@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 Lessons — HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:   #7C3AED; --bible-l:  #EDE9FE; --bible-d:  #5B21B6;
+  --english: #DB2777; --english-l:#FCE7F3; --english-d:#9D174D;
+  --maths:   #D97706; --maths-l:  #FEF3C7; --maths-d:  #92400E;
+  --science: #059669; --science-l:#D1FAE5; --science-d:#064E3B;
+  --social:  #2563EB; --social-l: #DBEAFE; --social-d: #1E3A8A;
+  --bg: #FAFBFF; --card: #FFFFFF; --text: #1E1B4B; --muted: #6B7280;
+  --radius: 20px; --radius-sm: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.13);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+.top-bar {
+  background: white;
+  border-bottom: 3px solid #E5E7EB;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.logo { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--text); margin-right: 10px; }
+.logo span { color: var(--science); }
+
+.nav-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 50px; border: 2.5px solid transparent;
+  font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
+  cursor: pointer; transition: all 0.25s; white-space: nowrap;
+  background: #F3F4F6;
+}
+.nav-btn .emoji { font-size: 1.1rem; }
+.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.nav-btn.active { color: white; }
+
+.nav-btn[data-sub="bible"]   { --c: var(--bible); }
+.nav-btn[data-sub="english"] { --c: var(--english); }
+.nav-btn[data-sub="maths"]   { --c: var(--maths); }
+.nav-btn[data-sub="science"] { --c: var(--science); }
+.nav-btn[data-sub="social"]  { --c: var(--social); }
+.nav-btn.active { background: var(--c); border-color: var(--c); }
+
+/* ── PAGES ───────────────────────────────────────────────────────────────── */
+.page { display: none; padding: 30px 20px 60px; max-width: 960px; margin: 0 auto; animation: fadeIn 0.4s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+
+/* ── HERO ────────────────────────────────────────────────────────────────── */
+.hero {
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 220px; height: 220px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -30px; right: 60px;
+  width: 120px; height: 120px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+}
+.hero-week { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 6px; }
+.hero-title { font-family: 'Fredoka One', cursive; font-size: 2.4rem; line-height: 1.1; margin-bottom: 10px; }
+.hero-sub { font-size: 1rem; font-weight: 600; opacity: 0.9; max-width: 480px; }
+.hero-emoji { position: absolute; right: 32px; top: 50%; transform: translateY(-50%); font-size: 5rem; opacity: 0.3; }
+
+/* ── CARDS ───────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  border-left: 6px solid var(--accent, #ccc);
+  animation: slideUp 0.5s ease both;
+}
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.card:nth-child(2) { animation-delay: 0.05s; }
+.card:nth-child(3) { animation-delay: 0.10s; }
+.card:nth-child(4) { animation-delay: 0.15s; }
+.card:nth-child(5) { animation-delay: 0.20s; }
+.card:nth-child(6) { animation-delay: 0.25s; }
+
+.card-title {
+  font-family: 'Fredoka One', cursive; font-size: 1.35rem;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+
+.section-label {
+  display: inline-block; font-size: 0.72rem; font-weight: 800;
+  letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+
+/* ── VOCAB BOX ───────────────────────────────────────────────────────────── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px; margin-top: 14px;
+}
+.vocab-item {
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: transform 0.2s;
+  cursor: default;
+}
+.vocab-item:hover { transform: scale(1.03); }
+.vocab-word { font-weight: 900; font-size: 1.05rem; margin-bottom: 4px; }
+.vocab-def { font-size: 0.88rem; color: #374151; line-height: 1.45; }
+
+/* ── INTERACTIVE ─────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 11px 22px; border-radius: 50px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.92rem;
+  border: none; cursor: pointer; transition: all 0.2s;
+  color: white;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+.btn:active { transform: translateY(0); }
+
+.quiz-box { background: #F8FAFF; border-radius: var(--radius-sm); padding: 20px; margin-top: 16px; }
+.quiz-q { font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-opt {
+  background: white; border: 2.5px solid #E5E7EB; border-radius: 50px;
+  padding: 12px 20px; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; font-family: 'Nunito', sans-serif; font-size: 0.95rem; text-align: left;
+}
+.quiz-opt:hover { border-color: var(--accent,#888); background: var(--accent-l,#f5f5f5); }
+.quiz-opt.correct { background: #D1FAE5; border-color: #059669; color: #065F46; }
+.quiz-opt.wrong { background: #FEE2E2; border-color: #DC2626; color: #7F1D1D; }
+.quiz-feedback { margin-top: 14px; padding: 12px 18px; border-radius: 12px; font-weight: 700; display: none; }
+
+/* ── ANIMATIONS / INFOGRAPHICS ───────────────────────────────────────────── */
+.anim-stage {
+  background: linear-gradient(135deg, #F0F9FF, #E0F2FE);
+  border-radius: var(--radius-sm);
+  min-height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; margin: 16px 0;
+}
+
+/* Plant animation */
+.plant-scene { display: flex; align-items: flex-end; justify-content: center; gap: 24px; padding: 20px; }
+.plant-container { display: flex; flex-direction: column; align-items: center; }
+.plant-label { font-size: 0.78rem; font-weight: 800; color: #374151; margin-top: 8px; text-align: center; }
+.plant-svg { transition: all 0.8s ease; }
+
+/* Column addition animation */
+.col-add { font-family: 'Fredoka One', cursive; font-size: 2rem; text-align: center; line-height: 1.4; }
+.digit-block {
+  display: inline-block; width: 52px; height: 52px; line-height: 52px;
+  border-radius: 12px; text-align: center; font-size: 1.6rem; font-weight: 900;
+  margin: 2px; transition: all 0.4s;
+}
+.digit-h { background: #FEF3C7; color: #92400E; }
+.digit-t { background: #D1FAE5; color: #065F46; }
+.digit-o { background: #DBEAFE; color: #1E3A8A; }
+.digit-carry { background: #FDE8FF; color: #7C3AED; font-size: 1rem; height: 36px; line-height: 36px; }
+.highlight { box-shadow: 0 0 0 3px #F59E0B; transform: scale(1.15); }
+
+/* Map compass */
+.compass { width: 140px; height: 140px; border-radius: 50%; background: white; border: 4px solid #2563EB; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: var(--shadow); }
+.compass-needle { width: 6px; height: 60px; background: linear-gradient(#DC2626 50%, #E5E7EB 50%); border-radius: 3px; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(0deg); transform-origin: center center; transition: transform 1s ease; }
+.compass-N { position: absolute; top: 8px; font-weight: 900; font-size: 1.1rem; color: #2563EB; }
+.compass-S { position: absolute; bottom: 8px; font-weight: 900; font-size: 1.1rem; color: #6B7280; }
+.compass-E { position: absolute; right: 10px; font-weight: 900; font-size: 1.1rem; color: #6B7280; }
+.compass-W { position: absolute; left: 10px; font-weight: 900; font-size: 1.1rem; color: #6B7280; }
+
+/* ── CALLOUT BOX ─────────────────────────────────────────────────────────── */
+.callout {
+  border-radius: var(--radius-sm); padding: 16px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+  margin: 14px 0;
+}
+.callout-icon { font-size: 1.6rem; flex-shrink: 0; }
+.callout-text { font-size: 0.95rem; font-weight: 600; line-height: 1.55; }
+.callout-text strong { font-weight: 900; }
+
+/* ── STEP LIST ───────────────────────────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+.step {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #FAFBFF; border-radius: var(--radius-sm); padding: 14px 18px;
+  border: 2px solid #E5E7EB; transition: border-color 0.2s;
+}
+.step:hover { border-color: var(--accent, #888); }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 1rem; color: white;
+  background: var(--accent, #888);
+}
+.step-content { flex: 1; }
+.step-title { font-weight: 800; font-size: 0.98rem; margin-bottom: 3px; }
+.step-desc { font-size: 0.88rem; color: #4B5563; line-height: 1.5; }
+
+/* ── VERSE BOX ───────────────────────────────────────────────────────────── */
+.verse-box {
+  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  border-radius: var(--radius-sm); padding: 20px 24px;
+  border-left: 6px solid var(--bible); text-align: center; margin: 16px 0;
+}
+.verse-text { font-family: 'Fredoka One', cursive; font-size: 1.25rem; color: var(--bible-d); margin-bottom: 6px; }
+.verse-ref { font-size: 0.85rem; font-weight: 800; color: var(--bible); }
+
+/* ── PROGRESS ─────────────────────────────────────────────────────────────── */
+.progress-bar-wrap { background: #E5E7EB; border-radius: 99px; height: 10px; margin: 8px 0; }
+.progress-bar { height: 10px; border-radius: 99px; transition: width 1.2s ease; }
+
+/* ── PLANT PARTS DIAGRAM ─────────────────────────────────────────────────── */
+.plant-diagram {
+  display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
+  justify-content: center; padding: 16px 0;
+}
+.plant-img-area { position: relative; width: 220px; flex-shrink: 0; }
+.plant-label-card {
+  background: white; border-radius: var(--radius-sm);
+  padding: 12px 16px; margin-bottom: 10px;
+  border-left: 4px solid var(--science);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: transform 0.2s;
+}
+.plant-label-card:hover { transform: translateX(4px); }
+.plc-name { font-weight: 900; font-size: 0.95rem; color: var(--science-d); }
+.plc-job { font-size: 0.82rem; color: #4B5563; margin-top: 2px; }
+.plc-emoji { font-size: 1.2rem; margin-right: 6px; }
+
+/* ── SENTENCE TYPES ──────────────────────────────────────────────────────── */
+.sent-card {
+  border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 12px;
+  border: 2.5px solid transparent; transition: all 0.25s;
+}
+.sent-card:hover { transform: translateX(6px); }
+.sent-type { font-weight: 900; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+.sent-example { font-size: 1.05rem; font-weight: 700; }
+.sent-tip { font-size: 0.82rem; color: #6B7280; margin-top: 4px; }
+
+/* ── COLUMN METHOD ───────────────────────────────────────────────────────── */
+.col-method {
+  background: white; border-radius: var(--radius-sm); padding: 24px;
+  max-width: 320px; margin: 0 auto; box-shadow: var(--shadow);
+  font-family: 'Fredoka One', cursive;
+}
+.col-row { display: flex; justify-content: flex-end; gap: 4px; margin-bottom: 6px; }
+.col-cell { width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 1.8rem; }
+.col-line { border-top: 3px solid #374151; margin: 8px 0; }
+.col-plus { color: #6B7280; font-size: 1.5rem; margin-right: 8px; }
+.col-carry-row { display: flex; justify-content: flex-end; gap: 4px; margin-bottom: 4px; }
+.col-carry-cell { width: 54px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; color: #9333EA; font-family: 'Nunito', sans-serif; font-weight: 900; }
+
+/* ── MAP SYMBOLS ─────────────────────────────────────────────────────────── */
+.map-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px; margin-top: 14px;
+}
+.map-symbol {
+  background: white; border-radius: var(--radius-sm); padding: 14px;
+  text-align: center; border: 2px solid #DBEAFE; transition: all 0.2s;
+  cursor: default;
+}
+.map-symbol:hover { border-color: var(--social); transform: translateY(-3px); box-shadow: var(--shadow); }
+.map-sym-icon { font-size: 2rem; margin-bottom: 6px; }
+.map-sym-name { font-weight: 800; font-size: 0.88rem; }
+.map-sym-means { font-size: 0.75rem; color: #6B7280; margin-top: 2px; }
+
+/* ── MEMORY GAME ─────────────────────────────────────────────────────────── */
+.memory-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; max-width: 400px; margin: 16px auto; }
+.mem-card {
+  height: 70px; border-radius: 12px; cursor: pointer;
+  background: linear-gradient(135deg, var(--accent,#888), var(--accent-d,#666));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: white; font-weight: 900;
+  transition: all 0.3s; position: relative; overflow: hidden;
+  border: 3px solid transparent;
+}
+.mem-card.flipped { background: white; border: 3px solid var(--accent,#888); }
+.mem-card.matched { background: #D1FAE5; border-color: #059669; }
+.mem-card .front { position: absolute; font-size: 0.75rem; font-weight: 800; color: white; opacity: 0; }
+.mem-card.flipped .front, .mem-card.matched .front { opacity: 1; color: #374151; font-size: 0.7rem; text-align: center; padding: 4px; }
+.mem-card.flipped .back, .mem-card.matched .back { display: none; }
+.mem-card .back { font-size: 1.6rem; }
+
+/* ── DRAG DROP ───────────────────────────────────────────────────────────── */
+.drag-zone {
+  min-height: 60px; border-radius: 12px; border: 2.5px dashed #CBD5E1;
+  padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  transition: border-color 0.2s; background: #F8FAFF;
+}
+.drag-zone.over { border-color: var(--accent,#888); background: rgba(0,0,0,0.02); }
+.draggable {
+  padding: 8px 16px; border-radius: 50px; font-weight: 800; font-size: 0.88rem;
+  cursor: grab; user-select: none; transition: all 0.2s;
+  background: white; border: 2px solid #E5E7EB; color: #374151;
+}
+.draggable:active { cursor: grabbing; opacity: 0.7; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hero-title { font-size: 1.7rem; }
+  .hero-emoji { display: none; }
+  .card { padding: 18px; }
+  .memory-grid { grid-template-columns: repeat(4,1fr); gap: 6px; }
+  .mem-card { height: 58px; }
+}
+
+/* ── CELEBRATION ─────────────────────────────────────────────────────────── */
+.confetti-piece {
+  position: fixed; top: -10px; width: 10px; height: 14px;
+  border-radius: 2px; animation: confettiFall linear forwards;
+  z-index: 9999; pointer-events: none;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* bible accent */
+.bible-accent   { --accent: var(--bible);   --accent-l: var(--bible-l);   --accent-d: var(--bible-d); }
+.english-accent { --accent: var(--english); --accent-l: var(--english-l); --accent-d: var(--english-d); }
+.maths-accent   { --accent: var(--maths);   --accent-l: var(--maths-l);   --accent-d: var(--maths-d); }
+.science-accent { --accent: var(--science); --accent-l: var(--science-l); --accent-d: var(--science-d); }
+.social-accent  { --accent: var(--social);  --accent-l: var(--social-l);  --accent-d: var(--social-d); }
+
+.tag {
+  display: inline-block; padding: 4px 12px; border-radius: 99px;
+  font-size: 0.75rem; font-weight: 800; margin: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">   <span class="emoji">📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"> <span class="emoji">✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">   <span class="emoji">🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"> <span class="emoji">🌱</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')">  <span class="emoji">🗺️</span> Social Studies</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     BIBLE — Week 2: Adam & Eve — The First Family
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="page-bible" class="page active bible-accent">
+
+  <div class="hero" style="background: linear-gradient(135deg, var(--bible-d), var(--bible));">
+    <div class="hero-week">📖 Bible · Week 2</div>
+    <div class="hero-title">Adam & Eve<br>The First Family</div>
+    <div class="hero-sub">Life in the garden · God's care · What happened when they disobeyed</div>
+    <div class="hero-emoji">🌿</div>
+  </div>
+
+  <!-- Memory Verse -->
+  <div class="card" style="--accent: var(--bible);">
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d);">⭐ Memory Verse</div>
+    <div class="verse-box">
+      <div class="verse-text">"But God shows his love for us in that while we were still sinners, Christ died for us."</div>
+      <div class="verse-ref">Romans 5:8</div>
+    </div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">
+        <strong>What does this mean?</strong> Even when we do wrong things (like Adam and Eve did), God still loves us. That love is so big that He sent Jesus for us. That is AMAZING love!
+      </div>
+    </div>
+  </div>
+
+  <!-- The Story -->
+  <div class="card" style="--accent: var(--bible);">
+    <div class="card-title" style="color:var(--bible);">🌱 The Story — What Happened?</div>
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d);">Read this carefully</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:var(--bible);">1</div>
+        <div class="step-content">
+          <div class="step-title">God made the Garden of Eden 🏡</div>
+          <div class="step-desc">After God made the whole world in 6 days, He planted a beautiful garden called Eden. It had trees with delicious fruit, rivers, animals, and perfect weather. It was paradise — a perfect, safe, happy home.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--bible);">2</div>
+        <div class="step-content">
+          <div class="step-title">God made Adam 🧍</div>
+          <div class="step-desc">God made the first man from the dust of the ground and breathed life into him. His name was Adam. God put Adam in charge of the garden — to look after it and name all the animals.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--bible);">3</div>
+        <div class="step-content">
+          <div class="step-title">God made Eve 🧍‍♀️</div>
+          <div class="step-desc">God saw that Adam was lonely. So He made Eve from Adam's rib — the first woman. She was made to be his helper and companion. They were the first family! God was happy with what He made.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--bible);">4</div>
+        <div class="step-content">
+          <div class="step-title">One rule 🚫</div>
+          <div class="step-desc">God gave Adam and Eve one rule: <em>"You may eat from any tree in the garden — except the tree of the knowledge of good and evil. Do NOT eat from that one."</em> It was one simple rule, given because God loved them and knew what was best.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:#DC2626);">5</div>
+        <div class="step-content">
+          <div class="step-title">The serpent's trick 🐍</div>
+          <div class="step-desc">A serpent (snake) said to Eve: "Did God really say you cannot eat from any tree?" The serpent told a lie — that the fruit would make them like God and that God was hiding something good. Eve listened. She ate the fruit. Then she gave some to Adam, and he ate too.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:#DC2626;">6</div>
+        <div class="step-content">
+          <div class="step-title">The consequence 😔</div>
+          <div class="step-desc">Adam and Eve felt ashamed and afraid for the first time. God knew what they had done. He was sad, but He was also fair. Because they broke His one rule, they had to leave the garden. Life became harder — but God still loved them and made them clothes to wear.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Words -->
+  <div class="card" style="--accent: var(--bible);">
+    <div class="card-title" style="color:var(--bible);">📚 Key Words</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:var(--bible-l);">
+        <div class="vocab-word" style="color:var(--bible-d);">🌳 Eden</div>
+        <div class="vocab-def">The beautiful garden God made. It was a perfect home.</div>
+      </div>
+      <div class="vocab-item" style="background:#DCFCE7;">
+        <div class="vocab-word" style="color:#166534;">🧍 Adam</div>
+        <div class="vocab-def">The first man God made, from dust.</div>
+      </div>
+      <div class="vocab-item" style="background:#FCE7F3;">
+        <div class="vocab-word" style="color:#9D174D;">🧍‍♀️ Eve</div>
+        <div class="vocab-def">The first woman, made from Adam's rib. The first family!</div>
+      </div>
+      <div class="vocab-item" style="background:#FEF3C7;">
+        <div class="vocab-word" style="color:#92400E;">🚫 Disobey</div>
+        <div class="vocab-def">To do something you were told NOT to do.</div>
+      </div>
+      <div class="vocab-item" style="background:#FEE2E2;">
+        <div class="vocab-word" style="color:#7F1D1D;">😔 Consequence</div>
+        <div class="vocab-def">What happens BECAUSE of what you did.</div>
+      </div>
+      <div class="vocab-item" style="background:#DBEAFE;">
+        <div class="vocab-word" style="color:#1E3A8A;">❤️ Compassion</div>
+        <div class="vocab-def">To care about someone even when they made a mistake.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why did it happen? -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">🤔 Think About It — Big Questions</div>
+    <div class="callout" style="background:#FEF3C7;">
+      <div class="callout-icon">❓</div>
+      <div class="callout-text"><strong>Why did Adam and Eve disobey?</strong> The serpent told them a lie. He made the wrong choice sound good. Sometimes things that look good or feel exciting are not right. We must think before we act.</div>
+    </div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">💜</div>
+      <div class="callout-text"><strong>Did God stop loving them?</strong> NO! Even after they disobeyed, God made clothes for them. This shows He still cared. Romans 5:8 tells us — God's love does NOT stop when we make mistakes.</div>
+    </div>
+    <div class="callout" style="background:#D1FAE5;">
+      <div class="callout-icon">🙏</div>
+      <div class="callout-text"><strong>What can WE learn?</strong> Rules exist to protect us, just like God's one rule was there to protect Adam and Eve. When we break rules, there are consequences — but we can always come back to God.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">🎯 Quick Quiz</div>
+    <div id="bible-quiz"></div>
+    <div style="margin-top:16px;">
+      <button class="btn" style="background:var(--bible);" onclick="nextBibleQ()">Next Question ➡️</button>
+      <span id="bible-score-display" style="margin-left:16px;font-weight:800;font-size:0.95rem;"></span>
+    </div>
+  </div>
+
+</div><!-- /bible -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ENGLISH — Week 2: Sentences — Types & Punctuation
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="page-english" class="page english-accent">
+
+  <div class="hero" style="background: linear-gradient(135deg, var(--english-d), var(--english));">
+    <div class="hero-week">✏️ English · Week 2</div>
+    <div class="hero-title">Sentences —<br>Types & Punctuation</div>
+    <div class="hero-sub">Statements · Questions · Exclamations · Commands · Capital letters & full stops</div>
+    <div class="hero-emoji">📝</div>
+  </div>
+
+  <!-- What is a sentence? -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">📌 What is a Sentence?</div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">A sentence is a group of words that makes <strong>complete sense</strong> on its own. Every sentence must have:<br>
+        <span class="tag" style="background:#FBD0E7;color:var(--english-d);">👤 Who (person/thing)</span>
+        <span class="tag" style="background:#FCE7F3;color:var(--english-d);">🏃 What they do (verb/action)</span>
+        <span class="tag" style="background:var(--english-l);color:var(--english-d);">🔤 Capital letter at the start</span>
+        <span class="tag" style="background:#FBD0E7;color:var(--english-d);">🔴 Punctuation at the end</span>
+      </div>
+    </div>
+    <div class="callout" style="background:#FEF3C7;">
+      <div class="callout-icon">❌</div>
+      <div class="callout-text">
+        <strong>NOT a sentence:</strong> "the big dog" — no action! "Ran fast." — who?<br>
+        <strong>✅ IS a sentence:</strong> "The big dog ran fast." — who + action + punctuation ✓
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Types -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">🗂️ The 4 Types of Sentence</div>
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d);">Click each one to learn more</div>
+
+    <div class="sent-card" style="background:#FEE2E2;border-color:#F87171;" onclick="toggleSent(this)">
+      <div class="sent-type" style="color:#DC2626;">🔴 Statement <span style="float:right;font-size:0.8rem;">(tap for example)</span></div>
+      <div class="sent-example">It tells us a fact or information.</div>
+      <div class="sent-tip" style="display:none;margin-top:8px;padding:10px;background:white;border-radius:8px;">
+        📌 Ends with a <strong>full stop (.)</strong><br>
+        ✏️ Example: <em>"The cat sat on the mat."</em><br>
+        ✏️ Example: <em>"Adam and Eve lived in the garden."</em><br>
+        💬 Use it to: tell someone a fact or describe something.
+      </div>
+    </div>
+
+    <div class="sent-card" style="background:#DBEAFE;border-color:#60A5FA;" onclick="toggleSent(this)">
+      <div class="sent-type" style="color:#2563EB;">🔵 Question <span style="float:right;font-size:0.8rem;">(tap for example)</span></div>
+      <div class="sent-example">It asks for information.</div>
+      <div class="sent-tip" style="display:none;margin-top:8px;padding:10px;background:white;border-radius:8px;">
+        📌 Ends with a <strong>question mark (?)</strong><br>
+        ✏️ Example: <em>"Where did you go?"</em><br>
+        ✏️ Example: <em>"What is your name?"</em><br>
+        💬 Often starts with: Who, What, Where, When, Why, How.
+      </div>
+    </div>
+
+    <div class="sent-card" style="background:#FEF3C7;border-color:#FBBF24;" onclick="toggleSent(this)">
+      <div class="sent-type" style="color:#D97706;">🟡 Exclamation <span style="float:right;font-size:0.8rem;">(tap for example)</span></div>
+      <div class="sent-example">It shows strong feeling or surprise!</div>
+      <div class="sent-tip" style="display:none;margin-top:8px;padding:10px;background:white;border-radius:8px;">
+        📌 Ends with an <strong>exclamation mark (!)</strong><br>
+        ✏️ Example: <em>"What a beautiful garden!"</em><br>
+        ✏️ Example: <em>"How amazing that is!"</em><br>
+        ⚠️ Important: True exclamation sentences start with <strong>What</strong> or <strong>How</strong>.
+      </div>
+    </div>
+
+    <div class="sent-card" style="background:#D1FAE5;border-color:#34D399;" onclick="toggleSent(this)">
+      <div class="sent-type" style="color:#059669;">🟢 Command <span style="float:right;font-size:0.8rem;">(tap for example)</span></div>
+      <div class="sent-example">It tells someone to do something.</div>
+      <div class="sent-tip" style="display:none;margin-top:8px;padding:10px;background:white;border-radius:8px;">
+        📌 Ends with a <strong>full stop (.) or !</strong><br>
+        ✏️ Example: <em>"Open the door."</em><br>
+        ✏️ Example: <em>"Sit down now!"</em><br>
+        💬 Commands start with a VERB (action word). The subject (you) is invisible!
+      </div>
+    </div>
+  </div>
+
+  <!-- Punctuation Guide -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">🔤 Punctuation Rules</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:#FEE2E2;">
+        <div class="vocab-word" style="color:#DC2626;font-size:1.8rem;">.</div>
+        <div class="vocab-word" style="color:#DC2626;">Full Stop</div>
+        <div class="vocab-def">Use at the end of a statement or command. "The dog barked."</div>
+      </div>
+      <div class="vocab-item" style="background:#DBEAFE;">
+        <div class="vocab-word" style="color:#2563EB;font-size:1.8rem;">?</div>
+        <div class="vocab-word" style="color:#2563EB;">Question Mark</div>
+        <div class="vocab-def">Use at the end of a question. "Where is she?"</div>
+      </div>
+      <div class="vocab-item" style="background:#FEF3C7;">
+        <div class="vocab-word" style="color:#D97706;font-size:1.8rem;">!</div>
+        <div class="vocab-word" style="color:#D97706;">Exclamation Mark</div>
+        <div class="vocab-def">Use at the end of an exclamation or strong command. "Stop!"</div>
+      </div>
+      <div class="vocab-item" style="background:#D1FAE5;">
+        <div class="vocab-word" style="color:#059669;font-size:1.8rem;">A</div>
+        <div class="vocab-word" style="color:#059669;">Capital Letter</div>
+        <div class="vocab-def">ALWAYS starts every sentence. Also used for names.</div>
+      </div>
+    </div>
+    <div class="callout" style="background:#FEF3C7;margin-top:14px;">
+      <div class="callout-icon">⭐</div>
+      <div class="callout-text"><strong>Golden Rule:</strong> Every sentence starts with a CAPITAL letter and ends with a punctuation mark (. ? !).</div>
+    </div>
+  </div>
+
+  <!-- Interactive sort -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">🎮 Sort the Sentences!</div>
+    <p style="font-size:0.9rem;color:#6B7280;margin-bottom:14px;">Read each sentence. Which type is it? Click the correct type!</p>
+    <div id="english-sort-game"></div>
+    <div style="margin-top:16px;">
+      <button class="btn" style="background:var(--english);" onclick="nextEnglishQ()">Next ➡️</button>
+      <span id="english-score" style="margin-left:14px;font-weight:800;"></span>
+    </div>
+  </div>
+
+</div><!-- /english -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     MATHS — Week 2: Addition — Column Method
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="page-maths" class="page maths-accent">
+
+  <div class="hero" style="background: linear-gradient(135deg, var(--maths-d), var(--maths));">
+    <div class="hero-week">🔢 Maths · Week 2</div>
+    <div class="hero-title">Addition —<br>Column Method</div>
+    <div class="hero-sub">Adding 2 and 3-digit numbers step by step · Carrying over</div>
+    <div class="hero-emoji">➕</div>
+  </div>
+
+  <!-- Place value reminder -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🧠 Remember: Place Value</div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text">Before we add, we must line up digits in the right columns! Every digit has a PLACE and a VALUE.</div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+      <div style="flex:1;min-width:90px;text-align:center;padding:18px;border-radius:14px;background:#FEF3C7;">
+        <div style="font-size:2rem;font-weight:900;color:#92400E;">H</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#92400E;">Hundreds</div>
+        <div style="font-size:0.75rem;color:#6B7280;">worth 100</div>
+      </div>
+      <div style="flex:1;min-width:90px;text-align:center;padding:18px;border-radius:14px;background:#D1FAE5;">
+        <div style="font-size:2rem;font-weight:900;color:#065F46;">T</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#065F46;">Tens</div>
+        <div style="font-size:0.75rem;color:#6B7280;">worth 10</div>
+      </div>
+      <div style="flex:1;min-width:90px;text-align:center;padding:18px;border-radius:14px;background:#DBEAFE;">
+        <div style="font-size:2rem;font-weight:900;color:#1E3A8A;">O</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#1E3A8A;">Ones</div>
+        <div style="font-size:0.75rem;color:#6B7280;">worth 1</div>
+      </div>
+    </div>
+    <div class="callout" style="background:#FEF3C7;margin-top:14px;">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Always line up:</strong> Ones under ones, tens under tens, hundreds under hundreds. NEVER mix them up!</div>
+    </div>
+  </div>
+
+  <!-- Step by Step -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">📋 The Column Method — Step by Step</div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text"><strong>The Golden Rule:</strong> Always start from the ONES column (right side). Work from RIGHT to LEFT.</div>
+    </div>
+
+    <!-- Animated example: 247 + 135 -->
+    <div style="margin:20px 0;">
+      <div style="text-align:center;font-weight:800;font-size:1rem;color:#6B7280;margin-bottom:12px;">Let's add: 247 + 135</div>
+      <div class="col-method">
+        <div style="text-align:right;font-size:0.82rem;color:#9333EA;font-weight:800;margin-bottom:4px;">← carry</div>
+        <div class="col-carry-row">
+          <div class="col-carry-cell" id="carry-h"></div>
+          <div class="col-carry-cell" id="carry-t"></div>
+          <div class="col-carry-cell" id="carry-o"></div>
+        </div>
+        <div class="col-row">
+          <div class="col-cell digit-h" id="top-h">2</div>
+          <div class="col-cell digit-t" id="top-t">4</div>
+          <div class="col-cell digit-o" id="top-o">7</div>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <span class="col-plus">+</span>
+          <div class="col-row" style="margin-left:0;">
+            <div class="col-cell digit-h" id="bot-h">1</div>
+            <div class="col-cell digit-t" id="bot-t">3</div>
+            <div class="col-cell digit-o" id="bot-o">5</div>
+          </div>
+        </div>
+        <div class="col-line"></div>
+        <div class="col-row">
+          <div class="col-cell" id="ans-h" style="background:#F3E8FF;color:#7C3AED;"></div>
+          <div class="col-cell" id="ans-t" style="background:#F3E8FF;color:#7C3AED;"></div>
+          <div class="col-cell" id="ans-o" style="background:#F3E8FF;color:#7C3AED;"></div>
+        </div>
+        <div style="text-align:center;margin-top:10px;">
+          <span id="step-label" style="font-size:0.82rem;font-weight:700;color:#6B7280;">Press START to begin!</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;justify-content:center;">
+      <button class="btn" style="background:var(--maths);" onclick="addStep()">▶ Next Step</button>
+      <button class="btn" style="background:#6B7280;" onclick="resetAdd()">↺ Reset</button>
+    </div>
+
+    <!-- Written steps -->
+    <div class="steps" style="margin-top:20px;">
+      <div class="step">
+        <div class="step-num" style="background:var(--maths);">1</div>
+        <div class="step-content">
+          <div class="step-title">Step 1 — Add the ONES 🟦</div>
+          <div class="step-desc">7 + 5 = 12. Write the 2 in the ones column. <strong>Carry the 1</strong> to the tens column above (write it small).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--maths);">2</div>
+        <div class="step-content">
+          <div class="step-title">Step 2 — Add the TENS 🟩</div>
+          <div class="step-desc">4 + 3 = 7. PLUS the carry: 7 + 1 = 8. Write 8 in the tens column. Nothing to carry this time.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--maths);">3</div>
+        <div class="step-content">
+          <div class="step-title">Step 3 — Add the HUNDREDS 🟨</div>
+          <div class="step-desc">2 + 1 = 3. Write 3 in the hundreds column. Answer: 382 ✅</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrying over explanation -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🚚 What is 'Carrying'?</div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">
+        <strong>Carrying (or 'regrouping') happens when a column adds up to 10 or more.</strong><br>
+        10 ones = 1 ten. So we CARRY the 1 ten to the next column.<br>
+        10 tens = 1 hundred. So we CARRY the 1 hundred to the next column.
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+      <div style="background:#FEE2E2;border-radius:12px;padding:14px;text-align:center;">
+        <div style="font-size:1.4rem;font-weight:900;color:#DC2626;">8 + 7 = 15</div>
+        <div style="font-size:0.85rem;color:#4B5563;margin-top:6px;">Write <strong>5</strong> in this column<br>Carry the <strong style="color:#9333EA;">1</strong> to the left ➡️</div>
+      </div>
+      <div style="background:#D1FAE5;border-radius:12px;padding:14px;text-align:center;">
+        <div style="font-size:1.4rem;font-weight:900;color:#059669;">6 + 3 = 9</div>
+        <div style="font-size:0.85rem;color:#4B5563;margin-top:6px;">Write <strong>9</strong> in this column<br>Nothing to carry ✅</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Practice -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🎯 Practise!</div>
+    <div id="maths-practice"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMaths()">Check ✅</button>
+      <button class="btn" style="background:#6B7280;" onclick="nextMaths()">Next ➡️</button>
+    </div>
+    <div id="maths-fb" style="margin-top:10px;font-weight:700;font-size:1rem;"></div>
+  </div>
+
+</div><!-- /maths -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SCIENCE — Week 2: Plants — Parts & Functions
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="page-science" class="page science-accent">
+
+  <div class="hero" style="background: linear-gradient(135deg, var(--science-d), var(--science));">
+    <div class="hero-week">🌱 Science · Week 2</div>
+    <div class="hero-title">Plants —<br>Parts & Functions</div>
+    <div class="hero-sub">Root · Stem · Leaf · Flower · Seed · What each part does</div>
+    <div class="hero-emoji">🌸</div>
+  </div>
+
+  <!-- ESL intro -->
+  <div class="card" style="--accent:var(--science);border-left-color:#F59E0B;">
+    <div class="card-title" style="color:#D97706;">🌍 Before We Start — Easy English</div>
+    <div class="callout" style="background:#FEF3C7;">
+      <div class="callout-icon">📖</div>
+      <div class="callout-text">
+        <strong>Parts</strong> = pieces of something. A plant has PARTS — like a body has parts (arms, legs, head).<br>
+        <strong>Function</strong> = what something DOES. The function of your eyes is to see. The function of a root is to drink water.<br>
+        <strong>Nutrients</strong> = good things in soil that help plants grow (like vitamins for us).
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Plant Diagram -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🌿 Meet the Plant — All 5 Parts</div>
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d);">Click each part to learn what it does!</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-start;padding:10px 0;">
+      <!-- SVG Plant -->
+      <div style="position:relative;width:220px;flex-shrink:0;">
+        <svg viewBox="0 0 220 360" width="220" height="360" style="overflow:visible;">
+          <!-- Soil -->
+          <rect x="0" y="270" width="220" height="90" rx="8" fill="#8B5E3C" opacity="0.25"/>
+          <text x="110" y="318" text-anchor="middle" fill="#6B4E35" font-size="11" font-weight="700">SOIL</text>
+
+          <!-- Roots -->
+          <g id="svg-root" style="cursor:pointer;" onclick="highlightPart('root')">
+            <line x1="110" y1="272" x2="80" y2="310" stroke="#8B5E3C" stroke-width="4" stroke-linecap="round"/>
+            <line x1="110" y1="272" x2="110" y2="330" stroke="#8B5E3C" stroke-width="4" stroke-linecap="round"/>
+            <line x1="110" y1="272" x2="140" y2="315" stroke="#8B5E3C" stroke-width="4" stroke-linecap="round"/>
+            <line x1="80" y1="310" x2="65" y2="330" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
+            <line x1="140" y1="315" x2="155" y2="332" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
+          </g>
+
+          <!-- Stem -->
+          <g id="svg-stem" style="cursor:pointer;" onclick="highlightPart('stem')">
+            <rect x="103" y="130" width="14" height="142" rx="7" fill="#4ADE80"/>
+          </g>
+
+          <!-- Leaves -->
+          <g id="svg-leaves" style="cursor:pointer;" onclick="highlightPart('leaf')">
+            <ellipse cx="75" cy="200" rx="38" ry="18" fill="#22C55E" transform="rotate(-30 75 200)"/>
+            <ellipse cx="145" cy="185" rx="38" ry="18" fill="#16A34A" transform="rotate(30 145 185)"/>
+            <ellipse cx="72" cy="155" rx="32" ry="15" fill="#22C55E" transform="rotate(-20 72 155)"/>
+          </g>
+
+          <!-- Flower centre -->
+          <g id="svg-flower" style="cursor:pointer;" onclick="highlightPart('flower')">
+            <!-- petals -->
+            <ellipse cx="110" cy="95" rx="16" ry="28" fill="#FB923C" opacity="0.9"/>
+            <ellipse cx="110" cy="95" rx="16" ry="28" fill="#FB923C" opacity="0.9" transform="rotate(60 110 95)"/>
+            <ellipse cx="110" cy="95" rx="16" ry="28" fill="#FBBF24" opacity="0.9" transform="rotate(120 110 95)"/>
+            <circle cx="110" cy="95" r="18" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+            <text x="110" y="99" text-anchor="middle" font-size="14">🌼</text>
+          </g>
+
+          <!-- Seed (in soil) -->
+          <g id="svg-seed" style="cursor:pointer;" onclick="highlightPart('seed')">
+            <ellipse cx="60" cy="295" rx="12" ry="8" fill="#92400E" opacity="0.8"/>
+            <text x="60" y="299" text-anchor="middle" font-size="9" fill="white" font-weight="bold">🌰</text>
+          </g>
+
+          <!-- Highlight ring (hidden by default) -->
+          <circle id="highlight-ring" cx="0" cy="0" r="35" fill="none" stroke="#F59E0B" stroke-width="3" stroke-dasharray="6 4" opacity="0" style="transition:all 0.3s;"/>
+        </svg>
+
+        <!-- click labels -->
+        <div style="position:absolute;top:80px;right:-10px;background:#FB923C;color:white;border-radius:20px;padding:4px 10px;font-size:0.72rem;font-weight:800;cursor:pointer;" onclick="highlightPart('flower')">🌸 Flower</div>
+        <div style="position:absolute;top:165px;left:-14px;background:#22C55E;color:white;border-radius:20px;padding:4px 10px;font-size:0.72rem;font-weight:800;cursor:pointer;" onclick="highlightPart('leaf')">🍃 Leaf</div>
+        <div style="position:absolute;top:220px;right:-10px;background:#4ADE80;color:#065F46;border-radius:20px;padding:4px 10px;font-size:0.72rem;font-weight:800;cursor:pointer;" onclick="highlightPart('stem')">🌿 Stem</div>
+        <div style="position:absolute;bottom:90px;right:-10px;background:#8B5E3C;color:white;border-radius:20px;padding:4px 10px;font-size:0.72rem;font-weight:800;cursor:pointer;" onclick="highlightPart('root')">🌱 Root</div>
+        <div style="position:absolute;bottom:50px;left:-10px;background:#92400E;color:white;border-radius:20px;padding:4px 10px;font-size:0.72rem;font-weight:800;cursor:pointer;" onclick="highlightPart('seed')">🌰 Seed</div>
+      </div>
+
+      <!-- Info panel -->
+      <div style="flex:1;min-width:220px;">
+        <div id="plant-info" style="background:var(--science-l);border-radius:16px;padding:20px;min-height:180px;border:3px solid var(--science);transition:all 0.3s;">
+          <div style="font-size:2.5rem;text-align:center;margin-bottom:10px;">👆</div>
+          <div style="text-align:center;font-weight:800;color:var(--science-d);">Tap a part of the plant<br>or a label to learn about it!</div>
+        </div>
+
+        <!-- All parts list -->
+        <div style="margin-top:14px;">
+          <div class="plant-label-card" onclick="highlightPart('root')" style="cursor:pointer;">
+            <div class="plc-name"><span class="plc-emoji">🌱</span> Root</div>
+            <div class="plc-job">Drinks water and food from soil. Holds plant in the ground.</div>
+          </div>
+          <div class="plant-label-card" onclick="highlightPart('stem')" style="cursor:pointer;">
+            <div class="plc-name"><span class="plc-emoji">🌿</span> Stem</div>
+            <div class="plc-job">Carries water and food up to the leaves and flower. Holds plant up.</div>
+          </div>
+          <div class="plant-label-card" onclick="highlightPart('leaf')" style="cursor:pointer;">
+            <div class="plc-name"><span class="plc-emoji">🍃</span> Leaf</div>
+            <div class="plc-job">Makes food for the plant using sunlight, water and air. Like a solar panel!</div>
+          </div>
+          <div class="plant-label-card" onclick="highlightPart('flower')" style="cursor:pointer;">
+            <div class="plc-name"><span class="plc-emoji">🌸</span> Flower</div>
+            <div class="plc-job">Attracts bees. Makes seeds so new plants can grow.</div>
+          </div>
+          <div class="plant-label-card" onclick="highlightPart('seed')" style="cursor:pointer;">
+            <div class="plc-name"><span class="plc-emoji">🌰</span> Seed</div>
+            <div class="plc-job">Grows into a NEW plant. Like a baby plant sleeping inside!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What plants NEED -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">☀️ What Does a Plant Need to Grow?</div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-text">Plants cannot eat food like we do. They MAKE their own food! But they need 4 things to do this.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:14px;">
+      <div style="background:#FEF3C7;border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2.5rem;">☀️</div>
+        <div style="font-weight:900;color:#92400E;margin:6px 0 4px;">Sunlight</div>
+        <div style="font-size:0.8rem;color:#4B5563;">For making food (photosynthesis)</div>
+      </div>
+      <div style="background:#DBEAFE;border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2.5rem;">💧</div>
+        <div style="font-weight:900;color:#1E3A8A;margin:6px 0 4px;">Water</div>
+        <div style="font-size:0.8rem;color:#4B5563;">Soaked up through the roots</div>
+      </div>
+      <div style="background:#D1FAE5;border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2.5rem;">🌍</div>
+        <div style="font-weight:900;color:#065F46;margin:6px 0 4px;">Nutrients</div>
+        <div style="font-size:0.8rem;color:#4B5563;">Good things in soil (like vitamins)</div>
+      </div>
+      <div style="background:#EDE9FE;border-radius:14px;padding:16px;text-align:center;">
+        <div style="font-size:2.5rem;">💨</div>
+        <div style="font-weight:900;color:#5B21B6;margin:6px 0 4px;">Air (CO₂)</div>
+        <div style="font-size:0.8rem;color:#4B5563;">Breathed in through tiny holes in leaves</div>
+      </div>
+    </div>
+    <div class="callout" style="background:#FEF3C7;margin-top:14px;">
+      <div class="callout-icon">🔬</div>
+      <div class="callout-text"><strong>Big word: Photosynthesis</strong> (say it: fo-to-SIN-thuh-sis)<br>This is the name for how plants MAKE their own food. Leaves trap sunlight + take in water + take in air = MAKE FOOD. This food is sugar that the plant uses to grow.</div>
+    </div>
+  </div>
+
+  <!-- Memory game -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🎮 Plant Parts Memory Game!</div>
+    <p style="font-size:0.9rem;color:#6B7280;margin-bottom:6px;">Find the matching pairs! (Part name + what it does)</p>
+    <div class="memory-grid" id="plant-memory" style="--accent:var(--science);--accent-d:var(--science-d);"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--science);" onclick="initMemory()">🔄 New Game</button>
+      <span id="mem-score" style="margin-left:6px;font-weight:800;font-size:0.95rem;line-height:2.4;"></span>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🎯 Science Quiz</div>
+    <div id="science-quiz"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--science);" onclick="nextScienceQ()">Next ➡️</button>
+      <span id="sci-score" style="margin-left:14px;font-weight:800;"></span>
+    </div>
+  </div>
+
+</div><!-- /science -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SOCIAL STUDIES — Week 2: Maps — Our Local Area
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="page-social" class="page social-accent">
+
+  <div class="hero" style="background: linear-gradient(135deg, var(--social-d), var(--social));">
+    <div class="hero-week">🗺️ Social Studies · Week 2</div>
+    <div class="hero-title">Maps —<br>Our Local Area</div>
+    <div class="hero-sub">Reading simple maps · Compass points (N, S, E, W) · Map symbols</div>
+    <div class="hero-emoji">🧭</div>
+  </div>
+
+  <!-- What is a map? -->
+  <div class="card" style="--accent:var(--social);">
+    <div class="card-title" style="color:var(--social);">🗺️ What is a Map?</div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">A map is a <strong>picture of a place from above</strong> — like a bird flying high and looking down. Maps help us find our way, understand where things are, and plan journeys.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
+      <div style="background:#DBEAFE;border-radius:12px;padding:14px;">
+        <div style="font-weight:900;color:#1E3A8A;margin-bottom:6px;">📍 Maps show:</div>
+        <div style="font-size:0.88rem;color:#374151;line-height:1.6;">
+          ✅ Roads and streets<br>
+          ✅ Buildings (school, hospital)<br>
+          ✅ Parks and green spaces<br>
+          ✅ Rivers and water<br>
+          ✅ Where North/South/East/West is
+        </div>
+      </div>
+      <div style="background:#FEE2E2;border-radius:12px;padding:14px;">
+        <div style="font-weight:900;color:#DC2626;margin-bottom:6px;">❌ Maps don't show:</div>
+        <div style="font-size:0.88rem;color:#374151;line-height:1.6;">
+          ❌ The height of buildings<br>
+          ❌ What colour things are<br>
+          ❌ How many people are inside<br>
+          ❌ Moving things (cars, people)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compass -->
+  <div class="card" style="--accent:var(--social);">
+    <div class="card-title" style="color:var(--social);">🧭 The Compass — N, S, E, W</div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text">A compass tells us which direction we are facing. Every map has a compass rose that shows which way is North. Once you know North, you can work out all the other directions!</div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:20px;">
+      <div>
+        <div class="compass">
+          <div class="compass-N">N</div>
+          <div class="compass-S">S</div>
+          <div class="compass-E">E</div>
+          <div class="compass-W">W</div>
+          <div class="compass-needle" id="compass-needle"></div>
+        </div>
+        <div style="text-align:center;margin-top:10px;">
+          <button class="btn" style="background:var(--social);font-size:0.82rem;padding:8px 16px;" onclick="spinCompass()">Spin! 🔄</button>
+        </div>
+      </div>
+      <div style="flex:1;min-width:200px;">
+        <div class="steps" style="gap:10px;">
+          <div class="step" style="padding:10px 14px;">
+            <div class="step-num" style="background:#DC2626;width:28px;height:28px;font-size:0.85rem;">N</div>
+            <div class="step-content">
+              <div class="step-title">North ⬆️</div>
+              <div class="step-desc">At the TOP of the map. The sun rises in the East and sets in the West — North is "up".</div>
+            </div>
+          </div>
+          <div class="step" style="padding:10px 14px;">
+            <div class="step-num" style="background:#6B7280;width:28px;height:28px;font-size:0.85rem;">S</div>
+            <div class="step-content">
+              <div class="step-title">South ⬇️</div>
+              <div class="step-desc">At the BOTTOM of the map. Opposite of North.</div>
+            </div>
+          </div>
+          <div class="step" style="padding:10px 14px;">
+            <div class="step-num" style="background:#D97706;width:28px;height:28px;font-size:0.85rem;">E</div>
+            <div class="step-content">
+              <div class="step-title">East ➡️</div>
+              <div class="step-desc">On the RIGHT of the map. The sun rises in the East every morning.</div>
+            </div>
+          </div>
+          <div class="step" style="padding:10px 14px;">
+            <div class="step-num" style="background:#2563EB;width:28px;height:28px;font-size:0.85rem;">W</div>
+            <div class="step-content">
+              <div class="step-title">West ⬅️</div>
+              <div class="step-desc">On the LEFT of the map. The sun sets in the West every evening.</div>
+            </div>
+          </div>
+        </div>
+        <div class="callout" style="background:#FEF3C7;margin-top:10px;">
+          <div class="callout-icon">🧠</div>
+          <div class="callout-text"><strong>Memory trick:</strong> <strong>N</strong>ever <strong>E</strong>at <strong>S</strong>limy <strong>W</strong>orms! → North, East, South, West (going clockwise)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Symbols -->
+  <div class="card" style="--accent:var(--social);">
+    <div class="card-title" style="color:var(--social);">🔣 Map Symbols</div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">Maps use <strong>symbols</strong> (small pictures or shapes) to show where things are. A key (also called a <strong>legend</strong>) tells you what each symbol means. Always check the key first!</div>
+    </div>
+    <div class="map-grid">
+      <div class="map-symbol">
+        <div class="map-sym-icon">🏫</div>
+        <div class="map-sym-name">School</div>
+        <div class="map-sym-means">Square with flag</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">🏥</div>
+        <div class="map-sym-name">Hospital</div>
+        <div class="map-sym-means">Cross symbol (+)</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">🌳</div>
+        <div class="map-sym-name">Park</div>
+        <div class="map-sym-means">Green shading</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">⛪</div>
+        <div class="map-sym-name">Church</div>
+        <div class="map-sym-means">Cross on building</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">🚉</div>
+        <div class="map-sym-name">Train Station</div>
+        <div class="map-sym-means">Railway symbol</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">🌊</div>
+        <div class="map-sym-name">River / Water</div>
+        <div class="map-sym-means">Blue lines or shading</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">🏪</div>
+        <div class="map-sym-name">Post Office</div>
+        <div class="map-sym-means">PO or envelope icon</div>
+      </div>
+      <div class="map-symbol">
+        <div class="map-sym-icon">🛣️</div>
+        <div class="map-sym-name">Main Road</div>
+        <div class="map-sym-means">Thick coloured line</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Map Quiz -->
+  <div class="card" style="--accent:var(--social);">
+    <div class="card-title" style="color:var(--social);">🎮 Compass Direction Game!</div>
+    <p style="font-size:0.9rem;color:#6B7280;margin-bottom:14px;">Look at the simple map below. Answer the direction questions!</p>
+
+    <!-- Simple SVG map -->
+    <div style="background:#E8F5E9;border-radius:16px;padding:16px;margin-bottom:16px;">
+      <svg viewBox="0 0 300 220" width="100%" style="max-width:340px;display:block;margin:0 auto;border-radius:12px;background:#F0F9FF;box-shadow:var(--shadow);">
+        <!-- Grid lines -->
+        <line x1="100" y1="0" x2="100" y2="220" stroke="#E5E7EB" stroke-width="1"/>
+        <line x1="200" y1="0" x2="200" y2="220" stroke="#E5E7EB" stroke-width="1"/>
+        <line x1="0" y1="73" x2="300" y2="73" stroke="#E5E7EB" stroke-width="1"/>
+        <line x1="0" y1="147" x2="300" y2="147" stroke="#E5E7EB" stroke-width="1"/>
+
+        <!-- Park (NW) -->
+        <rect x="10" y="10" width="80" height="55" rx="6" fill="#86EFAC" opacity="0.8"/>
+        <text x="50" y="38" text-anchor="middle" font-size="18">🌳</text>
+        <text x="50" y="55" text-anchor="middle" font-size="9" font-weight="700" fill="#166534">PARK</text>
+
+        <!-- School (NE) -->
+        <rect x="210" y="10" width="80" height="55" rx="6" fill="#FEF3C7"/>
+        <text x="250" y="38" text-anchor="middle" font-size="18">🏫</text>
+        <text x="250" y="55" text-anchor="middle" font-size="9" font-weight="700" fill="#92400E">SCHOOL</text>
+
+        <!-- Hospital (SW) -->
+        <rect x="10" y="155" width="80" height="55" rx="6" fill="#FECACA"/>
+        <text x="50" y="183" text-anchor="middle" font-size="18">🏥</text>
+        <text x="50" y="199" text-anchor="middle" font-size="9" font-weight="700" fill="#7F1D1D">HOSPITAL</text>
+
+        <!-- Church (SE) -->
+        <rect x="210" y="155" width="80" height="55" rx="6" fill="#EDE9FE"/>
+        <text x="250" y="183" text-anchor="middle" font-size="18">⛪</text>
+        <text x="250" y="199" text-anchor="middle" font-size="9" font-weight="700" fill="#5B21B6">CHURCH</text>
+
+        <!-- Market (Centre) -->
+        <rect x="115" y="85" width="70" height="50" rx="8" fill="#DBEAFE"/>
+        <text x="150" y="114" text-anchor="middle" font-size="18">🏪</text>
+        <text x="150" y="128" text-anchor="middle" font-size="8" font-weight="700" fill="#1E3A8A">MARKET</text>
+
+        <!-- Compass rose -->
+        <text x="270" y="145" text-anchor="middle" font-size="10" font-weight="900" fill="#2563EB">N↑</text>
+      </svg>
+    </div>
+
+    <div id="social-quiz"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--social);" onclick="nextSocialQ()">Next Question ➡️</button>
+      <span id="social-score" style="margin-left:14px;font-weight:800;"></span>
+    </div>
+  </div>
+
+</div><!-- /social -->
+
+<!-- ════════════ JAVASCRIPT ════════════════════════════════════════════════ -->
+<script>
+// ── NAV ───────────────────────────────────────────────────────────────────
+function showPage(sub) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector(`[data-sub="${sub}"]`).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── SENTENCE TOGGLE ───────────────────────────────────────────────────────
+function toggleSent(el) {
+  const tip = el.querySelector('.sent-tip');
+  tip.style.display = tip.style.display === 'none' ? 'block' : 'none';
+}
+
+// ── BIBLE QUIZ ─────────────────────────────────────────────────────────────
+const bibleQs = [
+  { q:"What was the name of the garden God made?", opts:["Eden","Canaan","Bethlehem","Egypt"], ans:0 },
+  { q:"What was the one rule God gave Adam and Eve?", opts:["Don't talk to animals","Don't leave the garden","Don't eat from the tree of knowledge of good and evil","Don't name the animals"], ans:2 },
+  { q:"Who told Eve a lie?", opts:["Adam","The lion","The serpent","God"], ans:2 },
+  { q:"What happened because Adam and Eve disobeyed?", opts:["Nothing changed","They got a reward","They had to leave the garden","God forgot about them"], ans:2 },
+  { q:"What does Romans 5:8 teach us?", opts:["God is angry with us","God still loves us even when we make mistakes","We must be perfect for God to love us","Adam and Eve were punished forever"], ans:1 },
+];
+let bibleIdx=0, bibleScore=0;
+function renderBibleQ() {
+  const q = bibleQs[bibleIdx];
+  if (!q) { document.getElementById('bible-quiz').innerHTML = `<div style="padding:18px;background:#D1FAE5;border-radius:14px;font-weight:800;font-size:1.1rem;">🎉 Quiz done! Score: ${bibleScore}/${bibleQs.length}</div>`; celebrate(); return; }
+  document.getElementById('bible-quiz').innerHTML = `
+    <div class="quiz-box">
+      <div class="quiz-q">Q${bibleIdx+1}: ${q.q}</div>
+      <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" style="--accent:var(--bible);--accent-l:var(--bible-l);" onclick="answerBible(${i})">${o}</button>`).join('')}</div>
+      <div id="bible-fb" class="quiz-feedback"></div>
+    </div>`;
+  document.getElementById('bible-score-display').textContent = `Score: ${bibleScore}/${bibleIdx}`;
+}
+function answerBible(i) {
+  const q=bibleQs[bibleIdx], opts=document.querySelectorAll('#bible-quiz .quiz-opt');
+  opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById('bible-fb');
+  if(i===q.ans) { bibleScore++; fb.style.display='block'; fb.style.background='#D1FAE5'; fb.style.color='#065F46'; fb.textContent='✅ Correct! Well done!'; }
+  else { opts[i].classList.add('wrong'); fb.style.display='block'; fb.style.background='#FEE2E2'; fb.style.color='#7F1D1D'; fb.textContent=`❌ Not quite. The correct answer is: ${q.opts[q.ans]}`; }
+  document.getElementById('bible-score-display').textContent = `Score: ${bibleScore}/${bibleIdx+1}`;
+}
+function nextBibleQ() { bibleIdx++; renderBibleQ(); }
+renderBibleQ();
+
+// ── ENGLISH GAME ───────────────────────────────────────────────────────────
+const englishQs = [
+  { s:"The cat sat on the mat.", types:["Statement","Question","Exclamation","Command"], ans:"Statement" },
+  { s:"What is your favourite colour?", types:["Statement","Question","Exclamation","Command"], ans:"Question" },
+  { s:"Sit down now!", types:["Statement","Question","Exclamation","Command"], ans:"Command" },
+  { s:"What a beautiful day!", types:["Statement","Question","Exclamation","Command"], ans:"Exclamation" },
+  { s:"She walked slowly to school.", types:["Statement","Question","Exclamation","Command"], ans:"Statement" },
+  { s:"Open the window, please.", types:["Statement","Question","Exclamation","Command"], ans:"Command" },
+  { s:"Where do you live?", types:["Statement","Question","Exclamation","Command"], ans:"Question" },
+  { s:"How wonderful this place is!", types:["Statement","Question","Exclamation","Command"], ans:"Exclamation" },
+];
+let engIdx=0, engScore=0;
+const typeColors = { Statement:'#DC2626', Question:'#2563EB', Exclamation:'#D97706', Command:'#059669' };
+function renderEnglishQ() {
+  const q=englishQs[engIdx];
+  if(!q) { document.getElementById('english-sort-game').innerHTML=`<div style="padding:18px;background:#D1FAE5;border-radius:14px;font-weight:800;font-size:1.1rem;">🎉 Quiz done! Score: ${engScore}/${englishQs.length}</div>`; celebrate(); return; }
+  document.getElementById('english-sort-game').innerHTML=`
+    <div class="quiz-box">
+      <div class="quiz-q">Q${engIdx+1}: What type of sentence is this?<br><em style="font-size:1.15rem;font-weight:700;color:#374151;">"${q.s}"</em></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+        ${q.types.map(t=>`<button onclick="answerEng('${t}')" style="padding:10px 20px;border-radius:50px;border:none;background:${typeColors[t]};color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">${t}</button>`).join('')}
+      </div>
+      <div id="eng-fb" class="quiz-feedback"></div>
+    </div>`;
+  document.getElementById('english-score').textContent = `Score: ${engScore}/${engIdx}`;
+}
+function answerEng(t) {
+  const q=englishQs[engIdx];
+  const fb=document.getElementById('eng-fb'); fb.style.display='block';
+  document.querySelectorAll('#english-sort-game button').forEach(b=>b.disabled=true);
+  if(t===q.ans) { engScore++; fb.style.background='#D1FAE5'; fb.style.color='#065F46'; fb.innerHTML=`✅ Correct! "${q.s}" is a <strong>${q.ans}</strong>.`; }
+  else { fb.style.background='#FEE2E2'; fb.style.color='#7F1D1D'; fb.innerHTML=`❌ Not quite. This is a <strong>${q.ans}</strong> because ${q.ans==='Statement'?'it states a fact and ends with a full stop.':q.ans==='Question'?'it asks something and ends with a ?.':q.ans==='Command'?'it tells someone to do something.':'it starts with "What" or "How" and shows strong feeling.'}`; }
+  document.getElementById('english-score').textContent=`Score: ${engScore}/${engIdx+1}`;
+}
+function nextEnglishQ() { engIdx++; renderEnglishQ(); }
+renderEnglishQ();
+
+// ── MATHS STEP ANIMATION ──────────────────────────────────────────────────
+let addPhase = 0;
+const steps247 = [
+  { label:"Step 1: Add the ONES → 7 + 5 = 12. Write 2, carry 1.", ho:'2',to:'4',oo:'7', hb:'1',tb:'3',ob:'5', carry_o:'1', ans_o:'2', hl_o:true },
+  { label:"Step 2: Add the TENS → 4 + 3 + 1(carry) = 8. Write 8.", ho:'2',to:'4',oo:'7', hb:'1',tb:'3',ob:'5', carry_o:'1', ans_o:'2', ans_t:'8', hl_t:true },
+  { label:"Step 3: Add the HUNDREDS → 2 + 1 = 3. Write 3. Done! ✅", ho:'2',to:'4',oo:'7', hb:'1',tb:'3',ob:'5', carry_o:'1', ans_o:'2', ans_t:'8', ans_h:'3', done:true },
+];
+function addStep() {
+  if(addPhase>=steps247.length) return;
+  const st=steps247[addPhase];
+  document.getElementById('step-label').textContent=st.label;
+  if(st.carry_o) { document.getElementById('carry-o').textContent=st.carry_o; document.getElementById('carry-o').style.color='#9333EA'; }
+  if(st.ans_o!=null) document.getElementById('ans-o').textContent=st.ans_o;
+  if(st.ans_t!=null) document.getElementById('ans-t').textContent=st.ans_t;
+  if(st.ans_h!=null) document.getElementById('ans-h').textContent=st.ans_h;
+  ['h','t','o'].forEach(col=>{
+    ['top-'+col,'bot-'+col,'ans-'+col].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.remove('highlight'); });
+  });
+  if(st.hl_o){ ['top-o','bot-o','ans-o'].forEach(id=>document.getElementById(id)?.classList.add('highlight')); }
+  if(st.hl_t){ ['top-t','bot-t','ans-t'].forEach(id=>document.getElementById(id)?.classList.add('highlight')); }
+  if(st.done){ ['top-h','bot-h','ans-h'].forEach(id=>document.getElementById(id)?.classList.add('highlight')); }
+  addPhase++;
+}
+function resetAdd() {
+  addPhase=0;
+  ['h','t','o'].forEach(col=>{
+    const ao=document.getElementById('ans-'+col); if(ao) { ao.textContent=''; ao.classList.remove('highlight'); }
+    const co=document.getElementById('carry-'+col); if(co) co.textContent='';
+    ['top-'+col,'bot-'+col].forEach(id=>document.getElementById(id)?.classList.remove('highlight'));
+  });
+  document.getElementById('step-label').textContent='Press START to begin!';
+}
+
+// Maths practice
+const mathsQs = [
+  { a:234, b:153, label:"234 + 153" },
+  { a:156, b:238, label:"156 + 238" },
+  { a:347, b:285, label:"347 + 285" },
+  { a:425, b:376, label:"425 + 376" },
+];
+let mathsIdx=0;
+function renderMaths() {
+  const q=mathsQs[mathsIdx%mathsQs.length];
+  document.getElementById('maths-practice').innerHTML=`
+    <div style="background:#FEF3C7;border-radius:14px;padding:18px;text-align:center;">
+      <div style="font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:12px;">${q.label}</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <span style="font-weight:800;font-size:1.1rem;">Answer =</span>
+        <input id="maths-ans" type="number" style="width:100px;padding:10px;border-radius:12px;border:2.5px solid #D97706;font-size:1.3rem;font-family:'Fredoka One',cursive;text-align:center;outline:none;" placeholder="?">
+      </div>
+    </div>`;
+  document.getElementById('maths-fb').textContent='';
+}
+function checkMaths() {
+  const q=mathsQs[mathsIdx%mathsQs.length];
+  const ans=parseInt(document.getElementById('maths-ans')?.value)||0;
+  const fb=document.getElementById('maths-fb');
+  if(ans===q.a+q.b) { fb.style.color='#065F46'; fb.textContent=`✅ Correct! ${q.label} = ${q.a+q.b} 🎉`; celebrate(); }
+  else { fb.style.color='#DC2626'; fb.textContent=`❌ Not quite. Try again! Hint: add the ones first (${q.a%10} + ${q.b%10})`; }
+}
+function nextMaths() { mathsIdx++; renderMaths(); }
+renderMaths();
+
+// ── PLANT PARTS ────────────────────────────────────────────────────────────
+const partInfo = {
+  root:   { emoji:'🌱', title:'Root', color:'#92400E', bg:'#FEF3C7', desc:'<strong>Job:</strong> The roots go deep into the soil. They drink up <strong>water</strong> and <strong>nutrients</strong> (good things from the soil) for the whole plant. They also hold the plant firmly in the ground so it doesn\'t fall over.<br><br><strong>Simple words:</strong> Roots are like the plant\'s mouth and feet at the same time — they eat AND hold on!<br><br>🔬 <strong>Interesting fact:</strong> Tree roots can spread as wide as the tree is tall!' },
+  stem:   { emoji:'🌿', title:'Stem', color:'#065F46', bg:'#D1FAE5', desc:'<strong>Job:</strong> The stem is like a pipe or a drinking straw. It carries <strong>water and nutrients</strong> from the roots UP to the leaves and flower.<br><br><strong>Simple words:</strong> If the roots are the mouth, the stem is the throat — it passes food up to the rest of the plant!<br><br>🔬 <strong>Interesting fact:</strong> You can prove this with an experiment — put a white flower in coloured water and watch the stem carry the colour up!' },
+  leaf:   { emoji:'🍃', title:'Leaf', color:'#166534', bg:'#DCFCE7', desc:'<strong>Job:</strong> Leaves MAKE FOOD for the plant using:<br>☀️ Sunlight<br>💧 Water from the stem<br>💨 Carbon dioxide from the air<br><br>This food-making process is called <strong>photosynthesis</strong> (fo-to-SIN-thuh-sis).<br><br><strong>Simple words:</strong> Leaves are like the plant\'s kitchen — they cook the food!<br><br>🔬 <strong>Interesting fact:</strong> Green plants make the air we breathe — they release oxygen!' },
+  flower: { emoji:'🌸', title:'Flower', color:'#9D174D', bg:'#FCE7F3', desc:'<strong>Job:</strong> The flower attracts bees, butterflies, and birds with its bright colours and sweet smell. When these creatures visit, they carry <strong>pollen</strong> between flowers. This is called <strong>pollination</strong> — and it leads to seeds being made!<br><br><strong>Simple words:</strong> The flower is the plant\'s advertisement — it says "come here!" to insects.<br><br>🔬 <strong>Interesting fact:</strong> Fruits like apples and tomatoes start as flowers!' },
+  seed:   { emoji:'🌰', title:'Seed', color:'#1E3A8A', bg:'#DBEAFE', desc:'<strong>Job:</strong> A seed is a tiny baby plant waiting to grow! Seeds are made by the flower. When a seed lands in soil (with water, air and sunlight nearby), it GERMINATES — which means it begins to grow into a new plant.<br><br><strong>Simple words:</strong> A seed is like an egg for plants — it contains everything needed to start a new life!<br><br>🔬 <strong>Interesting fact:</strong> Seeds can travel by wind, water, or inside animal poo!' },
+};
+function highlightPart(part) {
+  const info = partInfo[part];
+  document.getElementById('plant-info').innerHTML = `
+    <div style="font-size:2.5rem;text-align:center;margin-bottom:8px;">${info.emoji}</div>
+    <div style="font-family:'Fredoka One',cursive;font-size:1.4rem;color:${info.color};text-align:center;margin-bottom:10px;">${info.title}</div>
+    <div style="font-size:0.88rem;line-height:1.6;color:#374151;">${info.desc}</div>
+  `;
+  document.getElementById('plant-info').style.background = info.bg;
+  document.getElementById('plant-info').style.borderColor = info.color;
+}
+
+// ── MEMORY GAME ────────────────────────────────────────────────────────────
+const memPairs = [
+  {a:'Root 🌱', b:'Drinks water from soil'},
+  {a:'Stem 🌿', b:'Carries water up'},
+  {a:'Leaf 🍃', b:'Makes food from sunlight'},
+  {a:'Flower 🌸', b:'Attracts bees for seeds'},
+  {a:'Seed 🌰', b:'Grows into new plant'},
+  {a:'Roots hold', b:'plant in ground'},
+  {a:'CO₂ 💨', b:'breathed in by leaves'},
+  {a:'Nutrients 🌍', b:'from soil via roots'},
+];
+let memCards=[], memFlipped=[], memMatched=0, memTotal=0, memLock=false;
+function initMemory() {
+  const pairs = memPairs.slice(0,4);
+  const cards = [];
+  pairs.forEach((p,i) => { cards.push({id:i*2, pairId:i, text:p.a}); cards.push({id:i*2+1, pairId:i, text:p.b}); });
+  cards.sort(()=>Math.random()-0.5);
+  memCards=cards; memFlipped=[]; memMatched=0; memTotal=pairs.length; memLock=false;
+  const grid = document.getElementById('plant-memory');
+  grid.innerHTML = cards.map((c,idx)=>`
+    <div class="mem-card" onclick="flipMem(${idx})" id="mem-${idx}" style="--accent:var(--science);--accent-d:var(--science-d);">
+      <div class="back">🌱</div>
+      <div class="front" style="font-size:0.68rem;padding:6px;text-align:center;">${c.text}</div>
+    </div>`).join('');
+  document.getElementById('mem-score').textContent = '';
+}
+function flipMem(idx) {
+  if(memLock || memFlipped.includes(idx)) return;
+  const el=document.getElementById('mem-'+idx);
+  if(el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  memFlipped.push(idx);
+  if(memFlipped.length===2) {
+    memLock=true;
+    const [a,b]=memFlipped;
+    if(memCards[a].pairId===memCards[b].pairId) {
+      document.getElementById('mem-'+a).classList.add('matched');
+      document.getElementById('mem-'+b).classList.add('matched');
+      memMatched++;
+      memFlipped=[]; memLock=false;
+      document.getElementById('mem-score').textContent=`✅ ${memMatched}/${memTotal} pairs found!`;
+      if(memMatched===memTotal) { celebrate(); document.getElementById('mem-score').textContent='🎉 All pairs found!'; }
+    } else {
+      setTimeout(()=>{ document.getElementById('mem-'+a).classList.remove('flipped'); document.getElementById('mem-'+b).classList.remove('flipped'); memFlipped=[]; memLock=false; }, 1000);
+    }
+  }
+}
+initMemory();
+
+// ── SCIENCE QUIZ ───────────────────────────────────────────────────────────
+const sciQs = [
+  { q:"Which part of the plant drinks water from the soil?", opts:["Leaf","Flower","Root","Stem"], ans:2 },
+  { q:"What does the stem do?", opts:["Makes food","Carries water up from roots","Holds the plant in soil","Attracts bees"], ans:1 },
+  { q:"Which part of the plant makes food using sunlight?", opts:["Root","Seed","Stem","Leaf"], ans:3 },
+  { q:"What is the big word for when a plant makes its own food?", opts:["Germination","Pollination","Photosynthesis","Nutrition"], ans:2 },
+  { q:"What FOUR things does a plant need to grow?", opts:["Food, water, TV, soil","Sunlight, water, air, nutrients","Rain, wind, soil, animals","Light, heat, food, friends"], ans:1 },
+  { q:"What does a seed grow into?", opts:["A root","A leaf","A new plant","A flower"], ans:2 },
+];
+let sciIdx=0, sciScore=0;
+function renderSciQ() {
+  const q=sciQs[sciIdx];
+  if(!q) { document.getElementById('science-quiz').innerHTML=`<div style="padding:18px;background:#D1FAE5;border-radius:14px;font-weight:800;font-size:1.1rem;">🎉 Science quiz done! Score: ${sciScore}/${sciQs.length}</div>`; celebrate(); return; }
+  document.getElementById('science-quiz').innerHTML=`
+    <div class="quiz-box">
+      <div class="quiz-q">Q${sciIdx+1}: ${q.q}</div>
+      <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" style="--accent:var(--science);--accent-l:var(--science-l);" onclick="answerSci(${i})">${o}</button>`).join('')}</div>
+      <div id="sci-fb" class="quiz-feedback"></div>
+    </div>`;
+  document.getElementById('sci-score').textContent=`Score: ${sciScore}/${sciIdx}`;
+}
+function answerSci(i) {
+  const q=sciQs[sciIdx], opts=document.querySelectorAll('#science-quiz .quiz-opt');
+  opts.forEach(o=>o.disabled=true); opts[q.ans].classList.add('correct');
+  const fb=document.getElementById('sci-fb'); fb.style.display='block';
+  if(i===q.ans) { sciScore++; fb.style.background='#D1FAE5'; fb.style.color='#065F46'; fb.textContent='✅ Brilliant! Correct!'; }
+  else { opts[i].classList.add('wrong'); fb.style.background='#FEE2E2'; fb.style.color='#7F1D1D'; fb.textContent=`❌ Not quite. The answer is: ${q.opts[q.ans]}`; }
+  document.getElementById('sci-score').textContent=`Score: ${sciScore}/${sciIdx+1}`;
+}
+function nextScienceQ() { sciIdx++; renderSciQ(); }
+renderSciQ();
+
+// ── COMPASS ────────────────────────────────────────────────────────────────
+let compassAngle=0;
+function spinCompass() {
+  compassAngle += 90 + Math.floor(Math.random()*270);
+  document.getElementById('compass-needle').style.transform = `translate(-50%,-50%) rotate(${compassAngle}deg)`;
+}
+
+// ── SOCIAL QUIZ ────────────────────────────────────────────────────────────
+const socialQs = [
+  { q:"On the map, the Park is in which direction from the Market?", opts:["North-West ↖️","North-East ↗️","South-West ↙️","South-East ↘️"], ans:0 },
+  { q:"What is South-East of the Market?", opts:["Park","School","Hospital","Church"], ans:3 },
+  { q:"If you walk from the Hospital to the School, which direction are you going?", opts:["South","West","North-East","South-West"], ans:2 },
+  { q:"What does a KEY (legend) on a map tell you?", opts:["How big the map is","What the symbols mean","Who drew the map","How old the map is"], ans:1 },
+  { q:"Which sentence describes North correctly?", opts:["North is on the right of the map","North is at the bottom of the map","North is at the top of the map","North is on the left of the map"], ans:2 },
+  { q:"'Never Eat Slimy Worms' helps you remember...?", opts:["Map symbols","The four compass directions in order","How to read a key","The names of cities"], ans:1 },
+];
+let socIdx=0, socScore=0;
+function renderSocialQ() {
+  const q=socialQs[socIdx];
+  if(!q) { document.getElementById('social-quiz').innerHTML=`<div style="padding:18px;background:#D1FAE5;border-radius:14px;font-weight:800;font-size:1.1rem;">🎉 Quiz done! Score: ${socScore}/${socialQs.length}</div>`; celebrate(); return; }
+  document.getElementById('social-quiz').innerHTML=`
+    <div class="quiz-box">
+      <div class="quiz-q">Q${socIdx+1}: ${q.q}</div>
+      <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" style="--accent:var(--social);--accent-l:var(--social-l);" onclick="answerSoc(${i})">${o}</button>`).join('')}</div>
+      <div id="soc-fb" class="quiz-feedback"></div>
+    </div>`;
+  document.getElementById('social-score').textContent=`Score: ${socScore}/${socIdx}`;
+}
+function answerSoc(i) {
+  const q=socialQs[socIdx], opts=document.querySelectorAll('#social-quiz .quiz-opt');
+  opts.forEach(o=>o.disabled=true); opts[q.ans].classList.add('correct');
+  const fb=document.getElementById('soc-fb'); fb.style.display='block';
+  if(i===q.ans) { socScore++; fb.style.background='#D1FAE5'; fb.style.color='#065F46'; fb.textContent='✅ Correct! Great map reading!'; }
+  else { opts[i].classList.add('wrong'); fb.style.background='#FEE2E2'; fb.style.color='#7F1D1D'; fb.textContent=`❌ Not quite. The answer is: ${q.opts[q.ans]}`; }
+  document.getElementById('social-score').textContent=`Score: ${socScore}/${socIdx+1}`;
+}
+function nextSocialQ() { socIdx++; renderSocialQ(); }
+renderSocialQ();
+
+// ── CONFETTI CELEBRATION ───────────────────────────────────────────────────
+function celebrate() {
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<60;i++) {
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti-piece';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=colors[Math.floor(Math.random()*colors.length)];
+      el.style.transform=`rotate(${Math.random()*360}deg)`;
+      el.style.animationDuration=(1.5+Math.random()*2)+'s';
+      el.style.animationDelay=(Math.random()*0.5)+'s';
+      el.style.width=(8+Math.random()*8)+'px';
+      el.style.height=(10+Math.random()*10)+'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 4000);
+    }, i*30);
+  }
+}
+showPage('bible');
+</script>
+</body>
+</html>
