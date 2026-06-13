@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 2 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN SYSTEM ──────────────────────────────────────────────────────── */
+:root {
+  --bible:    #6D28D9; --bible-l:   #EDE9FE; --bible-m:   #8B5CF6; --bible-d:   #4C1D95;
+  --english:  #BE123C; --english-l: #FFF1F2; --english-m: #E11D48; --english-d: #881337;
+  --maths:    #B45309; --maths-l:   #FFFBEB; --maths-m:   #D97706; --maths-d:   #78350F;
+  --science:  #065F46; --science-l: #ECFDF5; --science-m: #059669; --science-d: #022C22;
+  --history:  #1E3A8A; --history-l: #EFF6FF; --history-m: #2563EB; --history-d: #0F1F5C;
+  --bg: #0F0F13; --surface: #18181F; --surface2: #22222E; --border: #2E2E3E;
+  --text: #F0EFF8; --muted: #9090A8; --bright: #FFFFFF;
+  --radius: 16px; --radius-sm: 10px; --radius-lg: 24px;
+  --glow-bible:   0 0 40px rgba(109,40,217,0.3);
+  --glow-english: 0 0 40px rgba(190,18,60,0.3);
+  --glow-maths:   0 0 40px rgba(180,83,9,0.3);
+  --glow-science: 0 0 40px rgba(6,95,70,0.3);
+  --glow-history: 0 0 40px rgba(30,58,138,0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── ANIMATED BG ────────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse 80% 50% at 20% 20%, rgba(109,40,217,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(30,58,138,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── TOP NAV ────────────────────────────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(15,15,19,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 0;
+  height: 60px;
+}
+.brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 900;
+  color: var(--bright); margin-right: 24px;
+  white-space: nowrap; letter-spacing: -0.02em;
+}
+.brand sup { font-size: 0.55rem; color: var(--muted); letter-spacing: 0.05em; vertical-align: super; }
+.week-badge {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 99px; padding: 4px 12px;
+  font-size: 0.72rem; font-weight: 600; color: var(--muted);
+  margin-right: 16px; white-space: nowrap;
+}
+
+.nav-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 8px 16px; border-radius: var(--radius-sm); border: none;
+  background: transparent; color: var(--muted);
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.tab:hover { background: var(--surface2); color: var(--text); }
+.tab.active { color: white; }
+.tab[data-s="bible"].active   { background: rgba(109,40,217,0.25); color: #C4B5FD; }
+.tab[data-s="english"].active { background: rgba(190,18,60,0.25);  color: #FCA5A5; }
+.tab[data-s="maths"].active   { background: rgba(180,83,9,0.25);   color: #FCD34D; }
+.tab[data-s="science"].active { background: rgba(6,95,70,0.25);    color: #6EE7B7; }
+.tab[data-s="history"].active { background: rgba(30,58,138,0.25);  color: #93C5FD; }
+
+/* ── PAGES ──────────────────────────────────────────────────────────────── */
+.page { display: none; max-width: 980px; margin: 0 auto; padding: 36px 24px 80px; }
+.page.active { display: block; animation: fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px) scale(0.98); } to { opacity:1; transform:none; } }
+
+/* ── HERO ───────────────────────────────────────────────────────────────── */
+.hero {
+  border-radius: var(--radius-lg); padding: 48px 40px;
+  margin-bottom: 32px; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.hero-eyebrow {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; opacity: 0.65; margin-bottom: 12px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900; line-height: 1.08;
+  letter-spacing: -0.03em; margin-bottom: 14px;
+  color: var(--bright);
+}
+.hero-subtitle { font-size: 1rem; font-weight: 500; opacity: 0.75; max-width: 500px; line-height: 1.6; }
+.hero-deco {
+  position: absolute; right: -20px; top: -20px;
+  width: 260px; height: 260px; border-radius: 50%;
+  opacity: 0.07; filter: blur(1px);
+}
+.hero-icon {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-size: 5.5rem; opacity: 0.18; line-height: 1;
+}
+.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.hero-tag {
+  padding: 5px 14px; border-radius: 99px;
+  font-size: 0.75rem; font-weight: 600;
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── CARDS ──────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  margin-bottom: 20px; position: relative; overflow: hidden;
+  animation: cardIn 0.5s cubic-bezier(0.22,0.68,0,1.2) both;
+}
+.card:nth-child(2)  { animation-delay:.06s; }
+.card:nth-child(3)  { animation-delay:.12s; }
+.card:nth-child(4)  { animation-delay:.18s; }
+.card:nth-child(5)  { animation-delay:.24s; }
+.card:nth-child(6)  { animation-delay:.30s; }
+.card:nth-child(7)  { animation-delay:.36s; }
+@keyframes cardIn { from {opacity:0;transform:translateY(16px);} to{opacity:1;transform:none;} }
+
+.card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--accent, #444); border-radius: 3px 0 0 3px;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--bright); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 10px;
+}
+.card-title .icon { font-size: 1.3rem; }
+
+/* ── SECTION LABEL ──────────────────────────────────────────────────────── */
+.slabel {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 99px;
+  margin-bottom: 16px;
+}
+
+/* ── ESL BOX ────────────────────────────────────────────────────────────── */
+.esl-box {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 16px;
+}
+.esl-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.esl-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 7px; }
+.esl-word { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent-light, #C4B5FD); font-weight: 700; min-width: 120px; padding: 3px 0; }
+.esl-def { font-size: 0.87rem; color: var(--muted); line-height: 1.5; }
+
+/* ── CALLOUT ────────────────────────────────────────────────────────────── */
+.callout {
+  border-radius: var(--radius-sm); padding: 14px 18px;
+  display: flex; gap: 12px; align-items: flex-start; margin: 12px 0;
+}
+.callout .ci { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+.callout .ct { font-size: 0.92rem; line-height: 1.6; }
+.callout .ct strong { color: var(--bright); font-weight: 700; }
+.callout.tip  { background: rgba(109,40,217,0.12); border: 1px solid rgba(109,40,217,0.25); }
+.callout.info { background: rgba(30,58,138,0.15);  border: 1px solid rgba(30,58,138,0.3); }
+.callout.warn { background: rgba(180,83,9,0.15);   border: 1px solid rgba(180,83,9,0.3); }
+.callout.good { background: rgba(6,95,70,0.15);    border: 1px solid rgba(6,95,70,0.3); }
+.callout.key  { background: rgba(190,18,60,0.1);   border: 1px solid rgba(190,18,60,0.25); }
+
+/* ── VOCAB GRID ─────────────────────────────────────────────────────────── */
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; margin-top: 12px; }
+.vocab-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 16px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.vocab-card:hover { transform: translateY(-3px); border-color: var(--accent,#555); }
+.vc-word { font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: var(--accent-light,#C4B5FD); margin-bottom: 5px; }
+.vc-pron { font-size: 0.73rem; color: var(--muted); margin-bottom: 5px; }
+.vc-def  { font-size: 0.85rem; color: #B0B0C8; line-height: 1.5; }
+
+/* ── STEPS ──────────────────────────────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 12px; }
+.step {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 18px;
+  transition: border-color 0.2s;
+}
+.step:hover { border-color: var(--accent,#555); }
+.step-n {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem; color: white;
+  background: var(--accent, #555);
+}
+.step-title { font-weight: 700; color: var(--bright); font-size: 0.95rem; margin-bottom: 4px; }
+.step-desc  { font-size: 0.87rem; color: var(--muted); line-height: 1.55; }
+
+/* ── INTERACTIVE QUIZ ───────────────────────────────────────────────────── */
+.quiz-wrap { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px; }
+.quiz-q { font-size: 1.02rem; font-weight: 600; color: var(--bright); margin-bottom: 16px; line-height: 1.5; }
+.quiz-q em { font-style: italic; color: var(--muted); }
+.opts { display: flex; flex-direction: column; gap: 9px; }
+.opt {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 50px; padding: 12px 20px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500;
+  color: var(--text); cursor: pointer; text-align: left; transition: all 0.18s;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent,#555); color: var(--bright); background: rgba(255,255,255,0.04); }
+.opt.correct { background: rgba(6,95,70,0.2); border-color: #059669; color: #6EE7B7; }
+.opt.wrong   { background: rgba(190,18,60,0.15); border-color: #E11D48; color: #FCA5A5; }
+.quiz-fb { margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; display: none; }
+.quiz-fb.ok  { background: rgba(6,95,70,0.2);  color: #6EE7B7;  border: 1px solid rgba(6,95,70,0.4); }
+.quiz-fb.bad { background: rgba(190,18,60,0.15); color: #FCA5A5; border: 1px solid rgba(190,18,60,0.4); }
+.quiz-nav { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+
+/* ── BUTTONS ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 10px 22px; border-radius: 50px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; color: white;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.btn-sm { padding: 8px 16px; font-size: 0.82rem; }
+.btn-ghost {
+  background: transparent; border: 1.5px solid var(--border); color: var(--muted);
+}
+.btn-ghost:hover { border-color: var(--accent,#555); color: var(--text); background: rgba(255,255,255,0.04); }
+
+/* ── TABLE ──────────────────────────────────────────────────────────────── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 12px; }
+.data-table th {
+  background: var(--surface2); color: var(--accent-light, #C4B5FD);
+  font-weight: 700; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: #B0B0C8; vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.data-table td strong { color: var(--bright); }
+.data-table td em { color: var(--accent-light, #C4B5FD); font-style: normal; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+
+/* ── CODE/FORMULA ───────────────────────────────────────────────────────── */
+.formula {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px 20px;
+  font-size: 1rem; color: var(--bright); margin: 12px 0;
+  overflow-x: auto; line-height: 1.7;
+}
+.formula .hl  { color: #FCD34D; }
+.formula .hl2 { color: #6EE7B7; }
+.formula .hl3 { color: #C4B5FD; }
+.formula .comment { color: var(--muted); font-size: 0.82rem; }
+
+/* ── TIMELINE ───────────────────────────────────────────────────────────── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 20px; }
+.tl-dot {
+  position: absolute; left: -24px; top: 4px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent,#555); border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent,#555);
+}
+.tl-date { font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--muted); margin-bottom:4px; }
+.tl-title { font-weight:700; color:var(--bright); font-size:0.95rem; margin-bottom:4px; }
+.tl-desc  { font-size:0.85rem; color:var(--muted); line-height:1.5; }
+
+/* ── COMPARISON TABLE ───────────────────────────────────────────────────── */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+.cmp-col { background: var(--surface2); border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border); }
+.cmp-head { font-weight: 700; color: var(--bright); margin-bottom: 12px; font-size: 0.95rem; }
+.cmp-row { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 8px; font-size: 0.87rem; color: var(--muted); line-height: 1.45; }
+.cmp-row::before { content:'•'; flex-shrink:0; }
+
+/* ── CELL DIAGRAM ───────────────────────────────────────────────────────── */
+.cell-diagram-wrap {
+  display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;
+  justify-content: center; margin: 16px 0;
+}
+.cell-info-panel {
+  flex: 1; min-width: 220px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 20px; min-height: 180px;
+  transition: border-color 0.3s;
+}
+.cip-name { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--bright); margin-bottom:8px; }
+.cip-body { font-size:0.87rem; color:var(--muted); line-height:1.6; }
+.cip-body strong { color: var(--bright); }
+.cip-analogy { font-size:0.82rem; margin-top:10px; padding:10px; background:rgba(255,255,255,0.04); border-radius:8px; }
+
+/* ── FACTOR TREE ────────────────────────────────────────────────────────── */
+.ftree {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 20px; text-align: center; font-size: 1rem;
+  line-height: 2.2; color: var(--bright); margin: 12px 0;
+}
+.ftree .root { font-size:1.4rem; font-weight:700; }
+.ftree .prime { color: #FCD34D; font-weight:700; }
+.ftree .branch { color: var(--muted); }
+.node-btn {
+  display: inline-block; padding: 4px 14px; border-radius: 8px;
+  cursor: pointer; border: 1.5px solid; transition: all 0.2s; margin: 2px;
+  font-family:'JetBrains Mono',monospace; font-size:0.9rem; font-weight:700;
+}
+.node-btn:hover { transform: scale(1.08); }
+
+/* ── PROGRESS ───────────────────────────────────────────────────────────── */
+.progress { background: var(--border); border-radius:99px; height:6px; margin:6px 0; }
+.progress-fill { height:6px; border-radius:99px; transition: width 1s ease; }
+
+/* ── VERSE BOX ──────────────────────────────────────────────────────────── */
+.verse-box {
+  background: linear-gradient(135deg, rgba(109,40,217,0.15), rgba(76,29,149,0.2));
+  border: 1px solid rgba(139,92,246,0.3);
+  border-radius: var(--radius); padding: 24px 28px; text-align: center; margin: 16px 0;
+}
+.verse-text { font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--bright); line-height:1.5; margin-bottom:8px; }
+.verse-ref  { font-size:0.82rem; color:#C4B5FD; font-weight:700; letter-spacing:0.05em; }
+
+/* ── SCORE ──────────────────────────────────────────────────────────────── */
+.score-badge { font-family:'JetBrains Mono',monospace; font-size:0.88rem; color:var(--muted); font-weight:700; }
+
+/* ── CELEBRATION ─────────────────────────────────────────────────────────── */
+.confetti { position:fixed; top:-20px; width:9px; height:12px; border-radius:2px; z-index:9999; pointer-events:none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity:0; } }
+
+/* ── SIEVE ANIMATION ────────────────────────────────────────────────────── */
+.sieve-grid {
+  display: grid; grid-template-columns: repeat(10,1fr);
+  gap: 5px; max-width: 420px; margin: 14px auto;
+}
+.sieve-num {
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+  background: var(--surface2); border: 1px solid var(--border);
+  transition: all 0.5s; cursor: default;
+}
+.sieve-num.prime { background: rgba(180,83,9,0.3); border-color: #D97706; color: #FCD34D; }
+.sieve-num.crossed { background: rgba(255,255,255,0.03); color: var(--border); border-color: transparent; }
+.sieve-num.one { background: var(--surface2); color: var(--border); border-style: dashed; }
+
+/* ── MAP STYLES ─────────────────────────────────────────────────────────── */
+.civ-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px 18px; margin-bottom: 10px;
+  cursor: pointer; transition: all 0.2s;
+}
+.civ-card:hover, .civ-card.open { border-color: var(--accent,#555); }
+.civ-card-head { display:flex; justify-content:space-between; align-items:center; }
+.civ-card-title { font-weight:700; color:var(--bright); font-size:0.95rem; }
+.civ-card-sub { font-size:0.78rem; color:var(--muted); margin-top:2px; }
+.civ-toggle { color:var(--muted); transition: transform 0.25s; }
+.civ-card.open .civ-toggle { transform: rotate(180deg); }
+.civ-body { display:none; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:0.87rem; color:var(--muted); line-height:1.65; }
+.civ-card.open .civ-body { display: block; }
+.civ-body strong { color: var(--bright); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media(max-width:600px){
+  .hero { padding:30px 22px; }
+  .hero-icon { display:none; }
+  .card { padding:18px; }
+  .compare { grid-template-columns:1fr; }
+  .sieve-grid { grid-template-columns: repeat(5,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ─────────────────────────────────────────────────────────── -->
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 2</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">  📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">  🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     BIBLE — Creation: Genesis 1-2
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+  <style>.pg-bible-a { --accent:#6D28D9; --accent-light:#C4B5FD; } </style>
+  <div class="pg-bible-a">
+
+  <div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+    <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+    <div class="hero-icon">✨</div>
+    <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 2</div>
+    <div class="hero-title">Creation —<br>Genesis 1 & 2</div>
+    <div class="hero-subtitle">God as Creator · Responsibility for creation · Beauty and order in the world</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Genesis 1–2</span>
+      <span class="hero-tag">Theology of Creation</span>
+      <span class="hero-tag">KS3 Level 6</span>
+    </div>
+  </div>
+
+  <!-- Memory Verse -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+    <div class="verse-box">
+      <div class="verse-text">"All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness."</div>
+      <div class="verse-ref">2 Timothy 3:16 — ESV</div>
+    </div>
+    <div class="callout tip">
+      <div class="ci">🧠</div>
+      <div class="ct">This verse connects to Week 1 (How the Bible is Organised). The Genesis creation account is <strong>Scripture breathed out by God</strong> — meaning every detail has theological significance, not just historical interest.</div>
+    </div>
+  </div>
+
+  <!-- ESL Vocabulary -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+    <div class="esl-box">
+      <div class="esl-title">Before you read — understand these words first</div>
+      <div class="esl-row"><div class="esl-word">formless</div><div class="esl-def">Without shape or structure. At the beginning, the earth had no order — it was empty chaos.</div></div>
+      <div class="esl-row"><div class="esl-word">sovereign</div><div class="esl-def">Having total power and authority. God is sovereign over all creation — nothing exists outside His will.</div></div>
+      <div class="esl-row"><div class="esl-word">ex nihilo</div><div class="esl-def">Latin: "out of nothing." God did not use pre-existing material — He created everything from nothing.</div></div>
+      <div class="esl-row"><div class="esl-word">imago Dei</div><div class="esl-def">Latin: "image of God." Humans were made in God's image — meaning we reflect His character (creativity, reason, morality).</div></div>
+      <div class="esl-row"><div class="esl-word">stewardship</div><div class="esl-def">Being responsible for something that belongs to someone else. God gave humans stewardship of creation — we manage it on His behalf.</div></div>
+      <div class="esl-row"><div class="esl-word">Sabbath</div><div class="esl-def">The seventh day of rest. God "rested" on Day 7 not because He was tired, but to model a rhythm of work and rest for humans.</div></div>
+    </div>
+  </div>
+
+  <!-- The Two Accounts -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title"><span class="icon">📜</span> Genesis 1 and Genesis 2 — Two Perspectives</div>
+    <div class="callout info">
+      <div class="ci">💡</div>
+      <div class="ct"><strong>KS3 Key Insight:</strong> Genesis has TWO creation accounts. Chapter 1 gives the cosmic, ordered view. Chapter 2 zooms in on humans and the garden. They are complementary — not contradictory. This is a common literary technique called <strong>recapitulation</strong>.</div>
+    </div>
+    <div class="compare">
+      <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+        <div class="cmp-head" style="color:#C4B5FD;">📖 Genesis 1:1 – 2:3</div>
+        <div class="cmp-row">Focus: The whole cosmos — sky, sea, land, stars, life</div>
+        <div class="cmp-row">Style: Structured, poetic, repetitive ("and it was good")</div>
+        <div class="cmp-row">Timeframe: 6 days + 1 rest day</div>
+        <div class="cmp-row">God's name: Elohim (Creator God, powerful)</div>
+        <div class="cmp-row">Key theme: God brings order out of chaos</div>
+        <div class="cmp-row">Climax: Creation of humans — "very good"</div>
+      </div>
+      <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+        <div class="cmp-head" style="color:#C4B5FD;">📖 Genesis 2:4 – 2:25</div>
+        <div class="cmp-row">Focus: The garden, Adam, Eve, and relationships</div>
+        <div class="cmp-row">Style: Narrative, intimate, story-like</div>
+        <div class="cmp-row">Timeframe: Not numbered days — a different lens</div>
+        <div class="cmp-row">God's name: Yahweh (personal, relational God)</div>
+        <div class="cmp-row">Key theme: God is personal and in relationship with people</div>
+        <div class="cmp-row">Climax: Man and woman together — "not good to be alone"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The 6 Days -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title"><span class="icon">🌌</span> The Six Days — Theological Pattern</div>
+    <div class="callout tip">
+      <div class="ci">🔍</div>
+      <div class="ct"><strong>Scholarly insight:</strong> The days follow a pattern — Days 1–3 create the <em>realms</em>; Days 4–6 fill those realms with <em>rulers</em>. This parallel structure reveals God's design is purposeful and ordered.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Day</th><th>God creates the REALM</th><th>Day</th><th>God fills it with RULERS</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Day 1</strong></td><td>Light and darkness (day/night)</td><td><strong>Day 4</strong></td><td>Sun, moon, stars — to govern day/night</td></tr>
+        <tr><td><strong>Day 2</strong></td><td>Sky and waters separated</td><td><strong>Day 5</strong></td><td>Birds fill the sky; fish fill the sea</td></tr>
+        <tr><td><strong>Day 3</strong></td><td>Dry land; plants and trees</td><td><strong>Day 6</strong></td><td>Animals fill the land; humans steward all</td></tr>
+        <tr><td><strong>Day 7</strong> 🌟</td><td colspan="3">God rests — Sabbath. Not exhaustion, but completion and model for human rhythm.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Imago Dei -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title"><span class="icon">👤</span> Imago Dei — What Does It Mean to Be Made in God's Image?</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n" style="background:#6D28D9;">1</div>
+        <div>
+          <div class="step-title">Rationality</div>
+          <div class="step-desc">Unlike animals, humans can reason, plan, and reflect. We can think about God, meaning, and morality. This reflects God's own rational nature.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="background:#6D28D9;">2</div>
+        <div>
+          <div class="step-title">Creativity</div>
+          <div class="step-desc">God creates — and humans uniquely create art, music, buildings, language. No other creature does this. We are sub-creators, reflecting our Creator.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="background:#6D28D9;">3</div>
+        <div>
+          <div class="step-title">Moral consciousness</div>
+          <div class="step-desc">Humans have an in-built sense of right and wrong (conscience). This reflects God's own moral character. Even people who don't believe in God still feel guilt and justice.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="background:#6D28D9;">4</div>
+        <div>
+          <div class="step-title">Dominion (stewardship)</div>
+          <div class="step-desc">Genesis 1:28 — "Have dominion over the earth." This is NOT a licence for destruction. It means responsible, caring management. A king's steward cares for the kingdom on the king's behalf.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="background:#6D28D9;">5</div>
+        <div>
+          <div class="step-title">Relationality</div>
+          <div class="step-desc">"It is not good for man to be alone" (Gen 2:18). Humans are made for relationship — just as God exists in relationship (Father, Son, Spirit). We flourish in community, not isolation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Critical thinking -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title"><span class="icon">⚖️</span> Critical Thinking — Three Views on Genesis 1</div>
+    <div class="callout warn">
+      <div class="ci">🎓</div>
+      <div class="ct"><strong>KS3 Level:</strong> You are expected to know that Christians interpret Genesis 1 differently. You must be able to explain each view and evaluate them — not just list them.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>View</th><th>What it claims</th><th>How it reads "day"</th><th>Key strength</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Young Earth Creationism</strong></td><td>God created everything in 6 literal 24-hour days, approximately 6,000 years ago</td><td>Literal 24 hours</td><td>Takes Scripture at face value; consistent literalism</td></tr>
+        <tr><td><strong>Day-Age Theory</strong></td><td>Each "day" represents a long geological era; compatible with an old universe</td><td>Long period (thousands/millions of years)</td><td>Harmonises with scientific timescales</td></tr>
+        <tr><td><strong>Framework / Literary View</strong></td><td>Genesis 1 is structured poetry/theology — not meant to teach <em>how</em> God created, but <em>that</em> God created and <em>why</em></td><td>Metaphorical / structural device</td><td>Respects the genre; avoids forcing modern science onto ancient text</td></tr>
+        <tr><td><strong>Theistic Evolution</strong></td><td>God used evolutionary processes as His method of creating; science and faith compatible</td><td>Long era / poetic</td><td>Embraced by many scientists who are Christians</td></tr>
+      </tbody>
+    </table>
+    <div class="callout good" style="margin-top:14px;">
+      <div class="ci">✅</div>
+      <div class="ct"><strong>The key question all Christians agree on:</strong> <em>Who</em> created? → God. <em>Why?</em> → Out of love and purpose. The <em>how</em> and <em>when</em> are where Christians respectfully disagree.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title"><span class="icon">🎯</span> Knowledge Check</div>
+    <div id="bible-quiz"></div>
+    <div class="quiz-nav">
+      <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+      <span class="score-badge" id="bible-score"></span>
+    </div>
+  </div>
+
+  </div><!-- .pg-bible-a -->
+</div><!-- /bible -->
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     ENGLISH — Parts of Speech Review
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="pg-english" class="page">
+  <style>.pg-english-a { --accent:#BE123C; --accent-light:#FCA5A5; }</style>
+  <div class="pg-english-a">
+
+  <div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+    <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+    <div class="hero-icon">✍️</div>
+    <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 2</div>
+    <div class="hero-title">Parts of Speech<br>Review</div>
+    <div class="hero-subtitle">Nouns · Verbs · Adjectives · Adverbs — identification, usage, and application in writing</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Grammar</span><span class="hero-tag">Parts of Speech</span><span class="hero-tag">KS3 Level 6</span>
+    </div>
+  </div>
+
+  <!-- ESL Intro -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">🌍</span> ESL Foundations — Why Parts of Speech Matter</div>
+    <div class="callout info">
+      <div class="ci">📌</div>
+      <div class="ct">Parts of speech are the <strong>categories</strong> that every word in English belongs to. Understanding them helps you: write more accurately, vary your sentences, improve your vocabulary, and analyse other writers' techniques. At KS3 Level 6, you must not just identify them — you must <strong>use them deliberately in your own writing</strong>.</div>
+    </div>
+    <div class="esl-box">
+      <div class="esl-title">Quick pronunciation guide</div>
+      <div class="esl-row"><div class="esl-word">noun</div><div class="esl-def">/naʊn/ — a naming word. Think: a person, place, thing or idea.</div></div>
+      <div class="esl-row"><div class="esl-word">verb</div><div class="esl-def">/vɜːb/ — an action or state word. Every sentence MUST have a verb.</div></div>
+      <div class="esl-row"><div class="esl-word">adjective</div><div class="esl-def">/ˈæd.ʒɪk.tɪv/ — a describing word for a noun. Makes writing vivid.</div></div>
+      <div class="esl-row"><div class="esl-word">adverb</div><div class="esl-def">/ˈæd.vɜːb/ — describes a verb, adjective, or another adverb. Often ends in -ly.</div></div>
+      <div class="esl-row"><div class="esl-word">determiner</div><div class="esl-def">/dɪˈtɜː.mɪ.nər/ — comes before a noun (the, a, an, this, my, every).</div></div>
+      <div class="esl-row"><div class="esl-word">conjunction</div><div class="esl-def">/kənˈdʒʌŋk.ʃən/ — joins clauses or words (and, but, because, although).</div></div>
+      <div class="esl-row"><div class="esl-word">preposition</div><div class="esl-def">/ˌprep.əˈzɪʃ.ən/ — shows relationship in time or place (in, on, under, before, through).</div></div>
+    </div>
+  </div>
+
+  <!-- The 8 Parts -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">📋</span> The 8 Parts of Speech — Definitions & Examples</div>
+    <table class="data-table">
+      <thead><tr><th>Part of Speech</th><th>What it does</th><th>Level 6 example</th><th>Test: ask yourself...</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Noun</strong></td><td>Names a person, place, thing, or idea</td><td><em>The <strong>destruction</strong> of the forest alarmed scientists.</em></td><td>"Is this a thing/idea/name?"</td></tr>
+        <tr><td><strong>Pronoun</strong></td><td>Replaces a noun to avoid repetition</td><td><em><strong>She</strong> argued that <strong>it</strong> was inevitable.</em></td><td>"Does this replace a noun?"</td></tr>
+        <tr><td><strong>Verb</strong></td><td>Shows action, state, or existence</td><td><em>The river <strong>carved</strong> its path through limestone.</em></td><td>"What is happening?"</td></tr>
+        <tr><td><strong>Adjective</strong></td><td>Describes or modifies a noun</td><td><em>A <strong>relentless</strong> downpour flooded the valley.</em></td><td>"What kind? Which one?"</td></tr>
+        <tr><td><strong>Adverb</strong></td><td>Modifies a verb, adjective, or adverb</td><td><em>She spoke <strong>barely</strong> audibly above the crowd.</em></td><td>"How? When? Where? To what degree?"</td></tr>
+        <tr><td><strong>Preposition</strong></td><td>Shows relationship in time/place/direction</td><td><em>The letter arrived <strong>before</strong> dawn.</em></td><td>"Where/when relative to something?"</td></tr>
+        <tr><td><strong>Conjunction</strong></td><td>Joins words, phrases, or clauses</td><td><em>He paused, <strong>yet</strong> he did not turn back.</em></td><td>"Is this connecting two ideas?"</td></tr>
+        <tr><td><strong>Determiner</strong></td><td>Specifies or quantifies a noun</td><td><em><strong>Every</strong> civilisation has its turning point.</em></td><td>"Does this come before a noun to specify it?"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Nouns deep dive -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">🔤</span> Nouns — Four Types at KS3</div>
+    <div class="vocab-grid">
+      <div class="vocab-card">
+        <div class="vc-word">Common noun</div>
+        <div class="vc-def">Generic names for things. <br>Examples: <em>city, river, idea, child</em></div>
+      </div>
+      <div class="vocab-card">
+        <div class="vc-word">Proper noun</div>
+        <div class="vc-def">Specific names — always capitalised. <br>Examples: <em>London, Thames, Abrish</em></div>
+      </div>
+      <div class="vocab-card">
+        <div class="vc-word">Abstract noun</div>
+        <div class="vc-def">Ideas you cannot touch. <br>Examples: <em>freedom, justice, grief, ambition</em></div>
+      </div>
+      <div class="vocab-card">
+        <div class="vc-word">Collective noun</div>
+        <div class="vc-def">Names a group. <br>Examples: <em>a flock of birds, a parliament of owls</em></div>
+      </div>
+    </div>
+    <div class="callout key" style="margin-top:14px;">
+      <div class="ci">✍️</div>
+      <div class="ct"><strong>KS3 writing tip:</strong> Abstract nouns elevate your writing. Instead of "He was brave," write "His <strong>courage</strong> was undeniable." The abstract noun gives weight and sophistication.</div>
+    </div>
+  </div>
+
+  <!-- Verbs deep dive -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">⚡</span> Verbs — Form, Tense & Modal Verbs</div>
+    <div class="compare">
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#FCA5A5;">Verb Types</div>
+        <div class="cmp-row"><strong>Action:</strong> She <em>sprinted</em> across the courtyard.</div>
+        <div class="cmp-row"><strong>State:</strong> The river <em>appears</em> calm.</div>
+        <div class="cmp-row"><strong>Auxiliary (helping):</strong> She <em>was running</em> late.</div>
+        <div class="cmp-row"><strong>Modal:</strong> He <em>might</em> understand eventually.</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#FCA5A5;">Modal Verbs — for precision</div>
+        <div class="cmp-row"><em>will/shall</em> → certainty: "It <em>will</em> collapse."</div>
+        <div class="cmp-row"><em>would/could</em> → possibility: "It <em>could</em> collapse."</div>
+        <div class="cmp-row"><em>might</em> → remote chance: "It <em>might</em> collapse."</div>
+        <div class="cmp-row"><em>must/should</em> → obligation: "We <em>must</em> act."</div>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top:12px;">
+      <div class="ci">🎓</div>
+      <div class="ct"><strong>Level 6 examiner expectation:</strong> Don't just say "there is a verb here." Say: "The writer uses the <strong>modal verb</strong> '<em>might</em>' to create uncertainty, suggesting the outcome is not guaranteed, which creates tension for the reader."</div>
+    </div>
+  </div>
+
+  <!-- Adjectives vs Adverbs -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">🎨</span> Adjectives vs Adverbs — The Difference That Matters</div>
+    <div class="callout info">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>Common ESL confusion:</strong> Adjectives modify <strong>nouns</strong>. Adverbs modify <strong>verbs, adjectives, or other adverbs</strong>. These are NOT interchangeable.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Wrong ❌</th><th>Correct ✅</th><th>Why?</th></tr></thead>
+      <tbody>
+        <tr><td>"She ran <em>quick</em>."</td><td>"She ran <strong>quickly</strong>."</td><td><em>Quick</em> is an adjective; it can't modify the verb "ran." Use the adverb <em>quickly</em>.</td></tr>
+        <tr><td>"He is a <em>hardly</em> worker."</td><td>"He is a <strong>hard</strong> worker."</td><td><em>Worker</em> is a noun — use the adjective <em>hard</em>, not the adverb <em>hardly</em>.</td></tr>
+        <tr><td>"The <em>brilliantly</em> scientist..."</td><td>"The <strong>brilliant</strong> scientist..."</td><td><em>Scientist</em> is a noun — needs an adjective, not an adverb.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout good" style="margin-top:12px;">
+      <div class="ci">💡</div>
+      <div class="ct"><strong>KS3 trick:</strong> Adverbs often (but not always) end in <strong>-ly</strong>. But "fast," "hard," "late," "early" are the same word as adjective AND adverb depending on what they modify.</div>
+    </div>
+  </div>
+
+  <!-- Embedded sentence analysis -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">🔍</span> Analyse This — Parts of Speech in a Real Sentence</div>
+    <div class="formula">
+      <span style="color:#FCA5A5;">The</span> <span class="hl">ancient</span> <span class="hl2">river</span> <span class="hl3">carved</span> its <span class="hl">relentless</span> path <span style="color:#60A5FA;">through</span> the <span class="hl">limestone</span> <span class="hl2">valley</span>, <span style="color:#A78BFA;">slowly</span> <span style="color:#A78BFA;">and</span> <span style="color:#A78BFA;">silently</span>.
+      <br><br>
+      <span class="comment">The = determiner | ancient, relentless, limestone = adjectives | river, path, valley = nouns</span><br>
+      <span class="comment">carved = verb (past tense) | through = preposition | slowly, silently = adverbs | and = conjunction</span>
+    </div>
+    <div class="callout key">
+      <div class="ci">✍️</div>
+      <div class="ct">Notice how the <strong>adjectives</strong> (ancient, relentless) create atmosphere, the <strong>verb</strong> (carved) is precise and vivid, and the <strong>adverbs</strong> (slowly, silently) at the end create a slowing rhythm. This is intentional craft.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title"><span class="icon">🎯</span> Parts of Speech Challenge</div>
+    <div id="english-quiz"></div>
+    <div class="quiz-nav">
+      <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+      <span class="score-badge" id="english-score"></span>
+    </div>
+  </div>
+
+  </div>
+</div><!-- /english -->
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     MATHS — Factors, Multiples & Primes
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="pg-maths" class="page">
+  <style>.pg-maths-a { --accent:#B45309; --accent-light:#FCD34D; }</style>
+  <div class="pg-maths-a">
+
+  <div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+    <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+    <div class="hero-icon">🧮</div>
+    <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 2</div>
+    <div class="hero-title">Factors, Multiples<br>& Primes</div>
+    <div class="hero-subtitle">HCF · LCM · Prime factorisation · Factor trees</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Number Theory</span><span class="hero-tag">HCF & LCM</span><span class="hero-tag">KS3 Level 6</span>
+    </div>
+  </div>
+
+  <!-- ESL Box -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title"><span class="icon">📚</span> Key Vocabulary — Defined Simply</div>
+    <div class="esl-box">
+      <div class="esl-title">Mathematical vocabulary — ESL guide</div>
+      <div class="esl-row"><div class="esl-word">factor</div><div class="esl-def">A number that divides EXACTLY into another number with no remainder. Example: 3 is a factor of 12 (12 ÷ 3 = 4, exactly).</div></div>
+      <div class="esl-row"><div class="esl-word">multiple</div><div class="esl-def">The result of multiplying a number by an integer. Example: multiples of 4 are 4, 8, 12, 16, 20... (the times table).</div></div>
+      <div class="esl-row"><div class="esl-word">prime number</div><div class="esl-def">A number that has EXACTLY two factors: 1 and itself. Example: 7 (factors: 1 and 7 only).</div></div>
+      <div class="esl-row"><div class="esl-word">composite number</div><div class="esl-def">A number with MORE than two factors. Example: 12 (factors: 1, 2, 3, 4, 6, 12).</div></div>
+      <div class="esl-row"><div class="esl-word">HCF</div><div class="esl-def">Highest Common Factor — the LARGEST number that divides exactly into two or more numbers.</div></div>
+      <div class="esl-row"><div class="esl-word">LCM</div><div class="esl-def">Lowest Common Multiple — the SMALLEST number that is a multiple of two or more numbers.</div></div>
+      <div class="esl-row"><div class="esl-word">prime factorisation</div><div class="esl-def">Writing a number as a product of its prime factors only. Like breaking a number into its atomic building blocks.</div></div>
+    </div>
+  </div>
+
+  <!-- Primes + Sieve -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title"><span class="icon">🔢</span> Prime Numbers — The Sieve of Eratosthenes</div>
+    <div class="callout info">
+      <div class="ci">📖</div>
+      <div class="ct"><strong>History:</strong> Eratosthenes (say: er-uh-TOS-thuh-neez) was a Greek mathematician around 276 BC. He invented this method to find all primes up to any number. Press the button to watch the sieve work!</div>
+    </div>
+    <div style="text-align:center;margin:14px 0;">
+      <button class="btn btn-sm" style="background:#B45309;" onclick="runSieve()">▶ Run the Sieve</button>
+      <button class="btn-ghost btn btn-sm" style="margin-left:8px;" onclick="resetSieve()">↺ Reset</button>
+    </div>
+    <div class="sieve-grid" id="sieve-grid"></div>
+    <div style="margin-top:12px;display:flex;gap:16px;font-size:0.82rem;color:var(--muted);">
+      <span><span style="color:#FCD34D;font-weight:700;">■</span> Prime number</span>
+      <span><span style="color:var(--border);font-weight:700;">■</span> Composite (crossed out)</span>
+    </div>
+    <div class="callout good" style="margin-top:12px;">
+      <div class="ci">⭐</div>
+      <div class="ct"><strong>Primes to memorise to 50:</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47. <strong>Note:</strong> 1 is NOT a prime (it has only one factor: itself).</div>
+    </div>
+  </div>
+
+  <!-- Factor Trees -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title"><span class="icon">🌳</span> Factor Trees — Prime Factorisation</div>
+    <div class="callout tip">
+      <div class="ci">💡</div>
+      <div class="ct"><strong>Method:</strong> Split the number into two factors. Keep splitting each factor until every branch ends in a prime. Circle the primes — they are your answer.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px;">
+      <div>
+        <div style="font-size:0.82rem;color:var(--muted);text-align:center;margin-bottom:6px;">Example: 60</div>
+        <div class="ftree">
+          <div class="root">60</div>
+          <div class="branch">╱    ╲</div>
+          <div><span class="node-btn" style="border-color:#B45309;color:#FCD34D;">6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="node-btn" style="border-color:#B45309;color:#FCD34D;">10</span></div>
+          <div class="branch">╱╲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╱╲</div>
+          <div><span class="prime">2</span>&nbsp;<span class="prime">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="prime">2</span>&nbsp;<span class="prime">5</span></div>
+          <div style="margin-top:12px;font-size:0.85rem;">60 = <span class="prime">2</span> × <span class="prime">2</span> × <span class="prime">3</span> × <span class="prime">5</span> = <span class="prime">2²</span> × <span class="prime">3</span> × <span class="prime">5</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.82rem;color:var(--muted);text-align:center;margin-bottom:6px;">Example: 84</div>
+        <div class="ftree">
+          <div class="root">84</div>
+          <div class="branch">╱    ╲</div>
+          <div><span class="node-btn" style="border-color:#B45309;color:#FCD34D;">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="node-btn" style="border-color:#B45309;color:#FCD34D;">21</span></div>
+          <div class="branch">╱╲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╱╲</div>
+          <div><span class="prime">2</span>&nbsp;<span class="prime">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="prime">3</span>&nbsp;<span class="prime">7</span></div>
+          <div style="margin-top:12px;font-size:0.85rem;">84 = <span class="prime">2²</span> × <span class="prime">3</span> × <span class="prime">7</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HCF and LCM -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title"><span class="icon">⚙️</span> HCF and LCM — Using Prime Factorisation</div>
+    <div class="callout warn">
+      <div class="ci">🔑</div>
+      <div class="ct"><strong>The Venn Diagram Method:</strong> Write prime factors of each number. Put shared primes in the middle. HCF = product of the <strong>middle</strong>. LCM = product of <strong>everything</strong>.</div>
+    </div>
+    <div class="formula">
+      <span class="comment">Find HCF and LCM of 60 and 84:</span><br><br>
+      60 = <span class="prime">2² × 3 × 5</span><br>
+      84 = <span class="prime">2² × 3 × 7</span><br><br>
+      <span class="comment">Shared factors (middle of Venn):</span> 2² × 3<br>
+      <span class="hl">HCF = 4 × 3 = 12</span><br><br>
+      <span class="comment">All factors (entire Venn):</span> 2² × 3 × 5 × 7<br>
+      <span class="hl2">LCM = 4 × 3 × 5 × 7 = 420</span>
+    </div>
+    <div class="callout good">
+      <div class="ci">✅</div>
+      <div class="ct"><strong>Check:</strong> HCF divides into BOTH numbers exactly. 12 ÷ 60 = 5 ✓ and 12 ÷ 84 = 7 ✓. LCM is a multiple of BOTH. 420 ÷ 60 = 7 ✓ and 420 ÷ 84 = 5 ✓.</div>
+    </div>
+    <table class="data-table" style="margin-top:16px;">
+      <thead><tr><th>Real-world use</th><th>HCF or LCM?</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Splitting 60 apples and 84 oranges into equal groups with no leftovers</td><td><strong>HCF</strong></td><td>You need the largest number that divides both (12 groups)</td></tr>
+        <tr><td>Two buses: one every 6 min, one every 10 min. When do they arrive together?</td><td><strong>LCM</strong></td><td>You need the smallest shared time (LCM of 6 and 10 = 30 min)</td></tr>
+        <tr><td>Tiles of 8 cm and 12 cm — smallest square floor both fit perfectly</td><td><strong>LCM</strong></td><td>LCM(8,12) = 24 cm square</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Interactive practice -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title"><span class="icon">🎯</span> Interactive Practice</div>
+    <div id="maths-quiz"></div>
+    <div class="quiz-nav">
+      <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+      <span class="score-badge" id="maths-score"></span>
+    </div>
+  </div>
+
+  </div>
+</div><!-- /maths -->
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     SCIENCE — Cells: The Building Blocks of Life
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="pg-science" class="page">
+  <style>.pg-science-a { --accent:#065F46; --accent-light:#6EE7B7; }</style>
+  <div class="pg-science-a">
+
+  <div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+    <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+    <div class="hero-icon">🔬</div>
+    <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 2</div>
+    <div class="hero-title">Cells —<br>Building Blocks<br>of Life</div>
+    <div class="hero-subtitle">Plant vs animal cells · Cell organelles and functions · Microscope use</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Biology</span><span class="hero-tag">Cell Theory</span><span class="hero-tag">KS3 Level 6</span>
+    </div>
+  </div>
+
+  <!-- ESL intro -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title"><span class="icon">🌍</span> ESL — Key Biology Vocabulary</div>
+    <div class="esl-box">
+      <div class="esl-title">Learn these words before the lesson</div>
+      <div class="esl-row"><div class="esl-word">cell</div><div class="esl-def">The smallest unit of life. Every living thing is made of one or more cells. Like the "brick" in a building.</div></div>
+      <div class="esl-row"><div class="esl-word">organelle</div><div class="esl-def">A structure INSIDE a cell that has a specific job. Like organs in a body, but tiny. Pronounced: or-gan-ELL.</div></div>
+      <div class="esl-row"><div class="esl-word">membrane</div><div class="esl-def">A thin flexible layer that surrounds and controls what enters and leaves the cell. Like a very selective gate.</div></div>
+      <div class="esl-row"><div class="esl-word">nucleus</div><div class="esl-def">The "control centre" of the cell. Contains DNA — the instructions for everything the cell does. Plural: nuclei.</div></div>
+      <div class="esl-row"><div class="esl-word">cytoplasm</div><div class="esl-def">The jelly-like fluid filling the cell. Where most chemical reactions take place. Think: the cell's "workspace."</div></div>
+      <div class="esl-row"><div class="esl-word">mitochondria</div><div class="esl-def">Organelles that release energy from food. Called "the powerhouse of the cell." Singular: mitochondrion.</div></div>
+      <div class="esl-row"><div class="esl-word">chloroplast</div><div class="esl-def">Found ONLY in plant cells. Contains chlorophyll (green pigment). Site of photosynthesis.</div></div>
+      <div class="esl-row"><div class="esl-word">vacuole</div><div class="esl-def">A storage space inside a cell. Animal cells have small ones; plant cells have one large central vacuole that keeps them firm.</div></div>
+    </div>
+  </div>
+
+  <!-- Cell theory -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title"><span class="icon">📖</span> Cell Theory — The Foundation of Biology</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n" style="background:#065F46;">1</div>
+        <div>
+          <div class="step-title">All living things are made of cells</div>
+          <div class="step-desc">From a bacterium (single cell) to a blue whale (37 trillion cells). Cells are universal to life on Earth.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="background:#065F46;">2</div>
+        <div>
+          <div class="step-title">The cell is the basic unit of life</div>
+          <div class="step-desc">The smallest thing that can carry out all life processes: nutrition, respiration, growth, reproduction, response.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="background:#065F46;">3</div>
+        <div>
+          <div class="step-title">All cells come from pre-existing cells</div>
+          <div class="step-desc">Cells divide to make new cells. No cell arises spontaneously — every cell has a parent cell.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout info">
+      <div class="ci">📅</div>
+      <div class="ct"><strong>History:</strong> Robert Hooke first observed cells using a microscope in 1665 — he saw cells in cork and named them after monastery rooms (<em>cella</em> = small room in Latin). Schleiden, Schwann, and Virchow formally established Cell Theory in the 1830s–1850s.</div>
+    </div>
+  </div>
+
+  <!-- Interactive cell diagram -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title"><span class="icon">🔬</span> Animal Cell — Click Each Part</div>
+    <div class="cell-diagram-wrap">
+      <div style="position:relative;width:280px;flex-shrink:0;">
+        <svg viewBox="0 0 280 260" width="280" height="260" style="overflow:visible;">
+          <!-- Cell membrane -->
+          <ellipse cx="140" cy="130" rx="130" ry="110" fill="rgba(6,95,70,0.08)" stroke="#059669" stroke-width="2.5" stroke-dasharray="6 3"/>
+          <!-- Cytoplasm label area -->
+          <text x="40" y="230" fill="#6EE7B7" font-size="9" font-weight="600" opacity="0.6">cytoplasm</text>
+          <!-- Nucleus -->
+          <ellipse cx="140" cy="120" rx="48" ry="40" fill="rgba(6,95,70,0.2)" stroke="#34D399" stroke-width="2" id="anim-nucleus" style="cursor:pointer;" onclick="showOrganelle('nucleus')"/>
+          <text x="140" y="116" text-anchor="middle" fill="#6EE7B7" font-size="10" font-weight="700" style="pointer-events:none;">Nucleus</text>
+          <text x="140" y="130" text-anchor="middle" fill="#6EE7B7" font-size="8" style="pointer-events:none;">DNA</text>
+          <!-- Mitochondria -->
+          <ellipse cx="60" cy="145" rx="26" ry="14" fill="rgba(245,158,11,0.2)" stroke="#F59E0B" stroke-width="1.5" style="cursor:pointer;" onclick="showOrganelle('mitochondria')"/>
+          <text x="60" y="149" text-anchor="middle" fill="#FCD34D" font-size="7.5" font-weight="700" style="pointer-events:none;">Mito.</text>
+          <!-- Ribosome dots -->
+          <circle cx="200" cy="80" r="5" fill="#A78BFA" style="cursor:pointer;" onclick="showOrganelle('ribosome')"/>
+          <circle cx="214" cy="90" r="5" fill="#A78BFA" style="cursor:pointer;" onclick="showOrganelle('ribosome')"/>
+          <circle cx="196" cy="95" r="5" fill="#A78BFA" style="cursor:pointer;" onclick="showOrganelle('ribosome')"/>
+          <text x="218" y="77" fill="#A78BFA" font-size="8" font-weight="600" style="pointer-events:none;">Ribosomes</text>
+          <!-- Cell surface membrane label -->
+          <text x="247" y="50" fill="#34D399" font-size="8.5" font-weight="700" text-anchor="middle" style="cursor:pointer;" onclick="showOrganelle('membrane')">Cell membrane</text>
+          <!-- Vacuole -->
+          <ellipse cx="200" cy="160" rx="20" ry="15" fill="rgba(96,165,250,0.15)" stroke="#60A5FA" stroke-width="1.5" style="cursor:pointer;" onclick="showOrganelle('vacuole')"/>
+          <text x="200" y="164" text-anchor="middle" fill="#93C5FD" font-size="7.5" font-weight="700" style="pointer-events:none;">Vacuole</text>
+          <!-- Lysosome -->
+          <circle cx="82" cy="90" r="10" fill="rgba(239,68,68,0.2)" stroke="#EF4444" stroke-width="1.5" style="cursor:pointer;" onclick="showOrganelle('lysosome')"/>
+          <text x="82" y="94" text-anchor="middle" fill="#FCA5A5" font-size="7" font-weight="700" style="pointer-events:none;">Lyso.</text>
+        </svg>
+      </div>
+      <div class="cell-info-panel" id="animal-info" style="border-color:#065F46;">
+        <div style="font-size:2rem;text-align:center;margin-bottom:10px;opacity:0.5;">👆</div>
+        <div class="cip-name" style="text-align:center;opacity:0.6;">Click a part of the cell</div>
+        <div class="cip-body" style="text-align:center;margin-top:6px;font-size:0.82rem;">Each organelle has a specific job. Tap to find out what each one does!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plant vs Animal comparison -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title"><span class="icon">🌿</span> Plant vs Animal Cells — Key Differences</div>
+    <div class="callout warn">
+      <div class="ci">🎓</div>
+      <div class="ct"><strong>Exam essential:</strong> You must be able to list the THREE structures found in plant cells but NOT in animal cells, and explain why each is needed.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Feature</th><th>Animal Cell</th><th>Plant Cell</th><th>Why the difference?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cell wall</strong></td><td>❌ Absent</td><td>✅ Present (cellulose)</td><td>Plants need rigid support to stand upright without bones or muscles.</td></tr>
+        <tr><td><strong>Chloroplasts</strong></td><td>❌ Absent</td><td>✅ Present</td><td>Plants make their own food via photosynthesis; animals eat food.</td></tr>
+        <tr><td><strong>Large central vacuole</strong></td><td>❌ Small/absent</td><td>✅ Large, permanent</td><td>Stores water and keeps plant cells turgid (firm). Wilting = vacuole deflated.</td></tr>
+        <tr><td><strong>Cell membrane</strong></td><td>✅ Present</td><td>✅ Present</td><td>Both need selective boundary control.</td></tr>
+        <tr><td><strong>Nucleus</strong></td><td>✅ Present</td><td>✅ Present</td><td>Both need DNA to control cell activity.</td></tr>
+        <tr><td><strong>Mitochondria</strong></td><td>✅ Present</td><td>✅ Present</td><td>Both need energy (animals from food; plants from photosynthesis and respiration).</td></tr>
+        <tr><td><strong>Cytoplasm</strong></td><td>✅ Present</td><td>✅ Present</td><td>Both need a fluid medium for chemical reactions.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Microscopes -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title"><span class="icon">🔭</span> Using a Microscope — Steps & Magnification</div>
+    <div class="formula">
+      <span class="hl2">Total magnification = eyepiece lens × objective lens</span><br><br>
+      <span class="comment">Example: eyepiece = ×10 | objective = ×40</span><br>
+      Total = 10 × 40 = <span class="hl">×400</span><br><br>
+      <span class="comment">If a cell appears 2 mm on the slide and magnification is ×400:</span><br>
+      Actual size = 2 mm ÷ 400 = <span class="hl2">0.005 mm = 5 μm (micrometres)</span>
+    </div>
+    <div class="steps" style="margin-top:14px;">
+      <div class="step"><div class="step-n" style="background:#065F46;">1</div><div><div class="step-title">Clip the slide onto the stage</div><div class="step-desc">Place your prepared slide (specimen + coverslip) and secure with clips.</div></div></div>
+      <div class="step"><div class="step-n" style="background:#065F46;">2</div><div><div class="step-title">Start with the lowest objective lens (×4)</div><div class="step-desc">Never start on high power — you risk crushing the slide and can't focus.</div></div></div>
+      <div class="step"><div class="step-n" style="background:#065F46;">3</div><div><div class="step-title">Use coarse focus FIRST</div><div class="step-desc">Slowly bring the slide into rough focus using the large knob.</div></div></div>
+      <div class="step"><div class="step-n" style="background:#065F46;">4</div><div><div class="step-title">Fine focus for clarity</div><div class="step-desc">Use the small knob to sharpen the image. Do not rush this step.</div></div></div>
+      <div class="step"><div class="step-n" style="background:#065F46;">5</div><div><div class="step-title">Switch to higher objective if needed</div><div class="step-desc">Move to ×10 or ×40 for detail. Re-focus with fine adjustment only.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title"><span class="icon">🎯</span> Cell Biology Quiz</div>
+    <div id="science-quiz"></div>
+    <div class="quiz-nav">
+      <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+      <span class="score-badge" id="science-score"></span>
+    </div>
+  </div>
+
+  </div>
+</div><!-- /science -->
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     HISTORY — Early Civilisations: Mesopotamia & Egypt
+════════════════════════════════════════════════════════════════════════════ -->
+<div id="pg-history" class="page">
+  <style>.pg-history-a { --accent:#1E3A8A; --accent-light:#93C5FD; }</style>
+  <div class="pg-history-a">
+
+  <div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+    <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+    <div class="hero-icon">🏛️</div>
+    <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History · Week 2</div>
+    <div class="hero-title">Early Civilisations —<br>Mesopotamia & Egypt</div>
+    <div class="hero-subtitle">Nile Valley · Mesopotamian inventions · Social structures · Pharaohs & Ziggurats</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Ancient History</span><span class="hero-tag">c.3500–30 BC</span><span class="hero-tag">KS3 Level 6</span>
+    </div>
+  </div>
+
+  <!-- ESL vocabulary -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+    <div class="esl-box">
+      <div class="esl-title">Historical vocabulary — understand these first</div>
+      <div class="esl-row"><div class="esl-word">civilisation</div><div class="esl-def">An advanced society with cities, government, writing, laws, and organised religion. More complex than a village or tribe.</div></div>
+      <div class="esl-row"><div class="esl-word">Mesopotamia</div><div class="esl-def">Greek for "land between the rivers" — the area between the Tigris and Euphrates rivers (modern Iraq). First civilisations arose here.</div></div>
+      <div class="esl-row"><div class="esl-word">pharaoh</div><div class="esl-def">The ruler of ancient Egypt. Considered both a king AND a god. Absolute power over millions of people.</div></div>
+      <div class="esl-row"><div class="esl-word">hieroglyphics</div><div class="esl-def">The ancient Egyptian writing system using picture symbols. From Greek: hieros (sacred) + glyphikos (carving).</div></div>
+      <div class="esl-row"><div class="esl-word">cuneiform</div><div class="esl-def">The earliest known writing system, developed in Mesopotamia around 3200 BC. Wedge-shaped marks pressed into clay tablets.</div></div>
+      <div class="esl-row"><div class="esl-word">ziggurat</div><div class="esl-def">A massive stepped temple-tower built in Mesopotamia. Believed to be a stairway between earth and heaven where priests communicated with gods.</div></div>
+      <div class="esl-row"><div class="esl-word">social hierarchy</div><div class="esl-def">A ranking system in society. In Egypt: Pharaoh → Priests/Officials → Scribes → Craftsmen → Farmers → Slaves.</div></div>
+      <div class="esl-row"><div class="esl-word">irrigation</div><div class="esl-def">Channelling water from rivers to water crops. Both civilisations used this to farm in dry seasons — a key reason they thrived.</div></div>
+    </div>
+  </div>
+
+  <!-- What makes a civilisation -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">🔍</span> What Makes a Civilisation? — The 7 Features</div>
+    <div class="callout info">
+      <div class="ci">🎓</div>
+      <div class="ct"><strong>KS3 Key concept:</strong> Historians use these 7 features to identify whether a society counts as a "civilisation." Both Mesopotamia and Egypt had ALL seven — which is why they are considered the world's first great civilisations.</div>
+    </div>
+    <div class="vocab-grid">
+      <div class="vocab-card"><div class="vc-word">1. Cities</div><div class="vc-def">Large permanent settlements with thousands of people. Uruk (Mesopotamia) had 50,000+ people by 3000 BC.</div></div>
+      <div class="vocab-card"><div class="vc-word">2. Writing</div><div class="vc-def">Cuneiform (Mesopotamia, 3200 BC) and hieroglyphics (Egypt, 3100 BC) — essential for records, laws, trade.</div></div>
+      <div class="vocab-card"><div class="vc-word">3. Organised government</div><div class="vc-def">Kings/pharaohs with laws, taxes, armies — not just local tribal chiefs.</div></div>
+      <div class="vocab-card"><div class="vc-word">4. Religion</div><div class="vc-def">Temples, priests, gods — organised belief systems that gave society structure and meaning.</div></div>
+      <div class="vocab-card"><div class="vc-word">5. Social classes</div><div class="vc-def">Different jobs and ranks — rulers, priests, merchants, farmers, slaves.</div></div>
+      <div class="vocab-card"><div class="vc-word">6. Arts & architecture</div><div class="vc-def">Pyramids, ziggurats, sculpture, jewellery — beyond basic survival needs.</div></div>
+      <div class="vocab-card"><div class="vc-word">7. Specialised jobs</div><div class="vc-def">Not everyone farmed. Potters, scribes, weavers, soldiers — division of labour.</div></div>
+    </div>
+  </div>
+
+  <!-- Mesopotamia accordion -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">🌊</span> Mesopotamia — The World's First Civilisation</div>
+    <div class="callout tip">
+      <div class="ci">📍</div>
+      <div class="ct"><strong>Location:</strong> Present-day Iraq — the Fertile Crescent between the Tigris and Euphrates rivers. Floods brought rich silt (soil) making this one of the most fertile regions in the ancient world.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">📝 The Invention of Writing — c.3200 BC</div><div class="civ-card-sub">Cuneiform · Clay tablets · Scribes</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">The Sumerians (in southern Mesopotamia) invented cuneiform writing around 3200 BC — the earliest known writing system on Earth. They pressed wedge-shaped marks into clay tablets using a stylus (a reed pen). <strong>Why?</strong> Trade records — keeping track of grain, livestock, and payments. Writing was not invented for poetry or stories; it was invented for accountancy. Over time, it evolved to record laws (Hammurabi's Code, ~1754 BC), myths (Epic of Gilgamesh), and royal achievements.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">⚖️ Hammurabi's Code — c.1754 BC</div><div class="civ-card-sub">One of the world's first legal codes</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">Hammurabi, King of Babylon, created one of the earliest written law codes — 282 laws carved onto an 8-foot stone stele. Famous for the principle of <strong>"an eye for an eye"</strong> (lex talionis). Its significance: laws applied to everyone (not just rulers' whims), punishments were proportional, and it protected some vulnerable groups. <strong>However</strong> — punishments varied by social class: a nobleman faced lesser punishment than a commoner for the same crime. Was this justice or privilege? This is a great source evaluation question.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">🏗️ Ziggurats — Temples to the Gods</div><div class="civ-card-sub">Architecture · Religion · Power</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">Ziggurats were enormous stepped temple-towers — the Great Ziggurat of Ur measured 64m × 45m at its base. Built as homes for the gods and as centres of city life. Priests performed rituals at the top; ordinary people brought offerings. <strong>Key insight:</strong> The ziggurat was not just religious — it was also an economic hub. Priests managed grain storage, redistribution, and trade. Religion and government were inseparable in Mesopotamia.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">🚿 Mesopotamian Innovations</div><div class="civ-card-sub">What we inherited</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">The Mesopotamians gave the world: the <strong>wheel</strong> (~3500 BC), the <strong>60-minute hour</strong> (base-60 mathematics — we still use it), the <strong>lunar calendar</strong>, the concept of <strong>zero</strong>, written <strong>laws</strong>, the first <strong>schools</strong> (edubba — tablet houses), and the world's first written <strong>story</strong> (Epic of Gilgamesh). When we ask "where did civilisation begin?" — the answer is the Fertile Crescent.</div>
+    </div>
+  </div>
+
+  <!-- Ancient Egypt accordion -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">🌅</span> Ancient Egypt — Gift of the Nile</div>
+    <div class="callout info">
+      <div class="ci">📍</div>
+      <div class="ct"><strong>The Greek historian Herodotus wrote:</strong> "Egypt is the gift of the Nile." The annual Nile flood deposited rich black silt on either side — the "Black Land" where crops grew. Beyond it was the "Red Land" — harsh desert that acted as a natural defence.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">👑 The Pharaoh — God-King</div><div class="civ-card-sub">Divine kingship · Absolute power</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">The pharaoh was considered the <strong>son of Ra</strong> (the sun god) and the earthly incarnation of Horus. This made him simultaneously a political ruler AND a religious leader. This dual role gave the pharaoh absolute authority — questioning the pharaoh was not just treason; it was blasphemy. Notable pharaohs: <strong>Narmer</strong> (unified Egypt, ~3100 BC), <strong>Hatshepsut</strong> (female pharaoh, one of the most successful rulers, ~1478–1458 BC), <strong>Akhenaten</strong> (revolutionary monotheist who worshipped one god, Aten), <strong>Ramesses II</strong> (the "Great," ruled 66 years, ~1279–1213 BC), <strong>Cleopatra VII</strong> (the last active pharaoh, ~51–30 BC).</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">🔺 Pyramids — Engineering Marvels</div><div class="civ-card-sub">Tombs · Religion · State power</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">The Great Pyramid of Giza (built for Pharaoh Khufu, ~2560 BC) contains 2.3 million stone blocks averaging 2.5 tonnes each. It remained the tallest human structure for 3,800 years. <strong>Why were pyramids built?</strong> Egyptians believed in <em>ka</em> (the soul) — the pharaoh's soul needed his body preserved (mummification) and his belongings ready for the afterlife. The pyramid's perfect geometry pointed to the stars (specifically Orion's belt — associated with Osiris, god of the afterlife). <strong>Critical thinking:</strong> Who really built the pyramids? NOT slaves, as often assumed — recent archaeology shows they were skilled, paid workers who received food, healthcare, and burial honours.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">✍️ Hieroglyphics & the Rosetta Stone</div><div class="civ-card-sub">Writing · Decipherment</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">Egyptian hieroglyphics (~3100 BC) used over 700 picture symbols. They were written right-to-left, left-to-right, or top-to-bottom depending on context. After Egypt fell to Rome, the ability to read hieroglyphics was LOST for 1,400 years. The <strong>Rosetta Stone</strong> (196 BC, discovered 1799) was the key — it showed the same text in hieroglyphics, Demotic, and Greek. Since scholars could read Greek, Jean-François Champollion used this to crack the code in 1822. This is why the Rosetta Stone is considered one of the most important historical artefacts ever found.</div>
+    </div>
+    <div class="civ-card" onclick="toggleCiv(this)">
+      <div class="civ-card-head"><div><div class="civ-card-title">🏗️ Egyptian Achievements</div><div class="civ-card-sub">Legacy to the modern world</div></div><div class="civ-toggle">▼</div></div>
+      <div class="civ-body">Egypt gave the world: the <strong>365-day calendar</strong> (remarkably accurate, still the basis of our calendar), <strong>papyrus</strong> (the world's first lightweight writing material), <strong>advanced medicine</strong> (Edwin Smith Papyrus describes surgical techniques for over 48 injuries), <strong>mathematics</strong> (fractions, geometry for building), <strong>irrigation</strong> (feeding millions), <strong>glass-making</strong>, and the concept of <strong>standardised weights and measures</strong> for trade.</div>
+    </div>
+  </div>
+
+  <!-- Comparison -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">⚖️</span> Mesopotamia vs Egypt — Key Comparison</div>
+    <div class="callout warn">
+      <div class="ci">🎓</div>
+      <div class="ct"><strong>Exam technique:</strong> When comparing two civilisations, always use the structure: <em>similarity → difference → significance</em>. Don't just list facts — explain WHY the differences matter.</div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Aspect</th><th>Mesopotamia</th><th>Egypt</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Geography</strong></td><td>Tigris & Euphrates — flood unpredictably, sometimes violently</td><td>Nile — floods predictably every July; gentle and reliable</td><td>Egypt's predictable flooding created stability; Mesopotamia's floods were chaotic, reflecting a more anxious religion</td></tr>
+        <tr><td><strong>Religion</strong></td><td>Polytheistic; gods were unpredictable, often hostile to humans</td><td>Polytheistic; pharaoh was divine; gods more accessible through ritual</td><td>Mesopotamian religion reflected environmental anxiety; Egyptian religion emphasised the afterlife and cosmic order (Ma'at)</td></tr>
+        <tr><td><strong>Writing</strong></td><td>Cuneiform on clay; primarily commercial</td><td>Hieroglyphics on papyrus/stone; sacred and administrative</td><td>Both invented writing independently for practical needs — showing writing is a natural consequence of complex society</td></tr>
+        <tr><td><strong>Architecture</strong></td><td>Ziggurats (mud brick, no stone available)</td><td>Pyramids (limestone, granite — quarried from Aswan)</td><td>Building materials reflect local geography — both cultures built for permanence and divine purpose</td></tr>
+        <tr><td><strong>Legacy</strong></td><td>Law codes, the wheel, writing, base-60 maths</td><td>Calendar, medicine, geometry, paper</td><td>Together these two civilisations gave humanity most of its foundational technologies and ideas</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Timeline -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">📅</span> Key Dates Timeline</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">c.3500 BC</div><div class="tl-title">First Sumerian cities emerge (Uruk, Ur)</div><div class="tl-desc">Mesopotamia becomes the first urban society. Population of Uruk reaches ~50,000.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">c.3200 BC</div><div class="tl-title">Cuneiform writing invented</div><div class="tl-desc">The world's first writing system. Originally for trade records.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">c.3100 BC</div><div class="tl-title">Egypt unified under Pharaoh Narmer</div><div class="tl-desc">Upper and Lower Egypt joined. Hieroglyphics appear. The 3,000-year Egyptian civilisation begins.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">c.2560 BC</div><div class="tl-title">Great Pyramid of Giza completed</div><div class="tl-desc">Built for Pharaoh Khufu. Remains one of the Seven Wonders of the Ancient World.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">c.1754 BC</div><div class="tl-title">Hammurabi's Code inscribed</div><div class="tl-desc">282 laws — one of history's first written legal codes.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">1478–1458 BC</div><div class="tl-title">Reign of Hatshepsut</div><div class="tl-desc">One of Egypt's most successful pharaohs — a woman who ruled as a king.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:#60A5FA;"></div><div class="tl-date">30 BC</div><div class="tl-title">Egypt falls to Rome (death of Cleopatra VII)</div><div class="tl-desc">End of the last dynasty. Egypt becomes a Roman province. 3,000 years of pharaonic rule ends.</div></div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title"><span class="icon">🎯</span> Civilisations Challenge</div>
+    <div id="history-quiz"></div>
+    <div class="quiz-nav">
+      <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+      <span class="score-badge" id="history-score"></span>
+    </div>
+  </div>
+
+  </div>
+</div><!-- /history -->
+
+<!-- ════════════════ JAVASCRIPT ══════════════════════════════════════════ -->
+<script>
+// ── NAVIGATION ─────────────────────────────────────────────────────────────
+function show(s) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector(`[data-s="${s}"]`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── ACCORDION ──────────────────────────────────────────────────────────────
+function toggleCiv(el) { el.classList.toggle('open'); }
+
+// ── SIEVE OF ERATOSTHENES ──────────────────────────────────────────────────
+const sieveGrid = document.getElementById('sieve-grid');
+let sieveState = Array(51).fill('none');
+function buildSieve() {
+  sieveGrid.innerHTML = '';
+  for(let i=1;i<=50;i++){
+    const d = document.createElement('div');
+    d.className = 'sieve-num' + (i===1?' one':'');
+    d.id = 'sn'+i; d.textContent = i;
+    sieveGrid.appendChild(d);
+  }
+}
+function resetSieve() { sieveState = Array(51).fill('none'); buildSieve(); }
+let sieveStep = 2;
+function runSieve() {
+  buildSieve();
+  sieveStep = 2;
+  const primes = [];
+  for(let i=2;i<=50;i++){
+    let isPrime = true;
+    for(let p of primes){ if(i%p===0){ isPrime=false; break; } }
+    if(isPrime) primes.push(i);
+  }
+  let delay = 0;
+  primes.forEach(p => {
+    setTimeout(()=>{ document.getElementById('sn'+p).classList.add('prime'); }, delay);
+    delay += 300;
+    for(let m=p*2;m<=50;m+=p){
+      const d=delay; const mm=m;
+      setTimeout(()=>{ const el=document.getElementById('sn'+mm); if(el && !el.classList.contains('prime')) el.classList.add('crossed'); }, d);
+      delay += 80;
+    }
+  });
+}
+buildSieve();
+
+// ── CELL ORGANELLES ────────────────────────────────────────────────────────
+const organelleData = {
+  nucleus: { name:'Nucleus', emoji:'🧬', body:'The <strong>control centre</strong> of the cell. Contains DNA — the genetic instructions for every process in the cell. Surrounded by the nuclear envelope (double membrane) with pores for communication. <div class="cip-analogy">🏛️ Analogy: Like the headmaster\'s office — all decisions come from here.</div>' },
+  mitochondria: { name:'Mitochondria', emoji:'⚡', body:'Site of <strong>cellular respiration</strong> — releases energy from glucose for all cell activities. The more active the cell, the more mitochondria it has. Muscle cells have thousands. <div class="cip-analogy">🔋 Analogy: The cell\'s power station — generates ATP (the cell\'s energy currency).</div>' },
+  membrane: { name:'Cell Surface Membrane', emoji:'🚪', body:'A <strong>selectively permeable</strong> phospholipid bilayer that controls what enters and leaves the cell. Allows useful substances (glucose, oxygen) in and waste (CO₂) out. <div class="cip-analogy">🏰 Analogy: A castle wall with guarded gates — decides who comes in and who goes out.</div>' },
+  ribosome: { name:'Ribosomes', emoji:'🏭', body:'Sites of <strong>protein synthesis</strong> — they read mRNA instructions from the nucleus and build proteins. Every cell needs proteins (as enzymes, structural components, hormones). <div class="cip-analogy">🏗️ Analogy: A factory assembly line — reading instructions and building products.</div>' },
+  vacuole: { name:'Vacuole', emoji:'💧', body:'A fluid-filled sac used for <strong>temporary storage</strong>. Animal cells have small, temporary vacuoles. Plant cells have a large, permanent <em>central vacuole</em> filled with cell sap — it maintains cell turgidity (firmness). <div class="cip-analogy">🫙 Analogy: A storage room — keeps things until they\'re needed.</div>' },
+  lysosome: { name:'Lysosome', emoji:'♻️', body:'Contains <strong>digestive enzymes</strong> that break down waste materials, old organelles, and invading bacteria. Acts as the cell\'s recycling centre and immune defence. <div class="cip-analogy">🗑️ Analogy: The cleaners of the cell — break down and recycle what isn\'t needed.</div>' },
+};
+function showOrganelle(name) {
+  const o = organelleData[name];
+  const panel = document.getElementById('animal-info');
+  panel.innerHTML = `<div style="font-size:2rem;margin-bottom:8px;">${o.emoji}</div><div class="cip-name">${o.name}</div><div class="cip-body">${o.body}</div>`;
+  panel.style.borderColor = '#059669';
+}
+
+// ── QUIZ ENGINE ─────────────────────────────────────────────────────────────
+const quizData = {
+  bible: [
+    { q:"What does the Latin term 'ex nihilo' mean in the context of creation?", opts:["Out of water","Out of nothing","From existing matter","Out of darkness"], ans:1, exp:"God created the universe from nothing — no pre-existing material. This is a core theological claim distinguishing the Christian God from deities who merely rearrange existing matter." },
+    { q:"In the literary structure of Genesis 1, which 'realm' does Day 5 fill?", opts:["The land (created Day 3)","The sky and sea (created Day 2)","Light and darkness (Day 1)","There is no pattern"], ans:1, exp:"Days 1–3 create realms; Days 4–6 fill them. Day 2 = sky and sea. Day 5 = birds fill the sky, fish fill the sea. This parallel structure reveals deliberate literary design." },
+    { q:"The phrase 'imago Dei' refers to which concept?", opts:["God resting on the seventh day","The creation of light","Humans made in God's image","The Garden of Eden"], ans:2, exp:"Imago Dei (Latin: image of God) is the doctrine that humans uniquely reflect God's character — in rationality, creativity, morality, and relationality." },
+    { q:"Which view holds that Genesis 1 is structured poetry/theology and NOT intended to teach HOW God created?", opts:["Young Earth Creationism","Day-Age Theory","Framework / Literary View","Theistic Evolution"], ans:2, exp:"The Framework View treats the 6 days as a literary framework conveying theological truth (who created and why) rather than a scientific timeline of HOW or WHEN." },
+    { q:"Why is Genesis 2's use of the name 'Yahweh' significant compared to Genesis 1's 'Elohim'?", opts:["It is a translation error","Yahweh emphasises God's personal, relational nature; Elohim emphasises power and cosmic authority","They mean exactly the same thing","Yahweh is an older name than Elohim"], ans:1, exp:"Elohim (Creator God) is used in the cosmic creation account. Yahweh (the personal covenant name of God) appears in the garden narrative — reflecting a shift from cosmic creation to intimate relationship with humans." },
+  ],
+  english: [
+    { q:"Identify the ADVERB in this sentence: 'The river carved its relentless path through the limestone valley, slowly.'", opts:["river","relentless","through","slowly"], ans:3, exp:"'Slowly' modifies the verb 'carved' — it tells us HOW the carving happened. That makes it an adverb. 'Relentless' is an adjective (modifies 'path'). 'Through' is a preposition." },
+    { q:"Which sentence uses an ABSTRACT NOUN?", opts:["The tall mountain stood silently.","Her courage never wavered.","She ran quickly through the gate.","The blue bird sang at dawn."], ans:1, exp:"'Courage' is an abstract noun — an idea you cannot physically touch or see. Abstract nouns elevate writing by naming concepts rather than things." },
+    { q:"What is WRONG with this sentence? 'She spoke incredible loud.'", opts:["'Spoke' should be 'speaks'","'Incredible' should be 'incredibly' — an adverb is needed to modify the adjective 'loud'","'Loud' should be 'loudly'","Nothing is wrong"], ans:1, exp:"'Incredible' is an adjective — it cannot modify another adjective ('loud'). You need the adverb 'incredibly.' Correct: 'She spoke incredibly loud.' OR 'She spoke incredibly loudly.'" },
+    { q:"Which part of speech is the underlined word: 'Every civilisation has its turning point.'?", opts:["Adjective","Noun","Determiner","Pronoun"], ans:2, exp:"'Every' is a DETERMINER — it comes before a noun ('civilisation') to specify quantity/scope. Determiners include: the, a, an, my, every, this, each, some." },
+    { q:"A writer uses the modal verb 'might' instead of 'will.' What effect does this create?", opts:["Certainty and confidence","Obligation and duty","Uncertainty and tentativeness — the outcome is not guaranteed","Urgency and command"], ans:2, exp:"Modal verbs signal the writer's attitude toward certainty. 'Will' = certain; 'might' = possible; 'must' = obligation. At KS3, explaining modal verb choice is a mark of analytical sophistication." },
+  ],
+  maths: [
+    { q:"What is the prime factorisation of 90?", opts:["2 × 3 × 15","2 × 3² × 5","2² × 5 × 9","3 × 5 × 6"], ans:1, exp:"90 = 2 × 45 = 2 × 9 × 5 = 2 × 3² × 5. Always express using index notation. Check: 2 × 9 × 5 = 90 ✓" },
+    { q:"Find the HCF of 48 and 36.", opts:["6","9","12","18"], ans:2, exp:"48 = 2⁴ × 3 | 36 = 2² × 3². Shared factors: 2² × 3 = 4 × 3 = 12. HCF = 12. Check: 48 ÷ 12 = 4 ✓  36 ÷ 12 = 3 ✓" },
+    { q:"Two lights flash every 8 seconds and every 12 seconds. How many seconds until they flash together?", opts:["4 seconds","20 seconds","24 seconds","96 seconds"], ans:2, exp:"You need the LCM of 8 and 12. 8 = 2³ | 12 = 2² × 3. LCM = 2³ × 3 = 24. The lights flash together every 24 seconds. This is a classic LCM application." },
+    { q:"Is 91 a prime number?", opts:["Yes — 91 has no factors other than 1 and 91","No — 91 = 7 × 13","No — 91 = 9 × 10 + 1","Yes — all odd numbers ending in 1 are prime"], ans:1, exp:"91 = 7 × 13. This is a classic trick question! Always test divisibility by small primes (2,3,5,7,11...) before declaring a number prime. 91 ÷ 7 = 13 exactly." },
+    { q:"Using prime factorisation, find the LCM of 60 and 84.", opts:["12","420","360","840"], ans:1, exp:"60 = 2² × 3 × 5 | 84 = 2² × 3 × 7. LCM = highest power of each prime = 2² × 3 × 5 × 7 = 4 × 3 × 5 × 7 = 420. HCF = 2² × 3 = 12." },
+  ],
+  science: [
+    { q:"Which THREE structures are found in plant cells but NOT animal cells?", opts:["Nucleus, ribosomes, vacuole","Cell wall, chloroplasts, large central vacuole","Mitochondria, cell membrane, nucleus","Cytoplasm, cell wall, ribosomes"], ans:1, exp:"Plant-only structures: (1) Cell wall — rigid support; (2) Chloroplasts — for photosynthesis; (3) Large central vacuole — for storage and turgidity. These relate to the plant's need to stand upright and make its own food." },
+    { q:"What is the function of the mitochondria?", opts:["Protein synthesis","Storage of genetic information (DNA)","Release of energy through cellular respiration","Control of what enters and leaves the cell"], ans:2, exp:"Mitochondria carry out cellular respiration — releasing energy (ATP) from glucose. The more active the cell (e.g. muscle cells), the more mitochondria it contains." },
+    { q:"A microscope eyepiece lens is ×10 and the objective lens is ×40. What is the total magnification?", opts:["×50","×400","×4","×410"], ans:1, exp:"Total magnification = eyepiece × objective = 10 × 40 = 400. This means the image appears 400 times larger than the actual specimen." },
+    { q:"Robert Hooke first observed cells in 1665. What material was he looking at?", opts:["Onion skin","Blood","Cork","Pond water"], ans:2, exp:"Hooke examined thin slices of cork under his microscope and saw tiny box-like compartments. He called them 'cells' after the Latin 'cella' (small room) — the same word used for monks' chambers." },
+    { q:"Why does a wilting plant suggest its vacuoles are not full?", opts:["The mitochondria have stopped working","The large central vacuole provides turgor pressure — when deflated, the cell loses rigidity","The chloroplasts have broken down","The cell wall has dissolved"], ans:1, exp:"Turgor pressure: when the central vacuole is full of water, it pushes outward against the cell wall, making the cell firm (turgid). Without enough water, the vacuole deflates → cell goes limp → plant wilts." },
+  ],
+  history: [
+    { q:"What does 'Mesopotamia' literally mean in Greek?", opts:["Land of the pharaohs","Land between the rivers","Gift of the Nile","The fertile crescent"], ans:1, exp:"Mesopotamia = meso (middle) + potamos (river). It refers to the land between the Tigris and Euphrates rivers — modern-day Iraq. This region is widely considered the 'cradle of civilisation.'" },
+    { q:"Which civilisation invented the world's first known writing system, and when?", opts:["Egypt, ~3100 BC","Mesopotamia (Sumerians), ~3200 BC","Indus Valley, ~2600 BC","China, ~1200 BC"], ans:1, exp:"Cuneiform was invented by the Sumerians around 3200 BC — initially for trade records. Egyptian hieroglyphics appeared around 3100 BC. Both writing systems developed independently." },
+    { q:"The Rosetta Stone was crucial because it allowed historians to do what?", opts:["Prove that Egypt traded with Greece","Decipher ancient Egyptian hieroglyphics by comparing them to Greek text","Date the construction of the pyramids","Identify which pharaoh built Giza"], ans:1, exp:"The Rosetta Stone (196 BC) showed the same decree in hieroglyphics, Demotic, and Greek. Since scholars could read Greek, Champollion used this bilingual key to decode hieroglyphics in 1822 — unlocking 3,000 years of Egyptian history." },
+    { q:"What is the historical significance of Hammurabi's Code (~1754 BC)?", opts:["It was the first Egyptian legal text","It was the first book written in hieroglyphics","One of the world's earliest written legal codes — establishing that laws applied to everyone, not just royal whim","It proved that Babylon had conquered Egypt"], ans:2, exp:"Hammurabi's Code is significant because: it was written (making laws public and consistent), it covered civil and criminal law, and it introduced the principle of proportional punishment. However, it was NOT equal — punishments varied by social class." },
+    { q:"Which statement BEST explains why Egypt's civilisation was more politically stable than Mesopotamia's?", opts:["Egypt had a larger army","The Nile flooded predictably every year, providing reliable agriculture and reducing famine risk; desert borders provided natural defence","Egypt discovered iron weapons before Mesopotamia","Egyptians were more intelligent than Mesopotamians"], ans:1, exp:"Egypt's geographic advantages — predictable Nile floods and desert borders — created agricultural stability and natural defence. Mesopotamia's unpredictable flooding and open borders led to more frequent invasions and political instability. Geography shapes civilisation." },
+  ],
+};
+
+const quizState = {};
+['bible','english','maths','science','history'].forEach(s => {
+  quizState[s] = { idx:0, score:0 };
+  renderQuiz(s);
+});
+
+function renderQuiz(s) {
+  const st = quizState[s];
+  const qs = quizData[s];
+  const container = document.getElementById(s+'-quiz');
+  const scoreEl = document.getElementById(s+'-score');
+  if(st.idx >= qs.length) {
+    container.innerHTML = `<div style="padding:20px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:8px;">🎉</div>
+      <div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section complete!</div>
+      <div style="color:var(--muted);margin-top:6px;font-size:0.9rem;">Score: ${st.score} / ${qs.length}</div>
+    </div>`;
+    celebrate();
+    return;
+  }
+  const q = qs[st.idx];
+  scoreEl.textContent = `${st.score} / ${st.idx} correct`;
+  container.innerHTML = `
+    <div class="quiz-wrap">
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question ${st.idx+1} of ${qs.length}</div>
+      <div class="quiz-q">${q.q}</div>
+      <div class="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="answer('${s}',${i})">${o}</button>`).join('')}</div>
+      <div id="${s}-fb" class="quiz-fb"></div>
+    </div>`;
+}
+
+function answer(s, i) {
+  const q = quizData[s][quizState[s].idx];
+  const opts = document.querySelectorAll(`#${s}-quiz .opt`);
+  opts.forEach(o => o.disabled = true);
+  const fb = document.getElementById(s+'-fb');
+  if(i === q.ans) {
+    quizState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className = 'quiz-fb ok'; fb.style.display='block';
+    fb.innerHTML = `✅ Correct! ${q.exp}`;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className = 'quiz-fb bad'; fb.style.display='block';
+    fb.innerHTML = `❌ Incorrect. ${q.exp}`;
+  }
+  document.getElementById(s+'-score').textContent = `${quizState[s].score} / ${quizState[s].idx+1} correct`;
+}
+
+function nextQ(s) {
+  quizState[s].idx++;
+  renderQuiz(s);
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function celebrate() {
+  const cols = ['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];
+  for(let i=0;i<70;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=cols[Math.floor(Math.random()*cols.length)];
+      el.style.animationDuration=(1.8+Math.random()*2.2)+'s';
+      el.style.animationDelay=(Math.random()*0.4)+'s';
+      el.style.width=(7+Math.random()*7)+'px';
+      el.style.height=(9+Math.random()*9)+'px';
+      el.style.transform=`rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),5000);
+    },i*25);
+  }
+}
+show('bible');
+</script>
+</body>
+</html>
