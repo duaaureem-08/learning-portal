@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 · Day 3 · Mixed Review — HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --humanities:#0891B2;--humanities-l:#CFFAFE;--humanities-d:#164E63;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:8px;}
+.logo span{color:var(--science);}
+.day-badge{background:linear-gradient(135deg,#DC2626,#7C3AED,#059669);color:white;font-weight:900;font-size:0.78rem;padding:6px 14px;border-radius:50px;letter-spacing:1px;}
+.nav-btn{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn .emoji{font-size:1rem;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn.active{color:white;}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="humanities"]{--c:var(--humanities);}
+.nav-btn.active{background:var(--c);border-color:var(--c);}
+
+.page{display:none;padding:28px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.hero{border-radius:var(--radius);padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-30px;right:60px;width:110px;height:110px;background:rgba(255,255,255,0.07);border-radius:50%;}
+.hero-week{font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:5px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:8px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:460px;}
+.hero-emoji{position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:4.5rem;opacity:0.28;}
+
+.card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.card-title{font-family:'Fredoka One',cursive;font-size:1.25rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.section-label{display:inline-block;font-size:0.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:12px;}
+
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.5rem;flex-shrink:0;}
+.callout-text{font-size:0.92rem;font-weight:600;line-height:1.55;}
+.callout-text strong{font-weight:900;}
+
+/* ── QUIZ ── */
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:18px;margin-top:14px;}
+.quiz-q{font-weight:800;font-size:1.02rem;margin-bottom:12px;line-height:1.4;}
+.quiz-tag{display:inline-block;font-size:0.7rem;font-weight:800;padding:2px 10px;border-radius:99px;margin-bottom:8px;letter-spacing:1px;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 18px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover{border-color:var(--acc,#888);background:var(--acc-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:11px 16px;border-radius:10px;font-weight:700;display:none;font-size:0.9rem;}
+
+/* ── TF ── */
+.tf-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:white;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);margin-bottom:8px;flex-wrap:wrap;}
+.tf-stmt{font-weight:700;font-size:0.88rem;flex:1;min-width:180px;line-height:1.4;}
+.tf-btns{display:flex;gap:8px;}
+.tf-btn{padding:7px 16px;border-radius:50px;border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.85rem;cursor:pointer;transition:all 0.2s;background:white;}
+.tf-btn.t-btn.chosen{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.f-btn.chosen{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{box-shadow:0 0 0 3px #059669;}
+.tf-btn.wrong-ans{box-shadow:0 0 0 3px #DC2626;}
+
+/* ── MATCH ── */
+.match-item{padding:11px 15px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-weight:700;cursor:pointer;transition:all 0.25s;background:white;font-size:0.88rem;text-align:center;line-height:1.35;}
+.match-item:hover{border-color:var(--acc,#888);transform:scale(1.02);}
+.match-item.selected{border-color:var(--acc,#888);background:var(--acc-l,#eee);}
+.match-item.matched{background:#D1FAE5;border-color:#059669;color:#065F46;cursor:default;}
+.match-item.wrong-match{background:#FEE2E2;border-color:#DC2626;}
+
+/* ── FILL ── */
+.fill-blank{display:inline-block;min-width:90px;border-bottom:2.5px dashed var(--acc,#888);text-align:center;cursor:pointer;padding:0 6px;font-weight:900;color:var(--acc,#888);}
+.fill-row{padding:11px 14px;background:#F8FAFF;border-radius:var(--radius-sm);margin-bottom:8px;font-weight:600;font-size:0.9rem;line-height:1.6;border:2px solid #E5E7EB;}
+
+/* ── ORDER ── */
+.order-item{display:flex;align-items:center;gap:10px;padding:11px 16px;background:white;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;margin-bottom:8px;}
+.order-item:hover{border-color:var(--acc,#888);}
+.order-num{width:32px;height:32px;border-radius:50%;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9rem;flex-shrink:0;border:2px solid #E5E7EB;}
+.order-num.set{color:white;border-color:var(--acc,#888);background:var(--acc,#888);}
+.order-text{font-weight:700;font-size:0.88rem;}
+
+/* ── BTN ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+
+/* ── SCOREBOARD ── */
+.scoreboard{background:linear-gradient(135deg,#1E1B4B,#3730A3);color:white;border-radius:var(--radius);padding:28px;margin-bottom:24px;text-align:center;}
+.scoreboard-title{font-family:'Fredoka One',cursive;font-size:1.8rem;margin-bottom:8px;}
+.scoreboard-sub{font-size:0.95rem;opacity:0.85;margin-bottom:16px;}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:14px;}
+.score-tile{background:rgba(255,255,255,0.12);border-radius:14px;padding:14px;text-align:center;}
+.score-tile-num{font-family:'Fredoka One',cursive;font-size:1.8rem;}
+.score-tile-label{font-size:0.75rem;font-weight:800;opacity:0.8;text-transform:uppercase;letter-spacing:1px;}
+
+/* ── WEEK BADGE ── */
+.week-chip{display:inline-block;padding:3px 12px;border-radius:99px;font-size:0.72rem;font-weight:800;margin-bottom:8px;letter-spacing:1px;}
+
+/* ── ANALYSIS ── */
+.analysis-box{background:#FFFBF0;border:2px solid #F59E0B;border-radius:var(--radius-sm);padding:16px 20px;margin:12px 0;}
+.analysis-q{font-weight:800;font-size:0.95rem;margin-bottom:8px;color:#92400E;}
+.analysis-input{width:100%;min-height:80px;border:2.5px solid #E5E7EB;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-weight:600;font-size:0.9rem;resize:vertical;outline:none;transition:border-color 0.2s;}
+.analysis-input:focus{border-color:var(--acc,#888);}
+.reveal-btn{margin-top:8px;padding:7px 16px;border-radius:50px;border:none;background:#F59E0B;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;}
+.reveal-btn:hover{background:#D97706;}
+.model-ans{background:#D1FAE5;border-radius:10px;padding:12px;margin-top:8px;font-size:0.88rem;font-weight:600;color:#065F46;display:none;line-height:1.6;}
+
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:14px;background:#F8FAFF;border-radius:var(--radius-sm);border:2px solid #E5E7EB;}
+.word-chip{padding:6px 14px;border-radius:50px;background:white;border:2px solid #E5E7EB;font-weight:800;font-size:0.85rem;cursor:pointer;transition:all 0.2s;user-select:none;}
+.word-chip:hover{transform:scale(1.04);}
+.word-chip.used{opacity:0.3;pointer-events:none;}
+.word-chip.selected{border-color:var(--acc,#888);background:var(--acc-l,#eee);}
+
+/* confetti */
+.confetti-piece{position:fixed;top:-10px;width:10px;height:14px;border-radius:2px;animation:confettiFall linear forwards;z-index:9999;pointer-events:none;}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.score-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <div class="day-badge">🏆 Week 3 · Day 3 · Grand Review</div>
+  <button class="nav-btn active" data-sub="bible"      onclick="showPage('bible')">   <span class="emoji">📖</span> Bible</button>
+  <button class="nav-btn"       data-sub="english"    onclick="showPage('english')"> <span class="emoji">✏️</span> English</button>
+  <button class="nav-btn"       data-sub="maths"      onclick="showPage('maths')">   <span class="emoji">🔢</span> Maths</button>
+  <button class="nav-btn"       data-sub="science"    onclick="showPage('science')"> <span class="emoji">🌱</span> Science</button>
+  <button class="nav-btn"       data-sub="humanities" onclick="showPage('humanities')"><span class="emoji">🌍</span> Humanities</button>
+</div>
+
+<!-- ═══════════ BIBLE ═══════════ -->
+<div id="page-bible" class="page active" style="--acc:var(--bible);--acc-l:var(--bible-l);--acc-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,#1E1B4B,var(--bible));">
+    <div class="hero-week">📖 Bible · Week 3 · Day 3 Grand Review</div>
+    <div class="hero-title">Bible Review —<br>Weeks 1 to 3</div>
+    <div class="hero-sub">Creation · Adam & Eve · Noah · Memory Verses · Big Ideas</div>
+    <div class="hero-emoji">✨</div>
+  </div>
+
+  <!-- Scoreboard -->
+  <div class="scoreboard">
+    <div class="scoreboard-title">🏆 Grand Review — Bible</div>
+    <div class="scoreboard-sub">Questions from Week 1 (Creation), Week 2 (Adam & Eve) and Week 3 (Noah)</div>
+    <div class="score-grid">
+      <div class="score-tile"><div class="score-tile-num" id="sb-bible-score">0</div><div class="score-tile-label">Score</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-bible-q">0</div><div class="score-tile-label">Questions</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-bible-pct">0%</div><div class="score-tile-label">Accuracy</div></div>
+    </div>
+  </div>
+
+  <!-- Part A: Cross-week Vocab -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">📚 Part A — Vocabulary Across the Weeks <span style="font-size:0.8rem;color:var(--muted);">(6 marks)</span></div>
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d);">Click a word, then its matching meaning</div>
+    <div id="bible-rev-match"></div>
+    <div id="bible-rev-match-score" style="margin-top:10px;font-weight:800;"></div>
+  </div>
+
+  <!-- Part B: Big Mixed Quiz -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">🎯 Part B — Grand Quiz: Weeks 1–3 <span style="font-size:0.8rem;color:var(--muted);">(15 marks)</span></div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">⚡</div>
+      <div class="callout-text"><strong>Hard Mode!</strong> These questions mix topics from ALL THREE weeks. Each question is labelled so you know which week it comes from.</div>
+    </div>
+    <div id="bible-grand-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextBibleGrand()">Next ➡️</button>
+      <span id="bible-grand-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part C: Order across all 3 weeks -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">📋 Part C — Big Story Timeline <span style="font-size:0.8rem;color:var(--muted);">(6 marks)</span></div>
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d);">Put these Bible events in the correct order — they span Weeks 1, 2 and 3!</div>
+    <div id="bible-timeline"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkTimeline()">Check ✅</button>
+      <button class="btn" style="background:#6B7280;" onclick="resetTimeline()">Reset 🔄</button>
+    </div>
+    <div id="timeline-fb" style="margin-top:10px;font-weight:700;font-size:0.95rem;"></div>
+  </div>
+
+  <!-- Part D: Memory Verses — all 3 -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">⭐ Part D — Memory Verses Challenge <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div id="bible-verses-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;">
+      <button class="btn" style="background:var(--bible);" onclick="nextVerseQ()">Next ➡️</button>
+      <span id="verse-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part E: Extended Thinking -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">✍️ Part E — Connect the Stories <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">💬 Across Weeks 1, 2 and 3 we studied: Creation, Adam & Eve, and Noah. What ONE big idea connects all three stories? Write at least FOUR sentences explaining the connection. Use the words: love, obedience, consequence, trust.</div>
+      <textarea class="analysis-input" style="min-height:120px;" placeholder="One big idea that connects all three stories is..."></textarea>
+      <button class="reveal-btn" onclick="revealModel(this)">💡 See key points</button>
+      <div class="model-ans">One big idea connecting all three stories is GOD'S LOVE. In Creation, God made a perfect world out of love. In Adam & Eve, even after disobedience brought consequences, God still made clothes for them — showing compassion. In Noah, God saved a righteous man because He loved and valued him. Trust and obedience are also threaded through — those who trust God (Noah) are protected; those who disobey (Adam & Eve) face consequences. But in every story, God's love does not end — it adapts, warns, rescues and renews.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ENGLISH ═══════════ -->
+<div id="page-english" class="page" style="--acc:var(--english);--acc-l:var(--english-l);--acc-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,#1E1B4B,var(--english));">
+    <div class="hero-week">✏️ English · Week 3 · Day 3 Grand Review</div>
+    <div class="hero-title">English Review —<br>Weeks 1 to 3</div>
+    <div class="hero-sub">Sentence types · Punctuation · Fiction skills · Writer's craft · Hard questions</div>
+    <div class="hero-emoji">🖊️</div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="scoreboard-title">🏆 Grand Review — English</div>
+    <div class="scoreboard-sub">Covering all English skills from Weeks 1, 2 and 3</div>
+    <div class="score-grid">
+      <div class="score-tile"><div class="score-tile-num" id="sb-eng-score">0</div><div class="score-tile-label">Score</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-eng-q">0</div><div class="score-tile-label">Questions</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-eng-pct">0%</div><div class="score-tile-label">Accuracy</div></div>
+    </div>
+  </div>
+
+  <!-- Part A: Identify sentence type with punctuation -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">✏️ Part A — Sentence Types & Punctuation <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d);">Identify the sentence type AND the correct punctuation mark</div>
+    <div id="eng-sent-punc"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextEngSP()">Next ➡️</button>
+      <span id="eng-sp-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part B: Fill the blanks — punctuation -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">🔤 Part B — Add the Correct Punctuation <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d);">Click a punctuation mark from the bank, then click the blank in the sentence</div>
+    <div class="word-bank" id="punc-bank">
+      <div class="word-chip" onclick="selectPunc(this,'.')">• Full Stop (.)</div>
+      <div class="word-chip" onclick="selectPunc(this,'?')">? Question Mark</div>
+      <div class="word-chip" onclick="selectPunc(this,'!')">! Exclamation</div>
+      <div class="word-chip" onclick="selectPunc(this,'A')">A Capital Letter</div>
+    </div>
+    <div id="punc-fill-area"></div>
+    <div style="margin-top:12px;">
+      <button class="btn" style="background:var(--english);" onclick="checkPuncFill()">Check ✅</button>
+      <span id="punc-fill-score" style="margin-left:12px;font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part C: Grand Mixed Quiz -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">🎯 Part C — Grand English Quiz <span style="font-size:0.8rem;color:var(--muted);">(12 marks)</span></div>
+    <div id="eng-grand-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextEngGrand()">Next ➡️</button>
+      <span id="eng-grand-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part D: Writing Challenge -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">✍️ Part D — Writing Challenge <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">Write a short paragraph (5–7 sentences) about a character who is lost at night. You MUST use ALL FOUR sentence types. Label each one in brackets: (Statement) (Question) (Exclamation) (Command).</div>
+      <textarea class="analysis-input" style="min-height:140px;" placeholder="Write your paragraph here...&#10;Remember:&#10;• Statement — ends with .&#10;• Question — ends with ? and often starts with Who/What/Where/When/Why/How&#10;• Exclamation — starts with What or How and ends with !&#10;• Command — starts with a verb (action word)"></textarea>
+      <button class="reveal-btn" onclick="revealModel(this)">💡 See a model paragraph</button>
+      <div class="model-ans">The boy stood alone in the dark street, unsure which way to go. (Statement) Where had everyone disappeared to? (Question) What a cold and frightening night it had been! (Exclamation) Stay calm and look for a light in a window. (Command) He took a deep breath, chose a direction, and began to walk. (Statement)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MATHS ═══════════ -->
+<div id="page-maths" class="page" style="--acc:var(--maths);--acc-l:var(--maths-l);--acc-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,#1E1B4B,var(--maths));">
+    <div class="hero-week">🔢 Maths · Week 3 · Day 3 Grand Review</div>
+    <div class="hero-title">Maths Review —<br>Weeks 1 to 3</div>
+    <div class="hero-sub">Addition · Subtraction · Column method · Carrying · Regrouping · Word problems</div>
+    <div class="hero-emoji">🧮</div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="scoreboard-title">🏆 Grand Review — Maths</div>
+    <div class="scoreboard-sub">Addition (Wk 2) + Subtraction (Wk 3) combined — hardest questions!</div>
+    <div class="score-grid">
+      <div class="score-tile"><div class="score-tile-num" id="sb-maths-score">0</div><div class="score-tile-label">Score</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-maths-q">0</div><div class="score-tile-label">Questions</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-maths-pct">0%</div><div class="score-tile-label">Accuracy</div></div>
+    </div>
+  </div>
+
+  <!-- Part A: Mixed add/subtract -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🔢 Part A — Mixed Calculations <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text"><strong>Each question is labelled + or −.</strong> Read carefully! Always start from the ONES column.</div>
+    </div>
+    <div id="maths-mixed-calc"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMixedCalc()">Check ✅</button>
+      <button class="btn" style="background:#6B7280;" onclick="nextMixedCalc()">Next ➡️</button>
+    </div>
+    <div id="mixed-calc-fb" style="margin-top:10px;font-weight:700;"></div>
+  </div>
+
+  <!-- Part B: Grand Quiz -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🎯 Part B — Grand Maths Quiz <span style="font-size:0.8rem;color:var(--muted);">(12 marks)</span></div>
+    <div id="maths-grand-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMathsGrand()">Next ➡️</button>
+      <span id="maths-grand-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part C: Multi-step word problems -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">📝 Part C — Multi-Step Word Problems <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div id="maths-word-rev"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMathsWord()">Next ➡️</button>
+      <span id="maths-word-rev-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part D: Reasoning -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🧠 Part D — Reasoning Challenge <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">Without calculating the exact answer, explain how you know that 487 + 364 must give an answer greater than 800. Use the words "hundreds", "tens" and "ones" in your explanation.</div>
+      <textarea class="analysis-input" style="min-height:80px;" placeholder="I know this because..."></textarea>
+      <button class="reveal-btn" onclick="revealModel(this)">💡 See model answer</button>
+      <div class="model-ans">I know this because if I just look at the hundreds digits: 4 hundreds + 3 hundreds = 7 hundreds = 700. Then the tens digits: 8 tens + 6 tens = 14 tens = 140. 700 + 140 = 840, which is already over 800 before we even add the ones. So the total must be greater than 800.</div>
+    </div>
+    <div class="analysis-box" style="margin-top:0;">
+      <div class="analysis-q">A student says: "I always start addition and subtraction from the HUNDREDS column because it is the most important." Are they right? Explain clearly why the ONES column must come first.</div>
+      <textarea class="analysis-input" style="min-height:80px;" placeholder="The student is wrong because..."></textarea>
+      <button class="reveal-btn" onclick="revealModel(this)">💡 See model answer</button>
+      <div class="model-ans">The student is wrong. We must start from the ONES column because we need to know whether there is a carry (regrouping) to add to the tens column. If we start from the hundreds, we will not know if the ones or tens have created an extra 1 to carry over, and our answer will be wrong. The ones column affects the tens, which affects the hundreds — so we must work from right to left.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SCIENCE ═══════════ -->
+<div id="page-science" class="page" style="--acc:var(--science);--acc-l:var(--science-l);--acc-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,#064E3B,var(--science));">
+    <div class="hero-week">🌱 Science · Week 3 · Day 3 Grand Review</div>
+    <div class="hero-title">Science Review —<br>Weeks 2 to 3</div>
+    <div class="hero-sub">Plant parts · Functions · What plants need · Photosynthesis · Experiments</div>
+    <div class="hero-emoji">🔬</div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="scoreboard-title">🏆 Grand Review — Science</div>
+    <div class="scoreboard-sub">Week 2 (Plant Parts) + Week 3 (What Plants Need) — hardest questions!</div>
+    <div class="score-grid">
+      <div class="score-tile"><div class="score-tile-num" id="sb-sci-score">0</div><div class="score-tile-label">Score</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-sci-q">0</div><div class="score-tile-label">Questions</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-sci-pct">0%</div><div class="score-tile-label">Accuracy</div></div>
+    </div>
+  </div>
+
+  <!-- Part A: Match part to function -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🌿 Part A — Part → Function Match <span style="font-size:0.8rem;color:var(--muted);">(6 marks)</span></div>
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d);">Match each plant part to what it does</div>
+    <div id="sci-rev-match"></div>
+    <div id="sci-rev-match-score" style="margin-top:10px;font-weight:800;"></div>
+  </div>
+
+  <!-- Part B: Grand Quiz -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🎯 Part B — Grand Science Quiz <span style="font-size:0.8rem;color:var(--muted);">(14 marks)</span></div>
+    <div id="sci-grand-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="nextSciGrand()">Next ➡️</button>
+      <span id="sci-grand-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part C: Fill in life cycle -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🔄 Part C — Plant Life Cycle <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d);">Click the events in the correct order (1 → 5)</div>
+    <div id="sci-lifecycle"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkLifecycle()">Check ✅</button>
+      <button class="btn" style="background:#6B7280;" onclick="resetLifecycle()">Reset 🔄</button>
+    </div>
+    <div id="lifecycle-fb" style="margin-top:10px;font-weight:700;"></div>
+  </div>
+
+  <!-- Part D: Extended -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">✍️ Part D — Extended Science Thinking <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">A student says: "Plants and animals are completely different — they have nothing in common." Using what you know about photosynthesis and what plants produce, explain how plants and animals are actually CONNECTED. Write at least THREE sentences.</div>
+      <textarea class="analysis-input" placeholder="Plants and animals are connected because..."></textarea>
+      <button class="reveal-btn" onclick="revealModel(this)">💡 See model answer</button>
+      <div class="model-ans">Plants and animals are deeply connected. During photosynthesis, plants produce OXYGEN as a by-product — this is the gas all animals (including humans) breathe to survive. Plants also form the base of every food chain, providing energy to herbivores, which in turn feed carnivores. Without photosynthesis, there would be no oxygen to breathe and no food at the base of the food chain — all animal life would end. Far from being separate, plants and animals depend on each other completely.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ HUMANITIES ═══════════ -->
+<div id="page-humanities" class="page" style="--acc:var(--humanities);--acc-l:var(--humanities-l);--acc-d:var(--humanities-d);">
+  <div class="hero" style="background:linear-gradient(135deg,#164E63,var(--humanities));">
+    <div class="hero-week">🌍 Humanities · Week 3 · Day 3 Grand Review</div>
+    <div class="hero-title">Humanities Review —<br>Weeks 2 to 3</div>
+    <div class="hero-sub">Maps · Compass · Symbols · UK Geography · Physical features</div>
+    <div class="hero-emoji">🗺️</div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="scoreboard-title">🏆 Grand Review — Humanities</div>
+    <div class="scoreboard-sub">Week 2 (Maps & Local Area) + Week 3 (Our Country & UK Geography)</div>
+    <div class="score-grid">
+      <div class="score-tile"><div class="score-tile-num" id="sb-hum-score">0</div><div class="score-tile-label">Score</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-hum-q">0</div><div class="score-tile-label">Questions</div></div>
+      <div class="score-tile"><div class="score-tile-num" id="sb-hum-pct">0%</div><div class="score-tile-label">Accuracy</div></div>
+    </div>
+  </div>
+
+  <!-- Part A: Match -->
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="card-title" style="color:var(--humanities);">📚 Part A — Key Terms Match <span style="font-size:0.8rem;color:var(--muted);">(6 marks)</span></div>
+    <div id="hum-rev-match"></div>
+    <div id="hum-rev-match-score" style="margin-top:10px;font-weight:800;"></div>
+  </div>
+
+  <!-- Part B: Grand Quiz -->
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="card-title" style="color:var(--humanities);">🎯 Part B — Grand Humanities Quiz <span style="font-size:0.8rem;color:var(--muted);">(14 marks)</span></div>
+    <div id="hum-grand-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--humanities);" onclick="nextHumGrand()">Next ➡️</button>
+      <span id="hum-grand-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part C: Map compass challenge -->
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="card-title" style="color:var(--humanities);">🧭 Part C — Map & Compass Challenge <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div style="background:#CFFAFE;border-radius:var(--radius-sm);padding:12px;margin-bottom:14px;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.9rem;text-align:center;">
+        <tr style="font-weight:900;"><td>🌳 PARK</td><td style="color:#0891B2;font-weight:900;">↑ NORTH ↑</td><td>🏫 SCHOOL</td></tr>
+        <tr><td style="color:#0891B2;font-weight:900;">← WEST</td><td style="font-family:'Fredoka One',cursive;font-size:1.1rem;">🏪 MARKET</td><td style="color:#0891B2;font-weight:900;">EAST →</td></tr>
+        <tr><td>🏥 HOSPITAL</td><td style="color:#0891B2;font-weight:900;">↓ SOUTH ↓</td><td>⛪ CHURCH</td></tr>
+      </table>
+    </div>
+    <div id="hum-map-rev"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--humanities);" onclick="nextHumMap()">Next ➡️</button>
+      <span id="hum-map-rev-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <!-- Part D: Extended Thinking -->
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="card-title" style="color:var(--humanities);">✍️ Part D — Thinking Like a Geographer <span style="font-size:0.8rem;color:var(--muted);">(6 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">Compare the UK and your home country (Pakistan). Name TWO things they have in common (e.g. both have mountains or rivers) and TWO things that are DIFFERENT. Use geography vocabulary: mountain, river, coastline, capital city, border, region.</div>
+      <textarea class="analysis-input" style="min-height:100px;" placeholder="Similar: Both the UK and Pakistan have...&#10;Different: The UK has... but Pakistan..."></textarea>
+      <button class="reveal-btn" onclick="revealModel(this)">💡 See model answer</button>
+      <div class="model-ans">Similar: Both the UK and Pakistan have mountain ranges (the Himalayas and Karakoram in Pakistan; the Scottish Highlands and Snowdonia in the UK). Both also have major rivers — the Indus in Pakistan, the Thames and Severn in the UK. Different: The UK is an island with a long coastline on all sides; Pakistan has only a small coastline along the Arabian Sea to the south. Also, the UK has four separate countries within it with different capitals; Pakistan is one country with Islamabad as its single capital city.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── NAV ──
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#0891B2','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<55;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti-piece';el.style.left=Math.random()*100+'vw';el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.animationDuration=(1.5+Math.random()*2)+'s';el.style.width=(8+Math.random()*7)+'px';el.style.height=(10+Math.random()*8)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*28);}
+}
+function revealModel(btn){const m=btn.nextElementSibling;m.style.display=m.style.display==='block'?'none':'block';}
+
+// ── SCOREBOARD UPDATER ──
+const sbMap={bible:{score:'sb-bible-score',q:'sb-bible-q',pct:'sb-bible-pct',s:0,t:0},english:{score:'sb-eng-score',q:'sb-eng-q',pct:'sb-eng-pct',s:0,t:0},maths:{score:'sb-maths-score',q:'sb-maths-q',pct:'sb-maths-pct',s:0,t:0},science:{score:'sb-sci-score',q:'sb-sci-q',pct:'sb-sci-pct',s:0,t:0},humanities:{score:'sb-hum-score',q:'sb-hum-q',pct:'sb-hum-pct',s:0,t:0}};
+function updateSB(sub,correct){
+  const sb=sbMap[sub];sb.t++;if(correct)sb.s++;
+  document.getElementById(sb.score).textContent=sb.s;
+  document.getElementById(sb.q).textContent=sb.t;
+  document.getElementById(sb.pct).textContent=Math.round((sb.s/sb.t)*100)+'%';
+}
+
+// ── MATCH ENGINE ──
+function buildMatch(containerId,scoreId,pairs,accentColor,accentL){
+  const container=document.getElementById(containerId);
+  let selected=null,matched=0;
+  function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+  const sT=shuffle(pairs.map(p=>({text:p[0],id:p[0],type:'term'})));
+  const sD=shuffle(pairs.map(p=>({text:p[1],id:p[0],type:'def'})));
+  container.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;"><div id="${containerId}-t" style="display:flex;flex-direction:column;gap:8px;"></div><div id="${containerId}-d" style="display:flex;flex-direction:column;gap:8px;"></div></div>`;
+  function makeItem(item){
+    const el=document.createElement('div');el.className='match-item';el.textContent=item.text;el.dataset.id=item.id;el.dataset.type=item.type;
+    el.style.setProperty('--acc',accentColor);el.style.setProperty('--acc-l',accentL);
+    el.addEventListener('click',()=>{
+      if(el.classList.contains('matched'))return;
+      if(selected&&selected===el){selected.classList.remove('selected');selected=null;return;}
+      if(selected){
+        if(selected.dataset.id===el.dataset.id&&selected.dataset.type!==el.dataset.type){
+          [selected,el].forEach(e=>{e.classList.remove('selected','wrong-match');e.classList.add('matched');e.style.pointerEvents='none';});
+          matched++;document.getElementById(scoreId).textContent=`✅ ${matched}/${pairs.length} matched!`;
+          if(matched===pairs.length)celebrate();selected=null;
+        }else{
+          [el,selected].forEach(e=>e.classList.add('wrong-match'));
+          setTimeout(()=>{[el,selected].forEach(e=>e.classList.remove('wrong-match','selected'));selected=null;},800);
+        }
+      }else{selected=el;el.classList.add('selected');}
+    });return el;
+  }
+  sT.forEach(t=>document.getElementById(containerId+'-t').appendChild(makeItem(t)));
+  sD.forEach(d=>document.getElementById(containerId+'-d').appendChild(makeItem(d)));
+}
+
+// ── QUIZ ENGINE ──
+function buildQuiz(qs,containerId,scoreId,nextFn,accentColor,accentL,sub){
+  let idx=0,score=0;
+  window[nextFn+'_st']={qs,idx,score,containerId,scoreId,accentColor,accentL,nextFn,sub};
+  renderQ2(nextFn+'_st');
+}
+function renderQ2(key){
+  const s=window[key];const q=s.qs[s.idx];
+  if(!q){document.getElementById(s.containerId).innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:14px;font-weight:800;">🎉 Finished! Score: ${s.score}/${s.qs.length}</div>`;celebrate();return;}
+  const weekTag=q.week?`<span class="quiz-tag" style="background:${q.week==='W1'?'#EDE9FE':q.week==='W2'?'#FCE7F3':q.week==='W3'?'#D1FAE5':'#CFFAFE'};color:#374151;">${q.week==='W1'?'📖 Week 1':q.week==='W2'?'📗 Week 2':q.week==='W3'?'📘 Week 3':'🔁 Mixed'}</span>`:'' ;
+  document.getElementById(s.containerId).innerHTML=`<div class="quiz-box">${weekTag}<div class="quiz-q">Q${s.idx+1} of ${s.qs.length}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" style="--acc:${s.accentColor};--acc-l:${s.accentL};" onclick="answerQ2('${key}',${i})">${o}</button>`).join('')}</div><div id="${key}-fb2" class="quiz-feedback"></div></div>`;
+  document.getElementById(s.scoreId).textContent=`Score: ${s.score}/${s.idx}`;
+}
+function answerQ2(key,i){
+  const s=window[key];const q=s.qs[s.idx];
+  const opts=document.querySelectorAll('#'+s.containerId+' .quiz-opt');
+  opts.forEach(o=>o.disabled=true);opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-fb2');fb.style.display='block';
+  const correct=i===q.ans;
+  if(correct){s.score++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct! '+(q.explain||'Well done!');}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent='❌ The answer is: '+q.opts[q.ans]+'. '+(q.explain||'');}
+  document.getElementById(s.scoreId).textContent=`Score: ${s.score}/${s.idx+1}`;
+  if(s.sub)updateSB(s.sub,correct);
+}
+function advQ2(key){window[key].idx++;renderQ2(key);}
+
+// ── TF ENGINE ──
+function buildTF(containerId,stmts){
+  const container=document.getElementById(containerId);
+  container.innerHTML=stmts.map((s,i)=>`<div class="tf-row"><div class="tf-stmt">${i+1}. <span style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:99px;background:${s.week==='W1'?'#EDE9FE':s.week==='W2'?'#FCE7F3':'#D1FAE5'};margin-right:4px;">${s.week||''}</span>${s.text}</div><div class="tf-btns"><button class="tf-btn t-btn" onclick="pickTF2(this,'T')">✅ T</button><button class="tf-btn f-btn" onclick="pickTF2(this,'F')">❌ F</button></div></div>`).join('');
+  container._stmts=stmts;container._answers=new Array(stmts.length).fill(null);
+}
+function pickTF2(btn,val){const row=btn.closest('.tf-row');row.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('chosen'));btn.classList.add('chosen');const rows=btn.closest('[id$="-tf"]')||btn.closest('[id]');if(rows._answers){const idx=[...rows.querySelectorAll('.tf-row')].indexOf(row);rows._answers[idx]=val;}}
+function checkTF2(containerId,scoreId,sub){
+  const container=document.getElementById(containerId);const stmts=container._stmts;const answers=container._answers;let score=0;
+  stmts.forEach((s,i)=>{
+    const row=container.querySelectorAll('.tf-row')[i];const tBtn=row.querySelector('.t-btn');const fBtn=row.querySelector('.f-btn');
+    const cBtn=s.ans==='T'?tBtn:fBtn;cBtn.classList.add('correct-ans');
+    const chosen=answers[i];const correct=chosen===s.ans;if(correct)score++;
+    if(chosen&&chosen!==s.ans)(s.ans==='T'?fBtn:tBtn).classList.add('wrong-ans');
+    row.querySelectorAll('.tf-btn').forEach(b=>b.disabled=true);
+  });
+  document.getElementById(scoreId).textContent=`Score: ${score}/${stmts.length}`;
+  if(score===stmts.length)celebrate();
+}
+
+// ══════════════════════════ BIBLE DATA ══════════════════════════
+buildMatch('bible-rev-match','bible-rev-match-score',[
+  ['Creation','God made the world in 6 days and rested on the 7th'],
+  ['Eden','The beautiful garden God made for Adam and Eve'],
+  ['Covenant','An unbreakable promise between God and a person'],
+  ['Disobey','To do something you were told NOT to do'],
+  ['Righteous','A person who is good and does what God says is right'],
+  ['Rainbow','The sign God put in the sky after the flood as His promise'],
+],'var(--bible)','var(--bible-l)');
+
+const bibleGrandQs=[
+  {week:'W1',q:'How many days did it take God to create the world?',opts:['3 days','5 days','6 days','7 days'],ans:2,explain:'God created everything in 6 days and rested on the 7th.'},
+  {week:'W1',q:'On which day did God create birds and sea creatures?',opts:['Day 2','Day 3','Day 4','Day 5'],ans:3,explain:'Day 5: birds and sea creatures. Day 6: land animals and humans.'},
+  {week:'W2',q:'What was the ONE rule God gave Adam and Eve?',opts:['Do not leave the garden','Do not talk to animals','Do not eat from the tree of knowledge of good and evil','Do not name the animals'],ans:2,explain:'One simple rule — do not eat from that one tree.'},
+  {week:'W2',q:'Who told Eve a lie about the fruit?',opts:['Adam','God','The serpent','A bird'],ans:2,explain:'The serpent (snake) told Eve a lie — that the fruit would make them like God.'},
+  {week:'W2',q:'Romans 5:8 teaches us that God\'s love is...',opts:['Only for people who are perfect','Conditional on good behaviour','Unconditional — He loves us even while we are still sinners','Only shown through punishment'],ans:2,explain:'Romans 5:8: God shows His love — while we were STILL sinners, Christ died for us.'},
+  {week:'W3',q:'Why did God choose Noah to build the ark?',opts:['He was the tallest','He was righteous — good and honest before God','He was the oldest man','He was a professional builder'],ans:1,explain:'Noah was righteous — the only man walking faithfully with God at that time.'},
+  {week:'W3',q:'What does the rainbow sign represent?',opts:['God is proud of Noah','God will never flood the WHOLE earth again','Noah must build another boat','The rain has ended'],ans:1,explain:'The rainbow is the sign of God\'s covenant — He will never again flood the whole earth.'},
+  {week:'W3',q:'How many days and nights did the rain fall?',opts:['7','14','30','40'],ans:3,explain:'The rain fell for 40 days and 40 nights.'},
+  {week:'W3',q:'What did the dove bring back to Noah?',opts:['A stone','A fish','A green leaf','A seed'],ans:2,explain:'The dove brought back a green leaf — proof that dry land had appeared.'},
+  {week:'W1',q:'What did God say after creating everything?',opts:['It is finished','It is very good','It is enough','It is perfect'],ans:1,explain:'Genesis 1:31: God saw everything He had made — and it was very good!'},
+  {week:'W2',q:'What happened to Adam and Eve AFTER they disobeyed?',opts:['Nothing changed','God destroyed them immediately','They felt ashamed and had to leave the garden','God forgave them instantly'],ans:2,explain:'Consequences: shame, fear, and being sent out of the garden — but God still cared for them.'},
+  {week:'W3',q:'What does the word "covenant" mean?',opts:['A large boat','A type of food','An important, unbreakable promise','A rainbow'],ans:2,explain:'A covenant is an unbreakable promise — especially one made between God and a person.'},
+  {week:'W1',q:'On which day did God rest?',opts:['Day 5','Day 6','Day 7','Day 8'],ans:2,explain:'God rested on the seventh day and made it holy — this is the Sabbath.'},
+  {week:'W2',q:'What does "compassion" mean?',opts:['Being very strict','Caring about someone even when they have made a mistake','Ignoring someone\'s problem','Being very happy'],ans:1,explain:'Compassion = caring for someone even when they have done wrong. God showed this to Adam and Eve.'},
+  {week:'W3',q:'What was Noah\'s response when people laughed at him building the ark?',opts:['He stopped building and gave up','He argued and fought with them','He kept building because he trusted God completely','He asked God to punish them'],ans:2,explain:'Noah kept going — true faith means continuing even when others mock or doubt.'},
+];
+buildQuiz(bibleGrandQs,'bible-grand-quiz','bible-grand-score','bibleGrand','var(--bible)','var(--bible-l)','bible');
+function nextBibleGrand(){advQ2('bibleGrand_st');}
+
+// Timeline
+const timelineEvents=[
+  {text:'🌍 God creates the world in 6 days.',correct:1,week:'W1'},
+  {text:'🌿 God plants the Garden of Eden and makes Adam.',correct:2,week:'W1'},
+  {text:'🧍‍♀️ God makes Eve from Adam\'s rib.',correct:3,week:'W2'},
+  {text:'🐍 The serpent tricks Eve; they eat the fruit.',correct:4,week:'W2'},
+  {text:'😔 Adam and Eve leave the garden.',correct:5,week:'W2'},
+  {text:'🌊 God sends the flood; Noah and the ark survive.',correct:6,week:'W3'},
+];
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+const shuffledTimeline=shuffle([...timelineEvents]);
+let timelineSeq=[];
+function buildTimeline(){
+  const el=document.getElementById('bible-timeline');el.innerHTML='';timelineSeq=[];
+  shuffledTimeline.forEach((item,i)=>{
+    const div=document.createElement('div');div.className='order-item';div.style.setProperty('--acc','var(--bible)');
+    div.innerHTML=`<div class="order-num" id="tl-${i}">?</div><div class="order-text"><span style="font-size:0.7rem;font-weight:800;padding:2px 8px;border-radius:99px;background:${item.week==='W1'?'#EDE9FE':item.week==='W2'?'#FCE7F3':'#D1FAE5'};margin-right:6px;">${item.week}</span>${item.text}</div>`;
+    div.addEventListener('click',()=>{
+      if(div.querySelector('.order-num').classList.contains('set'))return;
+      const n=timelineSeq.length+1;
+      const num=div.querySelector('.order-num');num.textContent=n;num.classList.add('set');num.style.background='var(--bible)';
+      timelineSeq.push({text:item.text,correct:item.correct});
+    });
+    el.appendChild(div);
+  });
+}
+buildTimeline();
+function checkTimeline(){
+  if(timelineSeq.length<6){document.getElementById('timeline-fb').textContent='⚠️ Please order all 6 events!';document.getElementById('timeline-fb').style.color='#D97706';return;}
+  let score=0;timelineSeq.forEach((t,i)=>{if(t.correct===i+1)score++;});
+  const fb=document.getElementById('timeline-fb');
+  fb.style.color=score===6?'#065F46':'#DC2626';
+  fb.textContent=score===6?'🎉 Perfect timeline! You know all three weeks!':'Score: '+score+'/6. Hint: Creation first, then Eden, then Eve, then disobedience, then leaving the garden, then Noah!';
+  if(score===6)celebrate();
+}
+function resetTimeline(){buildTimeline();document.getElementById('timeline-fb').textContent='';}
+
+const verseQs=[
+  {week:'W2',q:'Complete Romans 5:8: "But God shows his love for us in that while we were still _______, Christ died for us."',opts:['righteous','sinners','sleeping','believers'],ans:1},
+  {week:'W3',q:'Complete Genesis 9:13: "I have set my _______ in the clouds, and it will be the sign of the covenant..."',opts:['star','dove','rainbow','sun'],ans:2},
+  {week:'W3',q:'Genesis 9:13 says the rainbow is a sign of the _______ between God and the earth.',opts:['flood','punishment','covenant','rainbow'],ans:2},
+  {week:'W2',q:'Romans 5:8 teaches us that God\'s love is shown WHILE we are still _______. This means His love is unconditional.',opts:['perfect','sinners','asleep','obedient'],ans:1},
+  {week:'W1',q:'Philippians 4:13 says: "I can do all things through _______ who strengthens me."',opts:['God','Noah','Adam','Christ'],ans:3},
+];
+buildQuiz(verseQs,'bible-verses-quiz','verse-score','verseQ','var(--bible)','var(--bible-l)','bible');
+function nextVerseQ(){advQ2('verseQ_st');}
+
+// ══════════════════════════ ENGLISH DATA ══════════════════════════
+const engSPQs=[
+  {q:'What type is: "She walked alone into the forest." — and what punctuation ends it?',opts:['Statement — full stop (.)','Question — question mark (?)','Exclamation — exclamation mark (!)','Command — full stop (.)'],ans:0,explain:'A statement tells us a fact. It ends with a full stop.'},
+  {q:'What type is: "What a terrifying sound that was!" — and why?',opts:['Statement — it describes a sound','Question — it starts with What','Exclamation — starts with What + shows strong feeling + ends with !','Command — it tells someone to do something'],ans:2,explain:'True exclamation sentences start with What or How and end with ! They show strong feeling.'},
+  {q:'What type is: "Run towards the light immediately." — and what punctuation ends it?',opts:['Question — ends with ?','Statement — ends with .','Exclamation — ends with !','Command — ends with . or !'],ans:3,explain:'Commands tell someone to do something. They start with a verb. They end with . or !'},
+  {q:'What type is: "Where did the old bridge come from?" — what punctuation?',opts:['Statement — full stop','Question — question mark (?)','Exclamation — !','Command — .'],ans:1,explain:'Questions ask for information. They end with a question mark.'},
+  {q:'"How beautiful the forest looked at dawn!" — What TWO features make this a TRUE exclamation?',opts:['It is long and describes nature','It starts with How AND ends with ! AND shows strong feeling','It starts with a verb','It ends with a full stop'],ans:1,explain:'True exclamations start with What or How, express strong feeling, and end with !'},
+  {q:'Which sentence is WRONG — something is missing or incorrect?',opts:['"The bird landed on her hand."','"what a strange morning it was!"','"Where did the bridge lead?"','"Close your eyes carefully."'],ans:1,explain:'"what a strange morning" is wrong — it must start with a CAPITAL W at the beginning of a sentence.'},
+  {q:'"Stop!" — what type is this, and why?',opts:['Statement — it is very short','Question — it uses !','Command — it gives an instruction; starts with a verb','Exclamation — it starts with a capital'],ans:2,explain:'Even a one-word command is a command. It starts with a verb (Stop) and tells you what to do.'},
+  {q:'What does "infer" mean in reading comprehension?',opts:['Copy the text word for word','Work out something the text does NOT say directly, using clues','Find the title and author','Count how many sentences there are'],ans:1,explain:'Inference = reading between the lines. Using clues to work out things the writer implies.'},
+  {q:'Which of these is a STATEMENT?',opts:['Run!','What an amazing story!','She carried a small lantern into the dark.','Did she find the bridge?'],ans:2,explain:'A statement is a sentence that gives information. It ends with a full stop.'},
+  {q:'"Fiction" means...',opts:['A story about real events','A made-up story — not real','A science textbook','A poem'],ans:1,explain:'Fiction = made up. Non-fiction = real/factual.'},
+  {q:'What is the CHARACTER in a story?',opts:['Where and when the story happens','What happens in the story','A person or animal IN the story','The title of the book'],ans:2,explain:'Character = the people or animals in the story. Setting = where. Plot = what happens.'},
+  {q:'A writer uses very SHORT sentences at a tense moment: "She stopped. She listened." What effect does this create?',opts:['Makes the story confusing','Slows the pace too much','Creates urgency and tension — mirrors how quickly and quietly things happen','Makes it boring for the reader'],ans:2,explain:'Short sentences at a tense moment create pace, urgency and suspense — the reader also feels the tension.'},
+];
+buildQuiz(engSPQs,'eng-grand-quiz','eng-grand-score','engGrand','var(--english)','var(--english-l)','english');
+function nextEngGrand(){advQ2('engGrand_st');}
+
+// Sentence type + punctuation game
+const engSPItems=[
+  {s:'The forest was very old and dark',type:'Statement',punc:'.'},
+  {s:'Where did Zara find the stone bridge',type:'Question',punc:'?'},
+  {s:'What an incredible wish she made',type:'Exclamation',punc:'!'},
+  {s:'Follow the sound of the water',type:'Command',punc:'.'},
+  {s:'How beautiful the rainbow looked in the sky',type:'Exclamation',punc:'!'},
+  {s:'She closed her eyes and made her wish',type:'Statement',punc:'.'},
+  {s:'Stop right there and do not move',type:'Command',punc:'.'},
+  {s:'Why did the bird land on her hand',type:'Question',punc:'?'},
+];
+const typeColors2={Statement:'#DC2626',Question:'#2563EB',Exclamation:'#D97706',Command:'#059669'};
+let spIdx=0,spScore=0;
+function renderEngSP(){
+  const q=engSPItems[spIdx];
+  if(!q){document.getElementById('eng-sent-punc').innerHTML=`<div style="padding:14px;background:#D1FAE5;border-radius:14px;font-weight:800;">🎉 Done! Score: ${spScore}/${engSPItems.length}</div>`;celebrate();return;}
+  document.getElementById('eng-sent-punc').innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${spIdx+1}: "${q.s}___"<br><span style="font-size:0.85rem;color:#6B7280;font-weight:600;">Step 1: What TYPE? Step 2: What PUNCTUATION ends it?</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">${Object.keys(typeColors2).map(t=>`<button onclick="pickSPType('${t}')" id="spt-${t}" style="padding:8px 16px;border-radius:50px;border:2.5px solid #E5E7EB;background:white;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;color:${typeColors2[t]};">${t}</button>`).join('')}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">${['.','?','!'].map(p=>`<button onclick="pickSPPunc('${p}')" id="spp-${p}" style="padding:8px 20px;border-radius:50px;border:2.5px solid #E5E7EB;background:white;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;">${p}</button>`).join('')}</div>
+    <button onclick="checkSP()" style="margin-top:12px;padding:9px 20px;border-radius:50px;border:none;background:var(--english);color:white;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;">Check ✅</button>
+    <div id="sp-fb" class="quiz-feedback"></div>
+  </div>`;
+  document.getElementById('eng-sp-score').textContent=`Score: ${spScore}/${spIdx}`;
+}
+let spSelType=null,spSelPunc=null;
+function pickSPType(t){spSelType=t;Object.keys(typeColors2).forEach(k=>{const b=document.getElementById('spt-'+k);if(b){b.style.background=k===t?typeColors2[k]:'white';b.style.color=k===t?'white':typeColors2[k];b.style.borderColor=k===t?typeColors2[k]:'#E5E7EB';}});}
+function pickSPPunc(p){spSelPunc=p;['.','?','!'].forEach(k=>{const b=document.getElementById('spp-'+k);if(b){b.style.background=k===p?'#374151':'white';b.style.color=k===p?'white':'#374151';b.style.borderColor=k===p?'#374151':'#E5E7EB';}});}
+function checkSP(){
+  const q=engSPItems[spIdx];const fb=document.getElementById('sp-fb');
+  if(!spSelType||!spSelPunc){fb.style.display='block';fb.style.background='#FEF3C7';fb.style.color='#92400E';fb.textContent='⚠️ Please choose both a TYPE and a PUNCTUATION MARK!';return;}
+  fb.style.display='block';
+  const correct=spSelType===q.type&&spSelPunc===q.punc;
+  if(correct){spScore++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent=`✅ Correct! "${q.s}" is a ${q.type} ending with "${q.punc}".`;updateSB('english',true);}
+  else{fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ It is a ${q.type} ending with "${q.punc}". ${spSelType!==q.type?`Type was ${q.type}, not ${spSelType}. `:''}${spSelPunc!==q.punc?`Punctuation: ${q.punc}, not ${spSelPunc}.`:''}`;updateSB('english',false);}
+  document.getElementById('eng-sp-score').textContent=`Score: ${spScore}/${spIdx+1}`;
+  spSelType=null;spSelPunc=null;
+}
+function nextEngSP(){spIdx++;spSelType=null;spSelPunc=null;renderEngSP();}
+renderEngSP();
+
+// Punctuation fill
+const puncFills=[
+  {text:'the sun rose slowly over the hills',ans:'A',slot:'start',note:'Every sentence starts with a CAPITAL LETTER.'},
+  {text:'What time does the school open ___',ans:'?',slot:'end',note:'This is a question — it ends with ?'},
+  {text:'What a beautiful morning it was ___',ans:'!',slot:'end',note:'This is an exclamation (starts with What + strong feeling) — it ends with !'},
+  {text:'Turn off the lights before you leave ___',ans:'.',slot:'end',note:'This is a command — it ends with a full stop.'},
+  {text:'she walked through the dark forest alone',ans:'A',slot:'start',note:'Every sentence must start with a CAPITAL LETTER.'},
+  {text:'How incredible this place was ___',ans:'!',slot:'end',note:'This is an exclamation (starts with How) — it ends with !'},
+  {text:'Where did you put the map ___',ans:'?',slot:'end',note:'This is a question — it ends with ?'},
+  {text:'The blue bird sang a beautiful song ___',ans:'.',slot:'end',note:'This is a statement — it ends with a full stop.'},
+];
+let puncSelected=null;
+function selectPunc(el,p){if(puncSelected)puncSelected.classList.remove('selected');puncSelected={el,p};el.classList.add('selected');}
+(function buildPuncFill(){
+  const el=document.getElementById('punc-fill-area');
+  el.innerHTML=puncFills.map((f,i)=>{
+    if(f.slot==='start'){
+      return `<div class="fill-row">${i+1}. <span id="pf-${i}" onclick="placePunc(${i})" style="cursor:pointer;display:inline-block;min-width:24px;border-bottom:2.5px dashed var(--english);text-align:center;font-weight:900;color:var(--english);">___</span>${f.text}.</div>`;
+    }else{
+      return `<div class="fill-row">${i+1}. ${f.text} <span id="pf-${i}" onclick="placePunc(${i})" style="cursor:pointer;display:inline-block;min-width:24px;border-bottom:2.5px dashed var(--english);text-align:center;font-weight:900;color:var(--english);">___</span></div>`;
+    }
+  }).join('');
+})();
+function placePunc(i){
+  if(!puncSelected)return;
+  const span=document.getElementById('pf-'+i);
+  span.textContent=puncSelected.p==='A'?'A':puncSelected.p;
+  span.style.borderBottom='none';span.dataset.placed=puncSelected.p;
+  puncSelected.el.classList.add('used');puncSelected=null;
+}
+function checkPuncFill(){
+  let score=0;
+  puncFills.forEach((f,i)=>{
+    const span=document.getElementById('pf-'+i);
+    if(span.dataset.placed===f.ans){score++;span.style.color='#065F46';}
+    else{span.style.color='#DC2626';span.textContent=f.ans;}
+  });
+  document.getElementById('punc-fill-score').textContent=`Score: ${score}/${puncFills.length}`;
+  if(score===puncFills.length)celebrate();
+}
+
+// ══════════════════════════ MATHS DATA ══════════════════════════
+const mixedCalcQs=[
+  {op:'+',a:247,b:185,label:'247 + 185',hint:'Carrying in ones and tens!'},
+  {op:'-',a:523,b:247,label:'523 − 247',hint:'Regroup in ones and tens!'},
+  {op:'+',a:364,b:278,label:'364 + 278',hint:'Carry in ones AND tens!'},
+  {op:'-',a:600,b:347,label:'600 − 347',hint:'Zeros make this tricky — regroup carefully!'},
+  {op:'+',a:456,b:387,label:'456 + 387',hint:'Both columns need carrying!'},
+  {op:'-',a:731,b:465,label:'731 − 465',hint:'Regroup the ones first!'},
+];
+let mixCalcIdx=0;
+function renderMixedCalc(){
+  const q=mixedCalcQs[mixCalcIdx%mixedCalcQs.length];
+  const correct=q.op==='+'?q.a+q.b:q.a-q.b;
+  document.getElementById('maths-mixed-calc').innerHTML=`<div style="background:${q.op==='+'?'#FEF3C7':'#D1FAE5'};border-radius:14px;padding:18px;"><div style="text-align:center;"><span style="background:${q.op==='+'?'#D97706':'#059669'};color:white;padding:4px 14px;border-radius:99px;font-weight:900;font-size:0.8rem;">${q.op==='+'?'➕ ADDITION (Week 2)':'➖ SUBTRACTION (Week 3)'}</span></div><div style="text-align:center;font-family:'Fredoka One',cursive;font-size:1.5rem;margin:10px 0;">${q.label}</div><div style="text-align:center;font-size:0.83rem;color:#6B7280;margin-bottom:12px;">💡 ${q.hint}</div><div style="display:flex;align-items:center;justify-content:center;gap:10px;"><span style="font-weight:800;">Answer =</span><input id="mc-ans" type="number" style="width:110px;padding:10px;border-radius:12px;border:2.5px solid ${q.op==='+'?'#D97706':'#059669'};font-size:1.2rem;font-family:'Fredoka One',cursive;text-align:center;outline:none;" placeholder="?"></div></div>`;
+  document.getElementById('mixed-calc-fb').textContent='';
+}
+function checkMixedCalc(){
+  const q=mixedCalcQs[mixCalcIdx%mixedCalcQs.length];
+  const correct=q.op==='+'?q.a+q.b:q.a-q.b;
+  const ans=parseInt(document.getElementById('mc-ans')?.value)||0;
+  const fb=document.getElementById('mixed-calc-fb');
+  if(ans===correct){fb.style.color='#065F46';fb.textContent=`✅ Correct! ${q.label} = ${correct} 🎉`;celebrate();updateSB('maths',true);}
+  else{fb.style.color='#DC2626';fb.textContent=`❌ Not quite. The answer is ${correct}. Remember: start from the ONES column!`;updateSB('maths',false);}
+}
+function nextMixedCalc(){mixCalcIdx++;renderMixedCalc();}
+renderMixedCalc();
+
+const mathsGrandQs=[
+  {week:'W2',q:'What is 247 + 135?',opts:['372','382','392','482'],ans:1,explain:'247 + 135 = 382. Ones: 7+5=12 (write 2 carry 1). Tens: 4+3+1=8. Hundreds: 2+1=3.'},
+  {week:'W3',q:'What is 91 − 47?',opts:['44','54','34','46'],ans:0,explain:'91 − 47 = 44. Ones: borrow, 11−7=4. Tens: 8−4=4. Answer: 44.'},
+  {week:'W2',q:'When do you need to "carry" in addition?',opts:['When the answer is less than 5','When a column adds up to 10 or more','When you subtract instead of add','When the numbers are the same'],ans:1,explain:'Carry when a column totals 10 or more — write the units digit and carry the 1 to the left.'},
+  {week:'W3',q:'What is "regrouping" in subtraction?',opts:['Adding the columns from left to right','Borrowing 10 from the next column when you cannot subtract','Writing the answer in reverse','Starting from the hundreds column'],ans:1,explain:'Regrouping = borrowing 10 from the next column so you can subtract.'},
+  {week:'W2',q:'In 456, what is the value of the digit 5?',opts:['5','50','500','0.5'],ans:1,explain:'The 5 is in the TENS column — so it is worth 50.'},
+  {week:'W3',q:'What is 502 − 264?',opts:['248','238','342','258'],ans:1,explain:'502 − 264 = 238. Be careful with the zero in the tens column — you need to regroup from the hundreds.'},
+  {week:'W2',q:'How do you CHECK an addition answer?',opts:['Add again from left to right','Subtract one of the original numbers from your answer','Multiply the two numbers','Round the numbers'],ans:1,explain:'Inverse operation: if 247 + 135 = 382, then 382 − 135 should equal 247.'},
+  {week:'W3',q:'What is 184 − 52?',opts:['122','132','142','112'],ans:1,explain:'184 − 52 = 132. No regrouping needed here — ones: 4−2=2, tens: 8−5=3, hundreds: 1.'},
+  {week:'W2',q:'A shop sold 347 fiction books and 256 non-fiction books. How many total?',opts:['593','603','603','603'],realOpts:['593','603','613','503'],ans:1,explain:'347 + 256 = 603. Ones: 7+6=13 (write 3 carry 1). Tens: 4+5+1=10 (write 0 carry 1). Hundreds: 3+2+1=6.'},
+  {week:'W3',q:'A school library has 524 books. 237 are borrowed. How many remain?',opts:['287','297','287','277'],realOpts:['297','287','277','267'],ans:1,explain:'524 − 237 = 287. Regroup: ones 14−7=7, tens 11−3=8... wait: 524−237. Ones: borrow, 14−7=7. Tens: (1)1−3 borrow again, 11−3=8... hundreds: 4−2=2. Answer = 287.'},
+  {week:'W2',q:'375 + 247 + 189 = ?',opts:['811','801','711','821'],ans:0,explain:'375+247=622, then 622+189=811. Add in two steps using column method.'},
+  {week:'W3',q:'___ − 134 = 258. What is the missing number?',opts:['382','392','372','302'],ans:1,explain:'Work backwards: 258 + 134 = 392. The missing number is 392.'},
+];
+const mGQs=mathsGrandQs.map((q,i)=>({...q,opts:q.realOpts||q.opts}));
+buildQuiz(mGQs,'maths-grand-quiz','maths-grand-score','mathsGrand','var(--maths)','var(--maths-l)','maths');
+function nextMathsGrand(){advQ2('mathsGrand_st');}
+
+const mathsWordRevQs=[
+  {week:'Mixed',q:'Aisha had 450 stickers. She gave 187 to friends and received 264 more. How many does she have now?',opts:['527','537','517','547'],ans:0,explain:'450−187=263, then 263+264=527.'},
+  {week:'Mixed',q:'A bookshop had 600 books. It sold 234 on Monday and 178 on Tuesday. How many are left?',opts:['188','198','188','178'],realOpts:['188','198','178','168'],ans:0,explain:'600−234=366, then 366−178=188.'},
+  {week:'Mixed',q:'On a trip there are 347 boys and 289 girls. How many children altogether?',opts:['626','636','616','646'],ans:1,explain:'347+289=636. Ones: 7+9=16 (carry 1). Tens: 4+8+1=13 (carry 1). Hundreds: 3+2+1=6. Answer: 636.'},
+  {week:'Mixed',q:'A farmer picked 512 apples. He packed 267 in boxes. How many are unpacked?',opts:['255','245','265','275'],ans:1,explain:'512−267=245. Regroup carefully from the ones and tens columns.'},
+];
+const mwrQs=mathsWordRevQs.map(q=>({...q,opts:q.realOpts||q.opts}));
+buildQuiz(mwrQs,'maths-word-rev','maths-word-rev-score','mathsWordRev','var(--maths)','var(--maths-l)','maths');
+function nextMathsWord(){advQ2('mathsWordRev_st');}
+
+// ══════════════════════════ SCIENCE DATA ══════════════════════════
+buildMatch('sci-rev-match','sci-rev-match-score',[
+  ['Root 🌱','Absorbs water and nutrients from soil'],
+  ['Stem 🌿','Carries water upward; holds plant up'],
+  ['Leaf 🍃','Makes food using sunlight (photosynthesis)'],
+  ['Flower 🌸','Attracts insects; produces seeds'],
+  ['Seed 🌰','Grows into a new plant when conditions are right'],
+  ['Nutrients','Good minerals in soil — like vitamins for plants'],
+],'var(--science)','var(--science-l)');
+
+const sciGrandQs=[
+  {week:'W2',q:'Which part of the plant absorbs water from the soil?',opts:['Leaf','Stem','Flower','Root'],ans:3,explain:'Roots absorb water AND nutrients from the soil. They also hold the plant in the ground.'},
+  {week:'W2',q:'What is the function of the STEM?',opts:['Makes food from sunlight','Absorbs water from soil','Carries water and food upward; holds plant up','Attracts bees for pollination'],ans:2,explain:'The stem is like a straw — it carries water and nutrients from roots UP to the leaves and flower.'},
+  {week:'W2',q:'What do we call the process where leaves make food using sunlight?',opts:['Germination','Pollination','Photosynthesis','Respiration'],ans:2,explain:'Photosynthesis (fo-to-SIN-thuh-sis) — leaves use sunlight + water + CO₂ to make food (sugar).'},
+  {week:'W3',q:'Which FOUR things does a plant need to grow?',opts:['Food, water, TV, soil','Sunlight, water, nutrients, space','Rain, wind, soil, animals','Light, heat, food, friends'],ans:1,explain:'Sunlight (for photosynthesis), water (absorbed by roots), nutrients (from soil), space (for roots and leaves to spread).'},
+  {week:'W3',q:'What happens to a plant with NO sunlight?',opts:['It grows faster and greener','Leaves turn yellow; it cannot make food; it grows tall and thin trying to find light','It produces more flowers','Nothing changes'],ans:1,explain:'Without light, chlorophyll cannot form — leaves go yellow. The plant etiolates (grows tall and thin) searching for light.'},
+  {week:'W3',q:'What does the word "wilt" describe?',opts:['When a plant grows very fast','When a plant droops because it has no water','When a plant flowers early','When roots grow very deep'],ans:1,explain:'Wilt = the plant droops and looks sad because it has no water to keep it firm.'},
+  {week:'W2',q:'What is the job of the FLOWER?',opts:['Absorb water','Hold the plant up','Make food from sunlight','Attract insects for pollination so seeds can form'],ans:3,explain:'The flower attracts bees and insects. Pollination leads to seeds, which grow into new plants.'},
+  {week:'W3',q:'A plant kept in a dark cupboard for 2 weeks would most likely...',opts:['Grow tall with dark green leaves','Stay exactly the same','Have yellow leaves, be weak, and possibly die','Grow flowers quickly'],ans:2,explain:'Without light: no photosynthesis → no food → yellow leaves, weak growth, eventual death.'},
+  {week:'W2',q:'What is a SEED?',opts:['A type of root','A tiny new plant waiting to grow — contains everything it needs to start life','A type of leaf','The colourful part of a plant'],ans:1,explain:'A seed is like an egg for plants — it contains a baby plant and stored food to begin growing.'},
+  {week:'W3',q:'What does "observe" mean in a science experiment?',opts:['To guess randomly','To water the plant','To watch carefully and notice what is happening','To measure temperature only'],ans:2,explain:'Observe = watch carefully using your senses and record exactly what you notice.'},
+  {week:'W3',q:'What is a FAIR TEST?',opts:['A test where you change many things at once','A test where you change only ONE thing and keep everything else the same','A test where every plant wins','A test where you already know the answer'],ans:1,explain:'A fair test = change ONE variable only. If you change two things, you cannot know which one caused the result.'},
+  {week:'W2',q:'What gas do plants RELEASE during photosynthesis that animals need?',opts:['Carbon dioxide','Nitrogen','Oxygen','Hydrogen'],ans:2,explain:'Plants absorb CO₂ and release OXYGEN as a by-product — this is the air all animals breathe!'},
+  {week:'W3',q:'Plant C survived without soil nutrients but grew slowly. Why did it survive at all?',opts:['Nutrients are not important for plants','It still had sunlight, water and space — the three other needs were met','Soil is only needed for trees','It stored nutrients in its stem'],ans:1,explain:'A plant can partially function without one need if the other three are met — but it will not thrive.'},
+  {week:'W2',q:'Which analogy best describes the LEAF?',opts:['The leaf is like the plant\'s feet','The leaf is like the plant\'s kitchen — it makes the food','The leaf is like the plant\'s bedroom','The leaf is like the plant\'s mouth'],ans:1,explain:'Leaves are the kitchen — they take in ingredients (sunlight, water, CO₂) and make food (sugar) through photosynthesis.'},
+];
+buildQuiz(sciGrandQs,'sci-grand-quiz','sci-grand-score','sciGrand','var(--science)','var(--science-l)','science');
+function nextSciGrand(){advQ2('sciGrand_st');}
+
+// Life cycle ordering
+const lifecycleItems=[
+  {text:'🌰 A seed lands in soil with water, light and warmth nearby.',correct:1},
+  {text:'🌱 The seed germinates: a root grows down and a shoot grows up.',correct:2},
+  {text:'🍃 Leaves grow and begin making food through photosynthesis.',correct:3},
+  {text:'🌸 The plant grows flowers which attract bees and insects.',correct:4},
+  {text:'🍎 The flower produces fruit containing new seeds.',correct:5},
+];
+const shuffledLC=shuffle([...lifecycleItems]);
+let lcSeq=[];
+function buildLifecycle(){
+  const el=document.getElementById('sci-lifecycle');el.innerHTML='';lcSeq=[];
+  shuffledLC.forEach((item,i)=>{
+    const div=document.createElement('div');div.className='order-item';div.style.setProperty('--acc','var(--science)');
+    div.innerHTML=`<div class="order-num" id="lc-${i}">?</div><div class="order-text">${item.text}</div>`;
+    div.addEventListener('click',()=>{
+      if(div.querySelector('.order-num').classList.contains('set'))return;
+      const n=lcSeq.length+1;const num=div.querySelector('.order-num');
+      num.textContent=n;num.classList.add('set');num.style.background='var(--science)';
+      lcSeq.push({text:item.text,correct:item.correct});
+    });
+    el.appendChild(div);
+  });
+}
+buildLifecycle();
+function checkLifecycle(){
+  if(lcSeq.length<5){document.getElementById('lifecycle-fb').textContent='⚠️ Please order all 5 stages!';document.getElementById('lifecycle-fb').style.color='#D97706';return;}
+  let score=0;lcSeq.forEach((t,i)=>{if(t.correct===i+1)score++;});
+  const fb=document.getElementById('lifecycle-fb');
+  fb.style.color=score===5?'#065F46':'#DC2626';
+  fb.textContent=score===5?'🎉 Perfect! You know the full plant life cycle!':'Score: '+score+'/5. Hint: Seed → Germinate → Leaves → Flower → New seeds!';
+  if(score===5)celebrate();
+}
+function resetLifecycle(){buildLifecycle();document.getElementById('lifecycle-fb').textContent='';}
+
+// ══════════════════════════ HUMANITIES DATA ══════════════════════════
+buildMatch('hum-rev-match','hum-rev-match-score',[
+  ['Symbol','A small picture on a map that stands for something in the real world'],
+  ['Key / Legend','The box on a map that tells you what each symbol means'],
+  ['Compass','A tool that shows direction — always points to North'],
+  ['Capital city','The most important city in a country — where the government works'],
+  ['Coastline','The place where the land meets the sea'],
+  ['Ben Nevis','The highest mountain in the UK — found in Scotland'],
+],'var(--humanities)','var(--humanities-l)');
+
+const humGrandQs=[
+  {week:'W2',q:'What is a MAP?',opts:['A list of places in a city','A picture of a place as seen from ABOVE — like a bird looking down','A photograph taken from the side','A story about a place'],ans:1,explain:'A map is a bird\'s-eye view — it shows the layout of a place from above so you can find your way.'},
+  {week:'W2',q:'What does the KEY (legend) on a map tell you?',opts:['How big the map is','Who drew the map','What each symbol on the map means','How old the map is'],ans:2,explain:'Always check the key first! It tells you what every symbol means.'},
+  {week:'W2',q:'Using the memory trick "Never Eat Slimy Worms" — going clockwise from North, what are the four directions in order?',opts:['North, West, East, South','North, East, South, West','North, South, East, West','South, North, West, East'],ans:1,explain:'N-E-S-W clockwise: Never (N) Eat (E) Slimy (S) Worms (W).'},
+  {week:'W3',q:'What are the FOUR countries that make up the United Kingdom?',opts:['England, France, Wales, Scotland','England, Scotland, Wales, Northern Ireland','England, Ireland, Scotland, Cornwall','Britain, Scotland, Wales, Ulster'],ans:1,explain:'The UK = England + Scotland + Wales + Northern Ireland. Each has its own capital city.'},
+  {week:'W3',q:'What is the capital city of SCOTLAND?',opts:['Glasgow','Aberdeen','Edinburgh','Dundee'],ans:2,explain:'Edinburgh is the capital of Scotland — not Glasgow, which is the largest city.'},
+  {week:'W3',q:'What is the LONGEST river in the UK?',opts:['River Thames','River Nile','River Severn','River Tyne'],ans:2,explain:'The River Severn (354 km) flows through England and Wales — it is the longest in the UK.'},
+  {week:'W3',q:'What is the HIGHEST mountain in the UK?',opts:['Snowdon in Wales','Scafell Pike in England','Ben Nevis in Scotland','The White Cliffs in England'],ans:2,explain:'Ben Nevis (1,345 m) in Scotland is the highest point in the UK.'},
+  {week:'W2',q:'On a standard map, North is at the...',opts:['Bottom','Left side','Right side','Top'],ans:3,explain:'North is always at the TOP of a standard map. South is at the bottom, East is right, West is left.'},
+  {week:'W2',q:'What symbol is typically used on a map for a HOSPITAL?',opts:['A tree icon','A cross symbol (+)','A star','A square'],ans:1,explain:'A red cross or plus symbol (+) represents a hospital on a map.'},
+  {week:'W3',q:'What is a BORDER?',opts:['A type of mountain range','The place where land meets the sea','The line dividing two countries or regions','The capital city of a country'],ans:2,explain:'A border is the dividing line between two countries or regions — e.g. England and Scotland share a border.'},
+  {week:'W3',q:'The White Cliffs of Dover are significant because they are on the UK\'s...',opts:['Northern border with Scotland','Coastline where England meets the sea','Highest mountain peak','Longest river'],ans:1,explain:'The White Cliffs of Dover are famous chalk cliffs on the south-east coastline where England meets the English Channel.'},
+  {week:'W2',q:'If you are at the MARKET and walk to the PARK (on the map shown), which direction are you going?',opts:['South-East','South-West','North-West','North-East'],ans:2,explain:'The Park is in the North-West corner relative to the Market — you travel North and West.'},
+  {week:'W3',q:'Which of these is a PHYSICAL feature of the UK?',opts:['Big Ben (a clock tower)','River Thames (a river)','Buckingham Palace (a building)','The London Eye (a wheel)'],ans:1,explain:'Physical features are natural — rivers, mountains, cliffs. Man-made structures are human features.'},
+  {week:'W3',q:'What is GEOGRAPHY?',opts:['The study of numbers and calculations','The study of places, land, water and people on Earth','The study of old stories and myths','The study of plants and animals only'],ans:1,explain:'Geography = the study of places, physical features (mountains, rivers) and the people who live there.'},
+];
+buildQuiz(humGrandQs,'hum-grand-quiz','hum-grand-score','humGrand','var(--humanities)','var(--humanities-l)','humanities');
+function nextHumGrand(){advQ2('humGrand_st');}
+
+const humMapRevQs=[
+  {week:'W2',q:'Looking at the map: what is directly WEST of the Church?',opts:['Park','School','Hospital','Market'],ans:2,explain:'The Hospital is directly West of the Church — they are in the same South row.'},
+  {week:'W2',q:'Which TWO places are directly NORTH of the Hospital?',opts:['Park and Church','Market and Church','Park and Market','School and Church'],ans:2,explain:'Moving North from the Hospital: the Market is directly North, and the Park is North-West (same row).'},
+  {week:'W2',q:'If you walk from the SCHOOL to the HOSPITAL, which directions do you travel?',opts:['North then East','South then West','East then North','West then South'],ans:1,explain:'School is North-East; Hospital is South-West. You travel South and West.'},
+  {week:'W2',q:'What is SOUTH-EAST of the Market?',opts:['Park','Hospital','Church','School'],ans:2,explain:'South-East of the Market = the Church (bottom-right corner of the map).'},
+  {week:'W2',q:'Why is it better to use compass directions (North/South/East/West) rather than saying "turn left" or "go right"?',opts:['Left and right are easier to remember','Compass directions are always the same — they do not change depending on which way you are facing','Compass directions are only used by sailors','Left and right are not real directions'],ans:1,explain:'Compass directions are absolute — North is always North regardless of which way you face. Left/right depend on the direction you are already facing.'},
+  {week:'W3',q:'Ben Nevis is in Scotland. Snowdon is in Wales. What do they have in common?',opts:['Both are rivers','Both are capital cities','Both are mountains','Both are coastlines'],ans:2,explain:'Both Ben Nevis and Snowdon are mountains — the highest in their respective countries.'},
+  {week:'W3',q:'Which city is the capital of WALES?',opts:['London','Edinburgh','Cardiff','Belfast'],ans:2,explain:'Cardiff is the capital of Wales. London=England, Edinburgh=Scotland, Belfast=Northern Ireland.'},
+  {week:'W3',q:'A map symbol of a TREE or green shading usually represents a...',opts:['Hospital','Park or forest','Train station','School'],ans:1,explain:'Green shading or tree symbols on maps represent parks, forests or green open spaces.'},
+];
+buildQuiz(humMapRevQs,'hum-map-rev','hum-map-rev-score','humMapRev','var(--humanities)','var(--humanities-l)','humanities');
+function nextHumMap(){advQ2('humMapRev_st');}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week3_Day3');</script>
+</body>
+</html>

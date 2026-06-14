@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 · Day 2 · Challenge — HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --humanities:#0891B2;--humanities-l:#CFFAFE;--humanities-d:#164E63;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:8px;}
+.logo span{color:var(--science);}
+.day-badge{background:linear-gradient(135deg,#DB2777,#7C3AED);color:white;font-weight:900;font-size:0.8rem;padding:6px 14px;border-radius:50px;letter-spacing:1px;}
+.nav-btn{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn .emoji{font-size:1rem;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn.active{color:white;}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="humanities"]{--c:var(--humanities);}
+.nav-btn.active{background:var(--c);border-color:var(--c);}
+.page{display:none;padding:28px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:5px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:8px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:460px;}
+.hero-emoji{position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:4.5rem;opacity:0.28;}
+.card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.card-title{font-family:'Fredoka One',cursive;font-size:1.25rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.section-label{display:inline-block;font-size:0.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:12px;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.5rem;flex-shrink:0;}
+.callout-text{font-size:0.92rem;font-weight:600;line-height:1.55;}
+.callout-text strong{font-weight:900;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:18px;margin-top:14px;}
+.quiz-q{font-weight:800;font-size:1.02rem;margin-bottom:12px;line-height:1.4;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 18px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover{border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:11px 16px;border-radius:10px;font-weight:700;display:none;font-size:0.9rem;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.tf-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:white;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);margin-bottom:8px;flex-wrap:wrap;}
+.tf-stmt{font-weight:700;font-size:0.88rem;flex:1;min-width:180px;}
+.tf-btns{display:flex;gap:8px;}
+.tf-btn{padding:7px 16px;border-radius:50px;border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.85rem;cursor:pointer;transition:all 0.2s;background:white;}
+.tf-btn.t-btn.chosen{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.f-btn.chosen{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{box-shadow:0 0 0 3px #059669;}
+.tf-btn.wrong-ans{box-shadow:0 0 0 3px #DC2626;}
+.match-item{padding:11px 15px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-weight:700;cursor:pointer;transition:all 0.25s;background:white;font-size:0.88rem;text-align:center;}
+.match-item:hover{border-color:var(--accent,#888);transform:scale(1.02);}
+.match-item.selected{border-color:var(--accent,#888);background:var(--accent-l,#eee);}
+.match-item.matched{background:#D1FAE5;border-color:#059669;color:#065F46;cursor:default;}
+.match-item.wrong-match{background:#FEE2E2;border-color:#DC2626;}
+
+/* CHALLENGE-specific */
+.challenge-badge{display:inline-block;background:linear-gradient(135deg,#F59E0B,#DC2626);color:white;font-weight:900;font-size:0.72rem;padding:4px 12px;border-radius:99px;letter-spacing:1px;margin-bottom:10px;}
+.analysis-box{background:#FFFBF0;border:2px solid #F59E0B;border-radius:var(--radius-sm);padding:16px 20px;margin:12px 0;}
+.analysis-q{font-weight:800;font-size:0.95rem;margin-bottom:8px;color:#92400E;}
+.analysis-input{width:100%;min-height:80px;border:2.5px solid #E5E7EB;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-weight:600;font-size:0.9rem;resize:vertical;outline:none;transition:border-color 0.2s;}
+.analysis-input:focus{border-color:var(--accent,#888);}
+.reveal-btn{margin-top:8px;padding:7px 16px;border-radius:50px;border:none;background:#F59E0B;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
+.reveal-btn:hover{background:#D97706;}
+.model-ans{background:#D1FAE5;border-radius:10px;padding:12px;margin-top:8px;font-size:0.88rem;font-weight:600;color:#065F46;display:none;line-height:1.6;}
+
+.char-table{width:100%;border-collapse:collapse;margin-top:12px;}
+.char-table th{background:var(--accent,#888);color:white;padding:10px;font-family:'Fredoka One',cursive;font-size:0.95rem;text-align:left;border-radius:0;}
+.char-table td{padding:10px;border-bottom:1px solid #E5E7EB;vertical-align:top;}
+.char-table tr:nth-child(even) td{background:#F8FAFF;}
+
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:12px;}
+.step{display:flex;gap:12px;align-items:flex-start;background:#FAFBFF;border-radius:var(--radius-sm);padding:12px 16px;border:2px solid #E5E7EB;}
+.step-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9rem;color:white;background:var(--accent,#888);}
+.step-content{flex:1;}
+.step-title{font-weight:800;font-size:0.95rem;margin-bottom:2px;}
+.step-desc{font-size:0.85rem;color:#4B5563;line-height:1.5;}
+
+.confetti-piece{position:fixed;top:-10px;width:10px;height:14px;border-radius:2px;animation:confettiFall linear forwards;z-index:9999;pointer-events:none;}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.char-table{font-size:0.8rem;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <div class="day-badge">⚡ Week 3 · Day 2 · Challenge</div>
+  <button class="nav-btn active" data-sub="bible"      onclick="showPage('bible')">   <span class="emoji">📖</span> Bible</button>
+  <button class="nav-btn"       data-sub="english"    onclick="showPage('english')"> <span class="emoji">✏️</span> English</button>
+  <button class="nav-btn"       data-sub="maths"      onclick="showPage('maths')">   <span class="emoji">🔢</span> Maths</button>
+  <button class="nav-btn"       data-sub="science"    onclick="showPage('science')"> <span class="emoji">🌱</span> Science</button>
+  <button class="nav-btn"       data-sub="humanities" onclick="showPage('humanities')"><span class="emoji">🌍</span> Humanities</button>
+</div>
+
+<!-- ═══════════ BIBLE ═══════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-week">📖 Bible · Week 3 · Day 2 Challenge</div>
+    <div class="hero-title">Noah —<br>Deep Analysis</div>
+    <div class="hero-sub">Character · Trust · Obedience · God's Covenant · Critical Thinking</div>
+    <div class="hero-emoji">🌊</div>
+  </div>
+
+  <div class="card" style="--accent:var(--bible);">
+    <div class="challenge-badge">⚡ CHALLENGE LEVEL</div>
+    <div class="card-title" style="color:var(--bible);">📚 Part A — Vocabulary in Context <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d);">Click a word on the left, then its meaning on the right</div>
+    <div id="bible-match"></div>
+    <div style="margin-top:10px;font-weight:800;" id="bible-match-score"></div>
+  </div>
+
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">📖 Part B — Read & Analyse <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div style="background:#EDE9FE;border-radius:var(--radius-sm);padding:16px;border-left:4px solid var(--bible);margin-bottom:14px;">
+      <div style="font-style:italic;font-size:0.92rem;line-height:1.7;color:#374151;">"Then God said to Noah, 'I have decided to put an end to all people, for the earth is filled with violence because of them… Make yourself an ark of cypress wood…' Noah did everything just as God commanded him." — Genesis 6:13–14, 22</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">a) God tells Noah about the flood BEFORE it happens. Why do you think God warned Noah instead of sending the flood without warning? What does this tell us about God's character?</div>
+      <textarea class="analysis-input" placeholder="Write your answer here... (Think: Is God fair? Does He care for righteous people?)"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">God warned Noah because He is fair and caring. He did not want to destroy a righteous person without warning. This shows that God looks at the heart of individuals — He rewards those who obey Him. It tells us God is not randomly cruel; He acts with justice and love.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">b) "Noah did everything just as God commanded him." This is said about Noah BEFORE the flood came. Noah had never seen a flood — he had to trust completely. What does this tell us about Noah's faith?</div>
+      <textarea class="analysis-input" placeholder="Write your answer here... (Think: Was it hard to trust? What is faith?)"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">Noah's faith was very strong. He obeyed God even though he could not see the flood coming — he had never experienced anything like it before. People laughed at him, making it even harder. True faith means trusting God even when things seem impossible or others disagree.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">c) People around Noah laughed at him while he built the ark. How do you think Noah felt? How did he keep going? Use what you know about trust and obedience.</div>
+      <textarea class="analysis-input" placeholder="Write your answer here..."></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">Noah may have felt lonely, embarrassed or doubted himself at times. But he kept going because his trust in God was stronger than his fear of what others thought. Obedience to God meant he focused on the task, not the laughter. This shows real courage — doing what is right even when it is hard.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">d) God made a covenant (promise) after the flood. Why is it important that God used a visible sign — the rainbow — for this promise? What does the rainbow remind us every time we see it?</div>
+      <textarea class="analysis-input" placeholder="Write your answer here..."></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">God used the rainbow as a visible sign so people could SEE the promise, not just hear it. A visible sign makes the promise feel real and permanent. Every time we see a rainbow, it is a reminder that God keeps His covenants — He does not break His promises. It shows that God's love reaches all the earth.</div>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">👥 Part C — Character Comparison <span style="font-size:0.8rem;color:var(--muted);">(6 marks)</span></div>
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d);">Answer the quiz about each character in the Noah story</div>
+    <div id="bible-char-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextBibleCQ()">Next ➡️</button>
+      <span id="bible-cq-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--bible);">
+    <div class="card-title" style="color:var(--bible);">✍️ Part D — Extended Thinking <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">🤔</div>
+      <div class="callout-text"><strong>Challenge question:</strong> A classmate says "The story of Noah is just about a flood — it's not really about faith." Do you AGREE or DISAGREE? Write at least FOUR sentences using examples from the story.</div>
+    </div>
+    <textarea class="analysis-input" placeholder="Write your argument here. Use words like: 'I disagree because...' / 'The evidence shows...' / 'Noah demonstrates faith by...'"></textarea>
+    <button class="reveal-btn" onclick="showModel(this)" style="margin-top:8px;">💡 See key points</button>
+    <div class="model-ans">I disagree because the story of Noah is fundamentally about faith and trust in God. Noah had no visible evidence a flood was coming — he trusted God's word completely. His obedience, despite being laughed at, is the ultimate act of faith. The covenant and rainbow at the end show God rewards those who trust Him. The flood is the setting; faith is the real subject of the story.</div>
+  </div>
+</div>
+
+<!-- ═══════════ ENGLISH ═══════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-week">✏️ English · Week 3 · Day 2 Challenge</div>
+    <div class="hero-title">Fiction Analysis —<br>Writer's Craft</div>
+    <div class="hero-sub">Inference · Effect · Character · Writer's choices · Sentence analysis</div>
+    <div class="hero-emoji">🖊️</div>
+  </div>
+
+  <div class="card" style="--accent:var(--english);">
+    <div class="challenge-badge">⚡ CHALLENGE LEVEL</div>
+    <div class="card-title" style="color:var(--english);">📖 Read the Passage Again</div>
+    <div style="background:#FCE7F3;border-radius:var(--radius-sm);padding:18px;border-left:4px solid var(--english);">
+      <div style="font-family:'Fredoka One',cursive;font-size:1.05rem;color:var(--english-d);margin-bottom:10px;">Zara and the Old Forest</div>
+      <p style="font-size:0.9rem;line-height:1.75;color:#374151;"><em>Zara was eight years old. She lived in a small village near a very old forest. One morning, she woke up early and walked into the forest alone. The trees were tall and dark. Strange sounds came from the leaves above.</em></p>
+      <p style="font-size:0.9rem;line-height:1.75;color:#374151;margin-top:8px;"><em>Zara felt nervous, but she kept walking. She wanted to find the old stone bridge her grandmother had told her about. "It grants one wish," her grandmother had said.</em></p>
+      <p style="font-size:0.9rem;line-height:1.75;color:#374151;margin-top:8px;"><em>After a long walk, Zara heard the sound of water. She followed it and — there it was! A beautiful stone bridge covered in green moss. She closed her eyes and made her wish. She wished her sick father would get better.</em></p>
+      <p style="font-size:0.9rem;line-height:1.75;color:#374151;margin-top:8px;"><em>When she opened her eyes, a small blue bird landed on her hand and sang. Zara smiled. Somehow, she felt sure everything would be alright.</em></p>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">🔍 Part A — Deep Analysis <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">a) "The trees were tall and dark." What does this description tell us about how Zara might be feeling? What effect does it create for the reader?</div>
+      <textarea class="analysis-input" placeholder="Think about: what do tall, dark trees make you feel? How does the writer use this description on purpose?"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">The description "tall and dark" creates a feeling of danger or mystery. It suggests the forest is threatening or unfamiliar. For the reader, it builds tension — we feel nervous alongside Zara. The writer uses this deliberately to show that Zara's journey is not easy; it takes real courage to keep walking.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">b) "Zara felt nervous, but she kept walking." Why is the word "but" so important here? What does it tell us about Zara's character?</div>
+      <textarea class="analysis-input" placeholder="Focus on the word 'but' — what does it do to the sentence? What does keeping walking tell us about Zara?"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">The word "but" shows contrast — it tells us that despite feeling scared, Zara pushed through. This single word reveals her character: she is brave and determined. She could have turned back, but her love for her father and her hope in the wish made her continue. The word "but" is doing a lot of work in just one sentence.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">c) The writer uses a dash (—) in: "there it was!" What effect does this punctuation create? Why might the writer have chosen a dash rather than a comma?</div>
+      <textarea class="analysis-input" placeholder="Think about: what does a dash do to the pace/speed of reading? What emotion does it create?"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">The dash creates a sudden pause before the reveal — it builds excitement and suspense. The reader holds their breath for a moment. A comma would feel smoother and less dramatic. The dash mimics the feeling of Zara suddenly spotting the bridge, making the reader feel the surprise alongside her.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">d) At the end, Zara "somehow felt sure everything would be alright." The writer does NOT tell us if the wish came true. Why might the writer have chosen to end the story this way?</div>
+      <textarea class="analysis-input" placeholder="Think about: what is the effect on the reader? Is hope more powerful than a definite ending?"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">The ambiguous ending is powerful because it focuses on Zara's FEELING rather than facts. Hope is more uplifting than certainty. The reader is left to believe the wish may come true, which is more emotionally satisfying. It also suggests that sometimes what matters most is trust and hope — not proof. This is a mature, thoughtful ending for a children's story.</div>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">✏️ Part B — Sentence Craft <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div id="eng-sent-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextEngSent()">Next ➡️</button>
+      <span id="eng-sent-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--english);">
+    <div class="card-title" style="color:var(--english);">✍️ Part C — Creative Writing Challenge <span style="font-size:0.8rem;color:var(--muted);">(7 marks)</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">🖊️</div>
+      <div class="callout-text"><strong>Task:</strong> Write a paragraph (5–7 sentences) continuing the story of Zara. What happens when she gets home? Include: ONE statement, ONE question, ONE exclamation and ONE command. Underline each type and label it in brackets.</div>
+    </div>
+    <textarea class="analysis-input" style="min-height:140px;" placeholder="Write your continuation here... (Statement) (Question) (Exclamation) (Command)"></textarea>
+    <button class="reveal-btn" onclick="showModel(this)" style="margin-top:8px;">💡 See a model paragraph</button>
+    <div class="model-ans">Zara walked home through the quiet village as the sun began to rise. (Statement) She wondered if her wish would really come true. (Question — also possible as rhetorical) What a long and strange morning it had been! (Exclamation) "Tell me everything," her mother said, taking her hands. (Command) Zara smiled and held her mother tightly, feeling strangely peaceful inside.</div>
+  </div>
+</div>
+
+<!-- ═══════════ MATHS ═══════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-week">🔢 Maths · Week 3 · Day 2 Challenge</div>
+    <div class="hero-title">Subtraction —<br>Multi-Step & Reasoning</div>
+    <div class="hero-sub">Column method · Regrouping · Missing numbers · Word problems · Checking</div>
+    <div class="hero-emoji">🧮</div>
+  </div>
+
+  <div class="card" style="--accent:var(--maths);">
+    <div class="challenge-badge">⚡ CHALLENGE LEVEL</div>
+    <div class="card-title" style="color:var(--maths);">📚 Part A — Vocabulary Deep Dive <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d);">Match each word to its definition</div>
+    <div id="maths-match"></div>
+    <div style="margin-top:10px;font-weight:800;" id="maths-match-score"></div>
+  </div>
+
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">🔢 Part B — Column Subtraction with Checking <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text"><strong>Challenge rule:</strong> After each subtraction, use ADDITION to CHECK your answer. If 85 – 43 = 42, then check: 42 + 43 = 85 ✅</div>
+    </div>
+    <div id="maths-challenge-practice"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMathsChallenge()">Check ✅</button>
+      <button class="btn" style="background:#6B7280;" onclick="nextMathsChallenge()">Next ➡️</button>
+    </div>
+    <div id="maths-ch-fb" style="margin-top:10px;font-weight:700;font-size:0.95rem;"></div>
+  </div>
+
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">❓ Part C — Missing Numbers <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d);">Find the missing number in each equation</div>
+    <div id="missing-nums"></div>
+    <div style="margin-top:12px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMissing()">Check All ✅</button>
+      <span id="missing-score" style="margin-left:12px;font-weight:800;"></span>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--maths);">
+    <div class="card-title" style="color:var(--maths);">📝 Part D — Word Problems <span style="font-size:0.8rem;color:var(--muted);">(7 marks)</span></div>
+    <div id="maths-word-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMathsWord()">Next ➡️</button>
+      <span id="maths-word-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SCIENCE ═══════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-week">🌱 Science · Week 3 · Day 2 Challenge</div>
+    <div class="hero-title">Plants — Experiments<br>& Fair Tests</div>
+    <div class="hero-sub">Scientific method · Predict · Observe · Conclude · Photosynthesis deep dive</div>
+    <div class="hero-emoji">🔬</div>
+  </div>
+
+  <div class="card" style="--accent:var(--science);">
+    <div class="challenge-badge">⚡ CHALLENGE LEVEL</div>
+    <div class="card-title" style="color:var(--science);">🔬 Part A — Experiment Analysis <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div style="background:#D1FAE5;border-radius:var(--radius-sm);padding:14px;border-left:4px solid var(--science);margin-bottom:14px;">
+      <div style="font-weight:800;color:var(--science-d);margin-bottom:8px;">📋 Experiment Results — Four Plants</div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+        <tr style="background:var(--science);color:white;"><th style="padding:8px;text-align:left;">Plant</th><th style="padding:8px;">Condition</th><th style="padding:8px;">What happened after 5 days</th></tr>
+        <tr style="background:white;"><td style="padding:8px;font-weight:700;">A</td><td style="padding:8px;">No water</td><td style="padding:8px;">Leaves shrivelled and drooped. Stem became thin.</td></tr>
+        <tr style="background:#F8FAFF;"><td style="padding:8px;font-weight:700;">B</td><td style="padding:8px;">No light</td><td style="padding:8px;">Grew tall and thin. Leaves turned pale yellow.</td></tr>
+        <tr style="background:white;"><td style="padding:8px;font-weight:700;">C</td><td style="padding:8px;">No nutrients (soil)</td><td style="padding:8px;">Survived but grew slowly. Leaves pale green.</td></tr>
+        <tr style="background:#F8FAFF;"><td style="padding:8px;font-weight:700;">D</td><td style="padding:8px;">All needs met</td><td style="padding:8px;">Grew 12cm. Dark green leaves. Healthy.</td></tr>
+      </table>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">a) Plant B grew TALLER without light — this seems strange! Why would a plant grow taller when it has NO sunlight? What was it trying to do?</div>
+      <textarea class="analysis-input" placeholder="Think: the plant is reaching for something. What is it reaching for?"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">Plant B grew taller because it was REACHING for light — this is called etiolation. The plant used its stored energy to grow upward, trying to find a light source. It got taller but weaker because without light, it could not make food through photosynthesis. The yellow colour shows it could not produce chlorophyll without sunlight.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">b) Plant C survived without soil but grew pale and slowly. Which part of the plant was most affected, and why?</div>
+      <textarea class="analysis-input" placeholder="Think: what do roots need soil for? What is in soil that helps the plant?"></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">The ROOTS were most affected. Roots absorb nutrients (minerals) from the soil that the plant needs for healthy growth. Without these nutrients, the leaves turned pale green because the plant could not make enough chlorophyll. Chlorophyll is the green pigment that helps plants photosynthesise and grow strong.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">c) Write a CONCLUSION sentence for this experiment. Use the words "photosynthesis" and "all four needs" in your sentence.</div>
+      <textarea class="analysis-input" style="min-height:60px;" placeholder="This experiment proves that plants need..."></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">This experiment proves that plants need all four things — sunlight, water, nutrients and space — to grow healthily, because without any one of them, the plant's ability to carry out photosynthesis and grow properly is seriously affected.</div>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🧪 Part B — Design a Fair Test <span style="font-size:0.8rem;color:var(--muted);">(8 marks)</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🔬</div>
+      <div class="callout-text"><strong>Task:</strong> You want to find out if plants grow TALLER with MORE sunlight. Plan your experiment below. A fair test changes ONLY ONE thing!</div>
+    </div>
+    <div id="sci-fair-test"></div>
+    <div style="margin-top:12px;">
+      <button class="btn" style="background:var(--science);" onclick="checkFairTest()">Check Plan ✅</button>
+      <span id="fair-test-score" style="margin-left:12px;font-weight:800;"></span>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--science);">
+    <div class="card-title" style="color:var(--science);">🎯 Part C — Science Quiz (Hard) <span style="font-size:0.8rem;color:var(--muted);">(7 marks)</span></div>
+    <div id="sci-hard-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="nextSciHard()">Next ➡️</button>
+      <span id="sci-hard-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ HUMANITIES ═══════════ -->
+<div id="page-humanities" class="page" style="--accent:var(--humanities);--accent-l:var(--humanities-l);--accent-d:var(--humanities-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--humanities-d),var(--humanities));">
+    <div class="hero-week">🌍 Humanities · Week 3 · Day 2 Challenge</div>
+    <div class="hero-title">UK Geography —<br>Deep Map Skills</div>
+    <div class="hero-sub">Physical features · Compass directions · Comparing countries · Critical thinking</div>
+    <div class="hero-emoji">🧭</div>
+  </div>
+
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="challenge-badge">⚡ CHALLENGE LEVEL</div>
+    <div class="card-title" style="color:var(--humanities);">📚 Part A — Vocabulary Match <span style="font-size:0.8rem;color:var(--muted);">(5 marks)</span></div>
+    <div id="hum-match"></div>
+    <div style="margin-top:10px;font-weight:800;" id="hum-match-score"></div>
+  </div>
+
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="card-title" style="color:var(--humanities);">🗺️ Part B — Map Analysis <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div style="background:#CFFAFE;border-radius:var(--radius-sm);padding:12px;margin-bottom:14px;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;text-align:center;">
+        <tr style="font-weight:900;"><td>🌳 PARK</td><td style="color:#0891B2;">↑ NORTH ↑</td><td>🏫 SCHOOL</td></tr>
+        <tr><td style="color:#0891B2;font-weight:900;">← WEST</td><td style="font-weight:900;font-family:'Fredoka One',cursive;font-size:1.1rem;">🏪 MARKET</td><td style="color:#0891B2;font-weight:900;">EAST →</td></tr>
+        <tr><td>🏥 HOSPITAL</td><td style="color:#0891B2;">↓ SOUTH ↓</td><td>⛪ CHURCH</td></tr>
+      </table>
+    </div>
+    <div id="hum-map-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--humanities);" onclick="nextHumMap()">Next ➡️</button>
+      <span id="hum-map-score" style="font-weight:800;"></span>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--humanities);">
+    <div class="card-title" style="color:var(--humanities);">🌍 Part C — Critical Thinking <span style="font-size:0.8rem;color:var(--muted);">(10 marks)</span></div>
+    <div class="analysis-box">
+      <div class="analysis-q">a) A map shows a place from ABOVE. Why is this more useful than a side-view photograph for finding your way? Give TWO specific reasons.</div>
+      <textarea class="analysis-input" placeholder="Reason 1: ... Reason 2: ..."></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">Reason 1: A top-down view shows the exact layout of roads, parks and buildings relative to each other — you can see which direction to travel. Reason 2: A side-view photo is blocked by buildings in front — you cannot see what is behind them. A map shows ALL places at once without anything being hidden.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">b) Maps use symbols instead of drawing everything in detail. Give THREE reasons why symbols are better than detailed drawings on a map.</div>
+      <textarea class="analysis-input" placeholder="Reason 1:... Reason 2:... Reason 3:..."></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See model answer</button>
+      <div class="model-ans">1) Symbols save space — you can fit more information in a small area. 2) Symbols are quick to read — a trained eye spots a hospital cross instantly. 3) Symbols work for all languages — a tree icon means park whether you speak English, Urdu or French. Without symbols, maps would be cluttered and impossible to read quickly.</div>
+    </div>
+    <div class="analysis-box">
+      <div class="analysis-q">c) EXTENDED: You want to build a new playground on the map above. Using compass directions and all the places shown, recommend the BEST location. Explain your reasoning using directions.</div>
+      <textarea class="analysis-input" style="min-height:100px;" placeholder="I recommend building the playground at... because it is [direction] of... and would be easy for... to reach."></textarea>
+      <button class="reveal-btn" onclick="showModel(this)">💡 See key points</button>
+      <div class="model-ans">Model answer: I recommend the area north of the Market, between the Park and the School. It is centrally located — the School is to the East and the Park to the West, making it easy for children from the school to reach going West, and for families using the Park to reach going East. The Hospital is to the South, which is useful in case of accidents. This central northern position means it is accessible from all four compass directions.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#0891B2','#F59E0B'];
+  for(let i=0;i<50;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti-piece';el.style.left=Math.random()*100+'vw';el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.animationDuration=(1.5+Math.random()*2)+'s';el.style.width=(8+Math.random()*7)+'px';el.style.height=(10+Math.random()*8)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*30);}
+}
+function showModel(btn){const m=btn.nextElementSibling;m.style.display=m.style.display==='block'?'none':'block';}
+
+// ── MATCH ENGINE ──
+function buildMatch(containerId,scoreId,pairs,accentColor,accentL){
+  const container=document.getElementById(containerId);
+  let selected=null,matched=0;
+  function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+  const terms=pairs.map(p=>({text:p[0],id:p[0],type:'term'}));
+  const defs=pairs.map(p=>({text:p[1],id:p[0],type:'def'}));
+  const sT=shuffle([...terms]);const sD=shuffle([...defs]);
+  container.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;"><div id="${containerId}-t" style="display:flex;flex-direction:column;gap:8px;"></div><div id="${containerId}-d" style="display:flex;flex-direction:column;gap:8px;"></div></div>`;
+  function makeItem(item){
+    const el=document.createElement('div');el.className='match-item';el.textContent=item.text;el.dataset.id=item.id;el.dataset.type=item.type;
+    el.style.setProperty('--accent',accentColor);el.style.setProperty('--accent-l',accentL);
+    el.addEventListener('click',()=>{
+      if(el.classList.contains('matched'))return;
+      if(selected&&selected===el){selected.classList.remove('selected');selected=null;return;}
+      if(selected){
+        if(selected.dataset.id===el.dataset.id&&selected.dataset.type!==el.dataset.type){
+          [selected,el].forEach(e=>{e.classList.remove('selected','wrong-match');e.classList.add('matched');e.style.pointerEvents='none';});
+          matched++;document.getElementById(scoreId).textContent=`✅ ${matched}/${pairs.length} matched!`;
+          if(matched===pairs.length)celebrate();selected=null;
+        }else{
+          el.classList.add('wrong-match');selected.classList.add('wrong-match');
+          setTimeout(()=>{el.classList.remove('wrong-match','selected');selected.classList.remove('wrong-match','selected');selected=null;},800);
+        }
+      }else{selected=el;el.classList.add('selected');}
+    });return el;
+  }
+  sT.forEach(t=>document.getElementById(containerId+'-t').appendChild(makeItem(t)));
+  sD.forEach(d=>document.getElementById(containerId+'-d').appendChild(makeItem(d)));
+}
+
+// ── QUIZ ENGINE ──
+function buildQuiz(qs,containerId,scoreId,nextFn,accentColor,accentL){
+  let idx=0,score=0;
+  window[nextFn+'_state']={qs,idx,score,containerId,scoreId,accentColor,accentL,nextFn};
+  renderQ(nextFn+'_state');
+}
+function renderQ(key){
+  const s=window[key];const q=s.qs[s.idx];
+  if(!q){document.getElementById(s.containerId).innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:14px;font-weight:800;">🎉 Quiz done! Score: ${s.score}/${s.qs.length}</div>`;celebrate();return;}
+  document.getElementById(s.containerId).innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${s.idx+1} of ${s.qs.length}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" style="--accent:${s.accentColor};--accent-l:${s.accentL};" onclick="answerQ('${key}',${i})">${o}</button>`).join('')}</div><div id="${key}-fb" class="quiz-feedback"></div></div>`;
+  document.getElementById(s.scoreId).textContent=`Score: ${s.score}/${s.idx}`;
+}
+function answerQ(key,i){
+  const s=window[key];const q=s.qs[s.idx];
+  const opts=document.querySelectorAll('#'+s.containerId+' .quiz-opt');
+  opts.forEach(o=>o.disabled=true);opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-fb');fb.style.display='block';
+  if(i===q.ans){s.score++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct!';}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent='❌ Not quite. The answer is: '+q.opts[q.ans];}
+  document.getElementById(s.scoreId).textContent=`Score: ${s.score}/${s.idx+1}`;
+}
+function advanceQuiz(key){window[key].idx++;renderQ(key);}
+
+// ══════ BIBLE ══════
+buildMatch('bible-match','bible-match-score',[
+  ['Trust','To believe that someone is good and will keep their promise'],
+  ['Righteous','A person who is good and does what God says is right'],
+  ['Covenant','An unbreakable promise — especially between God and a person'],
+  ['Obey','To do what someone tells you — especially God\'s commands'],
+  ['Rainbow','The colourful arc in the sky — sign of God\'s promise'],
+],'var(--bible)','var(--bible-l)');
+
+const bibleCQs=[
+  {q:'What was the MAIN reason Noah survived the flood?',opts:['He was the biggest and strongest','He was very clever at building','He trusted and obeyed God completely','He found the ark by accident'],ans:2},
+  {q:'What word describes Noah in Genesis?',opts:['Righteous','Famous','Powerful','Wealthy'],ans:0},
+  {q:'God\'s covenant (promise) after the flood was that He would never...',opts:['Let Noah die','Send another flood to cover the whole earth','Allow animals to speak','Make another rainbow'],ans:1},
+  {q:'Why did God make the rainbow VISIBLE as a sign?',opts:['Because rainbows are beautiful to look at','So people and animals could SEE and remember the promise','To celebrate Noah\'s birthday','To show where the ark landed'],ans:1},
+  {q:'What does the story of Noah teach us about how God responds to righteousness?',opts:['God does not notice good people','God rewards those who trust and obey Him','God tests everyone equally the same way','God only cares about large groups of people'],ans:1},
+  {q:'Which is the BEST description of Noah\'s obedience?',opts:['He obeyed only because he was afraid','He obeyed because others told him to','He obeyed God completely, even when it was hard and others laughed','He obeyed after the flood had already started'],ans:2},
+];
+buildQuiz(bibleCQs,'bible-char-quiz','bible-cq-score','bibleCQ','var(--bible)','var(--bible-l)');
+function nextBibleCQ(){advanceQuiz('bibleCQ_state');}
+
+// ══════ ENGLISH SENTENCE ══════
+const engSentQs=[
+  {q:'What type of sentence is: "What a strange and beautiful forest that was!"',opts:['Statement','Question','Exclamation','Command'],ans:2,explain:'It starts with "What" and shows strong feeling — this is an exclamation.'},
+  {q:'A writer uses a SHORT sentence at the end of a scary scene: "She ran." What effect does this create?',opts:['It slows the reader down','It creates urgency and panic — the shortness mirrors how fast everything happened','It shows the character is bored','It makes the story confusing'],ans:1,explain:'Short sentences create pace and tension — they feel urgent and fast.'},
+  {q:'"Where had the bridge come from?" — Who is the character speaking to?',opts:['Another character in the story','The bird on her hand','No one — it is a rhetorical question the writer uses to pull the reader in','The grandmother'],ans:2,explain:'A rhetorical question is asked to create effect — it invites the reader to wonder along with the character.'},
+  {q:'What does the word "infer" mean when reading a story?',opts:['Write down what the text says exactly','Work out something the text does NOT say directly, using clues','Find the title and author','Count how many sentences there are'],ans:1,explain:'Inference means reading between the lines — using evidence to work out what the writer implies.'},
+  {q:'Which sentence is an EXCLAMATION (true exclamation sentence)?',opts:['She walked into the forest.','Did she find the bridge?','How wonderful the bridge looked!','Run towards the water.'],ans:2,explain:'True exclamation sentences start with "What" or "How" and end with !'},
+  {q:'"Strange sounds came from the leaves above." What technique does the writer use?',opts:['A list of adjectives','Describing sounds to build atmosphere and tension','A rhetorical question','A command to the reader'],ans:1,explain:'Describing sound creates atmosphere — it helps the reader imagine being in the scene.'},
+];
+buildQuiz(engSentQs,'eng-sent-quiz','eng-sent-score','engSent','var(--english)','var(--english-l)');
+function nextEngSent(){advanceQuiz('engSent_state');}
+
+// ══════ MATHS ══════
+buildMatch('maths-match','maths-match-score',[
+  ['Regroup','Borrow 10 from the next column when you cannot subtract'],
+  ['Difference','The answer you get when you subtract one number from another'],
+  ['Inverse','The opposite operation — add to check subtract, subtract to check add'],
+  ['Digit','One number symbol from 0 to 9'],
+  ['Column method','Lining up digits in Hundreds, Tens and Ones columns to calculate'],
+],'var(--maths)','var(--maths-l)');
+
+const mathsChallengeQs=[
+  {a:324,b:187,label:'324 − 187',hint:'Regroup ones and tens!'},
+  {a:502,b:264,label:'502 − 264',hint:'Watch out! Zero in the tens column.'},
+  {a:731,b:456,label:'731 − 456',hint:'Regroup needed in ones and tens.'},
+  {a:800,b:347,label:'800 − 347',hint:'Careful — zeros make this tricky!'},
+];
+let mathsCIdx=0;
+function renderMathsChallenge(){
+  const q=mathsChallengeQs[mathsCIdx%mathsChallengeQs.length];
+  document.getElementById('maths-challenge-practice').innerHTML=`<div style="background:#FEF3C7;border-radius:14px;padding:18px;"><div style="text-align:center;font-family:'Fredoka One',cursive;font-size:1.5rem;margin-bottom:6px;">${q.label}</div><div style="text-align:center;font-size:0.83rem;color:#6B7280;margin-bottom:14px;">💡 ${q.hint}</div><div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;"><span style="font-weight:800;">Answer =</span><input id="mch-ans" type="number" style="width:100px;padding:10px;border-radius:12px;border:2.5px solid #D97706;font-size:1.2rem;font-family:'Fredoka One',cursive;text-align:center;outline:none;" placeholder="?"><span style="font-weight:800;">Check: answer +</span><input id="mch-check" type="number" value="${q.b}" readonly style="width:80px;padding:10px;border-radius:12px;border:2px solid #E5E7EB;text-align:center;background:#F3F4F6;font-family:'Fredoka One',cursive;"><span style="font-weight:800;">= ?</span><input id="mch-total" type="number" style="width:100px;padding:10px;border-radius:12px;border:2.5px solid #D97706;font-size:1.2rem;font-family:'Fredoka One',cursive;text-align:center;outline:none;" placeholder="${q.a}"></div></div>`;
+  document.getElementById('maths-ch-fb').textContent='';
+}
+function checkMathsChallenge(){
+  const q=mathsChallengeQs[mathsCIdx%mathsChallengeQs.length];
+  const ans=parseInt(document.getElementById('mch-ans')?.value)||0;
+  const total=parseInt(document.getElementById('mch-total')?.value)||0;
+  const fb=document.getElementById('maths-ch-fb');
+  const diff=q.a-q.b;
+  if(ans===diff&&total===q.a){fb.style.color='#065F46';fb.textContent=`✅ Perfect! ${q.label} = ${diff}. Check: ${diff} + ${q.b} = ${q.a} ✅`;celebrate();}
+  else if(ans===diff){fb.style.color='#D97706';fb.textContent=`✅ Subtraction correct (${diff})! But check your addition check — it should equal ${q.a}.`;}
+  else{fb.style.color='#DC2626';fb.textContent=`❌ Not quite. The answer to ${q.label} is ${diff}. Remember: start from the ones column!`;}
+}
+function nextMathsChallenge(){mathsCIdx++;renderMathsChallenge();}
+renderMathsChallenge();
+
+const missingQs=[
+  {text:'___ − 134 = 258',type:'first',b:134,c:258,ans:392},
+  {text:'456 − ___ = 189',type:'second',a:456,c:189,ans:267},
+  {text:'___ − 275 = 318',type:'first',b:275,c:318,ans:593},
+  {text:'700 − 345 = ___',type:'third',a:700,b:345,ans:355},
+];
+(function buildMissing(){
+  const el=document.getElementById('missing-nums');
+  el.innerHTML=missingQs.map((q,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FEF3C7;border-radius:var(--radius-sm);margin-bottom:8px;flex-wrap:wrap;"><span style="font-weight:800;font-family:'Fredoka One',cursive;font-size:1rem;flex:1;">${i+1}. ${q.text}</span><span style="font-weight:700;">Missing = </span><input id="miss-${i}" type="number" style="width:90px;padding:8px;border-radius:12px;border:2.5px solid #D97706;font-family:'Fredoka One',cursive;font-size:1rem;text-align:center;outline:none;" placeholder="?"></div>`).join('');
+})();
+function checkMissing(){
+  let score=0;
+  missingQs.forEach((q,i)=>{
+    const input=document.getElementById('miss-'+i);
+    if(parseInt(input.value)===q.ans){score++;input.style.borderColor='#059669';input.style.background='#D1FAE5';}
+    else{input.style.borderColor='#DC2626';input.style.background='#FEE2E2';}
+  });
+  document.getElementById('missing-score').textContent=`Score: ${score}/${missingQs.length}`;
+  if(score===missingQs.length)celebrate();
+}
+
+const mathsWordQs=[
+  {q:'A library had 524 books. 237 were borrowed. How many are left on the shelves?',opts:['287','287','261','267','287'],realOpts:['287','261','267','311'],ans:0},
+  {q:'A farmer had 703 dates. He sold 456. How many does he have left?',realOpts:['347','247','257','253'],ans:1,realAns:247},
+  {q:'There are 850 students in a school. 374 are boys. How many are girls?',realOpts:['476','476','524','466'],ans:0,realAns:476},
+  {q:'A shop had 600 sweets. They sold 283 on Saturday and 149 on Sunday. How many are left?',realOpts:['168','267','432','178'],ans:0,realAns:168},
+];
+const mwQs=[
+  {q:'A library had 524 books. 237 were borrowed. How many are left on the shelves?',opts:['287','261','267','311'],ans:0},
+  {q:'A farmer had 703 dates. He sold 456. How many does he have left?',opts:['347','247','257','253'],ans:1},
+  {q:'There are 850 students in a school. 374 are boys. How many are girls?',opts:['476','466','524','486'],ans:0},
+  {q:'A shop had 600 sweets. They sold 283 on Saturday and 149 on Sunday. How many are left?',opts:['168','267','432','178'],ans:0},
+];
+buildQuiz(mwQs,'maths-word-quiz','maths-word-score','mathsWord','var(--maths)','var(--maths-l)');
+function nextMathsWord(){advanceQuiz('mathsWord_state');}
+
+// ══════ SCIENCE ══════
+const fairTestQs=[
+  {q:'What is the ONE thing you will CHANGE in the experiment?',opts:['The type of plant pot','The amount of sunlight the plant gets','The colour of the water','The name of the plant'],ans:1},
+  {q:'What will you MEASURE to find out if your experiment worked?',opts:['The colour of the pot','How tall the plant grows (in cm)','How many leaves fall off','The temperature of the room'],ans:1},
+  {q:'Which of these should you KEEP THE SAME to make it a fair test?',opts:['The amount of sunlight','The amount of water given to each plant','The type of pot you use','The distance from the window'],ans:1},
+  {q:'What is a good PREDICTION for this experiment?',opts:['I think the plant with more sunlight will grow shorter.','I think the plant with more sunlight will grow taller because photosynthesis needs light to make food.','I think sunlight does not matter for growth.','I think the plant in the dark will grow the fastest.'],ans:1},
+  {q:'What is a FAIR TEST?',opts:['A test where every plant is a different size','A test where you change many things at once','A test where you change ONLY ONE thing and keep everything else the same','A test where you guess the answer before you start'],ans:2},
+];
+buildQuiz(fairTestQs,'sci-fair-test','fair-test-score','sciFair','var(--science)','var(--science-l)');
+function checkFairTest(){} // quiz engine handles this
+
+const sciHardQs=[
+  {q:'Why do leaves turn YELLOW when a plant has no light?',opts:['They get too hot','They cannot produce chlorophyll (the green pigment) without sunlight','They have too much water','They are trying to attract insects'],ans:1},
+  {q:'What gas do plants produce during photosynthesis that all animals need?',opts:['Carbon dioxide','Nitrogen','Oxygen','Hydrogen'],ans:2},
+  {q:'What does "etiolation" describe?',opts:['When a plant grows flowers early','When a plant grows tall and weak while searching for light in the dark','When roots grow very deep for water','When leaves fall off in autumn'],ans:1},
+  {q:'Why is photosynthesis described as "the most important process on Earth"?',opts:['Because plants are the most beautiful living things','Because it produces the oxygen animals breathe AND the food at the base of all food chains','Because it keeps the soil warm','Because it makes rain fall'],ans:1},
+  {q:'A scientist says: "My experiment is not fair." What does this most likely mean?',opts:['The experiment was too expensive','She changed more than one variable at the same time','The plants were too small','She forgot to water the plants'],ans:1},
+  {q:'Plant C grew slowly without soil nutrients. Which nutrient process was most affected?',opts:['Germination only','The production of chlorophyll and general growth (nutrient absorption)','Water transport through the stem','Pollination'],ans:1},
+  {q:'What is the correct order of a plant\'s life cycle?',opts:['Flower → Seed → Root → Leaf','Seed → Root → Leaf → Flower → New seed','Root → Seed → Leaf → Flower','Leaf → Root → Flower → Seed'],ans:1},
+];
+buildQuiz(sciHardQs,'sci-hard-quiz','sci-hard-score','sciHard','var(--science)','var(--science-l)');
+function nextSciHard(){advanceQuiz('sciHard_state');}
+
+// ══════ HUMANITIES ══════
+buildMatch('hum-match','hum-match-score',[
+  ['Coastline','The place where the land meets the sea'],
+  ['Region','A large area inside a country — like a big neighbourhood'],
+  ['Border','The line between two countries or two areas'],
+  ['Capital city','The most important city — where the government works'],
+  ['River','A long flow of fresh water that moves through the land'],
+],'var(--humanities)','var(--humanities-l)');
+
+const humMapQs=[
+  {q:'On the map, what is directly NORTH of the Market?',opts:['Hospital','Church','Park and School (the northern row)','Nothing'],ans:2},
+  {q:'What is directly SOUTH-WEST of the Market?',opts:['Park','School','Hospital','Church'],ans:2},
+  {q:'You walk from the Hospital to the School. What compass directions do you travel?',opts:['South then West','North then East','East then South','West then North'],ans:1},
+  {q:'What is to the EAST of the Market?',opts:['Park','Hospital','Church','School'],ans:2},
+  {q:'The Hospital is directly SOUTH of which TWO places?',opts:['Market and Church','Park and School','Market and Park','School and Church'],ans:1},
+  {q:'If you face NORTH from the Market, what is behind you?',opts:['Park','Hospital','School','Church'],ans:1},
+  {q:'What direction is the Church from the Park?',opts:['North-West','South-East','North-East','South-West'],ans:1},
+];
+buildQuiz(humMapQs,'hum-map-quiz','hum-map-score','humMap','var(--humanities)','var(--humanities-l)');
+function nextHumMap(){advanceQuiz('humMap_state');}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week3_Day2');</script>
+</body>
+</html>

@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --coral:#D85A30;--coral-light:#FAECE7;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --text:#2C2C2A;--text-muted:#888780;
+  --white:#FFFFFF;
+  --radius:12px;--radius-sm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+
+.nav{background:var(--white);border-bottom:2px solid var(--amber-mid);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.nav-title{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);flex:1;min-width:120px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 12px;border-radius:20px;border:1.5px solid transparent;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab:hover{opacity:.85}
+.tab.active{color:var(--white)!important}
+
+.subject-tabs{display:flex;gap:8px;padding:16px 20px 0;flex-wrap:wrap}
+.stab{padding:8px 16px;border-radius:20px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.15s}
+.stab:hover{opacity:.8}
+.stab.active{color:var(--white)}
+
+.page{display:none;padding:16px 20px 40px}
+.page.active{display:block}
+
+.ws-header{background:linear-gradient(135deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--teal);margin:4px 0}
+.ws-sub{font-size:13px;color:var(--gray);font-weight:600}
+.name-box{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray)}
+.name-line{width:120px;border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none}
+
+.section{margin-bottom:20px}
+.section-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:'';display:inline-block;width:4px;height:16px;background:var(--amber);border-radius:2px}
+.section-num{background:var(--teal);color:var(--white);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--amber);margin-bottom:6px}
+.q-text{font-size:14px;line-height:1.6;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:52px;border:1.5px dashed var(--teal-mid);border-radius:var(--radius-sm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:80px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+.table-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 12px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 12px;vertical-align:top}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+table.ws-table input[type=text]{width:100%;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;border-bottom:1px dashed var(--teal-mid);padding:2px}
+
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:16px;color:var(--blue)}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+
+.urdu-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:16px;color:#7B5B00}
+.urdu-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+
+.word-bank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;font-size:13px}
+.word-bank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px}
+.word-tag{display:inline-block;background:var(--purple);color:var(--white);border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+
+.circle-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.opt{border:1.5px solid var(--amber);border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:600;color:var(--amber);transition:.12s;background:var(--white)}
+.opt.selected{background:var(--amber);color:var(--white)}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:1.5px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px}
+.chk.done{background:var(--teal);color:var(--white)}
+
+.match-col{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}
+.match-item{background:var(--amber-light);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;font-weight:600;font-family:'Nunito',sans-serif}
+.match-item.right{background:var(--teal-light);border-color:var(--teal-mid)}
+
+.highlight-box{background:var(--coral-light);border:1.5px solid var(--coral);border-radius:var(--radius-sm);padding:12px 16px;font-size:14px;line-height:1.9;margin:8px 0}
+
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:16px 18px;font-size:14px;line-height:1.9;margin:8px 0}
+
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;flex-shrink:0}
+.step-text{font-size:14px;line-height:1.6}
+
+.worked-ex{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;font-family:'Courier New',monospace;font-size:16px;text-align:center}
+.worked-line{font-size:18px;font-weight:700;letter-spacing:2px;color:var(--teal)}
+.borrow{color:var(--coral);font-size:13px;font-weight:800}
+
+.plant-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.plant-card{border-radius:var(--radius-sm);padding:12px;text-align:center;border:2px solid}
+.plant-icon{font-size:32px;margin-bottom:6px}
+.plant-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.plant-desc{font-size:12px;margin-top:4px;line-height:1.5}
+
+.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.map-card{background:var(--white);border:1.5px solid var(--purple);border-radius:var(--radius-sm);padding:12px}
+.map-country{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--purple)}
+.map-cap{font-size:13px;color:var(--gray);margin-top:2px}
+
+.rainbow-bar{height:12px;border-radius:6px;margin-bottom:4px}
+
+.seq-item{display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px}
+.seq-num-input{width:36px;height:36px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:var(--red);background:var(--red-light);outline:none}
+
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:8px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:.15s}
+.print-btn:hover{opacity:.85}
+
+.score-box{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:10px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--green);display:none;margin-top:10px}
+
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">HOS International · KS2 Level 3 · Week 3</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const subjects = [
+  {id:'eng',   label:'📖 English',    color:'#185FA5', light:'#E6F1FB'},
+  {id:'maths', label:'🔢 Maths',      color:'#0F6E56', light:'#E1F5EE'},
+  {id:'sci',   label:'🌱 Science',    color:'#D85A30', light:'#FAECE7'},
+  {id:'hum',   label:'🌍 Humanities', color:'#534AB7', light:'#EEEDFE'},
+  {id:'bib',   label:'✝️ Bible',      color:'#B71C1C', light:'#FFEBEE'},
+];
+
+const worksheets = {
+
+  // ══════════════════════════════════════════════════════════════════════════
+  eng:[
+    {
+      num:1, title:'What is Fiction? Characters, Setting & Plot',
+      badge:'Reading Comprehension',
+      sections:[
+        {title:'Learn the key words', content:'eng_vocab'},
+        {title:'Read the story', content:'eng_story'},
+        {title:'Fiction or Non-Fiction?', content:'eng_fiction_sort'},
+      ]
+    },
+    {
+      num:2, title:'Comprehension Questions',
+      badge:'Reading Comprehension',
+      sections:[
+        {title:'Literal questions — find the answer in the text', content:'eng_literal'},
+        {title:'Inferential questions — think about the story', content:'eng_infer'},
+        {title:'Your prediction', content:'eng_predict'},
+      ]
+    },
+    {
+      num:3, title:'Characters & Feelings',
+      badge:'Reading Comprehension',
+      sections:[
+        {title:'Describe the character', content:'eng_character'},
+        {title:'How did the character feel?', content:'eng_feelings'},
+        {title:'Retell the story', content:'eng_retell'},
+      ]
+    }
+  ],
+
+  // ══════════════════════════════════════════════════════════════════════════
+  maths:[
+    {
+      num:1, title:'What is Subtraction? Place Value Columns',
+      badge:'Subtraction — Column Method',
+      sections:[
+        {title:'Learn the key words', content:'maths_vocab'},
+        {title:'Set up the columns correctly', content:'maths_columns'},
+        {title:'No regrouping practice', content:'maths_no_regroup'},
+      ]
+    },
+    {
+      num:2, title:'Regrouping (Borrowing)',
+      badge:'Subtraction — Column Method',
+      sections:[
+        {title:'When do we regroup?', content:'maths_when_regroup'},
+        {title:'Worked examples — follow the steps', content:'maths_worked'},
+        {title:'Your turn — subtract with regrouping', content:'maths_regroup_practice'},
+      ]
+    },
+    {
+      num:3, title:'Word Problems',
+      badge:'Subtraction — Column Method',
+      sections:[
+        {title:'Read, underline, solve', content:'maths_word_steps'},
+        {title:'Word problems', content:'maths_word_probs'},
+        {title:'Check your work with addition', content:'maths_check'},
+      ]
+    }
+  ],
+
+  // ══════════════════════════════════════════════════════════════════════════
+  sci:[
+    {
+      num:1, title:'What Do Plants Need to Grow?',
+      badge:'Plants & Living Things',
+      sections:[
+        {title:'Learn the key words', content:'sci_vocab'},
+        {title:'The 4 things plants need', content:'sci_4needs'},
+        {title:'Match the need to what happens without it', content:'sci_without'},
+      ]
+    },
+    {
+      num:2, title:'Parts of a Plant',
+      badge:'Plants & Living Things',
+      sections:[
+        {title:'Label the plant parts', content:'sci_parts'},
+        {title:'What does each part do?', content:'sci_jobs'},
+        {title:'Healthy or unhealthy plant?', content:'sci_healthy'},
+      ]
+    },
+    {
+      num:3, title:'Planning a Plant Experiment',
+      badge:'Plants & Living Things',
+      sections:[
+        {title:'Write a prediction', content:'sci_predict'},
+        {title:'Plan your experiment', content:'sci_plan'},
+        {title:'Record your observations', content:'sci_observe'},
+      ]
+    }
+  ],
+
+  // ══════════════════════════════════════════════════════════════════════════
+  hum:[
+    {
+      num:1, title:'The United Kingdom — 4 Countries',
+      badge:'Our Country & Its Geography',
+      sections:[
+        {title:'Learn the key words', content:'hum_vocab'},
+        {title:'The 4 countries of the UK', content:'hum_4countries'},
+        {title:'Match the capital city', content:'hum_capitals'},
+      ]
+    },
+    {
+      num:2, title:'Physical Features of the UK',
+      badge:'Our Country & Its Geography',
+      sections:[
+        {title:'Rivers and mountains', content:'hum_features'},
+        {title:'Label and describe', content:'hum_label'},
+        {title:'Compare with your home country', content:'hum_compare'},
+      ]
+    },
+    {
+      num:3, title:'Maps and Geography Words',
+      badge:'Our Country & Its Geography',
+      sections:[
+        {title:'Geography vocabulary', content:'hum_geowords'},
+        {title:'True or false?', content:'hum_trufalse'},
+        {title:'My geography fact file', content:'hum_factfile'},
+      ]
+    }
+  ],
+
+  // ══════════════════════════════════════════════════════════════════════════
+  bib:[
+    {
+      num:1, title:'The Story of Noah — What Happened?',
+      badge:'Noah — Trusting God',
+      sections:[
+        {title:'Learn the key words', content:'bib_vocab'},
+        {title:'Read the story of Noah', content:'bib_story'},
+        {title:'Put the story in order', content:'bib_sequence'},
+      ]
+    },
+    {
+      num:2, title:'Understanding the Story',
+      badge:'Noah — Trusting God',
+      sections:[
+        {title:'Comprehension questions', content:'bib_questions'},
+        {title:'What does it mean to trust God?', content:'bib_trust'},
+        {title:'The Covenant — God\'s Promise', content:'bib_covenant'},
+      ]
+    },
+    {
+      num:3, title:'Memory Verse & Life Application',
+      badge:'Noah — Trusting God',
+      sections:[
+        {title:'Learn the memory verse', content:'bib_verse'},
+        {title:'Noah\'s character — what kind of person was he?', content:'bib_character'},
+        {title:'My rainbow promise', content:'bib_apply'},
+      ]
+    }
+  ]
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONTENT RENDERER
+// ═══════════════════════════════════════════════════════════════════════════
+function renderContent(key){
+  switch(key){
+
+  // ── ENGLISH ──────────────────────────────────────────────────────────────
+
+  case 'eng_vocab': return `
+    <div class="urdu-box"><strong>🌍 Language Bridge:</strong> Fiction = افسانہ / قصة خيالية · Character = کردار / شخصية · Setting = ماحول / البيئة · Plot = کہانی / الحبكة</div>
+    ${[
+      ['📖 Fiction','A story that is <strong>made up</strong> — it is NOT real. Someone imagined it!','افسانہ / قصة خيالية','"The dragon flew over the castle." — This is fiction!'],
+      ['👤 Character','A <strong>person or animal</strong> in the story','کردار / شخصية','"Zara is the main character in our story."'],
+      ['🏡 Setting','<strong>WHERE and WHEN</strong> the story happens','ماحول / البيئة','"The story is set in an old forest at night."'],
+      ['📋 Plot','<strong>What happens</strong> in the story — the events','کہانی / الحبكة','"The plot begins when Zara enters the forest."'],
+      ['🔍 Infer','Work out something the text does <strong>NOT</strong> say directly — use clues','نتیجہ اخذ کرنا / استنتاج','"She was shaking — I infer she was scared."'],
+      ['🔮 Predict','<strong>Guess what will happen next</strong> before you read on','پیشگوئی کرنا / تنبؤ','"I predict Zara will find the bridge."'],
+    ].map(([w,m,l1,eg])=>`
+    <div class="vocab-card">
+      <div class="vocab-word">${w}</div>
+      <div class="vocab-meaning">${m}</div>
+      <div class="vocab-l1">🌍 ${l1}</div>
+      <div class="vocab-eg">✏️ ${eg}</div>
+    </div>`).join('')}`;
+
+  case 'eng_story': return `
+    <div class="tip-box"><strong>📖 How to read:</strong> Read slowly. After each paragraph, stop and ask yourself: Who? Where? What happened?</div>
+    <div class="story-box">
+      <strong style="font-size:16px;font-family:Nunito,sans-serif;color:var(--teal)">🌲 Zara and the Old Forest</strong><br/><br/>
+      Zara was eight years old. She lived in a small village near a very old forest. One morning, she woke up early and walked into the forest alone. The trees were tall and dark. Strange sounds came from the leaves above.<br/><br/>
+      Zara felt nervous, but she kept walking. She wanted to find the old stone bridge her grandmother had told her about. <em>"It grants one wish,"</em> her grandmother had said.<br/><br/>
+      After a long walk, Zara heard the sound of water. She followed it and — there it was! A beautiful stone bridge covered in green moss. She closed her eyes and made her wish.<br/><br/>
+      She wished her sick father would get better.<br/><br/>
+      When she opened her eyes, a small blue bird landed on her hand and sang. Zara smiled. Somehow, she felt sure everything would be alright.
+    </div>
+    <div class="q-block">
+      <div class="q-text">After reading, write one word to describe how you felt about the story:</div>
+      <input class="ans-line" placeholder="I felt ... because ..."/>
+    </div>`;
+
+  case 'eng_fiction_sort': return `
+    <div class="tip-box"><strong>Remember:</strong> Fiction = made up story. Non-Fiction = about real things (facts, science, news).</div>
+    <p style="font-size:14px;margin-bottom:12px">Read each text. Is it <strong>Fiction</strong> or <strong>Non-Fiction</strong>? Click to choose!</p>
+    ${[
+      ['A dragon swooped down from the mountains and breathed fire on the castle.','Fiction'],
+      ['Lions live in Africa. They eat meat and live in groups called prides.','Non-Fiction'],
+      ['The princess locked the door and hid the golden key under her pillow.','Fiction'],
+      ['Water is made of two hydrogen atoms and one oxygen atom (H₂O).','Non-Fiction'],
+      ['The robot danced until the stars came out and the moon clapped.','Fiction'],
+      ['The River Thames flows through London and is 346 km long.','Non-Fiction'],
+    ].map(([t,ans],i)=>`
+    <div class="q-block">
+      <div class="q-text">"${t}"</div>
+      <div class="circle-opts">
+        <div class="opt" onclick="checkAns(this,'fn${i}','Fiction','${ans}')">📖 Fiction</div>
+        <div class="opt" onclick="checkAns(this,'fn${i}','Non-Fiction','${ans}')">📰 Non-Fiction</div>
+      </div>
+    </div>`).join('')}`;
+
+  case 'eng_literal': return `
+    <div class="tip-box"><strong>Literal questions:</strong> The answer is IN the text. Find it and copy or write it in your own words.</div>
+    ${[
+      ['How old is Zara?','She is _____ years old.'],
+      ['Where does Zara live?','She lives _______________________________________.'],
+      ['What did her grandmother say about the bridge?','Her grandmother said _____________________________.'],
+      ['What did Zara hear before she found the bridge?','She heard _______________________________________.'],
+      ['What did Zara wish for?','She wished _______________________________________.'],
+    ].map(([q,frame],i)=>`
+    <div class="q-block">
+      <div class="q-num">Question ${i+1}</div>
+      <div class="q-text">${q}</div>
+      <div style="font-size:12px;color:var(--teal);margin-top:6px;font-style:italic">Sentence frame: ${frame}</div>
+      <input class="ans-line"/>
+    </div>`).join('')}`;
+
+  case 'eng_infer': return `
+    <div class="tip-box"><strong>Inferential questions:</strong> The answer is NOT in the text. Use clues to THINK and work it out.</div>
+    ${[
+      'How do you think Zara felt when she heard strange sounds? How do you know?',
+      'Why did Zara wish for her father to get better instead of something for herself? What does this tell you about her?',
+      'Do you think the wish came true? What clues in the last paragraph make you think this?',
+      'Was Zara a brave person or a scared person? Use evidence from the story.',
+    ].map((q,i)=>`
+    <div class="q-block">
+      <div class="q-num">Question ${i+1}</div>
+      <div class="q-text">${q}</div>
+      <div style="font-size:12px;color:var(--teal);margin-top:4px;font-style:italic">Use: "I think ... because ..."</div>
+      <textarea class="ans-box" placeholder="I think ... because ..."></textarea>
+    </div>`).join('')}`;
+
+  case 'eng_predict': return `
+    <div class="tip-box"><strong>Prediction:</strong> Use what you know from the story to guess what happens next. Always use the word BECAUSE.</div>
+    <div class="q-block">
+      <div class="q-num">Your Prediction</div>
+      <div class="q-text">The story ends with Zara smiling and feeling sure everything will be alright. What do you think happens next? Write at least 2 sentences.</div>
+      <div style="font-size:12px;color:var(--teal);margin:4px 0 6px;font-style:italic">I predict that ... will happen next because ...</div>
+      <textarea class="ans-box" style="min-height:80px" placeholder="I predict that ..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Write a new title for the NEXT chapter of the story:</div>
+      <input class="ans-line" placeholder="Chapter 2: ..."/>
+    </div>`;
+
+  case 'eng_character': return `
+    <div class="tip-box"><strong>Character:</strong> We learn about a character from what they <em>do</em>, <em>say</em> and <em>feel</em>.</div>
+    <div class="q-block">
+      <div class="q-num">Zara — Character Profile</div>
+      <div class="q-text">Complete the profile about Zara:</div>
+      <div style="line-height:2.8;font-size:14px;margin-top:6px">
+        Name: <input class="inline-ans" value="Zara" readonly style="color:var(--teal);font-weight:700;width:100px"/>
+        Age: <input class="inline-ans" style="width:50px" placeholder="?"/><br/>
+        Where she lives: <input class="inline-ans" style="width:220px" placeholder="..."/><br/>
+        Three words to describe her: <input class="inline-ans" style="width:80px"/>, <input class="inline-ans" style="width:80px"/>, <input class="inline-ans" style="width:80px"/><br/>
+        Something brave she does: <input class="inline-ans" style="width:250px" placeholder="..."/>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Draw Zara in the box. Add 3 labels describing her:</div>
+      <div style="border:1.5px dashed var(--teal-mid);border-radius:8px;height:130px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:13px;font-style:italic;margin-top:8px">✏️ Draw Zara here and label her</div>
+    </div>`;
+
+  case 'eng_feelings': return `
+    <div class="tip-box"><strong>Feelings words:</strong> nervous · brave · hopeful · sad · surprised · relieved · curious · scared · happy</div>
+    <p style="font-size:14px;margin-bottom:12px">Choose the correct feeling for each part of the story. Then explain WHY.</p>
+    ${[
+      ['At the START — Zara walks into the dark forest alone.',['nervous','excited','bored','angry'],'nervous'],
+      ['IN THE MIDDLE — Zara keeps walking even though she is scared.',['brave','tired','confused','silly'],'brave'],
+      ['When she FINDS the bridge.',['angry','relieved/happy','bored','nervous'],'relieved/happy'],
+      ['At the END — a blue bird lands on her hand.',['scared','hopeful','angry','bored'],'hopeful'],
+    ].map(([ctx,opts,ans],i)=>`
+    <div class="q-block">
+      <div class="q-num">Part ${i+1}</div>
+      <div class="q-text" style="margin-bottom:8px">${ctx}</div>
+      <div class="circle-opts">
+        ${opts.map(o=>`<div class="opt" onclick="checkAns(this,'feel${i}','${o}','${ans}')">${o}</div>`).join('')}
+      </div>
+      <input class="ans-line" placeholder="I know this because the text says ..."/>
+    </div>`).join('')}`;
+
+  case 'eng_retell': return `
+    <div class="tip-box"><strong>Connectives to use:</strong> First · Next · Then · After that · Finally · Because · So</div>
+    <div class="q-block">
+      <div class="q-num">Retell the Story</div>
+      <div class="q-text">Write the story in your own words. Use the sentence starters below:</div>
+      <div style="margin-top:10px">
+        <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px">🟢 Beginning:</div>
+        <textarea class="ans-box" style="min-height:44px" placeholder="First, Zara ..."></textarea>
+        <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;margin-top:8px">🟡 Middle:</div>
+        <textarea class="ans-box" style="min-height:44px" placeholder="Next / Then, ..."></textarea>
+        <div style="font-size:13px;font-weight:700;color:var(--coral);margin-bottom:4px;margin-top:8px">🔴 End:</div>
+        <textarea class="ans-box" style="min-height:44px" placeholder="Finally, ..."></textarea>
+      </div>
+    </div>`;
+
+  // ── MATHS ────────────────────────────────────────────────────────────────
+
+  case 'maths_vocab': return `
+    <div class="urdu-box"><strong>🌍 Language Bridge:</strong> Subtract = تفریق کرنا · Minus = منفی · Difference = فرق · Regroup = ادھار لینا / إعادة التجميع</div>
+    ${[
+      ['➖ Subtract','To <strong>take away</strong> a number from another','تفریق / طرح','"10 subtract 4 = 6"'],
+      ['= Difference','The <strong>answer</strong> to a subtraction','فرق / الفرق','"The difference between 9 and 5 is 4."'],
+      ['H · T · O','<strong>Hundreds · Tens · Ones</strong> — the column names','سیکڑے · دہائیاں · اکائیاں','"In 356: 3 is hundreds, 5 is tens, 6 is ones."'],
+      ['🔄 Regroup','<strong>Borrow 10</strong> from the next column when you cannot subtract','ادھار لینا / استعارة','"2 – 7 is impossible, so we regroup!"'],
+      ['#️⃣ Digit','A single number symbol from <strong>0 to 9</strong>','ہندسہ / رقم','"The number 47 has two digits: 4 and 7."'],
+    ].map(([w,m,l1,eg])=>`
+    <div class="vocab-card">
+      <div class="vocab-word">${w}</div>
+      <div class="vocab-meaning">${m}</div>
+      <div class="vocab-l1">🌍 ${l1}</div>
+      <div class="vocab-eg">✏️ ${eg}</div>
+    </div>`).join('')}`;
+
+  case 'maths_columns': return `
+    <div class="tip-box"><strong>Rule 1:</strong> Always write numbers in columns — Ones under Ones, Tens under Tens, Hundreds under Hundreds.<br/><strong>Rule 2:</strong> Always start subtracting from the ONES column (right side first!).</div>
+    <p style="font-size:14px;margin-bottom:12px">Write each subtraction in the correct columns. The first one is done for you.</p>
+    ${[
+      {top:'47',bot:'23',h_t:['','4'],h_o:['','7'],h_h2:['','2'],h_o2:['','3'],done:true},
+      {top:'356',bot:'124',h_t:['?','?'],h_o:['?','?'],h_h2:['?','?'],h_o2:['?','?'],done:false},
+      {top:'85',bot:'43',done:false},
+    ].map((ex,i)=>`
+    <div class="q-block">
+      <div class="q-num">${i===0?'✅ Example (done for you):':'Your turn '+i+':'}</div>
+      ${i===0?`
+      <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal);background:var(--teal-light);border-radius:8px;padding:14px 20px;display:inline-block;margin:6px 0">
+        <div style="display:grid;grid-template-columns:30px 30px 30px;text-align:center;gap:2px">
+          <div style="font-size:11px;color:var(--gray);font-family:Nunito,sans-serif">H</div>
+          <div style="font-size:11px;color:var(--gray);font-family:Nunito,sans-serif">T</div>
+          <div style="font-size:11px;color:var(--gray);font-family:Nunito,sans-serif">O</div>
+          <div></div><div>4</div><div>7</div>
+          <div style="font-size:13px;color:var(--coral)">–</div><div>2</div><div>3</div>
+          <div style="border-top:2px solid var(--teal);padding-top:4px"></div>
+          <div style="border-top:2px solid var(--teal);padding-top:4px">2</div>
+          <div style="border-top:2px solid var(--teal);padding-top:4px">4</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--green);margin-top:6px">✓ Ones: 7–3=4 · Tens: 4–2=2 · Answer = <strong>24</strong></div>
+      `:`
+      <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal);background:var(--teal-light);border-radius:8px;padding:14px 20px;display:inline-block;margin:6px 0">
+        <div style="display:grid;grid-template-columns:30px 30px 30px;text-align:center;gap:2px">
+          <div style="font-size:11px;color:var(--gray);font-family:Nunito,sans-serif">H</div>
+          <div style="font-size:11px;color:var(--gray);font-family:Nunito,sans-serif">T</div>
+          <div style="font-size:11px;color:var(--gray);font-family:Nunito,sans-serif">O</div>
+          ${[...ex.top.padStart(3,' ')].map(d=>`<div>${d.trim()?d:'&nbsp;'}</div>`).join('')}
+          <div style="font-size:13px;color:var(--coral)">–</div>${[...ex.bot.padStart(2,' ')].map(d=>`<div>${d.trim()?d:'&nbsp;'}</div>`).join('')}
+          <div style="border-top:2px solid var(--teal);padding-top:4px"><input type="text" style="width:28px;text-align:center;border:none;border-bottom:1px dashed var(--teal-mid);background:transparent;font-size:18px;font-weight:700;outline:none;color:var(--teal)"/></div>
+          <div style="border-top:2px solid var(--teal);padding-top:4px"><input type="text" style="width:28px;text-align:center;border:none;border-bottom:1px dashed var(--teal-mid);background:transparent;font-size:18px;font-weight:700;outline:none;color:var(--teal)"/></div>
+          <div style="border-top:2px solid var(--teal);padding-top:4px"><input type="text" style="width:28px;text-align:center;border:none;border-bottom:1px dashed var(--teal-mid);background:transparent;font-size:18px;font-weight:700;outline:none;color:var(--teal)"/></div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--gray);margin-top:6px">${ex.top} – ${ex.bot} = <input type="text" style="width:50px;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:15px;font-weight:700;outline:none;color:var(--teal)"/></div>
+      `}
+    </div>`).join('')}`;
+
+  case 'maths_no_regroup': return `
+    <div class="tip-box"><strong>No Regrouping:</strong> Every digit on the bottom is SMALLER than the digit on top. Just subtract each column! Start from the right (Ones).</div>
+    <div class="two-col">
+    ${[['76','43'],['184','52'],['95','31'],['268','145'],['547','326'],['439','208']].map(([a,b],i)=>`
+    <div class="q-block" style="text-align:center">
+      <div class="q-num">Problem ${i+1}</div>
+      <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">
+        ${a}<br/>
+        <span style="color:var(--coral)">–</span> ${b.padStart(a.length,' ')}<br/>
+        <div style="border-top:2px solid var(--teal);margin:4px 0"></div>
+        <input type="text" style="width:70px;text-align:center;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/>
+      </div>
+    </div>`).join('')}
+    </div>`;
+
+  case 'maths_when_regroup': return `
+    <div class="tip-box"><strong>When do we regroup?</strong> When the TOP digit in a column is SMALLER than the BOTTOM digit. We cannot do 2 – 7, so we must borrow!</div>
+    <p style="font-size:14px;margin-bottom:12px">Look at the ones column. Do we need to regroup? Click Yes or No.</p>
+    ${[
+      ['85 – 42','5 – 2 = easy!','No','no'],
+      ['63 – 27','3 – 7 = impossible!','Yes','yes'],
+      ['94 – 51','4 – 1 = easy!','No','no'],
+      ['52 – 38','2 – 8 = impossible!','Yes','yes'],
+      ['77 – 33','7 – 3 = easy!','No','no'],
+      ['41 – 16','1 – 6 = impossible!','Yes','yes'],
+    ].map(([prob,hint,ans,ansKey],i)=>`
+    <div class="check-row">
+      <span style="font-family:'Courier New',monospace;font-size:16px;font-weight:700;min-width:90px">${prob}</span>
+      <span style="font-size:12px;color:var(--gray);font-style:italic;flex:1">${hint}</span>
+      <div class="circle-opts" style="margin:0">
+        <div class="opt" onclick="checkAns(this,'rg${i}','yes','${ansKey}')">✅ Yes</div>
+        <div class="opt" onclick="checkAns(this,'rg${i}','no','${ansKey}')">❌ No</div>
+      </div>
+    </div>`).join('')}`;
+
+  case 'maths_worked': return `
+    <div class="tip-box"><strong>3 Steps to Regroup:</strong> 1️⃣ See you can't subtract → 2️⃣ Cross out the tens digit, take 1 ten → 3️⃣ Add 10 to the ones digit, then subtract.</div>
+    <div class="worked-ex">
+      <div style="font-size:13px;color:var(--gray);font-family:Nunito,sans-serif;margin-bottom:6px">Example: 52 – 37</div>
+      <div class="worked-line">
+        &nbsp;&nbsp;<span style="color:var(--coral);text-decoration:line-through">5</span><sup style="color:var(--coral);font-size:13px">4</sup>&nbsp;
+        <span style="color:var(--coral);text-decoration:line-through">2</span><sup style="color:var(--coral);font-size:13px">12</sup>
+      </div>
+      <div class="worked-line">– &nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;7</div>
+      <div style="border-top:2px solid var(--teal);margin:6px auto;width:120px"></div>
+      <div class="worked-line" style="color:var(--green)">&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;5</div>
+      <div style="font-size:12px;font-family:Nunito,sans-serif;color:var(--gray);margin-top:8px">
+        Step 1: Ones — 2–7 impossible! ❌<br/>
+        Step 2: Borrow 1 ten → tens become 4, ones become 12<br/>
+        Step 3: 12–7=5 · 4–3=1 → Answer = <strong style="color:var(--teal)">15</strong>
+      </div>
+    </div>
+    <p style="font-size:14px;margin-bottom:10px">Follow the same steps. Solve these:</p>
+    <div class="two-col">
+    ${[['74','36'],['91','47'],['63','28'],['82','55']].map(([a,b],i)=>`
+    <div class="q-block" style="text-align:center">
+      <div class="q-num">Problem ${i+1}: ${a} – ${b}</div>
+      <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">
+        ${a}<br/>
+        <span style="color:var(--coral)">– ${b}</span><br/>
+        <div style="border-top:2px solid var(--teal);margin:4px 0"></div>
+        <input type="text" style="width:70px;text-align:center;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/>
+      </div>
+    </div>`).join('')}
+    </div>`;
+
+  case 'maths_regroup_practice': return `
+    <div class="two-col">
+    ${[['134','57'],['325','148'],['402','165'],['513','278'],['231','84'],['700','263']].map(([a,b],i)=>`
+    <div class="q-block" style="text-align:center">
+      <div class="q-num">Problem ${i+1}</div>
+      <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">
+        ${a}<br/>
+        <span style="color:var(--coral)">– ${b.padStart(a.length,' ')}</span><br/>
+        <div style="border-top:2px solid var(--teal);margin:4px 0"></div>
+        <input type="text" style="width:80px;text-align:center;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/>
+      </div>
+    </div>`).join('')}
+    </div>`;
+
+  case 'maths_word_steps': return `
+    <div class="tip-box"><strong>3 steps for word problems:</strong></div>
+    <div class="step-box"><div class="step-num">1</div><div class="step-text"><strong>Underline</strong> the numbers in the question.</div></div>
+    <div class="step-box"><div class="step-num">2</div><div class="step-text"><strong>Circle</strong> the question word: <em>left, fewer, how many more, remain, difference</em> → these mean SUBTRACT!</div></div>
+    <div class="step-box"><div class="step-num">3</div><div class="step-text"><strong>Solve</strong> using the column method. Show your working.</div></div>
+    <div class="q-block" style="margin-top:10px">
+      <div class="q-text">Which words tell us to subtract? Tick all that apply:</div>
+      ${['how many are left','how many altogether','fewer than','the difference','total','how many more','take away','in all'].map((w,i)=>`
+      <div class="check-row">
+        <div class="chk" onclick="this.classList.toggle('done')">${['✓','✓','✓','✓','','✓','✓',''].includes(['','','✓','✓','','✓','✓',''][i])?'':''}</div>
+        <span>${w}</span>
+      </div>`).join('')}
+    </div>`;
+
+  case 'maths_word_probs': return `
+    ${[
+      ['🌴','Ali had <strong>85</strong> dates. He gave <strong>43</strong> to his family. How many dates does Ali have left?','85 – 43 = ____'],
+      ['📚','There are <strong>124</strong> books in the library. <strong>57</strong> books are borrowed. How many books are still on the shelves?','124 – 57 = ____'],
+      ['🍎','A market had <strong>236</strong> apples. By evening, <strong>178</strong> were sold. How many apples remain?','236 – 178 = ____'],
+      ['🏫','A school has <strong>312</strong> students. <strong>95</strong> are absent today. How many students are in school?','312 – 95 = ____'],
+    ].map(([emoji,q,hint],i)=>`
+    <div class="q-block">
+      <div class="q-num">${emoji} Problem ${i+1}</div>
+      <div class="q-text">${q}</div>
+      <div style="font-size:12px;color:var(--gray);margin:4px 0 8px;font-style:italic">Hint: ${hint}</div>
+      <div style="font-size:13px;color:var(--teal);font-weight:700;margin-bottom:4px">My working (column method):</div>
+      <textarea class="ans-box" style="min-height:60px;font-family:'Courier New',monospace" placeholder="Write your column method here..."></textarea>
+      <input class="ans-line" placeholder="Answer: ___________"/>
+    </div>`).join('')}`;
+
+  case 'maths_check': return `
+    <div class="tip-box"><strong>Check subtraction with addition!</strong> If 52 – 37 = 15, then 15 + 37 should = 52. Try it!</div>
+    <p style="font-size:14px;margin-bottom:12px">Solve each subtraction. Then CHECK your answer by adding back.</p>
+    ${[['91','47'],['134','58'],['205','76']].map(([a,b],i)=>`
+    <div class="q-block">
+      <div class="q-num">Problem ${i+1}</div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <div style="text-align:center">
+          <div style="font-size:12px;color:var(--gray);font-family:Nunito,sans-serif">Subtraction</div>
+          <div style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:var(--teal)">${a} – ${b} = <input type="text" style="width:55px;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal)"/></div>
+        </div>
+        <div style="font-size:20px;color:var(--amber)">→ Check:</div>
+        <div style="text-align:center">
+          <div style="font-size:12px;color:var(--gray);font-family:Nunito,sans-serif">Add back</div>
+          <div style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:var(--green)">
+            <input type="text" style="width:55px;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--green)"/>
+            + ${b} = <input type="text" style="width:55px;border:none;border-bottom:1.5px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--green)"/>
+          </div>
+        </div>
+      </div>
+    </div>`).join('')}`;
+
+  // ── SCIENCE ──────────────────────────────────────────────────────────────
+
+  case 'sci_vocab': return `
+    <div class="urdu-box"><strong>🌍 Language Bridge:</strong> Plant = پودا / نبات · Water = پانی / ماء · Sunlight = دھوپ / ضوء الشمس · Roots = جڑیں / جذور · Soil = مٹی / تربة</div>
+    ${[
+      ['🌱 Plant','A living thing that grows from soil, needs water and light','پودا / نبات','"A rose is a plant. A tree is a plant."'],
+      ['☀️ Sunlight','Light from the sun — plants use it to make their own food','دھوپ / ضوء الشمس','"A plant in a dark cupboard will not grow well."'],
+      ['💧 Water','Liquid that travels up through roots into the whole plant','پانی / ماء','"Without water, a plant wilts in just a few days."'],
+      ['🌍 Nutrients','Good minerals in the soil that feed and strengthen a plant','غذائی اجزاء / مغذيات','"Nutrients help the plant grow strong and green."'],
+      ['🌿 Roots','Underground parts that take in water and hold the plant in soil','جڑیں / جذور','"The roots go deep into the ground to find water."'],
+      ['😔 Wilt','When a plant droops and looks sad because it has no water','مرجھانا / ذبل','"My plant started to wilt — I forgot to water it!"'],
+      ['🔬 Observe','To watch carefully and notice changes','مشاہدہ کرنا / ملاحظة','"I observed the plant every day for a week."'],
+    ].map(([w,m,l1,eg])=>`
+    <div class="vocab-card">
+      <div class="vocab-word">${w}</div>
+      <div class="vocab-meaning">${m}</div>
+      <div class="vocab-l1">🌍 ${l1}</div>
+      <div class="vocab-eg">✏️ ${eg}</div>
+    </div>`).join('')}`;
+
+  case 'sci_4needs': return `
+    <div class="tip-box"><strong>Remember:</strong> Plants need 4 things to grow well. Without even ONE of them, a plant will struggle or die.</div>
+    <div class="plant-grid">
+      ${[
+        ['☀️','SUNLIGHT','#F59E0B','#FEF3C7','Plants use sunlight to make their own food. This is called photosynthesis.','Without it: leaves turn yellow. Plant cannot grow.'],
+        ['💧','WATER','#185FA5','#E6F1FB','Water travels from the soil, through the roots, up the stem, and into the leaves.','Without it: plant wilts, leaves dry out, plant dies.'],
+        ['🌍','NUTRIENTS','#0F6E56','#E1F5EE','Nutrients are minerals in the soil. They are like vitamins for plants.','Without them: plant grows very slowly, looks pale.'],
+        ['📏','SPACE','#534AB7','#EEEDFE','Plants need room for their roots to spread underground and leaves to spread above.','Without it: roots get tangled, plant is weak.'],
+      ].map(([ico,name,col,bg,desc,without])=>`
+      <div class="plant-card" style="background:${bg};border-color:${col}">
+        <div class="plant-icon">${ico}</div>
+        <div class="plant-name" style="color:${col}">${name}</div>
+        <div class="plant-desc">${desc}</div>
+        <div style="font-size:11px;color:#B71C1C;margin-top:6px;font-weight:700">❗ ${without}</div>
+      </div>`).join('')}
+    </div>
+    <div class="q-block" style="margin-top:12px">
+      <div class="q-text">Complete the sentence: Plants need <input class="inline-ans" style="width:80px"/>, <input class="inline-ans" style="width:80px"/>, <input class="inline-ans" style="width:80px"/> and <input class="inline-ans" style="width:70px"/> to grow.</div>
+    </div>`;
+
+  case 'sci_without': return `
+    <p style="font-size:14px;margin-bottom:12px">Match each problem to the missing need. Click the correct answer!</p>
+    ${[
+      ['A plant\'s leaves have turned yellow. It can no longer make food.','☀️ No Sunlight','💧 No Water','🌍 No Nutrients','☀️ No Sunlight'],
+      ['A plant is drooping badly. Its leaves feel dry and papery.','💧 No Water','☀️ No Sunlight','📏 No Space','💧 No Water'],
+      ['A plant is very pale and grows very slowly even with water and light.','🌍 No Nutrients','📏 No Space','💧 No Water','🌍 No Nutrients'],
+      ['Two plants in one tiny pot — both are weak and their roots are tangled.','📏 No Space','🌍 No Nutrients','☀️ No Sunlight','📏 No Space'],
+    ].map(([prob,o1,o2,o3,ans],i)=>`
+    <div class="q-block">
+      <div class="q-num">Situation ${i+1}</div>
+      <div class="q-text">${prob}</div>
+      <div class="circle-opts">
+        ${[o1,o2,o3].map(o=>`<div class="opt" onclick="checkAns(this,'sci_w${i}','${o}','${ans}')">${o}</div>`).join('')}
+      </div>
+    </div>`).join('')}`;
+
+  case 'sci_parts': return `
+    <div class="tip-box"><strong>Parts of a plant:</strong> roots · stem · leaves · flower · seed</div>
+    <div class="q-block">
+      <div class="q-text">Draw a plant in the box below. Then add arrows and labels for: roots, stem, leaves and flower.</div>
+      <div style="border:2px dashed var(--coral);border-radius:8px;height:180px;background:var(--coral-light);display:flex;align-items:center;justify-content:center;color:var(--coral);font-size:14px;font-style:italic;margin:10px 0">🌱 Draw and label your plant here!</div>
+    </div>
+    <div class="word-bank"><strong>Labels to add:</strong>
+      ${['🌸 Flower (makes seeds)','🍃 Leaves (make food using sunlight)','🌿 Stem (carries water up)','🌱 Roots (take in water from soil)','🌰 Seed (grows into a new plant)'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+    </div>`;
+
+  case 'sci_jobs': return `
+    <p style="font-size:14px;margin-bottom:12px">What does each plant part do? Match the part to its job.</p>
+    <div class="table-wrap"><table class="ws-table"><thead><tr><th>Plant Part</th><th>Its Job</th></tr></thead><tbody>
+    ${[
+      ['🌱 Roots','Carry water and nutrients from the soil up to the whole plant.'],
+      ['🌿 Stem',''],
+      ['🍃 Leaves',''],
+      ['🌸 Flower',''],
+      ['🌰 Seed',''],
+    ].map(([p,j])=>`<tr><td style="font-weight:700">${p}</td><td><input type="text" value="${j}" ${j?'readonly style="color:var(--teal)"':'placeholder="Write the job..."'}/></td></tr>`).join('')}
+    </tbody></table></div>
+    <div class="word-bank" style="margin-top:10px"><strong>Jobs to choose from:</strong>
+    ${['Make food using sunlight and air','Attract insects and make seeds','Grow into a new plant','Hold the plant up and carry water'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+    </div>`;
+
+  case 'sci_healthy': return `
+    <p style="font-size:14px;margin-bottom:12px">Look at each plant description. Is it <strong>Healthy</strong> or <strong>Unhealthy</strong>? What does it need?</p>
+    ${[
+      ['🌿 Plant A: Green leaves, standing tall, new buds growing.','Healthy','Nothing — it has everything it needs!'],
+      ['😔 Plant B: Yellow leaves, drooping, dry soil.','Unhealthy','Needs water (and maybe sunlight)'],
+      ['😰 Plant C: Very pale, barely growing, even with water and light.','Unhealthy','Needs nutrients from soil'],
+      ['🌱 Plant D: Two plants in a tiny cup, both look weak.','Unhealthy','Needs more space — separate them!'],
+    ].map(([desc,ans,fix],i)=>`
+    <div class="q-block">
+      <div class="q-num">Plant ${String.fromCharCode(65+i)}</div>
+      <div class="q-text">${desc}</div>
+      <div class="circle-opts">
+        <div class="opt" onclick="checkAns(this,'hlth${i}','Healthy','${ans}')">✅ Healthy</div>
+        <div class="opt" onclick="checkAns(this,'hlth${i}','Unhealthy','${ans}')">🤒 Unhealthy</div>
+      </div>
+      <input class="ans-line" placeholder="It needs: ..."/>
+    </div>`).join('')}`;
+
+  case 'sci_predict': return `
+    <div class="tip-box"><strong>A good prediction:</strong> Always uses the word BECAUSE. "I think the plant will _______ because _______."</div>
+    ${[
+      'What will happen to a plant if you put it in a dark cupboard for 5 days?',
+      'What will happen to a plant if you do not water it for 5 days?',
+      'If one plant gets a little water and another gets the right amount — which will grow taller?',
+    ].map((q,i)=>`
+    <div class="q-block">
+      <div class="q-num">Prediction ${i+1}</div>
+      <div class="q-text">${q}</div>
+      <div style="font-size:12px;color:var(--teal);font-style:italic;margin:4px 0 6px">I think ... will ... because ...</div>
+      <textarea class="ans-box" placeholder="I think the plant will ... because ..."></textarea>
+    </div>`).join('')}`;
+
+  case 'sci_plan': return `
+    <div class="tip-box"><strong>Our experiment question:</strong> What happens to a plant without water for 5 days?</div>
+    <div class="q-block">
+      <div class="q-text">Complete the experiment plan:</div>
+      <div style="line-height:2.8;font-size:14px;margin-top:6px">
+        My question: What happens to a plant without <input class="inline-ans" style="width:100px" placeholder="water/light?"/> for <input class="inline-ans" style="width:50px" placeholder="5"/> days?<br/>
+        My prediction: I think the plant will <input class="inline-ans" style="width:200px" placeholder="..."/> because <input class="inline-ans" style="width:200px" placeholder="..."/>.<br/>
+        What I will CHANGE: <input class="inline-ans" style="width:200px" placeholder="..."/><br/>
+        What I will OBSERVE each day: <input class="inline-ans" style="width:220px" placeholder="colour, height, drooping..."/><br/>
+        How I will record: <input class="inline-ans" style="width:220px" placeholder="drawing, table, writing..."/>
+      </div>
+    </div>`;
+
+  case 'sci_observe': return `
+    <p style="font-size:14px;margin-bottom:10px">Record what you see each day. Use the table. Then answer the questions.</p>
+    <div class="table-wrap"><table class="ws-table"><thead><tr><th>Day</th><th>What does the plant look like?</th><th>Is it healthy? (✅/❌)</th></tr></thead><tbody>
+    ${['Day 1','Day 2','Day 3','Day 4','Day 5'].map(d=>`<tr><td style="font-weight:700">${d}</td><td><input type="text" placeholder="Describe what you see..."/></td><td><input type="text" style="width:60px;text-align:center"/></td></tr>`).join('')}
+    </tbody></table></div>
+    <div class="q-block" style="margin-top:12px">
+      <div class="q-text">Conclusion — what did you find out?</div>
+      <div style="font-size:12px;color:var(--teal);font-style:italic;margin:4px 0">I found out that ... My prediction was right / not right because ...</div>
+      <textarea class="ans-box" placeholder="I found out that ..."></textarea>
+    </div>`;
+
+  // ── HUMANITIES ────────────────────────────────────────────────────────────
+
+  case 'hum_vocab': return `
+    <div class="urdu-box"><strong>🌍 Language Bridge:</strong> Geography = جغرافیہ / جغرافيا · Mountain = پہاڑ / جبل · River = دریا / نهر · Capital = دارالحکومت / عاصمة</div>
+    ${[
+      ['🌍 Geography','The study of places, land, water and people on Earth','جغرافیہ / جغرافيا','"In geography, we study rivers, mountains and countries."'],
+      ['⛰️ Mountain','A very tall, rocky piece of land — higher than a hill','پہاڑ / جبل','"Ben Nevis is the highest mountain in the UK."'],
+      ['〰️ River','A long flow of fresh water that moves through the land','دریا / نهر','"The River Thames flows through London."'],
+      ['🌊 Coastline','Where the land meets the sea','ساحلی پٹی / ساحل','"The White Cliffs of Dover are on England\'s coastline."'],
+      ['🏙️ Capital City','The most important city — where the government works','دارالحکومت / عاصمة','"London is the capital city of England."'],
+      ['🗺️ Region','A large area inside a country','علاقہ / منطقة','"Scotland is a region in the north of the UK."'],
+      ['🚧 Border','The line between two countries or two areas','سرحد / حدود','"England and Scotland share a border."'],
+    ].map(([w,m,l1,eg])=>`
+    <div class="vocab-card">
+      <div class="vocab-word">${w}</div>
+      <div class="vocab-meaning">${m}</div>
+      <div class="vocab-l1">🌍 ${l1}</div>
+      <div class="vocab-eg">✏️ ${eg}</div>
+    </div>`).join('')}`;
+
+  case 'hum_4countries': return `
+    <div class="tip-box"><strong>UK = United Kingdom.</strong> It is made of 4 countries. Each has its own capital city, flag and traditions!</div>
+    <div class="map-grid">
+      ${[
+        ['🏴󠁧󠁢󠁥󠁮󠁧󠁿 England','Capital: London 🏙️','Largest country. Famous for the River Thames, Big Ben, and the red phone box.','#185FA5','#E6F1FB'],
+        ['🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland','Capital: Edinburgh 🏰','Home of Ben Nevis — the highest mountain in the UK!','#0F6E56','#E1F5EE'],
+        ['🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales','Capital: Cardiff 🐉','Famous for Snowdon mountain and the Welsh dragon symbol.','#B71C1C','#FFEBEE'],
+        ['🇬🇧 Northern Ireland','Capital: Belfast 🌿','Shares a border with the Republic of Ireland. Famous for the Giant\'s Causeway.','#534AB7','#EEEDFE'],
+      ].map(([name,cap,fact,col,bg])=>`
+      <div class="map-card" style="border-color:${col};background:${bg}">
+        <div class="map-country" style="color:${col}">${name}</div>
+        <div class="map-cap">${cap}</div>
+        <div style="font-size:12px;color:#5F5E5A;margin-top:6px">${fact}</div>
+      </div>`).join('')}
+    </div>
+    <div class="q-block" style="margin-top:12px">
+      <div class="q-text">Complete: The United Kingdom is made of 4 countries:<br/>
+      <input class="inline-ans" style="width:100px"/>, <input class="inline-ans" style="width:90px"/>, <input class="inline-ans" style="width:70px"/> and <input class="inline-ans" style="width:130px"/>.</div>
+    </div>`;
+
+  case 'hum_capitals': return `
+    <p style="font-size:14px;margin-bottom:12px">Match each country to its capital city. Click the correct city!</p>
+    ${[
+      ['🏴󠁧󠁢󠁥󠁮󠁧󠁿 England',['London','Edinburgh','Cardiff','Belfast'],'London'],
+      ['🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland',['Cardiff','London','Edinburgh','Belfast'],'Edinburgh'],
+      ['🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales',['Belfast','Cardiff','London','Edinburgh'],'Cardiff'],
+      ['🇬🇧 Northern Ireland',['Edinburgh','London','Cardiff','Belfast'],'Belfast'],
+    ].map(([country,opts,ans],i)=>`
+    <div class="q-block">
+      <div class="q-num" style="font-size:15px">${country}</div>
+      <div class="q-text" style="margin-bottom:6px">Capital city:</div>
+      <div class="circle-opts">
+        ${opts.map(o=>`<div class="opt" onclick="checkAns(this,'cap${i}','${o}','${ans}')">${o}</div>`).join('')}
+      </div>
+    </div>`).join('')}`;
+
+  case 'hum_features': return `
+    <div class="tip-box"><strong>Physical features</strong> are natural things on the land — rivers, mountains, hills, coastlines. They are NOT made by people.</div>
+    <div class="table-wrap"><table class="ws-table"><thead><tr><th>Feature</th><th>Type</th><th>Location</th><th>Key Fact</th></tr></thead><tbody>
+    ${[
+      ['⛰️ Ben Nevis','Mountain','Scotland','Highest point in the UK — 1,345 metres tall!'],
+      ['〰️ River Thames','River','England','Flows through London — very important in history.'],
+      ['〰️ River Severn','River','England / Wales','The LONGEST river in the whole UK.'],
+      ['🏔️ Snowdon','Mountain','Wales','Highest mountain in Wales. Great for walking!'],
+      ['🪨 White Cliffs of Dover','Coastline','England','Where the land meets the sea — tall white cliffs!'],
+    ].map(([f,t,l,q])=>`<tr><td style="font-weight:700">${f}</td><td>${t}</td><td>${l}</td><td>${q}</td></tr>`).join('')}
+    </tbody></table></div>
+    <div class="q-block" style="margin-top:12px">
+      <div class="q-text">Which is the HIGHEST mountain in the UK? <input class="ans-line" style="width:200px;display:inline-block" placeholder="..."/></div>
+      <div class="q-text" style="margin-top:8px">Which is the LONGEST river in the UK? <input class="ans-line" style="width:200px;display:inline-block" placeholder="..."/></div>
+    </div>`;
+
+  case 'hum_label': return `
+    <div class="q-block">
+      <div class="q-text">Label this simple UK map outline. Write the name of each country and capital city in the correct place.</div>
+      <div style="border:2px dashed var(--purple);border-radius:10px;height:200px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:14px;font-style:italic;margin:10px 0">🗺️ Draw and label the UK map here!<br/><span style="font-size:12px">Add: England, Scotland, Wales, N.Ireland + capital cities</span></div>
+      <div class="word-bank"><strong>Labels to use:</strong>
+        ${['England','Scotland','Wales','Northern Ireland','London','Edinburgh','Cardiff','Belfast','Ben Nevis ⛰️','River Thames 〰️'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Colour code your map: 🟫 Mountains · 🔵 Rivers · 🟢 Coastlines</div>
+      <input class="ans-line" placeholder="I coloured Ben Nevis brown because it is a ..."/>
+    </div>`;
+
+  case 'hum_compare': return `
+    <div class="tip-box"><strong>Compare</strong> means look at two things and find what is the SAME and what is DIFFERENT.</div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:start;margin:10px 0">
+      <div style="background:var(--blue-light);border:1.5px solid var(--blue);border-radius:var(--radius-sm);padding:12px">
+        <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--blue);margin-bottom:6px">🇬🇧 UK Only</div>
+        <textarea class="ans-box" style="min-height:80px;font-size:12px" placeholder="e.g. Has 4 separate countries..."></textarea>
+      </div>
+      <div style="background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:var(--radius-sm);padding:12px">
+        <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--teal);margin-bottom:6px">🤝 Both</div>
+        <textarea class="ans-box" style="min-height:80px;font-size:12px" placeholder="e.g. Both have mountains..."></textarea>
+      </div>
+      <div style="background:var(--amber-light);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px">
+        <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--amber);margin-bottom:6px">🏠 My Country Only</div>
+        <textarea class="ans-box" style="min-height:80px;font-size:12px" placeholder="e.g. Has a desert..."></textarea>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Complete the sentence:</div>
+      <div style="line-height:2.8;font-size:14px;margin-top:6px">
+        My home country is <input class="inline-ans" style="width:160px" placeholder="..."/>.<br/>
+        It has <input class="inline-ans" style="width:200px" placeholder="rivers / mountains / desert"/>. The UK also has <input class="inline-ans" style="width:200px" placeholder="..."/>.<br/>
+        But my country does NOT have <input class="inline-ans" style="width:200px" placeholder="..."/> like the UK.
+      </div>
+    </div>`;
+
+  case 'hum_geowords': return `
+    <div class="tip-box"><strong>Geography words</strong> describe the land, water and places around us.</div>
+    <div class="table-wrap"><table class="ws-table"><thead><tr><th>Word</th><th>Definition</th><th>Example</th></tr></thead><tbody>
+    ${[
+      ['Mountain','A very tall, rocky piece of land','Ben Nevis, Scotland'],
+      ['River','A long flow of water through the land','River Thames, England'],
+      ['Coastline','Where land meets the sea','White Cliffs of Dover'],
+      ['Capital City','Main city of a country','London'],
+      ['Border','Line between two countries or areas','England–Scotland border'],
+      ['Region','A large area inside a country','Scotland is a region of the UK'],
+    ].map(([w,d,e])=>`<tr><td style="font-weight:700">${w}</td><td><input type="text" value="${d}" readonly style="color:var(--teal)"/></td><td style="font-style:italic;color:var(--gray)">${e}</td></tr>`).join('')}
+    </tbody></table></div>`;
+
+  case 'hum_trufalse': return `
+    <p style="font-size:14px;margin-bottom:12px">Read each statement. Is it True or False?</p>
+    ${[
+      ['The UK is made up of 4 countries.','True'],
+      ['The capital city of Scotland is London.','False'],
+      ['Ben Nevis is the highest mountain in the UK.','True'],
+      ['The River Thames flows through Edinburgh.','False'],
+      ['Wales has a capital city called Cardiff.','True'],
+      ['The White Cliffs of Dover are in Scotland.','False'],
+      ['The River Severn is the longest river in the UK.','True'],
+    ].map(([s,ans],i)=>`
+    <div class="check-row">
+      <span style="flex:1;font-size:14px">${s}</span>
+      <div class="circle-opts" style="margin:0">
+        <div class="opt" onclick="checkAns(this,'hum_tf${i}','True','${ans}')">✅ True</div>
+        <div class="opt" onclick="checkAns(this,'hum_tf${i}','False','${ans}')">❌ False</div>
+      </div>
+    </div>`).join('')}`;
+
+  case 'hum_factfile': return `
+    <div class="q-block">
+      <div class="q-num">🗺️ My Geography Fact File — The UK</div>
+      <div style="line-height:2.8;font-size:14px;margin-top:8px">
+        The UK stands for: <input class="inline-ans" style="width:220px" placeholder="United Kingdom"/><br/>
+        The 4 countries are: <input class="inline-ans" style="width:350px" placeholder="England, Scotland, Wales, Northern Ireland"/><br/>
+        The capital of England is: <input class="inline-ans" style="width:120px"/><br/>
+        The highest mountain is: <input class="inline-ans" style="width:140px"/> in <input class="inline-ans" style="width:100px"/><br/>
+        The longest river is: <input class="inline-ans" style="width:160px"/><br/>
+        One fact I want to remember: <input class="inline-ans" style="width:300px" placeholder="..."/>
+      </div>
+    </div>`;
+
+  // ── BIBLE ────────────────────────────────────────────────────────────────
+
+  case 'bib_vocab': return `
+    <div class="urdu-box"><strong>🌍 Language Bridge:</strong> Ark = کشتی / سفينة نوح · Flood = سیلاب / فيضان · Covenant = عہد / ميثاق · Trust = بھروسا / ثقة<br/>
+    📌 <em>Did you know? The story of Noah is also in the Quran! In Arabic and Urdu, Noah is called <strong>نوح (Nuh)</strong>.</em></div>
+    ${[
+      ['⛵ Ark','A very large boat that God told Noah to build to save his family and all the animals','کشتی / سفينة نوح','"Noah built the ark from wood — it was enormous!"'],
+      ['🌊 Flood','When a huge amount of water covers the land','سیلاب / فيضان','"The flood lasted for 40 days and nights."'],
+      ['🤝 Covenant','A very important, unbreakable promise — especially between God and a person','عہد / ميثاق','"God made a covenant: I will never flood the whole earth again."'],
+      ['🌈 Rainbow','The colourful arc in the sky after rain — God\'s sign of the covenant','قوس قزح / قوسِ قزح','"Every rainbow reminds us of God\'s promise to Noah."'],
+      ['😇 Righteous','A person who is good and honest — does what God says is right','نیک / صالح','"Noah was a righteous man — he always tried to do good."'],
+      ['🙏 Obey','To do what someone tells you — especially God\'s commands','اطاعت / طاعة','"Noah chose to obey God even when it seemed strange."'],
+      ['💛 Trust','To believe someone is good and will keep their promise','بھروسا / ثقة','"We trust God even when we don\'t fully understand."'],
+    ].map(([w,m,l1,eg])=>`
+    <div class="vocab-card" style="border-left-color:var(--red)">
+      <div class="vocab-word" style="color:var(--red)">${w}</div>
+      <div class="vocab-meaning">${m}</div>
+      <div class="vocab-l1">🌍 ${l1}</div>
+      <div class="vocab-eg">✏️ ${eg}</div>
+    </div>`).join('')}`;
+
+  case 'bib_story': return `
+    <div class="tip-box"><strong>Bible reference:</strong> Genesis chapters 6–9 · <strong>Key theme:</strong> Trusting God even when things seem hard.</div>
+    <div class="story-box" style="background:var(--red-light);border-color:#E57373">
+      <strong style="font-size:16px;font-family:Nunito,sans-serif;color:var(--red)">⛵ The Story of Noah (Genesis 6–9)</strong><br/><br/>
+      <strong>Beginning —</strong> Long ago, people on Earth were doing many wrong things. God was very sad. But there was one man called Noah. Noah was righteous — good and honest in everything he did. God spoke to Noah: <em>"I am going to send a great flood. Build a large ark — a big wooden boat. Bring your family and two of every kind of animal on board."</em><br/><br/>
+      <strong>Middle —</strong> Noah obeyed God. He worked for many, many years building the huge ark. People around him laughed. <em>"A flood? It isn't even raining!"</em> they said. But Noah trusted God completely and kept working.<br/><br/>
+      When the ark was finished, Noah, his family, and the animals went inside. Then the rain began — and it did not stop! For 40 days and 40 nights the rain fell. The whole earth was covered in water. But Noah and his family were safe inside the ark.<br/><br/>
+      <strong>End —</strong> After many months, the water went down. A dove brought back a green leaf — the land was dry again! Noah thanked God with all his heart. Then God made a covenant — a special, unbreakable promise — with Noah: <em>"I will never flood the whole earth again."</em><br/><br/>
+      As the sign of this promise, God put a beautiful rainbow in the sky. 🌈
+    </div>`;
+
+  case 'bib_sequence': return `
+    <div class="tip-box"><strong>Sequence</strong> means putting events in the correct order — first, next, then, finally.</div>
+    <p style="font-size:14px;margin-bottom:12px">Number the events 1–6 in the correct order. Write the number in the circle.</p>
+    ${[
+      ['God shows Noah the rainbow — the sign of the covenant.','6'],
+      ['God speaks to Noah and tells him to build a large ark.','1'],
+      ['The flood begins — rain falls for 40 days and nights.','3'],
+      ['The animals come into the ark, two of every kind.','2'],
+      ['Noah builds the ark. People laugh, but he trusts God.','?'],
+      ['The water goes down. Noah and the animals come out safely.','5'],
+    ].map(([ev,num],i)=>`
+    <div class="seq-item">
+      <input class="seq-num-input" placeholder="?" value="${num==='?'?'':num}" ${num!=='?'?'readonly':''} style="${num!=='?'?'border-color:var(--teal);background:var(--teal-light);color:var(--teal)':''}"/>
+      <span style="font-size:14px">${ev}</span>
+    </div>`).join('')}`;
+
+  case 'bib_questions': return `
+    <div class="tip-box"><strong>Remember:</strong> Use evidence from the story to support your answers. Write in full sentences!</div>
+    ${[
+      ['Who was Noah? What kind of person was he?','Noah was a ___ man. He always ...'],
+      ['What did God ask Noah to build? Why?','God asked Noah to build a ___ because ...'],
+      ['How did the people react when Noah built the ark? Why do you think they reacted like this?','The people laughed because ...'],
+      ['What happened when the rain came? How do you think Noah felt?','I think Noah felt ... because ...'],
+      ['What was God\'s covenant (promise) with Noah?','God promised that ...'],
+    ].map(([q,frame],i)=>`
+    <div class="q-block">
+      <div class="q-num">Question ${i+1}</div>
+      <div class="q-text">${q}</div>
+      <div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0 6px">Sentence frame: ${frame}</div>
+      <textarea class="ans-box" style="min-height:44px"></textarea>
+    </div>`).join('')}`;
+
+  case 'bib_trust': return `
+    <div class="tip-box"><strong>Trust</strong> means believing someone is good and will do what they say — even when it's hard or scary.</div>
+    <p style="font-size:14px;margin-bottom:12px">Noah trusted God in several ways. Tick each thing Noah did that shows he TRUSTED God:</p>
+    ${[
+      ['He built the ark even though it had never rained that much before.','trust'],
+      ['He stopped building when people laughed at him.','not-trust'],
+      ['He kept working for many years without giving up.','trust'],
+      ['He brought two of every animal, just as God said.','trust'],
+      ['He complained and said it was too hard.','not-trust'],
+      ['He thanked God when the flood was over.','trust'],
+    ].map(([action,type],i)=>`
+    <div class="check-row">
+      <div class="chk" onclick="this.classList.toggle('done')" style="${type==='trust'?'':'border-color:var(--coral)'}"></div>
+      <span style="flex:1">${action}</span>
+      ${type==='trust'?'<span style="font-size:11px;color:var(--green);font-weight:700">✅ Shows trust</span>':'<span style="font-size:11px;color:var(--coral);font-weight:700">Not trust</span>'}
+    </div>`).join('')}
+    <div class="q-block" style="margin-top:12px">
+      <div class="q-text">Think of a time YOU had to trust someone even when it was hard. Write 2 sentences:</div>
+      <textarea class="ans-box" style="min-height:50px" placeholder="Once, I had to trust ... It was hard because ... but ..."></textarea>
+    </div>`;
+
+  case 'bib_covenant': return `
+    <div class="tip-box"><strong>Covenant</strong> = عہد / ميثاق — A very special, unbreakable promise. Different from a normal promise — it lasts forever!</div>
+    <div class="q-block">
+      <div class="q-num">God's Covenant with Noah</div>
+      <div style="background:var(--red-light);border:2px solid #E57373;border-radius:8px;padding:14px;margin:10px 0;font-size:15px;font-style:italic;text-align:center;font-family:Nunito,sans-serif;font-weight:700;color:var(--red)">
+        "I have set my rainbow in the clouds,<br/>and it will be the sign of the covenant<br/>between me and the earth."<br/><span style="font-size:12px;color:var(--gray)">— Genesis 9:13</span>
+      </div>
+      <div class="q-text">Answer these questions about the covenant:</div>
+      <div style="line-height:2.8;font-size:14px;margin-top:6px">
+        A covenant is: <input class="inline-ans" style="width:280px" placeholder="a very special, unbreakable promise..."/><br/>
+        God's promise to Noah was: <input class="inline-ans" style="width:300px" placeholder="He would never flood the whole earth again"/><br/>
+        The sign of this covenant is: <input class="inline-ans" style="width:150px" placeholder="the rainbow 🌈"/><br/>
+        Every time we see a rainbow, we should remember: <input class="inline-ans" style="width:250px" placeholder="God's promise to Noah..."/>
+      </div>
+    </div>`;
+
+  case 'bib_verse': return `
+    <div style="background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:16px">
+      <div style="font-size:13px;color:var(--gray);font-family:Nunito,sans-serif;font-weight:700;margin-bottom:8px">🌈 MEMORY VERSE — Genesis 9:13</div>
+      <div style="font-family:Nunito,sans-serif;font-size:16px;font-weight:800;color:var(--teal);line-height:1.8">
+        "I have set my rainbow in the clouds,<br/>
+        and it will be the sign of the covenant<br/>
+        between me and the earth."
+      </div>
+    </div>
+    <div class="tip-box"><strong>How to learn a verse:</strong> Read it 3 times → cover 1 word → say it → cover 2 words → say it → keep going!</div>
+    <div class="q-block">
+      <div class="q-text">Fill in the missing words:</div>
+      <div style="font-size:15px;line-height:2.6;font-family:Nunito,sans-serif;margin-top:8px">
+        "I have set my <input class="inline-ans" style="width:90px" placeholder="?"/> in the clouds,<br/>
+        and it will be the <input class="inline-ans" style="width:60px" placeholder="?"/> of the <input class="inline-ans" style="width:100px" placeholder="?"/><br/>
+        between me and the <input class="inline-ans" style="width:70px" placeholder="?"/>."<br/>
+        — <input class="inline-ans" style="width:120px" placeholder="Genesis ?:?"/>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Write the verse from memory (without looking!):</div>
+      <textarea class="ans-box" style="min-height:60px" placeholder="I have set my ..."></textarea>
+    </div>`;
+
+  case 'bib_character': return `
+    <div class="tip-box"><strong>Character</strong> means what kind of person someone is — their qualities and values.</div>
+    <div class="q-block">
+      <div class="q-num">Noah's Character Profile</div>
+      <div class="q-text">Circle all the words that describe Noah:</div>
+      <div class="circle-opts" style="margin:10px 0">
+        ${['righteous','dishonest','brave','obedient','lazy','faithful','trustworthy','selfish','patient','giving up'].map((w,i)=>`<div class="opt" onclick="this.classList.toggle('selected')">${w}</div>`).join('')}
+      </div>
+      <div class="q-text" style="margin-top:10px">Write 3 words you chose and explain one:</div>
+      <div style="line-height:2.8;font-size:14px;margin-top:6px">
+        Three words: <input class="inline-ans" style="width:100px"/>, <input class="inline-ans" style="width:100px"/>, <input class="inline-ans" style="width:100px"/><br/>
+        I chose <input class="inline-ans" style="width:100px"/> because in the story, Noah <input class="inline-ans" style="width:250px" placeholder="..."/>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">How is Noah similar to or different from a person you admire?</div>
+      <textarea class="ans-box" style="min-height:50px" placeholder="Both Noah and ___ are similar because ..."></textarea>
+    </div>`;
+
+  case 'bib_apply': return `
+    <div class="tip-box"><strong>Life application:</strong> The story of Noah teaches us to trust God even when things seem hard or strange. Just like Noah, we can choose to obey and trust!</div>
+    <div class="q-block">
+      <div style="text-align:center;margin-bottom:10px">
+        <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:var(--red)">🌈 My Rainbow Promise</div>
+        <div style="font-size:13px;color:var(--gray)">Each colour of the rainbow = something I will trust God with this week</div>
+      </div>
+      ${[
+        ['#EF5350','❤️ Something hard at school I will trust God with:'],
+        ['#FF9800','🧡 Something at home I will be obedient about:'],
+        ['#FDD835','💛 One way I will try to be righteous (good) this week:'],
+        ['#66BB6A','💚 One person I will be kind to like Noah was:'],
+        ['#42A5F5','💙 One promise I will keep this week:'],
+        ['#AB47BC','💜 My prayer / thought to God this week:'],
+      ].map(([col,label])=>`
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <div class="rainbow-bar" style="width:12px;height:30px;background:${col};border-radius:4px;flex-shrink:0"></div>
+        <div style="flex:1">
+          <div style="font-size:12px;font-weight:700;color:${col};font-family:Nunito,sans-serif">${label}</div>
+          <input class="ans-line" style="border-bottom-color:${col}"/>
+        </div>
+      </div>`).join('')}
+    </div>`;
+
+  default: return '<p style="padding:20px;color:var(--gray)">Loading content...</p>';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ANSWER CHECKER
+// ═══════════════════════════════════════════════════════════════════════════
+function checkAns(el, group, chosen, correct){
+  document.querySelectorAll(`[data-ansgroup="${group}"]`).forEach(o=>{
+    o.classList.remove('selected','correct','wrong');
+    o.setAttribute('data-ansgroup',group);
+  });
+  el.setAttribute('data-ansgroup',group);
+  const isRight = chosen.toLowerCase()===correct.toLowerCase();
+  el.classList.add(isRight?'correct':'wrong');
+  if(!isRight){
+    const allOpts = el.closest('.circle-opts')||el.closest('.q-block');
+    if(allOpts){
+      allOpts.querySelectorAll('.opt').forEach(o=>{
+        if(o.textContent.trim().toLowerCase().includes(correct.toLowerCase().replace('☀️ no sunlight','sunlight').replace('💧 no water','water').replace('🌍 no nutrients','nutrients').replace('📏 no space','space'))){
+          o.classList.add('correct');
+        }
+      });
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RENDER ENGINE
+// ═══════════════════════════════════════════════════════════════════════════
+let currentSubject = 'eng';
+let currentWS = {};
+subjects.forEach(s=>currentWS[s.id]=1);
+
+function renderAll(){
+  const stabs = document.getElementById('subjectTabs');
+  const navT  = document.getElementById('navTabs');
+  const pages = document.getElementById('pages');
+  stabs.innerHTML=''; navT.innerHTML=''; pages.innerHTML='';
+
+  subjects.forEach(sub=>{
+    const st = document.createElement('div');
+    st.className='stab'+(sub.id===currentSubject?' active':'');
+    st.textContent=sub.label;
+    st.style.borderColor=sub.color;
+    st.style.color=sub.id===currentSubject?'var(--white)':sub.color;
+    if(sub.id===currentSubject) st.style.background=sub.color;
+    st.onclick=()=>{currentSubject=sub.id;renderAll()};
+    stabs.appendChild(st);
+  });
+
+  const sub    = subjects.find(s=>s.id===currentSubject);
+  const wsList = worksheets[currentSubject];
+
+  wsList.forEach((ws,idx)=>{
+    const t = document.createElement('div');
+    t.className='tab'+(currentWS[currentSubject]===idx+1?' active':'');
+    t.textContent=`Lesson ${ws.num}`;
+    t.style.borderColor=sub.color;
+    t.style.color=currentWS[currentSubject]===idx+1?'var(--white)':sub.color;
+    if(currentWS[currentSubject]===idx+1) t.style.background=sub.color;
+    t.onclick=()=>{currentWS[currentSubject]=idx+1;renderAll()};
+    navT.appendChild(t);
+  });
+
+  const ws   = wsList[currentWS[currentSubject]-1];
+  const page = document.createElement('div');
+  page.className='page active';
+
+  page.innerHTML=`
+  <div class="ws-header">
+    <div>
+      <div class="ws-badge">${ws.badge} · Lesson ${ws.num} of 3</div>
+      <div class="ws-title">${ws.title}</div>
+      <div class="ws-sub">KS2 Level 3 · Week 3 · ESL Support Included</div>
+    </div>
+    <div class="name-box">Name: <input class="name-line" placeholder="________________"/></div>
+  </div>
+  ${ws.sections.map((sec,i)=>`
+  <div class="section">
+    <div class="section-title"><span class="section-num">${i+1}</span>${sec.title}</div>
+    ${renderContent(sec.content)}
+  </div>`).join('')}`;
+
+  pages.appendChild(page);
+}
+
+renderAll();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.initDynamic('KS2_L3_Week3_Interactive');</script>
+</body>
+</html>
