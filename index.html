@@ -255,6 +255,14 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D12;color:#F0EFF8;min-heigh
 .ov-jessica .ov-go{background:#7C3AED;color:white}
 .ov-areej .ov-go{background:#3B82F6;color:white}
 
+.review-link{display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,#022C22,#065F46);border:1px solid rgba(16,185,129,0.4);
+  border-radius:14px;padding:16px 20px;margin-bottom:28px;text-decoration:none;transition:all 0.2s}
+.review-link:hover{transform:translateY(-2px);border-color:#10B981}
+.review-link-text{font-weight:700;color:white;font-size:0.95rem}
+.review-link-sub{font-size:0.78rem;color:#6EE7B7;margin-top:2px}
+.review-link-arr{color:#6EE7B7;font-size:1.2rem}
+
 footer{border-top:1px solid #2E2E3E;padding:28px 24px;text-align:center;color:#4B5563;font-size:0.8rem}
 footer strong{color:#6B7280}
 code{background:#1F2937;padding:2px 6px;border-radius:4px;color:#D1FAE5;font-size:0.78rem}
@@ -386,6 +394,15 @@ code{background:#1F2937;padding:2px 6px;border-radius:4px;color:#D1FAE5;font-siz
     <div><h2>Teacher Overview</h2><p>All students · All weeks · Full access</p></div>
     <button class="lock-btn" onclick="lockPanel('teacher')">🔒 Lock</button>
   </div>
+
+  <a href="Teacher_Review.html" target="_blank" class="review-link">
+    <div>
+      <div class="review-link-text">📊 Review Student Worksheet Submissions</div>
+      <div class="review-link-sub">See what students wrote for Week 3 and leave feedback</div>
+    </div>
+    <span class="review-link-arr">→</span>
+  </a>
+
   <!-- Teacher sees overview cards for each student -->
   <div class="teacher-overview">
     <div class="ov-card ov-abrish" onclick="teacherGoTo('abrish')">
@@ -567,6 +584,25 @@ function phCard(icon, bg, name, topic, path) {
   </div>`;
 }
 
+function flatResCard(icon, bg, name, topic, file, badge, badgeText, label) {
+  return `
+  <div class="subj-card">
+    <div class="subj-top">
+      <div class="subj-icon" style="background:${bg}">${icon}</div>
+      <div><div class="subj-name">${name}</div><div class="subj-topic">${topic}</div></div>
+    </div>
+    <div class="resources">
+      <a href="${file}" class="res" target="_blank">
+        <div class="res-left"><span>▶️</span><span class="res-label">${label||'Open'}</span></div>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span class="badge ${badge}">${badgeText}</span>
+          <span class="res-arr">→</span>
+        </div>
+      </a>
+    </div>
+  </div>`;
+}
+
 const STD_RES = (base) => [
   {icon:'🎮', label:'Interactive Lesson',    file:'lesson.html',             badge:'b-html', badgeText:'HTML'},
   {icon:'📄', label:'Worksheet',             file:'worksheet.pdf',           badge:'b-pdf',  badgeText:'PDF'},
@@ -592,10 +628,18 @@ const KS2_SUBJECTS_W2 = [
   {icon:'🗺️', bg:'#EFF6FF', name:'Social Studies', topic:'Maps — Our Local Area',             base:'ks2-abrish/week2/social'},
 ];
 
+// ── KS2 ABRISH — Week 3 resources (root-level files) ───────────
+const KS2_WEEK3_RESOURCES = [
+  {icon:'✍️', bg:'#ECFDF5', name:'Writing Worksheets', topic:'English, Maths, Science, Humanities & Bible — type your answers, then submit', file:'Week3_Interactive_Lessons.html', badge:'b-html', badgeText:'HTML'},
+  {icon:'🎮', bg:'#FFF7ED', name:'Day 1 — Quiz Games',  topic:'All 5 subjects — quizzes, matching & true/false', file:'KS2_L3_Week3_Day1.html', badge:'b-html', badgeText:'HTML'},
+  {icon:'🎮', bg:'#EFF6FF', name:'Day 2 — Quiz Games',  topic:'All 5 subjects — challenge activities', file:'KS2_L3_Week3_Day2.html', badge:'b-html', badgeText:'HTML'},
+  {icon:'🎮', bg:'#EDE9FE', name:'Day 3 — Quiz Games',  topic:'All 5 subjects — grand review & quizzes', file:'KS2_L3_Week3_Day3.html', badge:'b-html', badgeText:'HTML'},
+];
+
 const KS2_WEEKS_DATA = [
   {w:1,  title:'Introduction',          topics:'Creation · Phonics · Place Value · Working Scientifically · My Community',             status:'s-pending'},
   {w:2,  title:'Core Foundations',      topics:'Adam & Eve · Sentences · Column Addition · Plants · Maps',                            status:'s-partial', subjects: KS2_SUBJECTS_W2},
-  {w:3,  title:'Story Writing',         topics:'Noah · Story Sentences · Subtraction · Rocks & Fossils · Ancient Egypt',              status:'s-pending'},
+  {w:3,  title:'Story Writing',         topics:'Noah · Story Sentences · Subtraction · Rocks & Fossils · Ancient Egypt',              status:'s-complete', flatResources: KS2_WEEK3_RESOURCES},
   {w:4,  title:'Character & Number',    topics:'Abraham · Nouns & Verbs · Multiplication · Skeletons · Continents',                   status:'s-pending'},
   {w:5,  title:'Descriptive Writing',   topics:'Joseph · Descriptive Writing · Times Tables · Muscles · Ancient Egypt Achievements',  status:'s-pending'},
   {w:6,  title:'Spelling & Forces',     topics:'Moses · Spelling Rules · Division · Nutrition · Stone Age to Iron Age',               status:'s-pending'},
@@ -673,7 +717,11 @@ function weekHTML(wData, accClass, student) {
   const bodyOpen = wData.w === 2 ? ' open' : '';
 
   let subjectsHTML = '';
-  if (wData.subjects) {
+  if (wData.flatResources) {
+    subjectsHTML = wData.flatResources.map(r =>
+      flatResCard(r.icon, r.bg, r.name, r.topic, r.file, r.badge, r.badgeText, r.label)
+    ).join('');
+  } else if (wData.subjects) {
     subjectsHTML = wData.subjects.map(s => {
       const res = STD_RES(s.base);
       return subjCard(s.icon, s.bg, s.name, s.topic, s.base, res, accClass);
