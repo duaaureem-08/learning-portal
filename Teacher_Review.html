@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Review — HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFBFF; --card:#FFFFFF; --text:#1E1B4B; --muted:#6B7280;
+  --accent:#0891B2; --accent-l:#CFFAFE;
+  --good:#059669; --good-l:#D1FAE5;
+  --warn:#F59E0B; --warn-l:#FFFBEB;
+  --radius:18px; --radius-sm:12px;
+  --shadow:0 4px 24px rgba(0,0,0,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:24px 16px 60px;}
+.wrap{max-width:880px;margin:0 auto;}
+.hero{background:linear-gradient(135deg,#1E1B4B,#0891B2);color:#fff;border-radius:var(--radius);padding:26px 28px;margin-bottom:20px;}
+.hero h1{font-family:'Fredoka One',cursive;font-size:1.7rem;margin-bottom:4px;}
+.hero p{opacity:.9;font-weight:600;font-size:.92rem;}
+
+.controls{background:var(--card);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.controls label{font-weight:800;font-size:.85rem;}
+select,input[type=text]{padding:9px 14px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;outline:none;min-width:200px;}
+select:focus,input:focus{border-color:var(--accent);}
+.btn{padding:10px 20px;border-radius:50px;border:none;background:var(--accent);color:#fff;font-weight:800;font-size:.88rem;cursor:pointer;font-family:'Nunito',sans-serif;}
+.btn:hover{filter:brightness(1.1);}
+.btn.save{background:var(--good);}
+#status{font-weight:700;font-size:.85rem;color:var(--muted);width:100%;}
+
+.card{background:var(--card);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:var(--shadow);}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:10px;border-bottom:3px solid #F3F4F6;padding-bottom:10px;}
+.student-name{font-family:'Fredoka One',cursive;font-size:1.25rem;}
+.submitted-at{font-size:.78rem;color:var(--muted);font-weight:700;}
+.scores{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
+.score-chip{background:var(--accent-l);color:#164E63;font-weight:800;font-size:.72rem;padding:4px 10px;border-radius:50px;}
+
+.group-title{font-family:'Fredoka One',cursive;font-size:1rem;margin:18px 0 8px;color:var(--accent);}
+.qa{background:#F8FAFF;border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
+.qa .q{font-weight:800;font-size:.86rem;margin-bottom:6px;}
+.qa .a{background:#fff;border:2px solid #E5E7EB;border-radius:10px;padding:8px 12px;font-weight:700;font-size:.88rem;margin-bottom:8px;white-space:pre-wrap;min-height:20px;}
+.qa .a:empty::before{content:'(no answer written)';color:#9CA3AF;font-weight:600;font-style:italic;}
+.qa textarea{width:100%;border:2px solid #E5E7EB;border-radius:10px;padding:8px 12px;font-family:'Nunito',sans-serif;font-weight:600;font-size:.85rem;resize:vertical;min-height:44px;outline:none;}
+.qa textarea:focus{border-color:var(--good);}
+.qa .fb-label{font-size:.72rem;font-weight:800;color:var(--good);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+
+.notes-block{margin-top:16px;}
+.notes-block label{display:block;font-weight:800;font-size:.85rem;margin-bottom:6px;}
+.notes-block textarea{width:100%;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:10px 14px;font-family:'Nunito',sans-serif;font-weight:600;font-size:.9rem;resize:vertical;min-height:60px;outline:none;}
+.notes-block textarea:focus{border-color:var(--accent);}
+
+.foot-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:10px;}
+.graded-toggle{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.85rem;}
+.save-status{font-size:.8rem;font-weight:700;color:var(--good);}
+
+.empty{background:var(--card);border-radius:var(--radius);padding:30px;text-align:center;color:var(--muted);font-weight:700;box-shadow:var(--shadow);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>📚 Teacher Review Portal</h1>
+    <p>See what each student wrote, leave corrections, and they'll see your notes next time they open the worksheet.</p>
+  </div>
+
+  <div class="controls">
+    <label for="ws-select">Worksheet:</label>
+    <select id="ws-select">
+      <option value="KS2_L3_Week3_Interactive">KS2 Level 3 · Week 3 · Interactive Lessons (writing)</option>
+      <option value="KS2_L3_Week3_Day1">KS2 Level 3 · Week 3 · Day 1</option>
+      <option value="KS2_L3_Week3_Day2">KS2 Level 3 · Week 3 · Day 2</option>
+      <option value="KS2_L3_Week3_Day3">KS2 Level 3 · Week 3 · Day 3</option>
+      <option value="__custom">Other (type ID below)</option>
+    </select>
+    <input type="text" id="ws-custom" placeholder="custom worksheet ID" style="display:none;">
+    <button class="btn" id="load-btn">🔍 Load submissions</button>
+    <span id="status"></span>
+  </div>
+
+  <div id="results"></div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ldftwnsixhgpfldhlkyq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
+
+const SUBJECT_NAMES = {
+  eng: '📖 English', maths: '🔢 Maths', sci: '🌱 Science',
+  hum: '🌍 Humanities', bib: '✝️ Bible'
+};
+
+const wsSelect = document.getElementById('ws-select');
+const wsCustom = document.getElementById('ws-custom');
+wsSelect.onchange = () => {
+  wsCustom.style.display = wsSelect.value === '__custom' ? 'inline-block' : 'none';
+};
+
+document.getElementById('load-btn').onclick = loadSubmissions;
+
+async function loadSubmissions() {
+  const status = document.getElementById('status');
+  const results = document.getElementById('results');
+  const worksheetId = wsSelect.value === '__custom' ? wsCustom.value.trim() : wsSelect.value;
+  if (!worksheetId) { status.textContent = '⚠️ Enter a worksheet ID'; return; }
+
+  status.textContent = 'Loading…';
+  results.innerHTML = '';
+
+  const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?worksheet_id=eq.${encodeURIComponent(worksheetId)}&select=*&order=student_name`;
+  const res = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY } });
+  if (!res.ok) { status.textContent = '❌ Could not load submissions'; return; }
+  const rows = await res.json();
+  status.textContent = `${rows.length} submission${rows.length === 1 ? '' : 's'} found`;
+
+  if (rows.length === 0) {
+    results.innerHTML = '<div class="empty">No one has submitted this worksheet yet.</div>';
+    return;
+  }
+
+  rows.forEach(row => results.appendChild(renderCard(row, worksheetId)));
+}
+
+function renderCard(row, worksheetId) {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const feedback = row.feedback || {};
+  const answers = row.answers || {};
+
+  // Header
+  const head = document.createElement('div');
+  head.className = 'card-head';
+  head.innerHTML = `
+    <div>
+      <div class="student-name">${escapeHtml(row.student_name)}</div>
+      <div class="submitted-at">Submitted ${row.submitted_at ? new Date(row.submitted_at).toLocaleString() : '—'}</div>
+    </div>
+  `;
+  card.appendChild(head);
+
+  // Scores
+  if (row.scores && Object.keys(row.scores).length) {
+    const scoresEl = document.createElement('div');
+    scoresEl.className = 'scores';
+    Object.entries(row.scores).forEach(([k, v]) => {
+      const chip = document.createElement('span');
+      chip.className = 'score-chip';
+      chip.textContent = `${k.replace(/-/g, ' ')}: ${v}`;
+      scoresEl.appendChild(chip);
+    });
+    card.appendChild(scoresEl);
+  }
+
+  // Answers — grouped by subject/lesson for the dynamic worksheet, flat otherwise
+  const isDynamic = Object.keys(answers).some(k => k.includes('__'));
+  if (isDynamic) {
+    const groups = {};
+    Object.entries(answers).forEach(([key, val]) => {
+      const [groupKey, fieldKey] = key.split('__');
+      groups[groupKey] = groups[groupKey] || [];
+      groups[groupKey].push({ key, fieldKey, ...val });
+    });
+    Object.keys(groups).sort().forEach(groupKey => {
+      const [subj, lesson] = groupKey.split('_');
+      const title = document.createElement('div');
+      title.className = 'group-title';
+      title.textContent = `${SUBJECT_NAMES[subj] || subj} — Lesson ${lesson}`;
+      card.appendChild(title);
+      groups[groupKey].forEach(item => card.appendChild(renderQA(item.key, item.label, item.value, feedback[item.key])));
+    });
+  } else {
+    Object.entries(answers).forEach(([key, val]) => {
+      card.appendChild(renderQA(key, val.label, val.value, feedback[key]));
+    });
+  }
+
+  // Overall notes + graded toggle
+  const notesBlock = document.createElement('div');
+  notesBlock.className = 'notes-block';
+  notesBlock.innerHTML = `
+    <label>📝 Overall note to ${escapeHtml(row.student_name)} (shown at the top of their worksheet):</label>
+    <textarea class="overall-notes">${escapeHtml(row.teacher_notes || '')}</textarea>
+  `;
+  card.appendChild(notesBlock);
+
+  const footRow = document.createElement('div');
+  footRow.className = 'foot-row';
+  footRow.innerHTML = `
+    <label class="graded-toggle">
+      <input type="checkbox" class="graded-cb" ${row.graded ? 'checked' : ''}> Marked as graded
+    </label>
+    <div>
+      <span class="save-status"></span>
+      <button class="btn save">💾 Save feedback</button>
+    </div>
+  `;
+  card.appendChild(footRow);
+
+  footRow.querySelector('.save').onclick = async () => {
+    const saveStatus = footRow.querySelector('.save-status');
+    saveStatus.textContent = 'Saving…';
+    const newFeedback = {};
+    card.querySelectorAll('.qa').forEach(qaEl => {
+      const key = qaEl.dataset.key;
+      const val = qaEl.querySelector('textarea').value.trim();
+      if (val) newFeedback[key] = val;
+    });
+    const overallNotes = notesBlock.querySelector('textarea').value.trim();
+    const graded = footRow.querySelector('.graded-cb').checked;
+
+    const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?student_name=eq.${encodeURIComponent(row.student_name)}&worksheet_id=eq.${encodeURIComponent(worksheetId)}`;
+    const res = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json', Prefer: 'return=representation'
+      },
+      body: JSON.stringify({ feedback: newFeedback, teacher_notes: overallNotes, graded })
+    });
+    saveStatus.textContent = res.ok ? '✅ Saved' : '❌ Failed to save';
+  };
+
+  return card;
+}
+
+function renderQA(key, label, value, feedbackText) {
+  const qa = document.createElement('div');
+  qa.className = 'qa';
+  qa.dataset.key = key;
+  qa.innerHTML = `
+    <div class="q">${escapeHtml(label || key)}</div>
+    <div class="a">${escapeHtml(value || '')}</div>
+    <div class="fb-label">Your correction / feedback for this answer</div>
+    <textarea placeholder="e.g. Great answer! / Try to add more detail here...">${escapeHtml(feedbackText || '')}</textarea>
+  `;
+  return qa;
+}
+
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+</script>
+</body>
+</html>
