@@ -65,13 +65,17 @@
   /* ---------- label + field helpers ---------- */
   function getLabel(el) {
     const containerSelectors = ['.analysis-box', '.q-block', '.fill-row', '.tf-row', '.callout', '.ws-header'];
+    // checked in priority order — .q-num (just a number badge) is a last resort
+    const labelSelectors = ['.analysis-q', '.q-text', 'label', '.callout-text', '.tf-stmt', '.q-num'];
     for (const sel of containerSelectors) {
       const c = el.closest(sel);
       if (c) {
-        const lbl = c.querySelector('.analysis-q, .q-text, .q-num, label, .callout-text, .tf-stmt');
-        if (lbl) {
-          const t = lbl.textContent.trim().replace(/\s+/g, ' ');
-          if (t) return t.slice(0, 160);
+        for (const lsel of labelSelectors) {
+          const lbl = c.querySelector(lsel);
+          if (lbl) {
+            const t = lbl.textContent.trim().replace(/\s+/g, ' ');
+            if (t) return t.slice(0, 160);
+          }
         }
       }
     }

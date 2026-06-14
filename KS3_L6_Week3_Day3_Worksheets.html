@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 3 · Day 3 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#6D28D9;--english:#BE123C;--maths:#B45309;--science:#065F46;--humanities:#1E3A8A;
+  --bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;
+  --text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;
+  --radius:16px;--radius-sm:10px;--radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.06) 0%,transparent 60%),
+             radial-gradient(ellipse 60% 40% at 80% 80%,rgba(190,18,60,0.06) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);letter-spacing:0.05em;vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="humanities"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-banner.consolidation{background:rgba(109,40,217,0.12);border-color:rgba(109,40,217,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-banner.consolidation .diff-label{background:rgba(109,40,217,0.3);color:#C4B5FD;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.callout{border-radius:var(--radius-sm);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+.callout .ci{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.callout .ct{font-size:0.88rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);}
+.callout.tip{background:rgba(109,40,217,0.1);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.13);border:1px solid rgba(30,58,138,0.28);}
+.callout.warn{background:rgba(180,83,9,0.12);border:1px solid rgba(180,83,9,0.28);}
+.callout.good{background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.28);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:180px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.86rem;margin:10px 0;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;padding:9px 13px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 13px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:100px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.week-summary{background:linear-gradient(135deg,rgba(109,40,217,0.1),rgba(30,58,138,0.1));border:1px solid rgba(109,40,217,0.25);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:20px;}
+.week-summary-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--bright);margin-bottom:8px;font-weight:700;}
+.week-summary-body{font-size:0.85rem;color:var(--muted);line-height:1.65;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 3</div>
+  <div class="day-badge">📅 Day 3</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="humanities" onclick="show('humanities')">🏛️ Humanities</button>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════
+     BIBLE — DAY 3 (Consolidation + Extension)
+═══════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 3 · Day 3 — Consolidation</div>
+  <div class="hero-title">How the Bible<br>is Organised —<br>Full Review</div>
+  <div class="hero-subtitle">Retrieve · Connect · Evaluate · Extend</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="     /  40"></div>
+</div>
+
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 3 Bible — What We Covered</div>
+  <div class="week-summary-body">Day 1: Basic structure — 66 books, OT vs NT, 5 sections of OT, Gospels, Epistles, Bible references. &nbsp;|&nbsp; Day 2: Genres, identifying genre from descriptions, 2 Timothy 3:16 in depth, inspiration vs dictation. &nbsp;|&nbsp; Day 3 (today): Full consolidation — recall everything, connect ideas, evaluate, and write extended responses.</div>
+</div>
+
+<!-- EASY -->
+<div class="diff-banner easy">
+  <span class="diff-label">🟢 Easy</span>
+  <span class="diff-desc">Section A — Speed round. Answer as quickly as you can from memory. No notes!</span>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⚡ Speed Retrieval — 10 Questions</div>
+  <div class="callout tip"><div class="ci">⏱️</div><div class="ct"><strong>Challenge:</strong> Try to answer all 10 questions in 5 minutes without your notes. Then check your answers. How many did you get right?</div></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">How many books are in the Bible? <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Name the 4 Gospels. <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">What does "Epistle" mean? <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">What is the only book of Prophecy in the New Testament? <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">What does "God-breathed" mean from 2 Timothy 3:16? <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">Name ONE book from the Major Prophets section of the OT. <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">What is the genre of the book of Proverbs? <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">What is the first book of the Old Testament? <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">9</div>
+    <div class="q-text">Write the Bible reference for: Book of Romans, Chapter 8, Verse 28. <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">10</div>
+    <div class="q-text">Name one difference between the Major and Minor Prophets. <span class="marks">1 mark</span></div>
+    <textarea class="q-input narrow" placeholder="Answer: "></textarea>
+  </div>
+</div>
+
+<!-- MEDIUM -->
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium">
+  <span class="diff-label">🟡 Medium</span>
+  <span class="diff-desc">Section B — Connecting ideas across the whole week. Think about HOW the Bible's structure helps readers.</span>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔗 Connecting Knowledge</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">11</div>
+    <div class="q-text">The lesson says the Bible contains 8 different genres. Create a table below that names each genre, its type of writing, and ONE example book. Try to complete it from memory first. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" style="min-height:200px;" placeholder="Genre 1:           Type of writing:           Example book:&#10;Genre 2:           Type of writing:           Example book:&#10;Genre 3:           Type of writing:           Example book:&#10;Genre 4:           Type of writing:           Example book:&#10;Genre 5:           Type of writing:           Example book:&#10;Genre 6:           Type of writing:           Example book:&#10;Genre 7:           Type of writing:           Example book:&#10;Genre 8:           Type of writing:           Example book:"></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">12</div>
+    <div class="q-text">2 Timothy 3:16 lists four purposes of Scripture: teaching, rebuking, correcting, training in righteousness. Using what you have learned this week, explain how the STRUCTURE of the Bible (having 66 books across 8 genres) helps the Bible fulfil all four of these purposes. <span class="marks">4 marks</span></div>
+    <div class="q-hint">Think: which genre helps with teaching? Which with rebuking? Which with training? Use specific genre or book names.</div>
+    <textarea class="q-input wide" placeholder="How the structure helps fulfil each purpose: &#10;Teaching — &#10;Rebuking — &#10;Correcting — &#10;Training in righteousness — "></textarea>
+  </div>
+</div>
+
+<!-- HARD -->
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard">
+  <span class="diff-label">🔴 Hard</span>
+  <span class="diff-desc">Section C — Exam-quality extended writing. Full sentences, specific references, theological depth.</span>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Extended Writing — Examination Questions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">13</div>
+    <div class="q-text">"The Bible is too old, too complicated, and written in the wrong languages to be useful to people today." Write a detailed response that evaluates this statement. You must: (a) acknowledge the challenge it raises, (b) use TWO specific examples from the lesson to show why the Bible IS still useful, (c) explain how the concept of "God-breathed" Scripture affects how Christians view this criticism. Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) The challenge raised: &#10;(b) Example 1 from the lesson: &#10;    Example 2 from the lesson: &#10;(c) How 'God-breathed' responds to this: &#10;My conclusion: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">14</div>
+    <div class="q-text">If you were explaining the Bible's structure to a new student who had never heard of it before, how would you explain it clearly and helpfully? Write your explanation (at least 5 sentences). Use the analogy the lesson gives ("the Bible is a library, not just one book") and at least TWO specific examples of books or genres to make it clear. <span class="marks">9 marks</span></div>
+    <div class="q-hint">ESL Tip: Imagine you are talking to a friend who is completely new to this topic. Use simple language but specific examples. A good explanation is clear, accurate, AND interesting.</div>
+    <textarea class="q-input xwide" placeholder="Write your explanation here..."></textarea>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+
+</div></div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     ENGLISH — DAY 3
+═══════════════════════════════════════════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">✍️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 3 · Day 3 — Consolidation</div>
+  <div class="hero-title">Reading Fiction —<br>Full Review &<br>Creative Writing</div>
+  <div class="hero-subtitle">Inference · Analysis · PEEL · Creative Writing with Technique</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="     /  40"></div>
+</div>
+
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 3 English — What We Covered</div>
+  <div class="week-summary-body">Day 1: Inference, mood, theme, author's intent, PEEL — using Maya at the cliff. &nbsp;|&nbsp; Day 2: Characterisation, implied meaning, deeper PEEL — using the old man at the jetty. &nbsp;|&nbsp; Day 3 (today): Full consolidation — new extract, comparison, and independent creative writing task.</div>
+</div>
+
+<!-- EASY -->
+<div class="diff-banner easy">
+  <span class="diff-label">🟢 Easy</span>
+  <span class="diff-desc">Section A — Final vocabulary check. Define and use all key terms from the week.</span>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Complete Vocabulary Review</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Complete this vocabulary table from memory. Write a definition AND one example for each term: <span class="marks">6 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#FCA5A5;">
+      <thead><tr><th>Term</th><th>Your Definition</th><th>Your Own Example</th></tr></thead>
+      <tbody>
+        <tr><td>Inference</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Definition..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Example..."></td></tr>
+        <tr><td>Theme</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Definition..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Example..."></td></tr>
+        <tr><td>Author's intent</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Definition..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Example..."></td></tr>
+        <tr><td>Mood</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Definition..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Example..."></td></tr>
+        <tr><td>Characterisation</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Definition..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Example..."></td></tr>
+        <tr><td>PEEL</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="What PEEL stands for..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Example topic sentence..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- MEDIUM -->
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium">
+  <span class="diff-label">🟡 Medium</span>
+  <span class="diff-desc">Section B — Final extract. Apply all your skills in one focused analysis task.</span>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📄 Final Reading Extract</div>
+  <div class="callout info">
+    <div class="ci">📝</div>
+    <div class="ct"><strong>Read this final extract carefully. Then answer all questions that follow:</strong><br><br>
+    <em>"The letter had been sitting on the kitchen table for three days. Every morning, Lena walked past it on her way to make tea. She never picked it up. She never looked at it directly. But she always knew exactly where it was."</em></div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">What do you infer about how Lena feels about the letter? Give TWO separate inferences, each supported by a different piece of evidence from the text. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Inference 1: I infer that Lena... because '...'&#10;&#10;Inference 2: I also infer that... because '...'"></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">The author says Lena "never looked at it directly." This is unusual because people normally look at things they are thinking about. What does this choice of detail suggest about Lena's psychological state? <span class="marks">3 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your answer here..."></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">What MOOD does the author create? Identify TWO specific words or phrases that create this mood and explain how each one contributes to the atmosphere. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Overall mood: &#10;Word/phrase 1:      Effect: &#10;Word/phrase 2:      Effect: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Write TWO PEEL paragraphs about this extract — one analysing the author's use of TIME (three days), and one analysing the author's use of ACTIONS (what Lena does and does not do). <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="PEEL 1 — Use of time: &#10;P: &#10;E (quote): &#10;E (explain): &#10;L (link): &#10;&#10;PEEL 2 — Use of actions: &#10;P: &#10;E (quote): &#10;E (explain): &#10;L (link): "></textarea>
+  </div>
+</div>
+
+<!-- HARD -->
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard">
+  <span class="diff-label">🔴 Hard</span>
+  <span class="diff-desc">Section C — Final challenge. Independent creative writing AND critical comparison. This is your best work.</span>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Final Challenge Tasks</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">All THREE extracts from this week (Maya at the cliff, the old man at the jetty, Lena and the letter) share a common theme: characters who are AVOIDING or DELAYING something. Write a comparison of how all three authors handle this theme. Use specific evidence from each extract. Write at least 8 sentences. <span class="marks">8 marks</span></div>
+    <div class="q-hint">ESL Tip: A good comparison says: "In the first extract, the author creates avoidance by... In contrast, the second extract shows... Similarly, the third extract..." Use linking phrases to compare.</div>
+    <textarea class="q-input xwide" placeholder="Write your comparison here..."></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">CREATIVE WRITING TASK: Write your own short extract (8–10 sentences) about a character who is avoiding or facing something difficult. You MUST use at least FOUR of these techniques deliberately: (a) inference — hint at what's wrong without saying it, (b) mood through setting description, (c) characterisation through action (not telling), (d) a single powerful word choice explained in your annotation, (e) theme of courage, loss, or change. After writing your extract, annotate it — label where you used each technique and WHY you made that choice. <span class="marks">10 marks</span></div>
+    <div class="q-hint">This is your chance to show everything you have learned this week. Take your time. Plan before you write.</div>
+    <textarea class="q-input xwide" style="min-height:220px;" placeholder="PLAN (jot ideas first): &#10;&#10;MY EXTRACT: &#10;&#10;&#10;ANNOTATIONS: &#10;(a) Inference — where I used it and how: &#10;(b) Mood through setting — word/phrase and why: &#10;(c) Characterisation through action — sentence and why: &#10;(d) Powerful word choice — word and effect: &#10;(e) Theme — what my theme is and how I showed it: "></textarea>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 43" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+
+</div></div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     MATHS — DAY 3
+═══════════════════════════════════════════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🏆</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 3 · Day 3 — Consolidation</div>
+  <div class="hero-title">Fractions —<br>Full Review &<br>Multi-Step<br>Challenges</div>
+  <div class="hero-subtitle">All Operations · Problem Solving · Exam-Style Questions</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="     /  40"></div>
+</div>
+
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 3 Maths — What We Covered</div>
+  <div class="week-summary-body">Day 1: Fraction basics, numerator/denominator, simplifying (HCF), equivalence, mixed numbers and improper fractions, ordering with common denominators. &nbsp;|&nbsp; Day 2: Comparing with common denominators, adding and subtracting fractions, real-world fraction problems. &nbsp;|&nbsp; Day 3 (today): Full consolidation — speed recall, all four operations, multi-step word problems, error analysis, reasoning.</div>
+</div>
+
+<!-- EASY -->
+<div class="diff-banner easy">
+  <span class="diff-label">🟢 Easy</span>
+  <span class="diff-desc">Section A — Speed practice. All basic fraction operations. Show working.</span>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Fraction Drill</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Simplify fully. State the HCF used: <span class="marks">4 marks</span><br><br>a) 24/36 &nbsp;&nbsp; b) 45/60 &nbsp;&nbsp; c) 16/40 &nbsp;&nbsp; d) 21/49</div>
+    <textarea class="q-input" placeholder="a) HCF =    →  &#10;b) HCF =    →  &#10;c) HCF =    →  &#10;d) HCF =    →  "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Convert to improper fractions: <span class="marks">3 marks</span><br><br>a) 5⅓ &nbsp;&nbsp; b) 3¾ &nbsp;&nbsp; c) 6⅖</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Convert to mixed numbers: <span class="marks">3 marks</span><br><br>a) 23/4 &nbsp;&nbsp; b) 31/6 &nbsp;&nbsp; c) 29/5</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) "></textarea>
+  </div>
+</div>
+
+<!-- MEDIUM -->
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium">
+  <span class="diff-label">🟡 Medium</span>
+  <span class="diff-desc">Section B — All four operations with fractions. Every answer in simplest form.</span>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚙️ Four Operations</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Remember — add and subtract need a common denominator. Multiply: top × top, bottom × bottom. Divide: flip the second fraction and multiply. Always simplify at the end.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Add or subtract. Simplify all answers: <span class="marks">4 marks</span><br><br>a) 2/3 + 3/4 &nbsp;&nbsp; b) 5/6 − 1/4 &nbsp;&nbsp; c) 1/2 + 2/5 + 1/3 &nbsp;&nbsp; d) 7/8 − 3/10</div>
+    <textarea class="q-input wide" placeholder="a) &#10;b) &#10;c) (hint: find LCM of 2, 5, and 3) &#10;d) "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Multiply. Simplify all answers: <span class="marks">3 marks</span><br><br>a) 2/3 × 3/5 &nbsp;&nbsp; b) 4/7 × 7/8 &nbsp;&nbsp; c) 3/4 × 8/9</div>
+    <div class="q-hint">Tip: You can simplify BEFORE multiplying (cross-cancel) to keep numbers small.</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">Divide. Simplify all answers: <span class="marks">3 marks</span><br><br>a) 3/4 ÷ 1/2 &nbsp;&nbsp; b) 5/6 ÷ 5/3 &nbsp;&nbsp; c) 2/3 ÷ 4</div>
+    <div class="q-hint">To divide: KEEP the first fraction, FLIP the second, then MULTIPLY. (KCF method)</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">Order from SMALLEST to largest. Show all working: <span class="marks">3 marks</span><br><br>2/3 &nbsp;&nbsp; 3/5 &nbsp;&nbsp; 7/12 &nbsp;&nbsp; 5/8</div>
+    <textarea class="q-input wide" placeholder="Common denominator: &#10;Converted fractions: &#10;Order (smallest → largest): "></textarea>
+  </div>
+</div>
+
+<!-- HARD -->
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard">
+  <span class="diff-label">🔴 Hard</span>
+  <span class="diff-desc">Section C — Exam-style multi-step problems and error spotting. This is the real test.</span>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Exam-Style Challenges</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">8</div>
+    <div class="q-text">Fatima runs 3½ km in the morning and 2¾ km in the evening, five days a week. How many kilometres does she run in total each week? Give your answer as a mixed number. Show all working clearly. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Distance each day (morning + evening): &#10;Convert to improper fractions: &#10;Add fractions: &#10;Multiply by 5: &#10;Final answer as mixed number: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">9</div>
+    <div class="q-text">A student made FOUR errors below. Find each error, write what they did wrong, and give the correct answer: <span class="marks">8 marks</span><br><br>(i) 3/4 + 1/4 = 4/8 &nbsp;&nbsp; (ii) 2/3 × 3/4 = 6/12 = 1/3 &nbsp;&nbsp; (iii) 5/6 ÷ 2/3 = 5/6 × 2/3 = 10/18 = 5/9 &nbsp;&nbsp; (iv) 5/8 − 1/4 = 4/4 = 1</div>
+    <textarea class="q-input wide" placeholder="(i) Error: &#10;Correct answer: &#10;&#10;(ii) Error: &#10;Correct answer: &#10;&#10;(iii) Error: &#10;Correct answer: &#10;&#10;(iv) Error: &#10;Correct answer: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">10</div>
+    <div class="q-text">A tank is 5/8 full of water. Each day, 1/12 of the FULL tank leaks out. After how many days will the tank be LESS than half full? Show your working day by day and explain your reasoning. <span class="marks">7 marks</span></div>
+    <div class="q-hint">ESL Tip: Start at 5/8. Each day, subtract 1/12. Find a common denominator for 8 and 12. Keep subtracting until you get below 1/2. Show each step.</div>
+    <textarea class="q-input xwide" placeholder="Start: 5/8&#10;Common denominator for 8 and 12: &#10;5/8 = /24    1/12 = /24    1/2 = /24&#10;&#10;After Day 1: &#10;After Day 2: &#10;After Day 3: &#10;After Day 4: &#10;&#10;Answer — the tank drops below half after day: &#10;Reasoning: "></textarea>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 43" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+
+</div></div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCIENCE — DAY 3
+═══════════════════════════════════════════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🏆</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 3 · Day 3 — Consolidation</div>
+  <div class="hero-title">Tissues, Organs<br>& Systems —<br>Full Review</div>
+  <div class="hero-subtitle">All Levels of Organisation · All Systems · Extended Scientific Writing</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="     /  42"></div>
+</div>
+
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 3 Science — What We Covered</div>
+  <div class="week-summary-body">Day 1: 5 levels of organisation (cell → organism), major organs and functions, organ systems basics. &nbsp;|&nbsp; Day 2: Organ systems in depth — digestive, respiratory, circulatory, nervous, excretory; specialised tissues. &nbsp;|&nbsp; Day 3 (today): Full consolidation — speed recall, complete organ system knowledge, extended scientific reasoning.</div>
+</div>
+
+<!-- EASY -->
+<div class="diff-banner easy">
+  <span class="diff-label">🟢 Easy</span>
+  <span class="diff-desc">Section A — Complete organ-to-system matching and function recall.</span>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">⚡ Full Organ Review</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Complete this full organ table from memory. Fill in the organ system and the function for each organ: <span class="marks">8 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#6EE7B7;">
+      <thead><tr><th>Organ</th><th>Organ System</th><th>Main Function</th></tr></thead>
+      <tbody>
+        <tr><td>Heart</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Lungs</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Brain</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Stomach</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Liver</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Kidneys</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Small intestine</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+        <tr><td>Spinal cord</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="system..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="function..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Without using notes — write the 5 levels of organisation in order and give ONE example from your own body for each level. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="1 (smallest):         Example from my body: &#10;2:         Example: &#10;3:         Example: &#10;4:         Example: &#10;5 (largest):         Example: "></textarea>
+  </div>
+</div>
+
+<!-- MEDIUM -->
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium">
+  <span class="diff-label">🟡 Medium</span>
+  <span class="diff-desc">Section B — Explain, link, and apply across the whole topic.</span>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔗 Synthesis Questions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">When you eat a meal, MULTIPLE organ systems are working at the same time. Identify at least FOUR organ systems that are active during a meal and explain what each one is doing. <span class="marks">4 marks</span></div>
+    <div class="q-hint">Think about: digesting, blood pumping, breathing, your brain controlling everything, waste removal that will happen later...</div>
+    <textarea class="q-input wide" placeholder="System 1:         What it's doing: &#10;System 2:         What it's doing: &#10;System 3:         What it's doing: &#10;System 4:         What it's doing: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">The circulatory and respiratory systems are sometimes described as "partners." Explain fully why — what does each system provide that the other one needs? What would happen if one system failed? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What respiratory gives circulatory: &#10;What circulatory gives respiratory: &#10;If one failed, what would happen to the other: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">Give TWO examples of how a cell's STRUCTURE is directly linked to its FUNCTION. Your examples must be from DIFFERENT organ systems. <span class="marks">4 marks</span></div>
+    <div class="q-hint">Example structure: red blood cells are flat and disc-shaped — this gives them a large surface area to carry oxygen. Now give TWO of your own.</div>
+    <textarea class="q-input wide" placeholder="Example 1 — Cell type:         Structure:         How it links to function: &#10;&#10;Example 2 — Cell type:         Structure:         How it links to function: "></textarea>
+  </div>
+</div>
+
+<!-- HARD -->
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard">
+  <span class="diff-label">🔴 Hard</span>
+  <span class="diff-desc">Section C — Scientific extended writing. Show depth, precision, and joined-up thinking.</span>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔬 Scientific Extended Writing</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">"The human body is more than the sum of its parts." Using the levels of organisation (cell → organism) as your framework, explain what this statement means scientifically. How do cells working together in tissues, and tissues working together in organs, create abilities that no single cell could have on its own? Use at least THREE specific examples. Write at least 7 sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="What the statement means: &#10;&#10;Example 1 (cell → tissue → organ ability): &#10;Example 2: &#10;Example 3: &#10;&#10;Conclusion: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">7</div>
+    <div class="q-text">DESIGN A CONCEPT: You are a scientist designing a new organ system for a human body. What problem would it solve? What organs would be in it? What tissues would those organs be made of? What would happen if this system failed? Write a detailed scientific proposal of at least 6 sentences. Be creative but scientifically logical. <span class="marks">8 marks</span></div>
+    <div class="q-hint">ESL Tip: Be creative! You might design a system that repairs damage faster, detects disease earlier, or improves memory. Just make sure you explain it using scientific vocabulary from the lesson.</div>
+    <textarea class="q-input xwide" placeholder="Name of my new organ system: &#10;Problem it solves: &#10;Organs in the system: &#10;Tissues those organs are made of: &#10;What happens if it fails: &#10;&#10;Full proposal: "></textarea>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 42" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+
+</div></div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HUMANITIES — DAY 3
+═══════════════════════════════════════════════════ -->
+<div id="pg-humanities" class="page">
+<style>.pg-humanities-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-humanities-a">
+
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏆</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ Humanities · Week 3 · Day 3 — Consolidation</div>
+  <div class="hero-title">Ancient Greece —<br>Full Review &<br>Essay Writing</div>
+  <div class="hero-subtitle">Retrieve · Compare · Evaluate · Extended Historical Essay</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="     /  42"></div>
+</div>
+
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 3 Humanities — What We Covered</div>
+  <div class="week-summary-body">Day 1: City-states (polis), Athens vs Sparta, democracy, the three philosophers, Greek legacies. &nbsp;|&nbsp; Day 2: Philosopher quotes in depth, Greek legacies analysed, Olympics history, Hippocratic Oath, defending democracy vs oligarchy. &nbsp;|&nbsp; Day 3 (today): Full consolidation — speed facts, timeline, comparative analysis, and extended historical essay writing.</div>
+</div>
+
+<!-- EASY -->
+<div class="diff-banner easy">
+  <span class="diff-label">🟢 Easy</span>
+  <span class="diff-desc">Section A — Full knowledge recall. Timeline and key facts without notes.</span>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚡ Speed Knowledge Check</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Write a brief fact about each of the following — from memory: <span class="marks">6 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#93C5FD;">
+      <thead><tr><th>Topic</th><th>One key fact</th></tr></thead>
+      <tbody>
+        <tr><td>Socrates</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Key fact..."></td></tr>
+        <tr><td>Sparta</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Key fact..."></td></tr>
+        <tr><td>The Olympics</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Key fact..."></td></tr>
+        <tr><td>Athenian democracy</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Key fact..."></td></tr>
+        <tr><td>Aristotle</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Key fact..."></td></tr>
+        <tr><td>Hippocrates</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="Key fact..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Place these dates and events in the correct order on a mini-timeline. Write them from EARLIEST to LATEST: <span class="marks">4 marks</span><br><br>Alexander the Great taught by Aristotle (343 BC) &nbsp;·&nbsp; First Olympics (776 BC) &nbsp;·&nbsp; Ancient Greece ends (146 BC) &nbsp;·&nbsp; Socrates born (470 BC) &nbsp;·&nbsp; Death of Socrates (399 BC) &nbsp;·&nbsp; Aristotle born (384 BC)</div>
+    <textarea class="q-input wide" placeholder="Earliest → Latest: "></textarea>
+  </div>
+</div>
+
+<!-- MEDIUM -->
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium">
+  <span class="diff-label">🟡 Medium</span>
+  <span class="diff-desc">Section B — Comparative and analytical questions. Use specific evidence from the whole week.</span>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚖️ Analysis & Comparison</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">All three philosophers asked BIG questions — Socrates about truth, Plato about ideal government, Aristotle about how we should live. Explain how the question each philosopher asked CONNECTS to a problem people face in real life today. Give one specific modern example for each philosopher. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Socrates (truth) → Modern connection: &#10;Plato (ideal government) → Modern connection: &#10;Aristotle (how to live) → Modern connection: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">Athenian democracy is praised as the "birthplace of democracy." Spartan oligarchy is often criticised. Yet Sparta produced some of the most disciplined and effective soldiers in history. Using the SIMILARITY → DIFFERENCE → SIGNIFICANCE structure from the Week 2 History lesson: compare Athens and Sparta using ONE similarity and TWO differences, and explain the significance of the most important difference. <span class="marks">5 marks</span></div>
+    <div class="q-hint">Similarity → Difference → Significance is from Week 2 History. Well done if you remembered it! Cross-topic thinking shows excellent learning.</div>
+    <textarea class="q-input wide" placeholder="Similarity: &#10;&#10;Difference 1: &#10;Difference 2: &#10;&#10;Most significant difference and why: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">This week we studied Ancient Greece. In Week 2, we studied Ancient Mesopotamia and Egypt. Identify ONE similarity and ONE difference between Ancient Greece and ONE of the Week 2 civilisations. Explain the significance of each. <span class="marks">4 marks</span></div>
+    <div class="q-hint">Think about: writing, government, religion, legacy, democracy, laws, architecture, contributions to science or culture.</div>
+    <textarea class="q-input wide" placeholder="Civilisation I am comparing to Greece: &#10;&#10;Similarity: &#10;Significance of similarity: &#10;&#10;Difference: &#10;Significance of difference: "></textarea>
+  </div>
+</div>
+
+<!-- HARD -->
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard">
+  <span class="diff-label">🔴 Hard</span>
+  <span class="diff-desc">Section C — Extended historical essay. Your best work. Plan before you write.</span>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Historical Essay Questions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">6</div>
+    <div class="q-text">"The most important contribution of Ancient Greece was not democracy or sport — but the habit of asking questions." Using evidence from the lesson about the three philosophers, evaluate this claim. Do you agree that asking questions is the most important Greek contribution? Write a balanced argument of at least 7 sentences. You must: (a) explain what asking questions meant in ancient Greece, (b) use at least TWO of the philosophers as evidence, (c) consider at least ONE other Greek contribution as a counter-argument, (d) reach a clear conclusion. <span class="marks">10 marks</span></div>
+    <div class="q-hint">ESL Tip: A balanced argument considers BOTH sides even if you personally agree with the statement. "On one hand... On the other hand... However, I believe..."</div>
+    <textarea class="q-input xwide" placeholder="PLAN (key points): &#10;&#10;(a) What asking questions meant in ancient Greece: &#10;(b) Philosopher 1 as evidence: &#10;    Philosopher 2 as evidence: &#10;(c) Counter-argument (another contribution): &#10;(d) My conclusion: &#10;&#10;FULL ESSAY: "></textarea>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">7</div>
+    <div class="q-text">REFLECTION QUESTION — Think back across the WHOLE week of Humanities study. Which idea, person, or event from Ancient Greece do you find most interesting or important? Write a personal reflection of at least 5 sentences explaining: (a) what you chose and why, (b) how it connects to something in the modern world, (c) what question it makes YOU want to ask — following in the tradition of the Greek philosophers. <span class="marks">7 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) What I chose and why: &#10;(b) Connection to the modern world: &#10;(c) My own philosophical question inspired by this: &#10;&#10;Full reflection: "></textarea>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — Humanities Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 42" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+
+</div></div>
+
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector(`[data-s="${s}"]`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week3_Day3');</script>
+</body>
+</html>

@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 3 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:260px;height:260px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;animation:cardIn 0.5s cubic-bezier(0.22,0.68,0,1.2) both;}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.18s}.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.30s}.card:nth-child(7){animation-delay:.36s}.card:nth-child(8){animation-delay:.42s}.card:nth-child(9){animation-delay:.48s}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:130px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-sm{padding:8px 16px;font-size:0.82rem;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent,#555);color:var(--text);background:rgba(255,255,255,0.04);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.fwall{display:flex;flex-direction:column;gap:3px;margin:14px 0;}
+.fwall-row{display:flex;gap:3px;height:32px;}
+.fwall-cell{display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:0.75rem;font-weight:700;color:white;flex:1;transition:opacity 0.2s;}
+.fwall-cell:hover{opacity:0.8;}
+.acc-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.acc-card:hover,.acc-card.open{border-color:var(--accent,#555);}
+.acc-head{display:flex;justify-content:space-between;align-items:center;}
+.acc-title{font-weight:700;color:var(--bright);font-size:0.95rem;}
+.acc-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.acc-toggle{color:var(--muted);transition:transform 0.25s;}
+.acc-card.open .acc-toggle{transform:rotate(180deg);}
+.acc-body{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:0.87rem;color:var(--muted);line-height:1.65;}
+.acc-card.open .acc-body{display:block;}
+.acc-body strong{color:var(--bright);}
+.peel-row{display:flex;margin:14px 0;border-radius:10px;overflow:hidden;}
+.peel-cell{flex:1;padding:14px 12px;text-align:center;}
+.peel-letter{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:white;line-height:1;}
+.peel-word{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;color:rgba(255,255,255,0.65);}
+.peel-desc{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4;}
+.genre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:12px;}
+.genre-tile{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;transition:all 0.2s;}
+.genre-tile:hover{border-color:var(--accent,#555);transform:translateY(-2px);}
+.genre-name{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:4px;}
+.genre-book{font-size:0.75rem;color:var(--muted);margin-bottom:6px;}
+.genre-def{font-size:0.82rem;color:#B0B0C8;line-height:1.4;}
+.inf-chain{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;margin:14px 0;}
+.inf-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:0.85rem;flex:1;min-width:140px;}
+.inf-box .label{font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:700;}
+.inf-box .value{color:var(--bright);font-weight:600;line-height:1.4;}
+.inf-arrow{color:var(--muted);font-size:1.2rem;flex-shrink:0;align-self:center;}
+.cell-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;min-height:160px;transition:border-color 0.3s;}
+.cip-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--bright);margin-bottom:8px;}
+.cip-body{font-size:0.87rem;color:var(--muted);line-height:1.6;}
+.cip-body strong{color:var(--bright);}
+.cip-analogy{font-size:0.82rem;margin-top:10px;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;}
+.hier-wrap{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:16px 0;}
+.hier-box{padding:8px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;color:white;text-align:center;}
+.hier-arrow{color:var(--muted);font-size:1.1rem;}
+@media(max-width:600px){
+  .hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}
+  .compare{grid-template-columns:1fr;}.peel-row{flex-direction:column;}
+  .inf-chain{flex-direction:column;}.inf-arrow{transform:rotate(90deg);}
+}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 3</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BIBLE — How the Bible is Organised
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">📖</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 3</div>
+  <div class="hero-title">How the Bible<br>is Organised</div>
+  <div class="hero-subtitle">66 books · Old & New Testament · 8 genres of Scripture · How to find a Bible verse</div>
+  <div class="hero-tags">
+    <span class="hero-tag">2 Timothy 3:16</span><span class="hero-tag">OT & NT</span><span class="hero-tag">Genres</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness."</div>
+    <div class="verse-ref">2 Timothy 3:16 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word breakdown:</strong> <em>God-breathed</em> = God guided the human writers. <em>Teaching</em> = shows what is true. <em>Rebuking</em> = shows what is wrong. <em>Correcting</em> = shows how to get back on track. <em>Training in righteousness</em> = grows us in goodness. Every word is deliberate — at KS3 Level 6, word-level analysis matters.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">Bible</div><div class="esl-def">A collection of 66 books. Christians believe it is the Word of God. "Bible" comes from Greek <em>biblia</em> = "books." It is a library, not a single book.</div></div>
+    <div class="esl-row"><div class="esl-word">Testament</div><div class="esl-def">An agreement or promise. Old Testament = before Jesus. New Testament = after Jesus. Think of it as two halves of one story.</div></div>
+    <div class="esl-row"><div class="esl-word">Scripture</div><div class="esl-def">Another word for the Bible — means "holy writings." When we say "the Scriptures," we mean the whole Bible.</div></div>
+    <div class="esl-row"><div class="esl-word">God-breathed</div><div class="esl-def">Christians believe God guided the human writers of the Bible — He breathed His message into them. Not dictation, but deep divine influence.</div></div>
+    <div class="esl-row"><div class="esl-word">Genre</div><div class="esl-def">A TYPE of writing. A poem is read differently from a letter or a history book. Knowing the genre changes how you understand the text.</div></div>
+    <div class="esl-row"><div class="esl-word">Gospel</div><div class="esl-def">Means "Good News." The 4 Gospels tell the life, death and resurrection of Jesus: Matthew, Mark, Luke, John.</div></div>
+    <div class="esl-row"><div class="esl-word">Epistle</div><div class="esl-def">A formal letter written to a church or person to teach them. Most were written by the apostle Paul.</div></div>
+    <div class="esl-row"><div class="esl-word">Prophecy</div><div class="esl-def">A message from God through a prophet — often a warning or promise about the future. Isaiah, Jeremiah, and Revelation are prophetic books.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📚</span> The Bible — A Library in One Cover</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Key Insight:</strong> The Bible is NOT one book — it is a LIBRARY of <strong>66 books</strong> written by over 40 different authors across approximately <strong>1,500 years</strong>. They wrote in three languages: <strong>Hebrew</strong> (most of OT), <strong>Aramaic</strong> (small parts of OT), and <strong>Greek</strong> (all of NT). Yet Christians believe one unified message runs through all of it — pointing to Jesus Christ.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">📜 Old Testament — 39 Books</div>
+      <div class="cmp-row">Written before the birth of Jesus Christ</div>
+      <div class="cmp-row">Mainly in Hebrew and Aramaic</div>
+      <div class="cmp-row">Covers creation, God's law, Israel's history, poetry and prophecy</div>
+      <div class="cmp-row">Divided into 5 sections</div>
+      <div class="cmp-row">Points forward to the coming of Jesus (the Messiah)</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">✝️ New Testament — 27 Books</div>
+      <div class="cmp-row">Written after the resurrection of Jesus (~45–95 AD)</div>
+      <div class="cmp-row">Written entirely in Greek</div>
+      <div class="cmp-row">Covers the life of Jesus, the early church, letters, prophecy</div>
+      <div class="cmp-row">Divided into 3 sections</div>
+      <div class="cmp-row">Looks back at Jesus' life and forward to His return</div>
+    </div>
+  </div>
+  <div class="callout good" style="margin-top:14px;">
+    <div class="ci">🔢</div>
+    <div class="ct"><strong>Memory trick:</strong> OT = 39 books. NT = 27 books. Total = 66. Some students remember it as: 3 × 9 = 27 (NT), and 39 is what's left. Write it on your hand the first week until it sticks!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📜</span> Old Testament — 5 Sections Explained</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">The Law (Torah / Pentateuch) — 5 Books</div><div class="step-desc">Genesis, Exodus, Leviticus, Numbers, Deuteronomy. Written by Moses. Contains: <strong>Creation and the Fall</strong>, Noah's Flood, Abraham, the Ten Commandments, and God's laws for Israel. <em>Genesis</em> means "beginning" — the beginning of everything. This is the foundation of the whole Bible.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">History — 12 Books</div><div class="step-desc">Joshua to Esther. True stories of Israel: entering the Promised Land, the time of the Judges, the kings (Saul, David, Solomon), the split of the kingdom, exile to Babylon, and the return. This is <strong>theological history</strong> — it tells what happened AND what it means spiritually. God is always active in the story.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">Poetry & Wisdom — 5 Books</div><div class="step-desc">Job, Psalms, Proverbs, Ecclesiastes, Song of Solomon. The <strong>Psalms</strong> are 150 hymns and prayers covering every human emotion. <strong>Proverbs</strong> gives practical life wisdom. <strong>Ecclesiastes</strong> asks: "What is the meaning of life?" Read these as <strong>POETRY</strong> — they use imagery, repetition and rhythm, not literal fact.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">4</div><div><div class="step-title">Major Prophets — 5 Books</div><div class="step-desc">Isaiah, Jeremiah, Lamentations, Ezekiel, Daniel. Longer prophetic books. "Major" = <strong>longer books</strong>, not more important. Isaiah famously predicted the coming of Jesus over 700 years before His birth: <em>"For unto us a child is born..."</em> (Isaiah 9:6). This is called Messianic prophecy.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">5</div><div><div class="step-title">Minor Prophets — 12 Books</div><div class="step-desc">Hosea to Malachi. "Minor" = <strong>shorter books</strong> — not less important. Malachi is the final OT book. After it: 400 years of silence before the NT begins. Contains powerful lines like <strong>Micah 6:8</strong>: "Act justly, love mercy, and walk humbly with your God."</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">✝️</span> New Testament — 3 Sections Explained</div>
+  <table class="data-table">
+    <thead><tr><th>Section</th><th>Books</th><th>What It Contains</th><th>Key Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Gospels & Acts</strong></td><td>5 books</td><td>Matthew, Mark, Luke and John = four eyewitness perspectives on Jesus' life, death and resurrection. Acts = how the early church spread from Jerusalem to Rome after Jesus' ascension.</td><td>John 3:16 — "For God so loved the world..."</td></tr>
+      <tr><td><strong>Letters (Epistles)</strong></td><td>21 books</td><td>Letters from Paul (13 letters), Peter, James, John and others — written to specific churches and individuals to teach, correct, and encourage. Real letters to real people solving real problems.</td><td>Romans 8:28; 1 Corinthians 13 (the love chapter)</td></tr>
+      <tr><td><strong>Prophecy (Revelation)</strong></td><td>1 book</td><td>A prophetic vision given to John — written in symbolic, apocalyptic language about spiritual warfare, the end of time and God's complete victory. Must be read as APOCALYPTIC genre, not literal prediction.</td><td>Rev 21:4 — "He will wipe every tear from their eyes."</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">🎓</div>
+    <div class="ct"><strong>KS3 Level 6 — The Four Gospels are NOT identical:</strong> Matthew wrote for a Jewish audience (Jesus as Messiah). Mark is fast-paced, written for Romans (Jesus as Servant). Luke is written by a doctor and emphasises compassion for the poor (Jesus as the Perfect Human). John is deeply theological (Jesus as the eternal Son of God — "In the beginning was the Word"). Each writer selected material to make a theological point.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎭</span> The 8 Genres of the Bible — Why Genre Matters</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Critical literacy skill:</strong> You would not read a poem the same way you read an instruction manual. Knowing the GENRE of a Bible passage changes HOW you read it and what it means. Misreading genre is one of the most common errors in Bible interpretation.</div>
+  </div>
+  <div class="genre-grid">
+    <div class="genre-tile"><div class="genre-name">LAW</div><div class="genre-book">Genesis – Deuteronomy</div><div class="genre-def">God's rules and commands to Israel. Contains the Ten Commandments and detailed instructions for worship and holy living.</div></div>
+    <div class="genre-tile"><div class="genre-name">HISTORY</div><div class="genre-book">Joshua – Esther</div><div class="genre-def">True accounts of Israel's story — written with theological commentary on why events happened and what they reveal about God.</div></div>
+    <div class="genre-tile"><div class="genre-name">POETRY</div><div class="genre-book">Psalms, Song of Solomon</div><div class="genre-def">Lyrical writing full of emotion, imagery and metaphor. Read for feeling and meaning — not literal, factual detail.</div></div>
+    <div class="genre-tile"><div class="genre-name">WISDOM</div><div class="genre-book">Proverbs, Job, Ecclesiastes</div><div class="genre-def">Practical advice and deep questions about life, suffering and meaning. "The fear of the Lord is the beginning of wisdom." (Prov 9:10)</div></div>
+    <div class="genre-tile"><div class="genre-name">PROPHECY</div><div class="genre-book">Isaiah – Malachi</div><div class="genre-def">Urgent messages from God through prophets — warnings, calls to repentance, and promises of a coming Messiah who would save the world.</div></div>
+    <div class="genre-tile"><div class="genre-name">GOSPEL</div><div class="genre-book">Matthew, Mark, Luke, John</div><div class="genre-def">Theological biography of Jesus. Each writer shapes material to reveal a different aspect of who Jesus is and why He came.</div></div>
+    <div class="genre-tile"><div class="genre-name">EPISTLE</div><div class="genre-book">Romans – Jude</div><div class="genre-def">Real letters to real churches and people. They address specific problems — division, false teaching, grief — with practical gospel wisdom.</div></div>
+    <div class="genre-tile"><div class="genre-name">APOCALYPTIC</div><div class="genre-book">Daniel, Revelation</div><div class="genre-def">Symbolic visions of cosmic events. The imagery (dragons, beasts, numbers) is NOT literal — it is coded language for readers facing persecution.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🔍</span> How to Find a Bible Verse — The Reference System</div>
+  <div class="callout info">
+    <div class="ci">📌</div>
+    <div class="ct">Every verse in the Bible has an address: <strong>Book Name → Chapter → Verse</strong>. Think of it like a house address: street name → house number → flat number.</div>
+  </div>
+  <div class="formula">
+    <span class="hl">John</span>  <span class="comment">← Book name</span> &nbsp;&nbsp;&nbsp; <span class="hl2">3</span>  <span class="comment">← Chapter</span> &nbsp;:&nbsp; <span class="hl3">16</span>  <span class="comment">← Verse</span><br><br>
+    <span class="comment">"John 3:16" = Book of John, Chapter 3, Verse 16</span><br>
+    <span class="comment">"2 Tim 3:16" = Second Timothy, Chapter 3, Verse 16</span><br>
+    <span class="comment">"Gen 1:1" = Genesis, Chapter 1, Verse 1</span><br>
+    <span class="comment">"Ps 23:1" = Psalms, Chapter 23, Verse 1</span><br><br>
+    <span class="hl">Common abbreviations:</span><br>
+    <span class="comment">Gen=Genesis | Ps=Psalms | Matt=Matthew | Rom=Romans | 1 Cor=First Corinthians | Rev=Revelation</span>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Practice:</strong> Open a Bible or Bible app and find <strong>Psalm 23:1</strong>, then <strong>Romans 8:28</strong>, then <strong>Revelation 21:4</strong>. Read each one aloud. Fluency with the reference system is a core KS3 Bible Studies skill.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> Knowledge Check — Bible Organisation</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ENGLISH — Reading Comprehension: Inference & Theme
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">📖</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 3</div>
+  <div class="hero-title">Reading Fiction —<br>Inference & Theme</div>
+  <div class="hero-subtitle">Reading between the lines · Identifying theme · Author's intent · PEEL paragraph writing</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Inference</span><span class="hero-tag">Theme</span><span class="hero-tag">Author's Intent</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these — you will use them in every English lesson at KS3</div>
+    <div class="esl-row"><div class="esl-word">inference</div><div class="esl-def">A conclusion reached by reading BETWEEN the lines — not directly stated in the text. You use clues to figure out meaning. Like a detective working from evidence.</div></div>
+    <div class="esl-row"><div class="esl-word">theme</div><div class="esl-def">The BIG IDEA or message of a story — not what HAPPENS but what it MEANS. Always a concept: friendship, courage, loneliness, injustice, identity, belonging.</div></div>
+    <div class="esl-row"><div class="esl-word">author's intent</div><div class="esl-def">WHY the author wrote something and what effect they wanted on the reader. Always ask: "Why did the author choose THIS word or image?"</div></div>
+    <div class="esl-row"><div class="esl-word">imply</div><div class="esl-def">To suggest something without saying it directly. "The dark clouds gathered" IMPLIES danger without the word "danger" ever appearing.</div></div>
+    <div class="esl-row"><div class="esl-word">evidence</div><div class="esl-def">A quotation or specific detail from the text that PROVES your point. In English, every claim MUST be backed by evidence from the text.</div></div>
+    <div class="esl-row"><div class="esl-word">mood / atmosphere</div><div class="esl-def">The FEELING created in the text. Examples: tense, eerie, joyful, hopeful, melancholic. Authors create mood through word choice, setting and sentence structure.</div></div>
+    <div class="esl-row"><div class="esl-word">characterisation</div><div class="esl-def">HOW an author builds a picture of a character — through actions, words, thoughts, appearance, and how others react to them. Good authors SHOW character, they do not just TELL it.</div></div>
+    <div class="esl-row"><div class="esl-word">narrator</div><div class="esl-def">The VOICE that tells the story. First person = "I" (inside the character's head). Third person = "he/she/they" (narrator stands outside the story).</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🔍</span> What Is Inference? — Reading Between the Lines</div>
+  <div class="callout info">
+    <div class="ci">🕵️</div>
+    <div class="ct"><strong>Think like a detective:</strong> A good detective does not need a confession to know what happened. They use CLUES. Reading fiction is the same — a skilled reader uses clues in the text to understand things the author has NOT directly stated. This is inference.</div>
+  </div>
+  <div class="inf-chain">
+    <div class="inf-box"><div class="label">The Text says...</div><div class="value">"The boy slammed the door and sat alone in the dark."</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Clues I notice...</div><div class="value">"slammed" = violent, sudden action. "alone" = chosen isolation. "dark" = no comfort or light sought.</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">I INFER that...</div><div class="value">The boy is angry AND deeply hurt. He chooses isolation. The author implies emotional pain without ever saying "he was upset."</div></div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">✍️</div>
+    <div class="ct"><strong>ESL sentence starter for inference:</strong> "From the phrase '___', I can infer that ___ because the word '___' suggests ___." Learn this structure by heart — it earns marks in every English assessment at KS3.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📝</span> PEEL Paragraph Structure — How to Write Analytically</div>
+  <div class="callout warn">
+    <div class="ci">🎓</div>
+    <div class="ct"><strong>KS3 Level 6 requirement:</strong> You must not just DESCRIBE what happens. You must ANALYSE — explain WHY the author made choices and what EFFECT they have on the reader. PEEL is your tool for doing this.</div>
+  </div>
+  <div class="peel-row">
+    <div class="peel-cell" style="background:#BE123C;"><div class="peel-letter">P</div><div class="peel-word">Point</div><div class="peel-desc">State your main idea clearly in one sentence.</div></div>
+    <div class="peel-cell" style="background:#9B1033;"><div class="peel-letter">E</div><div class="peel-word">Evidence</div><div class="peel-desc">Quote directly from the text using speech marks.</div></div>
+    <div class="peel-cell" style="background:#7D0D28;"><div class="peel-letter">E</div><div class="peel-word">Explain</div><div class="peel-desc">Analyse WHAT the quotation shows and WHY the author chose it.</div></div>
+    <div class="peel-cell" style="background:#5E0A1E;"><div class="peel-letter">L</div><div class="peel-word">Link</div><div class="peel-desc">Connect back to the question or the wider theme.</div></div>
+  </div>
+  <div class="callout good" style="margin-top:16px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>PEEL in action — full example:</strong><br><strong>P:</strong> The author suggests Maya is overwhelmed by fear.<br><strong>E:</strong> The author writes "her hands would not stop shaking."<br><strong>E:</strong> The word "shaking" describes an involuntary physical reaction — something she cannot control. By choosing a physical symptom rather than simply stating "she was scared," the author SHOWS emotion more powerfully, making it feel real and immediate to the reader.<br><strong>L:</strong> This contributes to the tense, anxious mood and creates sympathy for Maya as a character who must act despite her fear.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">💡</span> Understanding Theme — The Author's Deeper Message</div>
+  <div class="callout info">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Theme ≠ Plot.</strong> Plot is WHAT HAPPENS. Theme is WHAT IT MEANS. A story about a boy running away from home is not "about" running away — it might be about <em>loneliness</em>, <em>belonging</em>, or <em>the pain of family breakdown</em>. Theme is always abstract — a universal human experience that the reader can connect to their own life.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>What happens (Plot)</th><th>What it really means (Theme)</th><th>How the author signals the theme</th></tr></thead>
+    <tbody>
+      <tr><td>A soldier returns home from war</td><td><strong>Identity, trauma, the cost of conflict</strong></td><td>The soldier walks past his own wife without recognition — loss of self shown through action, not statement.</td></tr>
+      <tr><td>Two children find a mysterious key</td><td><strong>Curiosity, the danger of secrets, loss of innocence</strong></td><td>The key opens a forbidden room — the act of disobeying echoes Eve in Eden, suggesting a fall from innocence.</td></tr>
+      <tr><td>An old woman refuses to sell her house</td><td><strong>Memory, resistance, past vs progress</strong></td><td>Her dialogue is filled with specific memories: "Your grandfather built this wall." Memory = identity = resistance.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">✍️</div>
+    <div class="ct"><strong>How to write about theme:</strong> "The theme of ___ is explored through ___. The author uses ___ to suggest that ___. This implies a wider message about what it means to be human when ___."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🎯</span> Author's Intent — WHY Did the Author Write This?</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">To make the reader feel a specific emotion</div><div class="step-desc">Fear, sympathy, unease, joy. Every word choice is deliberate. "The child's eyes were wide with something that wasn't quite hope" — the author's intent is to create unease. If they wanted joy, they would have written differently.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">To make the reader think about a big idea</div><div class="step-desc">Social justice, identity, family, what makes us human. A Level 6 student connects the text to bigger questions beyond the surface of the story. Ask: "What does this make me think about the real world?"</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">To create a specific atmosphere through setting</div><div class="step-desc">Setting, weather, time of day, sounds — all deliberately chosen to reinforce meaning. A storm in a story is not just weather — it usually mirrors inner turmoil. This technique is called <strong>PATHETIC FALLACY</strong>.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">4</div><div><div class="step-title">To challenge or unsettle the reader's assumptions</div><div class="step-desc">Authors sometimes deliberately destroy expectations — an ending that seems happy turns out to be ambiguous. The discomfort this creates is itself the intent. At KS3, recognising this kind of deliberate choice shows literary sophistication.</div></div></div>
+  </div>
+  <div class="callout key" style="margin-top:14px;">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden question:</strong> Always ask "WHY did the author choose THIS word and not a different one?" Every word in a carefully written text is a deliberate decision. Your job as a KS3 reader is to explain the effect of those decisions.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🌍</span> ESL Sentence Starters — Use These in Writing & Assessments</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">Inference</div><div class="vc-def">"From the phrase '___', I can infer that ___ because the word '___' suggests ___."</div></div>
+    <div class="vocab-card"><div class="vc-word">Theme</div><div class="vc-def">"The theme of ___ is explored through ___. The author uses ___ to suggest that ___."</div></div>
+    <div class="vocab-card"><div class="vc-word">Author's Intent</div><div class="vc-def">"The author's intent is to make the reader feel ___ because ___."</div></div>
+    <div class="vocab-card"><div class="vc-word">Mood</div><div class="vc-def">"The author creates a ___ mood through the use of ___, which makes the reader feel ___."</div></div>
+    <div class="vocab-card"><div class="vc-word">Character</div><div class="vc-def">"The character of ___ is presented as ___ through the author's use of ___."</div></div>
+    <div class="vocab-card"><div class="vc-word">Evidence</div><div class="vc-def">"This is supported by the quotation '___', which shows ___."</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🎯</span> Reading Comprehension Challenge</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MATHS — Fractions
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🧮</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 3</div>
+  <div class="hero-title">Fractions —<br>Equivalence &<br>Simplification</div>
+  <div class="hero-subtitle">What fractions are · Simplifying to lowest terms · Finding equivalent fractions · Mixed numbers & improper fractions</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Fractions</span><span class="hero-tag">HCF</span><span class="hero-tag">Equivalence</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — Defined Simply</div>
+  <div class="esl-box">
+    <div class="esl-title">Mathematical vocabulary — understand these before you start</div>
+    <div class="esl-row"><div class="esl-word">fraction</div><div class="esl-def">A number that represents PART of a whole. Written as numerator ÷ denominator. 3/4 means 3 parts out of 4 equal parts.</div></div>
+    <div class="esl-row"><div class="esl-word">numerator</div><div class="esl-def">The TOP number — how many parts you HAVE. In 3/4, numerator = 3.</div></div>
+    <div class="esl-row"><div class="esl-word">denominator</div><div class="esl-def">The BOTTOM number — how many equal parts the WHOLE is divided into. In 3/4, denominator = 4.</div></div>
+    <div class="esl-row"><div class="esl-word">equivalent</div><div class="esl-def">EQUAL in value. Fractions that look different but represent the same amount. 1/2 = 2/4 = 3/6 = 4/8. They are all the same point on a number line.</div></div>
+    <div class="esl-row"><div class="esl-word">simplify</div><div class="esl-def">Reduce a fraction to its SIMPLEST FORM. Divide both numerator and denominator by their HCF. 6/8 ÷ 2 = 3/4.</div></div>
+    <div class="esl-row"><div class="esl-word">HCF</div><div class="esl-def">Highest Common Factor — the BIGGEST number that divides exactly into two numbers. HCF of 6 and 8 = 2. HCF of 12 and 18 = 6.</div></div>
+    <div class="esl-row"><div class="esl-word">mixed number</div><div class="esl-def">A WHOLE NUMBER and a fraction together. 2¾ = "two and three-quarters." Has both a whole part and a fraction part.</div></div>
+    <div class="esl-row"><div class="esl-word">improper fraction</div><div class="esl-def">A fraction where the NUMERATOR is BIGGER than the denominator. 11/4 is improper — it means more than one whole.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🍕</span> What Is a Fraction? — The Pizza Model</div>
+  <div class="callout info">
+    <div class="ci">🍕</div>
+    <div class="ct"><strong>Visual model:</strong> Imagine a pizza cut into <strong>8 equal slices</strong>. You eat 6 slices. You have eaten <strong>6/8</strong> of the pizza. Bottom number (8) = total slices. Top number (6) = slices you ate. Now — 6/8 and 3/4 are the SAME amount. Cut the pizza into 4 instead of 8, and you ate 3 of them. Same pizza, same amount. This is equivalence.</div>
+  </div>
+  <div class="formula">
+    <span class="hl">3</span>   ← numerator (parts you HAVE)<br>
+    ─────<br>
+    <span class="hl2">4</span>   ← denominator (equal parts the WHOLE is divided into)<br><br>
+    <span class="comment">Read as: "three quarters" or "three out of four"</span><br>
+    <span class="comment">Numerator = Denominator → equals 1 whole (e.g. 4/4 = 1)</span><br>
+    <span class="comment">Numerator > Denominator → improper fraction (e.g. 5/4 = more than 1 whole)</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🧱</span> Fraction Wall — Seeing Equivalence Visually</div>
+  <div class="callout tip">
+    <div class="ci">👁️</div>
+    <div class="ct">Each row below represents ONE WHOLE. Cells that line up in the same column are EQUIVALENT — they represent the same amount. Find 1/2 and trace downwards — 2/4, 3/6, 4/8 are all equal to it.</div>
+  </div>
+  <div class="fwall" id="fwall"></div>
+  <div class="callout good" style="margin-top:10px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Key equivalences to memorise:</strong> 1/2=2/4=3/6=4/8=5/10 &nbsp;|&nbsp; 1/3=2/6=3/9 &nbsp;|&nbsp; 1/4=2/8=3/12 &nbsp;|&nbsp; 2/3=4/6=6/9</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">⬇️</span> How to Simplify a Fraction — Step by Step</div>
+  <div class="callout warn">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The rule:</strong> Divide BOTH the numerator AND denominator by their <strong>Highest Common Factor (HCF)</strong>. The fraction's VALUE does not change — you are writing it in a simpler, cleaner form.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Write all factors of the numerator and denominator</div><div class="step-desc">Example: Simplify 18/24.<br>Factors of 18: 1, 2, 3, <strong>6</strong>, 9, 18<br>Factors of 24: 1, 2, 3, 4, <strong>6</strong>, 8, 12, 24</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Find the HIGHEST Common Factor (HCF)</div><div class="step-desc">Circle the biggest number that appears in BOTH lists.<br>Common factors of 18 and 24: 1, 2, 3, 6 → <strong>HCF = 6</strong></div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Divide BOTH top and bottom by the HCF</div><div class="step-desc">18 ÷ 6 = 3 &nbsp;&nbsp;&nbsp; 24 ÷ 6 = 4 &nbsp;&nbsp;&nbsp; → <strong>Answer: 3/4</strong></div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">4</div><div><div class="step-title">Check: can you simplify further?</div><div class="step-desc">Factors of 3: 1, 3. Factors of 4: 1, 2, 4. Only common factor is 1 → cannot simplify further. <strong>3/4 is in its simplest form.</strong> ✓</div></div></div>
+  </div>
+  <div class="formula" style="margin-top:16px;">
+    <span class="comment">More worked examples:</span><br><br>
+    6/8   → HCF(6,8)=2   → 6÷2 / 8÷2   = <span class="hl">3/4</span><br>
+    10/15 → HCF(10,15)=5 → 10÷5 / 15÷5 = <span class="hl">2/3</span><br>
+    12/20 → HCF(12,20)=4 → 12÷4 / 20÷4 = <span class="hl">3/5</span><br>
+    24/36 → HCF(24,36)=12 → 24÷12 / 36÷12 = <span class="hl">2/3</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔄</span> Equivalent Fractions — Zooming In and Out</div>
+  <div class="callout info">
+    <div class="ci">🔍</div>
+    <div class="ct"><strong>The rule:</strong> Multiply OR divide BOTH numerator AND denominator by the <strong>same number</strong>. The VALUE stays equal — you are just changing how you express it. Think of multiplying as "zooming in" (more slices) and dividing as "zooming out" (fewer slices).</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Creating equivalent fractions — multiply or divide BOTH top and bottom by the same number:</span><br><br>
+    3/4 = ?/12 → denominator: 4×3=12 → numerator: 3×3=<span class="hl">9</span> → answer: <span class="hl">9/12</span><br>
+    3/4 = ?/20 → denominator: 4×5=20 → numerator: 3×5=<span class="hl">15</span> → answer: <span class="hl">15/20</span><br><br>
+    <span class="comment">Filling in a blank (reverse method):</span><br>
+    ?/10 = 2/5 → denominator: 5×2=10 → numerator: 2×2=<span class="hl">4</span> → answer: <span class="hl">4/10</span>
+  </div>
+  <div class="callout tip">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> You MUST do the SAME thing to BOTH top and bottom. Multiplying the top by 3 and the bottom by 4 changes the value of the fraction. Rule: same operation, same number, both parts — always.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔃</span> Mixed Numbers ↔ Improper Fractions</div>
+  <div class="compare">
+    <div class="cmp-col">
+      <div class="cmp-head" style="color:#FCD34D;">Mixed → Improper</div>
+      <div class="cmp-row"><strong>Formula:</strong> (whole × denominator) + numerator. Keep the denominator.</div>
+      <div class="cmp-row">2¾ → (2×4)+3 = 8+3 = 11 → <strong>11/4</strong></div>
+      <div class="cmp-row">3⅖ → (3×5)+2 = 15+2 = 17 → <strong>17/5</strong></div>
+      <div class="cmp-row">5⅓ → (5×3)+1 = 15+1 = 16 → <strong>16/3</strong></div>
+    </div>
+    <div class="cmp-col">
+      <div class="cmp-head" style="color:#FCD34D;">Improper → Mixed</div>
+      <div class="cmp-row"><strong>Method:</strong> Divide numerator by denominator. Quotient = whole number. Remainder = new numerator.</div>
+      <div class="cmp-row">11/4 → 11÷4 = 2 rem 3 → <strong>2¾</strong></div>
+      <div class="cmp-row">17/5 → 17÷5 = 3 rem 2 → <strong>3⅖</strong></div>
+      <div class="cmp-row">22/7 → 22÷7 = 3 rem 1 → <strong>3 1/7</strong></div>
+    </div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Built-in check:</strong> Convert your answer back the other way. If 2¾ → 11/4, then 11/4 should convert back to 2¾. If it does, your answer is correct. Always use this in tests.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🎯</span> Fractions Practice Challenge</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCIENCE — Tissues, Organs & Organ Systems
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🫀</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 3</div>
+  <div class="hero-title">Tissues, Organs<br>&amp; Organ Systems</div>
+  <div class="hero-subtitle">Levels of organisation · Cell → Tissue → Organ → System → Organism · Major organs and their functions</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Biology</span><span class="hero-tag">Human Body</span><span class="hero-tag">Organisation</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Biology Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these before studying the hierarchy of organisation</div>
+    <div class="esl-row"><div class="esl-word">cell</div><div class="esl-def">The SMALLEST unit of life. The building block of everything living. Like one single brick. You have about 37 trillion cells in your body.</div></div>
+    <div class="esl-row"><div class="esl-word">tissue</div><div class="esl-def">A GROUP of the SAME type of cells all doing the same job together. Like a wall made of identical bricks. Muscle tissue = many muscle cells contracting together.</div></div>
+    <div class="esl-row"><div class="esl-word">organ</div><div class="esl-def">A structure made of DIFFERENT types of tissue working together to do ONE specific job. The heart has muscle tissue, nerve tissue, connective tissue — all in one organ.</div></div>
+    <div class="esl-row"><div class="esl-word">organ system</div><div class="esl-def">A GROUP of ORGANS working together to carry out ONE major body function. Like a whole floor of a building — several rooms (organs) serving a connected purpose.</div></div>
+    <div class="esl-row"><div class="esl-word">organism</div><div class="esl-def">A COMPLETE living thing — the highest level of organisation. YOU are an organism. A tree is an organism. A bacterium is an organism.</div></div>
+    <div class="esl-row"><div class="esl-word">function</div><div class="esl-def">The JOB or PURPOSE of something. Always answer function questions with a verb: "to pump," "to absorb," "to filter," "to carry."</div></div>
+    <div class="esl-row"><div class="esl-word">circulatory system</div><div class="esl-def">The organ system that moves blood around the body. Contains the heart, arteries, veins and capillaries. Delivers oxygen and nutrients; removes waste products.</div></div>
+    <div class="esl-row"><div class="esl-word">digestive system</div><div class="esl-def">The organ system that breaks food into nutrients the body can absorb. Contains: mouth, oesophagus, stomach, small intestine, large intestine, liver, pancreas.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🏗️</span> The 5 Levels of Organisation — Smallest to Largest</div>
+  <div class="callout info">
+    <div class="ci">🪆</div>
+    <div class="ct"><strong>Think of Russian nesting dolls (Matryoshka):</strong> Each level fits INSIDE the next bigger level. Cells inside tissues. Tissues inside organs. Organs inside organ systems. Organ systems inside the organism — YOU. Each level cannot exist without the ones inside it.</div>
+  </div>
+  <div class="hier-wrap">
+    <div class="hier-box" style="background:#1E7A3E;">CELL</div>
+    <div class="hier-arrow">→</div>
+    <div class="hier-box" style="background:#17673A;">TISSUE</div>
+    <div class="hier-arrow">→</div>
+    <div class="hier-box" style="background:#115430;">ORGAN</div>
+    <div class="hier-arrow">→</div>
+    <div class="hier-box" style="background:#0C4124;">ORGAN SYSTEM</div>
+    <div class="hier-arrow">→</div>
+    <div class="hier-box" style="background:#072E1A;">ORGANISM</div>
+  </div>
+  <table class="data-table" style="margin-top:14px;">
+    <thead><tr><th>Level</th><th>Definition</th><th>Body Example</th><th>Building Analogy</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Cell</strong></td><td>Smallest living unit</td><td>Muscle cell, nerve cell, red blood cell</td><td>One single brick</td></tr>
+      <tr><td><strong>2. Tissue</strong></td><td>Same-type cells doing same job</td><td>Muscle tissue, nerve tissue, epithelial tissue</td><td>A wall of identical bricks</td></tr>
+      <tr><td><strong>3. Organ</strong></td><td>Different tissues, one specific job</td><td>Heart (muscle + nerve + connective + epithelial tissue)</td><td>A room (walls, floor, ceiling together)</td></tr>
+      <tr><td><strong>4. Organ System</strong></td><td>Group of organs, one major function</td><td>Circulatory system (heart + all blood vessels)</td><td>An entire floor of the building</td></tr>
+      <tr><td><strong>5. Organism</strong></td><td>Complete living being</td><td>A human being — YOU</td><td>The entire building</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🧬</span> Four Types of Tissue — What They Do</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">Muscle Tissue</div><div class="vc-def">Contracts to produce movement. Three types: <strong>skeletal</strong> (voluntary — moves bones), <strong>cardiac</strong> (heart muscle — never tires), <strong>smooth</strong> (involuntary — in stomach, gut walls).</div></div>
+    <div class="vocab-card"><div class="vc-word">Nerve Tissue</div><div class="vc-def">Carries electrical signals (impulses) between brain, spinal cord and the rest of the body at very high speed. Made of specialised cells called <strong>neurones</strong>.</div></div>
+    <div class="vocab-card"><div class="vc-word">Epithelial Tissue</div><div class="vc-def">Lines surfaces and cavities inside and outside the body. Forms the skin (protection from outside), and lines organs and tubes inside (gut lining, lung lining). Acts as a <strong>barrier</strong>.</div></div>
+    <div class="vocab-card"><div class="vc-word">Connective Tissue</div><div class="vc-def">Supports and connects other tissues. Includes bone, cartilage, tendons, ligaments — and <strong>blood</strong> (which technically connects all systems by transporting materials between them).</div></div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>The heart — a perfect organ example:</strong> The heart contains ALL four tissue types. Cardiac <strong>muscle tissue</strong> to pump. <strong>Nerve tissue</strong> to control rhythm (the sinoatrial node is your natural pacemaker). <strong>Epithelial tissue</strong> lining the chambers. <strong>Connective tissue</strong> (the pericardium — tough outer sac). This combination of different tissues is exactly what makes it an ORGAN, not merely "a muscle."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🫁</span> Major Organs — Click to Learn Each One</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('heart')">🫀 Heart</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('lungs')">🫁 Lungs</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('brain')">🧠 Brain</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('stomach')">🟡 Stomach</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('liver')">🟤 Liver</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('kidney')">🫘 Kidneys</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('small_int')">〰️ Small Intestine</button>
+  </div>
+  <div class="cell-panel" id="organ-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click an organ button to learn its function, tissues, and which organ system it belongs to.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">⚙️</span> Two Key Organ Systems in Detail</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.5);">
+      <div class="cmp-head" style="color:#6EE7B7;">🫀 Circulatory System</div>
+      <div class="cmp-row"><strong>Function:</strong> Deliver oxygen and nutrients to every cell. Remove CO₂ and waste.</div>
+      <div class="cmp-row"><strong>Main organs:</strong> Heart, arteries, veins, capillaries, blood</div>
+      <div class="cmp-row">Heart beats ~70 times/min = 100,000 times per day — never resting</div>
+      <div class="cmp-row"><strong>Arteries</strong> carry blood AWAY from the heart. <strong>Veins</strong> return blood TO the heart. <strong>Capillaries</strong> are the tiny vessels where gas exchange with cells happens.</div>
+      <div class="cmp-row">Blood vessels laid end-to-end = ~96,000 km (twice around Earth)</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">🫁 Digestive System</div>
+      <div class="cmp-row"><strong>Function:</strong> Break food into nutrients small enough to be absorbed into the blood.</div>
+      <div class="cmp-row"><strong>Main organs:</strong> Mouth, oesophagus, stomach, small intestine, large intestine, liver, pancreas</div>
+      <div class="cmp-row">Stomach acid reaches pH 2 — strong enough to break down proteins (and potentially dissolve metal)</div>
+      <div class="cmp-row">Small intestine is ~6 metres long — absorbs nutrients into blood via villi (finger-like projections)</div>
+      <div class="cmp-row">Liver performs 500+ functions: detoxifies blood, produces bile, regulates blood sugar</div>
+    </div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 Level 6 key understanding:</strong> Organ systems are <strong>interdependent</strong> — they depend on each other. The circulatory system DELIVERS the nutrients the digestive system EXTRACTED. The respiratory system PROVIDES the oxygen the circulatory system CARRIES. The nervous system CONTROLS when all the others speed up or slow down. Nothing works in isolation.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🎯</span> Organisation of Life — Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HISTORY — Ancient Greece
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏛️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History · Week 3</div>
+  <div class="hero-title">Ancient Greece —<br>Democracy, Philosophy<br>&amp; Legacy</div>
+  <div class="hero-subtitle">City-states · Athens vs Sparta · Birth of democracy · Greek philosophers · Legacy to the modern world</div>
+  <div class="hero-tags">
+    <span class="hero-tag">c.800–146 BC</span><span class="hero-tag">Democracy</span><span class="hero-tag">Philosophy</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL History Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Historical vocabulary — understand these before reading</div>
+    <div class="esl-row"><div class="esl-word">ancient</div><div class="esl-def">Very OLD — thousands of years ago. Ancient Greece = approximately 800–146 BC — over 2,000 years before today.</div></div>
+    <div class="esl-row"><div class="esl-word">city-state (polis)</div><div class="esl-def">An independent city that ruled ITSELF like a small country. Each had its own government, laws, army and money. Athens and Sparta were the two most famous.</div></div>
+    <div class="esl-row"><div class="esl-word">democracy</div><div class="esl-def">Government where THE PEOPLE have a say. From Greek: <em>demos</em> (people) + <em>kratos</em> (power). Athens invented the world's first democracy around 508 BC.</div></div>
+    <div class="esl-row"><div class="esl-word">oligarchy</div><div class="esl-def">Rule by a SMALL GROUP of powerful people. From Greek: <em>oligos</em> (few) + <em>arche</em> (rule). Sparta was an oligarchy — ruled by two kings and a council of elders.</div></div>
+    <div class="esl-row"><div class="esl-word">philosopher</div><div class="esl-def">A THINKER who asks big questions about life, truth, knowledge and ethics. From Greek: <em>philos</em> (love) + <em>sophia</em> (wisdom). Philosophy = "love of wisdom."</div></div>
+    <div class="esl-row"><div class="esl-word">legacy</div><div class="esl-def">Something from the PAST that still affects us TODAY. The Olympics, democracy, theatre, geometry — all Greek legacies still alive in your world right now.</div></div>
+    <div class="esl-row"><div class="esl-word">acropolis</div><div class="esl-def">A HIGH HILL in an ancient Greek city where important temples were built. Athens' Acropolis holds the Parthenon — built 447–432 BC in honour of the goddess Athena.</div></div>
+    <div class="esl-row"><div class="esl-word">agora</div><div class="esl-def">The PUBLIC SQUARE or marketplace where citizens gathered, debated, traded and voted. The centre of Athenian democratic life — like a parliament square and marketplace combined.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🗺️</span> Where and When? — Setting the Scene</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct"><strong>Location:</strong> Ancient Greece was NOT a single country. It was a collection of city-states around the Mediterranean and Aegean Seas — mainland Greece, islands (Crete, Rhodes, Corfu) and colonies stretching from Spain to modern Turkey. The Greeks called themselves <em>Hellenes</em> and their land <em>Hellas</em>.</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">c.800 BC</div><div class="tl-title">Rise of the City-States (poleis)</div><div class="tl-desc">Greek communities organise into independent city-states. Trade, colonisation and fierce competition between them begins. Each polis develops its own identity, values and government.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">776 BC</div><div class="tl-title">First Olympic Games</div><div class="tl-desc">Held at Olympia in honour of Zeus. All Greek city-states observed a truce to attend. The Games unified a fragmented culture — sport as shared Greek identity.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">508 BC</div><div class="tl-title">Birth of Athenian Democracy — Cleisthenes</div><div class="tl-desc">Cleisthenes reforms the Athenian government, giving free male citizens the right to vote in an Assembly. The world's first democracy is established. A revolution in political thought.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">490–479 BC</div><div class="tl-title">Persian Wars — Greece vs the Persian Empire</div><div class="tl-desc">Athens and Sparta unite briefly to defeat the vast Persian Empire. Battle of Marathon (490 BC): Athenians defeat Persians against huge odds — a messenger runs 42 km to Athens to deliver the news. Origin of the modern marathon race.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">447–432 BC</div><div class="tl-title">The Golden Age of Athens — Parthenon Built</div><div class="tl-desc">Under the leadership of Pericles, Athens builds the Parthenon on the Acropolis. Peak of art, philosophy, drama and democratic participation. This era produced Socrates, Sophocles, Thucydides and Hippocrates.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">469–399 BC</div><div class="tl-title">Life of Socrates</div><div class="tl-desc">The greatest philosopher of Ancient Greece. Never wrote a single word — his ideas survive only through his student Plato. Executed by Athens in 399 BC for "corrupting the youth" by asking too many uncomfortable questions.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#60A5FA;"></div><div class="tl-date">146 BC</div><div class="tl-title">Rome Conquers Greece — But Greece Conquers Rome's Mind</div><div class="tl-desc">Rome conquers Greece militarily. Yet Romans said: "Captive Greece captured her savage victor" — meaning Greek culture, philosophy and art completely overwhelmed Roman culture. Greek ideas, not Roman ones, became the foundation of Western civilisation.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">⚔️</span> Athens vs Sparta — Two Very Different City-States</div>
+  <div class="callout warn">
+    <div class="ci">🎓</div>
+    <div class="ct"><strong>KS3 Level 6 thinking:</strong> Don't just LIST differences — EXPLAIN why they existed. Athens was a coastal trading city that needed educated diplomats and thinkers. Sparta was inland and depended on military force to control its massive enslaved population (helots). Their values came from their circumstances.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>⚡ Athens</th><th>⚔ Sparta</th><th>Why the difference?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Government</strong></td><td>Democracy — free male citizens voted in the Assembly</td><td>Oligarchy — two kings + Council of Elders + Ephors</td><td>Athens valued citizen participation; Sparta valued order, tradition and military hierarchy</td></tr>
+      <tr><td><strong>Focus</strong></td><td>Arts, philosophy, trade, seafaring, oratory</td><td>Military training, physical strength, discipline, warfare</td><td>Athens' wealth came from trade; Sparta's power came from its army</td></tr>
+      <tr><td><strong>Boys' education</strong></td><td>Reading, writing, mathematics, music, rhetoric (the art of persuasive speech)</td><td>Military training (the agoge) from age 7 — combat, endurance, obedience, survival</td><td>Athens needed educated citizens for democracy; Sparta needed elite soldiers</td></tr>
+      <tr><td><strong>Women</strong></td><td>Limited rights — confined to the home; no political participation</td><td>More freedom — owned land, exercised publicly, spoke their minds</td><td>Spartan women managed estates while men were at war; their role was to produce and raise strong soldiers</td></tr>
+      <tr><td><strong>Famous for</strong></td><td>Parthenon, Socrates, Plato, Aristotle, the theatre, the Olympics</td><td>Battle of Thermopylae (300 Spartans held off a Persian army of thousands), legendary military discipline</td><td>Different core values created different legacies</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🗳️</span> How Athenian Democracy Worked — And Its Limits</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">1</div><div><div class="step-title">The Assembly (Ekklesia) — Where Laws Were Made</div><div class="step-desc">All free adult male citizens could attend and vote on laws, declarations of war, and public policy. Meetings held on the Pnyx hill near the Agora. Around 6,000 citizens attended major debates out of roughly 30,000–40,000 eligible people.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">2</div><div><div class="step-title">The Council (Boule) — 500 Citizens by Lottery</div><div class="step-desc">500 citizens chosen by lottery (not election!) to serve one year. They prepared legislation for the Assembly. A lottery was used deliberately — so no powerful family could dominate. Any citizen could serve. This is radical equality of opportunity.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">3</div><div><div class="step-title">The Courts (Dikasteria) — Giant Juries</div><div class="step-desc">Juries of 201–2,501 citizens voted on legal cases by secret ballot. Large numbers prevented bribery — you cannot bribe 500 people. Citizens could also prosecute government officials if they abused power.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">4</div><div><div class="step-title">Ostracism — Removing Dangerous Leaders</div><div class="step-desc">Citizens could vote to EXILE a politician for 10 years by scratching their name on a pottery shard (ostrakon — this is where we get the word "ostracise"). No trial, no charges needed — just 6,000 votes. This protected democracy from anyone who might try to seize power.</div></div></div>
+  </div>
+  <div class="callout key" style="margin-top:14px;">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Critical evaluation — the limits of Athenian democracy:</strong> Only FREE ADULT MALE citizens could vote — roughly 10–20% of the total population. <strong>Women</strong> (50% of population): no vote. <strong>Slaves</strong> (30–40% of population, who produced most of the wealth): no vote. <strong>Foreign residents / metics</strong>: no vote. This is a key KS3 evaluative question: was Athens truly a democracy, or an exclusive club for one group of men?</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🧠</span> The Three Great Philosophers</div>
+  <div class="callout tip">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Etymology:</strong> <em>Philo-</em> = love (philanthropy = love of people; philharmonic = love of harmony). <em>-sophia</em> = wisdom (sophisticated). Philosophy = "love of wisdom." These men did not just think — they challenged everything their society believed about gods, justice, truth and what it means to be human.</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">🏛️ Socrates (469–399 BC) — "I know that I know nothing"</div><div class="acc-sub">Father of Western philosophy · Athenian · Never wrote a word</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">Socrates never wrote anything — everything we know comes from his student Plato. He walked Athens asking questions to challenge what people thought they knew. This is the <strong>Socratic Method</strong> — using questions to expose contradictions and push toward truth. His core insight: most people are confident in beliefs they cannot actually justify. True wisdom begins with knowing your own ignorance.<br><br><strong>Why was he executed?</strong> In 399 BC he was put on trial for "impiety" (disrespecting the gods) and "corrupting the youth." Found guilty by 500 jurors, sentenced to death by drinking hemlock. He refused to flee or compromise. His death became the defining symbol of a person who valued truth above life itself — inspiring philosophers and freedom fighters for 2,500 years.</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">📚 Plato (428–348 BC) — "Knowledge is the food of the soul"</div><div class="acc-sub">Student of Socrates · Founded the Academy · Theory of Forms</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">Plato was Socrates' most famous student. He founded the <strong>Academy</strong> in Athens in 387 BC — the world's first institution for higher learning (the origin of our word "academic"). His most famous work: <em>The Republic</em> — asks "What is justice? What is the ideal state? Who should rule?" His answer: philosopher-kings who love wisdom above power or money.<br><br><strong>Theory of Forms:</strong> Plato believed the physical world is just a shadow of a perfect, invisible world of ideal "Forms." Every chair is an imperfect copy of the ideal Form of a chair. Mathematical truths (like the Pythagorean theorem) exist in this perfect realm — they are discovered, not invented. This idea influenced all of Western philosophy, Christian theology, and Islamic scholarship for over 1,500 years.</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">🔬 Aristotle (384–322 BC) — "We are what we repeatedly do"</div><div class="acc-sub">Student of Plato · Tutor of Alexander the Great · Father of Science</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">Aristotle disagreed with his teacher Plato fundamentally. While Plato looked to an invisible world of perfect forms, Aristotle believed truth is found by carefully <strong>observing the physical world</strong>. He catalogued hundreds of animals, developed formal logic, and wrote about ethics, politics, poetry, physics, astronomy and biology — essentially inventing multiple academic disciplines.<br><br><strong>His greatest student:</strong> Aristotle tutored a 13-year-old prince who became <strong>Alexander the Great</strong> — the conqueror of most of the known world, from Greece to India. Aristotle's influence spread through Alexander's vast empire.<br><br><strong>His lasting legacy:</strong> For nearly 2,000 years after his death, Aristotle was considered the definitive authority on almost every subject of human knowledge. Medieval Islamic scholars and Christian theologians called him simply "The Philosopher." The scientific method — observe, hypothesise, test — begins with Aristotle.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🌍</span> Greek Legacy — Why Ancient Greece Still Matters Today</div>
+  <div class="callout info">
+    <div class="ci">🎓</div>
+    <div class="ct"><strong>KS3 concept — Historical Significance:</strong> A civilisation is historically significant if it changed the world in lasting, far-reaching ways. Ancient Greece meets this test in almost every area of human life. You are living in a world still shaped by Greek ideas every single day.</div>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">🗳️ Democracy</div><div class="vc-def">Most countries today use some form of democratic government. The idea that citizens deserve a political voice was born in Athens in 508 BC and changed the world forever.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏅 Olympic Games</div><div class="vc-def">Modern Olympics began in 1896, directly inspired by the ancient Greek games (776 BC). Every 4 years, 200+ nations compete together — a living 2,800-year-old Greek legacy.</div></div>
+    <div class="vocab-card"><div class="vc-word">🎭 Theatre</div><div class="vc-def">Greeks invented tragedy and comedy as art forms. Every play, film, and TV drama you watch follows storytelling structures developed by Sophocles, Euripides and Aristophanes over 2,400 years ago.</div></div>
+    <div class="vocab-card"><div class="vc-word">📐 Mathematics</div><div class="vc-def">Pythagoras (a²+b²=c²), Euclid (geometry), Archimedes (levers, volume, pi). These principles are used today in engineering, construction, GPS, and every KS3 maths lesson.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏛️ Architecture</div><div class="vc-def">Greek columns (Doric, Ionic, Corinthian) appear on government buildings, courts, banks and universities worldwide — including in Pakistan. The British Museum and US Supreme Court both use Greek architectural styles.</div></div>
+    <div class="vocab-card"><div class="vc-word">⚕️ Medicine</div><div class="vc-def">Hippocrates established medicine as a science separate from religion. The Hippocratic Oath — the ethical promise made by doctors — is still sworn today, 2,500 years after Hippocrates wrote it.</div></div>
+    <div class="vocab-card"><div class="vc-word">🔬 Scientific Method</div><div class="vc-def">Aristotle pioneered the idea of observing the world carefully and drawing conclusions from evidence — the foundation of all modern science. Every scientist in every laboratory today follows a process Aristotle began.</div></div>
+    <div class="vocab-card"><div class="vc-word">📖 Literature</div><div class="vc-def">Homer's <em>Iliad</em> and <em>Odyssey</em> (written c.800 BC) are the oldest surviving narrative poems in Western literature. They shaped storytelling for nearly 3,000 years and are still read in universities today.</div></div>
+  </div>
+  <div class="callout good" style="margin-top:14px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Greek roots are everywhere in English:</strong> <em>bio</em>logy (bios=life), <em>geo</em>graphy (geo=earth), <em>demo</em>cracy (demos=people), <em>philo</em>sophy (philos=love), <em>astro</em>nomy (astron=star), <em>micro</em>scope (mikros=small), <em>tele</em>phone (tele=far). Learning Greek roots helps you decode thousands of academic English words — and many Arabic and Urdu words too.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🎯</span> Ancient Greece — Knowledge Challenge</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Fraction wall
+(function(){
+  const data=[
+    {n:1,label:'1',c:'#B45309'},{n:2,label:'½',c:'#9A4520'},{n:3,label:'⅓',c:'#854530'},
+    {n:4,label:'¼',c:'#7A3A2A'},{n:5,label:'⅕',c:'#6F3025'},{n:6,label:'⅙',c:'#642820'},
+    {n:8,label:'⅛',c:'#59201A'},{n:10,label:'1/10',c:'#4E1815'}
+  ];
+  const w=document.getElementById('fwall');
+  if(!w)return;
+  data.forEach(({n,label,c})=>{
+    const row=document.createElement('div');row.className='fwall-row';
+    for(let i=0;i<n;i++){
+      const cell=document.createElement('div');cell.className='fwall-cell';
+      cell.style.background=c;cell.textContent=label;row.appendChild(cell);
+    }
+    w.appendChild(row);
+  });
+})();
+
+// Organ info
+const organData={
+  heart:{e:'🫀',name:'Heart',sys:'Circulatory System',body:'Pumps blood around the body continuously — about <strong>70 times per minute</strong>, 100,000 times per day. Made primarily of <strong>cardiac muscle tissue</strong> (which never tires — it works every second of your life). Has four chambers: two atria (receive blood) and two ventricles (pump blood out). The right side pumps to the lungs; the left side pumps to the rest of the body.',a:'🔋 Analogy: The body\'s pump. Like a water pump that NEVER switches off — even during sleep, even during surgery.'},
+  lungs:{e:'🫁',name:'Lungs',sys:'Respiratory System',body:'Two spongy organs in the chest that exchange gases: taking in <strong>oxygen</strong> from the air and releasing <strong>carbon dioxide</strong> (a waste product). The lungs do not move themselves — the diaphragm contracts to pull air in and relaxes to push it out. Each lung contains millions of tiny air sacs called <strong>alveoli</strong> where gas exchange with the blood happens.',a:'💨 Analogy: Like two enormous sponges — absorbing oxygen from every breath and passing it to the blood.'},
+  brain:{e:'🧠',name:'Brain',sys:'Nervous System',body:'The control centre of the entire body. Contains about <strong>86 billion nerve cells (neurones)</strong>. Divided into regions: the <strong>cerebrum</strong> (thinking, memory, language, personality), <strong>cerebellum</strong> (balance, coordination), and <strong>brainstem</strong> (breathing, heart rate — unconscious, automatic functions). Uses 20% of the body\'s energy despite being only 2% of its weight.',a:'💻 Analogy: The body\'s supercomputer — processing millions of signals per second, storing memories, and controlling everything from movement to emotion.'},
+  stomach:{e:'🟡',name:'Stomach',sys:'Digestive System',body:'A muscular bag that uses <strong>hydrochloric acid (pH ~2)</strong> and digestive enzymes to break down food — especially proteins. It churns food through muscular contractions to create a liquid called <strong>chyme</strong>. Stomach acid is so strong it could dissolve metal. The stomach lining renews itself every few days to avoid being digested by its own acid.',a:'🫙 Analogy: A powerful blender — mechanically and chemically crushing food before passing it to the small intestine.'},
+  liver:{e:'🟤',name:'Liver',sys:'Digestive System',body:'The largest internal organ (~1.5 kg). Performs over <strong>500 different functions</strong>: detoxifying blood (removing alcohol, drugs, toxins), producing bile (to digest fats), regulating blood glucose levels (storing excess as glycogen), making clotting proteins, and processing all absorbed nutrients arriving from the small intestine.',a:'🏭 Analogy: The body\'s chemical factory and recycling plant — constantly processing, filtering, and producing exactly what the body needs.'},
+  kidney:{e:'🫘',name:'Kidneys',sys:'Excretory System',body:'Two bean-shaped organs that filter the blood — approximately <strong>200 litres per day</strong>. They remove waste products (especially <strong>urea</strong>, from protein breakdown) and excess water, producing urine. They also regulate blood pressure, balance salt and mineral levels, and produce a hormone that stimulates red blood cell production in bone marrow.',a:'🔍 Analogy: Two sophisticated water treatment plants running 24/7 — filtering out exactly what the body does not need.'},
+  small_int:{e:'〰️',name:'Small Intestine',sys:'Digestive System',body:'Despite its name, the small intestine is approximately <strong>6 metres long</strong>. Its inner wall is covered in millions of tiny finger-like projections called <strong>villi</strong>, which massively increase the surface area available for absorption. Here, digested nutrients (glucose, amino acids, fatty acids) are absorbed into the bloodstream to be carried to every cell in the body.',a:'〰️ Analogy: A very long, textured carpet — the folds and villi create the surface area of a tennis court inside a small space.'},
+};
+function showOrgan(id){
+  const o=organData[id];if(!o)return;
+  const p=document.getElementById('organ-panel');
+  p.innerHTML='<div style="font-size:2rem;margin-bottom:8px;">'+o.e+'</div><div class="cip-name">'+o.name+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sys+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.a+'</div></div>';
+  p.style.borderColor='#059669';
+}
+
+// Quiz data
+const quizData={
+  bible:[
+    {q:'The Bible contains 66 books. How many are in the Old Testament, and how many in the New Testament?',opts:['OT: 27 / NT: 39','OT: 39 / NT: 27','OT: 33 / NT: 33','OT: 45 / NT: 21'],ans:1,exp:'The Old Testament has 39 books and the New Testament has 27. 39 + 27 = 66. The OT is the larger half — it covers roughly 4,000 years of history from creation to 400 BC.'},
+    {q:'Which section of the Old Testament contains the first 5 books — Genesis, Exodus, Leviticus, Numbers and Deuteronomy?',opts:['History','Poetry & Wisdom','The Law (Torah/Pentateuch)','Major Prophets'],ans:2,exp:'The first 5 books are called the Torah (Hebrew) or Pentateuch (Greek). They contain God\'s law, the creation account, the story of Abraham, Moses, and the Ten Commandments. They were written by Moses.'},
+    {q:'What does the word "Gospel" mean, and how many Gospels are in the New Testament?',opts:['Holy Word — 3 Gospels','Good News — 4 Gospels','God\'s Teaching — 5 Gospels','Sacred Story — 6 Gospels'],ans:1,exp:'Gospel comes from Greek euangelion = "Good News." There are 4 Gospels: Matthew, Mark, Luke and John. Each gives a different perspective on the life, death and resurrection of Jesus — written for different audiences.'},
+    {q:'What genre is the book of Revelation, and why is knowing the genre important?',opts:['History — it records literal future events','Poetry — it uses rhyme and rhythm','Apocalyptic — its imagery (dragons, beasts, numbers) is symbolic; knowing this changes how you read it','Epistle — it is a letter from John to churches'],ans:2,exp:'Revelation is apocalyptic literature — a genre using symbolic imagery to convey spiritual truths to people under persecution. The "beast," the number 666, and cosmic imagery all have symbolic meaning. Misreading it as literal prediction is a genre error.'},
+    {q:'Using the Bible reference system: what does "Ps 23:1" mean?',opts:['Book of Psalms, Chapter 1, Verse 23','Book of Proverbs, Chapter 23, Verse 1','Book of Psalms, Chapter 23, Verse 1','Book of Philippians, Chapter 2, Verse 3'],ans:2,exp:'Ps = Psalms. 23 = Chapter 23. 1 = Verse 1. The format is always: Book → Chapter → Verse. Psalm 23:1 reads: "The Lord is my shepherd; I shall not want." One of the most memorised verses in the Bible.'},
+  ],
+  english:[
+    {q:'Read this: "The soldier sat in the corner, his medals untouched in the drawer." What can we INFER about the soldier?',opts:['He has forgotten where he put his medals','He is proud of his military service','He feels disconnected from or troubled by his past — the untouched medals suggest he wants distance from his military experience','He is planning to sell his medals'],ans:2,exp:'The medals are "untouched" — deliberately not displayed. We INFER that the soldier wants distance from his past, suggesting trauma or unresolved pain. The author does not say this — we deduce it from the specific word "untouched" and the detail of the closed drawer (hidden, stored away, not celebrated).'},
+    {q:'Which BEST describes the concept of "theme" in fiction?',opts:['The list of events that happen in the story (the plot)','The big universal idea or message the story explores — e.g. identity, justice, belonging, courage','The name of the main character','The setting where the story takes place'],ans:1,exp:'Theme is the abstract, universal MESSAGE beneath the surface. A story about a boy escaping his village might have themes of freedom, identity, or the cost of ambition. Theme is what the story MEANS — not what HAPPENS. At KS3, you must identify theme AND show HOW the author communicates it through specific language choices.'},
+    {q:'What is the correct PEEL order when writing an analytical paragraph?',opts:['Point, Example, Explain, Link','Point, Evidence, Explain, Link','Paragraph, Evidence, Evaluate, Language','Proof, Explain, Elaborate, Link'],ans:1,exp:'PEEL = Point (your main idea), Evidence (a quotation from the text), Explain (analyse WHY the author chose that language and what EFFECT it has), Link (connect back to the question or theme). This structure earns marks because it moves from observation to analysis — the key KS3 distinction.'},
+    {q:'An author describes a storm at the exact moment the main character\'s marriage breaks down. This technique is called...',opts:['Metaphor','Foreshadowing','Pathetic Fallacy','Personification'],ans:2,exp:'Pathetic Fallacy = using weather or nature to reflect a character\'s emotional state. "Pathetic" here means relating to the emotions (Greek: pathos = feeling). The storm mirrors inner turmoil. At KS3 Level 6, your job is to explain the EFFECT: "The storm creates a sense of inevitable breakdown, mirroring the character\'s emotional state and making the reader feel the collapse is as uncontrollable as the weather."'},
+    {q:'A student writes: "The author makes the reader scared." Why is this weak at KS3 Level 6?',opts:['It is grammatically incorrect','It identifies an effect but does not explain HOW the author creates it — it needs specific technique, evidence, and analysis of why the author chose that particular word or image','It uses the wrong tense','There is nothing wrong with this statement'],ans:1,exp:'At Level 6, you must move BEYOND identifying effects. Strong analysis = Effect + HOW (which technique?) + WHY (what does this suggest?) + Evidence. Stronger version: "The author creates fear through the imagery of \'the cold hand on her shoulder\' — the physical sensation described makes the threat feel immediate and visceral, placing the reader inside the character\'s body."'},
+  ],
+  maths:[
+    {q:'Simplify 24/36 to its lowest terms. Which answer is correct?',opts:['2/3','4/6','12/18','3/4'],ans:0,exp:'HCF of 24 and 36: list factors of 24 (1,2,3,4,6,8,12,24) and 36 (1,2,3,4,6,9,12,18,36). HCF = 12. Divide both: 24÷12=2, 36÷12=3. Answer: 2/3. Check: HCF(2,3)=1 → cannot simplify further ✓. Note: 4/6 and 12/18 are equivalent to 2/3 but NOT in their simplest form.'},
+    {q:'Fill in the blank: 3/5 = ___/20',opts:['9/20','12/20','15/20','6/20'],ans:1,exp:'Denominator: 5×4=20. So multiply the numerator by the same number: 3×4=12. Answer: 12/20. Verify: 12/20 → HCF(12,20)=4 → 12÷4/20÷4=3/5 ✓ The fractions are equivalent.'},
+    {q:'Convert 4⅗ into an improper fraction.',opts:['20/5','23/5','21/5','19/5'],ans:1,exp:'Formula: (whole × denominator) + numerator, keep denominator. (4×5)+3=20+3=23. Denominator stays 5. Answer: 23/5. Check by converting back: 23÷5=4 remainder 3 → 4⅗ ✓'},
+    {q:'Are 4/6 and 6/9 equivalent? Which answer gives the correct reason?',opts:['No — the numerators and denominators are different numbers','Yes — both simplify to 2/3 (4÷2/6÷2=2/3 and 6÷3/9÷3=2/3), so they have the same value','No — fractions with different denominators can never be equal','Yes — because 4+6=10 and 6+9=15 and 10/15=2/3'],ans:1,exp:'Simplify both fractions: 4/6 → HCF(4,6)=2 → 2/3. 6/9 → HCF(6,9)=3 → 2/3. Both equal 2/3 → they ARE equivalent. You can also cross-multiply to check: 4×9=36 and 6×6=36. Equal cross-products confirm equivalence ✓'},
+    {q:'Put these in order from smallest to largest: 3/4, 2/3, 7/12, 5/6',opts:['2/3, 3/4, 7/12, 5/6','7/12, 2/3, 3/4, 5/6','5/6, 3/4, 2/3, 7/12','3/4, 7/12, 2/3, 5/6'],ans:1,exp:'Convert all to denominator 12: 3/4=9/12, 2/3=8/12, 7/12=7/12, 5/6=10/12. Compare: 7<8<9<10 → 7/12 < 2/3 < 3/4 < 5/6. The key method: always convert to a common denominator before comparing fractions.'},
+  ],
+  science:[
+    {q:'Place these in the correct order from SMALLEST to LARGEST: Organ System, Cell, Organism, Organ, Tissue',opts:['Cell → Tissue → Organ → Organ System → Organism','Tissue → Cell → Organ → System → Organism','Organism → Organ System → Organ → Tissue → Cell','Cell → Organ → Tissue → Organ System → Organism'],ans:0,exp:'Correct hierarchy: Cell (smallest living unit) → Tissue (same cells, same job) → Organ (different tissues, one job) → Organ System (group of organs, one function) → Organism (complete living being). This sequence is fundamental KS3 biology.'},
+    {q:'The heart is described as an ORGAN, not just "a muscle." Which statement BEST explains why?',opts:['Because the heart is very large','Because the heart is found deep inside the body','Because the heart contains MULTIPLE tissue types (cardiac muscle, nerve, connective and epithelial tissue) working together — not just one tissue type','Because the heart beats very fast'],ans:2,exp:'An ORGAN is defined as a structure made of DIFFERENT tissue types working together for one purpose. The heart contains: cardiac muscle tissue (to pump), nerve tissue (the sinoatrial node controls rhythm), epithelial tissue (lining the chambers), and connective tissue (the pericardium outer layer). This combination of tissues is precisely what makes it an organ.'},
+    {q:'A plant wilts when it has not received enough water. At the CELLULAR level, what has happened?',opts:['The chloroplasts have stopped working','The large central vacuoles in plant cells have lost water and deflated — reducing turgor pressure, so cells can no longer support the plant\'s structure','The cell walls have broken down completely','The mitochondria have run out of energy'],ans:1,exp:'Plant cell firmness (turgidity) depends on the large central vacuole being filled with water, pressing against the rigid cell wall — called turgor pressure. Without water: vacuole deflates → less pressure → cells become flaccid → plant wilts. Water the plant and the vacuoles refill — explaining why wilted plants can recover if watered quickly.'},
+    {q:'Why does the small intestine have VILLI on its inner surface?',opts:['To produce digestive acid','To move food along using muscle contractions','To massively increase the surface area available for absorbing nutrients into the blood','To store undigested food before excretion'],ans:2,exp:'Villi are tiny finger-like projections lining the small intestine wall. They dramatically increase surface area — the total absorbing surface of the small intestine is estimated at ~250 m² (the size of a tennis court). Greater surface area = faster, more efficient absorption of glucose, amino acids and fatty acids into the bloodstream.'},
+    {q:'Which statement about organ systems is MOST accurate at KS3 Level 6?',opts:['Organ systems work completely independently of each other','The circulatory system is the most important — all others depend on it','Organ systems are deeply interdependent — the function of each system relies on inputs from other systems','Each organ system contains exactly five organs'],ans:2,exp:'Organ systems are interdependent. The circulatory system delivers oxygen — obtained by the respiratory system. It delivers nutrients — extracted by the digestive system. It carries hormones — produced by the endocrine system. The nervous system controls when all others speed up or slow down. Nothing works in isolation. This interconnection is what KS3 Level 6 biology expects you to understand.'},
+  ],
+  history:[
+    {q:'What does "democracy" mean in its original Greek roots?',opts:['Rule by the wise','People\'s power — from demos (people) + kratos (rule/power)','Government by written law','Freedom from tyranny'],ans:1,exp:'Democracy = demos (people) + kratos (power/rule). Literally: "rule by the people." Cleisthenes introduced it in Athens around 508 BC. It was revolutionary — before this, power belonged to kings, nobles or tyrants, not ordinary citizens. Understanding the etymology tells you exactly what democracy claims to be.'},
+    {q:'Why was Athenian democracy considered LIMITED, despite being revolutionary?',opts:['Athens only held elections every 10 years','Only wealthy men could vote','Only free adult male citizens could vote — women, slaves (30–40% of population) and foreign residents were all excluded','The Assembly met only once a year'],ans:2,exp:'Athens was revolutionary in extending political participation beyond the nobility — but its democracy excluded the majority. Women (50% of population): no vote. Enslaved people (30–40% of population, who produced most of Athens\' wealth): no vote. Foreign residents (metics): no vote. This is the essential critical evaluation: Athens created the idea of democracy but applied it only to a minority.'},
+    {q:'Socrates was executed by Athens in 399 BC. What does this most reveal about Athenian democracy?',opts:['Athens had a perfect and just legal system','Even in a democracy, the majority can persecute those who challenge accepted beliefs — majority rule does not automatically protect individual rights','Socrates was genuinely guilty of serious crimes','Athens was not actually a democracy at all'],ans:1,exp:'Socrates\' death reveals democracy\'s key weakness: the tyranny of the majority. 500 democratically chosen jurors voted to execute him for asking questions that made people uncomfortable. This event directly inspired Plato to question whether democracy always produces justice — or whether it can be driven by popular emotion and fear of change. This is one of the deepest questions in political philosophy.'},
+    {q:'Which BEST explains why Sparta developed such an intensely militaristic society?',opts:['Spartans simply enjoyed fighting more than other Greeks','Sparta\'s large enslaved population (helots) outnumbered Spartans — constant fear of revolt meant Sparta needed a powerful, always-ready army to maintain control','Sparta was at war with Athens continuously for 300 years','The Spartan climate made farming impossible, so they raided neighbouring cities'],ans:1,exp:'Sparta\'s militarism was rooted in a practical fear. Spartan society depended on helots (enslaved people from conquered Messenia) who outnumbered Spartan citizens approximately 7:1. A helot revolt would destroy Spartan society entirely. To prevent this, Sparta maintained a permanent military culture: every citizen was a soldier, trained from birth. Social structure — not just warrior values — created the Spartan military machine.'},
+    {q:'"Captive Greece captured her savage victor." What does this Roman saying reveal?',opts:['Greece defeated Rome militarily and politically','Although Rome conquered Greece politically and militarily, Greek culture, philosophy, art and ideas so overwhelmed Roman civilisation that Greece won the cultural and intellectual war','Romans learned Greek as a foreign hobby language','Greece and Rome were equally matched civilisations'],ans:1,exp:'When Rome conquered Greece in 146 BC, educated Romans were fascinated by Greek culture. Roman elites sent children to Athens to study. Greek became the language of educated Romans. Roman gods were renamed Greek gods (Zeus→Jupiter, Athena→Minerva). Roman philosophy, architecture and theatre all directly imitated Greek models. In every cultural sense, Greece conquered Rome — which is why Greek (not Roman) ideas form the foundation of Western civilisation.'},
+  ],
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{
+  quizState[s]={idx:0,score:0};
+  renderQuiz(s);
+});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){
+    container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';
+    celebrate();return;
+  }
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){
+    quizState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='quiz-fb ok';fb.style.display='block';
+    fb.innerHTML='✅ Correct! '+q.exp;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='quiz-fb bad';fb.style.display='block';
+    fb.innerHTML='❌ Not quite. '+q.exp;
+  }
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+
+function celebrate(){
+  const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];
+  for(let i=0;i<70;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=cols[Math.floor(Math.random()*cols.length)];
+      el.style.animationDuration=(1.8+Math.random()*2.2)+'s';
+      el.style.animationDelay=(Math.random()*0.3)+'s';
+      el.style.width=(7+Math.random()*7)+'px';
+      el.style.height=(9+Math.random()*9)+'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),5000);
+    },i*25);
+  }
+}
+</script>
+</body>
+</html>

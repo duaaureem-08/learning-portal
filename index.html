@@ -636,6 +636,14 @@ const KS2_WEEK3_RESOURCES = [
   {icon:'🎮', bg:'#EDE9FE', name:'Day 3 — Quiz Games',  topic:'All 5 subjects — grand review & quizzes', file:'KS2_L3_Week3_Day3.html', badge:'b-html', badgeText:'HTML'},
 ];
 
+// ── KS3 JESSICA/AREEJ — Week 3 resources (root-level files) ────
+const KS3_WEEK3_RESOURCES = [
+  {icon:'📖', bg:'rgba(139,92,246,0.15)', name:'Interactive Lesson', topic:'All 5 subjects — teaching notes, diagrams & key vocabulary', file:'HOS_Week3_Lessons.html', badge:'b-html', badgeText:'HTML'},
+  {icon:'✍️', bg:'rgba(244,63,94,0.12)',  name:'Day 1 Worksheets',   topic:'All 5 subjects — written answers, then submit', file:'KS3_L6_Week3_Day1_Worksheets.html', badge:'b-html', badgeText:'HTML'},
+  {icon:'✍️', bg:'rgba(245,158,11,0.12)', name:'Day 2 Worksheets',   topic:'All 5 subjects — written answers, then submit', file:'KS3_L6_Week3_Day2_Worksheets.html', badge:'b-html', badgeText:'HTML'},
+  {icon:'✍️', bg:'rgba(16,185,129,0.12)', name:'Day 3 Worksheets',   topic:'All 5 subjects — written answers, then submit', file:'KS3_L6_Week3_Day3_Worksheets.html', badge:'b-html', badgeText:'HTML'},
+];
+
 const KS2_WEEKS_DATA = [
   {w:1,  title:'Introduction',          topics:'Creation · Phonics · Place Value · Working Scientifically · My Community',             status:'s-pending'},
   {w:2,  title:'Core Foundations',      topics:'Adam & Eve · Sentences · Column Addition · Plants · Maps',                            status:'s-partial', subjects: KS2_SUBJECTS_W2},
@@ -797,6 +805,10 @@ function buildTeacherWeeks() {
     {w:2, title:'Deep Foundations', topics:'Creation · Parts of Speech · Factors & Primes · Cells · Mesopotamia & Egypt', status:'s-partial'},
     ...KS3_WEEKS_TOPICS.map(w => ({...w, status:'s-pending'}))
   ];
+  const teacherWeek3 = allWeeks.find(w => w.w === 3);
+  teacherWeek3.topics = 'How the Bible is Organised · Reading Comprehension (Fiction) · Fractions: Concepts & Equivalence · Tissues, Organs & Organ Systems · Ancient Greece';
+  teacherWeek3.status = 's-complete';
+  teacherWeek3.flatResources = KS3_WEEK3_RESOURCES;
   container.innerHTML = allWeeks.map(w => {
     if (w.w === 1) {
       return weekHTML({...w, subjects:null}, 'teach-acc', 'jessica-areej');
@@ -821,6 +833,10 @@ function initPanels() {
     {w:2, title:'Deep Foundations', topics:'Creation · Parts of Speech · Factors & Primes · Cells · Mesopotamia & Egypt', status:'s-partial', subjects: KS3_SUBJ_W2('jessica-areej')},
     ...KS3_WEEKS_TOPICS.map(w => ({...w, status:'s-pending'}))
   ];
+  const ks3Week3 = ks3All.find(w => w.w === 3);
+  ks3Week3.topics = 'How the Bible is Organised · Reading Comprehension (Fiction) · Fractions: Concepts & Equivalence · Tissues, Organs & Organ Systems · Ancient Greece';
+  ks3Week3.status = 's-complete';
+  ks3Week3.flatResources = KS3_WEEK3_RESOURCES;
   jessicaWeeks.innerHTML = ks3All.map(w => weekHTML(w, 'ks3j-acc', 'jessica')).join('');
 
   // Areej (same curriculum, separate panel)
