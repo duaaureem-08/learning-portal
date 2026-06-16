@@ -2,24 +2,23 @@
    HOS International — Worksheet Submission Helper
    Saves student answers to Supabase so the teacher can review
    them and leave corrections/feedback. Works with:
-   - Static worksheets (Day1/Day2/Day3 style: all subject pages
-     exist in the DOM at once, toggled with .active)
-   - Dynamic worksheets (Interactive Lessons style: content for
-     the current subject/lesson is rebuilt on every tab click)
+   - Static worksheets (Day1/Day2/Day3 style)
+   - Dynamic worksheets (Interactive Lessons style)
+   Auto-save: 2 seconds after student stops typing + 30s fallback
    ============================================================ */
 (function (global) {
   const SUPABASE_URL = 'https://ldftwnsixhgpfldhlkyq.supabase.co';
   const SUPABASE_KEY =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
 
-  const AUTO_SAVE_INTERVAL = 30 * 1000; // every 30 seconds
+  const DEBOUNCE_DELAY   = 2000;
+  const FALLBACK_INTERVAL = 30000;
 
   const FIELD_SELECTOR =
     'textarea, input.ans-line, input.inline-ans, input.ans-box, input.name-line, ' +
     'input[type="text"]:not([readonly]), input[type="number"]:not([readonly])';
   const SCORE_SELECTOR = '[id$="-score"], [id$="-pct"], [id$="-fb"]';
 
-  /* ---------- styling + UI bar ---------- */
   function injectStyles() {
     if (document.getElementById('ws-style')) return;
     const style = document.createElement('style');
@@ -61,22 +60,20 @@
       <button id="ws-load-btn" class="ws-btn">📥 Load my saved work</button>
       <button id="ws-submit-btn" class="ws-btn">✅ Submit my work</button>
       <span id="ws-status"></span>
-      <span id="ws-autosave-indicator">💾 Auto-saved</span>
+      <span id="ws-autosave-indicator">💾 Saved</span>
     `;
     document.body.appendChild(bar);
     document.body.style.paddingBottom =
       (parseInt(getComputedStyle(document.body).paddingBottom) || 0) + 70 + 'px';
   }
 
-  /* ---------- auto-save indicator flash ---------- */
-  function flashAutoSave() {
+  function flashSaved() {
     const el = document.getElementById('ws-autosave-indicator');
     if (!el) return;
     el.classList.add('show');
     setTimeout(() => el.classList.remove('show'), 2000);
   }
 
-  /* ---------- label + field helpers ---------- */
   function getLabel(el) {
     const containerSelectors = ['.analysis-box', '.q-block', '.fill-row', '.tf-row', '.callout', '.ws-header'];
     const labelSelectors = ['.analysis-q', '.q-text', 'label', '.callout-text', '.tf-stmt', '.q-num'];
@@ -116,7 +113,6 @@
     return scores;
   }
 
-  /* ---------- Supabase calls ---------- */
   async function fetchSubmission(name, worksheetId) {
     const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?student_name=eq.${encodeURIComponent(
       name
@@ -139,20 +135,17 @@
         'Content-Type': 'application/json',
         Prefer: 'resolution=merge-duplicates,return=representation',
       },
-      body: JSON.stringify([
-        {
-          student_name: name,
-          worksheet_id: worksheetId,
-          answers: answers,
-          scores: scores,
-          submitted_at: new Date().toISOString(),
-        },
-      ]),
+      body: JSON.stringify([{
+        student_name: name,
+        worksheet_id: worksheetId,
+        answers: answers,
+        scores: scores,
+        submitted_at: new Date().toISOString(),
+      }]),
     });
     return res.ok;
   }
 
-  /* ---------- restore + feedback ---------- */
   function restoreFields(answers, root) {
     const fields = collectFields(root);
     fields.forEach((f) => {
@@ -187,7 +180,14 @@
     });
   }
 
-  /* ---------- init: static worksheets (Day1/Day2/Day3 style) ---------- */
+  function debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
   function init(worksheetId) {
     buildBar();
     const nameInput = document.getElementById('ws-student-name');
@@ -212,15 +212,13 @@
       showFeedback(sub.feedback || {});
       statusEl.textContent =
         '✅ Loaded your saved work (last saved ' +
-        new Date(sub.submitted_at).toLocaleString() +
-        ')';
+        new Date(sub.submitted_at).toLocaleString() + ')';
     }
 
     async function doSave(silent) {
       const name = nameInput.value.trim();
       if (!name) return;
       localStorage.setItem('hos_student_name', name);
-      statusEl.textContent = silent ? statusEl.textContent : 'Saving…';
       const fields = collectFields();
       const answers = {};
       fields.forEach((f) => {
@@ -228,25 +226,30 @@
       });
       const scores = collectScores();
       const ok = await saveSubmission(name, worksheetId, answers, scores);
-      if (ok && !silent) {
-        statusEl.textContent = '✅ Submitted! Your teacher can now see your work.';
-      }
-      if (ok && silent) flashAutoSave();
+      if (ok && silent)  { flashSaved(); }
+      if (ok && !silent) { statusEl.textContent = '✅ Submitted! Your teacher can now see your work.'; }
     }
 
-    document.getElementById('ws-load-btn').onclick = () => doLoad(false);
+    const debouncedSave = debounce(() => doSave(true), DEBOUNCE_DELAY);
+
+    function attachListeners() {
+      document.querySelectorAll(FIELD_SELECTOR).forEach((el) => {
+        el.addEventListener('input', debouncedSave);
+      });
+    }
+    attachListeners();
+
+    const observer = new MutationObserver(() => attachListeners());
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    document.getElementById('ws-load-btn').onclick  = () => doLoad(false);
     document.getElementById('ws-submit-btn').onclick = () => doSave(false);
 
-    // Auto-save every 30 seconds if student has typed their name
-    setInterval(() => {
-      if (nameInput.value.trim()) doSave(true);
-    }, AUTO_SAVE_INTERVAL);
+    setInterval(() => { if (nameInput.value.trim()) doSave(true); }, FALLBACK_INTERVAL);
 
-    // Auto-load saved work for returning students
     if (nameInput.value) doLoad(true);
   }
 
-  /* ---------- init: dynamic worksheets (Interactive Lessons style) ---------- */
   function initDynamic(worksheetId) {
     buildBar();
     const nameInput = document.getElementById('ws-student-name');
@@ -291,6 +294,7 @@
       origRenderAll();
       lastPageKey = currentPageKey();
       applyPage();
+      attachDynamicListeners();
     };
 
     async function doLoad(silent) {
@@ -322,19 +326,25 @@
       localStorage.setItem('hos_student_name', name);
       capturePage(lastPageKey);
       const ok = await saveSubmission(name, worksheetId, global.__wsAnswers, {});
-      if (ok && !silent) {
-        statusEl.textContent = '✅ Submitted! Your teacher can now see your work from every subject and lesson you visited.';
-      }
-      if (ok && silent) flashAutoSave();
+      if (ok && silent)  { flashSaved(); }
+      if (ok && !silent) { statusEl.textContent = '✅ Submitted! Your teacher can now see your work from every subject and lesson you visited.'; }
     }
 
-    document.getElementById('ws-load-btn').onclick = () => doLoad(false);
+    const debouncedSave = debounce(() => doSave(true), DEBOUNCE_DELAY);
+
+    function attachDynamicListeners() {
+      const pagesEl = document.getElementById('pages');
+      if (!pagesEl) return;
+      pagesEl.querySelectorAll(FIELD_SELECTOR).forEach((el) => {
+        el.addEventListener('input', debouncedSave);
+      });
+    }
+    attachDynamicListeners();
+
+    document.getElementById('ws-load-btn').onclick  = () => doLoad(false);
     document.getElementById('ws-submit-btn').onclick = () => doSave(false);
 
-    // Auto-save every 30 seconds if student has typed their name
-    setInterval(() => {
-      if (nameInput.value.trim()) doSave(true);
-    }, AUTO_SAVE_INTERVAL);
+    setInterval(() => { if (nameInput.value.trim()) doSave(true); }, FALLBACK_INTERVAL);
 
     if (nameInput.value) doLoad(true);
   }
