@@ -12,6 +12,8 @@
   const SUPABASE_KEY =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
 
+  const AUTO_SAVE_INTERVAL = 30 * 1000; // every 30 seconds
+
   const FIELD_SELECTOR =
     'textarea, input.ans-line, input.inline-ans, input.ans-box, input.name-line, ' +
     'input[type="text"]:not([readonly]), input[type="number"]:not([readonly])';
@@ -35,6 +37,9 @@
       #ws-load-btn{background:#0891B2;}
       #ws-submit-btn{background:#059669;}
       #ws-status{font-weight:700;font-size:0.82rem;}
+      #ws-autosave-indicator{font-size:0.75rem;font-weight:700;color:#A5F3FC;opacity:0;
+        transition:opacity 0.5s;}
+      #ws-autosave-indicator.show{opacity:1;}
       .ws-feedback{margin-top:6px;padding:8px 12px;border-radius:10px;background:#ECFDF5;
         border-left:4px solid #059669;font-size:0.85rem;font-weight:700;color:#065F46;
         font-family:'Nunito',sans-serif;}
@@ -56,16 +61,24 @@
       <button id="ws-load-btn" class="ws-btn">📥 Load my saved work</button>
       <button id="ws-submit-btn" class="ws-btn">✅ Submit my work</button>
       <span id="ws-status"></span>
+      <span id="ws-autosave-indicator">💾 Auto-saved</span>
     `;
     document.body.appendChild(bar);
     document.body.style.paddingBottom =
       (parseInt(getComputedStyle(document.body).paddingBottom) || 0) + 70 + 'px';
   }
 
+  /* ---------- auto-save indicator flash ---------- */
+  function flashAutoSave() {
+    const el = document.getElementById('ws-autosave-indicator');
+    if (!el) return;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2000);
+  }
+
   /* ---------- label + field helpers ---------- */
   function getLabel(el) {
     const containerSelectors = ['.analysis-box', '.q-block', '.fill-row', '.tf-row', '.callout', '.ws-header'];
-    // checked in priority order — .q-num (just a number badge) is a last resort
     const labelSelectors = ['.analysis-q', '.q-text', 'label', '.callout-text', '.tf-stmt', '.q-num'];
     for (const sel of containerSelectors) {
       const c = el.closest(sel);
@@ -198,21 +211,16 @@
       showTeacherNotes(sub.teacher_notes);
       showFeedback(sub.feedback || {});
       statusEl.textContent =
-        '✅ Loaded your saved work (last submitted ' +
+        '✅ Loaded your saved work (last saved ' +
         new Date(sub.submitted_at).toLocaleString() +
         ')';
     }
 
-    document.getElementById('ws-load-btn').onclick = () => doLoad(false);
-
-    document.getElementById('ws-submit-btn').onclick = async () => {
+    async function doSave(silent) {
       const name = nameInput.value.trim();
-      if (!name) {
-        statusEl.textContent = '⚠️ Type your name first';
-        return;
-      }
+      if (!name) return;
       localStorage.setItem('hos_student_name', name);
-      statusEl.textContent = 'Saving…';
+      statusEl.textContent = silent ? statusEl.textContent : 'Saving…';
       const fields = collectFields();
       const answers = {};
       fields.forEach((f) => {
@@ -220,10 +228,19 @@
       });
       const scores = collectScores();
       const ok = await saveSubmission(name, worksheetId, answers, scores);
-      statusEl.textContent = ok
-        ? '✅ Submitted! Your teacher can now see your work.'
-        : '❌ Something went wrong — please try again.';
-    };
+      if (ok && !silent) {
+        statusEl.textContent = '✅ Submitted! Your teacher can now see your work.';
+      }
+      if (ok && silent) flashAutoSave();
+    }
+
+    document.getElementById('ws-load-btn').onclick = () => doLoad(false);
+    document.getElementById('ws-submit-btn').onclick = () => doSave(false);
+
+    // Auto-save every 30 seconds if student has typed their name
+    setInterval(() => {
+      if (nameInput.value.trim()) doSave(true);
+    }, AUTO_SAVE_INTERVAL);
 
     // Auto-load saved work for returning students
     if (nameInput.value) doLoad(true);
@@ -240,15 +257,9 @@
     let __wsFeedback = {};
 
     function currentPageKey() {
-      // currentSubject / currentWS are declared with `let` in the page's own
-      // script, so they live in the shared global lexical scope rather than
-      // on `window` — reference them as bare identifiers here.
       return currentSubject + '_' + currentWS[currentSubject];
     }
 
-    // The page's own onclick handlers update currentSubject/currentWS
-    // *before* calling renderAll(), so by the time our wrapper runs we can
-    // no longer tell which page was on screen. Track it ourselves instead.
     let lastPageKey = currentPageKey();
 
     function capturePage(pageKey) {
@@ -300,27 +311,30 @@
       showTeacherNotes(sub.teacher_notes);
       applyPage();
       statusEl.textContent =
-        '✅ Loaded your saved work (last submitted ' +
+        '✅ Loaded your saved work (last saved ' +
         new Date(sub.submitted_at).toLocaleString() +
         '). Switch between subjects/lessons to see all of it.';
     }
 
-    document.getElementById('ws-load-btn').onclick = () => doLoad(false);
-
-    document.getElementById('ws-submit-btn').onclick = async () => {
+    async function doSave(silent) {
       const name = nameInput.value.trim();
-      if (!name) {
-        statusEl.textContent = '⚠️ Type your name first';
-        return;
-      }
+      if (!name) return;
       localStorage.setItem('hos_student_name', name);
-      statusEl.textContent = 'Saving…';
       capturePage(lastPageKey);
       const ok = await saveSubmission(name, worksheetId, global.__wsAnswers, {});
-      statusEl.textContent = ok
-        ? '✅ Submitted! Your teacher can now see your work from every subject and lesson you visited.'
-        : '❌ Something went wrong — please try again.';
-    };
+      if (ok && !silent) {
+        statusEl.textContent = '✅ Submitted! Your teacher can now see your work from every subject and lesson you visited.';
+      }
+      if (ok && silent) flashAutoSave();
+    }
+
+    document.getElementById('ws-load-btn').onclick = () => doLoad(false);
+    document.getElementById('ws-submit-btn').onclick = () => doSave(false);
+
+    // Auto-save every 30 seconds if student has typed their name
+    setInterval(() => {
+      if (nameInput.value.trim()) doSave(true);
+    }, AUTO_SAVE_INTERVAL);
 
     if (nameInput.value) doLoad(true);
   }
