@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 4 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:260px;height:260px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;animation:cardIn 0.5s cubic-bezier(0.22,0.68,0,1.2) both;}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.18s}.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.30s}.card:nth-child(7){animation-delay:.36s}.card:nth-child(8){animation-delay:.42s}.card:nth-child(9){animation-delay:.48s}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:130px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-sm{padding:8px 16px;font-size:0.82rem;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent,#555);color:var(--text);background:rgba(255,255,255,0.04);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.fwall{display:flex;flex-direction:column;gap:3px;margin:14px 0;}
+.fwall-row{display:flex;gap:3px;height:32px;}
+.fwall-cell{display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:0.75rem;font-weight:700;color:white;flex:1;transition:opacity 0.2s;}
+.fwall-cell:hover{opacity:0.8;}
+.acc-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.acc-card:hover,.acc-card.open{border-color:var(--accent,#555);}
+.acc-head{display:flex;justify-content:space-between;align-items:center;}
+.acc-title{font-weight:700;color:var(--bright);font-size:0.95rem;}
+.acc-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.acc-toggle{color:var(--muted);transition:transform 0.25s;}
+.acc-card.open .acc-toggle{transform:rotate(180deg);}
+.acc-body{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:0.87rem;color:var(--muted);line-height:1.65;}
+.acc-card.open .acc-body{display:block;}
+.acc-body strong{color:var(--bright);}
+.peel-row{display:flex;margin:14px 0;border-radius:10px;overflow:hidden;flex-wrap:wrap;}
+.peel-cell{flex:1;min-width:140px;padding:14px 12px;text-align:center;}
+.peel-letter{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:white;line-height:1;}
+.peel-word{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;color:rgba(255,255,255,0.65);}
+.peel-desc{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4;}
+.genre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:12px;}
+.genre-tile{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;transition:all 0.2s;}
+.genre-tile:hover{border-color:var(--accent,#555);transform:translateY(-2px);}
+.genre-name{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:4px;}
+.genre-book{font-size:0.75rem;color:var(--muted);margin-bottom:6px;}
+.genre-def{font-size:0.82rem;color:#B0B0C8;line-height:1.4;}
+.inf-chain{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;margin:14px 0;}
+.inf-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:0.85rem;flex:1;min-width:140px;}
+.inf-box .label{font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:700;}
+.inf-box .value{color:var(--bright);font-weight:600;line-height:1.4;}
+.inf-arrow{color:var(--muted);font-size:1.2rem;flex-shrink:0;align-self:center;}
+.cell-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;min-height:160px;transition:border-color 0.3s;}
+.cip-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--bright);margin-bottom:8px;}
+.cip-body{font-size:0.87rem;color:var(--muted);line-height:1.6;}
+.cip-body strong{color:var(--bright);}
+.cip-analogy{font-size:0.82rem;margin-top:10px;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;}
+.hier-wrap{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:16px 0;}
+.hier-box{padding:8px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;color:white;text-align:center;}
+.hier-arrow{color:var(--muted);font-size:1.1rem;}
+/* Size-compare bars */
+.size-compare{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.size-row{display:flex;align-items:center;gap:10px;}
+.size-label{width:150px;font-size:0.8rem;color:var(--muted);flex-shrink:0;}
+.size-track{flex:1;background:var(--surface2);border-radius:8px;height:24px;overflow:hidden;}
+.size-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding-left:10px;font-size:0.72rem;font-weight:700;color:white;white-space:nowrap;transition:width 1s ease;}
+/* Fraction add bars */
+.frac-add-block{margin:16px 0;}
+.frac-row-label{font-size:0.78rem;color:var(--muted);margin-bottom:5px;font-weight:600;}
+.frac-bar{display:flex;height:32px;border-radius:6px;overflow:hidden;border:1px solid var(--border);margin-bottom:10px;}
+.frac-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:white;border-right:1px solid rgba(255,255,255,0.15);}
+.frac-seg:last-child{border-right:none;}
+.frac-seg.empty{background:var(--surface2);color:var(--muted);}
+.frac-op{text-align:center;font-size:1.3rem;color:var(--muted);margin:2px 0 10px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+@media(max-width:600px){
+  .hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}
+  .compare{grid-template-columns:1fr;}.peel-row{flex-direction:column;}
+  .inf-chain{flex-direction:column;}.inf-arrow{transform:rotate(90deg);}
+  .size-label{width:90px;font-size:0.7rem;}
+}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 4</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BIBLE — Noah: Faith & Obedience
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🌊</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 4</div>
+  <div class="hero-title">Noah —<br>Faith &amp; Obedience</div>
+  <div class="hero-subtitle">Genesis 6–9 · The Flood · God's Covenant · Trusting God Before You See the Result</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Hebrews 11:7</span><span class="hero-tag">Genesis 6–9</span><span class="hero-tag">Covenant</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"By faith Noah, when warned about things not yet seen, in holy fear built an ark to save his family. By his faith he condemned the world and became heir of the righteousness that comes by faith."</div>
+    <div class="verse-ref">Hebrews 11:7 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word breakdown:</strong> <em>"warned about things not yet seen"</em> = faith means trusting God's word BEFORE you have proof. <em>"in holy fear"</em> = Noah took God's warning seriously — not terrified, but deeply respectful. <em>"built an ark"</em> = real faith shows itself through ACTION, not just belief. <em>"condemned the world"</em> = Noah's righteous life was itself a quiet contrast to the wickedness around him. <em>"heir of righteousness"</em> = Noah received right standing with God BECAUSE of his faith, not because he was perfect.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">ark</div><div class="esl-def">A huge boat built to survive a flood. The Hebrew word <em>tebah</em> means "box" or "chest" — a vessel built for protection and survival, not for sailing or exploring.</div></div>
+    <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A solemn, binding PROMISE — often between God and people. Stronger than an ordinary promise. God's covenant with Noah was a promise He made to the whole earth.</div></div>
+    <div class="esl-row"><div class="esl-word">righteous</div><div class="esl-def">Living in right relationship with God — doing what is right, even when others around you do not. Noah was described as righteous compared to his generation.</div></div>
+    <div class="esl-row"><div class="esl-word">corrupt</div><div class="esl-def">Morally rotten or spoiled — full of violence, dishonesty and evil. Genesis describes the world before the flood as deeply corrupt.</div></div>
+    <div class="esl-row"><div class="esl-word">faith</div><div class="esl-def">Trust in God shown through ACTION — especially when you cannot yet see the result. Faith is not just a feeling; it changes what you DO.</div></div>
+    <div class="esl-row"><div class="esl-word">obedience</div><div class="esl-def">Doing what God (or a trusted authority) instructs — even when it is difficult, takes a long time, or does not make sense to others.</div></div>
+    <div class="esl-row"><div class="esl-word">generation</div><div class="esl-def">All the people living during a particular period of time. "Noah's generation" means the people who were alive at the same time as Noah.</div></div>
+    <div class="esl-row"><div class="esl-word">judgment</div><div class="esl-def">A decision or action that responds to right and wrong. In the Bible, God's judgment is His response to persistent evil — but it is never separated from mercy.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🌍</span> The World Before the Flood — Why Did God Judge It?</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">Genesis 6:5 describes humanity's wickedness as having reached an extreme point — every inclination of people's hearts had become corrupt. But Genesis 6:9 describes Noah very differently: he was <strong>righteous</strong> and <strong>walked faithfully with God</strong>.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">🌍 Noah's Generation</div>
+      <div class="cmp-row">Violence and corruption had spread across the whole earth</div>
+      <div class="cmp-row">People's thoughts and actions were consistently turned toward evil</div>
+      <div class="cmp-row">No one else is described as living for God</div>
+      <div class="cmp-row">God's judgment is described as a grieving response, not a casual one</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">🙏 Noah</div>
+      <div class="cmp-row">Described as "righteous" and "blameless among the people of his time"</div>
+      <div class="cmp-row">"Walked faithfully with God" — a close, ongoing relationship</div>
+      <div class="cmp-row">Stood out as different from everyone around him</div>
+      <div class="cmp-row">Chosen to carry forward God's purposes for humanity and creation</div>
+    </div>
+  </div>
+  <div class="callout info" style="margin-top:14px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>KS3 thinking point:</strong> God's judgment in this story is not random or sudden — it is described as a response to a long pattern of corruption. At the same time, God always provides a way of escape. Noah and the ark show that judgment and mercy appear TOGETHER in this story, not as opposites.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🔨</span> Building the Ark — Faith in Action</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden idea of this lesson:</strong> "Faith is acting on what God says BEFORE you see the result." Noah received instructions to build an enormous ark — with no rain yet falling, no flood yet visible, and (according to Jewish tradition) the construction took around 100 years. Imagine the questions from neighbours over generations: "Why are you building a giant boat on dry land?"</div>
+  </div>
+  <div class="callout info">
+    <div class="ci">📐</div>
+    <div class="ct">According to Genesis 6:15, God gave Noah exact measurements: <strong>300 cubits long, 50 cubits wide, 30 cubits high</strong>. A cubit is roughly the length of a forearm — about 45 cm. That makes the ark approximately <strong>137 metres long, 23 metres wide, and 14 metres high</strong>.</div>
+  </div>
+  <div class="size-compare">
+    <div class="size-row"><div class="size-label">The Ark</div><div class="size-track"><div class="size-fill" style="width:100%;background:#6D28D9;">~137 m long</div></div></div>
+    <div class="size-row"><div class="size-label">Football pitch</div><div class="size-track"><div class="size-fill" style="width:78%;background:#8B5CF6;">~105 m long</div></div></div>
+    <div class="size-row"><div class="size-label">Olympic pool</div><div class="size-track"><div class="size-fill" style="width:37%;background:#A78BFA;">~50 m long</div></div></div>
+    <div class="size-row"><div class="size-label">Blue whale</div><div class="size-track"><div class="size-fill" style="width:22%;background:#C4B5FD;">~30 m long</div></div></div>
+  </div>
+  <div class="callout tip" style="margin-top:10px;">
+    <div class="ci">✍️</div>
+    <div class="ct"><strong>Reflect:</strong> The ark was longer than a football pitch — built by one family, by hand, with no visible reason yet. This was not a small act of trust. It was sustained obedience over a very long time, with no immediate evidence that it was "working."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🌧️</span> The Flood — Judgment and Mercy Together</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#6D28D9;"></div><div class="tl-date">Day 1</div><div class="tl-title">The Rain Begins</div><div class="tl-desc">Genesis 7:11–12 — the rain falls for 40 days and 40 nights. Noah, his wife, his three sons and their wives (8 people total) and pairs of animals enter the ark, and God shuts the door.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#8B5CF6;"></div><div class="tl-date">Days 1–150</div><div class="tl-title">The Waters Rise and Prevail</div><div class="tl-desc">Genesis 7:19–20 — the floodwaters rise until even the highest mountains are covered. The waters remain high for 150 days before beginning to recede.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#A78BFA;"></div><div class="tl-date">~Month 7</div><div class="tl-title">The Ark Rests on Mount Ararat</div><div class="tl-desc">Genesis 8:4 — as the waters recede, the ark comes to rest on the mountains of Ararat. The long wait for dry land continues for months afterward.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#C4B5FD;"></div><div class="tl-date">Final Days</div><div class="tl-title">The Raven and the Dove</div><div class="tl-desc">Genesis 8:6–12 — Noah sends out a raven (it does not return), then a dove (it returns with nothing, then later returns carrying an olive leaf — a sign that new life had begun on the earth).</div></div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Both themes together:</strong> The flood is described as God's response to corruption (justice) — but the ark itself, given freely as a way of escape, shows mercy. Noah's family and the animals are not destroyed — they are SAVED. The story holds both ideas without one cancelling out the other.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🌈</span> The Covenant — God's Promise and Its Sign</div>
+  <div class="callout info">
+    <div class="ci">📜</div>
+    <div class="ct">After the flood, Genesis 9:8–17 describes God making a <strong>covenant</strong> — not only with Noah, but with "every living creature" and with the earth itself. The promise: God will never again destroy the earth with a flood.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>An Ordinary Promise</th><th>A Biblical Covenant</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Who is it between?</strong></td><td>Usually two people</td><td>God and people (sometimes all creation)</td></tr>
+      <tr><td><strong>How binding is it?</strong></td><td>Can often be broken or forgotten</td><td>Permanent — God's covenants in the Bible are never withdrawn</td></tr>
+      <tr><td><strong>Is there a sign?</strong></td><td>Not usually</td><td>Yes — a visible sign as a reminder (here, the rainbow)</td></tr>
+      <tr><td><strong>Example</strong></td><td>"I promise to meet you at 3pm"</td><td>"I will never again flood the whole earth" (Gen 9:11)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">🌈</div>
+    <div class="ct"><strong>The sign of the covenant:</strong> Genesis 9:13 — God sets the rainbow in the sky as the sign of this covenant. Every time a rainbow appears — even thousands of years later — it points back to this promise. This is the FIRST of several major covenants in the Bible (later: Abraham, Moses, David, and the New Covenant through Jesus).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> What Faith and Obedience Look Like — Application</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">Faith often means acting before you have proof</div><div class="step-desc">Noah built the ark without seeing rain first. Faith is forward-looking — it trusts a reliable source (God's word) ahead of visible evidence.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">Obedience can take a long time and feel unrewarded at first</div><div class="step-desc">Building the ark may have taken decades. Real obedience is not always immediately validated — sometimes it requires patience across a long period.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">Doing right when others do wrong takes courage</div><div class="step-desc">Noah's righteousness stood out precisely because it was uncommon. Standing apart from a crowd — for the right reasons — is one of the themes this story explores.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">4</div><div><div class="step-title">God's promises are meant to be remembered</div><div class="step-desc">The rainbow was given as a lasting, visible reminder of God's covenant. Symbols and signs help people remember important truths across generations.</div></div></div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">✍️</div>
+    <div class="ct"><strong>Sentence starters for reflection:</strong> "Noah's faith is shown through his ___ because ___." / "The covenant shows that God ___." / "An example of trusting before seeing proof in my own life could be ___."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> Knowledge Check — Noah</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ENGLISH — Sentence Types & Punctuation
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">✒️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 4</div>
+  <div class="hero-title">Sentence Types &amp;<br>Punctuation</div>
+  <div class="hero-subtitle">Simple, compound and complex sentences · Clauses and conjunctions · Commas, full stops and question marks</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Clauses</span><span class="hero-tag">Conjunctions</span><span class="hero-tag">Punctuation</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these — they are the foundation of correct sentence writing</div>
+    <div class="esl-row"><div class="esl-word">clause</div><div class="esl-def">A group of words containing a SUBJECT and a VERB. "The dog barked" is a clause — subject = "the dog," verb = "barked."</div></div>
+    <div class="esl-row"><div class="esl-word">independent clause</div><div class="esl-def">A clause that can stand ALONE as a complete sentence. "The dog barked." makes complete sense by itself — also called a MAIN clause.</div></div>
+    <div class="esl-row"><div class="esl-word">dependent clause</div><div class="esl-def">A clause that CANNOT stand alone — it depends on a main clause for its meaning. "...because it was hungry" has a subject and verb but does not make sense by itself — also called a SUBORDINATE clause.</div></div>
+    <div class="esl-row"><div class="esl-word">conjunction</div><div class="esl-def">A word that JOINS clauses or words together. Two types matter here: coordinating (joins equals) and subordinating (introduces a dependent clause).</div></div>
+    <div class="esl-row"><div class="esl-word">coordinating conjunction</div><div class="esl-def">Joins two INDEPENDENT clauses of equal importance. Remember with FANBOYS: For, And, Nor, But, Or, Yet, So.</div></div>
+    <div class="esl-row"><div class="esl-word">subordinating conjunction</div><div class="esl-def">Begins a DEPENDENT clause and shows its relationship to the main clause. Examples: because, although, when, if, since, while, after, before, unless.</div></div>
+    <div class="esl-row"><div class="esl-word">simple sentence</div><div class="esl-def">ONE independent clause. Can be short OR long — length does not determine the type, STRUCTURE does.</div></div>
+    <div class="esl-row"><div class="esl-word">compound sentence</div><div class="esl-def">TWO OR MORE independent clauses joined by a coordinating conjunction (or a semicolon). Both halves could stand alone.</div></div>
+    <div class="esl-row"><div class="esl-word">complex sentence</div><div class="esl-def">An independent clause PLUS one or more dependent clauses, joined by a subordinating conjunction.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🧩</span> What Is a Clause? — The Building Block of Every Sentence</div>
+  <div class="callout info">
+    <div class="ci">🔍</div>
+    <div class="ct"><strong>The test:</strong> Does the group of words have a SUBJECT (who or what) and a VERB (what they do)? If yes, it's a clause. Now ask: does it make COMPLETE sense by itself? If yes → independent clause. If no → dependent clause.</div>
+  </div>
+  <div class="inf-chain">
+    <div class="inf-box"><div class="label">Example A</div><div class="value">"The dog barked."<br>Subject: the dog. Verb: barked. Makes sense alone → <strong>independent clause</strong>.</div></div>
+    <div class="inf-arrow">vs</div>
+    <div class="inf-box"><div class="label">Example B</div><div class="value">"...because it was hungry."<br>Subject: it. Verb: was. Does NOT make sense alone → <strong>dependent clause</strong>.</div></div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">💡</div>
+    <div class="ct">Combine them: <strong>"The dog barked because it was hungry."</strong> One independent clause + one dependent clause, joined by the subordinating conjunction "because" = a COMPLEX sentence.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🔬</span> Sentence Lab — Click Each Type to Explore</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showSentence('simple')">1️⃣ Simple</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showSentence('compound')">2️⃣ Compound</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showSentence('complex')">3️⃣ Complex</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showSentence('compoundcomplex')">4️⃣ Compound-Complex</button>
+  </div>
+  <div class="cell-panel" id="sentence-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click a sentence type to see its structure, an example, and how it is punctuated.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🔗</span> FANBOYS — Joining Independent Clauses (Compound Sentences)</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>The rule:</strong> independent clause + <strong>comma</strong> + FANBOYS word + independent clause. Each FANBOYS word has its own meaning — choosing the right one changes the relationship between the two ideas.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>FANBOYS Word</th><th>Meaning / Relationship</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>For</strong></td><td>Gives a reason (formal — like "because")</td><td>She studied hard, for the exam was important.</td></tr>
+      <tr><td><strong>And</strong></td><td>Adds an equal idea</td><td>Maya finished her homework, and she practised the piano.</td></tr>
+      <tr><td><strong>Nor</strong></td><td>Adds a second negative idea</td><td>He did not complain, nor did he give up.</td></tr>
+      <tr><td><strong>But</strong></td><td>Shows contrast</td><td>I wanted to play outside, but it started raining.</td></tr>
+      <tr><td><strong>Or</strong></td><td>Shows a choice/alternative</td><td>We can revise today, or we can revise tomorrow.</td></tr>
+      <tr><td><strong>Yet</strong></td><td>Shows surprising contrast</td><td>The test was difficult, yet she passed easily.</td></tr>
+      <tr><td><strong>So</strong></td><td>Shows result/consequence</td><td>It was raining heavily, so the match was cancelled.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🧷</span> Subordinating Conjunctions — Building Complex Sentences</div>
+  <div class="callout info">
+    <div class="ci">📌</div>
+    <div class="ct">A complex sentence can be written in TWO orders. The comma rule depends on which order you choose:</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.4);">
+      <div class="cmp-head" style="color:#FCA5A5;">Dependent clause FIRST → use a comma</div>
+      <div class="cmp-row"><strong>[Dependent clause], [Independent clause].</strong></div>
+      <div class="cmp-row">"Although she was tired, she finished her homework."</div>
+      <div class="cmp-row">"Because it was raining, the match was postponed."</div>
+      <div class="cmp-row">"When the bell rang, the students lined up quietly."</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.3);">
+      <div class="cmp-head" style="color:#FCA5A5;">Independent clause FIRST → usually no comma</div>
+      <div class="cmp-row"><strong>[Independent clause] [dependent clause].</strong></div>
+      <div class="cmp-row">"She finished her homework although she was tired."</div>
+      <div class="cmp-row">"The match was postponed because it was raining."</div>
+      <div class="cmp-row">"The students lined up quietly when the bell rang."</div>
+    </div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Common subordinating conjunctions:</strong> because, although, when, if, since, while, after, before, unless, until, even though, as soon as. Each one signals a different relationship — try swapping "because" for "although" in a sentence and notice how the meaning changes completely.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🖊️</span> Punctuation Rules — Commas, Full Stops &amp; Question Marks</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">Full stop ( . ) — ends a statement</div><div class="step-desc">Used at the end of every simple, compound, and complex sentence that makes a statement. "The library closes at 5pm."</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">Question mark ( ? ) — ends a direct question</div><div class="step-desc">Only for DIRECT questions. "What time does the library close?" — NOT for reported/indirect questions: "She asked what time the library closes." (this needs a full stop, not a question mark).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">Comma — separating items in a list</div><div class="step-desc">"I packed a pencil, a ruler, a calculator and a book." Note: in UK English, a comma before "and" in a list (the "Oxford comma") is optional but should be used consistently.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">4</div><div><div class="step-title">Comma — after an introductory word or phrase</div><div class="step-desc">"However, the results were surprising." / "After the lesson ended, the students went to lunch." The comma signals a brief pause before the main clause begins.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">5</div><div><div class="step-title">Comma — joining two independent clauses (compound sentences)</div><div class="step-desc">Comma + FANBOYS word. "I finished my work, so I went outside." Without the comma AND the conjunction together, this becomes an error.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">6</div><div><div class="step-title">Comma — after a dependent clause that comes first</div><div class="step-desc">"Although it was late, she kept working." If the dependent clause comes second, the comma usually disappears: "She kept working although it was late."</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🚫</span> Common Mistakes — Comma Splices &amp; Run-On Sentences</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Comma splice:</strong> joining TWO independent clauses with ONLY a comma — no conjunction. This is one of the most common errors at KS3.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>❌ Incorrect</th><th>✅ Correct Options</th><th>What Changed?</th></tr></thead>
+    <tbody>
+      <tr><td>I went to the shop, I bought some bread.</td><td>I went to the shop, <strong>and</strong> I bought some bread.</td><td>Added a FANBOYS conjunction → compound sentence</td></tr>
+      <tr><td>I went to the shop, I bought some bread.</td><td>I went to the shop. I bought some bread.</td><td>Split into two simple sentences with a full stop</td></tr>
+      <tr><td>I went to the shop, I bought some bread.</td><td>I went to the shop; I bought some bread.</td><td>Used a semicolon to join two related independent clauses</td></tr>
+      <tr><td>I went to the shop because I bought some bread.</td><td>I went to the shop <strong>because I needed</strong> bread.</td><td>"Because" must introduce a REASON — the original sentence doesn't make logical sense</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Quick self-check:</strong> Read each half of your sentence separately. If BOTH halves make complete sense alone, you need a conjunction, a semicolon, or a full stop between them — never just a comma on its own.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🎯</span> Sentence Types &amp; Punctuation — Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MATHS — Adding & Subtracting Fractions
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">➕</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 4</div>
+  <div class="hero-title">Adding &amp;<br>Subtracting<br>Fractions</div>
+  <div class="hero-subtitle">Like and unlike denominators · Finding the LCM · Mixed number calculations · Borrowing</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Fractions</span><span class="hero-tag">LCM</span><span class="hero-tag">Mixed Numbers</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — Defined Simply</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 3 — make sure you remember numerator, denominator, simplify and HCF</div>
+    <div class="esl-row"><div class="esl-word">like denominators</div><div class="esl-def">Fractions that have the SAME bottom number. Example: 2/9 and 4/9 have like denominators (both 9).</div></div>
+    <div class="esl-row"><div class="esl-word">unlike denominators</div><div class="esl-def">Fractions with DIFFERENT bottom numbers. Example: 1/4 and 1/6 have unlike denominators (4 and 6).</div></div>
+    <div class="esl-row"><div class="esl-word">common denominator</div><div class="esl-def">A denominator that BOTH fractions can be converted to so they can be added or subtracted. Usually the LCM of the two denominators.</div></div>
+    <div class="esl-row"><div class="esl-word">LCM</div><div class="esl-def">Lowest Common Multiple — the SMALLEST number that both denominators divide into exactly. LCM of 4 and 6 = 12.</div></div>
+    <div class="esl-row"><div class="esl-word">mixed number</div><div class="esl-def">A whole number AND a fraction together. 2¾ = "two and three quarters." Revision from Week 3.</div></div>
+    <div class="esl-row"><div class="esl-word">borrowing</div><div class="esl-def">When subtracting mixed numbers, if the fraction you are subtracting is BIGGER than the fraction you start with, you "borrow" 1 whole from the whole number and convert it into a fraction.</div></div>
+    <div class="esl-row"><div class="esl-word">simplify</div><div class="esl-def">Reduce a fraction to its lowest terms by dividing top and bottom by their HCF (Highest Common Factor) — always do this as your LAST step. Revision from Week 3.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">➕</span> Adding Fractions with LIKE Denominators — The Easy Case</div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>The rule:</strong> If the denominators are the SAME, just ADD the numerators. Keep the denominator unchanged. Then simplify if possible.</div>
+  </div>
+  <div class="frac-add-block">
+    <div class="frac-row-label">2/7 + 3/7</div>
+    <div class="frac-bar">
+      <div class="frac-seg" style="background:#B45309;flex:2;">2/7</div>
+      <div class="frac-seg" style="background:#9A4520;flex:3;">3/7</div>
+      <div class="frac-seg empty" style="flex:2;"></div>
+    </div>
+    <div class="frac-op">= 5/7</div>
+  </div>
+  <div class="formula">
+    2/7 + 3/7 = (2+3)/7 = <span class="hl">5/7</span>  <span class="comment">← denominators match, just add the tops</span><br><br>
+    3/8 + 7/8 = (3+7)/8 = 10/8 = <span class="hl">1 2/8 = 1¼</span>  <span class="comment">← simplify and convert to mixed number if the answer is improper</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔄</span> Adding Fractions with UNLIKE Denominators — Find the LCM First</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>You CANNOT add fractions with different denominators directly.</strong> 1/4 + 1/6 is NOT 2/10! You must first convert both fractions to have the SAME denominator.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Find the LCM of the two denominators</div><div class="step-desc">For 1/4 + 1/6: multiples of 4 = 4, 8, <strong>12</strong>, 16... Multiples of 6 = 6, <strong>12</strong>, 18... LCM(4,6) = 12.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Convert each fraction to the common denominator</div><div class="step-desc">1/4 → ×3 top and bottom → 3/12. &nbsp;&nbsp; 1/6 → ×2 top and bottom → 2/12.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Add the numerators — keep the denominator</div><div class="step-desc">3/12 + 2/12 = 5/12.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">4</div><div><div class="step-title">Simplify if possible</div><div class="step-desc">HCF(5,12) = 1 → 5/12 is already in its simplest form. <strong>Final answer: 5/12.</strong></div></div></div>
+  </div>
+  <div class="frac-add-block" style="margin-top:14px;">
+    <div class="frac-row-label">1/4 (as 3/12)</div>
+    <div class="frac-bar">
+      <div class="frac-seg" style="background:#B45309;flex:3;">3/12</div>
+      <div class="frac-seg empty" style="flex:9;"></div>
+    </div>
+    <div class="frac-row-label">1/6 (as 2/12)</div>
+    <div class="frac-bar">
+      <div class="frac-seg" style="background:#9A4520;flex:2;">2/12</div>
+      <div class="frac-seg empty" style="flex:10;"></div>
+    </div>
+    <div class="frac-op">+ combined →</div>
+    <div class="frac-bar">
+      <div class="frac-seg" style="background:#B45309;flex:3;">3/12</div>
+      <div class="frac-seg" style="background:#9A4520;flex:2;">2/12</div>
+      <div class="frac-seg empty" style="flex:7;"></div>
+    </div>
+    <div class="frac-op">= 5/12</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">➖</span> Subtracting Fractions — Same Method, Different Operation</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Subtraction follows exactly the same process as addition: like denominators → subtract straight away; unlike denominators → find the LCM, convert, THEN subtract.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Like denominators:</span><br>
+    7/9 − 4/9 = (7−4)/9 = <span class="hl">3/9 = 1/3</span> <span class="comment">(simplify! HCF(3,9)=3)</span><br><br>
+    <span class="comment">Unlike denominators:</span><br>
+    5/6 − 1/4 → LCM(6,4)=12 → 10/12 − 3/12 = <span class="hl">7/12</span><br>
+    <span class="comment">(5/6 → ×2 → 10/12)  (1/4 → ×3 → 3/12)</span>
+  </div>
+  <div class="callout tip">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Order matters in subtraction!</strong> 5/6 − 1/4 is NOT the same as 1/4 − 5/6. Always subtract in the order written — the first fraction is the starting amount, the second is what is taken away.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔢</span> Mixed Number Calculations — Adding</div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Method:</strong> Add the whole numbers together. Add the fraction parts together (finding a common denominator if needed). If the fraction part is improper (≥1), convert and carry the extra whole number across.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Example: 2¾ + 1½</span><br><br>
+    Whole numbers: 2 + 1 = <span class="hl2">3</span><br>
+    Fractions: 3/4 + 1/2 → LCM(4,2)=4 → 3/4 + 2/4 = <span class="hl3">5/4</span><br>
+    5/4 is improper → 5/4 = 1¼<br>
+    Combine: 3 + 1¼ = <span class="hl">4¼</span><br><br>
+    <span class="comment">Final answer: 2¾ + 1½ = 4¼</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔁</span> Mixed Number Calculations — Subtracting with Borrowing</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>When do you need to borrow?</strong> When the fraction you are subtracting is BIGGER than the fraction you are starting with. You cannot have a "negative" fraction part, so you borrow 1 whole from the whole-number part and add it to the fraction.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Compare the fraction parts first</div><div class="step-desc">Example: 4⅕ − 1⅗. Fraction parts: 1/5 vs 3/5. Since 1/5 < 3/5, we cannot subtract directly — we need to borrow.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Borrow 1 from the whole number</div><div class="step-desc">4⅕ = 3 + 1 + 1/5 = 3 + 5/5 + 1/5 = 3 + 6/5 = <strong>3 6/5</strong>. We've turned 4⅕ into "3 and six-fifths" — same value, different form.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Subtract whole numbers and fractions separately</div><div class="step-desc">Whole numbers: 3 − 1 = 2. Fractions: 6/5 − 3/5 = 3/5.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">4</div><div><div class="step-title">Combine and simplify</div><div class="step-desc">2 + 3/5 = <strong>2⅗</strong>. Check: HCF(3,5)=1, already simplified. <strong>Final answer: 4⅕ − 1⅗ = 2⅗</strong></div></div></div>
+  </div>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Alternative method:</strong> Convert BOTH mixed numbers to improper fractions first, then subtract, then convert back. 4⅕ = 21/5. 1⅗ = 8/5. 21/5 − 8/5 = 13/5 = 2⅗ ✓ Same answer — choose whichever method you find clearer.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🎯</span> Adding &amp; Subtracting Fractions — Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCIENCE — Nutrition & Digestion
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🍽️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 4</div>
+  <div class="hero-title">Nutrition &amp;<br>Digestion</div>
+  <div class="hero-subtitle">Food groups · Balanced diet · The digestive system · Enzymes and the journey of food</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Biology</span><span class="hero-tag">Nutrition</span><span class="hero-tag">Digestion</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Biology Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 3 — remember organ, tissue and function</div>
+    <div class="esl-row"><div class="esl-word">nutrition</div><div class="esl-def">The process of taking in food and using it for energy, growth, and health. "Good nutrition" means eating the right foods in the right amounts.</div></div>
+    <div class="esl-row"><div class="esl-word">nutrient</div><div class="esl-def">A substance in food that the body needs: carbohydrates, proteins, fats, vitamins, minerals, fibre and water are all nutrients.</div></div>
+    <div class="esl-row"><div class="esl-word">balanced diet</div><div class="esl-def">Eating the right VARIETY and PROPORTION of foods for good health — not equal amounts of everything, but the correct proportions of each group.</div></div>
+    <div class="esl-row"><div class="esl-word">carbohydrate</div><div class="esl-def">The body's MAIN source of energy. Found in rice, bread, pasta, potatoes, and other starchy foods.</div></div>
+    <div class="esl-row"><div class="esl-word">protein</div><div class="esl-def">Needed for GROWTH and REPAIR of body tissues. Found in chicken, fish, lentils, beans, chickpeas, eggs and dairy.</div></div>
+    <div class="esl-row"><div class="esl-word">fibre</div><div class="esl-def">Helps digestion run smoothly and keeps the gut healthy. Found in fruits, vegetables, whole grains and pulses (lentils, beans).</div></div>
+    <div class="esl-row"><div class="esl-word">digestion</div><div class="esl-def">The process of BREAKING DOWN food into nutrients small enough for the body to absorb into the blood.</div></div>
+    <div class="esl-row"><div class="esl-word">enzyme</div><div class="esl-def">A biological molecule that SPEEDS UP digestion — it breaks large food molecules into smaller ones. Different enzymes break down different nutrients.</div></div>
+    <div class="esl-row"><div class="esl-word">peristalsis</div><div class="esl-def">Wave-like muscle squeezing movements that push food along the digestive tract — from the oesophagus all the way through the intestines.</div></div>
+    <div class="esl-row"><div class="esl-word">absorption</div><div class="esl-def">Nutrients passing from the gut into the BLOODSTREAM — mainly happens in the small intestine, through the villi (Week 3 link).</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🍛</span> What Is a Balanced Diet? — The Five Food Groups</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>A balanced diet does NOT mean equal amounts of everything.</strong> It means eating the RIGHT PROPORTIONS — much more of some groups (carbohydrates, fruit and vegetables) and much less of others (fats and sugary foods).</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Food Group</th><th>Main Function</th><th>Examples (halal-friendly)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Carbohydrates</strong></td><td>Main source of ENERGY — should make up the largest part of meals</td><td>Rice, bread, roti/chapati, pasta, potatoes, oats</td></tr>
+      <tr><td><strong>Fruits &amp; Vegetables</strong></td><td>Provide vitamins, minerals and fibre — support immune system and digestion</td><td>Apples, bananas, spinach, carrots, tomatoes, oranges</td></tr>
+      <tr><td><strong>Protein Foods</strong></td><td>GROWTH and REPAIR of muscles, skin and organs</td><td>Chicken, fish, eggs, lentils, chickpeas, kidney beans, nuts</td></tr>
+      <tr><td><strong>Dairy &amp; Alternatives</strong></td><td>Calcium for strong bones and teeth; also provides protein</td><td>Milk, yoghurt, cheese, fortified soy/plant milk</td></tr>
+      <tr><td><strong>Fats &amp; Oils</strong></td><td>Energy storage, insulation, helps absorb certain vitamins — needed in SMALL amounts only</td><td>Olive oil, sunflower oil, nuts, seeds, avocado</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> An unbalanced diet — even if it contains "healthy" foods — can cause problems. Too much carbohydrate and fat with too little fruit, vegetables and protein can lead to poor energy levels, weak immunity, and long-term health issues such as obesity.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🔬</span> Macronutrients vs Micronutrients</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.5);">
+      <div class="cmp-head" style="color:#6EE7B7;">Macronutrients — needed in LARGE amounts</div>
+      <div class="cmp-row"><strong>Carbohydrates:</strong> primary energy source — broken down into glucose</div>
+      <div class="cmp-row"><strong>Proteins:</strong> broken down into amino acids — used to build and repair tissue</div>
+      <div class="cmp-row"><strong>Fats:</strong> broken down into fatty acids and glycerol — long-term energy storage, cell membranes, insulation</div>
+      <div class="cmp-row">"Macro" = LARGE — these make up most of your daily food intake</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">Micronutrients — needed in SMALL amounts</div>
+      <div class="cmp-row"><strong>Vitamin C:</strong> immune system, healing wounds — found in citrus fruit, peppers</div>
+      <div class="cmp-row"><strong>Vitamin D:</strong> helps the body absorb calcium for bone health — sunlight + eggs, fortified milk</div>
+      <div class="cmp-row"><strong>Calcium:</strong> strong bones and teeth — found in dairy, leafy greens</div>
+      <div class="cmp-row"><strong>Iron:</strong> needed to make red blood cells — found in red meat, lentils, spinach. Deficiency causes anaemia (tiredness)</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🚶</span> The Digestive System — The Journey of Food (Click Each Stage)</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('mouth')">1️⃣ Mouth</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('oesophagus')">2️⃣ Oesophagus</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('stomach')">3️⃣ Stomach</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('smallint')">4️⃣ Small Intestine</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showOrgan('largeint')">5️⃣ Large Intestine</button>
+  </div>
+  <div class="cell-panel" id="organ-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click each stage in order to follow food on its journey through the digestive system.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🧪</span> Enzymes — Biological Catalysts</div>
+  <div class="callout info">
+    <div class="ci">⚡</div>
+    <div class="ct">An <strong>enzyme</strong> is a biological molecule that speeds up a chemical reaction without being used up itself. In digestion, enzymes break large food molecules (which are too big to absorb) into small molecules (which CAN be absorbed into the blood).</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Enzyme</th><th>Where Produced</th><th>Breaks Down...</th><th>Products</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Amylase</strong></td><td>Salivary glands (mouth) and pancreas</td><td>Starch (a carbohydrate)</td><td>Simple sugars</td></tr>
+      <tr><td><strong>Protease</strong></td><td>Stomach (as pepsin) and pancreas</td><td>Proteins</td><td>Amino acids</td></tr>
+      <tr><td><strong>Lipase</strong></td><td>Pancreas</td><td>Fats (with help from bile)</td><td>Fatty acids and glycerol</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Bile — not an enzyme, but essential:</strong> Bile is produced by the liver and stored in the gallbladder. It is not an enzyme — it does not break molecules apart chemically. Instead, it EMULSIFIES fats — breaking large fat globules into tiny droplets, which gives lipase a much larger surface area to work on.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🏃</span> Why Does This Matter? — Health and Growth</div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 application:</strong> During your teenage years, your body is going through rapid growth — you need MORE protein (for muscle and tissue growth), MORE calcium and vitamin D (for bone development), and MORE iron (especially important to prevent anaemia). A diet that lacks variety — even if it "feels" healthy — can leave gaps that affect energy, concentration, and growth.</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🔗</div>
+    <div class="ct"><strong>Connecting to Week 3:</strong> Remember the digestive ORGANS from last week (stomach, small intestine, liver)? This week we've added the CHEMICALS (enzymes, bile) that do the actual breaking-down work inside those organs. Organisation (Week 3) + Function (Week 4) = the complete picture.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🎯</span> Nutrition &amp; Digestion — Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HISTORY — The Roman Empire
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏛️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History · Week 4</div>
+  <div class="hero-title">The Roman<br>Empire</div>
+  <div class="hero-subtitle">Rise and fall · Roman government · Roman Britain · Legacy to the modern world</div>
+  <div class="hero-tags">
+    <span class="hero-tag">753 BC–476 AD</span><span class="hero-tag">Roman Britain</span><span class="hero-tag">Government</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL History Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 3 — compare these terms to Ancient Greece as you go</div>
+    <div class="esl-row"><div class="esl-word">empire</div><div class="esl-def">A large territory containing many different lands and peoples, ruled by ONE supreme authority. At its height, the Roman Empire stretched from Britain to Egypt to Iraq.</div></div>
+    <div class="esl-row"><div class="esl-word">republic</div><div class="esl-def">A system of government where REPRESENTATIVES are elected to govern, rather than a king ruling alone. Rome was a republic for almost 500 years before becoming an empire.</div></div>
+    <div class="esl-row"><div class="esl-word">emperor</div><div class="esl-def">The supreme ruler of the Roman Empire — often holding power for life, unlike the elected leaders of the Republic.</div></div>
+    <div class="esl-row"><div class="esl-word">senate</div><div class="esl-def">A council of senior, experienced politicians who advised and governed Rome. Under the Republic the Senate held real power; under emperors it became mostly advisory.</div></div>
+    <div class="esl-row"><div class="esl-word">legion</div><div class="esl-def">A large unit of the Roman army — around 5,000 soldiers. The Roman army's organisation, training and engineering made it one of the most effective military forces in history.</div></div>
+    <div class="esl-row"><div class="esl-word">citizen</div><div class="esl-def">A legal member of Rome with rights (such as voting and legal protection) and responsibilities. Compare to Athenian citizenship from Week 3 — both systems excluded large groups of people.</div></div>
+    <div class="esl-row"><div class="esl-word">province</div><div class="esl-def">A region or territory controlled by Rome OUTSIDE Italy — such as Britannia (Britain), Gaul (France), or Egypt.</div></div>
+    <div class="esl-row"><div class="esl-word">aqueduct</div><div class="esl-def">A structure (often a bridge-like channel) built to carry water over long distances using gravity — a major feat of Roman engineering.</div></div>
+    <div class="esl-row"><div class="esl-word">Latin</div><div class="esl-def">The language of the Romans. Latin is the root of Italian, Spanish, French, Portuguese and Romanian, and forms the basis of a huge amount of English vocabulary.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🏛️</span> From Republic to Empire — How Rome Grew</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct"><strong>Founding legend:</strong> According to Roman legend, the city of Rome was founded in <strong>753 BC</strong> by twin brothers Romulus and Remus, who were said to have been raised by a wolf. Historians treat this as legend — but Rome's growth from a small city to the largest empire the ancient world had ever seen is very real history.</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">753 BC (legend)</div><div class="tl-title">Founding of Rome</div><div class="tl-desc">A small city-state begins on seven hills beside the river Tiber in central Italy.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#1E3A8A;"></div><div class="tl-date">509–27 BC</div><div class="tl-title">The Roman Republic</div><div class="tl-desc">Rome is governed by elected officials (consuls) and the Senate — not by kings. The motto "SPQR" (Senatus Populusque Romanus — "The Senate and People of Rome") appears on Roman buildings, coins and military standards.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">49–44 BC</div><div class="tl-title">Julius Caesar's Rise and Assassination</div><div class="tl-desc">Caesar becomes the most powerful man in Rome, declared dictator. He is assassinated by senators in 44 BC who feared he wanted to become king — a fear that ironically helped bring about the end of the Republic.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">27 BC</div><div class="tl-title">Augustus Becomes First Emperor</div><div class="tl-desc">Octavian (Caesar's adopted heir) takes the title "Augustus" and becomes Rome's first emperor — beginning the Roman Empire and a long period of relative stability known as the <strong>Pax Romana</strong> ("Roman Peace").</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#2563EB;"></div><div class="tl-date">43 AD</div><div class="tl-title">Roman Conquest of Britain</div><div class="tl-desc">Emperor Claudius leads the full conquest of Britain (after Julius Caesar's earlier limited expeditions in 55–54 BC). Britain becomes the province of Britannia.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#60A5FA;"></div><div class="tl-date">122 AD</div><div class="tl-title">Hadrian's Wall Built</div><div class="tl-desc">Emperor Hadrian orders a great wall built across northern Britain to mark and defend the empire's frontier against the Picts and other northern tribes.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#60A5FA;"></div><div class="tl-date">410 AD</div><div class="tl-title">Roman Withdrawal from Britain</div><div class="tl-desc">As pressures grow elsewhere in the empire, Roman forces withdraw from Britain — ending nearly 400 years of Roman rule there.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#93C5FD;"></div><div class="tl-date">476 AD</div><div class="tl-title">Fall of the Western Roman Empire</div><div class="tl-desc">The last Western Roman emperor is removed. The Eastern half of the empire (the Byzantine Empire, centred on Constantinople) continues for almost another 1,000 years.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">⚖️</span> Roman Government — Republic vs Empire (and a Look Back to Greece)</div>
+  <div class="callout warn">
+    <div class="ci">🎓</div>
+    <div class="ct"><strong>KS3 Level 6 connection:</strong> In Week 3 you studied Athenian democracy. Rome's Republic borrowed some similar ideas — elected officials, a council, citizen participation — but Rome's system was different in important ways. Comparing the two helps you understand both more deeply.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Roman Republic (509–27 BC)</th><th>Roman Empire (27 BC onward)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Who holds power?</strong></td><td>Two elected Consuls (one-year terms) + the Senate</td><td>One Emperor, often holding power for life</td></tr>
+      <tr><td><strong>The Senate's role</strong></td><td>Real political power — debated laws, controlled finances</td><td>Mostly advisory — real power belonged to the emperor</td></tr>
+      <tr><td><strong>Citizens' role</strong></td><td>Citizens voted in assemblies for officials and some laws</td><td>Citizens had legal rights but very limited political power</td></tr>
+      <tr><td><strong>Compare to Athens (Week 3)</strong></td><td>Both used elected representatives and citizen assemblies — but Rome's voting system favoured the wealthy more heavily than Athens'</td><td>Athens never had anything equivalent to an all-powerful emperor — this is a key difference</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">⚔️</span> The Roman Army — Legions and Engineering</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">1</div><div><div class="step-title">The Legion — Rome's Core Military Unit</div><div class="step-desc">A legion contained around <strong>5,000 soldiers</strong>, divided into smaller groups called centuries (originally ~100 men, later ~80), each led by a centurion. This structure allowed huge armies to be organised, commanded and moved efficiently.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">2</div><div><div class="step-title">Discipline and Training</div><div class="step-desc">Roman soldiers trained constantly — marching, building camps, formation drills. This level of discipline echoes the Spartan military culture from Week 3, though for different underlying reasons (Rome's was about conquest and control of a vast empire; Sparta's was about survival against the helots).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">3</div><div><div class="step-title">Roman Roads — Built for the Army, Used by Everyone</div><div class="step-desc">Roman roads were built primarily so legions could move quickly across the empire. Many were so well-built that parts of their routes are still used by modern roads today — including in Britain.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">4</div><div><div class="step-title">At Its Height</div><div class="step-desc">The Roman Empire stretched from Britain in the northwest to Egypt in the southeast and Iraq in the east — covering roughly 5 million km² and governing tens of millions of people across dozens of different cultures and languages.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🇬🇧</span> Roman Britain — How Rome Changed Britain</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">🛡️ The Conquest (43 AD)</div><div class="vc-def">Emperor Claudius led the full Roman conquest of Britain in 43 AD, following Julius Caesar's earlier, more limited expeditions a century before. Britain became the Roman province of <strong>Britannia</strong>.</div></div>
+    <div class="vocab-card"><div class="vc-word">🧱 Hadrian's Wall</div><div class="vc-def">Built from 122 AD across northern Britain — roughly 117 km long. Marked the northern frontier of the empire and was defended by forts and garrisons along its length.</div></div>
+    <div class="vocab-card"><div class="vc-word">🛣️ Roman Roads</div><div class="vc-def">A network of straight, well-engineered roads connected towns and forts across Britain. Several modern roads still follow these ancient routes.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏙️ Roman Towns</div><div class="vc-def"><strong>Londinium</strong> (London) grew into a major trading centre. <strong>Aquae Sulis</strong> (Bath) became famous for its Roman baths, parts of which survive today. <strong>Eboracum</strong> (York) and <strong>Deva</strong> (Chester) were important military centres.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏺 Roman Baths &amp; Villas</div><div class="vc-def">Wealthy Romans and Romanised Britons built villas with underfloor heating (hypocausts) and bathhouses — technology that disappeared from Britain for centuries after Rome's withdrawal.</div></div>
+    <div class="vocab-card"><div class="vc-word">📜 Departure (410 AD)</div><div class="vc-def">As the empire faced growing pressure elsewhere, Roman forces withdrew from Britain around 410 AD, leaving local rulers to manage their own defence — a major turning point in British history.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📉</span> Why Did Rome Fall? — Multiple Causes</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>KS3 key concept:</strong> The fall of the Western Roman Empire was NOT a single event — it was a slow process over roughly 200 years, caused by MULTIPLE factors working together. Historians still debate which causes mattered most.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Cause</th><th>Explanation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Economic troubles</strong></td><td>Heavy taxation to fund the army and government, combined with inflation, weakened the economy and made it harder to pay soldiers and maintain infrastructure.</td></tr>
+      <tr><td><strong>Military pressure</strong></td><td>Groups such as the Goths, Vandals and Huns moved into or attacked Roman territory, putting enormous strain on Rome's borders and armies.</td></tr>
+      <tr><td><strong>Political instability</strong></td><td>Frequent changes of emperor — sometimes through assassination or civil war — made long-term planning and stable government very difficult.</td></tr>
+      <tr><td><strong>Size of the empire</strong></td><td>The empire became so large that it was split into Western and Eastern halves to make it easier to govern — but this also weakened unity and shared resources.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>The Eastern Empire continued:</strong> While the WESTERN Roman Empire fell in 476 AD, the EASTERN Roman Empire (known as the Byzantine Empire, centred on Constantinople) continued for almost another 1,000 years, until 1453 AD. "The fall of Rome" really means the fall of the WESTERN half.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🌍</span> Roman Legacy — Impact on the Modern World</div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">🗣️ Language — Latin's Influence</div><div class="acc-sub">Italian, Spanish, French, Portuguese, Romanian — and English vocabulary</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">Latin is the direct ancestor of Italian, Spanish, French, Portuguese and Romanian — known as the "Romance languages" (from "Roman"). English is a Germanic language, but huge numbers of English words come from Latin, especially academic and formal vocabulary. Examples: <em>video</em> (I see), <em>audio</em> (I hear), <em>et cetera</em> (and the rest), <em>via</em> (by way of). Even the alphabet you are reading right now — the Latin alphabet — is a Roman invention.</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">⚖️ Law — Foundations of Modern Legal Systems</div><div class="acc-sub">Many legal principles used today have Roman roots</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">Roman law developed detailed written codes covering property, contracts, family and criminal matters. Many legal systems around the world — including in Europe and countries influenced by European law — are based partly on Roman legal principles, such as the idea that laws should be written down, publicly known, and applied consistently. The Latin phrase "innocent until proven guilty" reflects a principle with roots in Roman legal thinking.</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">🏗️ Engineering &amp; Architecture</div><div class="acc-sub">Roads, aqueducts, the arch, and concrete</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">The Romans perfected the <strong>arch</strong> — allowing them to build aqueducts that carried water across valleys using gravity alone, and structures like the Colosseum that could hold tens of thousands of people. They also developed a form of concrete, used in structures like the Pantheon in Rome, which still stands today after roughly 1,900 years. Modern bridges, domes and tunnels owe a debt to Roman engineering principles.</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">📅 The Calendar</div><div class="acc-sub">Why is it called "July" and "August"?</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">The calendar we use today is based on the Roman <strong>Julian calendar</strong> (later adjusted into the Gregorian calendar). The month <strong>July</strong> is named after Julius Caesar, and <strong>August</strong> after the emperor Augustus. Several other month names come from Roman gods and numbers (e.g. "December" comes from the Latin word for "ten," <em>decem</em> — because it was originally the tenth month in the old Roman calendar).</div>
+  </div>
+  <div class="acc-card" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="acc-title">🏛️ Government — Ideas That Inspired Later Democracies</div><div class="acc-sub">The word "republic" itself comes from Rome</div></div><div class="acc-toggle">▼</div></div>
+    <div class="acc-body">The word "republic" comes from the Latin phrase <em>res publica</em> — "public affair" or "the people's matter." When later thinkers and revolutionaries designed new systems of government (for example, in the late 1700s), many looked back to the Roman Republic — alongside Greek democracy — as a model for representative government, a senate, and checks on the power of any single ruler.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🎯</span> The Roman Empire — Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Sentence Lab (English)
+const sentenceData={
+  simple:{title:'Simple Sentence',sub:'ONE independent clause',body:'<strong>Structure:</strong> Subject + Verb (+ Object). Contains exactly ONE independent clause and no dependent clauses.<br><br><strong>Examples:</strong><br>• "Maya studied." — short, but still a complete sentence.<br>• "The students completed their homework before the deadline." — longer, but STILL only one independent clause (one subject, one main verb "completed"). The phrase "before the deadline" is just extra detail, not a separate clause with its own subject and verb.<br><br><strong>Punctuation:</strong> Ends with a full stop (or question/exclamation mark if it asks or exclaims).',analogy:'⚠️ ESL tip: Length does NOT determine sentence type. A long sentence can still be "simple" if it has only one independent clause. Always check the STRUCTURE, not the word count.'},
+  compound:{title:'Compound Sentence',sub:'TWO+ independent clauses, joined by FANBOYS or a semicolon',body:'<strong>Structure:</strong> [Independent clause] + comma + FANBOYS + [independent clause]. Both halves could stand alone as complete sentences.<br><br><strong>Examples:</strong><br>• "I finished my homework, so I went outside to play."<br>• "She wanted to study Biology, but the class was full."<br>• "We can revise today, or we can revise tomorrow."<br><br><strong>Punctuation:</strong> Comma BEFORE the FANBOYS word. (A semicolon can replace "comma + and/but" when the two clauses are closely related: "I finished my homework; I went outside.")',analogy:'🔗 Think of it as TWO complete sentences glued together with a connecting word that shows HOW they relate (addition, contrast, choice, result, etc.)'},
+  complex:{title:'Complex Sentence',sub:'Independent clause + dependent clause(s), joined by a subordinating conjunction',body:'<strong>Structure:</strong> Can be written two ways:<br>1. [Dependent clause], [Independent clause]. — comma required<br>2. [Independent clause] [dependent clause]. — usually no comma<br><br><strong>Examples:</strong><br>• "Although it was raining, we walked to school." (dependent first → comma)<br>• "We walked to school although it was raining." (independent first → no comma)<br>• "Because she practised every day, she became confident." <br><br><strong>Subordinating conjunctions:</strong> because, although, when, if, since, while, after, before, unless, until.',analogy:'🧷 The dependent clause adds extra information (reason, time, condition, contrast) to the main idea — but cannot stand alone.'},
+  compoundcomplex:{title:'Compound-Complex Sentence',sub:'TWO+ independent clauses AND at least one dependent clause',body:'<strong>Structure:</strong> Combines features of compound and complex sentences — at least two independent clauses joined by a FANBOYS word, PLUS at least one dependent clause.<br><br><strong>Examples:</strong><br>• "Although it was raining, we walked to school, and we still arrived on time." (dependent clause "Although it was raining" + two independent clauses joined by "and")<br>• "She studied hard because the exam was important, but she still felt nervous."<br><br><strong>Punctuation:</strong> Apply BOTH rules — comma after a leading dependent clause AND comma before the FANBOYS word.',analogy:'🎓 KS3 Level 6 challenge: try writing one of these about a topic from your other lessons this week — e.g. Noah\'s story, the Roman Empire, or fractions!'},
+};
+function showSentence(id){
+  const o=sentenceData[id];if(!o)return;
+  const p=document.getElementById('sentence-panel');
+  p.innerHTML='<div class="cip-name">'+o.title+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sub+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.analogy+'</div></div>';
+  p.style.borderColor='#BE123C';
+}
+
+// Fraction wall (Maths - kept for reference visuals if needed)
+(function(){
+  const w=document.getElementById('fwall');
+  if(!w)return;
+  const data=[
+    {n:1,label:'1',c:'#B45309'},{n:2,label:'½',c:'#9A4520'},{n:3,label:'⅓',c:'#854530'},
+    {n:4,label:'¼',c:'#7A3A2A'},{n:6,label:'⅙',c:'#642820'},{n:12,label:'1/12',c:'#4E1815'}
+  ];
+  data.forEach(({n,label,c})=>{
+    const row=document.createElement('div');row.className='fwall-row';
+    for(let i=0;i<n;i++){
+      const cell=document.createElement('div');cell.className='fwall-cell';
+      cell.style.background=c;cell.textContent=label;row.appendChild(cell);
+    }
+    w.appendChild(row);
+  });
+})();
+
+// Digestion organ info (Science)
+const organData={
+  mouth:{e:'👄',name:'Mouth',sys:'Start of the Digestive System',body:'Digestion BEGINS here in two ways: <strong>mechanical digestion</strong> — teeth physically break food into smaller pieces (chewing/mastication) — and <strong>chemical digestion</strong> — saliva contains the enzyme <strong>amylase</strong>, which starts breaking down starch into sugars immediately. The tongue mixes food with saliva to form a soft ball called a <strong>bolus</strong>, ready for swallowing.',a:'👄 Analogy: The "intake" stage — like sorting and pre-processing materials before they enter a factory production line.'},
+  oesophagus:{e:'⬇️',name:'Oesophagus',sys:'Tube to the Stomach',body:'A muscular tube connecting the mouth to the stomach. Food moves down it through <strong>peristalsis</strong> — wave-like muscle contractions that squeeze the bolus downward. This is why you can swallow food even upside down — peristalsis does not rely on gravity alone!',a:'⬇️ Analogy: A conveyor belt that actively pushes items along — not just a passive tube.'},
+  stomach:{e:'🟡',name:'Stomach',sys:'Chemical Breakdown — Especially Proteins',body:'A muscular bag that churns food and mixes it with <strong>hydrochloric acid</strong> (pH ~2) and the enzyme <strong>pepsin</strong> (a protease), which begins breaking down proteins into smaller chains. The acid also kills many harmful bacteria in food. The result is a thick liquid called <strong>chyme</strong>.',a:'🟡 Analogy: A churning chemical mixing tank — mechanical (muscle contractions) AND chemical (acid + enzymes) processing happen together.'},
+  smallint:{e:'〰️',name:'Small Intestine',sys:'Main Site of Digestion AND Absorption',body:'About 6 metres long. Receives <strong>bile</strong> from the liver/gallbladder (emulsifies fats) and enzymes from the <strong>pancreas</strong> (amylase, protease, lipase) which complete the breakdown of carbohydrates, proteins and fats. The inner wall is covered in <strong>villi</strong> — tiny finger-like projections that absorb the resulting nutrients into the bloodstream.',a:'〰️ Analogy: The "final processing and despatch" stage of the factory — finishing the breakdown AND loading the finished products (nutrients) onto delivery trucks (the blood).'},
+  largeint:{e:'🌀',name:'Large Intestine',sys:'Water Absorption and Waste Formation',body:'Absorbs remaining <strong>water</strong> and some minerals from the undigested material. Contains huge numbers of beneficial bacteria that help break down some remaining material and produce certain vitamins. What remains forms <strong>faeces</strong>, which are stored and eventually egested (removed from the body) through the rectum and anus.',a:'🌀 Analogy: The final "recycling and waste management" stage — recovering anything still useful (water) before disposing of what is left.'},
+};
+function showOrgan(id){
+  const o=organData[id];if(!o)return;
+  const p=document.getElementById('organ-panel');
+  p.innerHTML='<div style="font-size:2rem;margin-bottom:8px;">'+o.e+'</div><div class="cip-name">'+o.name+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sys+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.a+'</div></div>';
+  p.style.borderColor='#059669';
+}
+
+// Quiz data
+const quizData={
+  bible:[
+    {q:'According to Hebrews 11:7, what does Noah\'s story teach us about FAITH?',opts:['Faith means waiting for proof before acting','Faith means acting on what God said, even before seeing any evidence — Noah was "warned about things not yet seen"','Faith means fully understanding God\'s entire plan in advance','Faith means having no fear at all'],ans:1,exp:'Hebrews 11:7 specifically describes Noah as being "warned about things not yet seen" and responding "in holy fear" by building the ark. Faith here means trusting and acting on God\'s word BEFORE there is visible evidence — the rain had not yet started.'},
+    {q:'Why did God decide to send the flood, according to Genesis 6?',opts:['Because Noah asked God to do it','Because the earth had become overcrowded','Because human wickedness and violence had become extremely corrupt across the earth — yet Noah remained righteous','Because the animals were behaving badly'],ans:2,exp:'Genesis 6:5 describes humanity\'s thoughts as consistently turned toward evil, while Genesis 6:9 describes Noah as righteous and walking faithfully with God. The flood is presented as a response to widespread corruption, with Noah standing out as the exception.'},
+    {q:'Based on Genesis 6:15 (using ~45 cm per cubit for 300×50×30 cubits), roughly how big was the ark?',opts:['About the size of a small car','About the length of a football pitch and a half (~137 m long)','About the size of a swimming pool only','About the size of a single house'],ans:1,exp:'300 cubits × ~45 cm ≈ 137 metres — longer than a standard football pitch (~105 m). This was an enormous construction project undertaken over a very long period, with no flood yet visible — emphasising the scale of Noah\'s sustained obedience.'},
+    {q:'What was the SIGN of God\'s covenant with Noah after the flood (Genesis 9:13)?',opts:['A dove','An olive branch','A rainbow','A mountain'],ans:2,exp:'Genesis 9:13 describes God setting the rainbow in the sky as the sign of His covenant never to flood the whole earth again. A covenant is a binding promise — and this one was given a lasting, visible sign meant to be remembered across generations.'},
+    {q:'Which statement BEST describes the relationship between justice and mercy in the Noah story?',opts:['The story shows only mercy, with no judgment at all','The story shows only judgment, with no mercy for anyone','God judged the corrupt world (justice) while providing the ark as a way of escape for Noah\'s family (mercy) — both appear together','The story focuses only on animals and has nothing to do with justice or mercy'],ans:2,exp:'The flood narrative holds both ideas together: judgment responds to persistent corruption, while the ark — offered freely — represents a way of escape and salvation. Neither theme cancels out the other; together they show a fuller picture of how the story presents God\'s character.'},
+  ],
+  english:[
+    {q:'Which sentence is a SIMPLE sentence, even though it is fairly long?',opts:['The students completed their homework before the deadline, and the teacher was pleased.','Although the test was difficult, most students passed.','The students completed their challenging homework assignment before the strict deadline on Friday.','The students finished early, so they went outside.'],ans:2,exp:'This sentence has only ONE independent clause — one subject ("The students") and one main verb ("completed"). The extra detail ("challenging," "before the strict deadline on Friday") does not add a second clause with its own subject and verb. Length does not determine sentence type — structure does.'},
+    {q:'"I wanted to go outside, but it started raining." What sentence type and conjunction type is this?',opts:['Simple sentence; no conjunction needed','Compound sentence; coordinating conjunction (FANBOYS) "but"','Complex sentence; subordinating conjunction "but"','Compound-complex sentence; two subordinating conjunctions'],ans:1,exp:'Both halves — "I wanted to go outside" and "it started raining" — are independent clauses that could stand alone. They are joined by "but," one of the FANBOYS coordinating conjunctions, with a comma before it. This makes it a compound sentence.'},
+    {q:'"Although she was tired, she finished her homework." Why is the comma needed here?',opts:['Commas are always needed before "she"','Because the sentence has a list of items','Because the dependent clause ("Although she was tired") comes FIRST, before the independent clause','Because "Although" is always followed by a comma no matter where it appears'],ans:2,exp:'The rule: [Dependent clause], [Independent clause]. — when the dependent clause comes first, a comma separates it from the main clause. If the order were reversed ("She finished her homework although she was tired"), no comma would be needed.'},
+    {q:'What is wrong with this sentence: "I went to the shop, I bought some bread."?',opts:['Nothing is wrong with it','It is a comma splice — two independent clauses joined by ONLY a comma, with no conjunction','It should end with a question mark','It is missing a subordinating conjunction'],ans:1,exp:'Both halves are independent clauses ("I went to the shop" / "I bought some bread"), but they are joined by only a comma — this is a comma splice, a common error. Correct options: add "and" after the comma, replace the comma with a full stop, or use a semicolon.'},
+    {q:'Which sentence correctly uses a comma after an introductory phrase?',opts:['After the lesson ended the students went to lunch.','After the lesson ended, the students went to lunch.','After, the lesson ended the students went to lunch.','After the lesson, ended the students went to lunch.'],ans:1,exp:'"After the lesson ended" is an introductory dependent clause/phrase — a comma is placed after it, before the main independent clause ("the students went to lunch") begins. This signals a brief pause and separates the introductory information from the main statement.'},
+  ],
+  maths:[
+    {q:'2/9 + 4/9 = ? (give your answer in simplest form)',opts:['6/9','2/3','6/18','3/9'],ans:1,exp:'Like denominators — add the numerators: 2+4=6, so 6/9. Then simplify: HCF(6,9)=3, so 6/9 = 2/3. Remember: simplifying is always the FINAL step after adding or subtracting.'},
+    {q:'1/3 + 1/4 = ?',opts:['2/7','2/12','7/12','1/12'],ans:2,exp:'Unlike denominators — find LCM(3,4)=12. Convert: 1/3=4/12, 1/4=3/12. Add: 4/12+3/12=7/12. HCF(7,12)=1, so 7/12 is already simplest. Answer: 7/12.'},
+    {q:'5/6 − 1/3 = ?',opts:['4/3','4/6','1/2','3/6'],ans:2,exp:'Unlike denominators — LCM(6,3)=6. Convert: 5/6 stays as 5/6, 1/3=2/6. Subtract: 5/6−2/6=3/6. Simplify: HCF(3,6)=3, so 3/6=1/2. Answer: 1/2.'},
+    {q:'2¾ + 1½ = ?',opts:['3 5/4','4¼','3¼','4 5/4'],ans:1,exp:'Add whole numbers: 2+1=3. Add fractions: 3/4+1/2 → LCM(4,2)=4 → 3/4+2/4=5/4. 5/4 is improper → 5/4=1¼. Combine: 3+1¼=4¼. Final answer: 4¼.'},
+    {q:'4⅕ − 1⅗ = ? (this one needs borrowing!)',opts:['3⅗','2⅖','2⅗','3⅖'],ans:2,exp:'Compare fractions: 1/5 < 3/5, so borrow: 4⅕ = 3 + 6/5. Subtract whole numbers: 3−1=2. Subtract fractions: 6/5−3/5=3/5. Combine: 2⅗. Check using improper fractions: 21/5 − 8/5 = 13/5 = 2⅗ ✓'},
+  ],
+  science:[
+    {q:'Which food group is described as the body\'s MAIN source of energy and should make up the largest part of meals?',opts:['Proteins','Fats and oils','Carbohydrates','Vitamins and minerals'],ans:2,exp:'Carbohydrates (rice, bread, roti, pasta, potatoes) are the body\'s primary energy source and should form the largest portion of a balanced diet. Proteins are for growth/repair, fats are needed only in small amounts, and vitamins/minerals are micronutrients needed in tiny quantities.'},
+    {q:'Which enzyme begins breaking down starch into sugars, starting in the mouth?',opts:['Pepsin','Lipase','Amylase','Bile'],ans:2,exp:'Amylase is found in saliva and begins breaking down starch (a carbohydrate) into simple sugars immediately when food enters the mouth. Pepsin breaks down proteins (in the stomach), lipase breaks down fats (in the small intestine), and bile is not an enzyme — it emulsifies fats.'},
+    {q:'What is the role of BILE in digestion?',opts:['Bile is an enzyme that breaks down proteins','Bile is produced by the liver and emulsifies fats — breaking large fat globules into tiny droplets so lipase can work on them more effectively','Bile absorbs water in the large intestine','Bile kills bacteria in the stomach using acid'],ans:1,exp:'Bile is NOT an enzyme — it does not chemically break molecules apart. Instead, it physically emulsifies fats (breaks large fat globules into smaller droplets), massively increasing the surface area available for the enzyme lipase to act on.'},
+    {q:'A diet that lacks iron can lead to which condition?',opts:['Scurvy','Anaemia (tiredness due to too few healthy red blood cells)','Weak bones (rickets)','Tooth decay'],ans:1,exp:'Iron is needed to make haemoglobin in red blood cells, which carry oxygen around the body. A lack of iron leads to anaemia — symptoms include tiredness and lack of energy. (Scurvy relates to Vitamin C deficiency; rickets relates to Vitamin D/calcium deficiency.)'},
+    {q:'Put the digestive journey in the CORRECT order:',opts:['Stomach → Mouth → Small intestine → Oesophagus → Large intestine','Mouth → Oesophagus → Stomach → Small intestine → Large intestine','Mouth → Stomach → Oesophagus → Large intestine → Small intestine','Oesophagus → Mouth → Small intestine → Stomach → Large intestine'],ans:1,exp:'Food travels: Mouth (mechanical + start of chemical digestion) → Oesophagus (peristalsis transports food) → Stomach (acid + pepsin breaks down proteins) → Small intestine (main digestion + absorption via villi) → Large intestine (water absorption, waste formation).'},
+  ],
+  history:[
+    {q:'What system of government did Rome have BEFORE it became an empire?',opts:['An absolute monarchy with a single king','A republic — governed by elected consuls and the Senate','A direct democracy where every citizen voted on every law, like Athens','Rome was always ruled by emperors from its founding'],ans:1,exp:'From 509 BC to 27 BC, Rome was a Republic — governed by two elected Consuls (one-year terms) and the Senate. The motto "SPQR" (Senate and People of Rome) reflects this system. It became an Empire when Augustus became the first emperor in 27 BC.'},
+    {q:'Who became Rome\'s first emperor, and approximately when?',opts:['Julius Caesar, 44 BC','Augustus, 27 BC','Hadrian, 122 AD','Claudius, 43 AD'],ans:1,exp:'After Julius Caesar\'s assassination in 44 BC and a period of civil war, his adopted heir Octavian took the title "Augustus" and became Rome\'s first emperor in 27 BC — beginning the Roman Empire and the Pax Romana ("Roman Peace").'},
+    {q:'What was the PRIMARY purpose of Hadrian\'s Wall, built from 122 AD?',opts:['To separate England from Wales','To mark and defend the northern frontier of Roman Britain against the Picts and other northern tribes','To serve as a Roman aqueduct carrying water to London','To act as a racetrack for chariot races'],ans:1,exp:'Hadrian\'s Wall, roughly 117 km long, marked the northern boundary of Roman-controlled Britain (the province of Britannia) and was defended by forts and garrisons to control movement and defend against tribes to the north.'},
+    {q:'Which TWO factors are identified as contributing to the fall of the Western Roman Empire?',opts:['Only a single sudden invasion in one year','Economic troubles (heavy taxation, inflation) AND military pressure from groups such as the Goths, Vandals and Huns','The empire became too small to defend itself','The Senate voted to dissolve the empire peacefully'],ans:1,exp:'The fall of the Western Roman Empire (476 AD) resulted from MULTIPLE interacting causes over roughly 200 years — including economic troubles (taxation, inflation), military pressure from external groups, and political instability with frequent changes of emperor. It was a slow process, not a single event.'},
+    {q:'Which of these is a clear example of Roman legacy still visible or used in the modern world?',opts:['The English alphabet has no connection to Rome','The names of the months "July" and "August" come from Julius Caesar and Augustus, and the Latin alphabet is still used today','Modern democracy was invented entirely by Rome with no Greek influence','Roman roads in Britain were all destroyed and none survive in any form'],ans:1,exp:'July is named after Julius Caesar and August after Augustus — direct Roman legacies still used in every modern calendar. The Latin alphabet remains the basis of English writing. Roman roads, language (Romance languages and Latin-derived English vocabulary), law, architecture (the arch, concrete) and the word "republic" itself are all lasting legacies.'},
+  ],
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{
+  quizState[s]={idx:0,score:0};
+  renderQuiz(s);
+});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){
+    container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';
+    celebrate();return;
+  }
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){
+    quizState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='quiz-fb ok';fb.style.display='block';
+    fb.innerHTML='✅ Correct! '+q.exp;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='quiz-fb bad';fb.style.display='block';
+    fb.innerHTML='❌ Not quite. '+q.exp;
+  }
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+
+function celebrate(){
+  const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];
+  for(let i=0;i<70;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=cols[Math.floor(Math.random()*cols.length)];
+      el.style.animationDuration=(1.8+Math.random()*2.2)+'s';
+      el.style.animationDelay=(Math.random()*0.3)+'s';
+      el.style.width=(7+Math.random()*7)+'px';
+      el.style.height=(9+Math.random()*9)+'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),5000);
+    },i*25);
+  }
+}
+</script>
+</body>
+</html>
