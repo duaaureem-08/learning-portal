@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 · Day 1 Worksheets · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:   #7C3AED; --bible-l:  #EDE9FE; --bible-d:  #5B21B6;
+  --english: #DB2777; --english-l:#FCE7F3; --english-d:#9D174D;
+  --maths:   #D97706; --maths-l:  #FEF3C7; --maths-d:  #92400E;
+  --science: #059669; --science-l:#D1FAE5; --science-d:#064E3B;
+  --social:  #2563EB; --social-l: #DBEAFE; --social-d: #1E3A8A;
+  --bg:#FAFBFF; --card:#FFFFFF; --text:#1E1B4B; --muted:#6B7280;
+  --radius:20px; --radius-sm:12px;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px}
+.logo span{color:var(--science)}
+.day-badge{background:#F3F4F6;border:2px solid #E5E7EB;border-radius:50px;padding:5px 14px;font-size:0.8rem;font-weight:800;color:var(--muted)}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;transition:all .25s;white-space:nowrap;background:#F3F4F6}
+.nav-btn .emoji{font-size:1.1rem}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.nav-btn[data-sub="bible"]{--c:var(--bible)}
+.nav-btn[data-sub="english"]{--c:var(--english)}
+.nav-btn[data-sub="maths"]{--c:var(--maths)}
+.nav-btn[data-sub="science"]{--c:var(--science)}
+.nav-btn[data-sub="social"]{--c:var(--social)}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white}
+
+/* PAGES */
+.page{display:none;padding:28px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn .4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{border-radius:var(--radius);padding:32px;margin-bottom:24px;position:relative;overflow:hidden;color:white}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,.1);border-radius:50%}
+.hero-week{font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:5px}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:8px}
+.hero-sub{font-size:.95rem;font-weight:600;opacity:.9;max-width:480px}
+.hero-emoji{position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:4.5rem;opacity:.25}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);border-radius:50px;padding:4px 14px;font-size:.75rem;font-weight:800;margin-bottom:10px}
+
+/* CARDS */
+.card{background:var(--card);border-radius:var(--radius);padding:26px;margin-bottom:22px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc)}
+.card-title{font-family:'Fredoka One',cursive;font-size:1.3rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.section-label{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:12px}
+
+/* ESL BRIDGE */
+.esl-box{background:#FFF8E1;border-left:5px solid #F59E0B;border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0;font-size:.9rem;line-height:1.7}
+.esl-box strong{color:#92400E}
+
+/* CALLOUT */
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+.callout-icon{font-size:1.5rem;flex-shrink:0}
+.callout-text{font-size:.92rem;font-weight:600;line-height:1.55}
+.callout-text strong{font-weight:900}
+
+/* VOCAB GRID */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin-top:12px}
+.vocab-item{border-radius:var(--radius-sm);padding:13px 15px;transition:transform .2s;cursor:default}
+.vocab-item:hover{transform:scale(1.03)}
+.vocab-word{font-weight:900;font-size:1rem;margin-bottom:3px}
+.vocab-def{font-size:.85rem;color:#374151;line-height:1.4}
+.vocab-urdu{font-size:.75rem;color:#6B7280;margin-top:3px;font-style:italic}
+
+/* MATCH EXERCISE */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.match-term{background:white;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px 15px;font-weight:800;font-size:.92rem;display:flex;align-items:center;gap:8px}
+.match-def{font-size:.88rem;color:#374151;font-weight:600}
+.match-input{border:none;border-bottom:2px dashed;background:transparent;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;width:32px;text-align:center;outline:none;padding:2px}
+.match-check-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;border:none;cursor:pointer;color:white;transition:all .2s;margin-top:12px}
+.match-check-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+
+/* FILL IN BLANKS */
+.blank-input{border:none;border-bottom:2.5px solid;background:transparent;font-family:'Nunito',sans-serif;font-weight:700;font-size:1rem;width:110px;text-align:center;outline:none;padding:2px 4px;margin:0 4px}
+.blank-sentence{font-size:1.05rem;line-height:2.4;margin-bottom:8px;padding:12px 16px;background:#FAFBFF;border-radius:var(--radius-sm);border:2px solid #E5E7EB}
+
+/* WORD BANK BOX */
+.word-bank{background:#F0FDF4;border:2px solid #059669;border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px}
+.word-bank-label{font-size:.75rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#059669;margin-bottom:8px}
+.word-tag{display:inline-block;background:white;border:2px solid #059669;border-radius:20px;padding:4px 12px;margin:3px;font-weight:700;font-size:.85rem;color:#065F46}
+
+/* ORDER EXERCISE */
+.order-items{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.order-item{display:flex;align-items:center;gap:12px;background:white;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:11px 15px;font-size:.9rem;font-weight:700}
+.order-num-input{border:none;border-bottom:2.5px solid;background:transparent;width:32px;text-align:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;outline:none}
+
+/* TRUE/FALSE */
+.tf-item{display:flex;align-items:flex-start;gap:12px;background:white;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:13px 16px;margin-bottom:10px}
+.tf-statement{flex:1;font-size:.93rem;font-weight:700;line-height:1.5}
+.tf-btns{display:flex;gap:8px;flex-shrink:0;margin-top:2px}
+.tf-btn{padding:6px 14px;border-radius:50px;border:2.5px solid #E5E7EB;font-weight:800;font-size:.82rem;cursor:pointer;font-family:'Nunito',sans-serif;background:white;transition:all .2s}
+.tf-btn:hover{transform:scale(1.06)}
+.tf-btn.selected-t{background:#D1FAE5;border-color:#059669;color:#065F46}
+.tf-btn.selected-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D}
+.tf-correct{background:#D1FAE5;border-color:#059669!important}
+.tf-wrong{background:#FEE2E2;border-color:#DC2626!important}
+
+/* QUIZ */
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:18px;margin-top:14px}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px}
+.quiz-options{display:flex;flex-direction:column;gap:9px}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 18px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Nunito',sans-serif;font-size:.93rem;text-align:left}
+.quiz-opt:hover{border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5)}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D}
+.quiz-feedback{margin-top:12px;padding:11px 16px;border-radius:10px;font-weight:700;display:none}
+
+/* OPEN ANSWER */
+.open-box{background:#FAFBFF;border:2px dashed #CBD5E1;border-radius:var(--radius-sm);padding:14px;margin-top:10px}
+.open-label{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.open-input{width:100%;border:none;border-bottom:2px solid #E5E7EB;background:transparent;font-family:'Nunito',sans-serif;font-size:.95rem;padding:6px 2px;outline:none;display:block;margin-bottom:8px}
+.open-ta{width:100%;min-height:70px;border:1.5px solid #E5E7EB;border-radius:10px;background:white;font-family:'Nunito',sans-serif;font-size:.93rem;padding:8px 12px;outline:none;resize:none}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.step{display:flex;gap:12px;align-items:flex-start;background:#FAFBFF;border-radius:var(--radius-sm);padding:12px 16px;border:2px solid #E5E7EB}
+.step-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.95rem;color:white;background:var(--accent,#888)}
+.step-title{font-weight:800;font-size:.95rem;margin-bottom:2px}
+.step-desc{font-size:.86rem;color:#4B5563;line-height:1.5}
+
+/* BTN */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;color:white}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+
+/* SCORE DISPLAY */
+.score-bar{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 18px;border-radius:var(--radius-sm);background:#F8FAFF;border:2px solid #E5E7EB}
+.score-label{font-weight:800;font-size:.92rem}
+
+/* ACCENT CLASSES */
+.bible-accent{--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d)}
+.english-accent{--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d)}
+.maths-accent{--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d)}
+.science-accent{--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d)}
+.social-accent{--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d)}
+
+/* VERSE BOX */
+.verse-box{background:linear-gradient(135deg,#EDE9FE,#DDD6FE);border-radius:var(--radius-sm);padding:18px 22px;border-left:6px solid var(--bible);text-align:center;margin:14px 0}
+.verse-text{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--bible-d);margin-bottom:5px}
+.verse-ref{font-size:.82rem;font-weight:800;color:var(--bible)}
+
+/* COLUMN METHOD */
+.col-method{background:white;border-radius:var(--radius-sm);padding:20px;max-width:280px;margin:0 auto;box-shadow:var(--shadow);font-family:'Fredoka One',cursive}
+.col-row{display:flex;justify-content:flex-end;gap:4px;margin-bottom:5px}
+.col-cell{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:1.6rem}
+.digit-h{background:#FEF3C7;color:#92400E}
+.digit-t{background:#D1FAE5;color:#065F46}
+.digit-o{background:#DBEAFE;color:#1E3A8A}
+.col-line{border-top:3px solid #374151;margin:6px 0}
+
+/* MAP GRID */
+.map-grid-simple{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;max-width:300px;margin:10px auto;text-align:center}
+.map-cell{padding:14px 6px;border-radius:10px;font-size:.8rem;font-weight:800}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;top:-10px;width:10px;height:14px;border-radius:2px;animation:confettiFall linear forwards;z-index:9999;pointer-events:none}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+@media(max-width:600px){.hero-title{font-size:1.65rem}.hero-emoji{display:none}.card{padding:16px}.match-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <div class="day-badge">📅 Week 4 · Day 1</div>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span class="emoji">✝️</span> Bible</button>
+  <button class="nav-btn"       data-sub="english" onclick="showPage('english')"><span class="emoji">✏️</span> English</button>
+  <button class="nav-btn"       data-sub="maths"   onclick="showPage('maths')">  <span class="emoji">🔢</span> Maths</button>
+  <button class="nav-btn"       data-sub="science" onclick="showPage('science')"><span class="emoji">🦴</span> Science</button>
+  <button class="nav-btn"       data-sub="social"  onclick="showPage('social')"> <span class="emoji">🌍</span> Humanities</button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BIBLE — Abraham: Faith & Trust
+═══════════════════════════════════════════ -->
+<div id="page-bible" class="page active bible-accent">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible))">
+    <div class="hero-badge">Week 4 · Day 1 · Bible · Test Level</div>
+    <div class="hero-week">✝️ Bible</div>
+    <div class="hero-title">Abraham —<br>Faith & Trust</div>
+    <div class="hero-sub">Genesis 12–17 · Hebrews 11:1 · Trust God even when it is hard</div>
+    <div class="hero-emoji">🌟</div>
+  </div>
+
+  <!-- ESL BRIDGE -->
+  <div class="card" style="--accent:var(--bible)">
+    <div class="card-title" style="color:var(--bible)">🌍 Words in Your Language</div>
+    <div class="esl-box">
+      <strong>Faith</strong> = ایمان (Urdu) · إيمان (Arabic) — Believing and trusting in God even when you cannot see what will happen.<br>
+      <strong>Obey</strong> = اطاعت (Urdu) · طاعة (Arabic) — To do what God says, even when it is hard.<br>
+      <strong>Blessing</strong> = برکت (Urdu) · بركة (Arabic) — Something good that God gives you.<br>
+      <strong>Promise</strong> = وعدہ (Urdu) · وعد (Arabic) — A commitment. God ALWAYS keeps His promises.
+    </div>
+  </div>
+
+  <!-- PART A: VOCABULARY MATCH -->
+  <div class="card" style="--accent:var(--bible)">
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d)">Part A — Vocabulary Match · 5 marks</div>
+    <div class="card-title" style="color:var(--bible)">📚 Match the Word to the Meaning</div>
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:14px">Write the correct letter (A–E) in each box.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-weight:800;font-size:.85rem;color:var(--bible-d);margin-bottom:8px">WORDS</div>
+        <div class="match-term">1. Faith <input class="match-input" id="m1" style="border-bottom-color:var(--bible)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">2. Obey <input class="match-input" id="m2" style="border-bottom-color:var(--bible)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">3. Blessing <input class="match-input" id="m3" style="border-bottom-color:var(--bible)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">4. Promise <input class="match-input" id="m4" style="border-bottom-color:var(--bible)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">5. Nation <input class="match-input" id="m5" style="border-bottom-color:var(--bible)" maxlength="1"></div>
+      </div>
+      <div>
+        <div style="font-weight:800;font-size:.85rem;color:var(--bible-d);margin-bottom:8px">MEANINGS</div>
+        <div style="background:var(--bible-l);border-radius:var(--radius-sm);padding:12px;font-size:.88rem;line-height:2">
+          <strong>A.</strong> A commitment to do something. God always keeps this.<br>
+          <strong>B.</strong> Something good that God gives you.<br>
+          <strong>C.</strong> Trusting God even when you cannot see what will happen.<br>
+          <strong>D.</strong> To do what God says, even when it is hard.<br>
+          <strong>E.</strong> A large group of people with the same land — like a country.
+        </div>
+      </div>
+    </div>
+    <button class="match-check-btn" style="background:var(--bible)" onclick="checkBibleMatch()">✅ Check Answers</button>
+    <div id="bible-match-fb" style="margin-top:10px;font-weight:700;font-size:.95rem"></div>
+  </div>
+
+  <!-- PART B: STORY ORDER -->
+  <div class="card" style="--accent:var(--bible)">
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d)">Part B — Story Order · 6 marks</div>
+    <div class="card-title" style="color:var(--bible)">📖 Put the Events in Order (1–6)</div>
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:12px">Write 1 next to what happened FIRST, 2 for second… and so on.</p>
+    <div class="order-items" id="bible-order">
+      <div class="order-item"><input class="order-num-input" style="border-bottom-color:var(--bible)" maxlength="1" placeholder="#"> God changed Abram's name to <strong>Abraham</strong>.</div>
+      <div class="order-item"><input class="order-num-input" style="border-bottom-color:var(--bible)" maxlength="1" placeholder="#"> Abraham and Sarah had a son called Isaac.</div>
+      <div class="order-item"><input class="order-num-input" style="border-bottom-color:var(--bible)" maxlength="1" placeholder="#"> God spoke to Abram: <em>"Leave your home."</em></div>
+      <div class="order-item"><input class="order-num-input" style="border-bottom-color:var(--bible)" maxlength="1" placeholder="#"> Abram trusted God and left his home in Ur.</div>
+      <div class="order-item"><input class="order-num-input" style="border-bottom-color:var(--bible)" maxlength="1" placeholder="#"> God promised Abraham his family would be as many as the stars.</div>
+      <div class="order-item"><input class="order-num-input" style="border-bottom-color:var(--bible)" maxlength="1" placeholder="#"> Abram arrived in the land of Canaan.</div>
+    </div>
+    <button class="match-check-btn" style="background:var(--bible);margin-top:12px" onclick="checkBibleOrder()">✅ Check Order</button>
+    <div id="bible-order-fb" style="margin-top:10px;font-weight:700;font-size:.95rem"></div>
+  </div>
+
+  <!-- PART C: FILL IN BLANKS -->
+  <div class="card" style="--accent:var(--bible)">
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d)">Part C — Fill in the Blanks · 6 marks</div>
+    <div class="card-title" style="color:var(--bible)">✍️ Complete the Sentences</div>
+    <div class="word-bank" style="background:var(--bible-l);border-color:var(--bible)">
+      <div class="word-bank-label" style="color:var(--bible-d)">📦 Word Bank — use these words:</div>
+      <span class="word-tag" style="border-color:var(--bible);color:var(--bible-d)">faith</span>
+      <span class="word-tag" style="border-color:var(--bible);color:var(--bible-d)">Canaan</span>
+      <span class="word-tag" style="border-color:var(--bible);color:var(--bible-d)">Isaac</span>
+      <span class="word-tag" style="border-color:var(--bible);color:var(--bible-d)">promise</span>
+      <span class="word-tag" style="border-color:var(--bible);color:var(--bible-d)">Ur</span>
+      <span class="word-tag" style="border-color:var(--bible);color:var(--bible-d)">nation</span>
+    </div>
+    <div class="blank-sentence">1. Abraham lived in a city called <input class="blank-input" id="b1" style="border-bottom-color:var(--bible)" placeholder="______"> before God called him.</div>
+    <div class="blank-sentence">2. God told Abraham to go to a new land called <input class="blank-input" id="b2" style="border-bottom-color:var(--bible)" placeholder="______">.</div>
+    <div class="blank-sentence">3. God made a <input class="blank-input" id="b3" style="border-bottom-color:var(--bible)" placeholder="______"> to make Abraham's family into a great <input class="blank-input" id="b3b" style="border-bottom-color:var(--bible)" placeholder="______">.</div>
+    <div class="blank-sentence">4. Abraham and Sarah had a son called <input class="blank-input" id="b4" style="border-bottom-color:var(--bible)" placeholder="______">.</div>
+    <div class="blank-sentence">5. Abraham is called "the father of <input class="blank-input" id="b5" style="border-bottom-color:var(--bible)" placeholder="______">" because he trusted God completely.</div>
+    <button class="match-check-btn" style="background:var(--bible)" onclick="checkBibleBlanks()">✅ Check Answers</button>
+    <div id="bible-blanks-fb" style="margin-top:10px;font-weight:700;font-size:.95rem"></div>
+  </div>
+
+  <!-- PART D: TRUE / FALSE -->
+  <div class="card" style="--accent:var(--bible)">
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d)">Part D — True or False · 5 marks</div>
+    <div class="card-title" style="color:var(--bible)">✅❌ Is It True or False?</div>
+    <div id="bible-tf"></div>
+    <button class="match-check-btn" style="background:var(--bible)" onclick="checkBibleTF()">✅ Check Answers</button>
+    <div id="bible-tf-fb" style="margin-top:10px;font-weight:700;font-size:.95rem"></div>
+  </div>
+
+  <!-- PART E: MEMORY VERSE -->
+  <div class="card" style="--accent:var(--bible)">
+    <div class="section-label" style="background:var(--bible-l);color:var(--bible-d)">Part E — Memory Verse · 3 marks</div>
+    <div class="card-title" style="color:var(--bible)">⭐ Write the Verse from Memory</div>
+    <div class="verse-box">
+      <div class="verse-text">"Now faith is being sure of what we hope for and certain of what we do not see."</div>
+      <div class="verse-ref">Hebrews 11:1</div>
+    </div>
+    <div class="callout" style="background:var(--bible-l)">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>What does this mean?</strong> Faith means believing in God even when you cannot see Him or know what will happen. Abraham had this kind of faith!</div>
+    </div>
+    <div class="open-box">
+      <div class="open-label" style="color:var(--bible-d)">Fill in the missing words:</div>
+      <div style="font-size:1rem;line-height:2.8">
+        "Now <input class="blank-input" style="border-bottom-color:var(--bible);width:80px" placeholder="____"> is being <input class="blank-input" style="border-bottom-color:var(--bible);width:80px" placeholder="____"> of what we <input class="blank-input" style="border-bottom-color:var(--bible);width:90px" placeholder="____"> for and <input class="blank-input" style="border-bottom-color:var(--bible);width:100px" placeholder="____"> of what we do not <input class="blank-input" style="border-bottom-color:var(--bible);width:80px" placeholder="____">."
+        — <input class="blank-input" style="border-bottom-color:var(--bible);width:130px" placeholder="book & verse">
+      </div>
+    </div>
+    <div class="open-box" style="margin-top:10px">
+      <div class="open-label" style="color:var(--bible-d)">Write ONE thing YOU would trust God with:</div>
+      <textarea class="open-ta" style="border-color:var(--bible-l)" placeholder="I would trust God with..."></textarea>
+    </div>
+  </div>
+</div><!-- /bible -->
+
+<!-- ═══════════════════════════════════════════
+     ENGLISH — Nouns, Verbs & Adjectives
+═══════════════════════════════════════════ -->
+<div id="page-english" class="page english-accent">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english))">
+    <div class="hero-badge">Week 4 · Day 1 · English · Test Level</div>
+    <div class="hero-week">✏️ English</div>
+    <div class="hero-title">Nouns, Verbs<br>& Adjectives</div>
+    <div class="hero-sub">Name it · Do it · Describe it — the 3 key word types</div>
+    <div class="hero-emoji">📝</div>
+  </div>
+
+  <div class="card" style="--accent:var(--english)">
+    <div class="card-title" style="color:var(--english)">🌍 Words in Your Language</div>
+    <div class="esl-box">
+      <strong>Noun</strong> = اسم (ism) — Arabic & Urdu. The NAME of a person, place, thing or animal.<br>
+      <strong>Verb</strong> = فعل (fi'l) — Arabic & Urdu. An ACTION word — something you DO.<br>
+      <strong>Adjective</strong> = صفت (sifat) — Urdu · صفة (sifa) — Arabic. A DESCRIBING word — tells us more about a noun.
+    </div>
+  </div>
+
+  <!-- PART A: VOCAB MATCH -->
+  <div class="card" style="--accent:var(--english)">
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d)">Part A — Vocabulary Match · 5 marks</div>
+    <div class="card-title" style="color:var(--english)">📚 Match the Term to the Definition</div>
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:14px">Write the correct letter (A–E) in each box.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-weight:800;font-size:.85rem;color:var(--english-d);margin-bottom:8px">TERMS</div>
+        <div class="match-term">1. Noun <input class="match-input" id="em1" style="border-bottom-color:var(--english)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">2. Verb <input class="match-input" id="em2" style="border-bottom-color:var(--english)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">3. Adjective <input class="match-input" id="em3" style="border-bottom-color:var(--english)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">4. Common Noun <input class="match-input" id="em4" style="border-bottom-color:var(--english)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">5. Proper Noun <input class="match-input" id="em5" style="border-bottom-color:var(--english)" maxlength="1"></div>
+      </div>
+      <div>
+        <div style="font-weight:800;font-size:.85rem;color:var(--english-d);margin-bottom:8px">DEFINITIONS</div>
+        <div style="background:var(--english-l);border-radius:var(--radius-sm);padding:12px;font-size:.88rem;line-height:2">
+          <strong>A.</strong> The specific name of a person, place or day. Starts with a capital letter.<br>
+          <strong>B.</strong> An action word — something you do or that happens.<br>
+          <strong>C.</strong> A describing word that tells us about a noun.<br>
+          <strong>D.</strong> The name of a person, place, animal or thing.<br>
+          <strong>E.</strong> A general name — NOT a specific name. No capital letter.
+        </div>
+      </div>
+    </div>
+    <button class="match-check-btn" style="background:var(--english)" onclick="checkEngMatch()">✅ Check Answers</button>
+    <div id="eng-match-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART B: LABEL THE WORDS -->
+  <div class="card" style="--accent:var(--english)">
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d)">Part B — Label the Words · 8 marks</div>
+    <div class="card-title" style="color:var(--english)">🏷️ Write N (Noun), V (Verb) or A (Adjective)</div>
+    <div class="callout" style="background:var(--english-l)">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Noun</strong> = NAME (dog, London, teacher) · <strong>Verb</strong> = ACTION (run, eat, is) · <strong>Adjective</strong> = DESCRIBES (big, red, happy)</div>
+    </div>
+    <div id="label-game"></div>
+    <button class="match-check-btn" style="background:var(--english)" onclick="checkLabelGame()">✅ Check Answers</button>
+    <div id="label-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART C: SORT WORDS -->
+  <div class="card" style="--accent:var(--english)">
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d)">Part C — Sort the Words · 6 marks</div>
+    <div class="card-title" style="color:var(--english)">🗂️ Which column does each word belong in?</div>
+    <div id="sort-game"></div>
+    <button class="match-check-btn" style="background:var(--english)" onclick="nextSortQ()">Next Word ➡️</button>
+    <span id="sort-score" style="margin-left:12px;font-weight:800;font-size:.92rem"></span>
+  </div>
+
+  <!-- PART D: TRUE/FALSE -->
+  <div class="card" style="--accent:var(--english)">
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d)">Part D — True or False · 5 marks</div>
+    <div class="card-title" style="color:var(--english)">✅❌ True or False?</div>
+    <div id="eng-tf"></div>
+    <button class="match-check-btn" style="background:var(--english)" onclick="checkEngTF()">✅ Check Answers</button>
+    <div id="eng-tf-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART E: WRITE YOUR OWN SENTENCE -->
+  <div class="card" style="--accent:var(--english)">
+    <div class="section-label" style="background:var(--english-l);color:var(--english-d)">Part E — Write Your Own · 6 marks</div>
+    <div class="card-title" style="color:var(--english)">✍️ Write a Sentence Using All Three Word Types</div>
+    <div class="esl-box">Write a sentence about your school day. Use at least ONE noun, ONE verb and ONE adjective. Then label them below.</div>
+    <div class="open-box">
+      <div class="open-label" style="color:var(--english-d)">My sentence:</div>
+      <textarea class="open-ta" style="border-color:var(--english-l)" placeholder="The ________ (adjective) ________ (noun) ________ (verb)..."></textarea>
+    </div>
+    <div class="open-box" style="margin-top:10px">
+      <div class="open-label" style="color:var(--english-d)">Label the words (write the nouns, verbs, adjectives you used):</div>
+      <input class="open-input" style="border-bottom-color:var(--english)" placeholder="Nouns in my sentence:">
+      <input class="open-input" style="border-bottom-color:var(--english)" placeholder="Verbs in my sentence:">
+      <input class="open-input" style="border-bottom-color:var(--english)" placeholder="Adjectives in my sentence:">
+    </div>
+  </div>
+</div><!-- /english -->
+
+<!-- ═══════════════════════════════════════════
+     MATHS — Multiplication Tables 2×, 5×, 10×
+═══════════════════════════════════════════ -->
+<div id="page-maths" class="page maths-accent">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths))">
+    <div class="hero-badge">Week 4 · Day 1 · Maths · Test Level</div>
+    <div class="hero-week">🔢 Maths</div>
+    <div class="hero-title">Multiplication<br>Tables 2×, 5×, 10×</div>
+    <div class="hero-sub">Fast adding · Groups of · Products · Patterns</div>
+    <div class="hero-emoji">✖️</div>
+  </div>
+
+  <div class="card" style="--accent:var(--maths)">
+    <div class="card-title" style="color:var(--maths)">🌍 Words in Your Language</div>
+    <div class="esl-box">
+      <strong>Multiply</strong> = ضرب (zarb) — Urdu · ضرب (darb) — Arabic. It means: add the same number again and again!<br>
+      <strong>3 × 4</strong> means "3 groups of 4" → 4 + 4 + 4 = 12. Multiplication is fast adding!<br>
+      <strong>Product</strong> = حاصل ضرب (hasil zarb) — the ANSWER to a multiplication.
+    </div>
+  </div>
+
+  <!-- PART A: VOCAB MATCH -->
+  <div class="card" style="--accent:var(--maths)">
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d)">Part A — Vocabulary Match · 5 marks</div>
+    <div class="card-title" style="color:var(--maths)">📚 Match the Word to the Meaning</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div class="match-term">1. Multiply <input class="match-input" id="mm1" style="border-bottom-color:var(--maths)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">2. Product <input class="match-input" id="mm2" style="border-bottom-color:var(--maths)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">3. Groups of <input class="match-input" id="mm3" style="border-bottom-color:var(--maths)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">4. Double <input class="match-input" id="mm4" style="border-bottom-color:var(--maths)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">5. Array <input class="match-input" id="mm5" style="border-bottom-color:var(--maths)" maxlength="1"></div>
+      </div>
+      <div style="background:var(--maths-l);border-radius:var(--radius-sm);padding:12px;font-size:.88rem;line-height:2">
+        <strong>A.</strong> The answer you get when you multiply two numbers.<br>
+        <strong>B.</strong> Add the same number many times — a fast way to add.<br>
+        <strong>C.</strong> Equal groups. 4 × 3 = 4 equal groups of 3.<br>
+        <strong>D.</strong> A picture showing multiplication in rows and columns.<br>
+        <strong>E.</strong> Multiply by 2 — add the same number to itself.
+      </div>
+    </div>
+    <button class="match-check-btn" style="background:var(--maths)" onclick="checkMathsMatch()">✅ Check Answers</button>
+    <div id="maths-match-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART B: TIMES TABLES -->
+  <div class="card" style="--accent:var(--maths)">
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d)">Part B — Times Tables Practice · 12 marks</div>
+    <div class="card-title" style="color:var(--maths)">✖️ Fill in the Answers</div>
+    <div class="callout" style="background:var(--maths-l)">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>2× trick:</strong> Double the number (always even) · <strong>5× trick:</strong> Ends in 5 or 0 · <strong>10× trick:</strong> Just add a zero!</div>
+    </div>
+    <div id="times-table-grid"></div>
+    <button class="match-check-btn" style="background:var(--maths)" onclick="checkTables()">✅ Check Answers</button>
+    <div id="tables-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART C: WORD PROBLEMS -->
+  <div class="card" style="--accent:var(--maths)">
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d)">Part C — Word Problems · 6 marks</div>
+    <div class="card-title" style="color:var(--maths)">📖 Solve the Problems</div>
+    <div id="word-problems"></div>
+  </div>
+
+  <!-- PART D: TRUE/FALSE -->
+  <div class="card" style="--accent:var(--maths)">
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d)">Part D — True or False · 5 marks</div>
+    <div class="card-title" style="color:var(--maths)">✅❌ True or False?</div>
+    <div id="maths-tf"></div>
+    <button class="match-check-btn" style="background:var(--maths)" onclick="checkMathsTF()">✅ Check Answers</button>
+    <div id="maths-tf-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART E: QUIZ -->
+  <div class="card" style="--accent:var(--maths)">
+    <div class="section-label" style="background:var(--maths-l);color:var(--maths-d)">Part E — Quick Quiz · 2 marks</div>
+    <div class="card-title" style="color:var(--maths)">🎯 Mixed Tables Quiz</div>
+    <div id="maths-quiz"></div>
+    <div style="margin-top:12px">
+      <button class="btn" style="background:var(--maths)" onclick="nextMathsQ()">Next ➡️</button>
+      <span id="maths-q-score" style="margin-left:14px;font-weight:800"></span>
+    </div>
+  </div>
+</div><!-- /maths -->
+
+<!-- ═══════════════════════════════════════════
+     SCIENCE — Skeletons & Bones
+═══════════════════════════════════════════ -->
+<div id="page-science" class="page science-accent">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science))">
+    <div class="hero-badge">Week 4 · Day 1 · Science · Test Level</div>
+    <div class="hero-week">🦴 Science</div>
+    <div class="hero-title">Skeletons<br>& Bones</div>
+    <div class="hero-sub">206 bones · 3 jobs · Joints · Vertebrates & Invertebrates</div>
+    <div class="hero-emoji">💀</div>
+  </div>
+
+  <div class="card" style="--accent:var(--science)">
+    <div class="card-title" style="color:var(--science)">🌍 Words in Your Language</div>
+    <div class="esl-box">
+      <strong>Skeleton</strong> = ڈھانچا (Urdu) · هيكل عظمي (Arabic) — All the bones in your body together. Humans have <strong>206 bones</strong>!<br>
+      <strong>Bone</strong> = ہڈی (Urdu) · عظمة (Arabic) — A hard, strong part inside your body.<br>
+      <strong>Joint</strong> = جوڑ (Urdu) · مفصل (Arabic) — The place where two bones meet. Joints let you move and bend!
+    </div>
+  </div>
+
+  <!-- PART A: VOCAB MATCH -->
+  <div class="card" style="--accent:var(--science)">
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d)">Part A — Vocabulary Match · 5 marks</div>
+    <div class="card-title" style="color:var(--science)">📚 Match the Word to the Meaning</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div class="match-term">1. Skeleton <input class="match-input" id="sm1" style="border-bottom-color:var(--science)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">2. Joint <input class="match-input" id="sm2" style="border-bottom-color:var(--science)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">3. Muscle <input class="match-input" id="sm3" style="border-bottom-color:var(--science)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">4. Vertebrate <input class="match-input" id="sm4" style="border-bottom-color:var(--science)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">5. Exoskeleton <input class="match-input" id="sm5" style="border-bottom-color:var(--science)" maxlength="1"></div>
+      </div>
+      <div style="background:var(--science-l);border-radius:var(--radius-sm);padding:12px;font-size:.88rem;line-height:2">
+        <strong>A.</strong> An animal WITH a skeleton inside — like humans, dogs, fish.<br>
+        <strong>B.</strong> All the bones in the body together. Humans have 206!<br>
+        <strong>C.</strong> The place where two bones meet. Lets you move and bend.<br>
+        <strong>D.</strong> Pulls on bones to make them move.<br>
+        <strong>E.</strong> A skeleton on the OUTSIDE of the body — like a crab or insect.
+      </div>
+    </div>
+    <button class="match-check-btn" style="background:var(--science)" onclick="checkSciMatch()">✅ Check Answers</button>
+    <div id="sci-match-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART B: BONES TABLE -->
+  <div class="card" style="--accent:var(--science)">
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d)">Part B — Bones & Their Jobs · 6 marks</div>
+    <div class="card-title" style="color:var(--science)">🦴 Write the Job of Each Bone</div>
+    <div class="word-bank" style="background:var(--science-l);border-color:var(--science)">
+      <div class="word-bank-label" style="color:var(--science-d)">📦 Jobs Word Bank:</div>
+      <span class="word-tag" style="border-color:var(--science);color:var(--science-d)">protects your brain</span>
+      <span class="word-tag" style="border-color:var(--science);color:var(--science-d)">holds you upright</span>
+      <span class="word-tag" style="border-color:var(--science);color:var(--science-d)">helps you walk</span>
+      <span class="word-tag" style="border-color:var(--science);color:var(--science-d)">biggest strongest bone</span>
+      <span class="word-tag" style="border-color:var(--science);color:var(--science-d)">protects heart and lungs</span>
+      <span class="word-tag" style="border-color:var(--science);color:var(--science-d)">moves your arm</span>
+    </div>
+    <div id="bones-table"></div>
+  </div>
+
+  <!-- PART C: QUIZ -->
+  <div class="card" style="--accent:var(--science)">
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d)">Part C — Science Quiz · 8 marks</div>
+    <div class="card-title" style="color:var(--science)">🎯 Choose the Correct Answer</div>
+    <div id="sci-quiz"></div>
+    <div style="margin-top:12px">
+      <button class="btn" style="background:var(--science)" onclick="nextSciQ()">Next ➡️</button>
+      <span id="sci-q-score" style="margin-left:14px;font-weight:800"></span>
+    </div>
+  </div>
+
+  <!-- PART D: TRUE/FALSE -->
+  <div class="card" style="--accent:var(--science)">
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d)">Part D — True or False · 5 marks</div>
+    <div class="card-title" style="color:var(--science)">✅❌ True or False?</div>
+    <div id="sci-tf"></div>
+    <button class="match-check-btn" style="background:var(--science)" onclick="checkSciTF()">✅ Check Answers</button>
+    <div id="sci-tf-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART E: OPEN ANSWER -->
+  <div class="card" style="--accent:var(--science)">
+    <div class="section-label" style="background:var(--science-l);color:var(--science-d)">Part E — Think & Write · 4 marks</div>
+    <div class="card-title" style="color:var(--science)">🤔 Answer in a Full Sentence</div>
+    <div class="open-box">
+      <div class="open-label" style="color:var(--science-d)">What are the 3 jobs of the skeleton? Write them below:</div>
+      <input class="open-input" style="border-bottom-color:var(--science)" placeholder="Job 1:">
+      <input class="open-input" style="border-bottom-color:var(--science)" placeholder="Job 2:">
+      <input class="open-input" style="border-bottom-color:var(--science)" placeholder="Job 3:">
+    </div>
+    <div class="open-box" style="margin-top:10px">
+      <div class="open-label" style="color:var(--science-d)">What is the difference between a vertebrate and an invertebrate? Give ONE example of each:</div>
+      <textarea class="open-ta" style="border-color:var(--science-l)" placeholder="A vertebrate is an animal that... e.g. ___. An invertebrate is... e.g. ___"></textarea>
+    </div>
+  </div>
+</div><!-- /science -->
+
+<!-- ═══════════════════════════════════════════
+     SOCIAL STUDIES — 7 Continents & 5 Oceans
+═══════════════════════════════════════════ -->
+<div id="page-social" class="page social-accent">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social))">
+    <div class="hero-badge">Week 4 · Day 1 · Humanities · Test Level</div>
+    <div class="hero-week">🌍 Humanities</div>
+    <div class="hero-title">7 Continents<br>& 5 Oceans</div>
+    <div class="hero-sub">The World Around Us · Continents · Oceans · Equator · Compass</div>
+    <div class="hero-emoji">🗺️</div>
+  </div>
+
+  <div class="card" style="--accent:var(--social)">
+    <div class="card-title" style="color:var(--social)">🌍 Words in Your Language</div>
+    <div class="esl-box">
+      <strong>Continent</strong> = براعظم (Urdu) · قارة (Arabic) — One of the 7 very large areas of land on Earth.<br>
+      <strong>Ocean</strong> = سمندر (Urdu) · محيط (Arabic) — A very large area of salt water. There are 5 oceans.<br>
+      <strong>Equator</strong> = خط استوا (Urdu/Arabic) — An imaginary line around the MIDDLE of the Earth.
+    </div>
+  </div>
+
+  <!-- PART A: VOCAB MATCH -->
+  <div class="card" style="--accent:var(--social)">
+    <div class="section-label" style="background:var(--social-l);color:var(--social-d)">Part A — Vocabulary Match · 5 marks</div>
+    <div class="card-title" style="color:var(--social)">📚 Match the Word to the Meaning</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div class="match-term">1. Continent <input class="match-input" id="hm1" style="border-bottom-color:var(--social)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">2. Ocean <input class="match-input" id="hm2" style="border-bottom-color:var(--social)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">3. Equator <input class="match-input" id="hm3" style="border-bottom-color:var(--social)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">4. Compass <input class="match-input" id="hm4" style="border-bottom-color:var(--social)" maxlength="1"></div>
+        <div class="match-term" style="margin-top:6px">5. World Map <input class="match-input" id="hm5" style="border-bottom-color:var(--social)" maxlength="1"></div>
+      </div>
+      <div style="background:var(--social-l);border-radius:var(--radius-sm);padding:12px;font-size:.88rem;line-height:2">
+        <strong>A.</strong> A flat picture showing all land and water on Earth.<br>
+        <strong>B.</strong> Shows direction: North, South, East, West.<br>
+        <strong>C.</strong> One of the 7 very large areas of land on Earth.<br>
+        <strong>D.</strong> An imaginary line around the middle of the Earth.<br>
+        <strong>E.</strong> A very large area of salt water. There are 5 on Earth.
+      </div>
+    </div>
+    <button class="match-check-btn" style="background:var(--social)" onclick="checkHumMatch()">✅ Check Answers</button>
+    <div id="hum-match-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART B: NAME THE CONTINENTS -->
+  <div class="card" style="--accent:var(--social)">
+    <div class="section-label" style="background:var(--social-l);color:var(--social-d)">Part B — Name the Continents & Oceans · 12 marks</div>
+    <div class="card-title" style="color:var(--social)">🌍 Fill in the Missing Names</div>
+    <div class="word-bank" style="background:var(--social-l);border-color:var(--social)">
+      <div class="word-bank-label" style="color:var(--social-d)">📦 Word Bank:</div>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Asia</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Africa</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">North America</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">South America</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Europe</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Australia</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Antarctica</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Pacific</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Atlantic</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Indian</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Arctic</span>
+      <span class="word-tag" style="border-color:var(--social);color:var(--social-d)">Southern</span>
+    </div>
+    <div style="font-weight:800;color:var(--social-d);margin:10px 0 6px">🌍 7 Continents:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+      <div class="blank-sentence" style="margin-bottom:4px">1. <input class="blank-input" id="c1" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+      <div class="blank-sentence" style="margin-bottom:4px">2. <input class="blank-input" id="c2" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+      <div class="blank-sentence" style="margin-bottom:4px">3. <input class="blank-input" id="c3" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+      <div class="blank-sentence" style="margin-bottom:4px">4. <input class="blank-input" id="c4" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+      <div class="blank-sentence" style="margin-bottom:4px">5. <input class="blank-input" id="c5" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+      <div class="blank-sentence" style="margin-bottom:4px">6. <input class="blank-input" id="c6" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+      <div class="blank-sentence" style="margin-bottom:4px">7. <input class="blank-input" id="c7" style="border-bottom-color:var(--social);width:140px" placeholder="__________"></div>
+    </div>
+    <div style="font-weight:800;color:var(--social-d);margin:12px 0 6px">🌊 5 Oceans:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+      <div class="blank-sentence" style="margin-bottom:4px">1. <input class="blank-input" id="o1" style="border-bottom-color:var(--social);width:130px" placeholder="__________"> Ocean</div>
+      <div class="blank-sentence" style="margin-bottom:4px">2. <input class="blank-input" id="o2" style="border-bottom-color:var(--social);width:130px" placeholder="__________"> Ocean</div>
+      <div class="blank-sentence" style="margin-bottom:4px">3. <input class="blank-input" id="o3" style="border-bottom-color:var(--social);width:130px" placeholder="__________"> Ocean</div>
+      <div class="blank-sentence" style="margin-bottom:4px">4. <input class="blank-input" id="o4" style="border-bottom-color:var(--social);width:130px" placeholder="__________"> Ocean</div>
+      <div class="blank-sentence" style="margin-bottom:4px">5. <input class="blank-input" id="o5" style="border-bottom-color:var(--social);width:130px" placeholder="__________"> Ocean</div>
+    </div>
+    <button class="match-check-btn" style="background:var(--social)" onclick="checkContOce()">✅ Check Answers</button>
+    <div id="cont-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+
+  <!-- PART C: QUIZ -->
+  <div class="card" style="--accent:var(--social)">
+    <div class="section-label" style="background:var(--social-l);color:var(--social-d)">Part C — World Quiz · 6 marks</div>
+    <div class="card-title" style="color:var(--social)">🎯 Choose the Correct Answer</div>
+    <div id="hum-quiz"></div>
+    <div style="margin-top:12px">
+      <button class="btn" style="background:var(--social)" onclick="nextHumQ()">Next ➡️</button>
+      <span id="hum-q-score" style="margin-left:14px;font-weight:800"></span>
+    </div>
+  </div>
+
+  <!-- PART D: TRUE/FALSE -->
+  <div class="card" style="--accent:var(--social)">
+    <div class="section-label" style="background:var(--social-l);color:var(--social-d)">Part D — True or False · 5 marks</div>
+    <div class="card-title" style="color:var(--social)">✅❌ True or False?</div>
+    <div id="hum-tf"></div>
+    <button class="match-check-btn" style="background:var(--social)" onclick="checkHumTF()">✅ Check Answers</button>
+    <div id="hum-tf-fb" style="margin-top:10px;font-weight:700"></div>
+  </div>
+</div><!-- /social -->
+
+<!-- ════════════ JAVASCRIPT ════════════════════ -->
+<script>
+// ── NAV ─────────────────────────────────
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── HELPERS ─────────────────────────────
+function setFB(id,ok,msg){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.color=ok?'#065F46':'#7F1D1D';
+  el.textContent=msg;
+}
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<50;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti-piece';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=colors[Math.floor(Math.random()*colors.length)];
+      el.style.animationDuration=(1.5+Math.random()*2)+'s';
+      el.style.animationDelay=(Math.random()*.4)+'s';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),4000);
+    },i*30);
+  }
+}
+
+// ── TRUE/FALSE BUILDER ───────────────────
+function buildTF(containerId, items, accent){
+  const c=document.getElementById(containerId);
+  c.innerHTML=items.map((item,i)=>`
+    <div class="tf-item" id="tfi-${containerId}-${i}">
+      <div class="tf-statement">${i+1}. ${item.s}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="tf-t-${containerId}-${i}" onclick="selectTF('${containerId}',${i},'T')" style="border-color:${accent}">✅ True</button>
+        <button class="tf-btn" id="tf-f-${containerId}-${i}" onclick="selectTF('${containerId}',${i},'F')" style="">❌ False</button>
+      </div>
+    </div>`).join('');
+}
+const tfSelections={};
+function selectTF(cid,idx,val){
+  tfSelections[cid]=tfSelections[cid]||{};
+  tfSelections[cid][idx]=val;
+  const tBtn=document.getElementById('tf-t-'+cid+'-'+idx);
+  const fBtn=document.getElementById('tf-f-'+cid+'-'+idx);
+  tBtn.className='tf-btn'+(val==='T'?' selected-t':'');
+  fBtn.className='tf-btn'+(val==='F'?' selected-f':'');
+}
+function checkTF(cid,items,fbId){
+  const sel=tfSelections[cid]||{};
+  let score=0;
+  items.forEach((item,i)=>{
+    const chosen=sel[i];
+    const row=document.getElementById('tfi-'+cid+'-'+i);
+    if(!chosen){row.style.background='#FFFBEB';return;}
+    const correct=(chosen===item.ans);
+    if(correct)score++;
+    row.classList.add(correct?'tf-correct':'tf-wrong');
+  });
+  const total=items.length;
+  setFB(fbId, score===total, `Score: ${score}/${total}${score===total?' 🎉 Perfect!':' — Review the highlighted ones.'}`);
+  if(score===total)celebrate();
+}
+
+// ── QUIZ BUILDER ─────────────────────────
+function buildQuiz(containerId, questions, accentVar, scoreId, nextFn){
+  let idx=0, score=0;
+  function render(){
+    const q=questions[idx];
+    if(!q){
+      document.getElementById(containerId).innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:12px;font-weight:800">🎉 Done! Score: ${score}/${questions.length}</div>`;
+      if(score===questions.length)celebrate();
+      return;
+    }
+    document.getElementById(containerId).innerHTML=`
+      <div class="quiz-box">
+        <div class="quiz-q">Q${idx+1}: ${q.q}</div>
+        <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" style="--accent:${accentVar}" onclick="answerQ_${containerId}(${i})">${o}</button>`).join('')}</div>
+        <div id="qfb-${containerId}" class="quiz-feedback"></div>
+      </div>`;
+    document.getElementById(scoreId).textContent=`Score: ${score}/${idx}`;
+    window['answerQ_'+containerId]=function(i){
+      document.querySelectorAll('#'+containerId+' .quiz-opt').forEach(b=>b.disabled=true);
+      const opts=document.querySelectorAll('#'+containerId+' .quiz-opt');
+      opts[q.ans].classList.add('correct');
+      const fb=document.getElementById('qfb-'+containerId);
+      fb.style.display='block';
+      if(i===q.ans){score++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct!';}
+      else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent='❌ Not quite. The answer is: '+q.opts[q.ans];}
+      document.getElementById(scoreId).textContent=`Score: ${score}/${idx+1}`;
+    };
+  }
+  render();
+  window[nextFn]=function(){idx++;render();};
+}
+
+// ═══════ BIBLE ═══════
+const bibleMatchAns={m1:'C',m2:'D',m3:'B',m4:'A',m5:'E'};
+function checkBibleMatch(){
+  let s=0;
+  Object.entries(bibleMatchAns).forEach(([id,ans])=>{
+    const el=document.getElementById(id);
+    if(el.value.trim().toUpperCase()===ans){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('bible-match-fb',s===5,`Score: ${s}/5${s===5?' 🎉':' — Check highlighted inputs.'}`);
+  if(s===5)celebrate();
+}
+const bibleOrderAns=[4,6,1,2,5,3]; // correct order for each item in DOM
+function checkBibleOrder(){
+  const inputs=document.querySelectorAll('#bible-order .order-num-input');
+  const given=Array.from(inputs).map(i=>parseInt(i.value)||0);
+  let s=0;
+  given.forEach((v,i)=>{if(v===bibleOrderAns[i]){s++;inputs[i].style.color='#065F46';}else inputs[i].style.color='#DC2626';});
+  setFB('bible-order-fb',s===6,`Score: ${s}/6${s===6?' 🎉 Perfect order!':''}`);
+}
+function checkBibleBlanks(){
+  const answers={b1:'ur',b2:'canaan',b3:'promise',b3b:'nation',b4:'isaac',b5:'faith'};
+  let s=0;
+  Object.entries(answers).forEach(([id,ans])=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    if(el.value.trim().toLowerCase()===ans){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('bible-blanks-fb',s>=5,`Score: ${s}/6${s===6?' 🎉':''}`);
+}
+const bibleTFData=[
+  {s:'Abraham lived in a city called Ur before God called him.',ans:'T'},
+  {s:'God gave Abraham ten rules to follow.',ans:'F'},
+  {s:'Abraham obeyed God and left his home.',ans:'T'},
+  {s:'Abraham\'s wife was called Sarai, and later her name was changed to Sarah.',ans:'T'},
+  {s:'Abraham and Sarah had a son called Samuel.',ans:'F'},
+];
+buildTF('bible-tf',bibleTFData,'var(--bible)');
+function checkBibleTF(){checkTF('bible-tf',bibleTFData,'bible-tf-fb');}
+
+// ═══════ ENGLISH ═══════
+const engMatchAns={em1:'D',em2:'B',em3:'C',em4:'E',em5:'A'};
+function checkEngMatch(){
+  let s=0;
+  Object.entries(engMatchAns).forEach(([id,ans])=>{
+    const el=document.getElementById(id);
+    if(el.value.trim().toUpperCase()===ans){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('eng-match-fb',s===5,`Score: ${s}/5${s===5?' 🎉':''}`);
+  if(s===5)celebrate();
+}
+// Label game
+const labelWords=[
+  {word:'dog',type:'N'},{word:'run',type:'V'},{word:'happy',type:'A'},
+  {word:'London',type:'N'},{word:'eat',type:'V'},{word:'cold',type:'A'},
+  {word:'teacher',type:'N'},{word:'jump',type:'V'}
+];
+(function buildLabel(){
+  document.getElementById('label-game').innerHTML=labelWords.map((w,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:10px 14px;background:#FAFBFF;border-radius:10px;border:2px solid #E5E7EB">
+      <span style="font-weight:900;font-size:1.1rem;color:#374151;min-width:80px">${w.word}</span>
+      <input id="lw${i}" maxlength="1" style="width:40px;text-align:center;border:none;border-bottom:2.5px solid var(--english);background:transparent;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;outline:none" placeholder="?">
+      <span style="font-size:.8rem;color:var(--muted)">N = Noun · V = Verb · A = Adjective</span>
+    </div>`).join('');
+})();
+function checkLabelGame(){
+  let s=0;
+  labelWords.forEach((w,i)=>{
+    const el=document.getElementById('lw'+i);
+    if(el.value.trim().toUpperCase()===w.type){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('label-fb',s===labelWords.length,`Score: ${s}/${labelWords.length}${s===labelWords.length?' 🎉 Perfect!':''}`);
+  if(s===labelWords.length)celebrate();
+}
+// Sort game
+const sortWords=[
+  {word:'Ahmed',ans:'Proper Noun',opts:['Noun','Proper Noun','Verb','Adjective']},
+  {word:'runs',ans:'Verb',opts:['Noun','Verb','Adjective','Proper Noun']},
+  {word:'beautiful',ans:'Adjective',opts:['Noun','Verb','Adjective','Proper Noun']},
+  {word:'school',ans:'Noun',opts:['Noun','Verb','Adjective','Proper Noun']},
+  {word:'Monday',ans:'Proper Noun',opts:['Noun','Proper Noun','Verb','Adjective']},
+  {word:'small',ans:'Adjective',opts:['Noun','Verb','Adjective','Proper Noun']},
+];
+let sortIdx=0,sortScore=0;
+function renderSort(){
+  const q=sortWords[sortIdx];
+  if(!q){document.getElementById('sort-game').innerHTML=`<div style="padding:14px;background:#D1FAE5;border-radius:12px;font-weight:800">🎉 Done! Score: ${sortScore}/${sortWords.length}</div>`;if(sortScore===sortWords.length)celebrate();return;}
+  document.getElementById('sort-game').innerHTML=`
+    <div class="quiz-box">
+      <div class="quiz-q">What type of word is: <em style="font-size:1.3rem;color:#374151">"${q.word}"</em>?</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+        ${q.opts.map(o=>`<button onclick="answerSort('${o}')" style="padding:9px 18px;border-radius:50px;border:2.5px solid var(--english);background:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .2s;color:var(--english-d)">${o}</button>`).join('')}
+      </div>
+      <div id="sort-fb-inner" style="margin-top:10px;font-weight:700;font-size:.9rem"></div>
+    </div>`;
+  document.getElementById('sort-score').textContent=`Score: ${sortScore}/${sortIdx}`;
+}
+function answerSort(chosen){
+  const q=sortWords[sortIdx];
+  const fb=document.getElementById('sort-fb-inner');
+  document.querySelectorAll('#sort-game button').forEach(b=>b.disabled=true);
+  if(chosen===q.ans){sortScore++;fb.style.color='#065F46';fb.textContent='✅ Correct!';}
+  else{fb.style.color='#DC2626';fb.textContent=`❌ Not quite. "${q.word}" is a ${q.ans}.`;}
+  document.getElementById('sort-score').textContent=`Score: ${sortScore}/${sortIdx+1}`;
+}
+function nextSortQ(){sortIdx++;renderSort();}
+renderSort();
+const engTFData=[
+  {s:'A noun is the name of a person, place, animal or thing.',ans:'T'},
+  {s:'Verbs are describing words.',ans:'F'},
+  {s:'Proper nouns always start with a capital letter.',ans:'T'},
+  {s:'"Big" is a noun.',ans:'F'},
+  {s:'"London" is a proper noun.',ans:'T'},
+];
+buildTF('eng-tf',engTFData,'var(--english)');
+function checkEngTF(){checkTF('eng-tf',engTFData,'eng-tf-fb');}
+
+// ═══════ MATHS ═══════
+const mathsMatchAns={mm1:'B',mm2:'A',mm3:'C',mm4:'E',mm5:'D'};
+function checkMathsMatch(){
+  let s=0;
+  Object.entries(mathsMatchAns).forEach(([id,ans])=>{
+    const el=document.getElementById(id);
+    if(el.value.trim().toUpperCase()===ans){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('maths-match-fb',s===5,`Score: ${s}/5${s===5?' 🎉':''}`);
+}
+// Times table grid
+const ttQuestions=[
+  {q:'2 × 3',a:6},{q:'2 × 7',a:14},{q:'2 × 11',a:22},
+  {q:'5 × 4',a:20},{q:'5 × 8',a:40},{q:'5 × 12',a:60},
+  {q:'10 × 5',a:50},{q:'10 × 9',a:90},{q:'10 × 6',a:60},
+  {q:'2 × 9',a:18},{q:'5 × 6',a:30},{q:'10 × 3',a:30},
+];
+document.getElementById('times-table-grid').innerHTML=`
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
+    ${ttQuestions.map((q,i)=>`
+      <div style="background:white;border:2px solid #E5E7EB;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:#92400E">${q.q} =</div>
+        <input id="tt${i}" type="number" style="width:70px;margin-top:6px;border:none;border-bottom:2.5px solid var(--maths);background:transparent;font-family:'Fredoka One',cursive;font-size:1.4rem;text-align:center;outline:none;color:#374151" placeholder="?">
+      </div>`).join('')}
+  </div>`;
+function checkTables(){
+  let s=0;
+  ttQuestions.forEach((q,i)=>{
+    const el=document.getElementById('tt'+i);
+    if(parseInt(el.value)===q.a){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('tables-fb',s===ttQuestions.length,`Score: ${s}/${ttQuestions.length}${s===ttQuestions.length?' 🎉 All correct!':''}`);
+  if(s===ttQuestions.length)celebrate();
+}
+// Word problems
+document.getElementById('word-problems').innerHTML=[
+  {emoji:'🚗',q:'There are 5 cars. Each car has 4 wheels. How many wheels altogether?',hint:'5 × 4 = ?'},
+  {emoji:'🍎',q:'Ali puts 2 apples on each plate. There are 9 plates. How many apples?',hint:'2 × 9 = ?'},
+  {emoji:'✏️',q:'10 students each have 6 pencils. How many pencils altogether?',hint:'10 × 6 = ?'},
+].map((p,i)=>`
+  <div style="background:var(--maths-l);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;border-left:4px solid var(--maths)">
+    <div style="font-weight:800;margin-bottom:5px">${p.emoji} Problem ${i+1}</div>
+    <div style="font-size:.93rem;margin-bottom:8px">${p.q}</div>
+    <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Hint: ${p.hint}</div>
+    <input type="number" style="width:90px;border:none;border-bottom:2.5px solid var(--maths);background:transparent;font-family:'Fredoka One',cursive;font-size:1.3rem;text-align:center;outline:none" placeholder="Answer">
+  </div>`).join('');
+const mathsTFData=[
+  {s:'3 × 5 = 15',ans:'T'},
+  {s:'The answer to a multiplication is called the product.',ans:'T'},
+  {s:'2 × 8 = 14',ans:'F'},
+  {s:'All answers in the 5× table end in 5 or 0.',ans:'T'},
+  {s:'10 × 7 = 17',ans:'F'},
+];
+buildTF('maths-tf',mathsTFData,'var(--maths)');
+function checkMathsTF(){checkTF('maths-tf',mathsTFData,'maths-tf-fb');}
+const mathsQuizQs=[
+  {q:'What is 5 × 9?',opts:['40','44','45','50'],ans:2},
+  {q:'What do we call the answer to a multiplication?',opts:['Sum','Product','Factor','Total'],ans:1},
+  {q:'What is 2 × 12?',opts:['22','24','14','20'],ans:1},
+  {q:'Which rule helps with the 10× table?',opts:['Add 1 zero to the number','Double the number','Count in 5s','Subtract 10'],ans:0},
+];
+buildQuiz('maths-quiz',mathsQuizQs,'var(--maths)','maths-q-score','nextMathsQ');
+
+// ═══════ SCIENCE ═══════
+const sciMatchAns={sm1:'B',sm2:'C',sm3:'D',sm4:'A',sm5:'E'};
+function checkSciMatch(){
+  let s=0;
+  Object.entries(sciMatchAns).forEach(([id,ans])=>{
+    const el=document.getElementById(id);
+    if(el.value.trim().toUpperCase()===ans){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('sci-match-fb',s===5,`Score: ${s}/5${s===5?' 🎉':''}`);
+}
+// Bones table
+const bonesData=[
+  {bone:'💀 Skull',job:''},
+  {bone:'🩻 Spine (backbone)',job:''},
+  {bone:'🫀 Ribs',job:''},
+  {bone:'💪 Humerus (upper arm)',job:''},
+  {bone:'🦵 Femur (upper leg)',job:''},
+  {bone:'🦵 Tibia (lower leg)',job:''},
+];
+document.getElementById('bones-table').innerHTML=bonesData.map((b,i)=>`
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--science-l);border-radius:10px;padding:10px 14px">
+    <span style="font-weight:800;min-width:160px;font-size:.9rem">${b.bone}</span>
+    <input style="flex:1;border:none;border-bottom:2px dashed var(--science);background:transparent;font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;padding:2px 4px" placeholder="Write the job...">
+  </div>`).join('');
+const sciQuizQs=[
+  {q:'How many bones does a human adult have?',opts:['100','150','206','300'],ans:2},
+  {q:'What are the 3 jobs of the skeleton?',opts:['Eat, sleep, breathe','Protect, support, move','Think, feel, talk','Grow, shrink, bend'],ans:1},
+  {q:'Which joint moves like a door — opening and closing only?',opts:['Ball and socket','Hinge joint','Pivot joint','Fixed joint'],ans:1},
+  {q:'Which is the biggest, strongest bone in the body?',opts:['Skull','Humerus','Spine','Femur'],ans:3},
+  {q:'An invertebrate is...',opts:['An animal with bones inside','An animal WITHOUT bones inside','A type of joint','A type of muscle'],ans:1},
+  {q:'What is an exoskeleton?',opts:['Bones inside the body','A very large skeleton','A skeleton on the OUTSIDE of the body','A joint that can move in all directions'],ans:2},
+  {q:'Which food helps build strong bones?',opts:['Crisps and sweets','Milk and dairy (calcium)','Bread and pasta','Fizzy drinks'],ans:1},
+  {q:'Your skull protects which organ?',opts:['Heart','Lungs','Stomach','Brain'],ans:3},
+];
+buildQuiz('sci-quiz',sciQuizQs,'var(--science)','sci-q-score','nextSciQ');
+const sciTFData=[
+  {s:'The skeleton protects, supports and helps us move.',ans:'T'},
+  {s:'A vertebrate is an animal without bones inside.',ans:'F'},
+  {s:'Your knee is an example of a hinge joint.',ans:'T'},
+  {s:'The femur is found in the upper arm.',ans:'F'},
+  {s:'Eating calcium-rich foods like milk helps build strong bones.',ans:'T'},
+];
+buildTF('sci-tf',sciTFData,'var(--science)');
+function checkSciTF(){checkTF('sci-tf',sciTFData,'sci-tf-fb');}
+
+// ═══════ HUMANITIES ═══════
+const humMatchAns={hm1:'C',hm2:'E',hm3:'D',hm4:'B',hm5:'A'};
+function checkHumMatch(){
+  let s=0;
+  Object.entries(humMatchAns).forEach(([id,ans])=>{
+    const el=document.getElementById(id);
+    if(el.value.trim().toUpperCase()===ans){s++;el.style.color='#065F46';}
+    else el.style.color='#DC2626';
+  });
+  setFB('hum-match-fb',s===5,`Score: ${s}/5${s===5?' 🎉':''}`);
+}
+const continents=['asia','africa','north america','south america','europe','australia','antarctica'];
+const oceans=['pacific','atlantic','indian','arctic','southern'];
+function normalize(s){return s.trim().toLowerCase();}
+function checkContOce(){
+  let s=0,total=12;
+  continents.forEach((c,i)=>{
+    const el=document.getElementById('c'+(i+1));
+    if(el&&normalize(el.value)===c){s++;el.style.color='#065F46';}
+    else if(el)el.style.color='#DC2626';
+  });
+  oceans.forEach((o,i)=>{
+    const el=document.getElementById('o'+(i+1));
+    if(el&&normalize(el.value)===o){s++;el.style.color='#065F46';}
+    else if(el)el.style.color='#DC2626';
+  });
+  setFB('cont-fb',s===total,`Score: ${s}/${total}${s===total?' 🎉 All correct!':''}`);
+  if(s===total)celebrate();
+}
+const humQuizQs=[
+  {q:'How many continents are there on Earth?',opts:['5','6','7','8'],ans:2},
+  {q:'How many oceans are there on Earth?',opts:['3','4','5','6'],ans:2},
+  {q:'Which is the biggest continent?',opts:['Africa','Europe','North America','Asia'],ans:3},
+  {q:'Which is the biggest ocean?',opts:['Atlantic','Indian','Pacific','Arctic'],ans:2},
+  {q:'What is the Equator?',opts:['A very big ocean','An imaginary line around the middle of the Earth','A large mountain range','A type of compass'],ans:1},
+  {q:'Which continent is at the very bottom of the Earth (South Pole)?',opts:['Australia','Africa','Antarctica','South America'],ans:2},
+];
+buildQuiz('hum-quiz',humQuizQs,'var(--social)','hum-q-score','nextHumQ');
+const humTFData=[
+  {s:'There are 7 continents on Earth.',ans:'T'},
+  {s:'The Pacific Ocean is the smallest ocean.',ans:'F'},
+  {s:'Antarctica is at the South Pole.',ans:'T'},
+  {s:'Europe is the biggest continent.',ans:'F'},
+  {s:'The Equator is an imaginary line around the middle of the Earth.',ans:'T'},
+];
+buildTF('hum-tf',humTFData,'var(--social)');
+function checkHumTF(){checkTF('hum-tf',humTFData,'hum-tf-fb');}
+</script>
+</body>
+</html>

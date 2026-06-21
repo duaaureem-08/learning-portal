@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 4 · KS2 Level 3 · Interactive Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --mgray:#CFD8DC;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:12px;--radius-sm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh;font-size:15px}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1;min-width:100px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:20px;border:2px solid transparent;font-size:12px;font-weight:700;cursor:pointer;transition:.13s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab:hover{opacity:.82}
+.tab.active{color:var(--white)!important}
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.print-btn:hover{opacity:.85}
+
+/* SUBJECT TABS */
+.subject-tabs{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap}
+.stab{padding:9px 18px;border-radius:22px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab:hover{opacity:.8}
+.stab.active{color:var(--white)}
+
+/* PAGE */
+.page{display:none;padding:14px 18px 50px}
+.page.active{display:block}
+
+/* WORKSHEET HEADER */
+.ws-header{background:linear-gradient(130deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.4px;display:inline-block;margin-bottom:4px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--teal);margin:2px 0}
+.ws-sub{font-size:12px;color:var(--gray);font-weight:600}
+.name-line{border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none;width:130px}
+
+/* SECTIONS */
+.section{margin-bottom:18px}
+.sec-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num{background:var(--teal);color:var(--white);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+
+/* QUESTION BLOCKS */
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--radius-sm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+
+/* TIPS & BRIDGES */
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6}
+.l1-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+
+/* VOCAB CARDS */
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+
+/* WORD BANK */
+.word-bank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--radius-sm);padding:10px 13px;margin-bottom:14px}
+.word-bank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.word-tag{display:inline-block;background:var(--purple);color:var(--white);border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+
+/* CLICK OPTIONS */
+.circle-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.opt{border:2px solid var(--amber);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);transition:.12s;background:var(--white)}
+.opt:hover{opacity:.8}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+table.ws-table input[type=text]{width:100%;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;border-bottom:1px dashed var(--teal-mid);padding:2px}
+
+/* GRIDS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+
+/* SPECIAL BOXES */
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.example-box{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:10px;font-family:'Courier New',monospace}
+.highlight-box{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+.remember-box{border-radius:var(--radius-sm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--white);text-align:center;margin-top:12px}
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.6}
+
+/* CARD GRIDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:10px 0}
+.info-card{border-radius:var(--radius-sm);padding:12px;text-align:center;border:2px solid}
+.card-icon{font-size:30px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+
+/* CHECK ROWS */
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px;line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:2px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.chk.done{background:var(--teal);color:var(--white)}
+
+/* TIMES TABLE */
+.times-table{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:10px 0}
+.tt-cell{background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:6px;padding:6px 4px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal)}
+.tt-cell.header{background:var(--teal);color:var(--white);font-size:12px}
+.tt-input{width:100%;border:none;background:transparent;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal);outline:none}
+
+/* SKELETON */
+.bone-card{background:var(--white);border:2px solid;border-radius:var(--radius-sm);padding:12px;margin-bottom:8px}
+
+/* CONTINENT CARDS */
+.cont-card{border-radius:var(--radius-sm);padding:12px;border:2px solid;margin-bottom:8px}
+.cont-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px}
+.cont-facts{font-size:12px;margin-top:5px;line-height:1.6}
+
+/* VERSE BOX */
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.verse-ref{font-size:12px;color:var(--gray);margin-top:6px}
+
+@media(max-width:600px){.two-col,.three-col,.four-col{grid-template-columns:1fr}.times-table{grid-template-columns:repeat(3,1fr)}}
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">📚 HOS · KS2 Level 3 · Week 4</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const SUBJECTS = [
+  {id:'eng',   label:'📖 English',    col:'#185FA5', lt:'#E6F1FB'},
+  {id:'maths', label:'🔢 Maths',      col:'#0F6E56', lt:'#E1F5EE'},
+  {id:'sci',   label:'🦴 Science',    col:'#C2410C', lt:'#FFF0E6'},
+  {id:'hum',   label:'🌍 Humanities', col:'#534AB7', lt:'#EEEDFE'},
+  {id:'bib',   label:'✝️ Bible',      col:'#B71C1C', lt:'#FFEBEE'},
+];
+
+const WS = {
+
+/* ══════════════════════════════════════════════════════════
+   ENGLISH — Nouns, Verbs & Adjectives
+══════════════════════════════════════════════════════════ */
+eng:[
+  { num:1, badge:'Nouns, Verbs & Adjectives', title:'What are Nouns?',
+    secs:[
+      {t:'Learn the word: NOUN',     c:'eng_noun_vocab'},
+      {t:'Find the nouns!',          c:'eng_noun_find'},
+      {t:'Common and Proper Nouns',  c:'eng_noun_types'},
+    ]},
+  { num:2, badge:'Nouns, Verbs & Adjectives', title:'What are Verbs and Adjectives?',
+    secs:[
+      {t:'Learn: Verb and Adjective', c:'eng_verb_adj_vocab'},
+      {t:'Find the verb!',            c:'eng_find_verb'},
+      {t:'Choose the best adjective', c:'eng_adj_choose'},
+    ]},
+  { num:3, badge:'Nouns, Verbs & Adjectives', title:'Use Nouns, Verbs and Adjectives Together',
+    secs:[
+      {t:'Put it all together',        c:'eng_together'},
+      {t:'Write your own sentences',   c:'eng_write'},
+      {t:'Sort the words',             c:'eng_sort'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   MATHS — Multiplication 2x 5x 10x
+══════════════════════════════════════════════════════════ */
+maths:[
+  { num:1, badge:'Multiplication Tables', title:'What is Multiplication? The 2× Table',
+    secs:[
+      {t:'Learn: what is multiplication?', c:'maths_mult_intro'},
+      {t:'The 2× table',                   c:'maths_2x'},
+      {t:'2× practice',                    c:'maths_2x_practice'},
+    ]},
+  { num:2, badge:'Multiplication Tables', title:'The 5× and 10× Tables',
+    secs:[
+      {t:'The 5× table',         c:'maths_5x'},
+      {t:'The 10× table',        c:'maths_10x'},
+      {t:'5× and 10× practice',  c:'maths_5x_10x_practice'},
+    ]},
+  { num:3, badge:'Multiplication Tables', title:'Word Problems and Arrays',
+    secs:[
+      {t:'Arrays — see multiplication!', c:'maths_arrays'},
+      {t:'Word problems',                c:'maths_word'},
+      {t:'Mixed tables challenge',       c:'maths_mixed'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   SCIENCE — Skeletons
+══════════════════════════════════════════════════════════ */
+sci:[
+  { num:1, badge:'Animals Including Humans', title:'Why Do We Have a Skeleton?',
+    secs:[
+      {t:'Learn the key words',          c:'sci_skel_vocab'},
+      {t:'What does a skeleton do?',     c:'sci_skel_jobs'},
+      {t:'Name the bones',               c:'sci_bones_name'},
+    ]},
+  { num:2, badge:'Animals Including Humans', title:'Bones and Joints',
+    secs:[
+      {t:'What are joints?',             c:'sci_joints'},
+      {t:'Which joint does this?',       c:'sci_joints_match'},
+      {t:'Different animal skeletons',   c:'sci_animals_skel'},
+    ]},
+  { num:3, badge:'Animals Including Humans', title:'Exoskeletons and Looking After Bones',
+    secs:[
+      {t:'What is an exoskeleton?',      c:'sci_exo'},
+      {t:'How do we keep bones healthy?',c:'sci_healthy_bones'},
+      {t:'Skeleton quiz',                c:'sci_quiz'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   HUMANITIES — 7 Continents & 5 Oceans
+══════════════════════════════════════════════════════════ */
+hum:[
+  { num:1, badge:'The World Around Us', title:'The 7 Continents',
+    secs:[
+      {t:'Learn the key words',       c:'hum_world_vocab'},
+      {t:'The 7 continents',          c:'hum_continents'},
+      {t:'Continent facts',           c:'hum_cont_facts'},
+    ]},
+  { num:2, badge:'The World Around Us', title:'The 5 Oceans',
+    secs:[
+      {t:'The 5 oceans',              c:'hum_oceans'},
+      {t:'Compare sizes',             c:'hum_compare'},
+      {t:'Where do you live?',        c:'hum_where'},
+    ]},
+  { num:3, badge:'The World Around Us', title:'World Map Skills',
+    secs:[
+      {t:'Reading a world map',       c:'hum_map_skills'},
+      {t:'True or False?',            c:'hum_tf'},
+      {t:'My world fact file',        c:'hum_factfile'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   BIBLE — Abraham — Leaving Home to Follow God
+══════════════════════════════════════════════════════════ */
+bib:[
+  { num:1, badge:'Abraham — Faith & Trust', title:'The Story of Abraham',
+    secs:[
+      {t:'Learn the key words',        c:'bib_abr_vocab'},
+      {t:'Read the story',             c:'bib_abr_story'},
+      {t:'Put the story in order',     c:'bib_abr_sequence'},
+    ]},
+  { num:2, badge:'Abraham — Faith & Trust', title:'Understanding Faith',
+    secs:[
+      {t:'Comprehension questions',    c:'bib_abr_questions'},
+      {t:'What is faith?',             c:'bib_faith'},
+      {t:'The memory verse',           c:'bib_abr_verse'},
+    ]},
+  { num:3, badge:'Abraham — Faith & Trust', title:'Abraham\'s Character and My Life',
+    secs:[
+      {t:'What kind of person was Abraham?', c:'bib_abr_character'},
+      {t:'When do I need faith?',            c:'bib_abr_apply'},
+      {t:'Draw and write',                   c:'bib_abr_draw'},
+    ]},
+],
+};
+
+/* ══════════════════════════════════════════════════════════
+   CONTENT RENDERER
+══════════════════════════════════════════════════════════ */
+function C(key){switch(key){
+
+/* ─── ENGLISH ──────────────────────────────────────────── */
+
+case 'eng_noun_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Noun = اسم (ism) in Arabic · اسم (ism) in Urdu. A noun is the NAME of something!</div>
+${vc('📛 Noun','The <strong>name</strong> of a person, place, animal or thing.','اسم / اسم','"dog · school · Ali · London · table · happiness"','teal')}
+${vc('👤 Person noun','The name of a person.','اسم شخص / شخص کا نام','"Ali, teacher, mother, doctor"','teal')}
+${vc('🏙️ Place noun','The name of a place.','جگہ کا نام / اسم مكان','"London, school, park, Pakistan, kitchen"','teal')}
+${vc('🐶 Animal / thing noun','The name of an animal or object.','جانور یا چیز کا نام / شيء','"cat, book, chair, water, apple"','teal')}
+<div class="q-block"><div class="q-text">A noun is the name of a <input class="inline-ans" style="width:80px" placeholder="?"/>, a <input class="inline-ans" style="width:70px" placeholder="?"/>, an <input class="inline-ans" style="width:70px" placeholder="?"/> or a <input class="inline-ans" style="width:60px" placeholder="?"/>.</div></div>`;
+
+case 'eng_noun_find': return `
+<div class="tip-box"><strong>How to find a noun:</strong> Ask yourself — is it a NAME? Can I put "the" or "a" in front of it? ✅ "the dog" · ✅ "a school" · ✅ "the teacher"</div>
+<p style="font-size:14px;margin-bottom:10px">Read each sentence. Click on the word that is a <strong>noun</strong>.</p>
+${[
+  ['The','dog','ran','fast',        'dog'],
+  ['Ali','went','to','school',     'Ali'],
+  ['She','has','a','red','book',   'book'],
+  ['The','cat','sat','on','a','mat','cat'],
+  ['My','teacher','is','kind',     'teacher'],
+].map(([...words], i) => {
+  const sentence = words.slice(0,-1);
+  const ans = words[words.length-1];
+  return `<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+  <div class="circle-opts">${sentence.map(w=>`<div class="opt" onclick="chk(this,'enf${i}','${w}','${ans}')">${w}</div>`).join('')}</div></div>`;
+}).join('')}`;
+
+case 'eng_noun_types': return `
+<div class="tip-box"><strong>Two types of nouns:</strong><br/>
+🔹 <strong>Common noun</strong> = a general name. Example: city, boy, dog. (No capital letter.)<br/>
+🔸 <strong>Proper noun</strong> = the SPECIFIC name of a person, place or brand. Example: London, Ahmed, Monday. (Always starts with a CAPITAL letter!)</div>
+${[
+  ['London','Proper — it is the name of a specific city.'],
+  ['city','Common — it does not name a specific city.'],
+  ['Ahmed','Proper — it is the name of a specific person.'],
+  ['teacher','Common — there are many teachers!'],
+  ['Pakistan','Proper — it is the name of a specific country.'],
+  ['dog','Common — it is the general word for a type of animal.'],
+].map(([word,exp],i)=>`
+<div class="q-block"><div class="q-num">Is <strong>"${word}"</strong> a Common or Proper noun?</div>
+<div class="circle-opts">
+  <div class="opt" onclick="chk(this,'nt${i}','Common',${exp.startsWith('Common')?'"Common"':'"Proper"'})">Common</div>
+  <div class="opt" onclick="chk(this,'nt${i}','Proper',${exp.startsWith('Common')?'"Common"':'"Proper"'})">Proper</div>
+</div>
+<div style="font-size:12px;color:var(--gray);margin-top:6px;font-style:italic">${exp}</div></div>`).join('')}`;
+
+case 'eng_verb_adj_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Verb = فعل (fi'l) · Adjective = صفة (sifa) in Arabic. In Urdu: Verb = فعل · Adjective = صفت (sifat).</div>
+${vc('🏃 Verb','An <strong>action word</strong> — something you DO or something that HAPPENS.','فعل / فعل','"run · jump · eat · is · think · help · fly"','orange')}
+${vc('🎨 Adjective','A word that <strong>describes</strong> a noun — what it looks like, feels like, sounds like.','صفت / صفة','"big · red · happy · cold · loud · beautiful · small"','purple')}
+<div class="tip-box" style="margin-top:10px"><strong>Easy trick to remember:</strong><br/>
+Noun = the NAME (dog, Ahmed, London)<br/>
+Verb = the ACTION (runs, eats, is)<br/>
+Adjective = the DESCRIPTION (big dog, happy Ahmed, old London)</div>
+<div class="q-block"><div class="q-text">Complete the sentence below with the correct word type:
+<br/><br/>The <input class="inline-ans" style="width:90px" placeholder="adjective"/> <input class="inline-ans" style="width:90px" placeholder="noun"/> <input class="inline-ans" style="width:90px" placeholder="verb"/> quickly.
+<br/><br/>Example: The <u>big</u> <u>dog</u> <u>runs</u> quickly.</div></div>`;
+
+case 'eng_find_verb': return `
+<div class="tip-box"><strong>Finding a verb:</strong> Ask — what is the person or animal DOING? That word is the verb!</div>
+<p style="font-size:14px;margin-bottom:10px">Click the <strong>verb</strong> (action word) in each sentence.</p>
+${[
+  ['The','cat','sleeps','on','the','mat',       'sleeps'],
+  ['Ali','eats','his','lunch','slowly',          'eats'],
+  ['She','reads','a','book','every','night',     'reads'],
+  ['The','birds','fly','over','the','house',     'fly'],
+  ['We','play','football','after','school',      'play'],
+  ['The','teacher','writes','on','the','board',  'writes'],
+].map((words,i)=>{
+  const ans = words[words.length-1];
+  const sentence = words.slice(0,-1);
+  return `<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+  <div class="circle-opts">${sentence.map(w=>`<div class="opt" onclick="chk(this,'fv${i}','${w}','${ans}')">${w}</div>`).join('')}</div></div>`;
+}).join('')}`;
+
+case 'eng_adj_choose': return `
+<div class="tip-box"><strong>Adjectives</strong> make our writing more interesting. They describe nouns — they answer the question: <em>What kind? What colour? How big? How many?</em></div>
+<p style="font-size:14px;margin-bottom:10px">Choose the best adjective for each sentence. Click your answer!</p>
+${[
+  ['The _____ cat sat in the sun.',['fluffy','run','table','quickly'],'fluffy'],
+  ['Ali has a _____ bag.',['new','jump','slowly','under'],'new'],
+  ['We live in a _____ house.',['tall','eat','and','because'],'tall'],
+  ['She has _____ hair.',['long','walk','but','never'],'long'],
+  ['The soup is very _____.',['hot','sleep','table','into'],'hot'],
+].map(([s,opts,ans],i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+<div class="q-text">${s}</div>
+<div class="circle-opts">${opts.map(o=>`<div class="opt" onclick="chk(this,'ac${i}','${o}','${ans}')">${o}</div>`).join('')}</div>
+</div>`).join('')}`;
+
+case 'eng_together': return `
+<div class="tip-box"><strong>A good sentence has:</strong> a noun (who/what) + a verb (what they do) + an adjective (a describing word) = a great sentence!</div>
+<div class="highlight-box" style="font-size:15px;text-align:center;font-family:Nunito,sans-serif;font-weight:700">
+The <span style="color:#C2410C">big</span> <span style="color:#0F6E56">dog</span> <span style="color:#185FA5">runs</span> fast.<br/>
+&nbsp;&nbsp;&nbsp;<em style="color:#C2410C;font-size:12px">adjective</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em style="color:#0F6E56;font-size:12px">noun</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em style="color:#185FA5;font-size:12px">verb</em>
+</div>
+<p style="font-size:14px;margin:12px 0 8px">Label each word. Write N (noun), V (verb) or A (adjective):</p>
+${[
+  ['The happy girl dances.',   ['happy','girl','dances'],  ['A','N','V']],
+  ['A small bird flies high.', ['small','bird','flies'],   ['A','N','V']],
+  ['The old man walks slowly.',['old','man','walks'],      ['A','N','V']],
+].map(([s,words,labels],i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}: <em>${s}</em></div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px">
+${words.map((w,j)=>`<div style="text-align:center">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:var(--teal)">${w}</div>
+  <div class="circle-opts" style="margin-top:4px;justify-content:center">
+    ${['N','V','A'].map(l=>`<div class="opt" style="padding:3px 9px;font-size:12px" onclick="chk(this,'tg${i}${j}','${l}','${labels[j]}')">${l}</div>`).join('')}
+  </div>
+</div>`).join('')}
+</div></div>`).join('')}`;
+
+case 'eng_write': return `
+<div class="word-bank"><strong>Word bank — use these words:</strong>
+${['beautiful','fast','old','green','happy','loud','tiny','brave','cold','big'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="tip-box"><strong>Remember:</strong> Use a noun, a verb AND an adjective in every sentence!</div>
+${[
+  'Write a sentence about your school. (Use an adjective to describe it.)',
+  'Write a sentence about an animal. (What does it do? How does it look?)',
+  'Write a sentence about your favourite food. (Describe it!)',
+  'Write a sentence about your best friend or family member.',
+].map((q,i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+<div class="q-text" style="font-size:13px;color:var(--gray)">${q}</div>
+<input class="ans-line" placeholder="Write your sentence here..."/>
+<div style="font-size:11px;color:var(--teal);margin-top:4px">Circle the noun (N), verb (V) and adjective (A) in your sentence.</div>
+</div>`).join('')}`;
+
+case 'eng_sort': return `
+<div class="tip-box"><strong>Sort the words!</strong> Put each word into the correct column.</div>
+<div class="word-bank"><strong>Words to sort:</strong>
+${['quickly','teacher','red','jump','Ahmed','cold','London','eat','beautiful','river','sleep','tiny'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="three-col" style="margin-top:10px">
+${[['🏷️ Nouns','#0F6E56','#E1F5EE'],['🏃 Verbs','#185FA5','#E6F1FB'],['🎨 Adjectives','#C2410C','#FFF0E6']].map(([t,col,bg])=>`
+<div style="background:${bg};border:2px solid ${col};border-radius:var(--radius-sm);padding:10px">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:${col};margin-bottom:8px">${t}</div>
+  ${Array(4).fill(0).map(()=>`<input class="ans-line" style="border-bottom-color:${col};margin-bottom:4px" placeholder="write a word..."/>`).join('')}
+</div>`).join('')}
+</div>`;
+
+/* ─── MATHS ────────────────────────────────────────────── */
+
+case 'maths_mult_intro': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Multiplication = ضرب (darb) in Arabic · ضرب (zarb) in Urdu. It means: add the SAME number again and again!</div>
+${vc('✖️ Multiply','Add the same number many times. It is a fast way of adding!','ضرب / ضرب','"3 × 2 means 3 groups of 2. 2 + 2 + 2 = 6"','teal')}
+${vc('📦 Groups of','Multiplication means equal groups. 4 × 3 = 4 groups of 3.','گروپ / مجموعات','"🍎🍎🍎 + 🍎🍎🍎 + 🍎🍎🍎 + 🍎🍎🍎 = 12"','teal')}
+${vc('= Product','The ANSWER to a multiplication is called the product.','حاصل ضرب / حاصل ضرب','"4 × 5 = 20. The product is 20."','teal')}
+<div class="tip-box" style="margin-top:10px"><strong>Quick check:</strong> 2 × 5 is the same as 5 × 2. The order does not matter — the answer is always 10! This is called the <strong>commutative property</strong> (فعل التبديل).</div>
+<div class="q-block"><div class="q-text">
+3 × 4 means <input class="inline-ans" style="width:20px" placeholder="?"/> groups of <input class="inline-ans" style="width:20px" placeholder="?"/>.<br/>
+This is the same as <input class="inline-ans" style="width:20px" placeholder="?"/> + <input class="inline-ans" style="width:20px" placeholder="?"/> + <input class="inline-ans" style="width:20px" placeholder="?"/> = <input class="inline-ans" style="width:30px" placeholder="?"/>
+</div></div>`;
+
+case 'maths_2x': return `
+<div class="tip-box"><strong>2× table trick:</strong> When you multiply by 2, you are <strong>doubling</strong>! 4 × 2 = 8 (double 4 = 8). The answer is always an <strong>even number</strong>.</div>
+<div class="times-table">
+${['2×1=','2×2=','2×3=','2×4=','2×5=','2×6=','2×7=','2×8=','2×9=','2×10=','2×11=','2×12='].map((f,i)=>`
+<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">I can see a pattern! All the answers in the 2× table are <input class="inline-ans" style="width:80px" placeholder="odd/even?"/> numbers.</div></div>`;
+
+case 'maths_2x_practice': return `
+<div class="tip-box"><strong>Remember:</strong> 2 × ? = ? Just double the number! Count in 2s: 2, 4, 6, 8, 10, 12...</div>
+<div class="two-col">
+${['2×3','2×7','2×5','2×9','2×12','2×4','2×11','2×6'].map((q,i)=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">${q} = <input type="text" style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/></div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:8px"><div class="q-text">🌟 Challenge: If 2 × 8 = 16, what is 2 × 80? <input class="inline-ans" style="width:60px" placeholder="?"/></div></div>`;
+
+case 'maths_5x': return `
+<div class="tip-box"><strong>5× table trick:</strong> Count in 5s — 5, 10, 15, 20, 25... The answer always ends in <strong>5 or 0</strong>! Easy to remember!</div>
+<div class="times-table">
+${['5×1=','5×2=','5×3=','5×4=','5×5=','5×6=','5×7=','5×8=','5×9=','5×10=','5×11=','5×12='].map(f=>`
+<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">The answers in the 5× table always end in <input class="inline-ans" style="width:50px" placeholder="?"/> or <input class="inline-ans" style="width:30px" placeholder="?"/>.</div></div>`;
+
+case 'maths_10x': return `
+<div class="tip-box"><strong>10× table trick:</strong> When you multiply by 10, just add a <strong>zero</strong> at the end! 6 × 10 = 60. 3 × 10 = 30. Easy!</div>
+<div class="times-table">
+${['10×1=','10×2=','10×3=','10×4=','10×5=','10×6=','10×7=','10×8=','10×9=','10×10=','10×11=','10×12='].map(f=>`
+<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">I can see a pattern! To multiply by 10, I just add a <input class="inline-ans" style="width:60px" placeholder="?"/> to the end of the number.</div></div>`;
+
+case 'maths_5x_10x_practice': return `
+<div class="tip-box"><strong>Quick check:</strong> 5× ends in 5 or 0. 10× ends in 0. Use these tricks to check your answers!</div>
+<div class="two-col">
+${['5×4','10×7','5×9','10×3','5×6','10×11','5×12','10×5'].map((q,i)=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">${q} = <input type="text" style="width:55px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/></div>
+</div>`).join('')}
+</div>`;
+
+case 'maths_arrays': return `
+<div class="tip-box"><strong>An array</strong> is a picture that shows multiplication. Rows × columns = total.<br/>3 rows of 4 circles = 3 × 4 = 12</div>
+<div class="q-block"><div class="q-num">Look at the arrays below and write the multiplication:</div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:10px">
+${[
+  {rows:2,cols:5,ans:'2 × 5 = 10'},
+  {rows:3,cols:4,ans:'3 × 4 = 12'},
+  {rows:5,cols:2,ans:'5 × 2 = 10'},
+].map(({rows,cols,ans},i)=>`
+<div style="background:var(--amber-light);border:1.5px solid var(--amber-mid);border-radius:8px;padding:10px;display:inline-block">
+  ${Array(rows).fill(0).map(()=>`<div>${Array(cols).fill('🟡').join(' ')}</div>`).join('')}
+  <div style="font-size:13px;margin-top:6px;color:var(--gray)">
+    <input class="inline-ans" style="width:20px" placeholder="?"/> rows × <input class="inline-ans" style="width:20px" placeholder="?"/> columns = <input class="inline-ans" style="width:35px" placeholder="?"/>
+  </div>
+</div>`).join('')}
+</div></div>`;
+
+case 'maths_word': return `
+<div class="step-box"><div class="step-num">1</div><div class="step-text">Read the question carefully. Find the numbers.</div></div>
+<div class="step-box"><div class="step-num">2</div><div class="step-text">Look for words like: <em>groups of, each, times, rows of, altogether</em> — these mean multiply!</div></div>
+<div class="step-box"><div class="step-num">3</div><div class="step-text">Write your number sentence and solve.</div></div>
+${[
+  ['🚗','There are 5 cars. Each car has 4 wheels. How many wheels altogether?','5 × 4 = ____'],
+  ['🍎','Ali puts 2 apples on each plate. There are 8 plates. How many apples?','2 × 8 = ____'],
+  ['🌺','There are 10 rows of flowers. Each row has 6 flowers. How many flowers?','10 × 6 = ____'],
+  ['✏️','A class has 5 groups. Each group has 5 students. How many students?','5 × 5 = ____'],
+].map(([ico,q,hint],i)=>`
+<div class="q-block"><div class="q-num">${ico} Problem ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--gray);font-style:italic;margin:4px 0 6px">Hint: ${hint}</div>
+<div style="font-size:13px;color:var(--teal);font-weight:700;margin-bottom:4px">Number sentence:</div>
+<input class="ans-line" placeholder="____ × ____ = ____"/>
+<input class="ans-line" placeholder="Answer: ____"/>
+</div>`).join('')}`;
+
+case 'maths_mixed': return `
+<div class="tip-box"><strong>Mixed practice:</strong> Use the 2×, 5× and 10× tables. Check your patterns!</div>
+<div class="three-col">
+${['2×6','5×8','10×4','2×11','5×3','10×9','2×4','5×7','10×12','2×9','5×11','10×6'].map(q=>`
+<div class="q-block" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:var(--teal)">${q} =</div>
+  <input type="text" style="width:60px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal);margin-top:4px"/>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">🌟 Which table has the biggest numbers — 2×, 5× or 10×? <input class="ans-line" placeholder="I think the ____ table has the biggest numbers because..."/></div></div>`;
+
+/* ─── SCIENCE ───────────────────────────────────────────── */
+
+case 'sci_skel_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Skeleton = هيكل عظمي (Arabic) · ڈھانچا (Urdu). Bone = عظمة (Arabic) · ہڈی (Urdu).</div>
+${vc('💀 Skeleton','All the <strong>bones</strong> in your body together make a skeleton.','ڈھانچا / هيكل عظمي','"Your skeleton has 206 bones!"','orange')}
+${vc('🦴 Bone','A hard, strong part inside your body. Bones make up the skeleton.','ہڈی / عظمة','"Your arm has 3 bones in it."','orange')}
+${vc('🔗 Joint','The place where two bones <strong>meet</strong>. Joints help you move.','جوڑ / مفصل','"Your knee and elbow are joints."','orange')}
+${vc('💪 Muscle','A body part that <strong>pulls</strong> on bones to make them move.','پٹھا / عضلة','"When you bend your arm, your muscle pulls the bone."','orange')}
+${vc('🦀 Exoskeleton','A skeleton on the <strong>outside</strong> of the body. Insects and crabs have this!','بیرونی ڈھانچا / هيكل خارجي','"A crab\'s shell is its exoskeleton."','orange')}
+${vc('🛡️ Support','The skeleton holds your body up so you do not fall down.','سہارا / دعم','"Without a skeleton, we would be like jelly!"','orange')}`;
+
+case 'sci_skel_jobs': return `
+<div class="tip-box"><strong>Your skeleton has 3 main jobs:</strong></div>
+<div class="card-grid">
+${[
+  ['🛡️','PROTECT','Your skeleton protects soft parts inside your body.<br/>Example: Your skull protects your brain. Your ribs protect your heart and lungs.','#185FA5','#E6F1FB'],
+  ['🏗️','SUPPORT','Your skeleton holds your body up. Without it, you could not stand or sit.','#0F6E56','#E1F5EE'],
+  ['🏃','MOVE','Muscles pull on bones to make you move. Walk, run, jump — all need bones!','#C2410C','#FFF0E6'],
+].map(([ico,t,d,col,bg])=>`
+<div class="info-card" style="background:${bg};border-color:${col}">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:${col}">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-num">Match the job!</div>
+${[
+  ['Your skull protects your brain.',         'Protect','Protect'],
+  ['Your legs help you walk and run.',         'Move',   'Move'],
+  ['Your spine holds your body upright.',      'Support','Support'],
+  ['Your ribs protect your lungs and heart.', 'Protect','Protect'],
+].map(([s,opts_wrong,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    ${['Protect','Support','Move'].map(o=>`<div class="opt" style="padding:3px 9px;font-size:12px" onclick="chk(this,'sj${i}','${o}','${ans}')">${o}</div>`).join('')}
+  </div>
+</div>`).join('')}</div>`;
+
+case 'sci_bones_name': return `
+<div class="tip-box"><strong>Important bones to know:</strong> skull · ribs · spine · humerus · femur · tibia</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Bone Name</th><th>Where is it?</th><th>What does it protect or do?</th></tr></thead><tbody>
+${[
+  ['💀 Skull','Your head','Protects your brain'],
+  ['🩻 Spine (backbone)','Down your back','Holds you upright — like a tall tower!'],
+  ['🫀 Ribs','Around your chest','Protect your heart and lungs'],
+  ['💪 Humerus','Your upper arm','Lets you lift and move your arm'],
+  ['🦵 Femur','Your upper leg','The biggest and strongest bone in your body!'],
+  ['🦵 Tibia','Your lower leg','Helps you walk and run'],
+].map(([b,w,d])=>`<tr><td><strong>${b}</strong></td><td>${w}</td><td>${d}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="q-block" style="margin-top:10px">
+<div class="q-text">Which is the biggest bone in your body? <input class="ans-line" style="width:200px;display:inline-block" placeholder="..."/><br/>Which bone protects your brain? <input class="ans-line" style="width:200px;display:inline-block" placeholder="..."/></div></div>`;
+
+case 'sci_joints': return `
+<div class="tip-box"><strong>A joint</strong> is where two bones meet. Without joints, we could not bend or move. Different joints move in different ways.</div>
+<div class="card-grid">
+${[
+  ['🚪','Hinge joint','Moves like a door — opens and closes. Bend and straighten only.','Knee, elbow, fingers','#0F6E56','#E1F5EE'],
+  ['⚽','Ball and socket joint','Can move in ALL directions — round and round!','Shoulder, hip','#185FA5','#E6F1FB'],
+  ['🔄','Pivot joint','Turns/rotates side to side.','Neck','#C2410C','#FFF0E6'],
+].map(([ico,t,d,ex,col,bg])=>`
+<div class="info-card" style="background:${bg};border-color:${col}">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:${col}">${t}</div>
+  <div class="card-desc">${d}</div>
+  <div style="font-size:11px;font-weight:700;color:${col};margin-top:6px">Examples: ${ex}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">Look at your body. Try each movement and answer:
+<br/>Can you bend your elbow back AND forward? Yes / No: <input class="inline-ans" style="width:60px"/>
+<br/>Can you move your shoulder in a circle? Yes / No: <input class="inline-ans" style="width:60px"/>
+<br/>The elbow is a <input class="inline-ans" style="width:100px"/> joint. The shoulder is a <input class="inline-ans" style="width:130px"/> joint.</div></div>`;
+
+case 'sci_joints_match': return `
+<p style="font-size:14px;margin-bottom:10px">Match each body part to the correct type of joint.</p>
+${[
+  ['Your knee — it bends and straightens only.',           'Hinge joint',       'Hinge joint'],
+  ['Your shoulder — it can move in all directions.',       'Ball and socket',   'Ball and socket'],
+  ['Your neck — it turns left and right.',                 'Pivot joint',       'Pivot joint'],
+  ['Your elbow — it bends and straightens like a door.',   'Hinge joint',       'Hinge joint'],
+  ['Your hip — it can swing in all directions.',           'Ball and socket',   'Ball and socket'],
+].map(([s,a1,ans],i)=>`
+<div class="q-block"><div class="q-num">Part ${i+1}</div>
+<div class="q-text">${s}</div>
+<div class="circle-opts">
+  ${['Hinge joint','Ball and socket','Pivot joint'].map(o=>`<div class="opt" onclick="chk(this,'jm${i}','${o}','${ans}')">${o}</div>`).join('')}
+</div></div>`).join('')}`;
+
+case 'sci_animals_skel': return `
+<div class="tip-box"><strong>Not all animals have a skeleton inside.</strong> Animals with a skeleton INSIDE (like us) are called <strong>vertebrates</strong>. Animals with no skeleton inside are called <strong>invertebrates</strong>.</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Animal</th><th>Has a skeleton inside?</th><th>Type</th></tr></thead><tbody>
+${[
+  ['🐟 Fish','Yes','Vertebrate — has a spine and bones inside'],
+  ['🐸 Frog','Yes','Vertebrate — has a spine inside'],
+  ['🐦 Bird','Yes','Vertebrate — hollow bones to keep them light for flying!'],
+  ['🦀 Crab','No','Invertebrate — has a hard shell (exoskeleton) on the outside'],
+  ['🐛 Caterpillar','No','Invertebrate — soft body, no bones inside'],
+  ['🐕 Dog','Yes','Vertebrate — has the same main bones as humans!'],
+].map(([a,h,t])=>`<tr><td><strong>${a}</strong></td><td style="text-align:center;font-size:16px">${h==='Yes'?'✅':'❌'}</td><td>${t}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">
+Are humans vertebrates or invertebrates? <input class="ans-line" placeholder="Humans are ... because ..."/>
+</div></div>`;
+
+case 'sci_exo': return `
+<div class="tip-box"><strong>Exoskeleton</strong> = "exo" means OUTSIDE. An exoskeleton is a hard shell on the <strong>outside</strong> of an animal's body. It protects the soft parts inside.</div>
+<div class="card-grid">
+${[
+  ['🦀','Crab','Hard shell on the outside. It protects the soft body inside.'],
+  ['🦗','Grasshopper','Hard outside body. Wings and legs are attached to the outside.'],
+  ['🐌','Snail','Hard shell on the back. The snail can hide inside!'],
+  ['🦞','Lobster','Very strong, hard shell. Protects from enemies.'],
+].map(([ico,n,d])=>`
+<div class="info-card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--orange)">${n}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">
+What is the difference between a skeleton and an exoskeleton?<br/>
+A skeleton is on the <input class="inline-ans" style="width:70px" placeholder="?"/> of the body.<br/>
+An exoskeleton is on the <input class="inline-ans" style="width:70px" placeholder="?"/> of the body.
+</div></div>`;
+
+case 'sci_healthy_bones': return `
+<div class="tip-box"><strong>Bones are living!</strong> We can keep them strong. Good bones need 3 things: 🥛 calcium · ☀️ vitamin D · 🏃 exercise.</div>
+${[
+  ['🥛','Drink milk and eat dairy foods','Milk, cheese and yoghurt have calcium. Calcium makes bones strong and hard.','Good for bones ✅'],
+  ['☀️','Get sunlight','Sunlight helps your body make vitamin D. Vitamin D helps bones use calcium.','Good for bones ✅'],
+  ['🏃','Exercise and move','Running, jumping and sports make bones stronger over time.','Good for bones ✅'],
+  ['🚭','Do not smoke','Smoking makes bones weaker. Bad for bones!','Bad for bones ❌'],
+].map(([ico,t,d,label])=>`
+<div class="step-box">
+  <div style="font-size:22px;width:32px;text-align:center">${ico}</div>
+  <div>
+    <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--teal)">${t}</div>
+    <div style="font-size:12px;color:var(--gray);margin-top:2px">${d}</div>
+    <div style="font-size:11px;font-weight:700;color:${label.includes('✅')?'var(--green)':'var(--red)';};margin-top:3px">${label}</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_quiz': return `
+<p style="font-size:14px;margin-bottom:10px">Test yourself! Click the correct answer.</p>
+${[
+  ['How many bones does a human body have?','About 206','About 50','About 500','About 206'],
+  ['Which bone protects your brain?','Skull','Femur','Ribs','Skull'],
+  ['What type of joint is the elbow?','Hinge joint','Ball and socket','Pivot joint','Hinge joint'],
+  ['What is an exoskeleton?','A skeleton on the outside of the body','A very big skeleton','A skeleton with no bones','A skeleton on the outside of the body'],
+  ['Which food helps make bones strong?','Milk (calcium)','Chips','Sweets','Milk (calcium)'],
+  ['What do muscles do?','Pull on bones to make us move','Protect the brain','Hold bones together without moving','Pull on bones to make us move'],
+].map(([q,o1,o2,o3,ans],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div class="circle-opts">
+  ${[o1,o2,o3].map(o=>`<div class="opt" onclick="chk(this,'sq${i}','${o}','${ans}')">${o}</div>`).join('')}
+</div></div>`).join('')}`;
+
+/* ─── HUMANITIES ────────────────────────────────────────── */
+
+case 'hum_world_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Continent = قارة (Arabic) · براعظم (Urdu). Ocean = محيط (Arabic) · سمندر (Urdu).</div>
+${vc('🌍 Continent','One of the 7 very large areas of land on Earth.','براعظم / قارة','"Africa is a continent. Asia is a continent."','purple')}
+${vc('🌊 Ocean','A very large area of salt water. There are 5 oceans on Earth.','سمندر / محيط','"The Pacific Ocean is the biggest ocean in the world."','purple')}
+${vc('🗺️ World map','A flat picture showing all the land and water on Earth.','عالمی نقشہ / خريطة العالم','"We use a world map to find countries and oceans."','purple')}
+${vc('📍 Location','Where something is on a map — north, south, east or west.','مقام / موقع','"Pakistan is located in South Asia."','purple')}
+${vc('📏 Equator','An imaginary line around the middle of the Earth.','خط استوا / خط الاستواء','"Countries near the equator are very hot."','purple')}`;
+
+case 'hum_continents': return `
+<div class="tip-box"><strong>There are 7 continents.</strong> A good way to remember them: <em>"Eat An Apple As A Nice Snack"</em> — Europe · Antarctica · Asia · Africa · Australia · North America · South America!</div>
+<div class="card-grid">
+${[
+  ['🌏','ASIA','The BIGGEST continent!','Contains Pakistan, Saudi Arabia, China, India, Japan and many more countries.','#185FA5','#E6F1FB'],
+  ['🌍','AFRICA','The SECOND biggest continent!','Contains Egypt, Nigeria, Kenya, South Africa. The Sahara Desert is here.','#C2410C','#FFF0E6'],
+  ['🌎','NORTH AMERICA','North of South America.','Contains USA, Canada, Mexico. Very large and varied.','#0F6E56','#E1F5EE'],
+  ['🌎','SOUTH AMERICA','South of North America.','Contains Brazil, Argentina. The Amazon Rainforest is here.','#534AB7','#EEEDFE'],
+  ['🌍','EUROPE','A smaller but very important continent.','Contains UK, France, Germany, Italy. Where we are now!','#B71C1C','#FFEBEE'],
+  ['🌏','AUSTRALIA / OCEANIA','The SMALLEST continent.','Contains Australia and New Zealand. Kangaroos live here!','#F59E0B','#FEF3C7'],
+  ['🧊','ANTARCTICA','At the very SOUTH of Earth.','Covered in ice. No people live there — only penguins and scientists!','#64748B','#F1F5F9'],
+].map(([ico,n,sub,d,col,bg])=>`
+<div class="info-card" style="background:${bg};border-color:${col}">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:${col}">${n}</div>
+  <div style="font-size:11px;font-weight:700;color:${col};margin:2px 0">${sub}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>`;
+
+case 'hum_cont_facts': return `
+<div class="tip-box"><strong>How to learn the continents:</strong> Say them out loud 3 times! Asia · Africa · North America · South America · Europe · Australia · Antarctica.</div>
+<p style="font-size:14px;margin-bottom:10px">Write the name of the correct continent for each clue.</p>
+${[
+  ['This is the biggest continent. Pakistan and China are here.','Asia'],
+  ['This continent is covered in ice. Only penguins live here.','Antarctica'],
+  ['The UK and France are in this continent.','Europe'],
+  ['The Amazon Rainforest is in this continent.','South America'],
+  ['Egypt and Nigeria are in this continent.','Africa'],
+  ['Kangaroos and koalas live in this continent.','Australia'],
+  ['The USA and Canada are in this continent.','North America'],
+].map(([clue,ans],i)=>`
+<div class="q-block"><div class="q-num">Clue ${i+1}</div>
+<div class="q-text">${clue}</div>
+<input class="ans-line" placeholder="The continent is ..."/>
+</div>`).join('')}`;
+
+case 'hum_oceans': return `
+<div class="tip-box"><strong>There are 5 oceans.</strong> Remember: <em>"I Am A Pacific Sailor"</em> — Indian · Arctic · Atlantic · Pacific · Southern!</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Ocean</th><th>Size</th><th>Where is it?</th><th>Cool fact</th></tr></thead><tbody>
+${[
+  ['🌊 Pacific Ocean','BIGGEST — covers about 1/3 of Earth!','Between Asia and the Americas','Has the deepest point on Earth — 11 km deep!'],
+  ['🌊 Atlantic Ocean','2nd biggest','Between the Americas and Europe/Africa','The UK is on the edge of the Atlantic!'],
+  ['🌊 Indian Ocean','3rd biggest','Between Africa, Asia and Australia','Warm water — good for fish and coral reefs.'],
+  ['🧊 Arctic Ocean','Very small and cold','Around the North Pole','Covered with ice most of the year.'],
+  ['🌊 Southern Ocean','Around Antarctica','South of all other oceans','Very cold and windy — stormy seas!'],
+].map(([o,s,w,f])=>`<tr><td><strong>${o}</strong></td><td>${s}</td><td>${w}</td><td style="font-style:italic;color:var(--blue)">${f}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">
+Which is the biggest ocean? <input class="ans-line" style="display:inline-block;width:200px" placeholder="..."/><br/>
+Which ocean is near the UK? <input class="ans-line" style="display:inline-block;width:200px" placeholder="..."/>
+</div></div>`;
+
+case 'hum_compare': return `
+<div class="tip-box"><strong>Compare</strong> means look at two things and see what is the same and what is different.</div>
+<p style="font-size:14px;margin-bottom:10px">Compare the continents. Click True or False!</p>
+${[
+  ['Asia is bigger than Africa.','True'],
+  ['There are 6 continents on Earth.','False'],
+  ['The Pacific Ocean is the biggest ocean.','True'],
+  ['Antarctica is hot and sunny.','False'],
+  ['Europe is where the UK is.','True'],
+  ['The Indian Ocean is between Africa and Australia.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'hc${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'hc${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'hum_where': return `
+<div class="q-block"><div class="q-num">🌍 Where do YOU come from?</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+My home country is: <input class="inline-ans" style="width:180px" placeholder="..."/><br/>
+My home country is in the continent of: <input class="inline-ans" style="width:180px" placeholder="..."/><br/>
+The ocean nearest to my home country is: <input class="inline-ans" style="width:200px" placeholder="..."/><br/>
+One thing special about my home country: <input class="inline-ans" style="width:300px" placeholder="..."/>
+</div></div>
+<div class="q-block"><div class="q-text">Now I live in the UK. The UK is in the continent of <input class="inline-ans" style="width:100px" placeholder="?"/>. The nearest ocean is the <input class="inline-ans" style="width:150px" placeholder="?"/> Ocean.</div></div>`;
+
+case 'hum_map_skills': return `
+<div class="tip-box"><strong>Reading a world map:</strong> North is at the top. South is at the bottom. East is on the right. West is on the left. 🧭</div>
+<div class="q-block"><div class="q-text">Use the map skills above to answer these questions:</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+Which continent is at the very BOTTOM (south) of the world? <input class="inline-ans" style="width:140px" placeholder="?"/><br/>
+Which direction is Africa from Europe — north or south? <input class="inline-ans" style="width:100px" placeholder="?"/><br/>
+Is Asia to the east or west of Europe? <input class="inline-ans" style="width:100px" placeholder="?"/><br/>
+What is the imaginary line in the middle of the Earth called? <input class="inline-ans" style="width:140px" placeholder="?"/>
+</div></div>
+<div class="q-block"><div class="q-text">Draw a simple world map outline in the box below. Try to add the 7 continents!</div>
+<div style="border:2px dashed var(--purple);border-radius:8px;height:160px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:13px;font-style:italic">🗺️ Draw your world map here and label the 7 continents!</div></div>`;
+
+case 'hum_tf': return `
+<p style="font-size:14px;margin-bottom:10px">Read each statement. Is it True or False?</p>
+${[
+  ['There are 7 continents and 5 oceans on Earth.','True'],
+  ['Asia is the smallest continent.','False'],
+  ['The Pacific Ocean is the biggest ocean.','True'],
+  ['Antarctica is in the north of the world.','False'],
+  ['The UK is in Europe.','True'],
+  ['Australia is also called Oceania.','True'],
+  ['There are 8 oceans on Earth.','False'],
+  ['Africa has the Sahara Desert.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'htf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'htf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'hum_factfile': return `
+<div class="q-block"><div class="q-num">🗺️ My World Fact File</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+The 7 continents are: <input class="ans-line" placeholder="Asia, Africa, North America, South America, Europe, Australia, Antarctica"/><br/>
+The 5 oceans are: <input class="ans-line" placeholder="Pacific, Atlantic, Indian, Arctic, Southern"/><br/>
+The biggest continent is: <input class="inline-ans" style="width:80px" placeholder="?"/><br/>
+The biggest ocean is: <input class="inline-ans" style="width:130px" placeholder="?"/> Ocean<br/>
+My home continent is: <input class="inline-ans" style="width:150px" placeholder="?"/><br/>
+One interesting fact I remember: <input class="ans-line" placeholder="..."/>
+</div></div>`;
+
+/* ─── BIBLE ─────────────────────────────────────────────── */
+
+case 'bib_abr_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Abraham is called إبراهيم (Ibrahim) in Arabic and ابراہیم (Ibrahim) in Urdu. Ibrahim is a prophet in Islam too! The theme is the same: trusting God and obeying when it is hard.</div>
+${vc('🙏 Faith','Believing in God and trusting Him — even when you CANNOT see what will happen.','ایمان / إيمان','"Faith means trusting God even when things are hard to understand."')}
+${vc('✈️ Obey','To do what God (or a trusted person) says — even if it is difficult.','اطاعت / طاعة','"Abraham obeyed God and left his home."')}
+${vc('🌟 Blessing','Something good that God gives you — like family, health or happiness.','برکت / بركة','"God promised to bless Abraham\'s family."')}
+${vc('📜 Promise','A commitment to do something. God always keeps His promises.','وعدہ / وعد','"God made a promise to Abraham: I will make your family as many as the stars."')}
+${vc('🌍 Nation','A large group of people with the same land and government — a country.','قوم / أمة','"God told Abraham: you will be the father of a great nation."')}`;
+
+case 'bib_abr_story': return `
+<div class="tip-box"><strong>Bible reference:</strong> Genesis 12–17 · <strong>Key theme:</strong> Faith means trusting God even when you cannot see what will happen.</div>
+<div class="story-box" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:16px;font-family:Nunito,sans-serif;color:var(--red)">✈️ Abraham — Leaving Home to Follow God</strong><br/><br/>
+<strong>Beginning —</strong> A long time ago, there was a man called Abram. He lived with his family in a city called Ur. He had a wife called Sarai. One day, God spoke to Abram. God said: <em>"Leave your home. Leave your family. Go to a new land that I will show you. I will bless you. I will make your family into a great nation."</em><br/><br/>
+<strong>Middle —</strong> This was very hard! Abram did not know where he was going. He did not know what would happen. But he <strong>trusted God</strong>. He packed his things. He took his wife Sarai and his nephew Lot. And he left.<br/><br/>
+Abram walked for a very long time. He went to a land called Canaan. God spoke to him again: <em>"I will give this land to your children and grandchildren."</em><br/><br/>
+God also changed his name. Abram became <strong>Abraham</strong> — which means <em>"father of many nations."</em> Sarai became <strong>Sarah</strong>.<br/><br/>
+<strong>End —</strong> God kept His promise. Abraham and Sarah had a son called Isaac. From Isaac came a great family — and all the way from this family came Jesus. Abraham is called <em>"the father of faith"</em> because he trusted God completely — even when it was very hard.
+</div>
+<div class="q-block"><div class="q-text">After reading, write ONE word to describe Abraham:</div>
+<input class="ans-line" placeholder="I think Abraham was ... because ..."/></div>`;
+
+case 'bib_abr_sequence': return `
+<div class="tip-box"><strong>Sequence</strong> = the correct order. Use: First · Next · Then · Finally.</div>
+<p style="font-size:14px;margin-bottom:10px">Number these events 1–6 in the correct order:</p>
+${[
+  ['God changes Abram\'s name to Abraham.','4'],
+  ['God speaks to Abram: "Leave your home and go."','1'],
+  ['Abraham and Sarah have a son called Isaac.','6'],
+  ['Abram trusts God and leaves his home.','2'],
+  ['God says: "I will give this land to your family."','3'],
+  ['God promises Abraham his family will be as many as the stars.','5'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="${num}" placeholder="?" style="width:36px;height:36px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--red);background:var(--red-light);outline:none" ${num?'readonly':''}/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'bib_abr_questions': return `
+<div class="tip-box"><strong>Remember:</strong> Use full sentences. Use the sentence frame: "I think ... because ..."</div>
+${[
+  ['Where did Abraham live before God called him?','He lived in a city called ...'],
+  ['What did God ask Abraham to do?','God asked Abraham to ...'],
+  ['Why was it hard for Abraham to obey?','It was hard because ...'],
+  ['What did God promise Abraham?','God promised that ...'],
+  ['What did God change Abram\'s name to? What does the name mean?','God changed his name to ... It means ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0 6px">Sentence frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'bib_faith': return `
+<div class="verse-box">
+<div style="font-size:12px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">⭐ MEMORY VERSE — Hebrews 11:1</div>
+<div class="verse-text">"Now faith is being sure of what we hope for<br/>and certain of what we do not see."</div>
+<div class="verse-ref">— Hebrews 11:1</div>
+</div>
+<div class="tip-box"><strong>What does this mean in simple words?</strong><br/>Faith = trusting that God's plan is good — even when we cannot see the future. Like Abraham — he did not know where he was going. But he trusted God.</div>
+<div class="q-block"><div class="q-text">Can you think of something you believe but cannot see? (Example: the wind — you can't see it but you know it is there!)</div>
+<textarea class="ans-box" placeholder="I believe in ... even though I cannot see it because ..."></textarea></div>
+<div class="q-block"><div class="q-text">Abraham showed faith when he <input class="ans-line" placeholder="left his home even though he did not know where he was going..."/></div></div>`;
+
+case 'bib_abr_verse': return `
+<div class="verse-box">
+<div style="font-size:12px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">🌟 MEMORY VERSE — Hebrews 11:1</div>
+<div class="verse-text">"Now faith is being sure of what we hope for<br/>and certain of what we do not see."</div>
+<div class="verse-ref">— Hebrews 11:1</div>
+</div>
+<div class="tip-box"><strong>How to learn it:</strong> Read it 3 times. Cover one word. Say it. Cover two words. Say it. Keep going!</div>
+<div class="q-block"><div class="q-text">Fill in the missing words:</div>
+<div style="font-size:15px;line-height:2.8;font-family:Nunito,sans-serif;margin-top:8px">
+"Now <input class="inline-ans" style="width:60px" placeholder="?"/> is being <input class="inline-ans" style="width:60px" placeholder="?"/> of what we <input class="inline-ans" style="width:80px" placeholder="?"/> for<br/>
+and <input class="inline-ans" style="width:80px" placeholder="?"/> of what we do not <input class="inline-ans" style="width:60px" placeholder="?"/>."<br/>
+— <input class="inline-ans" style="width:120px" placeholder="book and verse?"/>
+</div></div>
+<div class="q-block"><div class="q-text">Write the verse from memory — no peeking!</div>
+<textarea class="ans-box" style="min-height:60px" placeholder="Now faith is ..."></textarea></div>`;
+
+case 'bib_abr_character': return `
+<div class="tip-box"><strong>Character</strong> means what kind of person someone is — what they DO and HOW they act shows their character.</div>
+<div class="q-block"><div class="q-num">Circle all the words that describe Abraham:</div>
+<div class="circle-opts" style="margin:10px 0">
+${['faithful','lazy','brave','

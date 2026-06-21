@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 4 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--mgray:#CFD8DC;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+
+/* PAGES */
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+
+/* SUBJECT BANNER */
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+
+/* SECTION HEADS */
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+/* VOCAB CARDS */
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.vocab-card{border-left:4px solid var(--teal)}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+
+/* INFO BOXES */
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+
+/* GRIDS */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+
+/* CARDS */
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+
+/* WRITE LINES */
+.write-label{font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px;font-family:'Nunito',sans-serif}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+
+/* TIMES TABLE GRID */
+.tt{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:8px 0}
+.tt-cell{background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:6px;padding:6px 3px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--teal)}
+.tt-cell input{width:100%;border:none;background:transparent;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--teal);outline:none}
+
+/* STORY BOX */
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+
+/* VERSE */
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+
+/* SENTENCE FRAME */
+.frame{border-radius:var(--rsm);padding:11px 14px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;border:2px solid}
+
+/* WORD BANK */
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:12px}
+.wbank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+
+/* STEP BOX */
+.step{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px;margin-bottom:8px}
+.step-n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-t{font-size:13px;line-height:1.6}
+
+/* RAINBOW */
+.rbow-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rbow-bar{width:12px;height:30px;border-radius:4px;flex-shrink:0}
+
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}.tt{grid-template-columns:repeat(3,1fr)}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 4 · Student Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover',  label:'🏠 Cover',     col:'#0F6E56'},
+  {id:'eng',    label:'📖 English',   col:'#185FA5'},
+  {id:'maths',  label:'🔢 Maths',     col:'#0F6E56'},
+  {id:'sci',    label:'🦴 Science',   col:'#C2410C'},
+  {id:'hum',    label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',    label:'✝️ Bible',     col:'#B71C1C'},
+];
+
+/* ══════════════════════════════════════════════════════════
+   PAGE CONTENT
+══════════════════════════════════════════════════════════ */
+const PAGES={
+
+/* ── COVER ─────────────────────────────────────────────── */
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#185FA5);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 4 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Nouns, Verbs & Adjectives','#1E40AF','#DBEAFE'],
+      ['🔢','Maths','2×, 5×, 10× Tables','#065F46','#D1FAE5'],
+      ['🦴','Science','Skeletons & Bones','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','7 Continents & 5 Oceans','#3730A3','#E0E7FF'],
+      ['✝️','Bible','Abraham — Faith & Trust','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Use this booklet to read, learn and practise. Every page has words in English, Arabic and Urdu! 🌍</div>
+</div>`,
+
+/* ── ENGLISH ────────────────────────────────────────────── */
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#185FA5,#1E40AF)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 4</div>
+  <div class="banner-title">📖 English — Nouns, Verbs & Adjectives</div>
+  <div class="banner-sub">KS2 Level 3 · Elementary ESL</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Noun = <strong>اسم (ism)</strong> — Arabic &amp; Urdu<br/>
+Verb = <strong>فعل (fi'l)</strong> — Arabic &amp; Urdu<br/>
+Adjective = <strong>صفة (sifa)</strong> — Arabic · <strong>صفت (sifat)</strong> — Urdu</div>
+
+<div class="sec-head"><span class="sec-num">1</span>THE 3 WORD TYPES</div>
+
+<div class="four" style="margin-bottom:14px">
+${[
+  ['📛','NOUN','The NAME of a person, place, animal or thing','dog · London · Ali · table','#185FA5','#DBEAFE'],
+  ['🏃','VERB','An ACTION word — something you DO or something that HAPPENS','run · eat · is · sleep','#0F6E56','#D1FAE5'],
+  ['🎨','ADJECTIVE','A DESCRIBING word — tells us more about a noun','big · red · happy · cold','#C2410C','#FFEDD5'],
+].map(([ico,n,d,ex,col,bg])=>`
+<div class="card" style="background:${bg};border-color:${col}">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:${col}">${n}</div>
+  <div class="card-desc">${d}</div>
+  <div style="font-size:11px;font-style:italic;color:${col};margin-top:5px">e.g. ${ex}</div>
+</div>`).join('')}
+</div>
+
+<div class="tip"><strong>Easy trick! 🧠</strong><br/>
+<strong>Noun</strong> = the NAME → <em>The <u>dog</u> ran.</em><br/>
+<strong>Verb</strong> = the ACTION → <em>The dog <u>ran</u>.</em><br/>
+<strong>Adjective</strong> = the DESCRIPTION → <em>The <u>big</u> dog ran.</em></div>
+
+<div class="sec-head"><span class="sec-num">2</span>WORD BANK</div>
+
+${[
+  ['📛 Noun','The name of a person, place, animal or thing.','اسم / اسم','"dog · school · Ali · London · water · happiness"','#185FA5'],
+  ['👤 Common Noun','A general name. NOT a specific name. No capital letter.','عام اسم / اسم عام','"city · teacher · river · boy · book"','#185FA5'],
+  ['🌟 Proper Noun','The SPECIFIC name of a person, place or day. Always starts with a CAPITAL letter!','خاص اسم / اسم علم','"Ahmed · London · Monday · Pakistan"','#185FA5'],
+  ['🏃 Verb','An action word — something you do or that happens.','فعل / فعل','"run · eat · jump · think · is · write · fly"','#0F6E56'],
+  ['🎨 Adjective','A describing word — tells us about a noun.','صفت / صفة','"big · red · happy · cold · loud · old · tiny"','#C2410C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ e.g. ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>COMMON NOUNS vs PROPER NOUNS</div>
+<div class="tbl-wrap"><table class="t"><thead><tr>
+  <th>Common Noun</th><th>Proper Noun</th><th>Why is it proper?</th>
+</tr></thead><tbody>
+${[
+  ['city','London','It is the SPECIFIC name of one city.'],
+  ['person','Ahmed','It is the SPECIFIC name of one person.'],
+  ['river','River Thames','It is the name of one specific river.'],
+  ['country','Pakistan','It is the name of one specific country.'],
+  ['day','Monday','It is the specific name of one day.'],
+].map(([c,p,r])=>`<tr><td>${c}</td><td><strong style="color:#185FA5">${p}</strong></td><td style="font-style:italic;color:var(--gray)">${r}</td></tr>`).join('')}
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>SENTENCE FRAMES — USE THESE!</div>
+${[
+  ['#185FA5','#DBEAFE','The _______ (adjective) _______ (noun) _______ (verb) quickly.'],
+  ['#0F6E56','#D1FAE5','I can see a _______ (adjective) _______ (noun) in the _______ (place noun).'],
+  ['#C2410C','#FFEDD5','_______ (proper noun) is a very _______ (adjective) _______ (noun).'],
+].map(([col,bg,f])=>`<div class="frame" style="background:${bg};border-color:${col};color:${col}">${f}</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>PRACTICE — LABEL THE WORDS</div>
+<div class="tip"><strong>Label each word:</strong> N = Noun · V = Verb · A = Adjective</div>
+${[
+  'The happy girl dances in the park.',
+  'A big, old tree fell in the storm.',
+  'Ahmed reads a long, interesting book.',
+].map((s,i)=>`
+<div class="q-box">
+  <div class="q-label">Sentence ${i+1}</div>
+  <div class="q-text" style="font-size:15px;font-style:italic;margin-bottom:8px">"${s}"</div>
+  <input class="dline" placeholder="Write the nouns: ...   verbs: ...   adjectives: ..."/>
+</div>`).join('')}
+
+<div class="remember" style="background:#185FA5">⭐ REMEMBER: Noun = NAME · Verb = ACTION · Adjective = DESCRIBES! Every good sentence needs all three.</div>`,
+
+/* ── MATHS ──────────────────────────────────────────────── */
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#0F6E56,#065F46)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 4</div>
+  <div class="banner-title">🔢 Maths — Multiplication Tables</div>
+  <div class="banner-sub">2× · 5× · 10× Tables · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Multiplication = <strong>ضرب (darb)</strong> — Arabic · <strong>ضرب (zarb)</strong> — Urdu<br/>
+It means: add the SAME number again and again. It is a FAST way of adding!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WHAT IS MULTIPLICATION?</div>
+
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#D1FAE5;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#0F6E56;margin-bottom:8px">✖️ Multiplication = fast adding!</div>
+  <div style="font-size:13px;line-height:1.8">
+    3 × 4 means <strong>3 groups of 4</strong>.<br/>
+    4 + 4 + 4 = 12<br/>
+    3 × 4 = <strong>12</strong> ✅
+  </div>
+</div>
+<div class="card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">= Product</div>
+  <div style="font-size:13px;line-height:1.8">
+    The <strong>answer</strong> to a multiplication is called the <strong>product</strong>.<br/>
+    5 × 4 = 20. The product is <strong>20</strong>.
+  </div>
+</div>
+</div>
+
+<div class="tip"><strong>Important rule:</strong> The ORDER does not matter! 3 × 4 = 4 × 3 = 12. You get the same answer! This is called the <strong>commutative property</strong>.</div>
+
+<div class="sec-head"><span class="sec-num">2</span>THE 2× TABLE</div>
+<div class="tip"><strong>2× trick:</strong> When you multiply by 2, you are <strong>DOUBLING</strong>! The answer always ends in an <strong>even number</strong> (0, 2, 4, 6, 8).</div>
+<div class="tt">
+${Array.from({length:12},(_,i)=>`
+<div class="tt-cell">2×${i+1}=<input placeholder="?"/></div>`).join('')}
+</div>
+<div style="font-size:13px;color:var(--gray);font-style:italic;margin-bottom:14px">Count in 2s to help: 2 · 4 · 6 · 8 · 10 · 12 · 14 · 16 · 18 · 20 · 22 · 24</div>
+
+<div class="sec-head"><span class="sec-num">3</span>THE 5× TABLE</div>
+<div class="tip"><strong>5× trick:</strong> Count in 5s! The answer always ends in <strong>5 or 0</strong>. Very easy to spot!</div>
+<div class="tt">
+${Array.from({length:12},(_,i)=>`
+<div class="tt-cell">5×${i+1}=<input placeholder="?"/></div>`).join('')}
+</div>
+<div style="font-size:13px;color:var(--gray);font-style:italic;margin-bottom:14px">Count in 5s to help: 5 · 10 · 15 · 20 · 25 · 30 · 35 · 40 · 45 · 50 · 55 · 60</div>
+
+<div class="sec-head"><span class="sec-num">4</span>THE 10× TABLE</div>
+<div class="tip"><strong>10× trick:</strong> Just add a <strong>ZERO</strong> at the end! 6 × 10 = 60. 9 × 10 = 90. Super easy!</div>
+<div class="tt">
+${Array.from({length:12},(_,i)=>`
+<div class="tt-cell">10×${i+1}=<input placeholder="?"/></div>`).join('')}
+</div>
+<div style="font-size:13px;color:var(--gray);font-style:italic;margin-bottom:14px">Count in 10s: 10 · 20 · 30 · 40 · 50 · 60 · 70 · 80 · 90 · 100 · 110 · 120</div>
+
+<div class="sec-head"><span class="sec-num">5</span>WORD BANK</div>
+${[
+  ['✖️ Multiply','Add the same number many times — a fast way to add.','ضرب / ضرب','"3 × 5 = 15. I multiplied 3 by 5."'],
+  ['📦 Groups of','Equal groups. 4 × 3 = 4 groups of 3.','گروپ / مجموعات','"5 groups of 2 apples = 10 apples."'],
+  ['= Product','The ANSWER to a multiplication.','حاصل ضرب / حاصل ضرب','"4 × 6 = 24. The product is 24."'],
+  ['🟡 Array','A picture showing multiplication in rows and columns.','ترتیب / مصفوفة','"3 rows of 4 = 3 × 4 = 12"'],
+  ['#️⃣ Double','Multiply by 2 — add the same number to itself.','دوگنا / ضعف','"Double 7 = 7 × 2 = 14."'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card">
+  <div class="v-word" style="color:#0F6E56">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>PATTERNS TO REMEMBER</div>
+<div class="tbl-wrap"><table class="t"><thead><tr>
+  <th>Table</th><th>Trick</th><th>Pattern in answers</th>
+</tr></thead><tbody>
+<tr><td><strong>2×</strong></td><td>Double the number</td><td>Always even: 2, 4, 6, 8, 10...</td></tr>
+<tr><td><strong>5×</strong></td><td>Count in 5s</td><td>Always ends in 5 or 0: 5, 10, 15, 20...</td></tr>
+<tr><td><strong>10×</strong></td><td>Add a zero</td><td>Always ends in 0: 10, 20, 30, 40...</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">7</span>PRACTICE — MIXED TABLES</div>
+<div class="three">
+${['2×7','5×6','10×8','2×11','5×9','10×4','2×3','5×12','10×7'].map(q=>`
+<div class="q-box" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:#0F6E56">${q} =</div>
+  <input style="width:60px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:#0F6E56;margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">8</span>WORD PROBLEM PRACTICE</div>
+${[
+  ['🚗','There are 5 cars. Each car has 4 wheels. How many wheels?','5 × 4 = ____'],
+  ['🍎','Ali puts 2 apples on each plate. There are 8 plates. How many apples?','2 × 8 = ____'],
+  ['✏️','10 students each have 3 pencils. How many pencils altogether?','10 × 3 = ____'],
+].map(([ico,q,hint],i)=>`
+<div class="q-box">
+  <div class="q-label">${ico} Problem ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--gray);font-style:italic;margin:4px 0">Hint: ${hint}</div>
+  <input class="dline" placeholder="My number sentence: ____ × ____ = ____  →  Answer: ____"/>
+</div>`).join('')}
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: 2× = double · 5× ends in 5 or 0 · 10× just add a zero! Count in 2s, 5s and 10s to help you.</div>`,
+
+/* ── SCIENCE ────────────────────────────────────────────── */
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#C2410C,#9A3412)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 4</div>
+  <div class="banner-title">🦴 Science — Skeletons &amp; Bones</div>
+  <div class="banner-sub">Animals Including Humans · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Skeleton = <strong>هيكل عظمي</strong> — Arabic · <strong>ڈھانچا</strong> — Urdu<br/>
+Bone = <strong>عظمة</strong> — Arabic · <strong>ہڈی</strong> — Urdu<br/>
+Joint = <strong>مفصل</strong> — Arabic · <strong>جوڑ</strong> — Urdu</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['💀 Skeleton','All the bones in your body together. Humans have 206 bones!','ڈھانچا / هيكل عظمي','"Your skeleton gives your body its shape."','#C2410C'],
+  ['🦴 Bone','A hard, strong part inside your body. Bones make up the skeleton.','ہڈی / عظمة','"Your arm has 3 bones in it."','#C2410C'],
+  ['🔗 Joint','The place where two bones meet. Joints let you move and bend.','جوڑ / مفصل','"Your knee and elbow are joints."','#C2410C'],
+  ['💪 Muscle','Pulls on bones to make them move.','پٹھا / عضلة','"When you bend your arm, your muscle pulls the bone."','#C2410C'],
+  ['🦀 Exoskeleton','A skeleton on the OUTSIDE of the body. Insects and crabs have this!','بیرونی ڈھانچا / هيكل خارجي','"A crab\'s hard shell is its exoskeleton."','#C2410C'],
+  ['✅ Vertebrate','An animal WITH a skeleton inside — like humans, dogs, fish, birds.','فقاری / فقاريات','"Dogs and fish are vertebrates — they have a spine."','#C2410C'],
+  ['❌ Invertebrate','An animal WITHOUT a skeleton inside — like insects and worms.','بے فقاری / لافقاريات','"A caterpillar is an invertebrate — no bones inside!"','#C2410C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>3 JOBS OF THE SKELETON</div>
+<div class="three">
+${[
+  ['🛡️','PROTECT','Bones protect soft and important organs inside your body.','Skull → brain · Ribs → heart &amp; lungs','#185FA5','#DBEAFE'],
+  ['🏗️','SUPPORT','The skeleton holds your body up. Without it, we would fall down like jelly!','Your spine holds you upright.','#0F6E56','#D1FAE5'],
+  ['🏃','MOVE','Muscles pull on bones to make us move. Walk, run, jump!','Leg bones help you walk &amp; run.','#C2410C','#FFEDD5'],
+].map(([ico,t,d,ex,col,bg])=>`
+<div class="card" style="background:${bg};border-color:${col}">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:${col}">${t}</div>
+  <div class="card-desc">${d}</div>
+  <div style="font-size:11px;color:${col};margin-top:5px;font-weight:700">${ex}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>IMPORTANT BONES TO KNOW</div>
+<div class="tbl-wrap"><table class="t"><thead><tr>
+  <th>Bone</th><th>Where?</th><th>Job</th>
+</tr></thead><tbody>
+${[
+  ['💀 Skull','Your head','Protects your brain — like a helmet!'],
+  ['🩻 Spine (backbone)','Down your back','Holds you upright. 33 small bones stacked together.'],
+  ['🫀 Ribs','Around your chest','Protect your heart and lungs. 12 pairs of ribs!'],
+  ['💪 Humerus','Upper arm','Lets you lift and move your arm.'],
+  ['🦵 Femur','Upper leg','The BIGGEST, STRONGEST bone in your body!'],
+  ['🦵 Tibia','Lower leg','Helps you walk, run and kick.'],
+].map(([b,w,j])=>`<tr><td><strong>${b}</strong></td><td>${w}</td><td>${j}</td></tr>`).join('')}
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>3 TYPES OF JOINTS</div>
+<div class="three">
+${[
+  ['🚪','HINGE JOINT','Moves like a door — opens and closes only.','Knee · Elbow · Fingers','#0F6E56','#D1FAE5'],
+  ['⚽','BALL AND SOCKET','Can move in ALL directions — round and round!','Shoulder · Hip','#185FA5','#DBEAFE'],
+  ['🔄','PIVOT JOINT','Turns and rotates side to side.','Neck','#C2410C','#FFEDD5'],
+].map(([ico,t,d,ex,col,bg])=>`
+<div class="card" style="background:${bg};border-color:${col}">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:${col}">${t}</div>
+  <div class="card-desc">${d}</div>
+  <div style="font-size:11px;color:${col};margin-top:5px;font-weight:700">Examples: ${ex}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>VERTEBRATES vs INVERTEBRATES</div>
+<div class="two">
+<div style="background:#D1FAE5;border:2px solid #0F6E56;border-radius:var(--rsm);padding:12px">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#0F6E56;margin-bottom:8px">✅ Vertebrates (have bones inside)</div>
+  ${['🐟 Fish','🐸 Frog','🐦 Bird','🐕 Dog','👤 Human'].map(a=>`<div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06)">${a}</div>`).join('')}
+</div>
+<div style="background:#FFEDD5;border:2px solid #C2410C;border-radius:var(--rsm);padding:12px">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#C2410C;margin-bottom:8px">❌ Invertebrates (NO bones inside)</div>
+  ${['🦀 Crab (exoskeleton)','🐛 Caterpillar','🐌 Snail (shell)','🦗 Grasshopper','🐙 Octopus'].map(a=>`<div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06)">${a}</div>`).join('')}
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>HOW TO KEEP BONES HEALTHY</div>
+${[
+  ['🥛','Drink milk &amp; eat dairy','Milk, cheese, yoghurt → calcium → strong bones!'],
+  ['☀️','Get sunlight','Sunlight → vitamin D → helps bones use calcium.'],
+  ['🏃','Exercise!','Running, jumping, sports → makes bones stronger.'],
+  ['🥦','Eat green vegetables','Broccoli and spinach also have calcium.'],
+].map(([ico,t,d])=>`
+<div class="step">
+  <div style="font-size:22px;width:28px;text-align:center">${ico}</div>
+  <div class="step-t"><strong>${t}</strong> — ${d}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>DRAW AND LABEL</div>
+<div class="q-box">
+  <div class="q-label">Draw a skeleton and label these bones: Skull · Spine · Ribs · Humerus · Femur</div>
+  <div style="border:2px dashed #C2410C;border-radius:8px;height:160px;background:#FFEDD5;display:flex;align-items:center;justify-content:center;color:#C2410C;font-size:13px;font-style:italic;margin:10px 0">💀 Draw and label your skeleton here!</div>
+</div>
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Skeleton = 206 bones. 3 jobs: Protect · Support · Move. Joints = where bones meet. Eat calcium for strong bones! 🦴</div>`,
+
+/* ── HUMANITIES ─────────────────────────────────────────── */
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#534AB7,#3730A3)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 4</div>
+  <div class="banner-title">🌍 Humanities — 7 Continents &amp; 5 Oceans</div>
+  <div class="banner-sub">The World Around Us · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Continent = <strong>براعظم</strong> — Urdu · <strong>قارة</strong> — Arabic<br/>
+Ocean = <strong>سمندر</strong> — Urdu · <strong>محيط</strong> — Arabic<br/>
+World map = <strong>عالمی نقشہ</strong> — Urdu · <strong>خريطة العالم</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🌍 Continent','One of the 7 very large areas of land on Earth.','براعظم / قارة','"Asia is the biggest continent."','#534AB7'],
+  ['🌊 Ocean','A very large area of salt water. There are 5 oceans.','سمندر / محيط','"The Pacific Ocean is the biggest ocean."','#534AB7'],
+  ['🗺️ World map','A flat picture showing all the land and water on Earth.','عالمی نقشہ / خريطة العالم','"We use a world map to find continents."','#534AB7'],
+  ['📏 Equator','An imaginary line around the MIDDLE of the Earth.','خط استوا / خط الاستواء','"Countries near the equator are very hot."','#534AB7'],
+  ['🧭 Compass','Shows direction: North · South · East · West.','سمت نما / بوصلة','"North is at the top of a map."','#534AB7'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE 7 CONTINENTS</div>
+<div class="tip"><strong>Memory trick:</strong> <em>"Eat An Apple As A Nice Snack"</em><br/>
+Europe · Antarctica · Asia · Africa · Australia · North America · South America</div>
+
+<div class="tbl-wrap"><table class="t"><thead><tr>
+  <th>Continent</th><th>Size</th><th>Where?</th><th>Key Fact</th>
+</tr></thead><tbody>
+${[
+  ['🌏 Asia','Biggest!','East side of world','Contains Pakistan, Saudi Arabia, China, India, Japan'],
+  ['🌍 Africa','2nd biggest','South of Europe','Egypt, Nigeria, Kenya. Sahara Desert is here.'],
+  ['🌎 North America','3rd biggest','West side','USA, Canada, Mexico'],
+  ['🌎 South America','4th biggest','South of North America','Brazil, Argentina. Amazon Rainforest!'],
+  ['🌍 Europe','5th (smaller)','Between Africa &amp; Asia (north)','UK, France, Germany. Where we are now!'],
+  ['🌏 Australia','6th','South of Asia','Australia &amp; New Zealand. Kangaroos live here!'],
+  ['🧊 Antarctica','7th (special)','Very bottom of Earth','All ice! Only scientists &amp; penguins here.'],
+].map(([c,s,w,f])=>`<tr><td><strong>${c}</strong></td><td>${s}</td><td>${w}</td><td style="font-style:italic;color:var(--gray);font-size:12px">${f}</td></tr>`).join('')}
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>THE 5 OCEANS</div>
+<div class="tip"><strong>Memory trick:</strong> <em>"I Am A Pacific Sailor"</em> — Indian · Arctic · Atlantic · Pacific · Southern</div>
+<div class="tbl-wrap"><table class="t"><thead><tr>
+  <th>Ocean</th><th>Size rank</th><th>Where?</th><th>Key Fact</th>
+</tr></thead><tbody>
+${[
+  ['🌊 Pacific','1st — BIGGEST','Between Asia &amp; Americas','Deepest point on Earth — 11 km deep!'],
+  ['🌊 Atlantic','2nd','Between Americas &amp; Europe/Africa','The UK is on the edge of this ocean!'],
+  ['🌊 Indian','3rd','Between Africa, Asia &amp; Australia','Warm water. Good for fish and coral.'],
+  ['🧊 Arctic','4th (small)','Around North Pole','Very cold. Mostly frozen ice.'],
+  ['🌊 Southern','5th','Around Antarctica','Very stormy and cold.'],
+].map(([o,s,w,f])=>`<tr><td><strong>${o}</strong></td><td>${s}</td><td>${w}</td><td style="font-style:italic;color:var(--blue);font-size:12px">${f}</td></tr>`).join('')}
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>MAP SKILLS</div>
+<div class="four" style="margin-bottom:14px">
+${[
+  ['⬆️','NORTH','Top of the map'],
+  ['⬇️','SOUTH','Bottom of the map'],
+  ['➡️','EAST','Right side of the map'],
+  ['⬅️','WEST','Left side of the map'],
+].map(([ico,d,desc])=>`
+<div class="card" style="background:#E0E7FF;border-color:#534AB7">
+  <div style="font-size:24px">${ico}</div>
+  <div class="card-title" style="color:#534AB7">${d}</div>
+  <div class="card-desc">${desc}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>MY HOME IN THE WORLD</div>
+<div class="q-box">
+  <div class="q-label">Complete about yourself</div>
+  <div style="line-height:2.8;font-size:14px;margin-top:6px">
+    My home country is: <input class="inline" style="width:180px" placeholder="..."/><br/>
+    My home country is in: <input class="inline" style="width:170px" placeholder="which continent?"/><br/>
+    The nearest ocean is: <input class="inline" style="width:180px" placeholder="..."/> Ocean<br/>
+    Now I live in the UK, which is in: <input class="inline" style="width:100px" placeholder="Europe"/> — near the <input class="inline" style="width:120px" placeholder="Atlantic"/> Ocean.
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>DRAW THE WORLD</div>
+<div class="q-box">
+  <div class="q-label">Draw a simple world map. Add the 7 continents. Colour the oceans blue!</div>
+  <div style="border:2px dashed #534AB7;border-radius:8px;height:170px;background:#E0E7FF;display:flex;align-items:center;justify-content:center;color:#534AB7;font-size:13px;font-style:italic">🗺️ Draw your world map here! Label all 7 continents.</div>
+</div>
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: 7 Continents · 5 Oceans. Asia = biggest continent. Pacific = biggest ocean. UK is in Europe! 🌍</div>`,
+
+/* ── BIBLE ──────────────────────────────────────────────── */
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#B71C1C,#991B1B)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 4</div>
+  <div class="banner-title">✝️ Bible — Abraham: Leaving Home to Follow God</div>
+  <div class="banner-sub">Genesis 12–17 · Memory Verse: Hebrews 11:1</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 Did you know?</strong><br/>
+Abraham = <strong>إبراهيم (Ibrahim)</strong> — Arabic · <strong>ابراہیم (Ibrahim)</strong> — Urdu<br/>
+Ibrahim is also a prophet in Islam! The story of leaving home and trusting God is in BOTH the Bible and the Quran. The theme is the same: <strong>trust God even when it is hard.</strong><br/>
+Faith = <strong>ایمان</strong> — Urdu · <strong>إيمان</strong> — Arabic</div>
+
+<div class="verse-box">
+  <div style="font-size:11px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;letter-spacing:.5px;margin-bottom:6px">🌟 MEMORY VERSE — Hebrews 11:1</div>
+  <div class="verse-text">"Now faith is being sure of what we hope for<br/>and certain of what we do not see."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:8px">— Hebrews 11:1 (NIV)</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🙏 Faith','Believing in God and TRUSTING Him — even when you cannot see what will happen.','ایمان / إيمان','"Abraham had faith — he trusted God completely."','#B71C1C'],
+  ['✈️ Obey','To do what God (or a trusted person) says — even when it is hard.','اطاعت / طاعة','"Abraham obeyed God and left his home."','#B71C1C'],
+  ['🌟 Blessing','Something good that God gives you.','برکت / بركة','"God promised to bless Abraham\'s family."','#B71C1C'],
+  ['📜 Promise','A commitment to do something. God ALWAYS keeps His promises.','وعدہ / وعد','"God made a promise to Abraham."','#B71C1C'],
+  ['🌍 Nation','A large group of people with the same land — a country or a people.','قوم / أمة','"God said: you will be the father of a great nation."','#B71C1C'],
+  ['💛 Trust','To believe someone is good and will keep their word.','بھروسا / ثقة','"Abraham trusted God even when he did not understand."','#B71C1C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY OF ABRAHAM</div>
+<div class="story" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:var(--red)">✈️ Abraham — Genesis 12–17</strong><br/><br/>
+<strong>Beginning —</strong> A long time ago, there was a man called <strong>Abram</strong>. He lived in a city called <strong>Ur</strong> with his wife <strong>Sarai</strong>. One day, God spoke to him:<br/>
+<em>"Leave your home. Leave your family. Go to a new land. I will bless you. I will make your family into a great nation."</em><br/><br/>
+<strong>Middle —</strong> This was very hard! Abram did not know where he was going. He did not know what would happen. But he <strong>trusted God</strong>. He packed his things, took his wife Sarai and his nephew Lot, and he left.<br/><br/>
+He walked for a very long time. He came to a land called <strong>Canaan</strong>. God spoke again:<br/>
+<em>"I will give this land to your children and grandchildren."</em><br/><br/>
+God also gave him a new name. Abram became <strong>Abraham</strong> — "father of many nations." Sarai became <strong>Sarah</strong>.<br/><br/>
+<strong>End —</strong> God kept His promise. Abraham and Sarah had a son called <strong>Isaac</strong>. From Isaac came a great family. Abraham is called <em>"the father of faith"</em> because he trusted God completely — even when it was very hard and he did not understand.
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>STORY IN ORDER</div>
+<div style="counter-reset:story-step">
+${[
+  ['God speaks to Abram: <em>"Leave your home."</em>','1'],
+  ['Abram trusts God and leaves his home.','2'],
+  ['Abram arrives in the land of Canaan.','3'],
+  ['God changes Abram\'s name to <strong>Abraham</strong>.','4'],
+  ['God promises Abraham his family will be as many as the stars.','5'],
+  ['Abraham and Sarah have a son called Isaac.','6'],
+].map(([ev,n])=>`
+<div style="display:flex;gap:10px;align-items:center;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <div style="background:var(--red);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:14px;flex-shrink:0">${n}</div>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>COMPREHENSION — ANSWER THESE</div>
+${[
+  ['Where did Abraham live before God called him?','He lived in a city called ...'],
+  ['What did God ask Abraham to do?','God asked Abraham to ...'],
+  ['What did God promise Abraham?','God promised that ...'],
+  ['What does Abraham\'s new name mean?','It means ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0 4px">Sentence frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:42px"></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>THE MEMORY VERSE — LEARN IT!</div>
+<div class="verse-box">
+  <div class="verse-text">"Now faith is being sure of what we hope for<br/>and certain of what we do not see."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Hebrews 11:1</div>
+</div>
+<div class="tip"><strong>How to learn:</strong> Read it 3 times → cover 1 word → say it → cover 2 words → say it → keep going until you can say it all!</div>
+<div class="q-box">
+  <div class="q-label">Fill in the missing words:</div>
+  <div style="font-size:15px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+    "Now <input class="inline" style="width:60px" placeholder="?"/> is being <input class="inline" style="width:60px" placeholder="?"/> of what we <input class="inline" style="width:80px" placeholder="?"/> for<br/>
+    and <input class="inline" style="width:80px" placeholder="?"/> of what we do not <input class="inline" style="width:60px" placeholder="?"/>."<br/>
+    — <input class="inline" style="width:120px" placeholder="book &amp; verse?"/>
+  </div>
+</div>
+<div class="q-box">
+  <div class="q-label">Write the verse from memory — no peeking! 😊</div>
+  <textarea class="tarea" style="min-height:55px" placeholder="Now faith is ..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>LIFE APPLICATION — MY FAITH</div>
+<div class="tip"><strong>Abraham left everything he knew because he trusted God.</strong> Sometimes we face hard things too. Faith helps us trust God even when we are scared or unsure.</div>
+${[
+  ['#EF5350','❤️ Something hard at school — I will trust God with:'],
+  ['#F97316','🧡 One way I will obey God or a trusted person this week:'],
+  ['#EAB308','💛 One blessing (good thing) I am thankful for:'],
+  ['#22C55E','💚 One promise I will keep this week:'],
+  ['#3B82F6','💙 Something I believe even though I cannot see it:'],
+  ['#A855F7','💜 My prayer or thought to God this week:'],
+].map(([col,label])=>`
+<div class="rbow-row">
+  <div class="rbow-bar" style="background:${col}"></div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;color:${col};font-family:Nunito,sans-serif">${label}</div>
+    <input class="dline" style="border-bottom-color:${col}"/>
+  </div>
+</div>`).join('')}
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: Faith = trusting God even when you cannot see what will happen. Abraham left his home and trusted God — and God kept His promise! 🌟</div>`,
+
+};
+
+/* ── Render engine ──────────────────────────────────────── */
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML=''; pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur) el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render()};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+</body>
+</html>
