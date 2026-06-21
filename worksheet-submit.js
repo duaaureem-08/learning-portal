@@ -15,9 +15,17 @@
   const FALLBACK_INTERVAL = 30000;
 
   const FIELD_SELECTOR =
-    'textarea, input.ans-line, input.inline-ans, input.ans-box, input.name-line, ' +
-    'input[type="text"]:not([readonly]), input[type="number"]:not([readonly])';
+    'textarea, input:not([type="radio"]):not([type="checkbox"]):not([type="button"])' +
+    ':not([type="submit"]):not([type="file"]):not([type="hidden"]):not([type="image"])' +
+    ':not([readonly])';
   const SCORE_SELECTOR = '[id$="-score"], [id$="-pct"], [id$="-fb"]';
+  // Button-based quiz games (buildQuiz/buildTF helpers used across the
+  // KS2_L3_WeekN_DayN.html "Quiz Games" pages) don't store the student's
+  // pick in any form field — the choice only ever lives in a JS closure
+  // and a CSS class on the clicked button. collectInteractions() below
+  // reads that DOM/class state so those answers get saved too.
+  const QUIZ_BOX_SELECTOR = '.quiz-box';
+  const TF_ITEM_SELECTOR = '.tf-item';
 
   function injectStyles() {
     if (document.getElementById('ws-style')) return;
@@ -111,6 +119,45 @@
       if (t) scores[el.id] = t;
     });
     return scores;
+  }
+
+  // Reads answered multiple-choice quizzes (buildQuiz pattern) and
+  // True/False items (buildTF pattern) out of the DOM, since neither
+  // stores its answer in a savable <input>/<textarea>.
+  function collectInteractions(root) {
+    const scope = root || document;
+    const items = [];
+
+    scope.querySelectorAll(QUIZ_BOX_SELECTOR).forEach((box, qi) => {
+      const opts = Array.from(box.querySelectorAll('.quiz-opt'));
+      if (!opts.length || !opts[0].disabled) return; // not answered yet
+      const qText = (box.querySelector('.quiz-q') || {}).textContent || '';
+      const wrongBtn = opts.find((o) => o.classList.contains('wrong'));
+      const correctBtn = opts.find((o) => o.classList.contains('correct'));
+      const chosen = wrongBtn || correctBtn;
+      if (!chosen) return;
+      const container = box.closest('[id]');
+      const idBase = container ? container.id : 'quizbox' + qi;
+      items.push({
+        key: 'mcq__' + idBase + '__q' + qi,
+        label: 'Quiz — ' + (qText.trim().slice(0, 160) || 'Question ' + (qi + 1)),
+        value: chosen.textContent.trim() + (wrongBtn ? ' (incorrect)' : ' (correct)'),
+      });
+    });
+
+    scope.querySelectorAll(TF_ITEM_SELECTOR).forEach((item, ti) => {
+      const tBtn = item.querySelector('.tf-btn.selected-t');
+      const fBtn = item.querySelector('.tf-btn.selected-f');
+      if (!tBtn && !fBtn) return; // not answered yet
+      const stmt = (item.querySelector('.tf-statement') || {}).textContent || '';
+      items.push({
+        key: 'tf__' + (item.id || 'tfitem' + ti),
+        label: 'True/False — ' + (stmt.trim().slice(0, 160) || 'Statement ' + (ti + 1)),
+        value: tBtn ? 'True' : 'False',
+      });
+    });
+
+    return items;
   }
 
   async function fetchSubmission(name, worksheetId) {
@@ -224,6 +271,9 @@
       fields.forEach((f) => {
         answers[f.key] = { label: f.label, value: f.el.value };
       });
+      collectInteractions().forEach((it) => {
+        answers[it.key] = { label: it.label, value: it.value };
+      });
       const scores = collectScores();
       const ok = await saveSubmission(name, worksheetId, answers, scores);
       if (ok && silent)  { flashSaved(); }
@@ -238,6 +288,17 @@
       });
     }
     attachListeners();
+
+    // Quiz-option and True/False buttons don't fire 'input' events, and
+    // buildQuiz/buildTF re-render their containers' innerHTML on every
+    // click — so a single delegated listener on the document (rather
+    // than per-button listeners that would get wiped out on re-render)
+    // catches every answer as soon as it's chosen.
+    document.body.addEventListener('click', (e) => {
+      if (e.target.closest('.quiz-opt') || e.target.closest('.tf-btn')) {
+        debouncedSave();
+      }
+    });
 
     const observer = new MutationObserver(() => attachListeners());
     observer.observe(document.body, { childList: true, subtree: true });
@@ -270,6 +331,10 @@
       fields.forEach((f) => {
         const k = pageKey + '__' + f.key;
         global.__wsAnswers[k] = { label: f.label, value: f.el.value };
+      });
+      collectInteractions(document.getElementById('pages')).forEach((it) => {
+        const k = pageKey + '__' + it.key;
+        global.__wsAnswers[k] = { label: it.label, value: it.value };
       });
     }
 
@@ -340,6 +405,12 @@
       });
     }
     attachDynamicListeners();
+
+    document.body.addEventListener('click', (e) => {
+      if (e.target.closest('.quiz-opt') || e.target.closest('.tf-btn')) {
+        debouncedSave();
+      }
+    });
 
     document.getElementById('ws-load-btn').onclick  = () => doLoad(false);
     document.getElementById('ws-submit-btn').onclick = () => doSave(false);

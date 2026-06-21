@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 4 · Day 3 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(190,18,60,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:180px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.86rem;margin:10px 0;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;padding:9px 13px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 13px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+.week-summary{background:linear-gradient(135deg,rgba(109,40,217,0.1),rgba(30,58,138,0.1));border:1px solid rgba(109,40,217,0.25);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:20px;}
+.week-summary-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--bright);margin-bottom:8px;font-weight:700;}
+.week-summary-body{font-size:0.85rem;color:var(--muted);line-height:1.65;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 4</div>
+  <div class="day-badge">📅 Day 3</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 3 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 4 · Day 3 — Consolidation</div>
+  <div class="hero-title">Noah — Full<br>Review &amp; Essay</div>
+  <div class="hero-subtitle">Speed recall · Covenant theology · Faith in action · Extended theological writing</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 42"></div>
+</div>
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 4 Bible — What We Covered</div>
+  <div class="week-summary-body">Day 1: Genesis 6–9 overview · Noah as righteous · God's grief · Hebrews 11:7 · Covenant sign (rainbow) · 5 aspects of faith. Day 2: Typology (Noah as type of Christ) · covenant progression · Noah's failure after the flood · Bible's honesty · Noah in the big picture. Day 3: Full consolidation — speed recall, synthesis, and extended essay writing.</div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — 10-question speed round. No notes. Aim for under 6 minutes.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⚡ Speed Round</div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">1</div><div class="q-text">What does "tebah" mean? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>Box</strong> or chest — meaning the ark was built for protection, not sailing.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">2</div><div class="q-text">What does it mean that Noah "walked faithfully with God"? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">An <strong>ongoing, intentional, daily relationship</strong> with God — not a single moment but a sustained way of living.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">3</div><div class="q-text">What sign did God give with the Noahic covenant? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">The <strong>rainbow</strong>.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">4</div><div class="q-text">Name the TWO emotions Genesis 6 attributes to God when He sees human wickedness. <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>Grief</strong> (Gen 6:6) and the decision to judge — often translated as "regret" or "sorrow." Not simply cold anger.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">5</div><div class="q-text">How long did it take Noah to build the ark? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">Approximately <strong>100 years</strong>.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">6</div><div class="q-text">What does "typology" mean in biblical interpretation? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">A method where an OT person, event or object <strong>foreshadows</strong> (previews) a NT reality — like a shadow before the person arrives.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">7</div><div class="q-text">Write Hebrews 11:7 from memory (key phrase is enough). <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">"By faith Noah, when warned about things not yet seen, in holy fear built an ark to save his family..." — key phrases: <strong>things not yet seen / holy fear / built an ark.</strong></div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">8</div><div class="q-text">What did Noah do AFTER the flood that showed his human weakness? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">He <strong>planted a vineyard, became drunk,</strong> and was involved in a shameful episode with his son Ham (Gen 9:20–21).</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">9</div><div class="q-text">To whom was the Noahic covenant made — just Noah, or wider? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">It was made with <strong>every living creature</strong> on earth — Noah, his descendants, and all animals — a universal, eternal covenant.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#6D28D9;">10</div><div class="q-text">What does 1 Peter 3:20–21 connect the flood waters to? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>Baptism</strong> — Peter connects the flood waters (judgment and rescue) with the waters of baptism (dying to sin and being raised to new life).</div></div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Connecting the whole week's learning. Synthesise, don't just recall.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔗 Synthesis Questions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">11</div>
+    <div class="q-text">The lesson presents Noah as a model of faith. Using ALL THREE characteristics of faith from Hebrews 11:7 (hearing and believing what is unseen, holy fear leading to action, resulting in salvation), explain how each applies to the Christian life today. Give a modern example for each. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Characteristic 1 (unseen things) — modern application: &#10;Characteristic 2 (holy fear → action) — modern application: &#10;Characteristic 3 (faith = salvation for others) — modern application: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Trusting what is unseen:</strong> Christians today cannot see God physically, yet faith means trusting His character, promises, and Word without visible proof. Modern example: trusting God's promise of eternal life, or that prayer matters, even when answers are not immediately visible. 2. <strong>Holy fear leading to action:</strong> True reverence for God should change behaviour — not out of slavish terror, but out of deep respect and love. Modern example: a Christian choosing honesty in a situation where lying would be easy, out of respect for God's character. 3. <strong>Faith saving others:</strong> Noah's obedience saved his whole family. Faith is not only personal — it has consequences for those around us. Modern example: a parent or teacher whose faith shapes the environment children grow up in, passing on values and beliefs that outlast their own life.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">12</div>
+    <div class="q-text">The Bible's covenants form a progression. Complete the covenant timeline showing how each one builds on the last and points toward Jesus: <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. Noahic covenant (Gen 9) — what it established: &#10;   How it points forward: &#10;2. Abrahamic covenant (Gen 12/15) — what it promised: &#10;   How it points forward: &#10;3. Mosaic covenant (Exodus 19–24) — what it required: &#10;   How it points forward: &#10;4. New Covenant (Jeremiah 31 / fulfilled in Jesus) — how it fulfils all the others: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Noahic:</strong> God commits to preserving creation and all life — grace in judgment. Points forward: God will not abandon what He made; He will save a remnant. 2. <strong>Abrahamic:</strong> God promises a people, a land, and blessing to ALL nations through Abraham's line. Points forward: ultimately Jesus fulfils the "blessing to all nations" globally. 3. <strong>Mosaic:</strong> God gives Israel the Law as a way of living as His holy people — obedience required. Points forward: the Law reveals how far all humans fall short, creating the need for a substitute/saviour. 4. <strong>New Covenant:</strong> Jesus fulfils all previous covenants — He is the true Israel (obedient Son), the ultimate sacrifice (what the Mosaic sacrifices pointed to), the blessing to all nations (Abraham), and the new creation (Noah). The law is now written on hearts, not stone; relationship with God is direct, not through priests.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Exam-quality extended theological essay. Plan before you write.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Extended Theological Essay</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">13</div>
+    <div class="q-text">"The story of Noah teaches us more about how to live than about what actually happened." Evaluate this statement from TWO perspectives — one that agrees and one that disagrees. Then reach your own conclusion. Reference specific details from Genesis 6–9 and Hebrews 11:7. Write at least 7 sentences. <span class="marks">10 marks</span></div>
+    <div class="q-hint">A strong answer will: (a) accurately explain what each side argues, (b) use specific textual evidence, (c) avoid simply listing — explain WHY each point matters theologically, (d) reach a clear, reasoned conclusion.</div>
+    <textarea class="q-input xwide" placeholder="PLAN: &#10;Perspective 1 (agrees — it's about how to live): key points &#10;Perspective 2 (disagrees — the events themselves matter): key points &#10;My conclusion: &#10;&#10;FULL ESSAY:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Agrees:</strong> Hebrews 11:7 uses Noah explicitly as a model of faith — the author is drawing out the pattern of Noah's life for application. The five aspects of faith (hearing, fearing, acting, standing apart, receiving righteousness) are all ethical/relational — they are about HOW Noah lived. The lesson also notes that the flood account contains literary patterns (the realm/ruler structure) suggesting theological artistry, not purely historical reporting. <strong>Disagrees:</strong> The covenant God makes after the flood (Gen 9) depends entirely on the event having happened — "I will never again send a flood" only makes sense if a flood occurred. Peter in 1 Peter 3 treats the flood as a real historical event that baptism corresponds to — if the event is just metaphor, the theological comparison breaks down. The physical details (measurements of the ark, specific animals, duration of the flood) suggest the text is presenting historical record, not merely moral allegory. <strong>Conclusion:</strong> The most accurate reading holds both together — the narrative is presented as historical AND carries profound theological meaning. The Bible does not separate "what happened" from "what it means" — meaning is embedded in events. Reducing the story to only moral lesson impoverishes it; reducing it to bare history misses its theological richness.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 3</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 42" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 3 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🏆</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 4 · Day 3 — Consolidation</div>
+  <div class="hero-title">Sentence Structure<br>— Full Review &amp;<br>Exam Writing</div>
+  <div class="hero-subtitle">Full vocabulary · Error correction · Analysis · Extended creative &amp; analytical writing</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 44"></div>
+</div>
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 4 English — What We Covered</div>
+  <div class="week-summary-body">Day 1: Simple/compound/complex sentences · FANBOYS · Comma rules · Comma splice · Direct vs reported questions. Day 2: Subordinating conjunctions · Sentence variety for effect · Correcting errors in context · Semicolons · Parenthetical phrases. Day 3: Full consolidation — complete vocabulary, error analysis, craft analysis of a real text, and extended creative writing.</div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Complete vocabulary table and sentence-type speed identification.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Complete Week Vocabulary Review</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Complete this full vocabulary table from memory: <span class="marks">8 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#FCA5A5;">
+      <thead><tr><th>Term</th><th>Definition</th><th>Example or test</th></tr></thead>
+      <tbody>
+        <tr><td>Independent clause</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Dependent clause</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>FANBOYS</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Comma splice</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Semicolon</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Parenthetical phrase</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Subordinating conjunction</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Complex sentence</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Independent clause:</strong> a group of words with subject + verb that makes complete sense alone. Example: "The river flooded." <strong>Dependent clause:</strong> has subject + verb but does NOT make sense alone — needs a main clause. Example: "Although it rained." <strong>FANBOYS:</strong> the 7 coordinating conjunctions: For And Nor But Or Yet So — used to join two independent clauses. <strong>Comma splice:</strong> joining two independent clauses with ONLY a comma — always an error. Example (wrong): "It rained, she got wet." <strong>Semicolon:</strong> joins two related independent clauses without a conjunction; stronger than a comma, weaker than a full stop. <strong>Parenthetical phrase:</strong> an interrupting phrase inserted between commas to add information. Example: "The teacher, exhausted from marking, sat down." <strong>Subordinating conjunction:</strong> introduces a dependent clause (because, although, when, unless, until, since, while, after, before, if). <strong>Complex sentence:</strong> one independent clause + one or more dependent clauses joined by a subordinating conjunction.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Analysis of a professionally written passage and error correction.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Passage Analysis</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> When analysing a real writer's sentences, ask: What TYPE is this? Why did they choose THIS length? What EFFECT does the punctuation create? Always link structure to meaning or effect.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Read this passage carefully. Then answer all four questions below: <span class="marks">8 marks</span><br><br><em>"She had lived in the city for thirty years. She knew its streets the way a cartographer knows a map — not just the routes, but the hesitations, the wrong turns, the places where the pavement ends without warning. The city, she sometimes thought, was less a place than a habit. And habits, as everyone eventually discovers, are harder to break than walls."</em></div>
+    <div style="margin-top:14px;">
+    <div class="q-hint">a) Identify the sentence type of sentence 1 and explain what effect this creates.</div>
+    <textarea class="q-input narrow" placeholder="(a) Sentence type:        Effect: "></textarea>
+    <div class="q-hint" style="margin-top:8px;">b) The writer uses a dash in sentence 2. What is the dash doing, and how is this different from a comma or bracket at that point?</div>
+    <textarea class="q-input" placeholder="(b) What the dash does:&#10;Why a dash rather than comma/bracket: "></textarea>
+    <div class="q-hint" style="margin-top:8px;">c) "The city, she sometimes thought, was less a place than a habit." Identify the parenthetical phrase and explain what it contributes to the sentence.</div>
+    <textarea class="q-input" placeholder="(c) Parenthetical phrase:        What it contributes: "></textarea>
+    <div class="q-hint" style="margin-top:8px;">d) The final sentence is a complex sentence. Identify the independent and dependent clauses. What effect does placing "as everyone eventually discovers" in the middle create?</div>
+    <textarea class="q-input" placeholder="(d) IC:        DC:        Effect of placement: "></textarea>
+    </div>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Simple sentence</strong> — single IC, plain statement. Creates a matter-of-fact opening — no embellishment, just a plain fact that sets up the deeper exploration that follows. (b) The <strong>dash introduces an elaboration</strong> — it signals "let me expand on what I just said." A comma would feel too light for the extended list that follows; brackets would feel parenthetical and separate. The dash creates a sense of the narrator pausing to dig deeper, which matches the content (she knows the city's hidden details, not just the obvious). (c) Parenthetical phrase: <strong>"she sometimes thought"</strong> — placed between commas it softens the statement, making it a personal reflection rather than objective fact. It makes the narrator seem thoughtful and self-aware. (d) IC: "And habits...are harder to break than walls." DC (embedded): <strong>"as everyone eventually discovers"</strong> — placed in the middle between commas, this creates the effect of a parenthetical insight — as if the narrator pauses to remind the reader of a universal truth mid-sentence. It also slows the sentence down, making the final comparison ("harder to break than walls") land with more weight.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Find and correct ALL 6 sentence-level errors in this passage. Label each correction with the rule applied: <span class="marks">6 marks</span><br><br><em>"The factory had been closed for decades nobody had entered it since the accident. Although the doors were rusted shut the windows above them were cracked open like eyes that had never quite managed to close. Workers used to say the building was haunted, they believed its machines still ran at night. Investigators arrived on a Tuesday morning their first task was to establish what had happened? they knocked on the gate, but nobody answered."</em></div>
+    <textarea class="q-input xwide" placeholder="Corrected passage: &#10;&#10;Corrections made: &#10;1. &#10;2. &#10;3. &#10;4. &#10;5. &#10;6. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Corrected: "The factory had been closed for decades<strong>;</strong> nobody had entered it since the accident. Although the doors were rusted shut<strong>,</strong> the windows above them were cracked open like eyes that had never quite managed to close. Workers used to say the building was haunted<strong>, and</strong> they believed its machines still ran at night. Investigators arrived on a Tuesday morning<strong>;</strong> their first task was to establish what had happened<strong>.</strong> They knocked on the gate, but nobody answered." Corrections: 1. "decades nobody" → semicolon (comma splice / run-on). 2. "rusted shut the" → comma after "shut" (DC first in complex sentence). 3. "haunted, they" → comma splice → add "and" (FANBOYS). 4. "morning their" → semicolon (run-on two ICs). 5. "happened?" → full stop not question mark (reported question). 6. Capital "T" on "They" after full stop.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended creative and analytical writing at full exam level.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Final Writing Challenges</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Analyse how the writer of the Week 4 passage (the city passage above) uses sentence structure to build meaning and effect. In your analysis you MUST discuss: (a) variety of sentence types, (b) at least ONE specific punctuation choice, (c) how structure connects to theme or feeling. Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 3 English — author's intent, mood, PEEL structure. Use PEEL or PEEL-style analysis here.</div>
+    <textarea class="q-input xwide" placeholder="Write your analysis here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The writer opens with a deliberately <strong>simple sentence</strong> ("She had lived in the city for thirty years") which creates a plain, factual tone — establishing the character's long connection before exploring its complexity. The second sentence is far longer and more complex, using a <strong>dash</strong> to introduce an elaboration on what "knowing" a city means — the structural shift from short to long mirrors the movement from surface knowledge to intimate detail. The <strong>parenthetical phrase</strong> "she sometimes thought" in the third sentence turns a bold statement into a personal reflection, making the narrator feel thoughtful rather than declarative. The final sentence, with its embedded dependent clause "as everyone eventually discovers," slows the reader down before the arresting final comparison — "harder to break than walls." This structural delay makes the conclusion hit harder. The writer uses sentence structure to control the reader's pace, moving from certainty to nuance to surprising insight — mirroring the theme of a long-held relationship with a place becoming something more complicated than simple geography.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">FINAL CREATIVE WRITING TASK: Write a descriptive paragraph (10–12 sentences) about a place you know well — a street, room, school, building. Model it on the style of the city passage: begin with a simple statement of long familiarity, use at least ONE dash for elaboration, ONE parenthetical phrase, ONE semicolon, and end with an unexpected or philosophical observation. After writing, annotate your paragraph — label each structural feature you used and explain why you made that choice. <span class="marks">12 marks</span></div>
+    <div class="q-hint">This is your final showcase piece for Week 4 English. Take time to plan. Good writers revise. Read it aloud — if it sounds wrong, fix it.</div>
+    <textarea class="q-input xwide" style="min-height:220px;" placeholder="PLAN (ideas, structure, key moments): &#10;&#10;MY PARAGRAPH: &#10;&#10;&#10;ANNOTATIONS: &#10;Simple opening sentence — line: &#10;Dash for elaboration — line + what it does: &#10;Parenthetical phrase — phrase + effect: &#10;Semicolon — line + why used here: &#10;Final philosophical observation — sentence + why placed at end: &#10;Overall effect I was aiming for: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Mark scheme: <strong>Simple opening</strong> — establishes familiarity, plain factual tone ✓ (2). <strong>Dash for elaboration</strong> — correctly punctuated; elaboration is specific and vivid ✓ (2). <strong>Parenthetical phrase</strong> — between commas, grammatically correct, adds nuance or personal voice ✓ (2). <strong>Semicolon</strong> — correctly joining two related ICs ✓ (2). <strong>Philosophical/unexpected ending</strong> — moves beyond description to insight; feels earned rather than forced ✓ (2). <strong>Annotations</strong> — explain choices with reference to effect, not just identification ✓ (2). Total: /12.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 3</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 44" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 3 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🏆</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 4 · Day 3 — Consolidation</div>
+  <div class="hero-title">Fractions —<br>Full Review &amp;<br>Exam Challenges</div>
+  <div class="hero-subtitle">All operations · Borrowing · Multi-step · Error spotting · Real-world exam-style problems</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 44"></div>
+</div>
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 4 Maths — What We Covered</div>
+  <div class="week-summary-body">Day 1: Like denominators · Unlike denominators (LCM method) · Adding/subtracting mixed numbers. Day 2: Borrowing in subtraction · Adding 3+ fractions · Multi-step word problems · Error analysis. Day 3: Full consolidation — drill, all four operations, exam-style multi-step problems, extended reasoning.</div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Speed drill. All answers simplified. Show HCF or LCM used.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Full Operation Drill</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Add — simplify all answers: <span class="marks">4 marks</span><br><br>a) 5/9 + 2/9 &nbsp;&nbsp; b) 3/8 + 5/12 &nbsp;&nbsp; c) 2⅓ + 1¾ &nbsp;&nbsp; d) 1/2 + 1/3 + 1/6</div>
+    <textarea class="q-input" placeholder="a) &#10;b) LCM(8,12)= &#10;c) &#10;d) LCM(2,3,6)= "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 7/9 b) LCM=24 → 9/24+10/24=19/24 c) LCM(3,4)=12 → 2 4/12+1 9/12=3 13/12=<strong>4 1/12</strong> d) LCM=6 → 3/6+2/6+1/6=6/6=<strong>1</strong></div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Subtract — use borrowing where needed: <span class="marks">4 marks</span><br><br>a) 11/12 − 3/8 &nbsp;&nbsp; b) 5¼ − 2⅝ &nbsp;&nbsp; c) 8 − 3⅔ &nbsp;&nbsp; d) 6⅙ − 4⅚</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) &#10;d) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) LCM(12,8)=24 → 22/24−9/24=13/24 b) LCM(4,8)=8 → 5 2/8−2 5/8; borrow→4 10/8−2 5/8=<strong>2 5/8</strong> c) 8=7 3/3 → 7 3/3−3 2/3=<strong>4 1/3</strong> d) 1/6<5/6→borrow→5 7/6−4 5/6=<strong>1 2/6=1⅓</strong></div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Multiply and divide — simplify all answers: <span class="marks">4 marks</span><br><br>a) 3/4 × 8/9 &nbsp;&nbsp; b) 2/5 × 5/6 &nbsp;&nbsp; c) 3/4 ÷ 3/8 &nbsp;&nbsp; d) 5/6 ÷ 2½</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) &#10;d) Convert 2½ first: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 24/36=<strong>2/3</strong> b) 10/30=<strong>1/3</strong> c) 3/4×8/3=24/12=<strong>2</strong> d) 2½=5/2 → 5/6÷5/2=5/6×2/5=10/30=<strong>1/3</strong></div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Mixed operations and multi-step problems.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚙️ Mixed Problem Solving</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">A wall is 8¾ metres long. Three sections are painted: the first is 2⅓ m, the second is 1⅚ m, and the third is 3¼ m. How much of the wall is UNPAINTED? Give your answer as a mixed number. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="LCM of all denominators: &#10;Section 1: 2⅓ = &#10;Section 2: 1⅚ = &#10;Section 3: 3¼ = &#10;Total painted: &#10;Unpainted: 8¾ − total = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">LCM(3,6,4)=12. 2⅓=2 4/12; 1⅚=1 10/12; 3¼=3 3/12. Total painted: 6 17/12=7 5/12. Unpainted: 8¾=8 9/12. 8 9/12−7 5/12=<strong>1 4/12=1⅓ m</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Tariq earns £360 per week. He saves 1/4, spends 1/3 on rent, 1/6 on food, and the rest on other things. How much does he spend on "other things"? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="LCM(4,3,6)= &#10;Savings: 1/4 of £360 = &#10;Rent: 1/3 of £360 = &#10;Food: 1/6 of £360 = &#10;Total accounted for: &#10;Other: £360 − total = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Savings: £90. Rent: £120. Food: £60. Total: £270. Other: £360−£270=<strong>£90</strong>. (As fraction: 1/4+1/3+1/6=3/12+4/12+2/12=9/12=3/4. Other=1−3/4=1/4. 1/4 of £360=£90 ✓)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">Spot and fully correct all 5 errors: <span class="marks">5 marks</span><br><br>(i) 2/3 + 3/4 = 5/7 &nbsp;&nbsp; (ii) 3½ − 1¾ = 2¼ &nbsp;&nbsp; (iii) 4/5 × 10/3 = 40/15 &nbsp;&nbsp; (iv) 5/6 ÷ 1/3 = 5/18 &nbsp;&nbsp; (v) 1/2+1/3+1/4=3/9=1/3</div>
+    <textarea class="q-input wide" placeholder="(i) Error:     Correct: &#10;(ii) Error:    Correct: &#10;(iii) Error:   Correct: &#10;(iv) Error:    Correct: &#10;(v) Error:     Correct: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(i) Added tops AND bottoms. Correct: LCM=12→8/12+9/12=17/12=<strong>1 5/12</strong>. (ii) 1/2<3/4, no borrowing done. Correct: 3½=2 6/4→2 6/4−1 3/4=<strong>1 3/4</strong>. (iii) Answer not simplified. 40/15=<strong>8/3=2⅔</strong>. (iv) Should flip and multiply: 5/6×3/1=15/6=<strong>5/2=2½</strong>. (v) Added numerators AND denominators again. Correct: LCM=12→6/12+4/12+3/12=13/12=<strong>1 1/12</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Exam-simulation. Multi-step, extended reasoning, and mathematical writing.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Exam-Style Final Challenges</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">A swimming pool holds 240,000 litres. Pipe A fills 3/8 of the pool per hour. Pipe B fills 1/6 per hour. Pipe C drains 1/12 per hour. If all three are running simultaneously, what fraction of the pool fills per hour? How many hours to fill the pool from empty? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Net fill per hour: 3/8 + 1/6 − 1/12&#10;LCM(8,6,12)= &#10;Convert: &#10;Net = &#10;Hours to fill: 1 ÷ net fill = &#10;Actual litres per hour: net × 240,000 = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">LCM(8,6,12)=24. 3/8=9/24; 1/6=4/24; 1/12=2/24. Net=9/24+4/24−2/24=11/24 per hour. Hours to fill: 1÷11/24=24/11=<strong>2 2/11 hours</strong> (≈2 hours 11 minutes). Litres per hour: 11/24×240,000=<strong>110,000 litres/hour</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">8</div>
+    <div class="q-text">Explain in full sentences why the LCM method works for adding fractions. Your explanation must include: (a) what a denominator REPRESENTS, (b) why you cannot add fractions with different denominators directly, (c) why the LCM (rather than just any common multiple) is the most efficient choice. Write at least 5 sentences. <span class="marks">6 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 3 Maths — LCM using prime factorisation. You learned HOW to find the LCM; now explain WHY it matters for fractions.</div>
+    <textarea class="q-input wide" placeholder="(a) What a denominator represents: &#10;(b) Why different denominators can't be added directly: &#10;(c) Why LCM is most efficient: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) The denominator tells you <strong>how many equal parts the whole is divided into</strong> — it defines the SIZE of each piece. 1/4 means the whole is split into 4 equal pieces and you have one; 1/6 means split into 6 equal pieces. (b) You cannot add fractions with different denominators directly because the pieces are <strong>different sizes</strong> — adding 1/4 + 1/6 directly would be like adding one large slice of pizza and one small slice and calling them "2 slices" — they are not the same size, so the count is meaningless. You need to convert both to the same-sized pieces first. (c) The LCM is the <strong>smallest</strong> number that both denominators divide into evenly. Using the LCM keeps the numbers as small as possible, making simplification easier at the end. You COULD use a larger common multiple (e.g. the product of the two denominators) but this creates larger numbers to work with and more simplification required at the end. The LCM is the most efficient choice because it is the smallest valid common denominator.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 3</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 43" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 3 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🥗</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 4 · Day 3 — Consolidation</div>
+  <div class="hero-title">Nutrition &amp;<br>Digestion —<br>Full Review</div>
+  <div class="hero-subtitle">Complete enzyme knowledge · Full digestion journey · Experimental design · Evaluation</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 44"></div>
+</div>
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 4 Science — What We Covered</div>
+  <div class="week-summary-body">Day 1: Food groups · balanced diet · peristalsis · enzymes (amylase/protease/lipase) · bile · nutrients. Day 2: Complete digestion journey (mouth→large intestine) · villi · deficiency diseases · stomach acid · cross-system links. Day 3: Full consolidation — complete organ/enzyme recall, experimental design, cross-topic reasoning, extended scientific evaluation.</div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Complete recall tables. No notes — try from memory first.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">⚡ Complete Knowledge Tables</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Complete the full enzyme table from memory: <span class="marks">6 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#6EE7B7;">
+      <thead><tr><th>Enzyme</th><th>Where Produced</th><th>Substrate (breaks down...)</th><th>Products</th><th>Optimal pH</th></tr></thead>
+      <tbody>
+        <tr><td>Amylase</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Protease</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Lipase</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Amylase:</strong> salivary glands + pancreas | starch | simple sugars (maltose) | pH 7 (neutral — mouth). <strong>Protease (pepsin):</strong> stomach + pancreas | proteins | amino acids | pH 2 (acidic — stomach) / pH 7–8 (pancreatic protease). <strong>Lipase:</strong> pancreas | fats/lipids (with help of bile emulsification) | fatty acids + glycerol | pH 7–8 (alkaline — small intestine).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Complete the deficiency disease table from memory: <span class="marks">4 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#6EE7B7;">
+      <thead><tr><th>Disease</th><th>Missing Nutrient</th><th>Main Symptom</th><th>Food Sources to cure it</th></tr></thead>
+      <tbody>
+        <tr><td>Scurvy</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Rickets</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Anaemia</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Night blindness</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Scurvy: Vitamin C | bleeding gums, poor wound healing | citrus fruits, peppers, broccoli. Rickets: Vitamin D / Calcium | soft/bowed bones | oily fish, dairy, sunlight (Vit D). Anaemia: Iron | fatigue, pale skin, breathlessness | red meat, spinach, lentils. Night blindness: Vitamin A | inability to see in low light | carrots, sweet potato, liver.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Cross-topic thinking and full digestion narration.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔗 Synthesis & Narration</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Write a "journey narrative" — trace a piece of bread from the moment it enters your mouth to when the glucose from it reaches a muscle cell in your leg. Name every organ and process involved. Write in full sentences. Aim for at least 8 steps. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 3 Science — circulatory system (heart + blood vessels), organ systems working together. Week 4 — digestion and absorption.</div>
+    <textarea class="q-input xwide" placeholder="Step 1 — Mouth: &#10;Step 2 — &#10;Step 3 — &#10;Step 4 — &#10;Step 5 — &#10;Step 6 — &#10;Step 7 — &#10;Step 8 — (from blood to muscle cell): "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Mouth:</strong> Teeth chew bread (mechanical); amylase in saliva begins breaking starch into simple sugars (chemical). 2. <strong>Oesophagus:</strong> Peristalsis pushes bolus of food to the stomach. 3. <strong>Stomach:</strong> HCl acid kills bacteria; churning continues mechanical digestion; pepsin (protease) begins protein breakdown. Bread's starch already partly converted; amylase is denatured in the acid. 4. <strong>Small intestine (duodenum):</strong> Pancreatic juice (amylase, protease, lipase) continues digestion. Bile from the liver (stored in gallbladder) is released to emulsify any fats. 5. <strong>Small intestine (ileum):</strong> Amylase completes starch → maltose → glucose. Glucose molecules are now small enough to pass through villi. 6. <strong>Villi:</strong> Glucose absorbed through the thin walls of the villi by active transport into blood capillaries inside the villi. 7. <strong>Bloodstream → portal vein → liver:</strong> Glucose travels to the liver, which regulates blood sugar levels, before entering general circulation. 8. <strong>Circulatory system → muscle cell:</strong> Heart pumps blood (now carrying glucose) through arteries → arterioles → capillaries in leg muscle. Glucose diffuses from blood into the muscle cell, where mitochondria use it in cellular respiration to produce ATP — energy for muscle contraction.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">Thinking across Weeks 3 and 4: a person's cells need BOTH oxygen (from the respiratory system, Week 3) AND glucose (from the digestive system, Week 4) to produce energy via cellular respiration. Explain precisely how these TWO systems must coordinate to deliver both substances to every cell in the body, and what role the circulatory system plays in this coordination. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Role of respiratory system: &#10;Role of digestive system: &#10;Role of circulatory system (the coordinator): &#10;What happens in the cell when both arrive: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The <strong>respiratory system</strong> absorbs oxygen from inhaled air into the bloodstream through the alveoli in the lungs (large surface area, thin walls, rich blood supply). The <strong>digestive system</strong> absorbs glucose from digested food through the villi in the small intestine (same structural principles — large surface area, thin walls, rich blood supply). The <strong>circulatory system</strong> acts as the delivery network — the heart pumps blood carrying both oxygen (in red blood cells as oxyhaemoglobin) and glucose (dissolved in plasma) through arteries to capillaries in every tissue of the body. At the capillaries, oxygen and glucose diffuse into cells. Inside each cell, the <strong>mitochondria</strong> use both in cellular respiration: glucose + oxygen → carbon dioxide + water + ATP (energy). The carbon dioxide is then carried back by blood to the lungs for exhalation — completing the cycle. Without any one of these three systems, the other two cannot function.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Experimental design and scientific evaluation essay.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔬 Experimental Design &amp; Scientific Essay</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">Design an experiment to investigate how TEMPERATURE affects the rate at which amylase breaks down starch. Include: (a) a clear hypothesis, (b) independent, dependent, and control variables, (c) method (step by step), (d) expected results, (e) how you would make it a fair test. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Hypothesis: &#10;(b) Independent variable: &#10;    Dependent variable: &#10;    Control variables (at least 3): &#10;(c) Method: &#10;(d) Expected results: &#10;(e) Fair test measures: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Hypothesis:</strong> Amylase will break down starch fastest at 37°C (body temperature). Below this it will be slower (less kinetic energy); above it the enzyme will denature and stop working. (b) <strong>IV:</strong> temperature (e.g. 10, 20, 37, 50, 70°C). <strong>DV:</strong> time for iodine to stop turning blue-black (starch fully broken down). <strong>CV:</strong> concentration of amylase, concentration of starch solution, volume of each, pH buffer, same person timing. (c) <strong>Method:</strong> Prepare starch solution and amylase solution. Set water baths at each target temperature. Place both solutions in the water bath for 5 min to equilibrate. Mix equal volumes (e.g. 2ml each) in a test tube. Every 30 seconds, remove a drop and test with iodine on a spotting tile. Record when iodine stays orange-brown (no starch left). Repeat 3 times at each temperature. (d) <strong>Expected results:</strong> slowest at 10°C; faster at 20°C; fastest at 37°C; slower again at 50°C as enzyme begins to denature; no reaction at 70°C (fully denatured). (e) <strong>Fair test:</strong> same concentrations, same volumes, same timing method, repeated 3 times for reliability.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">FINAL SCIENTIFIC ESSAY: "Understanding digestion is not just biology — it is also about making better daily decisions." Evaluate this statement. Use everything you have learned in Week 4 Science to argue that scientific knowledge of digestion and nutrition directly changes how individuals and societies should act. Write at least 7 sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Introduction — what the statement claims: &#10;Argument 1 — individual decisions: &#10;Argument 2 — societal implications: &#10;Counter-argument (limits of knowledge alone): &#10;Conclusion: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Understanding digestion and nutrition has profound practical implications. At the individual level, knowing that enzymes function optimally at body temperature (37°C) explains why fever disrupts digestion; knowing the role of villi explains why fibre promotes gut health; knowing the macronutrient functions explains why eliminating entire food groups is dangerous. For teenagers, knowing that protein is essential for growth and iron for oxygen transport justifies eating varied, balanced meals rather than following restrictive trends. At a societal level, governments use nutritional science to design school lunch programmes, food labelling laws, and public health campaigns targeting deficiency diseases — all of which have measurably reduced conditions like scurvy and rickets in developed nations. However, scientific knowledge alone does not change behaviour — people also need access to affordable healthy food (a socioeconomic issue) and the motivation to act on knowledge. The statement is therefore partly right: understanding digestion is necessary but not sufficient — it must be combined with access, education, and motivation to truly improve daily decisions. Science provides the "why"; society must create the conditions for the "how."</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 3</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 44" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 3 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏆</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History · Week 4 · Day 3 — Consolidation</div>
+  <div class="hero-title">The Roman<br>Empire —<br>Full Review</div>
+  <div class="hero-subtitle">Speed facts · Cause &amp; effect · Cross-civilisation comparison · Extended essay</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Consolidation</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 44"></div>
+</div>
+<div class="week-summary">
+  <div class="week-summary-title">📋 Week 4 History — What We Covered</div>
+  <div class="week-summary-body">Day 1: Republic vs Empire · SPQR · Caesar's assassination and its irony · Roman Britain · Roman legacies. Day 2: Pax Romana · Roman social hierarchy · Reasons for the fall · East vs West · Cross-civilisation patterns (Greece → Rome). Day 3: Full consolidation — speed recall, cause-effect analysis, exam essay, and major cross-week synthesis.</div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — 10-question speed round. No notes.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚡ Speed Round</div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">1</div><div class="q-text">What does SPQR stand for? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>Senatus Populusque Romanus</strong> — "The Senate and People of Rome."</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">2</div><div class="q-text">When did Julius Caesar die? How? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>44 BC</strong> — assassinated by senators (stabbed at the Theatre of Pompey on the Ides of March).</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">3</div><div class="q-text">Who was Rome's first emperor and when did he take power? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>Augustus</strong> (formerly Octavian), from <strong>27 BC</strong>.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">4</div><div class="q-text">When did the Romans conquer Britain? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>43 AD</strong> — under Emperor Claudius.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">5</div><div class="q-text">What was Hadrian's Wall? When was it built? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">A defensive wall across northern Britain marking and defending the empire's northern frontier. Built <strong>122 AD</strong> under Emperor Hadrian.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">6</div><div class="q-text">When did the Western Roman Empire fall? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>476 AD</strong> — when the Germanic chieftain Odoacer deposed the last Western Emperor, Romulus Augustulus.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">7</div><div class="q-text">What is the "Pax Romana" and approximately how long did it last? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">"Roman Peace" — approximately <strong>200 years</strong> (27 BC – 180 AD) of relative internal stability in the empire.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">8</div><div class="q-text">Name the months named after Roman figures. <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body"><strong>July</strong> (Julius Caesar) and <strong>August</strong> (Augustus). Also: January (Janus), March (Mars), etc.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">9</div><div class="q-text">What is the historical irony of Caesar's assassination? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">The assassins killed Caesar to <strong>prevent one-man rule</strong> — but their action triggered civil wars that led to Augustus becoming the first emperor — exactly what they feared.</div></div>
+  <div class="q-block"><div class="q-num" style="background:#1E3A8A;">10</div><div class="q-text">How long did the Eastern Roman Empire continue after the West fell? <span class="marks">1</span></div><textarea class="q-input narrow" placeholder="Answer:"></textarea><div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div><div class="ma-body">Almost <strong>1,000 years</strong> — until 1453 AD when Constantinople fell to the Ottoman Turks.</div></div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Cause and effect analysis and cross-civilisation synthesis.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚖️ Cause, Effect &amp; Synthesis</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">11</div>
+    <div class="q-text">Complete this cause-and-effect chain for the fall of the Western Roman Empire. For each cause, explain its effect on Rome's stability: <span class="marks">6 marks</span></div>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="data-table" style="--accent-light:#93C5FD;">
+      <thead><tr><th>Cause</th><th>Effect on Rome</th><th>Significance (long-term result)</th></tr></thead>
+      <tbody>
+        <tr><td>Military overextension</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Political instability / 50+ emperors in 3rd century</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+        <tr><td>Economic weakness / inflation</td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td><td><input type="text" style="background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);width:100%;padding:4px;font-family:inherit;" placeholder="..."></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Military overextension:</strong> Effect — the army was spread too thinly across thousands of miles of border; no region could be properly defended. Significance — Germanic tribes (Visigoths, Vandals) were able to penetrate and eventually conquer Roman territory. <strong>Political instability:</strong> Effect — constant civil wars as military commanders competed for the throne; resources diverted from defence to internal conflict. Significance — no long-term planning or stable leadership possible; empire fragmented into competing factions. <strong>Economic weakness:</strong> Effect — governments debased the currency (reduced silver content in coins) causing inflation; high taxes squeezed farmers and merchants; trade declined. Significance — the tax base collapsed, making it impossible to fund the army or maintain infrastructure.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">12</div>
+    <div class="q-text">Three civilisations, three legacies. For each one, identify their MOST IMPORTANT single contribution to the modern world and explain specifically how we still experience it today: <span class="marks">6 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Weeks 2, 3, 4 History — Mesopotamia, Ancient Greece, Roman Empire. The biggest cross-topic question of the course so far.</div>
+    <textarea class="q-input wide" placeholder="Mesopotamia — most important legacy: &#10;How we still experience it: &#10;&#10;Ancient Greece — most important legacy: &#10;How we still experience it: &#10;&#10;Roman Empire — most important legacy: &#10;How we still experience it: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Mesopotamia — most important: <strong>Writing</strong> (cuneiform, c.3200 BC). Still experienced: every time we write, read, record data, or use a legal document, we are using a skill that originated in Mesopotamia — invented for trade records, now foundational to all human knowledge transfer. Ancient Greece — most important: <strong>Democracy and philosophical reasoning</strong>. Still experienced: most governments in the world claim democratic principles originating in Athens; courts use logic and evidence (Aristotle); universities teach systematic questioning (Socrates). Roman Empire — most important: <strong>Legal system and the concept of written public law</strong>. Still experienced: "innocent until proven guilty," right to representation, proportional punishment, codified civil and criminal law — all Roman legal innovations embedded in modern legal systems from the UK to the USA to Europe.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Final extended essay. This is your best historical writing of the week.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">✍️ Final Historical Essay</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">13</div>
+    <div class="q-text">"The Roman Empire was the most important civilisation in history." Drawing on your knowledge of Mesopotamia (Week 2), Ancient Greece (Week 3), and the Roman Empire (Week 4), write a fully developed argument EITHER agreeing OR disagreeing with this claim. Your essay must: (a) define what makes a civilisation "important," (b) make a clear argument with at least THREE specific pieces of evidence, (c) acknowledge and refute at least ONE counter-argument, (d) reach a clear and well-reasoned conclusion. Write at least 8 sentences. <span class="marks">15 marks</span></div>
+    <div class="q-hint">This is your final showcase essay for History this week. Take 5 minutes to plan before writing. A great essay does not just list facts — it ARGUES. Every sentence should be doing a job.</div>
+    <textarea class="q-input xwide" style="min-height:260px;" placeholder="PLAN: &#10;My position (agree / disagree): &#10;Definition of 'important': &#10;Evidence 1: &#10;Evidence 2: &#10;Evidence 3: &#10;Counter-argument I will address: &#10;My conclusion: &#10;&#10;FULL ESSAY:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Mark scheme — Level descriptors: <strong>Level 1 (1–5):</strong> Simple recall of facts about Rome with little argument or comparison. <strong>Level 2 (6–9):</strong> Makes a clear position, uses some evidence from multiple civilisations, addresses the question of "importance" but comparison is not fully developed. <strong>Level 3 (10–12):</strong> Sustained argument across all three civilisations, clear definition of "importance," counter-argument acknowledged, evidence specific and well-explained, conclusion that follows logically. <strong>Level 4 (13–15):</strong> Evaluative throughout — weighs evidence rather than just presenting it; makes a nuanced conclusion that recognises complexity (e.g. "importance" depends on what criteria you use — longevity? scale? ongoing legacy?); uses precise historical vocabulary; connects ideas between civilisations explicitly. A strong disagreement essay might argue that Mesopotamia's invention of writing, the wheel, and law codes were more "important" because all subsequent civilisations built on them — Rome included. A strong agreement essay would emphasise Rome's scale (50–70 million people, 3 continents), administrative sophistication, legal legacy, and the fact that its language (Latin) directly shaped most European languages.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History Day 3</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 47" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('pg-'+s).classList.add('active');document.querySelector('[data-s="'+s+'"]').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function toggleMA(btn){btn.classList.toggle('open');const body=btn.nextElementSibling;body.classList.toggle('visible');btn.querySelector('.arrow').style.transform=btn.classList.contains('open')?'rotate(180deg)':'rotate(0deg)';}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week4_Day3');</script>
+</body>
+</html>
