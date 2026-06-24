@@ -1,358 +1,430 @@
 /* ============================================================
-   HOS International — Worksheet Submission Helper
-   Saves student answers to Supabase so the teacher can review
-   them and leave corrections/feedback. Works with:
-   - Static worksheets (Day1/Day2/Day3 style)
-   - Dynamic worksheets (Interactive Lessons style)
-   Auto-save: 2 seconds after student stops typing + 30s fallback
+   HOS International — Worksheet Auto-Save
+   Everything a student does is saved silently and instantly.
+   Identity comes from the portal login (PIN) — no name entry needed.
+   Works with:
+     - Static day worksheets  → WorksheetSubmit.init('id')
+     - Interactive lessons    → WorksheetSubmit.initDynamic('id')
    ============================================================ */
 (function (global) {
   const SUPABASE_URL = 'https://ldftwnsixhgpfldhlkyq.supabase.co';
   const SUPABASE_KEY =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
 
-  const DEBOUNCE_DELAY   = 2000;
-  const FALLBACK_INTERVAL = 30000;
+  const DEBOUNCE_MS   = 1500;   // save 1.5s after last interaction
+  const FALLBACK_MS   = 20000;  // hard fallback save every 20s
 
-  const FIELD_SELECTOR =
-    'textarea, input:not([type="radio"]):not([type="checkbox"]):not([type="button"])' +
-    ':not([type="submit"]):not([type="file"]):not([type="hidden"]):not([type="image"])' +
-    ':not([readonly])';
-  const SCORE_SELECTOR = '[id$="-score"], [id$="-pct"], [id$="-fb"]';
-  // Button-based quiz games (buildQuiz/buildTF helpers used across the
-  // KS2_L3_WeekN_DayN.html "Quiz Games" pages) don't store the student's
-  // pick in any form field — the choice only ever lives in a JS closure
-  // and a CSS class on the clicked button. collectInteractions() below
-  // reads that DOM/class state so those answers get saved too.
-  const QUIZ_BOX_SELECTOR = '.quiz-box';
-  const TF_ITEM_SELECTOR = '.tf-item';
-
-  function injectStyles() {
-    if (document.getElementById('ws-style')) return;
-    const style = document.createElement('style');
-    style.id = 'ws-style';
-    style.textContent = `
-      #ws-submit-bar{position:fixed;bottom:0;left:0;right:0;background:#1E1B4B;color:#fff;
-        padding:10px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;z-index:99999;
-        font-family:'Nunito',sans-serif;box-shadow:0 -2px 12px rgba(0,0,0,0.25);}
-      #ws-submit-bar .ws-label{font-weight:800;font-size:0.85rem;}
-      #ws-submit-bar input{padding:8px 12px;border-radius:8px;border:none;font-weight:700;
-        font-family:'Nunito',sans-serif;min-width:170px;font-size:0.85rem;}
-      #ws-submit-bar .ws-btn{padding:8px 14px;border-radius:50px;border:none;color:#fff;
-        font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.85rem;}
-      #ws-submit-bar .ws-btn:hover{filter:brightness(1.12);}
-      #ws-load-btn{background:#0891B2;}
-      #ws-submit-btn{background:#059669;}
-      #ws-status{font-weight:700;font-size:0.82rem;}
-      #ws-autosave-indicator{font-size:0.75rem;font-weight:700;color:#A5F3FC;opacity:0;
-        transition:opacity 0.5s;}
-      #ws-autosave-indicator.show{opacity:1;}
-      .ws-feedback{margin-top:6px;padding:8px 12px;border-radius:10px;background:#ECFDF5;
-        border-left:4px solid #059669;font-size:0.85rem;font-weight:700;color:#065F46;
-        font-family:'Nunito',sans-serif;}
-      #ws-teacher-banner{background:#FFFBEB;border:2px solid #F59E0B;border-radius:12px;
-        padding:12px 16px;margin:12px auto;max-width:960px;font-weight:700;color:#92400E;
-        font-family:'Nunito',sans-serif;}
-    `;
-    document.head.appendChild(style);
+  // ── Who is logged in? ────────────────────────────────────────
+  // index.html writes this key when a student enters their PIN.
+  function getStudent() {
+    return localStorage.getItem('hos_active_student') || null;
   }
 
-  function buildBar() {
-    if (document.getElementById('ws-submit-bar')) return;
+  // ── Field selectors ─────────────────────────────────────────
+  // Covers typed inputs, textareas, match letter boxes, order number boxes.
+  // Excludes buttons, hidden, file, image, and readonly fields.
+  const FIELD_SEL =
+    'textarea,' +
+    'input:not([type="radio"]):not([type="checkbox"]):not([type="button"])' +
+    ':not([type="submit"]):not([type="file"]):not([type="hidden"])' +
+    ':not([type="image"]):not([type="reset"]):not([readonly])';
+
+  // ── Styles ───────────────────────────────────────────────────
+  function injectStyles() {
+    if (document.getElementById('ws-style')) return;
+    const s = document.createElement('style');
+    s.id = 'ws-style';
+    s.textContent = `
+      #ws-bar {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        background: #1E1B4B; color: #fff;
+        padding: 9px 16px;
+        display: flex; align-items: center; gap: 10px;
+        z-index: 99999; font-family: 'Nunito', sans-serif;
+        box-shadow: 0 -2px 12px rgba(0,0,0,.3);
+        font-size: 0.82rem; font-weight: 700;
+      }
+      #ws-who { font-weight: 900; color: #A5F3FC; font-size: 0.88rem; }
+      #ws-indicator {
+        margin-left: auto; font-size: 0.78rem; font-weight: 800;
+        color: #6EE7B7; opacity: 0; transition: opacity 0.4s;
+      }
+      #ws-indicator.show { opacity: 1; }
+      #ws-indicator.saving { color: #FCD34D; opacity: 1; }
+      .ws-feedback {
+        margin-top: 6px; padding: 8px 12px; border-radius: 10px;
+        background: #ECFDF5; border-left: 4px solid #059669;
+        font-size: 0.85rem; font-weight: 700; color: #065F46;
+        font-family: 'Nunito', sans-serif;
+      }
+      #ws-teacher-banner {
+        background: #FFFBEB; border: 2px solid #F59E0B; border-radius: 12px;
+        padding: 12px 16px; margin: 12px auto; max-width: 960px;
+        font-weight: 700; color: #92400E; font-family: 'Nunito', sans-serif;
+      }
+    `;
+    document.head.appendChild(s);
+  }
+
+  function buildBar(studentName) {
+    if (document.getElementById('ws-bar')) return;
     injectStyles();
     const bar = document.createElement('div');
-    bar.id = 'ws-submit-bar';
+    bar.id = 'ws-bar';
     bar.innerHTML = `
-      <span class="ws-label">👤 Your name:</span>
-      <input id="ws-student-name" placeholder="Type your full name" />
-      <button id="ws-load-btn" class="ws-btn">📥 Load my saved work</button>
-      <button id="ws-submit-btn" class="ws-btn">✅ Submit my work</button>
-      <span id="ws-status"></span>
-      <span id="ws-autosave-indicator">💾 Saved</span>
+      <span>👤 Logged in as</span>
+      <span id="ws-who">${studentName}</span>
+      <span id="ws-indicator">💾 Saved</span>
     `;
     document.body.appendChild(bar);
     document.body.style.paddingBottom =
-      (parseInt(getComputedStyle(document.body).paddingBottom) || 0) + 70 + 'px';
+      (parseInt(getComputedStyle(document.body).paddingBottom) || 0) + 52 + 'px';
   }
 
   function flashSaved() {
-    const el = document.getElementById('ws-autosave-indicator');
+    const el = document.getElementById('ws-indicator');
     if (!el) return;
-    el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 2000);
+    el.textContent = '💾 Saved';
+    el.className = 'show';
+    setTimeout(() => { el.className = ''; }, 2000);
   }
 
+  function flashSaving() {
+    const el = document.getElementById('ws-indicator');
+    if (!el) return;
+    el.textContent = '⏳ Saving…';
+    el.className = 'saving';
+  }
+
+  // ── Label finder ─────────────────────────────────────────────
   function getLabel(el) {
-    const containerSelectors = ['.analysis-box', '.q-block', '.fill-row', '.tf-row', '.callout', '.ws-header'];
-    const labelSelectors = ['.analysis-q', '.q-text', 'label', '.callout-text', '.tf-stmt', '.q-num'];
-    for (const sel of containerSelectors) {
-      const c = el.closest(sel);
+    const containerSels = ['.q-block', '.analysis-box', '.fill-row', '.tf-row',
+                           '.callout', '.ws-header', '.match-term', '.order-item',
+                           '.card', '.step', '.blank-sentence'];
+    const labelSels    = ['.q-text', '.analysis-q', 'label', '.callout-text',
+                          '.tf-stmt', '.q-num', '.match-def', '.order-text'];
+    for (const cs of containerSels) {
+      const c = el.closest(cs);
       if (c) {
-        for (const lsel of labelSelectors) {
-          const lbl = c.querySelector(lsel);
+        for (const ls of labelSels) {
+          const lbl = c.querySelector(ls);
           if (lbl) {
             const t = lbl.textContent.trim().replace(/\s+/g, ' ');
             if (t) return t.slice(0, 160);
           }
         }
+        // fallback: use the container's own text (minus the input's value)
+        const clone = c.cloneNode(true);
+        clone.querySelectorAll('input,textarea,button').forEach(n => n.remove());
+        const t = clone.textContent.trim().replace(/\s+/g, ' ');
+        if (t) return t.slice(0, 160);
       }
     }
     if (el.placeholder) return el.placeholder.trim().slice(0, 160);
+    if (el.id) return el.id;
     return null;
   }
 
+  // ── Collect typed/written fields ─────────────────────────────
   function collectFields(root) {
     const scope = root || document;
     const fields = [];
-    scope.querySelectorAll(FIELD_SELECTOR).forEach((el, i) => {
-      const key = el.id || ('f' + i);
-      const label = getLabel(el) || ('Answer ' + (i + 1));
-      fields.push({ key, label, el });
+    scope.querySelectorAll(FIELD_SEL).forEach((el, i) => {
+      fields.push({
+        key:   el.id || ('f_' + i),
+        label: getLabel(el) || ('Field ' + (i + 1)),
+        el,
+      });
     });
     return fields;
   }
 
-  function collectScores() {
-    const scores = {};
-    document.querySelectorAll(SCORE_SELECTOR).forEach((el) => {
-      const t = el.textContent.trim();
-      if (t) scores[el.id] = t;
-    });
-    return scores;
-  }
-
-  // Reads answered multiple-choice quizzes (buildQuiz pattern) and
-  // True/False items (buildTF pattern) out of the DOM, since neither
-  // stores its answer in a savable <input>/<textarea>.
-  function collectInteractions(root) {
+  // ── Collect MCQ button clicks ────────────────────────────────
+  // buildQuiz() marks chosen option with .wrong or .correct class.
+  function collectMCQ(root) {
     const scope = root || document;
     const items = [];
-
-    scope.querySelectorAll(QUIZ_BOX_SELECTOR).forEach((box, qi) => {
+    scope.querySelectorAll('.quiz-box').forEach((box, qi) => {
       const opts = Array.from(box.querySelectorAll('.quiz-opt'));
-      if (!opts.length || !opts[0].disabled) return; // not answered yet
-      const qText = (box.querySelector('.quiz-q') || {}).textContent || '';
-      const wrongBtn = opts.find((o) => o.classList.contains('wrong'));
-      const correctBtn = opts.find((o) => o.classList.contains('correct'));
+      // options get disabled once answered
+      const answered = opts.some(o => o.disabled || o.classList.contains('wrong') || o.classList.contains('correct'));
+      if (!answered) return;
+      const wrongBtn   = opts.find(o => o.classList.contains('wrong'));
+      const correctBtn = opts.find(o => o.classList.contains('correct'));
       const chosen = wrongBtn || correctBtn;
       if (!chosen) return;
+      const qText = (box.querySelector('.quiz-q') || {}).textContent || '';
       const container = box.closest('[id]');
-      const idBase = container ? container.id : 'quizbox' + qi;
+      const key = 'mcq__' + (container ? container.id : 'box') + '__q' + qi;
       items.push({
-        key: 'mcq__' + idBase + '__q' + qi,
-        label: 'Quiz — ' + (qText.trim().slice(0, 160) || 'Question ' + (qi + 1)),
-        value: chosen.textContent.trim() + (wrongBtn ? ' (incorrect)' : ' (correct)'),
+        key,
+        label: 'MCQ — ' + (qText.trim().slice(0, 160) || 'Question ' + (qi + 1)),
+        value: chosen.textContent.trim() +
+               (wrongBtn ? ' ✗ (incorrect)' : ' ✓ (correct)'),
       });
     });
+    return items;
+  }
 
-    scope.querySelectorAll(TF_ITEM_SELECTOR).forEach((item, ti) => {
+  // ── Collect True/False button clicks ─────────────────────────
+  // buildTF() marks chosen button with .selected-t or .selected-f.
+  function collectTF(root) {
+    const scope = root || document;
+    const items = [];
+    scope.querySelectorAll('.tf-item').forEach((item, ti) => {
       const tBtn = item.querySelector('.tf-btn.selected-t');
       const fBtn = item.querySelector('.tf-btn.selected-f');
-      if (!tBtn && !fBtn) return; // not answered yet
-      const stmt = (item.querySelector('.tf-statement') || {}).textContent || '';
+      if (!tBtn && !fBtn) return;
+      const stmt = (item.querySelector('.tf-statement, .tf-stmt') || {}).textContent || '';
       items.push({
-        key: 'tf__' + (item.id || 'tfitem' + ti),
+        key:   'tf__' + (item.id || 'tfitem_' + ti),
         label: 'True/False — ' + (stmt.trim().slice(0, 160) || 'Statement ' + (ti + 1)),
         value: tBtn ? 'True' : 'False',
       });
     });
-
     return items;
   }
 
-  async function fetchSubmission(name, worksheetId) {
-    const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?student_name=eq.${encodeURIComponent(
-      name
-    )}&worksheet_id=eq.${encodeURIComponent(worksheetId)}&select=*`;
-    const res = await fetch(url, {
-      headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY },
+  // ── Collect sort/categorise game state ───────────────────────
+  // sortWords game stores correct/incorrect in DOM after each card.
+  function collectSortGame(root) {
+    const scope = root || document;
+    const items = [];
+    scope.querySelectorAll('#sort-game .sort-result, #sort-game [data-word]').forEach((el, i) => {
+      const word  = el.dataset.word || el.textContent.trim();
+      const result = el.dataset.result || (el.classList.contains('correct') ? 'correct' : el.classList.contains('wrong') ? 'wrong' : null);
+      if (!word || !result) return;
+      items.push({
+        key:   'sort__' + i,
+        label: 'Sort — ' + word,
+        value: result,
+      });
     });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data[0] || null;
+    return items;
   }
 
-  async function saveSubmission(name, worksheetId, answers, scores) {
-    const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?on_conflict=student_name,worksheet_id`;
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        apikey: SUPABASE_KEY,
-        Authorization: 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': 'application/json',
-        Prefer: 'resolution=merge-duplicates,return=representation',
-      },
-      body: JSON.stringify([{
-        student_name: name,
-        worksheet_id: worksheetId,
-        answers: answers,
-        scores: scores,
-        submitted_at: new Date().toISOString(),
-      }]),
+  // ── Build answers object ──────────────────────────────────────
+  function buildAnswers(root) {
+    const answers = {};
+    collectFields(root).forEach(f => {
+      answers[f.key] = { label: f.label, value: f.el.value };
     });
-    return res.ok;
+    collectMCQ(root).forEach(it => {
+      answers[it.key] = { label: it.label, value: it.value };
+    });
+    collectTF(root).forEach(it => {
+      answers[it.key] = { label: it.label, value: it.value };
+    });
+    collectSortGame(root).forEach(it => {
+      answers[it.key] = { label: it.label, value: it.value };
+    });
+    return answers;
   }
 
+  // ── Supabase ─────────────────────────────────────────────────
+  const HEADERS = {
+    apikey:        SUPABASE_KEY,
+    Authorization: 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json',
+  };
+
+  async function dbFetch(studentName, worksheetId) {
+    const url = SUPABASE_URL +
+      '/rest/v1/worksheet_submissions?student_name=eq.' +
+      encodeURIComponent(studentName) +
+      '&worksheet_id=eq.' + encodeURIComponent(worksheetId) + '&select=*';
+    try {
+      const res = await fetch(url, { headers: HEADERS });
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data[0] || null;
+    } catch { return null; }
+  }
+
+  async function dbSave(studentName, worksheetId, answers) {
+    const url = SUPABASE_URL +
+      '/rest/v1/worksheet_submissions?on_conflict=student_name,worksheet_id';
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { ...HEADERS, Prefer: 'resolution=merge-duplicates,return=representation' },
+        body: JSON.stringify([{
+          student_name:  studentName,
+          worksheet_id:  worksheetId,
+          answers,
+          scores:        {},
+          submitted_at:  new Date().toISOString(),
+        }]),
+      });
+      return res.ok;
+    } catch { return false; }
+  }
+
+  // ── Restore saved typed answers ───────────────────────────────
   function restoreFields(answers, root) {
-    const fields = collectFields(root);
-    fields.forEach((f) => {
-      if (answers && answers[f.key] && answers[f.key].value !== undefined) {
+    collectFields(root).forEach(f => {
+      if (answers[f.key] && answers[f.key].value !== undefined) {
         f.el.value = answers[f.key].value;
       }
     });
   }
 
-  function showTeacherNotes(teacherNotes) {
+  // ── Teacher notes banner ─────────────────────────────────────
+  function showTeacherNotes(notes) {
     const existing = document.getElementById('ws-teacher-banner');
     if (existing) existing.remove();
-    if (teacherNotes) {
-      const banner = document.createElement('div');
-      banner.id = 'ws-teacher-banner';
-      banner.innerHTML = `📝 <strong>Note from your teacher:</strong> ${teacherNotes}`;
-      document.body.insertBefore(banner, document.body.firstChild);
-    }
+    if (!notes) return;
+    const banner = document.createElement('div');
+    banner.id = 'ws-teacher-banner';
+    banner.innerHTML = '📋 <strong>Teacher note:</strong> ' + notes;
+    document.body.prepend(banner);
   }
 
+  // ── Feedback on individual fields ────────────────────────────
   function showFeedback(feedback, root) {
     const scope = root || document;
-    scope.querySelectorAll('.ws-feedback').forEach((e) => e.remove());
-    const fields = collectFields(root);
-    fields.forEach((f) => {
-      if (feedback && feedback[f.key]) {
+    scope.querySelectorAll('.ws-feedback').forEach(el => el.remove());
+    Object.entries(feedback || {}).forEach(([key, text]) => {
+      const el = scope.querySelector('#' + CSS.escape(key));
+      if (el && text) {
         const note = document.createElement('div');
         note.className = 'ws-feedback';
-        note.textContent = '📝 Teacher: ' + feedback[f.key];
-        f.el.insertAdjacentElement('afterend', note);
+        note.textContent = '📝 ' + text;
+        el.insertAdjacentElement('afterend', note);
       }
     });
   }
 
-  function debounce(fn, delay) {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => fn.apply(this, args), delay);
-    };
+  // ── Debounce ─────────────────────────────────────────────────
+  function debounce(fn, ms) {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
   }
 
+  // ════════════════════════════════════════════════════════════
+  // init() — static day worksheets
+  // ════════════════════════════════════════════════════════════
   function init(worksheetId) {
-    buildBar();
-    const nameInput = document.getElementById('ws-student-name');
-    nameInput.value = localStorage.getItem('hos_student_name') || '';
-    const statusEl = document.getElementById('ws-status');
-
-    async function doLoad(silent) {
-      const name = nameInput.value.trim();
-      if (!name) {
-        if (!silent) statusEl.textContent = '⚠️ Type your name first';
-        return;
-      }
-      localStorage.setItem('hos_student_name', name);
-      if (!silent) statusEl.textContent = 'Loading…';
-      const sub = await fetchSubmission(name, worksheetId);
-      if (!sub) {
-        if (!silent) statusEl.textContent = 'No saved work found yet — start filling it in!';
-        return;
-      }
-      restoreFields(sub.answers || {});
-      showTeacherNotes(sub.teacher_notes);
-      showFeedback(sub.feedback || {});
-      statusEl.textContent =
-        '✅ Loaded your saved work (last saved ' +
-        new Date(sub.submitted_at).toLocaleString() + ')';
+    const studentName = getStudent();
+    if (!studentName) {
+      // Not logged in — show a gentle nudge but don't break the page
+      injectStyles();
+      const bar = document.createElement('div');
+      bar.id = 'ws-bar';
+      bar.innerHTML = `<span style="color:#FCA5A5">⚠️ Please log in via the portal first so your work can be saved.</span>`;
+      document.body.appendChild(bar);
+      document.body.style.paddingBottom =
+        (parseInt(getComputedStyle(document.body).paddingBottom) || 0) + 52 + 'px';
+      return;
     }
 
-    async function doSave(silent) {
-      const name = nameInput.value.trim();
-      if (!name) return;
-      localStorage.setItem('hos_student_name', name);
-      const fields = collectFields();
-      const answers = {};
-      fields.forEach((f) => {
-        answers[f.key] = { label: f.label, value: f.el.value };
-      });
-      collectInteractions().forEach((it) => {
-        answers[it.key] = { label: it.label, value: it.value };
-      });
-      const scores = collectScores();
-      const ok = await saveSubmission(name, worksheetId, answers, scores);
-      if (ok && silent)  { flashSaved(); }
-      if (ok && !silent) { statusEl.textContent = '✅ Submitted! Your teacher can now see your work.'; }
+    buildBar(studentName);
+    const indicator = document.getElementById('ws-indicator');
+
+    // Save function — always silent
+    async function save() {
+      flashSaving();
+      const answers = buildAnswers();
+      const ok = await dbSave(studentName, worksheetId, answers);
+      if (ok) flashSaved();
+      else if (indicator) { indicator.textContent = '⚠️ Save failed'; indicator.className = 'show'; }
     }
 
-    const debouncedSave = debounce(() => doSave(true), DEBOUNCE_DELAY);
+    const debouncedSave = debounce(save, DEBOUNCE_MS);
 
+    // Attach input listeners to all typed fields
     function attachListeners() {
-      document.querySelectorAll(FIELD_SELECTOR).forEach((el) => {
-        el.addEventListener('input', debouncedSave);
+      document.querySelectorAll(FIELD_SEL).forEach(el => {
+        if (!el._wsBound) {
+          el.addEventListener('input', debouncedSave);
+          el._wsBound = true;
+        }
       });
     }
     attachListeners();
 
-    // Quiz-option and True/False buttons don't fire 'input' events, and
-    // buildQuiz/buildTF re-render their containers' innerHTML on every
-    // click — so a single delegated listener on the document (rather
-    // than per-button listeners that would get wiped out on re-render)
-    // catches every answer as soon as it's chosen.
-    document.body.addEventListener('click', (e) => {
-      if (e.target.closest('.quiz-opt') || e.target.closest('.tf-btn')) {
-        debouncedSave();
+    // Catch MCQ, True/False, and any other button-based interactions
+    document.body.addEventListener('click', e => {
+      if (
+        e.target.closest('.quiz-opt') ||
+        e.target.closest('.tf-btn') ||
+        e.target.closest('.sort-btn') ||
+        e.target.closest('.circle-opt') ||
+        e.target.closest('.match-check-btn')
+      ) {
+        // small delay so DOM state updates before we read it
+        setTimeout(debouncedSave, 100);
       }
     });
 
-    const observer = new MutationObserver(() => attachListeners());
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Re-attach when DOM mutates (buildQuiz/buildTF re-render innerHTML)
+    new MutationObserver(attachListeners)
+      .observe(document.body, { childList: true, subtree: true });
 
-    document.getElementById('ws-load-btn').onclick  = () => doLoad(false);
-    document.getElementById('ws-submit-btn').onclick = () => doSave(false);
+    // Hard fallback every 20s
+    setInterval(save, FALLBACK_MS);
 
-    setInterval(() => { if (nameInput.value.trim()) doSave(true); }, FALLBACK_INTERVAL);
-
-    if (nameInput.value) doLoad(true);
+    // Load previous work on open
+    (async () => {
+      const sub = await dbFetch(studentName, worksheetId);
+      if (!sub) return;
+      restoreFields(sub.answers || {});
+      showTeacherNotes(sub.teacher_notes);
+      showFeedback(sub.feedback || {});
+      if (indicator) {
+        indicator.textContent = '✅ Loaded';
+        indicator.className = 'show';
+        setTimeout(() => { indicator.className = ''; }, 3000);
+      }
+    })();
   }
 
+  // ════════════════════════════════════════════════════════════
+  // initDynamic() — interactive/writing lessons (multi-subject tabs)
+  // ════════════════════════════════════════════════════════════
   function initDynamic(worksheetId) {
-    buildBar();
-    const nameInput = document.getElementById('ws-student-name');
-    nameInput.value = localStorage.getItem('hos_student_name') || '';
-    const statusEl = document.getElementById('ws-status');
+    const studentName = getStudent();
+    if (!studentName) {
+      injectStyles();
+      const bar = document.createElement('div');
+      bar.id = 'ws-bar';
+      bar.innerHTML = `<span style="color:#FCA5A5">⚠️ Please log in via the portal first so your work can be saved.</span>`;
+      document.body.appendChild(bar);
+      document.body.style.paddingBottom =
+        (parseInt(getComputedStyle(document.body).paddingBottom) || 0) + 52 + 'px';
+      return;
+    }
+
+    buildBar(studentName);
+    const indicator = document.getElementById('ws-indicator');
 
     global.__wsAnswers = global.__wsAnswers || {};
-    let __wsFeedback = {};
 
     function currentPageKey() {
-      return currentSubject + '_' + currentWS[currentSubject];
+      return (global.currentSubject || 'page') + '_' + ((global.currentWS && global.currentWS[global.currentSubject]) || '0');
     }
 
     let lastPageKey = currentPageKey();
 
     function capturePage(pageKey) {
-      const fields = collectFields(document.getElementById('pages'));
-      fields.forEach((f) => {
-        const k = pageKey + '__' + f.key;
-        global.__wsAnswers[k] = { label: f.label, value: f.el.value };
-      });
-      collectInteractions(document.getElementById('pages')).forEach((it) => {
-        const k = pageKey + '__' + it.key;
-        global.__wsAnswers[k] = { label: it.label, value: it.value };
+      const pagesEl = document.getElementById('pages');
+      const answers = buildAnswers(pagesEl);
+      Object.entries(answers).forEach(([k, v]) => {
+        global.__wsAnswers[pageKey + '__' + k] = v;
       });
     }
 
     function applyPage() {
       const pagesEl = document.getElementById('pages');
-      const fields = collectFields(pagesEl);
+      if (!pagesEl) return;
       const prefix = currentPageKey() + '__';
-      const fb = {};
-      fields.forEach((f) => {
-        const k = prefix + f.key;
-        if (global.__wsAnswers[k] && global.__wsAnswers[k].value !== undefined) {
-          f.el.value = global.__wsAnswers[k].value;
-        }
-        if (__wsFeedback[k]) fb[f.key] = __wsFeedback[k];
+      collectFields(pagesEl).forEach(f => {
+        const saved = global.__wsAnswers[prefix + f.key];
+        if (saved && saved.value !== undefined) f.el.value = saved.value;
       });
-      showFeedback(fb, pagesEl);
     }
 
+    // Hook into renderAll so we capture before switching page
     const origRenderAll = global.renderAll;
     global.renderAll = function () {
       capturePage(lastPageKey);
@@ -362,71 +434,67 @@
       attachDynamicListeners();
     };
 
-    async function doLoad(silent) {
-      const name = nameInput.value.trim();
-      if (!name) {
-        if (!silent) statusEl.textContent = '⚠️ Type your name first';
-        return;
-      }
-      localStorage.setItem('hos_student_name', name);
-      if (!silent) statusEl.textContent = 'Loading…';
-      const sub = await fetchSubmission(name, worksheetId);
-      if (!sub) {
-        if (!silent) statusEl.textContent = 'No saved work found yet — start filling it in!';
-        return;
-      }
-      global.__wsAnswers = sub.answers || {};
-      __wsFeedback = sub.feedback || {};
-      showTeacherNotes(sub.teacher_notes);
-      applyPage();
-      statusEl.textContent =
-        '✅ Loaded your saved work (last saved ' +
-        new Date(sub.submitted_at).toLocaleString() +
-        '). Switch between subjects/lessons to see all of it.';
-    }
-
-    async function doSave(silent) {
-      const name = nameInput.value.trim();
-      if (!name) return;
-      localStorage.setItem('hos_student_name', name);
+    async function save() {
+      flashSaving();
       capturePage(lastPageKey);
-      const ok = await saveSubmission(name, worksheetId, global.__wsAnswers, {});
-      if (ok && silent)  { flashSaved(); }
-      if (ok && !silent) { statusEl.textContent = '✅ Submitted! Your teacher can now see your work from every subject and lesson you visited.'; }
+      const ok = await dbSave(studentName, worksheetId, global.__wsAnswers);
+      if (ok) flashSaved();
+      else if (indicator) { indicator.textContent = '⚠️ Save failed'; indicator.className = 'show'; }
     }
 
-    const debouncedSave = debounce(() => doSave(true), DEBOUNCE_DELAY);
+    const debouncedSave = debounce(save, DEBOUNCE_MS);
 
     function attachDynamicListeners() {
       const pagesEl = document.getElementById('pages');
       if (!pagesEl) return;
-      pagesEl.querySelectorAll(FIELD_SELECTOR).forEach((el) => {
-        el.addEventListener('input', debouncedSave);
+      pagesEl.querySelectorAll(FIELD_SEL).forEach(el => {
+        if (!el._wsBound) {
+          el.addEventListener('input', debouncedSave);
+          el._wsBound = true;
+        }
       });
     }
     attachDynamicListeners();
 
-    document.body.addEventListener('click', (e) => {
-      if (e.target.closest('.quiz-opt') || e.target.closest('.tf-btn')) {
-        debouncedSave();
+    document.body.addEventListener('click', e => {
+      if (
+        e.target.closest('.quiz-opt') ||
+        e.target.closest('.tf-btn') ||
+        e.target.closest('.sort-btn') ||
+        e.target.closest('.circle-opt') ||
+        e.target.closest('.match-check-btn')
+      ) {
+        setTimeout(debouncedSave, 100);
       }
     });
 
-    document.getElementById('ws-load-btn').onclick  = () => doLoad(false);
-    document.getElementById('ws-submit-btn').onclick = () => doSave(false);
+    new MutationObserver(attachDynamicListeners)
+      .observe(document.body, { childList: true, subtree: true });
 
-    setInterval(() => { if (nameInput.value.trim()) doSave(true); }, FALLBACK_INTERVAL);
+    setInterval(save, FALLBACK_MS);
 
-    if (nameInput.value) doLoad(true);
+    // Load previous work on open
+    (async () => {
+      const sub = await dbFetch(studentName, worksheetId);
+      if (!sub) return;
+      global.__wsAnswers = sub.answers || {};
+      showTeacherNotes(sub.teacher_notes);
+      applyPage();
+      if (indicator) {
+        indicator.textContent = '✅ Loaded';
+        indicator.className = 'show';
+        setTimeout(() => { indicator.className = ''; }, 3000);
+      }
+    })();
   }
 
+  // ── Public API ────────────────────────────────────────────────
   global.WorksheetSubmit = {
     init,
     initDynamic,
     collectFields,
-    collectScores,
-    fetchSubmission,
-    saveSubmission,
+    fetchSubmission: dbFetch,
+    saveSubmission:  dbSave,
     restoreFields,
     showFeedback,
   };

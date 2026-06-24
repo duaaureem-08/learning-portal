@@ -496,6 +496,12 @@ d.classList.remove('error');
 function checkPin() {
 if (currentPin === PINS[currentTarget]) {
 unlocked[currentTarget] = true;
+// store who is logged in so worksheet files opened in new tabs can identify the student
+if (currentTarget !== 'teacher') {
+  localStorage.setItem('hos_active_student', NAMES[currentTarget]);
+} else {
+  localStorage.removeItem('hos_active_student');
+}
 // mark button as unlocked
 const btn = document.querySelector('.stu-'+currentTarget);
 if (btn) { btn.classList.remove('locked'); btn.classList.add('unlocked'); }
@@ -522,6 +528,8 @@ document.getElementById('panel-'+who).scrollIntoView({behavior:'smooth',block:'s
 
 function lockPanel(who) {
 unlocked[who] = false;
+// clear active student so worksheets don't keep saving under their name after logout
+localStorage.removeItem('hos_active_student');
 const btn = document.querySelector('.stu-'+who);
 if (btn) { btn.classList.add('locked'); btn.classList.remove('unlocked','active'); }
 document.getElementById('panel-'+who).classList.remove('active');
