@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 — Day 2 Challenge Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#FEE2E2;color:#7F1D1D;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #DC2626;margin-right:8px;}
+
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn .emoji{font-size:1.1rem;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+
+.challenge-banner{background:linear-gradient(135deg,#7F1D1D,#DC2626);color:white;border-radius:var(--radius-sm);padding:12px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;}
+
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.card-title{font-family:'Fredoka One',cursive;font-size:1.3rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+
+.open-box{width:100%;min-height:100px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.open-box.tall{min-height:140px;}
+
+.analysis-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.analysis-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.analysis-table td{padding:10px 14px;border:1px solid #E5E7EB;font-size:0.88rem;vertical-align:top;}
+.analysis-table tr:nth-child(even) td{background:#F8FAFF;}
+.analysis-table textarea{width:100%;min-height:70px;padding:8px;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:0.88rem;resize:vertical;}
+.analysis-table textarea:focus{outline:2px solid var(--accent,#888);border-radius:6px;}
+
+.vocab-challenge-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;}
+.vcc{background:#F8FAFF;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px;}
+.vcc label{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);display:block;margin-bottom:4px;}
+.vcc textarea{width:100%;min-height:60px;padding:6px;border-radius:6px;border:1.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.85rem;resize:none;}
+.vcc textarea:focus{outline:none;border-color:var(--accent,#888);}
+
+.passage-box{background:linear-gradient(135deg,#F8FAFF,#EFF6FF);border-radius:var(--radius-sm);padding:18px 22px;border-left:4px solid var(--accent,#888);margin:14px 0;font-style:italic;font-size:0.95rem;line-height:1.7;}
+
+.step-list{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+.step-item{display:flex;gap:12px;background:#F8FAFF;border-radius:var(--radius-sm);padding:12px 16px;border:2px solid #E5E7EB;}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--accent,#888);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9rem;flex-shrink:0;}
+.step-content{flex:1;}
+.step-q{font-weight:800;font-size:0.92rem;margin-bottom:6px;}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;width:100%;margin-bottom:8px;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;}
+
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:top;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.correction-box{width:100%;margin-top:4px;padding:6px 8px;border-radius:6px;border:1.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.82rem;}
+
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+
+@media(max-width:600px){
+  .hero-title{font-size:1.6rem;}
+  .hero-emoji{display:none;}
+  .card{padding:16px;}
+  .vocab-challenge-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">⚠️ Day 2 — Challenge</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span class="emoji">📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span class="emoji">✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span class="emoji">🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span class="emoji">🌱</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span class="emoji">🏘️</span> Social Studies</button>
+</div>
+
+<!-- ═══════════ BIBLE CHALLENGE ═══════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">📖 Bible · Week 5</div>
+    <div class="hero-title">Noah's Ark &amp;<br>God's Covenant</div>
+    <div class="hero-sub">Genesis 6–9 · Deep analysis · Isaiah 54:10 · Critical thinking</div>
+    <div class="hero-emoji">🌈</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 5 topics, harder questions. Read carefully. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary: Use Each Word in a Sentence <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Do NOT just define the word. Write a complete sentence that <strong>shows</strong> you understand its meaning.</p>
+    <div class="vocab-challenge-grid">
+      <div class="vcc"><label>Covenant</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Righteous</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Faith</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Wicked</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Obedience</label><textarea placeholder="Write a sentence…"></textarea></div>
+    </div>
+    <div style="margin-top:12px;">
+      <button class="audio-btn" onclick="speak('Covenant means a special promise that God makes and will never break. Righteous means living in a way that pleases God. Faith means trusting God even when you cannot see the answer. Wicked means choosing to do wrong things. Obedience means doing what you are told without argument.')">🔊 Hear all definitions</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — The Story: Analysis &amp; Evidence <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Read this passage from Genesis 6. Then answer ALL questions below:</p>
+    <div class="passage-box">
+      "The Lord saw how great the wickedness of the human race had become on the earth, and that every inclination of the thoughts of the human heart was only evil all the time. The Lord regretted that he had made human beings on the earth, and his heart was deeply troubled. But Noah found favour in the eyes of the Lord." — Genesis 6:5–6, 8
+    </div>
+    <table class="analysis-table">
+      <tr><th>Question</th><th>Your answer — use evidence from the passage</th></tr>
+      <tr><td style="width:40%;">a) The passage says "every inclination of the thoughts of the human heart was only evil all the time." What does this tell us about how serious the problem of sin had become?</td><td><textarea placeholder="Use the passage to support your answer…"></textarea></td></tr>
+      <tr><td>b) God "regretted" making humans and was "deeply troubled." What does this tell us about God's feelings? Does this mean God made a mistake?</td><td><textarea placeholder="Think carefully — God is all-knowing…"></textarea></td></tr>
+      <tr><td>c) "But Noah found favour in the eyes of the Lord." Why is the word "But" so important here? What effect does it have on the reader?</td><td><textarea placeholder="Think about what 'but' does in a sentence…"></textarea></td></tr>
+      <tr><td>d) God gave Noah very specific instructions (exact measurements, materials, rooms). What does this tell us about God's plan? Was the flood an accident?</td><td><textarea placeholder="Think about the detail God gave Noah…"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Compare each character's choice and consequence:</p>
+    <table class="analysis-table">
+      <tr><th>Character</th><th>Choice they made</th><th>Consequence they received</th></tr>
+      <tr><td><strong>Noah</strong></td><td><textarea style="min-height:50px;" placeholder="What did Noah choose to do?"></textarea></td><td><textarea style="min-height:50px;" placeholder="What happened to Noah?"></textarea></td></tr>
+      <tr><td><strong>The wicked people</strong></td><td><textarea style="min-height:50px;" placeholder="What did they choose?"></textarea></td><td><textarea style="min-height:50px;" placeholder="What happened to them?"></textarea></td></tr>
+      <tr><td><strong>The animals</strong></td><td><textarea style="min-height:50px;" placeholder="Did the animals choose? Why were they affected?"></textarea></td><td><textarea style="min-height:50px;" placeholder="What happened to the animals on the ark?"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Isaiah 54:10 says: <em>"Though the mountains be shaken and the hills be removed, yet my unfailing love for you will not be shaken."</em> Using the story of Noah, give TWO specific examples from Genesis 6–9 where God showed He still cared even in the middle of judgement. Connect each example to Isaiah 54:10.</div>
+          <textarea class="open-box tall" placeholder="Example 1:&#10;&#10;Example 2:&#10;&#10;Connection to Isaiah 54:10:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A classmate says: <em>"Noah was just lucky — God picked him by chance."</em> Do you agree or disagree? Write a careful argument using: (a) what "righteous" means, (b) what Noah DID when God told him to build the ark, and (c) what Hebrews 11:7 tells us ("By faith Noah... built an ark to save his family"). Write at least FOUR sentences.</div>
+          <textarea class="open-box tall" placeholder="Write your argument here…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED RESPONSE: The rainbow is God's sign of the covenant — a permanent, visible promise in the sky. Think about what this teaches us about the KIND of God the Bible describes. Write a paragraph giving at least THREE points about God's character shown through the story of Noah and the covenant. Connect to Romans 5:8 ("While we were still sinners, Christ died for us").</div>
+          <textarea class="open-box" style="min-height:160px;" placeholder="Point 1:&#10;&#10;Point 2:&#10;&#10;Point 3:&#10;&#10;Connection to Romans 5:8:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;">Click TRUE or FALSE. If FALSE, write the correct answer below.</p>
+    <div id="bible-tf-ch"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkTFCh('bible')">Check Answers ✅</button>
+    </div>
+    <div id="bible-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /bible -->
+
+<!-- ═══════════ ENGLISH CHALLENGE ═══════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">✏️ English · Week 5</div>
+    <div class="hero-title">Adjectives &amp;<br>Descriptive Writing</div>
+    <div class="hero-sub">Writer's effect · Comparative &amp; superlative · Creating atmosphere</div>
+    <div class="hero-emoji">🎨</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 5 topics, harder questions. Read carefully. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary: Use Each Term in an Example <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Write a sentence that is a clear example of each. Then explain what makes it that type.</p>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Your example sentence</th><th>Why it is this type</th></tr>
+      <tr><td><strong>Adjective</strong> <button class="audio-btn" onclick="speak('An adjective is a describing word that tells us more about a noun.')">🔊</button></td><td><textarea placeholder="Write a sentence using an adjective…"></textarea></td><td><textarea placeholder="Explain what the adjective describes…"></textarea></td></tr>
+      <tr><td><strong>Comparative adjective</strong> <button class="audio-btn" onclick="speak('A comparative adjective compares two things. For example: The mountain is taller than the hill.')">🔊</button></td><td><textarea placeholder="Compare TWO things…"></textarea></td><td><textarea placeholder="What two things are being compared?"></textarea></td></tr>
+      <tr><td><strong>Superlative adjective</strong> <button class="audio-btn" onclick="speak('A superlative adjective is used when comparing three or more things. For example: Mount Everest is the tallest mountain in the world.')">🔊</button></td><td><textarea placeholder="Compare THREE or more things…"></textarea></td><td><textarea placeholder="How many things are being compared?"></textarea></td></tr>
+      <tr><td><strong>Noun phrase</strong> <button class="audio-btn" onclick="speak('A noun phrase is a group of words built around a noun, often with adjectives. For example: the dark, stormy night.')">🔊</button></td><td><textarea placeholder="Write a noun phrase with at least 2 adjectives…"></textarea></td><td><textarea placeholder="What is the noun? What are the adjectives?"></textarea></td></tr>
+      <tr><td><strong>Descriptive writing</strong></td><td><textarea placeholder="Write 2 descriptive sentences about a place…"></textarea></td><td><textarea placeholder="Which adjectives did you use and why?"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Sentence Skills: Analyse &amp; Create <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Read this passage carefully. Then answer ALL four questions:</p>
+    <div class="passage-box">
+      "The ancient, crumbling tower stood alone on the windswept hill. Its dark, narrow windows stared out like hollow eyes. Inside, cold air moved through the empty rooms, carrying the damp smell of forgotten years. Outside, a small, brave flower pushed through the broken stone at its base."
+    </div>
+    <table class="analysis-table">
+      <tr><th>Question</th><th>Your answer — quote the text</th></tr>
+      <tr><td>a) Find THREE adjectives in the passage. Write them and explain what each one makes the reader feel or imagine.</td><td><textarea placeholder="Adjective 1:&#10;Effect:&#10;&#10;Adjective 2:&#10;Effect:&#10;&#10;Adjective 3:&#10;Effect:"></textarea></td></tr>
+      <tr><td>b) "Its dark, narrow windows stared out like hollow eyes." What TWO adjectives describe the windows? Why has the writer chosen the word 'hollow'? What atmosphere does this create?</td><td><textarea placeholder="Two adjectives:&#10;&#10;Effect of 'hollow':&#10;&#10;Atmosphere:"></textarea></td></tr>
+      <tr><td>c) "a small, brave flower pushed through the broken stone." Why do you think the writer chose to end with this image? What effect does the contrast of 'broken stone' and 'brave flower' create?</td><td><textarea placeholder="Think about contrast and hope…"></textarea></td></tr>
+      <tr><td>d) How does the writer use adjectives to show the DIFFERENCE between the tower and the flower? Find evidence from the passage for BOTH.</td><td><textarea placeholder="Tower adjectives:&#10;&#10;Flower adjectives:&#10;&#10;The effect of the contrast:"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Rewrite each sentence using comparative OR superlative adjectives to make it more interesting:</p>
+    <table class="analysis-table">
+      <tr><th>Original sentence</th><th>Rewrite with comparative or superlative</th><th>Name the type (comparative / superlative)</th></tr>
+      <tr><td>The building was tall.</td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td>She was happy.</td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td>The storm was bad.</td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Write your own descriptive paragraph of 5–7 sentences about a PLACE (a forest, a market, a beach, a city at night). You MUST use: at least FIVE adjectives, at least ONE comparative adjective and at least ONE superlative adjective. Underline each adjective and write (comp) or (sup) next to comparative and superlative ones.</div>
+          <textarea class="open-box tall" placeholder="Write your descriptive paragraph here…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A student writes: "The happy, happier, happiest children played in the beautiful, big, tall park." What is WRONG with this sentence? Explain carefully — when should we use happy vs happier vs happiest? Rewrite the sentence correctly.</div>
+          <textarea class="open-box" placeholder="What is wrong:&#10;&#10;Correct version:&#10;&#10;Explanation:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED RESPONSE: Explain why adjectives are important in writing. Use THREE of these points: (a) they help the reader imagine the scene, (b) they create mood and atmosphere, (c) they give the reader information without telling them directly. Give an example from the passage in Question 1 for each point you use.</div>
+          <textarea class="open-box" style="min-height:160px;" placeholder="Point a:&#10;&#10;Point b:&#10;&#10;Point c:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="eng-tf-ch"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--english);" onclick="checkTFCh('eng')">Check Answers ✅</button>
+    </div>
+    <div id="eng-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /english -->
+
+<!-- ═══════════ MATHS CHALLENGE ═══════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">🔢 Maths · Week 5</div>
+    <div class="hero-title">Subtraction —<br>Column Method</div>
+    <div class="hero-sub">Borrowing · Missing numbers · Multi-step word problems · Checking with addition</div>
+    <div class="hero-emoji">➖</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Show ALL working. Write in full sentences where asked.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary: Explain with an Example <span class="marks">5 marks</span></div>
+    <table class="analysis-table">
+      <tr><th>Word</th><th>Definition in your own words</th><th>Numerical example showing the meaning</th></tr>
+      <tr><td><strong>Minuend</strong> <button class="audio-btn" onclick="speak('Minuend. This is the starting number in a subtraction — the larger number on top.')">🔊</button></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="Show with numbers…"></textarea></td></tr>
+      <tr><td><strong>Subtrahend</strong> <button class="audio-btn" onclick="speak('Subtrahend. This is the number being taken away — the smaller number on the bottom.')">🔊</button></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="Show with numbers…"></textarea></td></tr>
+      <tr><td><strong>Difference</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="Show with numbers…"></textarea></td></tr>
+      <tr><td><strong>Borrowing / Exchanging</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="Show when you need to borrow…"></textarea></td></tr>
+      <tr><td><strong>Inverse operation</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="Show checking 573 − 241 = 332 by adding…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Work out each subtraction. Show the column method AND use addition to CHECK your answer:</p>
+    <table class="analysis-table">
+      <tr><th>Sum</th><th>Column method working</th><th>Addition check (inverse)</th></tr>
+      <tr><td><strong>573 − 241</strong></td><td><textarea style="min-height:80px;" placeholder="Show step-by-step column working…"></textarea></td><td><textarea style="min-height:80px;" placeholder="Add answer + 241. Does it = 573?"></textarea></td></tr>
+      <tr><td><strong>742 − 368</strong></td><td><textarea style="min-height:80px;" placeholder="Show borrowing clearly…"></textarea></td><td><textarea style="min-height:80px;" placeholder="Check your answer…"></textarea></td></tr>
+      <tr><td><strong>600 − 347</strong></td><td><textarea style="min-height:80px;" placeholder="Careful! 0 in the tens column…"></textarea></td><td><textarea style="min-height:80px;" placeholder="Check your answer…"></textarea></td></tr>
+      <tr><td><strong>834 − 476 − 125</strong></td><td><textarea style="min-height:80px;" placeholder="Do TWO subtractions in order…"></textarea></td><td><textarea style="min-height:80px;" placeholder="Check final answer…"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Find the MISSING NUMBER. Show how you worked it out:</p>
+    <div id="maths-missing"></div>
+    <div style="margin-top:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMissing()">Check ✅</button>
+      <button class="audio-btn" onclick="speak('To find a missing number in subtraction, use the inverse. If blank minus 234 equals 350, add 350 plus 234 to find the missing number.')">🔊 Strategy hint</button>
+    </div>
+    <div id="missing-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Critical Thinking &amp; Word Problems <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">A student says: 742 − 368 = 426. Use the column method to check whether this is correct. Show ALL your working clearly, step by step. If they are wrong, explain exactly which step the mistake was made in.</div>
+          <textarea class="open-box tall" placeholder="Column method working:&#10;&#10;Is 426 correct?&#10;&#10;Where was the mistake?"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">Explain in your own words what "borrowing" means and WHEN it happens. Draw a column subtraction example that requires borrowing in BOTH the ones column AND the tens column. Label each borrow clearly.</div>
+          <textarea class="open-box" placeholder="What borrowing means:&#10;&#10;When it happens:&#10;&#10;My example with both borrows:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">A school library has 834 books. 276 books are taken out on loan. Then 45 more books are borrowed the next day. (a) How many books are left after the first day? (b) How many books are left after the second day? (c) If 150 books are returned, how many books are in the library at the end? Show ALL working.</div>
+          <textarea class="open-box tall" placeholder="a) Books after first day:&#10;&#10;b) Books after second day:&#10;&#10;c) Books at the end:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-q">REASONING: Without calculating, explain how you know that 500 − 347 MUST give an answer less than 200. Use the words "hundreds," "tens," and "ones" in your explanation.</div>
+          <textarea class="open-box" placeholder="Use hundreds, tens and ones in your explanation…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="maths-tf-ch"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkTFCh('maths')">Check Answers ✅</button>
+    </div>
+    <div id="maths-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /maths -->
+
+<!-- ═══════════ SCIENCE CHALLENGE ═══════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">🌱 Science · Week 5</div>
+    <div class="hero-title">Plant Life Cycle<br>&amp; Habitats</div>
+    <div class="hero-sub">Deep analysis · Fair tests · Food chains · Adaptation</div>
+    <div class="hero-emoji">🦋</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Use scientific vocabulary. Write in full sentences. Show all reasoning.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary: Explain with an Analogy <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">For each term: write what it means AND explain it using an analogy (comparison to something familiar). Example: <em>"Germination is like waking up from a long sleep because the seed starts growing when conditions are right."</em></p>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>What it means (function)</th><th>Analogy — "It is like ___ because ___"</th></tr>
+      <tr><td><strong>Germination</strong> <button class="audio-btn" onclick="speak('Germination. This is when a seed begins to grow. A root pushes down and a shoot pushes up.')">🔊</button></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Pollination</strong> <button class="audio-btn" onclick="speak('Pollination. This is when bees or insects carry pollen from one flower to another, which allows seeds to form.')">🔊</button></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Seed dispersal</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Habitat</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Adaptation</strong> <button class="audio-btn" onclick="speak('Adaptation. This is a feature that helps a living thing survive in its habitat. For example, a cactus stores water in its thick stem to survive the desert.')">🔊</button></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🔬 Part B — Science Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. A student grew FOUR plants. Each plant was missing ONE thing it needs. Study the results and explain:</p>
+    <table class="analysis-table">
+      <tr><th>Plant condition</th><th>What happened</th><th>Why? Use scientific vocabulary.</th></tr>
+      <tr><td><strong>Plant A — no water</strong></td><td>Wilted and died after 7 days.</td><td><textarea style="min-height:60px;" placeholder="What does water do for a plant? What process is affected?"></textarea></td></tr>
+      <tr><td><strong>Plant B — no light</strong></td><td>Grew tall and thin. Leaves turned yellow.</td><td><textarea style="min-height:60px;" placeholder="Why would a plant grow tall without light? What is it trying to do?"></textarea></td></tr>
+      <tr><td><strong>Plant C — no soil/nutrients</strong></td><td>Survived but grew slowly with pale leaves.</td><td><textarea style="min-height:60px;" placeholder="What do nutrients do? Which plant part is most affected?"></textarea></td></tr>
+      <tr><td><strong>Plant D — all needs met</strong></td><td>Grew 18cm in 3 weeks. Dark green leaves.</td><td><textarea style="min-height:60px;" placeholder="Why is it healthy? Name the process happening in its leaves."></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Write a simple food chain for TWO different habitats. Use the format: Producer → Primary consumer → Secondary consumer</p>
+    <table class="analysis-table">
+      <tr><th>Habitat</th><th>Your food chain</th><th>What is the producer? Why?</th></tr>
+      <tr><td><strong>Meadow / Grassland</strong></td><td><textarea style="min-height:55px;" placeholder="grass → ? → ?"></textarea></td><td><textarea style="min-height:55px;" placeholder="Why is the grass the producer?"></textarea></td></tr>
+      <tr><td><strong>Ocean / Pond</strong></td><td><textarea style="min-height:55px;" placeholder="? → ? → ?"></textarea></td><td><textarea style="min-height:55px;" placeholder="What produces food in water?"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Why is seed dispersal important for the survival of plant species? Give THREE different methods of seed dispersal and explain how each one works. What would happen if ALL seeds fell directly under the parent plant?</div>
+          <textarea class="open-box tall" placeholder="Method 1:&#10;&#10;Method 2:&#10;&#10;Method 3:&#10;&#10;What would happen if all seeds fell underneath?"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">Describe how a CACTUS is adapted to live in a HOT DESERT habitat. Give at least THREE adaptations and explain how each one helps the cactus survive. Use the word "because" in each explanation.</div>
+          <textarea class="open-box" placeholder="Adaptation 1: The cactus has ___ because ___&#10;&#10;Adaptation 2:&#10;&#10;Adaptation 3:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">DESIGN A FAIR TEST: You want to find out if plants germinate faster with WARMER temperatures. Complete the full plan:</div>
+          <table class="analysis-table" style="margin-top:10px;">
+            <tr><th>Section</th><th>Your answer</th></tr>
+            <tr><td>My question (Does ___ affect ___)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>My prediction (I think… will… because…)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will CHANGE (one thing only)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will MEASURE</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will KEEP THE SAME — 1</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will KEEP THE SAME — 2</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will KEEP THE SAME — 3</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>My conclusion will say: "I found out that…"</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="sci-tf-ch"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--science);" onclick="checkTFCh('sci')">Check Answers ✅</button>
+    </div>
+    <div id="sci-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /science -->
+
+<!-- ═══════════ SOCIAL CHALLENGE ═══════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">🏘️ Social Studies · Week 5</div>
+    <div class="hero-title">Communities &amp;<br>Settlements</div>
+    <div class="hero-sub">Deep analysis · Comparing settlements · Planning &amp; decision making</div>
+    <div class="hero-emoji">🌆</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 5 topics, harder questions. Use full sentences. Give evidence for opinions.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary: Use Each Word in a Real Context <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Do not just define the word. Write a sentence using it correctly AND explain what would happen without it in a community.</p>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Sentence using the term correctly</th><th>What would happen WITHOUT this in a community?</th></tr>
+      <tr><td><strong>Community</strong> <button class="audio-btn" onclick="speak('Community. A group of people who live, work and share services in the same area.')">🔊</button></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Infrastructure</strong> <button class="audio-btn" onclick="speak('Infrastructure. The roads, buildings, schools, hospitals and services that allow a community to function.')">🔊</button></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Rural</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Urban</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+      <tr><td><strong>Population</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🗺️ Part B — Map &amp; Community Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Compare the THREE types of settlement. Complete the table with as much detail as possible:</p>
+    <table class="analysis-table">
+      <tr><th>Feature</th><th>🌾 Rural</th><th>🏙️ Urban</th><th>🏘️ Suburban</th></tr>
+      <tr><td><strong>Population size</strong></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td></tr>
+      <tr><td><strong>Types of buildings</strong></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td></tr>
+      <tr><td><strong>Services available</strong></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td></tr>
+      <tr><td><strong>Transport links</strong></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td></tr>
+      <tr><td><strong>Main jobs / work</strong></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td><td><textarea style="min-height:45px;"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Map symbols — write what each stands for AND what you would find there:</p>
+    <table class="analysis-table">
+      <tr><th>Symbol</th><th>What it stands for</th><th>What you would find / do there</th></tr>
+      <tr><td>🌳 Green shading</td><td><textarea style="min-height:40px;"></textarea></td><td><textarea style="min-height:40px;"></textarea></td></tr>
+      <tr><td>🏥 Red cross (+)</td><td><textarea style="min-height:40px;"></textarea></td><td><textarea style="min-height:40px;"></textarea></td></tr>
+      <tr><td>🏫 Building with flag</td><td><textarea style="min-height:40px;"></textarea></td><td><textarea style="min-height:40px;"></textarea></td></tr>
+      <tr><td>🛣️ Thick coloured line</td><td><textarea style="min-height:40px;"></textarea></td><td><textarea style="min-height:40px;"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">A new factory wants to build in an area. It could go in a RURAL village, a SUBURBAN town, or an URBAN city. Give ONE reason FOR and ONE reason AGAINST each location. Then give your recommendation and explain why.</div>
+          <textarea class="open-box tall" placeholder="Rural — For:&#10;Rural — Against:&#10;&#10;Suburban — For:&#10;Suburban — Against:&#10;&#10;Urban — For:&#10;Urban — Against:&#10;&#10;My recommendation:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">Why are maps drawn from ABOVE rather than from the side? Explain why the bird's-eye view gives us more useful information than a photograph of the same place. Give TWO specific examples of information that would be LOST if maps were drawn from the side.</div>
+          <textarea class="open-box" placeholder="Why above is better:&#10;&#10;Information lost example 1:&#10;&#10;Information lost example 2:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED RESPONSE: A new town is being planned from scratch. As the town planner, decide: (a) What TYPE of settlement will it be (rural, urban or suburban)? (b) What THREE services MUST it have first and why? (c) Where will you put the school — and why does its location matter? Use compass directions, distances and the needs of the community in your answer. Write a planning report of at least 5 sentences.</div>
+          <textarea class="open-box" style="min-height:180px;" placeholder="My planning report:&#10;&#10;Type of settlement:&#10;&#10;Three essential services and why:&#10;&#10;Where the school should go and why:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="soc-tf-ch"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--social);" onclick="checkTFCh('soc')">Check Answers ✅</button>
+    </div>
+    <div id="soc-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /social -->
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+  if(!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.rate=0.85;u.lang='en-GB';
+  window.speechSynthesis.speak(u);
+}
+
+// TF Challenge data
+const tfChData={
+  bible:[
+    {s:'God gave Noah ten rules before the flood.',ans:false,correction:'God gave Noah ONE main instruction: build the ark and follow the exact design.'},
+    {s:'Noah sent out a raven AND a dove to find dry land.',ans:true},
+    {s:'The flood lasted exactly seven days.',ans:false,correction:'It rained for FORTY days and forty nights, and the water took much longer to recede.'},
+    {s:'God\'s covenant (promise) after the flood was only for Noah and his family.',ans:false,correction:'The covenant was for Noah, all his descendants, AND every living creature on earth.'},
+    {s:'Isaiah 54:10 teaches us that God\'s love is as permanent as the mountains.',ans:false,correction:'Isaiah 54:10 says God\'s love will NOT be shaken "though the mountains be shaken" — His love is MORE permanent than mountains.'},
+  ],
+  eng:[
+    {s:'Adjectives always come AFTER the noun they describe.',ans:false,correction:'Adjectives usually come BEFORE the noun. Example: "the red car" not "the car red".'},
+    {s:'"More beautiful" is a comparative adjective.',ans:true},
+    {s:'"The most intelligent student" uses a comparative adjective.',ans:false,correction:'"Most intelligent" is a SUPERLATIVE adjective — it compares three or more things.'},
+    {s:'You can use both "more tall" and "taller" — they mean the same thing.',ans:false,correction:'Short adjectives (1–2 syllables) use -er: "taller". Longer adjectives use "more": "more intelligent".'},
+    {s:'Descriptive writing uses adjectives to help the reader imagine a scene.',ans:true},
+  ],
+  maths:[
+    {s:'When subtracting using the column method, you always start from the HUNDREDS column.',ans:false,correction:'You always start from the ONES column (the right side).'},
+    {s:'742 − 368 = 374',ans:true},
+    {s:'In 600 − 347, you need to borrow from the hundreds column.',ans:true},
+    {s:'The minuend is the smaller number being taken away.',ans:false,correction:'The minuend is the LARGER starting number (on top). The subtrahend is the number being taken away.'},
+    {s:'To check 500 − 263 = 237, you can add 237 + 263 and it should equal 500.',ans:true},
+  ],
+  sci:[
+    {s:'Pollination can only happen when bees are present.',ans:false,correction:'Pollination can happen by bees, butterflies, other insects, birds, wind, or even water.'},
+    {s:'A cactus stores water in its thick stem — this is an adaptation to its desert habitat.',ans:true},
+    {s:'The life cycle of a plant always ends when the seed is produced.',ans:false,correction:'The life cycle CONTINUES — the seed grows into a new plant which starts the cycle again.'},
+    {s:'In a food chain, the plant is always the PRODUCER because it makes its own food.',ans:true},
+    {s:'Seed dispersal by wind works best for heavy seeds.',ans:false,correction:'Wind dispersal works best for LIGHT seeds (like dandelion fluff). Heavy seeds need other methods.'},
+  ],
+  soc:[
+    {s:'Urban areas always have smaller populations than rural areas.',ans:false,correction:'Urban (city) areas have LARGER populations than rural (countryside) areas.'},
+    {s:'Suburban areas are found between cities and the countryside.',ans:true},
+    {s:'A map drawn from above is called a bird\'s-eye view.',ans:true},
+    {s:'Infrastructure only refers to roads and nothing else.',ans:false,correction:'Infrastructure includes roads, schools, hospitals, water supply, electricity — everything a community needs to function.'},
+    {s:'Population density means how many people live in a given area.',ans:true},
+  ]
+};
+
+function buildTFCh(key){
+  const data=tfChData[key];
+  const area=document.getElementById(key+'-tf-ch');
+  if(!area) return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>T / F + Correction if False</th></tr>';
+  data.forEach((item,i)=>{
+    h+=`<tr><td>${item.s}</td><td>
+      <button class="tf-btn" id="tfc-${key}-${i}-T" onclick="selTFCh('${key}',${i},'T')">✅ True</button>
+      <button class="tf-btn" id="tfc-${key}-${i}-F" onclick="selTFCh('${key}',${i},'F')">❌ False</button>
+      <br><input class="correction-box" id="tfc-corr-${key}-${i}" placeholder="If FALSE — write the correct answer here…">
+    </td></tr>`;
+  });
+  h+='</table>';
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTFCh);
+
+function selTFCh(key,i,val){
+  ['T','F'].forEach(v=>{
+    const b=document.getElementById('tfc-'+key+'-'+i+'-'+v);
+    if(b){b.classList.remove('sel-t','sel-f');}
+  });
+  const btn=document.getElementById('tfc-'+key+'-'+i+'-'+val);
+  if(btn) btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+
+function checkTFCh(key){
+  const data=tfChData[key];
+  let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tfc-'+key+'-'+i+'-T');
+    const fBtn=document.getElementById('tfc-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');
+    const userF=fBtn?.classList.contains('sel-f');
+    const correct=item.ans;
+    if((correct&&userT)||(!correct&&userF)) score++;
+    if(correct){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;
+  });
+  const res=document.getElementById(key+'-tf-ch-result');
+  if(res){
+    res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Check the green buttons for correct answers, and fill in the correction boxes.`;}
+  }
+}
+
+// Missing number maths
+const missingNums=[
+  {q:'___ − 234 = 349',hint:'Add 349 + 234',ans:583},
+  {q:'742 − ___ = 368',hint:'Subtract 742 − 368',ans:374},
+  {q:'___ − 175 − 128 = 300',hint:'Add 300 + 175 + 128',ans:603},
+  {q:'600 − ___ = 253',hint:'Subtract 600 − 253',ans:347},
+];
+function buildMissing(){
+  const area=document.getElementById('maths-missing');
+  if(!area) return;
+  area.innerHTML=`<table class="analysis-table"><tr><th>Missing number problem</th><th>Hint</th><th>Answer</th></tr>
+  ${missingNums.map((item,i)=>`<tr>
+    <td><strong>${item.q}</strong></td>
+    <td style="font-size:0.82rem;color:var(--muted);">${item.hint}</td>
+    <td><input type="number" class="fill-in" id="miss-${i}" data-ans="${item.ans}" placeholder="?" style="width:90px;"></td>
+  </tr>`).join('')}
+  </table>`;
+}
+buildMissing();
+function checkMissing(){
+  let score=0;
+  missingNums.forEach((_,i)=>{
+    const inp=document.getElementById('miss-'+i);
+    if(!inp) return;
+    if(parseInt(inp.value)===missingNums[i].ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}
+  });
+  const res=document.getElementById('missing-result');
+  res.style.display='block';
+  if(score===missingNums.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${missingNums.length} correct! Brilliant reasoning!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${missingNums.length} correct. Use the inverse (opposite) operation to find missing numbers!`;}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<50;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
+    },i*30);
+  }
+}
+const s=document.createElement('style');
+s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week5_Day2');</script>
+</body>
+</html>

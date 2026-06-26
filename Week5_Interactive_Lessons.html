@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 5 · KS2 Level 3 · Interactive Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --mgray:#CFD8DC;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:12px;--radius-sm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh;font-size:15px}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1;min-width:100px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:20px;border:2px solid transparent;font-size:12px;font-weight:700;cursor:pointer;transition:.13s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab:hover{opacity:.82}
+.tab.active{color:var(--white)!important}
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.print-btn:hover{opacity:.85}
+
+/* SUBJECT TABS */
+.subject-tabs{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap}
+.stab{padding:9px 18px;border-radius:22px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab:hover{opacity:.8}
+.stab.active{color:var(--white)}
+
+/* PAGE */
+.page{display:none;padding:14px 18px 50px}
+.page.active{display:block}
+
+/* WORKSHEET HEADER */
+.ws-header{background:linear-gradient(130deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.4px;display:inline-block;margin-bottom:4px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--teal);margin:2px 0}
+.ws-sub{font-size:12px;color:var(--gray);font-weight:600}
+.name-line{border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none;width:130px}
+
+/* SECTIONS */
+.section{margin-bottom:18px}
+.sec-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num{background:var(--teal);color:var(--white);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+
+/* QUESTION BLOCKS */
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--radius-sm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+
+/* TIPS & BRIDGES */
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6}
+.l1-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+
+/* VOCAB CARDS */
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+
+/* WORD BANK */
+.word-bank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--radius-sm);padding:10px 13px;margin-bottom:14px}
+.word-bank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.word-tag{display:inline-block;background:var(--purple);color:var(--white);border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+
+/* CLICK OPTIONS */
+.circle-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.opt{border:2px solid var(--amber);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);transition:.12s;background:var(--white)}
+.opt:hover{opacity:.8}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+table.ws-table input[type=text]{width:100%;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;border-bottom:1px dashed var(--teal-mid);padding:2px}
+
+/* GRIDS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+
+/* SPECIAL BOXES */
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.example-box{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:10px;font-family:'Courier New',monospace}
+.highlight-box{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+.remember-box{border-radius:var(--radius-sm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--white);text-align:center;margin-top:12px}
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.6}
+
+/* CARD GRIDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:10px 0}
+.info-card{border-radius:var(--radius-sm);padding:12px;text-align:center;border:2px solid}
+.card-icon{font-size:30px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+
+/* CHECK ROWS */
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px;line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:2px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.chk.done{background:var(--teal);color:var(--white)}
+
+/* TIMES TABLE */
+.times-table{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:10px 0}
+.tt-cell{background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:6px;padding:6px 4px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal)}
+.tt-cell.header{background:var(--teal);color:var(--white);font-size:12px}
+.tt-input{width:100%;border:none;background:transparent;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal);outline:none}
+
+/* VERSE BOX */
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.verse-ref{font-size:12px;color:var(--gray);margin-top:6px}
+
+@media(max-width:600px){.two-col,.three-col,.four-col{grid-template-columns:1fr}.times-table{grid-template-columns:repeat(3,1fr)}}
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">📚 HOS · KS2 Level 3 · Week 5</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const SUBJECTS = [
+  {id:'eng',   label:'📖 English',    col:'#185FA5', lt:'#E6F1FB'},
+  {id:'maths', label:'🔢 Maths',      col:'#0F6E56', lt:'#E1F5EE'},
+  {id:'sci',   label:'💪 Science',    col:'#C2410C', lt:'#FFF0E6'},
+  {id:'hum',   label:'🌍 Humanities', col:'#534AB7', lt:'#EEEDFE'},
+  {id:'bib',   label:'✝️ Bible',      col:'#B71C1C', lt:'#FFEBEE'},
+];
+
+const WS = {
+
+/* ══════════════════════════════════════════════════════════
+   ENGLISH — Personal Narrative Writing
+══════════════════════════════════════════════════════════ */
+eng:[
+  { num:1, badge:'Personal Narrative Writing', title:'What is a Personal Narrative?',
+    secs:[
+      {t:'Learn the key words',          c:'eng_pn_vocab'},
+      {t:'Read a personal narrative',    c:'eng_pn_read'},
+      {t:'Find the time-order words',    c:'eng_pn_time_words'},
+    ]},
+  { num:2, badge:'Personal Narrative Writing', title:'Planning My Narrative',
+    secs:[
+      {t:'The 5 W questions',            c:'eng_pn_5w'},
+      {t:'Put the events in order',      c:'eng_pn_sequence'},
+      {t:'Time connectives practice',    c:'eng_pn_connectives'},
+    ]},
+  { num:3, badge:'Personal Narrative Writing', title:'Writing My Narrative',
+    secs:[
+      {t:'Sentence frames & word bank',  c:'eng_pn_frames'},
+      {t:'Write your personal narrative',c:'eng_pn_write'},
+      {t:'Check and improve',            c:'eng_pn_edit'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   MATHS — Multiplication 3x 4x 8x
+══════════════════════════════════════════════════════════ */
+maths:[
+  { num:1, badge:'Multiplication Tables', title:'The 3× Table',
+    secs:[
+      {t:'Learn: skip counting in 3s',  c:'maths_3x_intro'},
+      {t:'The 3× table',                c:'maths_3x'},
+      {t:'3× practice',                 c:'maths_3x_practice'},
+    ]},
+  { num:2, badge:'Multiplication Tables', title:'The 4× and 8× Tables',
+    secs:[
+      {t:'The 4× table',                  c:'maths_4x'},
+      {t:'The 8× table — double the 4×!', c:'maths_8x'},
+      {t:'4× and 8× practice',            c:'maths_4x_8x_practice'},
+    ]},
+  { num:3, badge:'Multiplication Tables', title:'Word Problems and Arrays',
+    secs:[
+      {t:'Arrays — see multiplication!', c:'maths_arrays2'},
+      {t:'Word problems',                c:'maths_word2'},
+      {t:'Mixed tables challenge',       c:'maths_mixed2'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   SCIENCE — Muscles & Movement
+══════════════════════════════════════════════════════════ */
+sci:[
+  { num:1, badge:'Animals Including Humans', title:'How Do Muscles Work?',
+    secs:[
+      {t:'Learn the key words',     c:'sci_mus_vocab'},
+      {t:'What do muscles do?',     c:'sci_mus_jobs'},
+      {t:'Name the muscles',        c:'sci_mus_name'},
+    ]},
+  { num:2, badge:'Animals Including Humans', title:'Muscle Pairs — Push and Pull',
+    secs:[
+      {t:'Muscles work in pairs',              c:'sci_mus_pairs'},
+      {t:'Match the muscle to the movement',   c:'sci_mus_match'},
+      {t:'True or False?',                     c:'sci_mus_tf'},
+    ]},
+  { num:3, badge:'Animals Including Humans', title:'Keeping Our Muscles Healthy',
+    secs:[
+      {t:'How to keep muscles strong', c:'sci_mus_healthy'},
+      {t:'Stretching and warming up',  c:'sci_mus_stretch'},
+      {t:'Muscles quiz',               c:'sci_mus_quiz'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   HUMANITIES — Ancient Egypt
+══════════════════════════════════════════════════════════ */
+hum:[
+  { num:1, badge:'Ancient Egypt', title:'Life by the Nile',
+    secs:[
+      {t:'Learn the key words',  c:'hum_egy_vocab'},
+      {t:'The River Nile',       c:'hum_egy_nile'},
+      {t:'True or False?',       c:'hum_egy_tf'},
+    ]},
+  { num:2, badge:'Ancient Egypt', title:'Pharaohs and Pyramids',
+    secs:[
+      {t:'Who were the pharaohs?',     c:'hum_egy_pharaoh'},
+      {t:'How were pyramids built?',   c:'hum_egy_pyramid_seq'},
+      {t:'Comprehension questions',    c:'hum_egy_questions'},
+    ]},
+  { num:3, badge:'Ancient Egypt', title:'Mummies and Hieroglyphics',
+    secs:[
+      {t:'Mummies — why and how?',          c:'hum_egy_mummy'},
+      {t:'Crack the hieroglyphics code!',   c:'hum_egy_hiero'},
+      {t:'My Ancient Egypt fact file',      c:'hum_egy_factfile'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   BIBLE — Isaac & Jacob — God Keeps His Promises
+══════════════════════════════════════════════════════════ */
+bib:[
+  { num:1, badge:'Isaac & Jacob — God Keeps His Promises', title:'The Story of Isaac and Jacob',
+    secs:[
+      {t:'Learn the key words',     c:'bib_ij_vocab'},
+      {t:'Read the story',          c:'bib_ij_story'},
+      {t:'Put the story in order',  c:'bib_ij_sequence'},
+    ]},
+  { num:2, badge:'Isaac & Jacob — God Keeps His Promises', title:'God Keeps His Promises',
+    secs:[
+      {t:'Comprehension questions',                       c:'bib_ij_questions'},
+      {t:'What does it mean God keeps His promises?',     c:'bib_ij_promise'},
+      {t:'The memory verse',                              c:'bib_ij_verse'},
+    ]},
+  { num:3, badge:'Isaac & Jacob — God Keeps His Promises', title:'Jacob & Esau — My Life Application',
+    secs:[
+      {t:'What kind of people were Jacob and Esau?', c:'bib_ij_character'},
+      {t:'When do I need to trust God\'s promises?', c:'bib_ij_apply'},
+      {t:'Draw and write',                            c:'bib_ij_draw'},
+    ]},
+],
+};
+
+/* ══════════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════════ */
+function vc(word,meaning,l1,eg,color){
+  color = color || 'teal';
+  return `<div class="vocab-card" style="border-left-color:var(--${color})">
+  <div class="vocab-word" style="color:var(--${color})">${word}</div>
+  <div class="vocab-meaning">${meaning}</div>
+  <div class="vocab-l1">🌍 ${l1}</div>
+  <div class="vocab-eg">✏️ e.g. ${eg}</div>
+</div>`;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTENT RENDERER
+══════════════════════════════════════════════════════════ */
+function C(key){switch(key){
+
+/* ─── ENGLISH ──────────────────────────────────────────── */
+
+case 'eng_pn_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Narrative = قصہ (Urdu) · قصة (Arabic). A personal narrative is a TRUE story about something that happened to YOU.</div>
+${vc('📖 Narrative','A story that has a beginning, middle and end.','کہانی / قصة','"My trip to the park is a personal narrative."','blue')}
+${vc('🙋 Personal','About YOU — your own life and experience.','ذاتی / شخصي','"This is personal because it happened to me."','blue')}
+${vc('🎒 Experience','Something that happened to you — an event in your life.','تجربہ / تجربة','"Going to a new school was a big experience."','blue')}
+${vc('⏰ Sequence','The order things happened — first, next, then, finally.','ترتیب / تسلسل','"I will write my story in the correct sequence."','blue')}
+${vc('😊 Feeling','How you felt — happy, scared, excited, surprised.','احساس / شعور','"I felt very excited on my first day."','blue')}
+<div class="q-block"><div class="q-text">A personal narrative is a <input class="inline-ans" style="width:60px" placeholder="?"/> story about something that happened to <input class="inline-ans" style="width:60px" placeholder="?"/>.</div></div>`;
+
+case 'eng_pn_read': return `
+<div class="tip-box"><strong>Read the personal narrative below.</strong> Look for the time-order words and the writer's feelings.</div>
+<div class="story-box">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:var(--teal)">📖 My First Day at a New School</strong><br/><br/>
+<strong>First,</strong> I woke up feeling very nervous. It was my first day at a new school. I did not know anyone.<br/><br/>
+<strong>Next,</strong> my mother walked with me to the school gate. My hands were shaking a little. I felt scared.<br/><br/>
+<strong>Then,</strong> a friendly teacher took me to my classroom. A girl called Sara smiled and said hello. I sat next to her.<br/><br/>
+<strong>After that,</strong> we did Maths together. Sara helped me find the right page. I started to feel happier.<br/><br/>
+<strong>Finally,</strong> at the end of the day, Sara said: "See you tomorrow, friend!" I walked home feeling proud and excited. My first day was not so scary after all.
+</div>
+<div class="q-block"><div class="q-text">How did the writer feel at the START of the story?</div>
+<input class="ans-line" placeholder="At the start, the writer felt ..."/></div>
+<div class="q-block"><div class="q-text">How did the writer feel at the END of the story?</div>
+<input class="ans-line" placeholder="At the end, the writer felt ..."/></div>`;
+
+case 'eng_pn_time_words': return `
+<div class="tip-box"><strong>Time-order words</strong> help the reader follow the sequence: First · Next · Then · After that · Finally.</div>
+<p style="font-size:14px;margin-bottom:10px">Click the time-order word in each sentence.</p>
+${[
+  ['First,','I','woke','up','feeling','nervous.',          'First,'],
+  ['Next,','we','walked','to','the','school','gate.',      'Next,'],
+  ['Then,','a','teacher','showed','me','my','classroom.',  'Then,'],
+  ['After','that,','we','did','Maths','together.',         'After'],
+  ['Finally,','I','walked','home','feeling','proud.',      'Finally,'],
+].map((words,i)=>{
+  const ans = words[words.length-1];
+  const sentence = words.slice(0,-1);
+  return `<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+  <div class="circle-opts">${sentence.map(w=>`<div class="opt" onclick="chk(this,'tw${i}','${w}','${ans}')">${w}</div>`).join('')}</div></div>`;
+}).join('')}`;
+
+case 'eng_pn_5w': return `
+<div class="tip-box"><strong>Before you write,</strong> plan your narrative using the 5 W questions: Who? What? When? Where? Why?</div>
+<div class="q-block"><div class="q-num">📝 Plan YOUR personal narrative</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+WHO was there? <input class="ans-line" placeholder="..."/><br/>
+WHAT happened? <input class="ans-line" placeholder="..."/><br/>
+WHEN did it happen? <input class="ans-line" placeholder="..."/><br/>
+WHERE did it happen? <input class="ans-line" placeholder="..."/><br/>
+WHY was it important to you? <input class="ans-line" placeholder="..."/><br/>
+How did you FEEL? <input class="ans-line" placeholder="..."/>
+</div></div>`;
+
+case 'eng_pn_sequence': return `
+<div class="tip-box"><strong>Sequence</strong> = the correct order. Use: First · Next · Then · Finally.</div>
+<p style="font-size:14px;margin-bottom:10px">Number these events 1–5 in the correct order (from "My First Day at a New School"):</p>
+${[
+  ['Sara and I did Maths together.','4'],
+  ['I woke up feeling nervous.','1'],
+  ['I walked home feeling proud and excited.','5'],
+  ['My mother walked with me to the school gate.','2'],
+  ['A teacher took me to my classroom and I met Sara.','3'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="" placeholder="?" style="width:36px;height:36px;border:2px solid var(--blue);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--blue);background:var(--blue-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'eng_pn_connectives': return `
+<div class="tip-box"><strong>Time connectives</strong> join your sentences and show the order of events.</div>
+<div class="word-bank"><strong>Time connective word bank:</strong>
+${['First','Next','Then','After that','Later','Finally','Suddenly','At the end'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<p style="font-size:14px;margin-bottom:10px">Complete each sentence with a good time connective from the word bank.</p>
+${[
+  '_______, I got out of bed and got dressed.',
+  '_______, I ate my breakfast quickly.',
+  '_______, something surprising happened on the way to school!',
+  '_______, I told my family all about my day.',
+].map((q,i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+<div class="q-text">${q}</div>
+<input class="ans-line" placeholder="Write the full sentence..."/>
+</div>`).join('')}`;
+
+case 'eng_pn_frames': return `
+<div class="word-bank"><strong>Feeling word bank:</strong>
+${['nervous','excited','proud','surprised','happy','scared','shy','curious'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="tip-box"><strong>Use a sentence frame to start your narrative:</strong></div>
+${[
+  ['#185FA5','#E6F1FB','One day, I will never forget _______.'],
+  ['#0F6E56','#E1F5EE','I remember the time when _______.'],
+  ['#C2410C','#FFF0E6','It all began when _______.'],
+].map(([col,bg,f])=>`<div style="background:${bg};border:2px solid ${col};border-radius:var(--radius-sm);padding:11px 14px;font-family:Nunito,sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;color:${col}">${f}</div>`).join('')}
+<div class="q-block" style="margin-top:8px"><div class="q-text">Choose ONE sentence frame above and complete it:</div>
+<input class="ans-line" placeholder="Write your opening sentence..."/></div>`;
+
+case 'eng_pn_write': return `
+<div class="tip-box"><strong>Remember:</strong> Use time-order words. Describe your feelings. Write about something that REALLY happened to you!</div>
+${[
+  ['Beginning','Where were you? Who was with you? How did you feel at the start?'],
+  ['Middle','What happened? What did you do? What did you say?'],
+  ['End','How did it finish? How did you feel at the end?'],
+].map(([t,q],i)=>`
+<div class="q-block"><div class="q-num">${i+1}. ${t}</div>
+<div class="q-text" style="font-size:13px;color:var(--gray)">${q}</div>
+<textarea class="ans-box" placeholder="Write your sentences here..."></textarea>
+</div>`).join('')}`;
+
+case 'eng_pn_edit': return `
+<div class="tip-box"><strong>Checking and improving:</strong> Read your narrative again. Tick each box when you check it!</div>
+<div class="q-block">
+${[
+  'I used time-order words (First, Next, Then...).',
+  'I described my feelings.',
+  'I used capital letters and full stops.',
+  'I wrote about something that really happened to me.',
+  'My narrative has a beginning, middle and end.',
+].map(item=>`<div class="check-row"><div class="chk" onclick="toggleChk(this)"></div><span>${item}</span></div>`).join('')}
+</div>
+<div class="remember-box" style="background:#185FA5">⭐ REMEMBER: A great personal narrative tells a TRUE story, in the correct ORDER, with your real FEELINGS!</div>`;
+
+/* ─── MATHS ────────────────────────────────────────────── */
+
+case 'maths_3x_intro': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Multiplication = ضرب (Arabic/Urdu). Skip counting in 3s: 3, 6, 9, 12...</div>
+${vc('3️⃣ Skip count','Counting on by the same number each time.','گنتی / عد تصاعدي','"Skip count in 3s: 3, 6, 9, 12, 15..."','teal')}
+${vc('✖️ 3× table','Multiplying a number by 3 — adding the number 3 times.','ضرب میں 3 / جدول الضرب 3','"3 × 4 = 4 + 4 + 4 = 12"','teal')}
+<div class="tip-box" style="margin-top:10px"><strong>3× trick:</strong> Add 3 each time! Try it: 3, ?, 9, ?, 15...</div>
+<div class="q-block"><div class="q-text">Fill in the missing numbers when counting in 3s:<br/><br/>
+3, <input class="inline-ans" style="width:40px" placeholder="?"/>, 9, <input class="inline-ans" style="width:40px" placeholder="?"/>, 15, <input class="inline-ans" style="width:40px" placeholder="?"/>, 21, <input class="inline-ans" style="width:40px" placeholder="?"/></div></div>`;
+
+case 'maths_3x': return `
+<div class="tip-box"><strong>3× table trick:</strong> Count in 3s — 3, 6, 9, 12, 15... Try doubling and adding one more group!</div>
+<div class="times-table">
+${['3×1=','3×2=','3×3=','3×4=','3×5=','3×6=','3×7=','3×8=','3×9=','3×10=','3×11=','3×12='].map(f=>`
+<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">3 × 4 means <input class="inline-ans" style="width:20px" placeholder="?"/> groups of <input class="inline-ans" style="width:20px" placeholder="?"/>, which equals <input class="inline-ans" style="width:30px" placeholder="?"/>.</div></div>`;
+
+case 'maths_3x_practice': return `
+<div class="tip-box"><strong>Remember:</strong> Count in 3s to check your answers: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36.</div>
+<div class="two-col">
+${['3×3','3×7','3×5','3×9','3×12','3×4','3×11','3×6'].map(q=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">${q} = <input type="text" style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/></div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:8px"><div class="q-text">🌟 Challenge: If 3 × 8 = 24, what is 3 × 80? <input class="inline-ans" style="width:60px" placeholder="?"/></div></div>`;
+
+case 'maths_4x': return `
+<div class="tip-box"><strong>4× table trick:</strong> 4× is double the 2× table! 4 × 6 = double of (2 × 6) doubled again = 24.</div>
+<div class="times-table">
+${['4×1=','4×2=','4×3=','4×4=','4×5=','4×6=','4×7=','4×8=','4×9=','4×10=','4×11=','4×12='].map(f=>`
+<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">If 2 × 5 = 10, then 4 × 5 = double 10 = <input class="inline-ans" style="width:40px" placeholder="?"/>.</div></div>`;
+
+case 'maths_8x': return `
+<div class="tip-box"><strong>8× table trick:</strong> 8× is DOUBLE the 4× table! Just double your 4× answer.</div>
+<div class="times-table">
+${['8×1=','8×2=','8×3=','8×4=','8×5=','8×6=','8×7=','8×8=','8×9=','8×10=','8×11=','8×12='].map(f=>`
+<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">If 4 × 6 = 24, then 8 × 6 = double 24 = <input class="inline-ans" style="width:40px" placeholder="?"/>.</div></div>`;
+
+case 'maths_4x_8x_practice': return `
+<div class="tip-box"><strong>Quick check:</strong> 4× = double the 2×. 8× = double the 4×. Use doubling to check your answers!</div>
+<div class="two-col">
+${['4×4','8×3','4×9','8×5','4×6','8×8','4×11','8×7'].map(q=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--teal)">${q} = <input type="text" style="width:55px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:20px;font-weight:800;outline:none;color:var(--teal)"/></div>
+</div>`).join('')}
+</div>`;
+
+case 'maths_arrays2': return `
+<div class="tip-box"><strong>An array</strong> is a picture that shows multiplication. Rows × columns = total.</div>
+<div class="q-block"><div class="q-num">Look at the arrays below and write the multiplication:</div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:10px">
+${[
+  {rows:3,cols:4,ans:'3 × 4 = 12'},
+  {rows:4,cols:3,ans:'4 × 3 = 12'},
+  {rows:2,cols:8,ans:'2 × 8 = 16'},
+].map(({rows,cols})=>`
+<div style="background:var(--amber-light);border:1.5px solid var(--amber-mid);border-radius:8px;padding:10px;display:inline-block">
+  ${Array(rows).fill(0).map(()=>`<div>${Array(cols).fill('🟢').join(' ')}</div>`).join('')}
+  <div style="font-size:13px;margin-top:6px;color:var(--gray)">
+    <input class="inline-ans" style="width:20px" placeholder="?"/> rows × <input class="inline-ans" style="width:20px" placeholder="?"/> columns = <input class="inline-ans" style="width:35px" placeholder="?"/>
+  </div>
+</div>`).join('')}
+</div></div>`;
+
+case 'maths_word2': return `
+<div class="step-box"><div class="step-num">1</div><div class="step-text">Read the question carefully. Find the numbers.</div></div>
+<div class="step-box"><div class="step-num">2</div><div class="step-text">Look for words like: <em>groups of, each, times, rows of, altogether</em> — these mean multiply!</div></div>
+<div class="step-box"><div class="step-num">3</div><div class="step-text">Write your number sentence and solve.</div></div>
+${[
+  ['🚲','There are 4 bikes. Each bike has 2 wheels and 2 pedals — but use the wheels! 4 bikes need 2 wheels each. How many wheels?','4 × 2 = ____'],
+  ['🥚','A hen lays 3 eggs every day. How many eggs in 8 days?','3 × 8 = ____'],
+  ['🍪','Each tray has 8 biscuits. There are 3 trays. How many biscuits?','8 × 3 = ____'],
+  ['📚','A shelf has 4 rows. Each row holds 4 books. How many books?','4 × 4 = ____'],
+].map(([ico,q,hint],i)=>`
+<div class="q-block"><div class="q-num">${ico} Problem ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--gray);font-style:italic;margin:4px 0 6px">Hint: ${hint}</div>
+<div style="font-size:13px;color:var(--teal);font-weight:700;margin-bottom:4px">Number sentence:</div>
+<input class="ans-line" placeholder="____ × ____ = ____"/>
+<input class="ans-line" placeholder="Answer: ____"/>
+</div>`).join('')}`;
+
+case 'maths_mixed2': return `
+<div class="tip-box"><strong>Mixed practice:</strong> Use the 3×, 4× and 8× tables. Check your patterns!</div>
+<div class="three-col">
+${['3×6','4×8','8×4','3×11','4×3','8×9','3×4','4×7','8×12','3×9','4×11','8×6'].map(q=>`
+<div class="q-block" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:var(--teal)">${q} =</div>
+  <input type="text" style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:var(--teal);margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>`;
+
+/* ─── SCIENCE ────────────────────────────────────────────── */
+
+case 'sci_mus_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Muscle = پٹھا (Urdu) · عضلة (Arabic). Muscles are the parts of your body that help you move!</div>
+${vc('💪 Muscle','A body part that pulls on bones to make them move.','پٹھا / عضلة','"Your leg muscles help you run."','orange')}
+${vc('🤏 Contract','When a muscle gets SHORTER and TIGHTER — it pulls.','سکڑنا / تقلص','"When you bend your arm, the muscle contracts."','orange')}
+${vc('😌 Relax','When a muscle gets LONGER and looser — it stops pulling.','آرام / استرخاء','"When you straighten your arm, the muscle relaxes."','orange')}
+${vc('🔗 Tendon','A strong cord that joins a muscle to a bone.','کنڈرا / وتر','"A tendon connects your muscle to your bone."','orange')}
+${vc('🦴 Joint','The place where two bones meet, where movement happens.','جوڑ / مفصل','"Your elbow is a joint."','orange')}
+<div class="q-block"><div class="q-text">Muscles <input class="inline-ans" style="width:60px" placeholder="?"/> on bones to make our body <input class="inline-ans" style="width:60px" placeholder="?"/>.</div></div>`;
+
+case 'sci_mus_jobs': return `
+<div class="tip-box"><strong>Muscles do many important jobs</strong> — not just helping us move!</div>
+<div class="card-grid">
+${[
+  ['🏃','Movement','Muscles pull on bones so we can walk, run, jump and dance.'],
+  ['🤸','Bending','Muscles let us bend our arms, legs, fingers and back.'],
+  ['❤️','Heart muscle','A special muscle that pumps blood around your whole body — all day, every day!'],
+  ['😀','Facial muscles','Tiny muscles in your face let you smile, frown and talk.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--orange)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">Name ONE job that muscles do in your body: <input class="ans-line" placeholder="Muscles help us ..."/></div></div>`;
+
+case 'sci_mus_name': return `
+<div class="tip-box"><strong>Some major muscles in your body:</strong> Biceps (front of upper arm) · Triceps (back of upper arm) · Quadriceps (front of thigh) · Abdominals (stomach) · Calf muscle (back of lower leg).</div>
+<div class="q-block"><div class="q-num">Match the muscle name to where it is in the body:</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+The muscle in the front of your upper arm is the <input class="inline-ans" style="width:100px" placeholder="?"/>.<br/>
+The muscle in the back of your upper arm is the <input class="inline-ans" style="width:100px" placeholder="?"/>.<br/>
+The muscle in the front of your thigh (upper leg) is the <input class="inline-ans" style="width:110px" placeholder="?"/>.<br/>
+The muscle in your stomach is called the <input class="inline-ans" style="width:120px" placeholder="?"/>.<br/>
+The muscle in the back of your lower leg is the <input class="inline-ans" style="width:100px" placeholder="?"/>.
+</div></div>`;
+
+case 'sci_mus_pairs': return `
+<div class="tip-box"><strong>Muscles work in PAIRS!</strong> One muscle contracts (pulls) while the other relaxes. Together they make a bone move both ways.</div>
+<div class="card-grid">
+${[
+  ['💪','Biceps','Contracts (pulls) to BEND your arm.'],
+  ['💪','Triceps','Contracts (pulls) to STRAIGHTEN your arm.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--orange)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">
+When you bend your arm: the biceps <input class="inline-ans" style="width:90px" placeholder="?"/> and the triceps <input class="inline-ans" style="width:90px" placeholder="?"/>.<br/>
+When you straighten your arm: the triceps <input class="inline-ans" style="width:90px" placeholder="?"/> and the biceps <input class="inline-ans" style="width:90px" placeholder="?"/>.</div></div>`;
+
+case 'sci_mus_match': return `
+<p style="font-size:14px;margin-bottom:10px">Match each action to the correct muscle.</p>
+${[
+  ['Bending your arm at the elbow.','Biceps','Biceps'],
+  ['Straightening your arm.','Triceps','Triceps'],
+  ['Kicking a football.','Quadriceps','Quadriceps'],
+  ['Standing on your toes.','Calf muscle','Calf muscle'],
+  ['Sitting up from lying down.','Abdominals','Abdominals'],
+].map(([s,a1,ans],i)=>`
+<div class="q-block"><div class="q-num">Action ${i+1}</div>
+<div class="q-text">${s}</div>
+<div class="circle-opts">
+  ${['Biceps','Triceps','Quadriceps','Calf muscle','Abdominals'].map(o=>`<div class="opt" onclick="chk(this,'mm${i}','${o}','${ans}')">${o}</div>`).join('')}
+</div></div>`).join('')}`;
+
+case 'sci_mus_tf': return `
+<p style="font-size:14px;margin-bottom:10px">Read each statement. Is it True or False?</p>
+${[
+  ['Muscles pull on bones to make us move.','True'],
+  ['Muscles only work alone, never in pairs.','False'],
+  ['The heart is a muscle.','True'],
+  ['A tendon joins a muscle to a bone.','True'],
+  ['When a muscle relaxes, it gets shorter.','False'],
+  ['Exercise can make our muscles stronger.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'mtf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'mtf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_mus_healthy': return `
+<div class="tip-box"><strong>Keep your muscles strong and healthy!</strong> Good muscles need: 🍗 protein · 💧 water · 🏃 exercise · 😴 rest.</div>
+${[
+  ['🍗','Eat protein foods','Meat, eggs, beans and fish help build and repair muscles.'],
+  ['💧','Drink water','Water keeps muscles working well and stops cramps.'],
+  ['🏃','Exercise regularly','Running, swimming and sports make muscles stronger over time.'],
+  ['😴','Get enough rest','Muscles grow and repair themselves while we sleep.'],
+].map(([ico,t,d])=>`
+<div class="step-box">
+  <div style="font-size:22px;width:32px;text-align:center">${ico}</div>
+  <div>
+    <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--teal)">${t}</div>
+    <div style="font-size:12px;color:var(--gray);margin-top:2px">${d}</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_mus_stretch': return `
+<div class="tip-box"><strong>Why stretch?</strong> Stretching before exercise warms up muscles and helps stop injuries. Stretching after exercise helps muscles relax.</div>
+<div class="step-box"><div class="step-num">1</div><div class="step-text">Before exercise: do gentle stretches and movements to warm up your muscles.</div></div>
+<div class="step-box"><div class="step-num">2</div><div class="step-text">During exercise: drink water and rest if your muscles feel tired.</div></div>
+<div class="step-box"><div class="step-num">3</div><div class="step-text">After exercise: stretch slowly and gently to help your muscles relax.</div></div>
+<div class="q-block"><div class="q-text">Why is it a good idea to stretch BEFORE exercise? <input class="ans-line" placeholder="Stretching before exercise helps because ..."/></div></div>`;
+
+case 'sci_mus_quiz': return `
+<p style="font-size:14px;margin-bottom:10px">Test yourself! Click the correct answer.</p>
+${[
+  ['What do muscles do?','Pull on bones to make us move','Protect the brain','Carry blood','Pull on bones to make us move'],
+  ['What happens when a muscle contracts?','It gets shorter and tighter','It disappears','It gets longer','It gets shorter and tighter'],
+  ['What joins a muscle to a bone?','A tendon','A joint','Skin','A tendon'],
+  ['Which muscle pumps blood around the body?','The heart','The biceps','The calf muscle','The heart'],
+  ['Which muscle bends your arm?','Biceps','Triceps','Quadriceps','Biceps'],
+  ['What helps muscles stay healthy?','Protein, water, exercise and rest','Only sleeping','Never moving','Protein, water, exercise and rest'],
+].map(([q,o1,o2,o3,ans],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div class="circle-opts">
+  ${[o1,o2,o3].map(o=>`<div class="opt" onclick="chk(this,'mq${i}','${o}','${ans}')">${o}</div>`).join('')}
+</div></div>`).join('')}`;
+
+/* ─── HUMANITIES ────────────────────────────────────────── */
+
+case 'hum_egy_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Pharaoh = فرعون (Arabic/Urdu). Pyramid = هرم (Arabic) · اہرام (Urdu).</div>
+${vc('👑 Pharaoh','The king (or queen) who ruled Ancient Egypt. People believed pharaohs were almost like gods.','فرعون / فرعون','"Tutankhamun was a famous young pharaoh."','purple')}
+${vc('🏞️ The Nile','The longest river in Africa. It gave Ancient Egyptians water, food and farmland.','دریائے نیل / نهر النيل','"Egyptian farmers grew crops next to the Nile."','purple')}
+${vc('🔺 Pyramid','A huge stone building with a triangle shape, built as a tomb for a pharaoh.','اہرام / هرم','"The Great Pyramid was built for a pharaoh."','purple')}
+${vc('✍️ Hieroglyphics','A writing system using pictures and symbols instead of letters.','تصویری رسم الخط / الكتابة الهيروغليفية','"Ancient Egyptians wrote in hieroglyphics."','purple')}
+${vc('🧻 Mummy','A dead body that has been carefully preserved (kept from rotting).','ممی / المومياء','"The pharaoh\'s body was made into a mummy."','purple')}`;
+
+case 'hum_egy_nile': return `
+<div class="tip-box"><strong>The River Nile</strong> is the longest river in Africa. Without it, people could not have lived in the Egyptian desert!</div>
+<div class="card-grid">
+${[
+  ['💧','Water','The Nile gave fresh water for drinking, washing and farming.'],
+  ['🌾','Farming','Every year the Nile flooded, leaving rich black soil for growing crops.'],
+  ['🚤','Transport','Boats on the Nile carried people, food and huge stone blocks.'],
+  ['🐟','Food','Fish from the Nile were an important food for many Egyptians.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--purple-light);border-color:var(--purple)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--purple)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Why was the River Nile so important to Ancient Egypt? <input class="ans-line" placeholder="The Nile was important because ..."/></div></div>`;
+
+case 'hum_egy_tf': return `
+<p style="font-size:14px;margin-bottom:10px">Read each statement. Is it True or False?</p>
+${[
+  ['Ancient Egypt was in Africa.','True'],
+  ['The Nile is the shortest river in the world.','False'],
+  ['A pharaoh was the ruler of Ancient Egypt.','True'],
+  ['Pyramids were built as tombs for pharaohs.','True'],
+  ['Hieroglyphics use letters like our alphabet.','False'],
+  ['The Nile flooded every year and helped farming.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'etf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'etf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'hum_egy_pharaoh': return `
+<div class="tip-box"><strong>Pharaohs</strong> were the kings (and sometimes queens) of Ancient Egypt. People believed they were chosen by the gods to rule.</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Pharaoh</th><th>Fact</th></tr></thead><tbody>
+${[
+  ['👑 Tutankhamun','Became pharaoh as a child! His tomb full of treasure was found in 1922.'],
+  ['👑 Ramesses II','One of the most powerful pharaohs. He built many huge temples and statues.'],
+  ['👑 Cleopatra','One of the last pharaohs of Egypt. Famous for her intelligence and power.'],
+].map(([p,f])=>`<tr><td><strong>${p}</strong></td><td>${f}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Which pharaoh became ruler as a child? <input class="ans-line" style="display:inline-block;width:220px" placeholder="..."/></div></div>`;
+
+case 'hum_egy_pyramid_seq': return `
+<div class="tip-box"><strong>Building a pyramid</strong> took thousands of workers and many years! Put these steps in the correct order.</div>
+${[
+  ['Workers dragged huge stone blocks to the building site.','2'],
+  ['Builders chose a flat place near the Nile to build.','1'],
+  ['The pyramid was finished and the pharaoh was buried inside.','5'],
+  ['Workers lifted and stacked the stones, layer by layer.','3'],
+  ['The outside was covered in smooth, shining white stone.','4'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="" placeholder="?" style="width:36px;height:36px;border:2px solid var(--purple);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--purple);background:var(--purple-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'hum_egy_questions': return `
+<div class="tip-box"><strong>Remember:</strong> Use full sentences to answer.</div>
+${[
+  ['What is a pharaoh?','A pharaoh was ...'],
+  ['Why did Ancient Egyptians build pyramids?','They built pyramids to ...'],
+  ['What river was Ancient Egypt built around?','Ancient Egypt was built around the ...'],
+  ['What is hieroglyphics?','Hieroglyphics is ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--purple);font-style:italic;margin:4px 0 6px">Sentence frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'hum_egy_mummy': return `
+<div class="tip-box"><strong>Mummification</strong> was the process of preserving a dead body so it would last for thousands of years. Ancient Egyptians believed people needed their body in the afterlife.</div>
+<div class="card-grid">
+${[
+  ['🧂','Drying the body','Special salt called natron was used to dry out the body for 40 days.'],
+  ['🧻','Wrapping','The body was carefully wrapped in long strips of linen cloth.'],
+  ['📦','Canopic jars','Some organs were removed and kept safe in special jars.'],
+  ['⚰️','The coffin','The mummy was placed inside a decorated coffin called a sarcophagus.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--purple-light);border-color:var(--purple)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--purple)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Why did Ancient Egyptians make mummies? <input class="ans-line" placeholder="They made mummies because ..."/></div></div>`;
+
+case 'hum_egy_hiero': return `
+<div class="tip-box"><strong>Hieroglyphics</strong> used pictures instead of letters! Here is a simple picture code. Use it to decode the secret word.</div>
+<div class="word-bank"><strong>Picture code:</strong>
+${[['🦁','N'],['🐦','I'],['💧','L'],['👁️','E'],['🐍','J'],['🌾','A'],['🐝','B'],['🦅','C'],['🌙','O'],['☀️','R']].map(([sym,letter])=>`<span class="word-tag">${sym} = ${letter}</span>`).join('')}
+</div>
+<div class="q-block"><div class="q-num">Decode this word about Ancient Egypt:</div>
+<div style="font-size:30px;text-align:center;margin:10px 0">🦁 🐦 💧 👁️</div>
+<div class="q-text" style="text-align:center">It spells: <input class="inline-ans" style="width:120px" placeholder="?"/> — the river of Ancient Egypt!</div></div>
+<div class="q-block"><div class="q-text">Now write YOUR name using the picture code (or draw your own symbols for new letters)!</div>
+<div style="border:2px dashed var(--purple);border-radius:8px;height:80px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:13px;font-style:italic">✍️ Draw your hieroglyphic name here!</div></div>`;
+
+case 'hum_egy_factfile': return `
+<div class="q-block"><div class="q-num">🏺 My Ancient Egypt Fact File</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+Ancient Egypt was in the continent of: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+The name of the river is: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+The ruler of Ancient Egypt was called a: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+Pyramids were built to be: <input class="ans-line" placeholder="?"/><br/>
+A preserved dead body is called a: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+One interesting fact I remember: <input class="ans-line" placeholder="..."/>
+</div></div>`;
+
+/* ─── BIBLE ─────────────────────────────────────────────── */
+
+case 'bib_ij_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Isaac is called اسحاق (Ishaq) and Jacob is called یعقوب (Yaqub) in Arabic and Urdu — both honoured names in Islam too!</div>
+${vc('📜 Promise','A commitment to do something. God always keeps His promises.','وعدہ / وعد','"God made a promise to Isaac, just as He had to Abraham."')}
+${vc('🌟 Blessing','Something good God gives — a special gift for the family.','برکت / بركة','"Isaac gave his special blessing to his son."')}
+${vc('🤝 Birthright','The special rights given to the firstborn son in a family.','حق ولادت / حق البكورة','"Esau was the firstborn, so the birthright belonged to him."')}
+${vc('👬 Twins','Two children born to the same mother at the same time.','جڑواں / توأم','"Esau and Jacob were twin brothers."')}
+${vc('🙏 Trust','Believing that someone will keep their word.','اعتماد / ثقة','"Isaac trusted that God would keep His promise."')}`;
+
+case 'bib_ij_story': return `
+<div class="tip-box"><strong>Bible reference:</strong> Genesis 25–28 · <strong>Key theme:</strong> God keeps His promises — to Abraham, to Isaac, and to Jacob.</div>
+<div class="story-box" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:16px;font-family:Nunito,sans-serif;color:var(--red)">📜 Isaac and Jacob — God Keeps His Promises</strong><br/><br/>
+<strong>Beginning —</strong> Isaac was Abraham's son. When Isaac grew up, God repeated the same promise He had made to Abraham: <em>"I will bless you. Your family will become as many as the stars."</em> Isaac married Rebekah, and they had twin sons — Esau, born first, and Jacob, born just after him.<br/><br/>
+<strong>Middle —</strong> As the firstborn, Esau had a special birthright. But one day, Esau came home very hungry and traded his birthright to Jacob for a bowl of stew! Later, with his mother's help, Jacob also received their father Isaac's special blessing — the blessing meant for the firstborn.<br/><br/>
+Esau was very angry, and Jacob had to run away to a faraway land. One night, while travelling alone, Jacob fell asleep and had an amazing dream — he saw a ladder reaching up to heaven, with angels going up and down. In the dream, God spoke to him: <em>"I am the God of Abraham and Isaac. I will give this land to you and your family. I will be with you wherever you go."</em><br/><br/>
+<strong>End —</strong> God kept His promise to Jacob, just as He had kept it for Abraham and Isaac before him. Jacob later returned home, made peace with his brother Esau, and his big family grew into the nation of Israel — exactly as God had promised.
+</div>
+<div class="q-block"><div class="q-text">After reading, write ONE word to describe how Jacob might have felt in his dream:</div>
+<input class="ans-line" placeholder="I think Jacob felt ... because ..."/></div>`;
+
+case 'bib_ij_sequence': return `
+<div class="tip-box"><strong>Sequence</strong> = the correct order. Use: First · Next · Then · Finally.</div>
+<p style="font-size:14px;margin-bottom:10px">Number these events 1–6 in the correct order:</p>
+${[
+  ['Esau trades his birthright to Jacob for a bowl of stew.','2'],
+  ['God repeats His promise to Isaac, son of Abraham.','1'],
+  ['Jacob has a dream of a ladder reaching up to heaven.','4'],
+  ['Jacob receives his father\'s special blessing.','3'],
+  ['Jacob\'s family grows into the nation of Israel.','6'],
+  ['Jacob runs away and later makes peace with Esau.','5'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="" placeholder="?" style="width:36px;height:36px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--red);background:var(--red-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'bib_ij_questions': return `
+<div class="tip-box"><strong>Remember:</strong> Use full sentences. Use the sentence frame: "I think ... because ..."</div>
+${[
+  ['What promise did God repeat to Isaac?','God promised that ...'],
+  ['What did Esau trade for a bowl of stew?','Esau traded his ...'],
+  ['What did Jacob see in his dream?','In his dream, Jacob saw ...'],
+  ['What did God say to Jacob in the dream?','God said He would ...'],
+  ['What happened to Jacob\'s family in the end?','In the end, Jacob\'s family ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0 6px">Sentence frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'bib_ij_promise': return `
+<div class="tip-box"><strong>God kept His promise</strong> — to Abraham, then to Isaac, then to Jacob. Three generations, one promise, always kept!</div>
+<div class="q-block"><div class="q-text">Why is it important that God keeps His promises? <input class="ans-line" placeholder="It is important because ..."/></div></div>
+<div class="q-block"><div class="q-text">Think of a promise that someone kept for you. How did it make you feel?</div>
+<textarea class="ans-box" placeholder="Someone promised me ... and they kept it. I felt ..."></textarea></div>
+<div class="q-block"><div class="q-text">Jacob learned that God's promise was passed to him when <input class="ans-line" placeholder="he saw ... and God said ..."/></div></div>`;
+
+case 'bib_ij_verse': return `
+<div class="verse-box">
+<div style="font-size:12px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">⭐ MEMORY VERSE — Numbers 23:19</div>
+<div class="verse-text">"God is not a man, that he should lie;<br/>neither the son of man, that he should repent:<br/>hath he said, and shall he not do it?"</div>
+<div class="verse-ref">— Numbers 23:19</div>
+</div>
+<div class="tip-box"><strong>What does this mean in simple words?</strong><br/>People sometimes break promises. But God always tells the truth and always does what He says — He NEVER breaks a promise!</div>
+<div class="q-block"><div class="q-text">Fill in the missing words:</div>
+<div style="font-size:15px;line-height:2.8;font-family:Nunito,sans-serif;margin-top:8px">
+"God is not a <input class="inline-ans" style="width:60px" placeholder="?"/>, that he should <input class="inline-ans" style="width:60px" placeholder="?"/>;<br/>
+hath he <input class="inline-ans" style="width:70px" placeholder="?"/>, and shall he not <input class="inline-ans" style="width:60px" placeholder="?"/> it?"<br/>
+— <input class="inline-ans" style="width:120px" placeholder="book and verse?"/>
+</div></div>
+<div class="q-block"><div class="q-text">Write the verse from memory — no peeking!</div>
+<textarea class="ans-box" style="min-height:60px" placeholder="God is not a man ..."></textarea></div>`;
+
+case 'bib_ij_character': return `
+<div class="tip-box"><strong>Character</strong> means what kind of person someone is — what they DO and HOW they act shows their character.</div>
+<div class="q-block"><div class="q-num">Circle all the words that describe Jacob in this story:</div>
+<div class="circle-opts" style="margin:10px 0">
+${['clever','lazy','determined','careless','trusting','rude'].map(w=>`<div class="opt" onclick="this.classList.toggle('correct')">${w}</div>`).join('')}
+</div></div>
+<div class="q-block"><div class="q-num">Circle all the words that describe Esau in this story:</div>
+<div class="circle-opts" style="margin:10px 0">
+${['hungry','patient','impulsive','forgiving','careful','quick-tempered'].map(w=>`<div class="opt" onclick="this.classList.toggle('correct')">${w}</div>`).join('')}
+</div></div>
+<div class="q-block"><div class="q-text">What did Esau do that he later regretted? <input class="ans-line" placeholder="Esau ..."/></div></div>`;
+
+case 'bib_ij_apply': return `
+<div class="tip-box"><strong>God's promises are still true for us today!</strong> Even when life feels uncertain, we can trust that God keeps His word.</div>
+<div class="q-block"><div class="q-text">Think of a time you had to trust someone, even though you could not see what would happen. What was it like?</div>
+<textarea class="ans-box" placeholder="I had to trust ... when ..."></textarea></div>
+<div class="q-block"><div class="q-text">What is one promise from God that is important to you?</div>
+<input class="ans-line" placeholder="One promise I want to remember is ..."/></div>
+<div class="q-block"><div class="q-text">Like Jacob, sometimes we make mistakes too. How can we make things right, like Jacob and Esau did?</div>
+<textarea class="ans-box" placeholder="We can make things right by ..."></textarea></div>`;
+
+case 'bib_ij_draw': return `
+<div class="q-block"><div class="q-text">Draw Jacob's dream — the ladder reaching to heaven with angels going up and down.</div>
+<div style="border:2px dashed var(--red);border-radius:8px;height:160px;background:var(--red-light);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:13px;font-style:italic">🪜 Draw Jacob's dream here!</div></div>
+<div class="q-block"><div class="q-text">Write one sentence about what you learned from Isaac and Jacob's story:</div>
+<input class="ans-line" placeholder="I learned that ..."/></div>
+<div class="remember-box" style="background:#B71C1C">⭐ REMEMBER: God kept His promise to Abraham, Isaac and Jacob — and God always keeps His promises to us too! 🌟</div>`;
+
+default: return '<p>Content coming soon!</p>';
+}}
+
+/* ══════════════════════════════════════════════════════════
+   RENDER ENGINE
+══════════════════════════════════════════════════════════ */
+let curSubj = 'eng';
+let curLesson = 1;
+
+function chk(el, group, val, ans){
+  const opts = el.parentElement.querySelectorAll('.opt');
+  opts.forEach(o=>o.classList.remove('correct','wrong'));
+  if(val === ans){
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    opts.forEach(o=>{ if(o.textContent.trim() === ans) o.classList.add('correct'); });
+  }
+}
+
+function toggleChk(el){
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+function render(){
+  const subjectTabs = document.getElementById('subjectTabs');
+  const navTabs = document.getElementById('navTabs');
+  const pages = document.getElementById('pages');
+
+  subjectTabs.innerHTML = '';
+  SUBJECTS.forEach(s=>{
+    const el = document.createElement('div');
+    el.className = 'stab' + (s.id === curSubj ? ' active' : '');
+    el.textContent = s.label;
+    el.style.borderColor = s.col;
+    el.style.color = s.id === curSubj ? '#fff' : s.col;
+    if(s.id === curSubj) el.style.background = s.col;
+    el.onclick = () => { curSubj = s.id; curLesson = 1; render(); };
+    subjectTabs.appendChild(el);
+  });
+
+  const subj = SUBJECTS.find(s=>s.id === curSubj);
+  const lessons = WS[curSubj];
+
+  navTabs.innerHTML = '';
+  lessons.forEach(l=>{
+    const el = document.createElement('div');
+    el.className = 'tab' + (l.num === curLesson ? ' active' : '');
+    el.textContent = 'Lesson ' + l.num;
+    el.style.borderColor = subj.col;
+    el.style.color = l.num === curLesson ? '#fff' : subj.col;
+    if(l.num === curLesson) el.style.background = subj.col;
+    el.onclick = () => { curLesson = l.num; render(); };
+    navTabs.appendChild(el);
+  });
+
+  const lesson = lessons.find(l=>l.num === curLesson);
+  pages.innerHTML = `
+  <div class="page active">
+    <div class="ws-header">
+      <div>
+        <div class="ws-badge">${lesson.badge}</div>
+        <div class="ws-title">${lesson.title}</div>
+        <div class="ws-sub">Lesson ${lesson.num} of ${lessons.length} · ${subj.label} · Week 5</div>
+      </div>
+      <div>Name: <input class="name-line"/></div>
+    </div>
+    ${lesson.secs.map((sec,i)=>`
+    <div class="section">
+      <div class="sec-title"><span class="sec-num">${i+1}</span>${sec.t}</div>
+      ${C(sec.c)}
+    </div>`).join('')}
+  </div>`;
+}
+
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week5_Lessons');</script>
+</body>
+</html>
