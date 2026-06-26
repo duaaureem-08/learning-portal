@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 5 · Day 1 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(109,40,217,0.2);border:1px solid rgba(109,40,217,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#C4B5FD;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.callout{border-radius:var(--radius-sm);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+.callout .ci{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.callout .ct{font-size:0.88rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);}
+.callout.info{background:rgba(30,58,138,0.13);border:1px solid rgba(30,58,138,0.28);}
+.callout.warn{background:rgba(180,83,9,0.12);border:1px solid rgba(180,83,9,0.28);}
+.callout.good{background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.28);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.86rem;margin:10px 0;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;padding:9px 13px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 13px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 5</div>
+  <div class="day-badge">📅 Day 1</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 1 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🐫</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 5 · Day 1</div>
+  <div class="hero-title">Abraham —<br>Called to Trust God</div>
+  <div class="hero-subtitle">Genesis 12 · God's Call · Leaving Everything · Faith Before Sight</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Key vocabulary and basic recall. Use your lesson notes if needed.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Vocabulary & Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> A <strong>covenant</strong> (Week 4 word!) is an unbreakable promise between God and people. Abraham receives the SECOND great covenant in the Bible — God's promise to bless the whole world through one family.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">What is the memory verse for this week? Write it out in full, then explain what "you will be a blessing" means in your own words. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Memory verse (Genesis 12:2): &#10;&#10;'You will be a blessing' means: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"I will make you into a great nation, and I will bless you; I will make your name great, and you will be a blessing." (Genesis 12:2, NIV). <strong>"You will be a blessing"</strong> means that God's promise to Abram was never just for his personal benefit — the blessing was designed to flow OUTWARD to other people. Abram was not just receiving a gift; he was being made into a channel of God's goodness to the world.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Where did Abram originally come from, and what kind of place was it? Give at least TWO details about his homeland. <span class="marks">2 marks</span></div>
+    <textarea class="q-input narrow" placeholder="Write your answer here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Abram came from <strong>Ur of the Chaldeans</strong>, in Mesopotamia (modern-day southern Iraq). Ur was a wealthy, advanced city with temples to many different gods — a polytheistic society where idol worship was the norm. Abram's own family, according to tradition, worshipped idols before God called him.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">Match each vocabulary word to its correct meaning: <em>patriarch · nomad · covenant · altar · famine</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="patriarch = &#10;nomad = &#10;covenant = &#10;altar = &#10;famine = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>patriarch</strong> = a founding "father" figure of a family or nation (Abraham is the first patriarch of the Bible). <strong>nomad</strong> = a person who moves from place to place rather than settling permanently. <strong>covenant</strong> = a solemn, binding, unbreakable promise between God and people. <strong>altar</strong> = a structure built for worship or sacrifice — Abram built altars at significant places where God spoke to him. <strong>famine</strong> = a severe shortage of food, often caused by drought or crop failure.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Understanding and explanation. Think carefully before answering.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Understanding & Explanation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">The lesson says Abram "left without knowing his final destination." Why is this significant? What does it tell us about the nature of his faith? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Write your answer here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This is significant because Abram obeyed God's call before receiving a clear destination — God said "go to the land I WILL show you," not "go to this specific place." This shows that <strong>genuine faith does not always require full information in advance</strong>. Abram trusted the God who was calling him, not just the clarity of the instructions. This is what the New Testament calls "faith" — acting on trust before seeing the full picture.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">The lesson compares Abraham's covenant to Noah's covenant (Week 4). Explain ONE key similarity AND ONE key difference between them. <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 Bible — Noah's covenant, its sign (the rainbow), and what it promised.</div>
+    <textarea class="q-input" placeholder="Similarity: &#10;&#10;Difference: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Similarity:</strong> Both are God-initiated, binding covenants — God makes the promise and God keeps it. Neither Noah nor Abraham earned the covenant through perfection. Both involve God making a promise about the future that seems impossible at the time. <strong>Key difference:</strong> Noah's covenant protected the whole earth (never again destroy by flood — a defensive promise). Abraham's covenant sends blessing OUTWARD into the world through one family — it is a purposeful, missional promise. Noah's is protective; Abraham's is generative.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">After God called Abram, he still faced a famine and had to travel to Egypt (Genesis 12:10). What does this tell us about what trusting God does NOT guarantee? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Write your answer here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This tells us that trusting God does <strong>not</strong> guarantee an easy path or an absence of hardship. Even after Abram obeyed God's call completely, he faced a life-threatening famine. The lesson is that faith is not a shield against difficulty — it is the assurance of God's <strong>continued presence</strong> through difficulty. Abram's story corrects the idea that following God = a comfortable life. God's promise was about the destination and purpose, not about removing every obstacle along the way.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking. Write in full sentences.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Analysis & Application</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">The lesson identifies FOUR lessons from Abraham's story. Choose TWO of them and for each one: (a) explain the lesson in your own words, and (b) give a real-life example of how someone today might face a similar situation. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Lesson 1 (state which one): &#10;Explanation: &#10;Real-life example: &#10;&#10;Lesson 2 (state which one): &#10;Explanation: &#10;Real-life example: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Example using Lessons 1 and 4: <strong>Lesson 1 — Trust sometimes means stepping into the unknown:</strong> Abram left his home, family, and culture without knowing his destination. Today, a person who moves to a new country without a guaranteed job, following what they believe is the right path, faces a similar kind of trust. They act on their convictions before they can see the outcome. <strong>Lesson 4 — Blessing is meant to be shared outward:</strong> God told Abram "you will be a blessing" — meaning his own blessing was never supposed to stop with him. A modern parallel: someone who receives an education or opportunity and uses it to lift others around them, not just to advance personally, reflects this outward-flowing principle.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">The lesson says: "God's promises are often bigger than the evidence available at the time." Abram was promised a great nation but had no children. How does this tension between promise and reality relate to what we learned about Noah's faith in Week 4? Write at least 5 sentences connecting both stories. <span class="marks">5 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 Bible — Hebrews 11:7 "warned about things not yet seen" — Noah trusted a promise before there was any rain.</div>
+    <textarea class="q-input wide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Both Noah and Abraham received promises from God that seemed completely impossible given the evidence in front of them. Noah was warned about a flood when the world was dry; Abraham was promised a great nation when he had no children and was already old. In both cases, the size of the promise far exceeded what the person could see or verify. Hebrews 11 calls this the core of faith: "being sure of what we hope for and certain of what we do not see." Both men chose to act on God's word rather than on their circumstances — Noah built an ark; Abraham packed up and left home. The pattern is the same: God makes a promise that looks impossible, a person trusts it anyway, and history turns on that decision of faith. Together, they show that biblical faith is not blind optimism but active trust in a God who has proved himself trustworthy — even when the evidence looks the other way.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">9</div>
+    <div class="q-text">Evaluate: Was Abram's obedience a simple decision or a costly one? Use specific details from the lesson about what he left behind and what he was promised to make your case. Write at least 6 sentences. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your evaluation here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Abram's obedience was clearly a costly decision, not a simple or painless one. He left behind a settled home in a wealthy and established city (Ur), his wider family and extended household, a familiar culture and way of life, and — crucially — security and certainty about the future. He exchanged all of these for a promise about a land he had never seen, made by a God his culture did not widely acknowledge. In exchange, he received a promise — but promises, however great, are not immediate. He received no land deed, no child (yet), no visible nation. The cost was real and immediate; the promise was future and invisible. The fact that Abram went anyway — aged 75, according to Genesis 12:4 — makes his obedience all the more remarkable. It was not recklessness; it was trust based on a relationship with God that was stronger than his attachment to what he was leaving behind.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 1 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🎨</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 5 · Day 1</div>
+  <div class="hero-title">Descriptive<br>Writing</div>
+  <div class="hero-subtitle">Imagery · The Five Senses · Simile · Metaphor · Personification · Show Don't Tell</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 38"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and identification. Use your lesson notes if needed.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Vocabulary & Identification</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Figurative language</strong> means language that goes BEYOND its literal meaning to create an image or feeling. The three main types you need are: simile (uses "like" or "as"), metaphor (says something IS something else), and personification (gives human qualities to non-human things).</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Define each term and give your own original example for each. <span class="marks">6 marks</span><br><br>simile · metaphor · personification</div>
+    <textarea class="q-input" placeholder="simile: definition + my own example &#10;metaphor: definition + my own example &#10;personification: definition + my own example "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Simile:</strong> A comparison using "like" or "as." Example: "Her voice was as smooth as warm honey." <strong>Metaphor:</strong> A comparison that states one thing IS another — no "like" or "as." Example: "The classroom was a prison by the last lesson of the day." <strong>Personification:</strong> Giving human qualities to a non-human thing. Example: "The old clock on the wall sighed as the hours passed." (Any original, correct examples are acceptable.)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Identify the figurative device used in each sentence AND name the sense it appeals to (sight, sound, smell, taste, touch): <span class="marks">5 marks</span><br><br>a) "The moon was a silver coin tossed into the dark sky."<br>b) "The wind howled and screamed through the broken window."<br>c) "The soup tasted like liquid fire against her tongue."<br>d) "Shadows crept silently across the cold stone floor."<br>e) "The old building groaned under the weight of the storm."</div>
+    <textarea class="q-input" placeholder="a) Device:    Sense: &#10;b) Device:    Sense: &#10;c) Device:    Sense: &#10;d) Device:    Sense: &#10;e) Device:    Sense: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Metaphor</strong> (the moon IS a silver coin) → appeals to <strong>sight</strong>. b) <strong>Personification</strong> (wind howled/screamed = human actions) → appeals to <strong>sound</strong>. c) <strong>Simile</strong> (tasted LIKE liquid fire) → appeals to <strong>taste</strong>. d) <strong>Personification</strong> (shadows crept = human movement) → appeals to <strong>sight/touch</strong>. e) <strong>Personification</strong> (building groaned = human sound) → appeals to <strong>sound</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Application. Write your own descriptive sentences and explain choices.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">✍️ Application & Technique</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Rewrite each "telling" sentence as a "showing" sentence. Do NOT use the underlined adjective in your rewrite — instead show the quality through action and sensory detail. <span class="marks">6 marks</span><br><br>a) The boy was <u>nervous</u>.<br>b) The market was <u>busy</u>.<br>c) The food was <u>delicious</u>.</div>
+    <textarea class="q-input" placeholder="a) Showing version: &#10;b) Showing version: &#10;c) Showing version: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) "His fingers drummed against the desk and he glanced at the door every few seconds." (No "nervous" used — reader works it out from the physical detail.) b) "Voices overlapped and vendors shouted over each other; the smell of spices and grilling meat hit you before you even turned the corner." c) "She closed her eyes as the first spoonful melted against her tongue — warm, rich, with a sweetness that lingered long after she swallowed." (Any well-crafted sensory showing sentences are acceptable.)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Write a description of a rainstorm using EXACTLY THREE of the five senses. Label each sense you use in brackets. Do NOT use the word "rain" more than once. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your description here, labelling each sense in brackets..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Example: "The first drops drummed against the tin roof in an irregular rhythm, building into a roar that filled the whole room. [sound] Cold air rushed through the open window, carrying the sharp, green smell of wet earth that always came before a proper downpour. [smell] When she pressed her palm to the window pane, the glass was cool and trembling, each drop sending a tiny vibration through her fingers. [touch]" — Key: three senses clearly used and labelled, "rain" used sparingly, sensory detail specific and vivid.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">The lesson says "one well-chosen comparison is more effective than five crowded together." Explain why. Then look at this sentence and improve it by removing all but ONE of the figurative devices: <span class="marks">4 marks</span><br><br><em>"The fire roared like a lion, was a dancing dragon, whispered like the wind, screamed like a wild beast, and breathed like a sleeping giant."</em></div>
+    <textarea class="q-input" placeholder="Why less is more in figurative language: &#10;&#10;My improved sentence (one device only): "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Why less is more:</strong> When too many comparisons appear together, they compete with each other and none of them lands with full force. The reader's imagination is pulled in too many directions at once and the writing feels cluttered rather than vivid. One strong, well-chosen comparison allows the reader to fully picture and feel it before moving on. <strong>Improved sentence (example):</strong> "The fire roared like a lion that had not eaten in days." (Keeping the simile and adding precision makes it far more powerful than five weaker images stacked together.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended descriptive writing and analysis.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Craft & Extended Writing</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">The lesson connects descriptive writing to reading — good readers notice the author's choices; good writers make them deliberately. Look at this passage and identify: (a) ONE simile, (b) ONE example of personification, (c) ONE "show don't tell" moment, (d) which TWO senses are used most. Then explain what overall mood the writer creates and HOW the language choices create it. <span class="marks">6 marks</span><br><br><em>"The abandoned playground sat hunched in the shadow of the building, its swings hanging limp and still. A single crisp packet skittered across the cracked concrete, catching in the wire fence with a whisper. The slide stood like a skeleton — rusted, peeling, forgotten. No child had laughed here for a long time."</em></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 English — mood, author's intent, and how language choices create effects on readers.</div>
+    <textarea class="q-input wide" placeholder="a) Simile: &#10;b) Personification: &#10;c) Show don't tell moment: &#10;d) Two senses: &#10;&#10;Overall mood + how language creates it: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Simile:</strong> "The slide stood like a skeleton" (comparing the slide to a skeleton using "like"). b) <strong>Personification:</strong> "the playground sat hunched" (sat hunched = human posture given to a non-human place) / "a crisp packet skittered" / "catching in the wire fence with a whisper" (the fence whispers). c) <strong>Show don't tell:</strong> "No child had laughed here for a long time" — the writer never uses the word "sad" or "lonely"; instead we feel the emptiness through the absence of children and laughter. d) <strong>Two senses:</strong> Sight (the swings, slide, peeling rust) and Sound (the whisper of the crisp packet). <strong>Mood + how it is created:</strong> The mood is one of melancholy, abandonment, and forgotten life. The writer creates this through personification that makes the playground feel slumped and defeated, the simile that links the slide to death (skeleton), the single moving detail (the crisp packet) set against total stillness, and the final line that names the absence of laughter rather than showing sadness directly.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">Write a descriptive paragraph of 8–10 sentences about ONE of these scenes: (a) a busy market at night, (b) an empty school corridor, (c) the moment before a thunderstorm. You MUST include: one simile, one metaphor, one use of personification, at least three different senses, and at least one "show don't tell" moment. After your paragraph, write one sentence explaining your most effective choice and why. <span class="marks">6 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Choose your scene: (a) / (b) / (c)&#10;&#10;Your descriptive paragraph: &#10;&#10;My most effective choice was: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Example (empty school corridor): "The corridor had swallowed the last of the afternoon light, and now only the hum of the fluorescent strip remained — a sound like a trapped insect. [sound + personification: corridor 'swallowed'] The lockers stood in grey rows like soldiers dismissed but not yet released. [simile] Her footsteps were gunshots in the silence. [metaphor] The smell of floor wax and old lunches clung to the air — sharp, institutional, familiar. [smell] A crumpled piece of paper lay just outside Room 4. [show don't tell — shows the corridor was recently full without saying so directly] The water fountain dripped once, then again. [sound] By the time she reached the fire door, her shoulders had unknotted themselves without her noticing. [touch + show don't tell for relief] The school was a different animal at 5pm — slower, emptier, almost kind. [metaphor]" Most effective: the metaphor "her footsteps were gunshots in the silence" — it makes the silence feel physical and dramatic, turning a sound into something violent and sudden, which captures the shock of unexpected noise in an empty space.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 38" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 1 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">✖️</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 5 · Day 1</div>
+  <div class="hero-title">Multiplying &<br>Dividing Fractions</div>
+  <div class="hero-subtitle">Fraction × fraction · Keep Change Flip · Cross-cancelling · Mixed numbers</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Basic multiplication and division of fractions. Show all working.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Vocabulary & Basic Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The <strong>reciprocal</strong> of a fraction means you flip it upside down — swap the numerator and denominator. The reciprocal of 3/4 is 4/3. The reciprocal of a whole number like 5 is 1/5. You need this for division (Keep, Change, Flip).</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Write the reciprocal of each of the following: <span class="marks">4 marks</span><br><br>a) 2/5 &nbsp;&nbsp; b) 7/3 &nbsp;&nbsp; c) 4 &nbsp;&nbsp; d) 1/9</div>
+    <textarea class="q-input narrow" placeholder="a) reciprocal of 2/5 = &#10;b) reciprocal of 7/3 = &#10;c) reciprocal of 4 = &#10;d) reciprocal of 1/9 = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) reciprocal of 2/5 = <strong>5/2</strong>. b) reciprocal of 7/3 = <strong>3/7</strong>. c) reciprocal of 4 = <strong>1/4</strong> (write 4 as 4/1, then flip). d) reciprocal of 1/9 = <strong>9/1 = 9</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Multiply the following fractions. Show your working and simplify your answer. <span class="marks">6 marks</span><br><br>a) 2/3 × 3/4 &nbsp;&nbsp; b) 5/8 × 4/5 &nbsp;&nbsp; c) 3/7 × 7/9</div>
+    <textarea class="q-input" placeholder="a) working + answer: &#10;b) working + answer: &#10;c) working + answer: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 2/3 × 3/4 = (2×3)/(3×4) = 6/12 = <strong>1/2</strong>. b) 5/8 × 4/5 = 20/40 = <strong>1/2</strong>. c) 3/7 × 7/9 = 21/63 = <strong>1/3</strong>. Note: Cross-cancelling makes these faster — in (b), cancel the 5s and the 4 with 8: (1/2 × 1/1) = 1/2.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Divide the following fractions using Keep, Change, Flip. Show the KCF step clearly. <span class="marks">6 marks</span><br><br>a) 3/4 ÷ 1/2 &nbsp;&nbsp; b) 5/6 ÷ 5/3 &nbsp;&nbsp; c) 2/9 ÷ 4/3</div>
+    <textarea class="q-input" placeholder="a) Keep: 3/4  Change ÷ to ×  Flip: 1/2 → 2/1  Answer: &#10;b) Keep:       Change:         Flip:          Answer: &#10;c) Keep:       Change:         Flip:          Answer: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 3/4 ÷ 1/2 → Keep 3/4, Change ÷ to ×, Flip 1/2 to 2/1 → 3/4 × 2/1 = 6/4 = <strong>3/2 = 1½</strong>. b) 5/6 ÷ 5/3 → 5/6 × 3/5 = 15/30 = <strong>1/2</strong>. c) 2/9 ÷ 4/3 → 2/9 × 3/4 = 6/36 = <strong>1/6</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Cross-cancelling and mixed numbers. Show all steps.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚙️ Cross-Cancelling & Mixed Numbers</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Use cross-cancelling to simplify BEFORE multiplying. Show the cancelling step clearly. <span class="marks">6 marks</span><br><br>a) 4/9 × 3/8 &nbsp;&nbsp; b) 7/10 × 5/14 &nbsp;&nbsp; c) 9/16 × 8/15</div>
+    <textarea class="q-input" placeholder="a) Cross-cancel: 4 and 8 (÷4) → ... 3 and 9 (÷3) → ...  Answer: &#10;b) Cross-cancel:   Answer: &#10;c) Cross-cancel:   Answer: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 4/9 × 3/8: cancel 4 and 8 (÷4 → 1 and 2), cancel 3 and 9 (÷3 → 1 and 3) → 1/3 × 1/2 = <strong>1/6</strong>. b) 7/10 × 5/14: cancel 5 and 10 (÷5 → 1 and 2), cancel 7 and 14 (÷7 → 1 and 2) → 1/2 × 1/2 = <strong>1/4</strong>. c) 9/16 × 8/15: cancel 8 and 16 (÷8 → 1 and 2), cancel 9 and 15 (÷3 → 3 and 5) → 3/2 × 1/5 = 3/10. <strong>Answer: 3/10</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Convert each mixed number to an improper fraction, then calculate. Show every step and give final answers as mixed numbers where appropriate. <span class="marks">6 marks</span><br><br>a) 1½ × 2/3 &nbsp;&nbsp; b) 2¼ × 1⅓ &nbsp;&nbsp; c) 3½ ÷ 1¾</div>
+    <textarea class="q-input wide" placeholder="a) Convert: 1½ = ___   then __ × 2/3 = ___   Answer: &#10;b) Convert both: 2¼ = ___  1⅓ = ___  then × = ___  Answer: &#10;c) Convert both: 3½ = ___  1¾ = ___  KCF then × = ___  Answer: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 1½ = 3/2 → 3/2 × 2/3 = 6/6 = <strong>1</strong>. b) 2¼ = 9/4, 1⅓ = 4/3 → 9/4 × 4/3 = 36/12 = 3 → <strong>3</strong>. c) 3½ = 7/2, 1¾ = 7/4 → KCF: 7/2 × 4/7 = 28/14 = <strong>2</strong>. (All three give clean answers — a good sign the working is correct!)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Problem solving and connections. Show full working.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Problem Solving</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A recipe needs 3/4 of a cup of sugar. If you want to make 2⅓ batches, how much sugar do you need in total? Show all working and give your answer as a mixed number. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Write your working and answer here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Convert 2⅓ to an improper fraction: 2⅓ = 7/3. Then: 3/4 × 7/3 = 21/12 = 7/4 = <strong>1¾ cups of sugar</strong>. Cross-cancelling shortcut: cancel 3s → 1/4 × 7/1 = 7/4 = 1¾.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">A piece of ribbon is 4½ metres long. It is cut into pieces each measuring 3/4 of a metre. How many COMPLETE pieces can be cut? How much ribbon is left over? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Working: &#10;Number of complete pieces: &#10;Remainder: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">4½ ÷ 3/4 → Convert 4½ = 9/2. KCF: 9/2 × 4/3 = 36/6 = 6. So <strong>6 complete pieces</strong> can be cut, with <strong>no ribbon left over</strong> (9/2 ÷ 3/4 = exactly 6). If students get a remainder, check their conversion of 4½.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">8</div>
+    <div class="q-text">Multiplying fractions connects to the area model. Explain why ½ × ¾ gives the area of a rectangle that is ½ units wide and ¾ units tall. Then use the same idea to explain what ½ × ¾ means in a real-life context of your own choosing. Compare this method to adding fractions (Week 4) — what is the key procedural difference? <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 Maths — adding and subtracting fractions, finding LCM, equivalent fractions.</div>
+    <textarea class="q-input wide" placeholder="Area model explanation: &#10;Real-life context: &#10;Key difference from adding (Week 4): "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Area model:</strong> If you draw a rectangle ½ unit wide and ¾ unit tall, its area is ½ × ¾ = 3/8 square units. The fraction multiplication gives the area directly — multiplying numerators gives the "counted parts" (3), multiplying denominators gives the "total parts in the whole" (8). <strong>Real-life context:</strong> You have ¾ of a pizza. You eat half of your share. You ate ½ × ¾ = 3/8 of the whole pizza. <strong>Key difference from Week 4:</strong> When ADDING fractions you must first find a common denominator (LCM) because you are combining parts of the same whole. When MULTIPLYING, you DO NOT need a common denominator — you simply multiply across: numerator × numerator and denominator × denominator. This is a critical distinction students often confuse.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 1 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#022C22,#065F46);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🌿</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 5 · Day 1</div>
+  <div class="hero-title">Photosynthesis &<br>Plant Biology</div>
+  <div class="hero-subtitle">The equation · Leaf structure · Limiting factors · Plant vs animal cells</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and identification. Use your lesson notes if needed.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Vocabulary & Core Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Photosynthesis</strong> = plants making their own food using light. The word comes from Greek: <em>photo</em> = light, <em>synthesis</em> = putting together. Plants are <strong>producers</strong> — they produce energy from sunlight. Animals are <strong>consumers</strong> — they consume energy by eating.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Write the word equation AND the balanced symbol equation for photosynthesis. Label each substance as a reactant or product. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Word equation: &#10;Symbol equation: &#10;Reactants: &#10;Products: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Word equation:</strong> carbon dioxide + water → glucose + oxygen (light energy needed). <strong>Symbol equation:</strong> 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂. <strong>Reactants</strong> (inputs): carbon dioxide (CO₂) and water (H₂O). <strong>Products</strong> (outputs): glucose (C₆H₁₂O₆) and oxygen (O₂). The reaction requires <strong>light energy</strong> (absorbed by chlorophyll) to proceed.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Name the THREE limiting factors of photosynthesis. For each one, explain in one sentence what "limiting" means in that context. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="1. &#10;2. &#10;3. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Light intensity</strong> — if light is too dim, the plant cannot absorb enough energy to drive the reaction faster, even if CO₂ and water are plentiful. 2. <strong>Carbon dioxide concentration</strong> — if CO₂ levels in the air are low, the plant runs out of raw material and the rate slows, even if light is bright. 3. <strong>Temperature</strong> — enzymes controlling photosynthesis work best at an optimum temperature; too cold slows them, too hot denatures them, stopping photosynthesis.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">List THREE structures found in plant cells but NOT in animal cells, and give the function of each. <span class="marks">3 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 2 Science — cell structure, organelles, and the difference between plant and animal cells.</div>
+    <textarea class="q-input" placeholder="1. Structure:    Function: &#10;2. Structure:    Function: &#10;3. Structure:    Function: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Cell wall</strong> (made of cellulose) — provides rigid support and shape to the plant cell. 2. <strong>Chloroplast</strong> — contains chlorophyll and is the site of photosynthesis; converts light energy into glucose. 3. <strong>Large permanent vacuole</strong> — stores water and dissolved substances; helps keep the cell firm (turgid) so the plant stands upright.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Understanding leaf structure and applying limiting factors.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Leaf Structure & Limiting Factors</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">For each leaf layer, name it and explain its specific role in photosynthesis: <span class="marks">6 marks</span><br><br>a) The upper layer — tightly packed, column-shaped cells with the most chloroplasts<br>b) The lower layer — loosely packed cells with large air spaces between them<br>c) The tiny pores on the underside of the leaf, controlled by guard cells</div>
+    <textarea class="q-input" placeholder="a) Name:    Role: &#10;b) Name:    Role: &#10;c) Name:    Role: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Palisade mesophyll</strong> — positioned just below the upper epidermis to receive maximum light; the tightly packed column cells are packed with chloroplasts, making this the PRIMARY site of photosynthesis. b) <strong>Spongy mesophyll</strong> — loosely packed with large air spaces between cells that allow CO₂ and O₂ to diffuse easily through the leaf to and from photosynthesising cells. c) <strong>Stomata</strong> (controlled by <strong>guard cells</strong>) — tiny pores (mainly on the underside) through which CO₂ enters and O₂ and water vapour exit; guard cells open and close the stomata to balance gas exchange against water loss.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">A student puts a plant in a bright room but the rate of photosynthesis does not increase beyond a certain point. Explain what is happening in terms of limiting factors, and name TWO changes the student could make to increase the rate further. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="What is happening (which factor is now limiting?): &#10;Change 1: &#10;Change 2: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">When light is no longer the limiting factor (it is now plentiful), another factor becomes the bottleneck — most likely <strong>CO₂ concentration</strong> or <strong>temperature</strong>. Even though there is enough light, the plant cannot photosynthesise faster because it does not have enough CO₂ or the enzymes are not working at their optimum rate. <strong>Change 1:</strong> Increase CO₂ concentration (e.g. in a greenhouse, add CO₂ or use ventilation). <strong>Change 2:</strong> Increase temperature slightly (towards the optimum, around 25–30°C for most plants) — this speeds up enzyme action.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">Explain the difference between a plant being an <em>autotroph</em> and an animal being a <em>heterotroph</em>. How does this connect to why plants need chloroplasts but animals do not? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Autotroph means: &#10;Heterotroph means: &#10;Connection to chloroplasts: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">An <strong>autotroph</strong> ("self-feeder") is an organism that makes its own food using an external energy source (for plants, sunlight). A <strong>heterotroph</strong> ("other-feeder") must consume other organisms to obtain energy — animals cannot make their own food. Plants need <strong>chloroplasts</strong> because that is where photosynthesis takes place — the chlorophyll inside captures light energy and uses it to convert CO₂ + H₂O into glucose. Animals have no chloroplasts because they do not photosynthesise: they obtain glucose by digesting food (Week 4 — digestion and enzymes). The cell structure reflects the organism's role in the ecosystem.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Analysis, evaluation, and extended scientific thinking.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Analysis & Extended Science</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">7</div>
+    <div class="q-text">A scientist measures the rate of photosynthesis in a pond plant at different light intensities (low / medium / high) while keeping temperature and CO₂ constant. At low light, the rate is slow. At medium, it doubles. At high, it barely increases at all. Explain these results in terms of limiting factors. What would you need to change to make high light intensity produce a faster rate? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Low light result — explanation: &#10;Medium light result — explanation: &#10;High light result — explanation (which factor is now limiting?): &#10;What to change to improve the rate at high light: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Low light:</strong> Light intensity is the limiting factor — there is not enough light energy to drive photosynthesis fast, even if CO₂ and temperature are fine. <strong>Medium light:</strong> More light energy is available, so the rate doubles — light is still partially limiting, but increasing it is producing a clear improvement. <strong>High light:</strong> Light is now in excess — adding more light has almost no effect because a different factor has become the new limiting factor (most likely <strong>CO₂ concentration</strong>, since temperature is held constant). The plant has more light than it can use. <strong>What to change:</strong> Increase the CO₂ concentration in the water/air around the plant — this would remove the new limiting factor and allow the high light intensity to produce a genuinely faster rate of photosynthesis.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">8</div>
+    <div class="q-text">"The leaf is perfectly designed for photosynthesis." Using specific structural features you have studied, evaluate this claim. Write at least 6 sentences and mention at least THREE different structural adaptations. <span class="marks">7 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your evaluation here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The leaf does show remarkable structural adaptation for photosynthesis at every level. <strong>The broad, flat shape</strong> maximises the surface area exposed to sunlight — a simple but crucial adaptation. <strong>The upper epidermis</strong> is transparent, allowing light to pass straight through to the palisade cells below without being blocked. <strong>The palisade mesophyll</strong> sits immediately beneath, packed with chloroplasts in tall columnar cells that maximise the number of chloroplasts in the path of incoming light. <strong>The spongy mesophyll</strong> below has large air spaces that allow CO₂ to diffuse freely to photosynthesising cells — this solves the problem of gas supply inside the leaf. <strong>Stomata</strong> on the lower surface allow gas exchange while being positioned away from direct sunlight, reducing the amount of water lost. <strong>The network of veins (vascular bundles)</strong> delivers water via xylem right to the photosynthesising cells, and carries away glucose via phloem. Every structure has a function that directly supports photosynthesis — the claim is strongly justified.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 1 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🗺️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 5 · Day 1</div>
+  <div class="hero-title">Maps, Globes &<br>Geographic Tools</div>
+  <div class="hero-subtitle">Latitude & longitude · Scale · Compass · Map types · Projections</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Key vocabulary and basic map skills. Use your lesson notes if needed.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,-e 
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week5_Day1');</script>

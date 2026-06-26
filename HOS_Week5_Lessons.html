@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 5 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:260px;height:260px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;animation:cardIn 0.5s cubic-bezier(0.22,0.68,0,1.2) both;}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.18s}.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.30s}.card:nth-child(7){animation-delay:.36s}.card:nth-child(8){animation-delay:.42s}.card:nth-child(9){animation-delay:.48s}.card:nth-child(10){animation-delay:.54s}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:130px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-sm{padding:8px 16px;font-size:0.82rem;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent,#555);color:var(--text);background:rgba(255,255,255,0.04);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.fwall{display:flex;flex-direction:column;gap:3px;margin:14px 0;}
+.fwall-row{display:flex;gap:3px;height:32px;}
+.fwall-cell{display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:0.75rem;font-weight:700;color:white;flex:1;transition:opacity 0.2s;}
+.fwall-cell:hover{opacity:0.8;}
+.acc-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.acc-card:hover,.acc-card.open{border-color:var(--accent,#555);}
+.acc-head{display:flex;justify-content:space-between;align-items:center;}
+.acc-title{font-weight:700;color:var(--bright);font-size:0.95rem;}
+.acc-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.acc-toggle{color:var(--muted);transition:transform 0.25s;}
+.acc-card.open .acc-toggle{transform:rotate(180deg);}
+.acc-body{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:0.87rem;color:var(--muted);line-height:1.65;}
+.acc-card.open .acc-body{display:block;}
+.acc-body strong{color:var(--bright);}
+.peel-row{display:flex;margin:14px 0;border-radius:10px;overflow:hidden;flex-wrap:wrap;}
+.peel-cell{flex:1;min-width:140px;padding:14px 12px;text-align:center;}
+.peel-letter{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:white;line-height:1;}
+.peel-word{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;color:rgba(255,255,255,0.65);}
+.peel-desc{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4;}
+.genre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:12px;}
+.genre-tile{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;transition:all 0.2s;}
+.genre-tile:hover{border-color:var(--accent,#555);transform:translateY(-2px);}
+.genre-name{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:4px;}
+.genre-book{font-size:0.75rem;color:var(--muted);margin-bottom:6px;}
+.genre-def{font-size:0.82rem;color:#B0B0C8;line-height:1.4;}
+.inf-chain{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;margin:14px 0;}
+.inf-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:0.85rem;flex:1;min-width:140px;}
+.inf-box .label{font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:700;}
+.inf-box .value{color:var(--bright);font-weight:600;line-height:1.4;}
+.inf-arrow{color:var(--muted);font-size:1.2rem;flex-shrink:0;align-self:center;}
+.cell-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;min-height:160px;transition:border-color 0.3s;}
+.cip-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--bright);margin-bottom:8px;}
+.cip-body{font-size:0.87rem;color:var(--muted);line-height:1.6;}
+.cip-body strong{color:var(--bright);}
+.cip-analogy{font-size:0.82rem;margin-top:10px;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;}
+.hier-wrap{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:16px 0;}
+.hier-box{padding:8px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;color:white;text-align:center;}
+.hier-arrow{color:var(--muted);font-size:1.1rem;}
+.size-compare{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.size-row{display:flex;align-items:center;gap:10px;}
+.size-label{width:150px;font-size:0.8rem;color:var(--muted);flex-shrink:0;}
+.size-track{flex:1;background:var(--surface2);border-radius:8px;height:24px;overflow:hidden;}
+.size-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding-left:10px;font-size:0.72rem;font-weight:700;color:white;white-space:nowrap;transition:width 1s ease;}
+.frac-add-block{margin:16px 0;}
+.frac-row-label{font-size:0.78rem;color:var(--muted);margin-bottom:5px;font-weight:600;}
+.frac-bar{display:flex;height:32px;border-radius:6px;overflow:hidden;border:1px solid var(--border);margin-bottom:10px;}
+.frac-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:white;border-right:1px solid rgba(255,255,255,0.15);}
+.frac-seg:last-child{border-right:none;}
+.frac-seg.empty{background:var(--surface2);color:var(--muted);}
+.frac-op{text-align:center;font-size:1.3rem;color:var(--muted);margin:2px 0 10px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.grid-model{display:grid;gap:3px;margin:14px 0;border:1px solid var(--border);padding:6px;border-radius:10px;background:var(--surface2);}
+.grid-cell{aspect-ratio:1;border-radius:4px;background:rgba(255,255,255,0.05);transition:background 0.3s;}
+.compass{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6px;max-width:280px;margin:18px auto;}
+.compass-cell{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;border-radius:10px;padding:18px 4px;color:white;text-align:center;}
+@media(max-width:600px){
+  .hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}
+  .compare{grid-template-columns:1fr;}.peel-row{flex-direction:column;}
+  .inf-chain{flex-direction:column;}.inf-arrow{transform:rotate(90deg);}
+  .size-label{width:90px;font-size:0.7rem;}
+}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 5</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+<!-- ═══════════════════════════════════════════════════════════
+     BIBLE — Abraham: Called to Trust God
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🐫</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 5</div>
+  <div class="hero-title">Abraham —<br>Called to Trust God</div>
+  <div class="hero-subtitle">Genesis 12 · God's Call · Leaving Home · Faith and Obedience Continued</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Genesis 12:2</span><span class="hero-tag">Genesis 12–13</span><span class="hero-tag">Covenant</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"I will make you into a great nation, and I will bless you; I will make your name great, and you will be a blessing."</div>
+    <div class="verse-ref">Genesis 12:2 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word breakdown:</strong> <em>"great nation"</em> = an enormous number of descendants — astonishing for a man with no children yet. <em>"I will bless you"</em> = God's favour and goodness resting on Abram's life. <em>"make your name great"</em> = lasting honour and reputation, not fame for its own sake. <em>"you will be a blessing"</em> = the promise was never meant to stop with Abram — it flows OUTWARD to other people. This is the key difference from Noah's covenant: Noah's covenant protected the earth; Abraham's covenant sends blessing out into the world through one family.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">call / calling</div><div class="esl-def">An invitation from God to a person to do something specific — often something that requires leaving the familiar behind.</div></div>
+    <div class="esl-row"><div class="esl-word">homeland</div><div class="esl-def">The country or place where a person was born and grew up. Abram's homeland was Ur of the Chaldeans, in Mesopotamia (modern-day Iraq).</div></div>
+    <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A solemn, binding PROMISE between God and people. (Remember this word from Week 4 — Noah's covenant. Abraham receives the SECOND major covenant in the Bible.)</div></div>
+    <div class="esl-row"><div class="esl-word">blessing</div><div class="esl-def">God's favour and goodness — often goodness that is meant to flow outward and benefit OTHER people too, not just the person who receives it.</div></div>
+    <div class="esl-row"><div class="esl-word">descendant</div><div class="esl-def">A person who comes from a particular ancestor. Abraham's descendants include the nation of Israel and, in the New Testament's view, all who share his faith.</div></div>
+    <div class="esl-row"><div class="esl-word">patriarch</div><div class="esl-def">A founding "father" figure of a family or nation. Abraham is often called the first patriarch of the Bible — followed by his son Isaac and grandson Jacob.</div></div>
+    <div class="esl-row"><div class="esl-word">altar</div><div class="esl-def">A structure built for worship or sacrifice. Abram builds altars at several points in his journey to mark significant places where God spoke to him.</div></div>
+    <div class="esl-row"><div class="esl-word">nomad</div><div class="esl-def">A person who moves from place to place rather than settling permanently in one location — Abram lived as a nomad for the rest of his life after leaving Ur.</div></div>
+    <div class="esl-row"><div class="esl-word">famine</div><div class="esl-def">A severe shortage of food, often caused by drought or crop failure, that can force people to migrate in search of survival.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🏺</span> Where Did Abraham Come From? — Leaving Everything Familiar</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">Abram (his name before God renamed him "Abraham" in Genesis 17) lived in <strong>Ur of the Chaldeans</strong> — a wealthy, advanced city in Mesopotamia, in what is now southern Iraq. Ur was full of temples to many different gods. Abram's own family, according to Jewish tradition, worshipped idols before God called him.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">🏙️ What Abram Left Behind</div>
+      <div class="cmp-row">A settled home in an established, wealthy city</div>
+      <div class="cmp-row">His wider family and extended household</div>
+      <div class="cmp-row">A familiar culture, language area, and way of life</div>
+      <div class="cmp-row">Security and certainty about the future</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">🌅 What He Was Promised Instead</div>
+      <div class="cmp-row">A land he had not yet seen — "the land I will show you"</div>
+      <div class="cmp-row">Descendants forming a "great nation," though he had none yet</div>
+      <div class="cmp-row">God's blessing and protection on the journey</div>
+      <div class="cmp-row">A role in blessing "all peoples on earth"</div>
+    </div>
+  </div>
+  <div class="callout key" style="margin-top:14px;">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>KS3 thinking point:</strong> Abram was 75 years old (Genesis 12:4) when he left — not a young adventurer, but a man giving up a settled life late in life, based on a promise with no visible proof yet. This connects directly to Noah's faith from Week 4: trusting God's word before seeing the result.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📜</span> The Call of Abraham — Genesis 12:1–3</div>
+  <div class="callout warn">
+    <div class="ci">📖</div>
+    <div class="ct">God's call has TWO parts: a command to leave, and a promise of what will follow. Look closely at the structure below.</div>
+  </div>
+  <div class="inf-chain">
+    <div class="inf-box"><div class="label">The Command</div><div class="value">"Go from your country, your people and your father's household to the land I will show you."</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">The Promise</div><div class="value">"I will make you into a great nation... I will bless you... you will be a blessing... all peoples on earth will be blessed through you."</div></div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Notice the order:</strong> God asks Abram to obey FIRST — leave everything — and only afterward explains the destination ("the land I will show you," not "the land of Canaan"). This is the same pattern of faith-before-evidence seen with Noah: trust comes before full information.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🗺️</span> Abram's Journey — From Ur to Canaan</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#6D28D9;"></div><div class="tl-date">Stage 1</div><div class="tl-title">Ur of the Chaldeans</div><div class="tl-desc">Abram's birthplace and homeland in Mesopotamia. His father Terah first leads the family out of Ur, intending to go to Canaan.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#8B5CF6;"></div><div class="tl-date">Stage 2</div><div class="tl-title">Harran</div><div class="tl-desc">The family settles in Harran for a time, and Terah dies there. It is in Harran that God repeats and clarifies His call directly to Abram — now 75 years old.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#A78BFA;"></div><div class="tl-date">Stage 3</div><div class="tl-title">Canaan — The Promised Land</div><div class="tl-desc">Abram, his wife Sarai, his nephew Lot, and their household arrive in Canaan (Genesis 12:5–6). God appears to Abram at Shechem and promises this very land to his descendants. Abram builds an altar there.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#C4B5FD;"></div><div class="tl-date">Stage 4</div><div class="tl-title">A Detour to Egypt</div><div class="tl-desc">A severe famine forces Abram to travel temporarily to Egypt for food (Genesis 12:10) — even the man of faith faces real, practical hardship. He later returns to Canaan once the famine ends.</div></div>
+  </div>
+  <div class="callout tip" style="margin-top:10px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>KS3 map skills link:</strong> This journey — Ur to Harran to Canaan — covers roughly 1,000 miles (about 1,600 km) across the Fertile Crescent, almost entirely on foot or by donkey/camel caravan. Keep this journey in mind for this week's History lesson on maps and geographic tools!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">⚖️</span> Comparing Two Examples of Faith — Noah and Abraham</div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Noah (Week 4)</th><th>Abraham (Week 5)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>What faith required</strong></td><td>Build an enormous ark for a flood that had not yet happened</td><td>Leave his entire homeland for a destination not yet revealed</td></tr>
+      <tr><td><strong>Length of obedience</strong></td><td>Decades of construction before any rain fell</td><td>A lifetime as a nomad, never permanently settling</td></tr>
+      <tr><td><strong>The covenant's sign</strong></td><td>The rainbow (Genesis 9:13)</td><td>Later formalised with circumcision (Genesis 17:11)</td></tr>
+      <tr><td><strong>Scope of the promise</strong></td><td>Protects the WHOLE EARTH from future flooding</td><td>Blesses "ALL PEOPLES on earth" through one family's descendants</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info" style="margin-top:12px;">
+    <div class="ci">🔗</div>
+    <div class="ct"><strong>The pattern continues:</strong> Both stories show the same "golden idea": faith means trusting and obeying God's word BEFORE you can see how it will turn out. You will meet this pattern again and again across the Bible's major figures this term.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> What Trusting God Looks Like — Application</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">Trust sometimes means stepping into the unknown</div><div class="step-desc">Abram left without knowing his final destination. Trusting God does not always come with a full explanation in advance.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">God's promises are often bigger than the evidence available at the time</div><div class="step-desc">Abram was promised a "great nation" while childless. Real trust holds onto a promise even when current circumstances seem to contradict it.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">Faith does not remove every hardship</div><div class="step-desc">Even after answering God's call, Abram faced a famine and had to travel to Egypt. Trusting God is not a guarantee of an easy path — but of God's continued presence on it.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">4</div><div><div class="step-title">Blessing is meant to be shared outward</div><div class="step-desc">"You will be a blessing" — Abram's calling was never just personal gain. Genuine blessing flows out to benefit other people too.</div></div></div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">✍️</div>
+    <div class="ct"><strong>Sentence starters for reflection:</strong> "Abram's trust is shown through his ___ because ___." / "The promise to Abram shows that God ___." / "An example of stepping into the unknown in my own life could be ___."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> Knowledge Check — Abraham</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+<!-- ═══════════════════════════════════════════════════════════
+     ENGLISH — Descriptive Writing
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🎨</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 5</div>
+  <div class="hero-title">Descriptive<br>Writing</div>
+  <div class="hero-subtitle">Imagery and the five senses · Similes and metaphors · Personification · Painting pictures with words</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Figurative Language</span><span class="hero-tag">Imagery</span><span class="hero-tag">Show, Don't Tell</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these — they turn flat writing into vivid writing</div>
+    <div class="esl-row"><div class="esl-word">descriptive writing</div><div class="esl-def">Writing that creates a vivid, detailed picture in the reader's mind — usually using sensory detail and figurative language.</div></div>
+    <div class="esl-row"><div class="esl-word">imagery</div><div class="esl-def">Language that appeals to the FIVE SENSES — sight, sound, smell, taste, and touch — to help the reader imagine an experience.</div></div>
+    <div class="esl-row"><div class="esl-word">figurative language</div><div class="esl-def">Language that means something BEYOND its literal, word-for-word meaning — used to create a stronger or more vivid effect.</div></div>
+    <div class="esl-row"><div class="esl-word">literal language</div><div class="esl-def">Language that means EXACTLY what it says, with no comparison or exaggeration. "The fire was hot" is literal.</div></div>
+    <div class="esl-row"><div class="esl-word">simile</div><div class="esl-def">A comparison between two different things using the words "like" or "as." "The fire roared <strong>like</strong> a hungry lion."</div></div>
+    <div class="esl-row"><div class="esl-word">metaphor</div><div class="esl-def">A comparison that states one thing IS another — without using "like" or "as." "The fire <strong>was</strong> a hungry lion."</div></div>
+    <div class="esl-row"><div class="esl-word">personification</div><div class="esl-def">Giving human qualities, feelings, or actions to something that is NOT human. "The wind whispered through the trees."</div></div>
+    <div class="esl-row"><div class="esl-word">hyperbole</div><div class="esl-def">Extreme exaggeration used for effect, not meant to be taken literally. "I've told you a million times."</div></div>
+    <div class="esl-row"><div class="esl-word">sensory detail</div><div class="esl-def">Specific description that draws on one or more of the five senses, making writing feel real and immediate.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🆚</span> Literal vs Descriptive — Why Detail Matters</div>
+  <div class="callout info">
+    <div class="ci">🔍</div>
+    <div class="ct"><strong>The test:</strong> Could a reader picture, hear, smell, taste, or feel what you are describing? If a sentence only states a fact with no sensory detail, it is LITERAL. If it helps the reader experience the scene, it is DESCRIPTIVE.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>❌ Literal (Flat)</th><th>✅ Descriptive (Vivid)</th><th>What Changed?</th></tr></thead>
+    <tbody>
+      <tr><td>The room was messy.</td><td>Crumpled papers spilled across the desk, and the bin overflowed with crushed cans.</td><td>Specific, visual detail replaces a vague adjective</td></tr>
+      <tr><td>The food smelled good.</td><td>The smell of cinnamon and fresh bread drifted from the kitchen.</td><td>Names the EXACT smell rather than a generic judgement</td></tr>
+      <tr><td>It was cold outside.</td><td>An icy wind bit at her fingers and stung her cheeks.</td><td>Adds physical sensation (touch) instead of a plain statement</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">👁️</span> The Five Senses — Building a Sensory Toolkit</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">👀 Sight</div><div class="vc-def">"The sky turned a deep shade of orange as the sun dipped below the hills."</div></div>
+    <div class="vocab-card"><div class="vc-word">👂 Sound</div><div class="vc-def">"Leaves crunched underfoot, and somewhere a dog barked twice."</div></div>
+    <div class="vocab-card"><div class="vc-word">👃 Smell</div><div class="vc-def">"The sharp tang of salt water filled the air near the harbour."</div></div>
+    <div class="vocab-card"><div class="vc-word">👅 Taste</div><div class="vc-def">"The lemon was so sour her whole mouth puckered."</div></div>
+    <div class="vocab-card"><div class="vc-word">✋ Touch</div><div class="vc-def">"The sand was rough and still warm from the afternoon sun."</div></div>
+  </div>
+  <div class="callout good" style="margin-top:14px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Strong descriptive writing rarely uses all five senses in every paragraph — but it deliberately chooses TWO or THREE senses that suit the scene, rather than relying only on sight (the most common — and most overused — sense in student writing).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🔬</span> Figurative Language Lab — Click Each Device to Explore</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('simile')">1️⃣ Simile</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('metaphor')">2️⃣ Metaphor</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('personification')">3️⃣ Personification</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('hyperbole')">4️⃣ Hyperbole</button>
+  </div>
+  <div class="cell-panel" id="fig-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click a device to see its definition, examples, and how to spot it.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🗣️</span> Personification — Giving Life to Objects and Nature</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>ESL tip:</strong> Personification only works on things that are NOT human — objects, animals, weather, ideas, nature. If you describe an actual person's actions, that is not personification, just normal description.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Non-Human Subject</th><th>Human Quality Given</th><th>Example Sentence</th></tr></thead>
+    <tbody>
+      <tr><td>The wind</td><td>Whispering / howling</td><td>"The wind whispered secrets through the trees."</td></tr>
+      <tr><td>The old house</td><td>Groaning / watching</td><td>"The old house groaned under the weight of the storm."</td></tr>
+      <tr><td>The shadows</td><td>Creeping / reaching</td><td>"Shadows crept slowly across the empty playground."</td></tr>
+      <tr><td>The sun</td><td>Smiling / glaring</td><td>"The sun glared down on the cracked, thirsty earth."</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📝</span> Show, Don't Tell — Strengthening Adjectives and Adverbs</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden idea of this lesson:</strong> "Show, don't tell" means replacing a vague label (an adjective that simply states an emotion or quality) with concrete sensory detail or action that lets the READER work out the feeling for themselves.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>❌ Telling</th><th>✅ Showing</th></tr></thead>
+    <tbody>
+      <tr><td>She was nervous.</td><td>Her hands trembled, and she kept glancing at the door.</td></tr>
+      <tr><td>The dog was angry.</td><td>The dog's lips curled back, and a low growl rumbled in its throat.</td></tr>
+      <tr><td>The forest was scary.</td><td>Twisted branches clawed at the darkening sky, and every snapped twig echoed like a gunshot.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Choosing precise adjectives:</strong> Instead of "big," consider <em>enormous, towering, vast, immense</em>. Instead of "good," consider <em>delicious, magnificent, soothing, triumphant</em>. Precise word choice is more powerful than piling up multiple weak adjectives.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🏗️</span> Building a Descriptive Paragraph — Step by Step</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">Choose a clear focus</div><div class="step-desc">Pick ONE scene, object, or moment — not an entire holiday or a whole day. A tightly focused description is far more powerful than a broad summary.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">Select two or three senses to focus on</div><div class="step-desc">Decide which senses suit the scene best (a bakery might use smell and taste; a thunderstorm might use sound and sight).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">Add ONE simile or metaphor</div><div class="step-desc">Do not overload a paragraph with figurative language — one well-chosen comparison is more effective than five crowded together.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">4</div><div><div class="step-title">Replace vague adjectives with precise ones</div><div class="step-desc">Read back through and swap any "nice," "big," "good," or "bad" for something more specific and vivid.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">5</div><div><div class="step-title">Read it aloud and check the rhythm</div><div class="step-desc">Descriptive writing should flow naturally when spoken. Vary your sentence lengths — a short sentence after several long ones can create real impact.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🎯</span> Descriptive Writing — Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+<!-- ═══════════════════════════════════════════════════════════
+     MATHS — Multiplying & Dividing Fractions
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D2200,#7A3D00);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">✖️</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 5</div>
+  <div class="hero-title">Multiplying &amp;<br>Dividing Fractions</div>
+  <div class="hero-subtitle">Fraction × fraction · Cross-cancelling · Mixed numbers · Dividing using reciprocals (Keep, Change, Flip)</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Reciprocals</span><span class="hero-tag">Cross-Cancel</span><span class="hero-tag">Mixed Numbers</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 4 — adding and subtracting fractions</div>
+    <div class="esl-row"><div class="esl-word">numerator</div><div class="esl-def">The TOP number of a fraction — shows how many parts you have. In 3/4, the numerator is 3.</div></div>
+    <div class="esl-row"><div class="esl-word">denominator</div><div class="esl-def">The BOTTOM number of a fraction — shows how many equal parts the whole is divided into. In 3/4, the denominator is 4.</div></div>
+    <div class="esl-row"><div class="esl-word">reciprocal</div><div class="esl-def">A fraction FLIPPED upside down — swap the numerator and denominator. The reciprocal of 2/3 is 3/2. The reciprocal of a whole number like 5 is 1/5.</div></div>
+    <div class="esl-row"><div class="esl-word">cross-cancel</div><div class="esl-def">Simplifying common factors between a numerator and a denominator BEFORE multiplying — makes the final answer easier to simplify.</div></div>
+    <div class="esl-row"><div class="esl-word">improper fraction</div><div class="esl-def">A fraction where the numerator is LARGER than the denominator, e.g. 7/4. Always convert mixed numbers to improper fractions before multiplying or dividing.</div></div>
+    <div class="esl-row"><div class="esl-word">mixed number</div><div class="esl-def">A whole number combined with a fraction, e.g. 2¾. Must be converted to an improper fraction before you can multiply or divide it.</div></div>
+    <div class="esl-row"><div class="esl-word">unit fraction</div><div class="esl-def">A fraction with a numerator of 1, e.g. 1/2, 1/3, 1/8. Useful for visualising multiplication "of" a quantity.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">✖️</span> Multiplying Fractions — Straight Across</div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>The rule:</strong> multiply the numerators together, then multiply the denominators together. Unlike adding and subtracting, you do NOT need a common denominator to multiply.</div>
+  </div>
+  <div class="formula">
+    a/b &times; c/d = <span class="hl">(a&times;c)</span> / <span class="hl2">(b&times;d)</span>  <span class="comment">← top times top, bottom times bottom</span><br><br>
+    2/3 &times; 1/4 = (2&times;1)/(3&times;4) = <span class="hl">2/12</span> = <span class="hl3">1/6</span>  <span class="comment">← simplify the final answer</span>
+  </div>
+  <div class="frac-add-block">
+    <div class="frac-row-label">Step 1 — Take 1/4 of the whole</div>
+    <div class="frac-bar">
+      <div class="frac-seg" style="background:#B45309;flex:1;">1/4</div>
+      <div class="frac-seg empty" style="flex:3;"></div>
+    </div>
+    <div class="frac-row-label">Step 2 — Now take 2/3 of THAT 1/4 piece</div>
+    <div class="frac-bar">
+      <div class="frac-seg" style="background:#B45309;flex:2;">2/3 of it</div>
+      <div class="frac-seg empty" style="flex:1;background:#7A3A2A;"></div>
+      <div class="frac-seg empty" style="flex:9;"></div>
+    </div>
+    <div class="frac-op">= 2/12 of the whole = 1/6</div>
+  </div>
+  <div class="callout tip" style="margin-top:10px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Why "of" means multiply:</strong> "2/3 of 1/4" and "2/3 × 1/4" mean exactly the same thing. Whenever a word problem uses "of" between two fractions, you are being asked to MULTIPLY them.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">✂️</span> Simplify BEFORE You Multiply — Cross-Cancelling</div>
+  <div class="callout info">
+    <div class="ci">⚡</div>
+    <div class="ct">Cross-cancelling makes your numbers smaller and easier to work with — and means you often won't need to simplify at the end at all.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Look diagonally across the two fractions</div><div class="step-desc">For 4/9 × 3/8: check if any numerator shares a common factor with either denominator (not just its own).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Divide matching factors by their HCF</div><div class="step-desc">4 (numerator) and 8 (denominator) share a factor of 4: 4÷4=1, 8÷4=2. Also 3 (numerator) and 9 (denominator) share a factor of 3: 3÷3=1, 9÷3=3.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Multiply the simplified fractions</div><div class="step-desc">Now you have 1/3 × 1/2 = 1/6 — much simpler than working with 4/9 × 3/8 = 12/72 and simplifying afterward.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">4</div><div><div class="step-title">Check: both methods give the same answer</div><div class="step-desc">12/72 simplified (HCF=12) also equals 1/6. Cross-cancelling just gets you there with smaller numbers.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔢</span> Multiplying Mixed Numbers — Convert First!</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>The most common mistake:</strong> you CANNOT multiply the whole numbers and fraction parts separately. 2½ × 1½ is NOT (2×1) + (½×½). You must convert both to improper fractions FIRST.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Example: 2½ × 1⅓</span><br><br>
+    Convert to improper fractions: 2½ = <span class="hl">5/2</span> &nbsp;&nbsp; 1⅓ = <span class="hl2">4/3</span><br>
+    Multiply straight across: 5/2 &times; 4/3 = (5&times;4)/(2&times;3) = 20/6<br>
+    Simplify: HCF(20,6)=2 → 20/6 = 10/3<br>
+    Convert back to a mixed number: 10/3 = <span class="hl3">3⅓</span><br><br>
+    <span class="comment">Final answer: 2½ × 1⅓ = 3⅓</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">➗</span> Dividing Fractions — Keep, Change, Flip</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden rule:</strong> to divide by a fraction, KEEP the first fraction the same, CHANGE the ÷ sign to ×, and FLIP the second fraction (find its reciprocal). Then multiply as normal.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">KEEP the first fraction</div><div class="step-desc">For 3/4 ÷ 2/5: keep 3/4 exactly as it is.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">CHANGE ÷ to ×</div><div class="step-desc">3/4 ÷ 2/5 becomes 3/4 × ...</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">FLIP the second fraction (find its reciprocal)</div><div class="step-desc">2/5 flips to become 5/2. Now we have: 3/4 × 5/2.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">4</div><div><div class="step-title">Multiply straight across</div><div class="step-desc">3/4 × 5/2 = (3×5)/(4×2) = 15/8 = 1⅞. <strong>Final answer: 3/4 ÷ 2/5 = 1⅞</strong></div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🍕</span> Why Does "Keep, Change, Flip" Actually Work?</div>
+  <div class="callout info">
+    <div class="ci">🤔</div>
+    <div class="ct">Dividing by a fraction answers the question: <strong>"How many of that fraction fit inside the first number?"</strong></div>
+  </div>
+  <div class="formula">
+    <span class="comment">Real-life example: 4 ÷ 1/2 = ?</span><br><br>
+    Question: how many <span class="hl">halves</span> fit into 4 whole pizzas?<br>
+    Each pizza splits into 2 halves, so 4 pizzas = 4 &times; 2 = <span class="hl2">8 halves</span><br><br>
+    Using Keep, Change, Flip: 4/1 &times; 2/1 = 8/1 = <span class="hl3">8</span> ✓ Same answer!
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Dividing by a fraction SMALLER than 1 always makes the answer BIGGER than the number you started with — because you are asking how many small pieces fit into a bigger amount. This often surprises students, since dividing usually feels like it should make numbers smaller!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔁</span> Dividing Mixed Numbers</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">Exactly like multiplying mixed numbers — convert to improper fractions FIRST, then apply Keep, Change, Flip.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Example: 3¼ ÷ 1½</span><br><br>
+    Convert: 3¼ = <span class="hl">13/4</span> &nbsp;&nbsp; 1½ = <span class="hl2">3/2</span><br>
+    Keep, Change, Flip: 13/4 &times; 2/3<br>
+    Cross-cancel: 4 and 2 share a factor of 2 → 13/2 &times; 1/3<br>
+    Multiply: 13/2 &times; 1/3 = 13/6 = <span class="hl3">2⅙</span><br><br>
+    <span class="comment">Final answer: 3¼ ÷ 1½ = 2⅙</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🎯</span> Multiplying &amp; Dividing Fractions — Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+<!-- ═══════════════════════════════════════════════════════════
+     SCIENCE — Photosynthesis & Plant Biology
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🌿</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 5</div>
+  <div class="hero-title">Photosynthesis &amp;<br>Plant Biology</div>
+  <div class="hero-subtitle">The photosynthesis equation · Leaf structure · Chloroplasts and chlorophyll · How plants make their own food</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Biology</span><span class="hero-tag">Photosynthesis</span><span class="hero-tag">Leaf Structure</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Biology Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 4 — remember nutrient, absorption and enzyme</div>
+    <div class="esl-row"><div class="esl-word">photosynthesis</div><div class="esl-def">The process by which plants make their OWN food (glucose) using light energy, carbon dioxide and water. The word literally means "putting together using light."</div></div>
+    <div class="esl-row"><div class="esl-word">chlorophyll</div><div class="esl-def">The GREEN pigment found in chloroplasts that absorbs light energy — this is why most leaves are green.</div></div>
+    <div class="esl-row"><div class="esl-word">chloroplast</div><div class="esl-def">The organelle (small structure) inside plant cells where photosynthesis actually takes place. Contains chlorophyll.</div></div>
+    <div class="esl-row"><div class="esl-word">glucose</div><div class="esl-def">A simple sugar — the food/energy product made by photosynthesis. Used by the plant for energy, growth and storage.</div></div>
+    <div class="esl-row"><div class="esl-word">stomata</div><div class="esl-def">Tiny pores, mostly on the underside of a leaf, that allow gases (carbon dioxide in, oxygen and water vapour out) to pass in and out.</div></div>
+    <div class="esl-row"><div class="esl-word">guard cells</div><div class="esl-def">Pairs of cells that open and close each stoma, controlling gas exchange and water loss.</div></div>
+    <div class="esl-row"><div class="esl-word">xylem</div><div class="esl-def">Tube-like tissue that transports WATER and minerals upward from the roots to the rest of the plant.</div></div>
+    <div class="esl-row"><div class="esl-word">phloem</div><div class="esl-def">Tube-like tissue that transports the GLUCOSE made during photosynthesis to all parts of the plant — this process is called translocation.</div></div>
+    <div class="esl-row"><div class="esl-word">transpiration</div><div class="esl-def">The loss of water vapour from a plant, mainly through the stomata in its leaves.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">⚗️</span> The Photosynthesis Equation</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Photosynthesis is a chemical reaction. Like any equation, it has REACTANTS (what goes in) and PRODUCTS (what comes out) — and it needs an energy source to happen.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Word equation:</span><br>
+    carbon dioxide + water &nbsp;<span class="hl">--(light energy)--&gt;</span>&nbsp; glucose + oxygen<br><br>
+    <span class="comment">Symbol equation:</span><br>
+    6CO<sub>2</sub> + 6H<sub>2</sub>O &nbsp;<span class="hl">--(light, chlorophyll)--&gt;</span>&nbsp; <span class="hl2">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></span> + <span class="hl3">6O<sub>2</sub></span>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Term</th><th>Role</th><th>Where It Comes From</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Carbon dioxide</strong></td><td>Reactant — raw material</td><td>Absorbed from the air through the stomata</td></tr>
+      <tr><td><strong>Water</strong></td><td>Reactant — raw material</td><td>Absorbed from the soil by the roots, carried up by the xylem</td></tr>
+      <tr><td><strong>Light energy</strong></td><td>Powers the reaction (not a substance)</td><td>Sunlight (or artificial light), absorbed by chlorophyll</td></tr>
+      <tr><td><strong>Glucose</strong></td><td>Product — the plant's food</td><td>Used for energy, growth, or stored as starch</td></tr>
+      <tr><td><strong>Oxygen</strong></td><td>Product — released as a "waste" gas</td><td>Released back into the air through the stomata</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">☀️</span> Why Plants Need Light — Where Does the Energy Come From?</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>KS3 key concept:</strong> Plants are called "producers" because, unlike animals, they do not need to eat other organisms — they PRODUCE their own food using light energy. This is the very first step of almost every food chain on Earth (you will study this further in Week 6: Ecosystems &amp; Food Webs).</div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct">Without light, photosynthesis stops almost immediately — this is why plants kept in darkness eventually turn pale (lose their green colour) and die. Chlorophyll cannot function without a light source to absorb.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🍃</span> Leaf Structure — Click Each Layer to Explore</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showLeaf('upper')">1️⃣ Upper Epidermis</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showLeaf('palisade')">2️⃣ Palisade Mesophyll</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showLeaf('spongy')">3️⃣ Spongy Mesophyll</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showLeaf('stomata')">4️⃣ Stomata &amp; Guard Cells</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showLeaf('veins')">5️⃣ Veins (Xylem &amp; Phloem)</button>
+  </div>
+  <div class="cell-panel" id="leaf-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click each layer in order, from the top surface of the leaf down to the bottom.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">⚖️</span> Limiting Factors — What Can Slow Photosynthesis Down?</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>A limiting factor</strong> is anything in short supply that slows down the rate of a process. If ANY of the three factors below is too low, photosynthesis slows down — even if the other two are plentiful.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Limiting Factor</th><th>Effect If Too Low</th><th>Real-World Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Light intensity</strong></td><td>Less energy available to power the reaction</td><td>Plants in deep shade grow more slowly</td></tr>
+      <tr><td><strong>Carbon dioxide concentration</strong></td><td>Less raw material available to build glucose</td><td>Greenhouses sometimes add extra CO₂ to boost crop growth</td></tr>
+      <tr><td><strong>Temperature</strong></td><td>Too cold slows the reaction; too hot can damage the enzymes involved</td><td>Plant growth slows dramatically in winter</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🔬</span> Plant Cells vs Animal Cells — Review &amp; Extension</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.5);">
+      <div class="cmp-head" style="color:#6EE7B7;">🌱 Plant Cells — Extra Structures</div>
+      <div class="cmp-row"><strong>Cell wall:</strong> rigid outer layer made of cellulose — gives shape and support</div>
+      <div class="cmp-row"><strong>Chloroplasts:</strong> contain chlorophyll — site of photosynthesis</div>
+      <div class="cmp-row"><strong>Large permanent vacuole:</strong> stores water and helps keep the cell rigid</div>
+      <div class="cmp-row">These three structures are NEVER found in animal cells</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">🐾 Shared by Both Cell Types</div>
+      <div class="cmp-row"><strong>Nucleus:</strong> controls the cell's activities, contains genetic material</div>
+      <div class="cmp-row"><strong>Cytoplasm:</strong> jelly-like substance where chemical reactions occur</div>
+      <div class="cmp-row"><strong>Cell membrane:</strong> controls what enters and leaves the cell</div>
+      <div class="cmp-row"><strong>Mitochondria:</strong> site of respiration — releases energy in BOTH cell types</div>
+    </div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">🔗</div>
+    <div class="ct"><strong>Connecting to Week 2:</strong> Remember plant vs animal cells from earlier this term? This week adds the DETAIL of what actually happens inside the chloroplast — turning that basic structure into a working understanding of plant biology.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🌍</span> Why Photosynthesis Matters — For Plants and For Us</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#065F46;">1</div><div><div class="step-title">It produces the oxygen we breathe</div><div class="step-desc">Most of the oxygen in Earth's atmosphere is a "waste product" of photosynthesis — produced by plants, algae and some bacteria over billions of years.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">2</div><div><div class="step-title">It is the foundation of almost every food chain</div><div class="step-desc">Plants are "producers" — nearly all energy in an ecosystem traces back to photosynthesis, even in animals that never eat plants directly (they eat something that ate a plant).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">3</div><div><div class="step-title">It created fossil fuels</div><div class="step-desc">Coal, oil and gas formed from the remains of ancient plants (and other organisms) that captured solar energy through photosynthesis millions of years ago.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">4</div><div><div class="step-title">It removes carbon dioxide from the air</div><div class="step-desc">Photosynthesis absorbs CO₂, which is why deforestation (cutting down large numbers of trees) is a major concern for climate change.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🎯</span> Photosynthesis &amp; Plant Biology — Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+<!-- ═══════════════════════════════════════════════════════════
+     HISTORY — Maps, Globes & Geographic Tools
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🧭</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History &amp; Geography · Week 5</div>
+  <div class="hero-title">Maps, Globes &amp;<br>Geographic Tools</div>
+  <div class="hero-subtitle">Latitude and longitude · Compass directions · Map scale · Types of maps · Globes vs flat maps</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Coordinates</span><span class="hero-tag">Compass Rose</span><span class="hero-tag">Map Scale</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL History &amp; Geography Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 1's timelines — geographic tools use similar systems of measurement</div>
+    <div class="esl-row"><div class="esl-word">latitude</div><div class="esl-def">Imaginary horizontal lines circling the Earth, measuring distance NORTH or SOUTH of the Equator (0°).</div></div>
+    <div class="esl-row"><div class="esl-word">longitude</div><div class="esl-def">Imaginary vertical lines running pole to pole, measuring distance EAST or WEST of the Prime Meridian (0°).</div></div>
+    <div class="esl-row"><div class="esl-word">equator</div><div class="esl-def">The imaginary line at 0° latitude, circling the Earth exactly halfway between the North and South Poles.</div></div>
+    <div class="esl-row"><div class="esl-word">Prime Meridian</div><div class="esl-def">The imaginary line at 0° longitude, passing through Greenwich, London — the reference point for all longitude measurements.</div></div>
+    <div class="esl-row"><div class="esl-word">coordinates</div><div class="esl-def">A pair of numbers (a latitude and a longitude) that together pinpoint one EXACT location on Earth.</div></div>
+    <div class="esl-row"><div class="esl-word">hemisphere</div><div class="esl-def">Half of the Earth. The Equator divides North/South hemispheres; the Prime Meridian (with its opposite line) divides East/West hemispheres.</div></div>
+    <div class="esl-row"><div class="esl-word">compass rose</div><div class="esl-def">A diagram on a map showing the cardinal directions (N, S, E, W) and intercardinal directions (NE, NW, SE, SW).</div></div>
+    <div class="esl-row"><div class="esl-word">scale</div><div class="esl-def">A ratio showing the relationship between distance ON a map and the real distance ON THE GROUND.</div></div>
+    <div class="esl-row"><div class="esl-word">key / legend</div><div class="esl-def">A box on a map that explains what each symbol, colour or line pattern represents.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🌐</span> Latitude &amp; Longitude — Earth's Grid System</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">Together, latitude and longitude form a GRID over the entire planet — similar to the rows and columns on the coordinates grid you used in Week 4's Maths lesson, but wrapped around a sphere.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Latitude</th><th>Longitude</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Direction of lines</strong></td><td>Run horizontally (east–west), like rungs of a ladder</td><td>Run vertically (north–south), from pole to pole</td></tr>
+      <tr><td><strong>What it measures</strong></td><td>Distance NORTH or SOUTH of the Equator</td><td>Distance EAST or WEST of the Prime Meridian</td></tr>
+      <tr><td><strong>0° reference line</strong></td><td>The Equator</td><td>The Prime Meridian (Greenwich, London)</td></tr>
+      <tr><td><strong>Range</strong></td><td>0°–90° North or 0°–90° South</td><td>0°–180° East or 0°–180° West</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 memory tip:</strong> Latitude lines are "flat" like the rungs of a LADDER (LATitude = LADDER — both start with similar sounds). Longitude lines are "LONG," stretching from the top of the globe to the bottom.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📌</span> Reading Coordinates — Finding an Exact Location</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">1</div><div><div class="step-title">Coordinates are always written latitude FIRST, then longitude</div><div class="step-desc">A common memory trick: "Latitude before Longitude," alphabetical order, just like reading along the floor (Lat) before going up a ladder (Long).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">2</div><div><div class="step-title">Each number includes a direction letter</div><div class="step-desc">London's coordinates are approximately <strong>51.5°N, 0.1°W</strong> — meaning 51.5 degrees north of the Equator, and 0.1 degrees west of the Prime Meridian.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">3</div><div><div class="step-title">Find the latitude line first</div><div class="step-desc">Trace along the correct line north or south of the Equator to the stated number of degrees.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">4</div><div><div class="step-title">Then find the longitude line</div><div class="step-desc">From that latitude line, move to the correct number of degrees east or west of the Prime Meridian. Where the two lines cross is your exact location.</div></div></div>
+  </div>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">🐫</div>
+    <div class="ct"><strong>Connecting to this week's Bible lesson:</strong> Ur of the Chaldeans (Abram's homeland) sits at approximately 30.9°N, 46.1°E — while Canaan (his destination) lies around 31.5°N, 35°E. Plotting Abram's journey on coordinates shows just how far he travelled into the unknown.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🧭</span> Compass Directions — Finding Your Way</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">There are FOUR cardinal directions (North, South, East, West) and FOUR intercardinal directions that sit exactly between them (Northeast, Southeast, Southwest, Northwest).</div>
+  </div>
+  <div class="compass">
+    <div class="compass-cell" style="background:#2563EB;">NW</div>
+    <div class="compass-cell" style="background:#1E3A8A;">N</div>
+    <div class="compass-cell" style="background:#2563EB;">NE</div>
+    <div class="compass-cell" style="background:#1E3A8A;">W</div>
+    <div class="compass-cell" style="background:#0F1F5C;font-size:1.3rem;">🧭</div>
+    <div class="compass-cell" style="background:#1E3A8A;">E</div>
+    <div class="compass-cell" style="background:#2563EB;">SW</div>
+    <div class="compass-cell" style="background:#1E3A8A;">S</div>
+    <div class="compass-cell" style="background:#2563EB;">SE</div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>ESL memory phrase:</strong> "<strong>N</strong>ever <strong>E</strong>at <strong>S</strong>oggy <strong>W</strong>affles" — going clockwise from the top: North, East, South, West.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📏</span> Map Scale — Real World vs Paper</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">A map of the whole UK obviously cannot be the same size as the UK itself — <strong>scale</strong> tells you exactly how much smaller the map is, so you can calculate real-world distances.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Scale shown as a ratio: 1 : 50,000</span><br><br>
+    Meaning: 1 cm on the map = <span class="hl">50,000 cm</span> in real life<br>
+    Convert to metres: 50,000 cm &divide; 100 = <span class="hl2">500 m</span><br><br>
+    <span class="comment">So measuring 6 cm between two towns on this map:</span><br>
+    6 &times; 500 m = <span class="hl3">3,000 m = 3 km</span> in real life
+  </div>
+  <div class="callout tip">
+    <div class="ci">📐</div>
+    <div class="ct"><strong>Other ways scale is shown:</strong> as a scale BAR (a small ruler-like line drawn directly on the map), or in WORDS ("1 centimetre represents 1 kilometre"). All three methods describe the exact same relationship.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🗺️</span> Types of Maps — Choosing the Right Tool</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">🏔️ Physical Map</div><div class="vc-def">Shows natural features: mountains, rivers, deserts, forests — usually using colour and shading to show landscape.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏳️ Political Map</div><div class="vc-def">Shows human-made borders: countries, states, cities and capitals — focused on how land is governed and divided.</div></div>
+    <div class="vocab-card"><div class="vc-word">⛰️ Topographic Map</div><div class="vc-def">Shows elevation (height) using contour lines — lines close together mean steep terrain; lines far apart mean gentle slopes.</div></div>
+    <div class="vocab-card"><div class="vc-word">🌦️ Climate Map</div><div class="vc-def">Shows weather patterns and climate zones across a region — useful for understanding biomes (Week 7 topic).</div></div>
+    <div class="vocab-card"><div class="vc-word">🛣️ Road Map</div><div class="vc-def">Shows transport routes — roads, railways, airports — designed to help travellers navigate between places.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🌍</span> Globe vs Flat Map — Why Are They Different?</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.5);">
+      <div class="cmp-head" style="color:#93C5FD;">🌐 Globe</div>
+      <div class="cmp-row">A 3D model — the most ACCURATE way to represent the Earth's true shape, size and distances</div>
+      <div class="cmp-row">Impossible to see the whole world at once</div>
+      <div class="cmp-row">Not practical to carry around or fold into a book</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.4);">
+      <div class="cmp-head" style="color:#93C5FD;">🗺️ Flat Map</div>
+      <div class="cmp-row">Practical, portable, and shows the whole world at once</div>
+      <div class="cmp-row">Always involves some DISTORTION — stretching a sphere flat always changes size, shape, distance, or direction somewhere</div>
+      <div class="cmp-row">Different "projections" (methods of flattening) distort different things</div>
+    </div>
+  </div>
+  <div class="callout warn" style="margin-top:14px;">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Famous example — the Mercator projection:</strong> on this commonly used flat map, Greenland appears roughly the same size as Africa. In reality, Africa is about <strong>14 times larger</strong> than Greenland! This happens because the Mercator projection stretches land near the poles to keep direction lines straight — useful for sailors, but misleading about true size.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🎯</span> Maps, Globes &amp; Geographic Tools — Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Figurative Language Lab (English)
+const figData={
+  simile:{title:'Simile',sub:'A comparison using "like" or "as"',body:'<strong>Structure:</strong> [Thing A] + is/was + like/as + [Thing B]. Two DIFFERENT things are compared directly, using the connecting word "like" or "as" to signal the comparison.<br><br><strong>Examples:</strong><br>• "The fire roared <strong>like</strong> a hungry lion."<br>• "Her eyes were <strong>as</strong> bright <strong>as</strong> stars."<br>• "He ran <strong>like</strong> the wind."<br><br><strong>Why use it:</strong> Similes let the reader borrow a familiar image (a lion\'s roar) to understand an unfamiliar or abstract feeling (a fire\'s sound and danger) more vividly.',analogy:'⚠️ ESL tip: If you see "like" or "as" connecting two different nouns, check whether it is a genuine comparison (simile) or just a literal use of the word, e.g. "I would like an apple" is NOT a simile.'},
+  metaphor:{title:'Metaphor',sub:'A direct comparison — stating one thing IS another',body:'<strong>Structure:</strong> [Thing A] + is/was + [Thing B]. NO "like" or "as" — the comparison is stated directly, as if it were a fact.<br><br><strong>Examples:</strong><br>• "The fire <strong>was</strong> a hungry lion, devouring everything in its path."<br>• "Her eyes <strong>were</strong> stars, lighting up the room."<br>• "Time <strong>is</strong> a thief."<br><br><strong>Why use it:</strong> Metaphors are often more powerful than similes because they merge the two things completely, rather than just comparing them side by side.',analogy:'🎭 Extended metaphor: when a writer continues the same metaphor across several sentences or an entire paragraph, deepening the comparison each time.'},
+  personification:{title:'Personification',sub:'Giving human qualities to non-human things',body:'<strong>Structure:</strong> A non-human subject (object, animal, weather, idea) + a HUMAN action or feeling.<br><br><strong>Examples:</strong><br>• "The wind <strong>whispered</strong> through the trees."<br>• "The old house <strong>groaned</strong> under the weight of the storm."<br>• "Opportunity <strong>knocked</strong> at the door."<br><br><strong>Why use it:</strong> Personification makes settings and objects feel alive and emotionally significant, drawing the reader deeper into the scene.',analogy:'🗣️ ESL tip: Only things that are NOT human can be personified. Describing an actual person\'s real actions ("She whispered") is just normal description, not personification.'},
+  hyperbole:{title:'Hyperbole',sub:'Extreme exaggeration used for effect',body:'<strong>Structure:</strong> A statement so exaggerated that no reasonable reader would take it literally.<br><br><strong>Examples:</strong><br>• "I\'ve told you a <strong>million</strong> times."<br>• "This bag weighs a <strong>tonne</strong>."<br>• "I\'m so hungry I could eat a <strong>horse</strong>."<br><br><strong>Why use it:</strong> Hyperbole emphasises strong emotion or scale in a way that plain, literal language cannot — but it only works if both writer and reader understand it is NOT meant to be taken literally.',analogy:'⚖️ Compare to a simile/metaphor: hyperbole exaggerates SCALE or DEGREE, while similes/metaphors create a comparison between two different things.'},
+};
+function showFig(id){
+  const o=figData[id];if(!o)return;
+  const p=document.getElementById('fig-panel');
+  p.innerHTML='<div class="cip-name">'+o.title+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sub+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.analogy+'</div></div>';
+  p.style.borderColor='#BE123C';
+}
+
+// Leaf structure diagram (Science)
+const leafData={
+  upper:{e:'☀️',name:'Upper Epidermis',sys:'Protective, Light-Letting Layer',body:'A single layer of transparent cells covered by a waxy <strong>cuticle</strong>, which reduces water loss. Being transparent allows maximum light to pass through to the photosynthesising cells beneath it, while still protecting the leaf from damage and disease.',a:'☀️ Analogy: Like a clear window — letting light in while keeping the weather (and water loss) out.'},
+  palisade:{e:'🟢',name:'Palisade Mesophyll',sys:'The Main Site of Photosynthesis',body:'Tightly packed, column-shaped cells sitting just below the upper epidermis — positioned here to catch the MAXIMUM amount of light. These cells contain a very high number of <strong>chloroplasts</strong>, making this the primary layer where photosynthesis occurs.',a:'🟢 Analogy: Like solar panels positioned on a rooftop facing the sun — packed densely to absorb as much light as possible.'},
+  spongy:{e:'🫧',name:'Spongy Mesophyll',sys:'Gas Exchange Layer',body:'Loosely packed, irregularly shaped cells with large AIR SPACES between them. These air spaces allow carbon dioxide to diffuse easily to the photosynthesising cells, and oxygen and water vapour to diffuse out toward the stomata.',a:'🫧 Analogy: Like a sponge full of air pockets — the gaps allow gases to move freely through the tissue.'},
+  stomata:{e:'🔲',name:'Stomata & Guard Cells',sys:'Gas Exchange Control — Mostly on the Lower Surface',body:'Tiny pores called <strong>stomata</strong> (singular: stoma) allow carbon dioxide IN and oxygen plus water vapour OUT. Each stoma is controlled by a pair of <strong>guard cells</strong>, which change shape to open or close the pore — often closing at night or during very hot, dry conditions to reduce water loss.',a:'🔲 Analogy: Like tiny automatic doors that open to let delivery trucks (gases) in and out, and close to keep the building (the leaf) from losing too much heat or moisture.'},
+  veins:{e:'➰',name:'Veins — Xylem & Phloem',sys:'Transport Network of the Leaf',body:'Veins contain two transport tissues working in opposite directions: <strong>xylem</strong> carries water and minerals UP from the roots into the leaf, supplying the raw material for photosynthesis. <strong>Phloem</strong> carries the GLUCOSE made by photosynthesis OUT of the leaf to the rest of the plant — a process called translocation.',a:'➰ Analogy: Like a two-way delivery system — xylem is the incoming supply route, phloem is the outgoing delivery route for finished products (sugar).'},
+};
+function showLeaf(id){
+  const o=leafData[id];if(!o)return;
+  const p=document.getElementById('leaf-panel');
+  p.innerHTML='<div style="font-size:2rem;margin-bottom:8px;">'+o.e+'</div><div class="cip-name">'+o.name+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sys+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.a+'</div></div>';
+  p.style.borderColor='#059669';
+}
+
+// Quiz data
+const quizData={
+  bible:[
+    {q:'According to Genesis 12:2, what does the promise "you will be a blessing" emphasise about Abram\'s calling?',opts:['That Abram would become wealthy for his own benefit only','That the blessing Abram received was meant to flow OUTWARD and benefit other people too, not stop with him','That Abram would never face any hardship again','That Abram would immediately become a king'],ans:1,exp:'Genesis 12:2-3 makes clear that Abram\'s blessing was never meant to be kept to himself — it was designed to flow outward, eventually blessing "all peoples on earth" (v.3). This outward-flowing pattern is a key theme of the whole call.'},
+    {q:'Where was Abram\'s original homeland, the city he was called to leave?',opts:['Canaan','Harran','Ur of the Chaldeans, in Mesopotamia','Egypt'],ans:2,exp:'Abram lived in Ur of the Chaldeans, a wealthy and advanced city in Mesopotamia (modern-day southern Iraq), before God called him to leave. His family travelled first to Harran before Abram continued on to Canaan.'},
+    {q:'What is the correct order of God\'s call to Abram in Genesis 12:1-3?',opts:['First the full destination is named, then Abram is asked to leave','Abram is asked to leave FIRST — before he is given the full details of his promised destination','God gives Abram no instructions at all, only a promise','Abram chooses to leave entirely on his own initiative, without God\'s call'],ans:1,exp:'God\'s instruction was "Go... to the land I will show you" — Abram had to obey first, trusting that the destination would be revealed along the way. This mirrors Noah\'s pattern of faith: trusting and acting before seeing the full picture.'},
+    {q:'According to Genesis 12:4, approximately how old was Abram when he left Harran for Canaan?',opts:['25 years old','40 years old','75 years old','100 years old'],ans:2,exp:'Genesis 12:4 states Abram was 75 years old when he left Harran. This makes his obedience even more striking — he was giving up a settled life late in life, based purely on a promise.'},
+    {q:'What event forced Abram to travel temporarily to Egypt, according to Genesis 12:10?',opts:['A war broke out in Canaan','A severe famine','He wanted to visit relatives','He was forced into exile by local rulers'],ans:1,exp:'A severe famine struck Canaan, forcing Abram to travel to Egypt in search of food. This shows that even a person of great faith still faced real, practical hardship — faith did not remove every difficulty from his journey.'},
+    {q:'Unlike Noah\'s covenant, whose sign was the rainbow, Abraham\'s covenant was later formalised with which sign (Genesis 17:11)?',opts:['A dove','Circumcision','A sacrifice of fire','A written scroll'],ans:1,exp:'While Noah\'s covenant sign was the rainbow (Genesis 9:13), Abraham\'s covenant was later marked by circumcision (Genesis 17:11) — a different sign, but the same underlying pattern of God making a binding, lasting promise.'},
+    {q:'What "golden idea" connects the stories of Noah (Week 4) and Abraham (Week 5)?',opts:['Both stories are unrelated and teach completely different lessons','Faith means trusting and obeying God\'s word BEFORE you can see how it will turn out','Both men became kings as a reward for their obedience','Neither story involves any kind of promise from God'],ans:1,exp:'Both Noah and Abraham are asked to act on God\'s word before seeing the result — Noah built an ark before any rain fell; Abram left his homeland before knowing his destination. This pattern of faith-before-evidence repeats throughout the Bible.'},
+  ],
+  english:[
+    {q:'"The fire roared like a hungry lion." What figurative device is this, and how can you tell?',opts:['Metaphor — because it compares two things directly','Simile — because it uses the connecting word "like" to compare the fire to a lion','Personification — because the fire is given human qualities','Hyperbole — because it is an extreme exaggeration'],ans:1,exp:'This is a simile because it uses "like" to connect two different things (the fire and a lion) as a comparison. If it said "The fire was a hungry lion" (no "like"), it would be a metaphor instead.'},
+    {q:'"The old house groaned under the weight of the storm." What figurative device is this?',opts:['Simile','Metaphor','Personification — a non-human object (the house) is given a human action (groaning)','Hyperbole'],ans:2,exp:'This is personification because a non-human object — the house — is given a human-like action (groaning), which only living, feeling beings normally do. Personification always involves giving human qualities to something that is NOT human.'},
+    {q:'"I\'ve told you a million times!" is an example of which device?',opts:['Simile','Hyperbole — extreme exaggeration not meant to be taken literally','Personification','Literal language'],ans:1,exp:'This is hyperbole: a clearly extreme exaggeration ("a million times") used for emotional effect, which both speaker and listener understand is not literally true.'},
+    {q:'Which sentence demonstrates "show, don\'t tell" most effectively?',opts:['"She was very nervous."','"The room was messy."','"Her hands trembled, and she kept glancing at the door."','"The food was good."'],ans:2,exp:'"Her hands trembled, and she kept glancing at the door" SHOWS nervousness through specific physical actions, letting the reader work out the emotion themselves — rather than simply TELLING the reader the character "was nervous."'},
+    {q:'"The sharp tang of salt water filled the air near the harbour." Which sense does this sentence primarily appeal to?',opts:['Sight','Smell','Taste','Touch'],ans:1,exp:'This sentence describes a SMELL ("the sharp tang... filled the air") — one of the five senses used in imagery. Strong descriptive writing deliberately selects senses beyond just sight, which is the most commonly overused sense in student writing.'},
+    {q:'What is the key difference between literal language and figurative language?',opts:['Literal language is always longer than figurative language','Literal language means exactly what it says; figurative language means something beyond its literal, word-for-word meaning','There is no real difference between them','Figurative language is only used in poetry, never in stories'],ans:1,exp:'Literal language states things exactly as they are ("the fire was hot"), while figurative language (similes, metaphors, personification, hyperbole) creates meaning beyond the literal words to produce a stronger or more vivid effect.'},
+    {q:'Why do KS3 writers usually choose just ONE simile or metaphor per paragraph rather than several?',opts:['Because only one is allowed by grammar rules','Because too many comparisons crowded together can overwhelm the reader and weaken the overall effect','Because similes and metaphors are not allowed in descriptive writing','Because readers cannot understand more than one comparison at a time'],ans:1,exp:'One well-chosen, carefully developed comparison is usually far more powerful and memorable than several comparisons crowded into the same paragraph, which can feel cluttered and reduce the impact of each individual image.'},
+  ],
+  maths:[
+    {q:'2/5 × 3/4 = ? (give your answer in simplest form)',opts:['5/9','6/20 = 3/10','5/20','6/9'],ans:1,exp:'Multiply straight across: (2×3)/(5×4) = 6/20. Simplify: HCF(6,20)=2, so 6/20 = 3/10. Remember — multiplying fractions never requires a common denominator, unlike adding or subtracting.'},
+    {q:'Using cross-cancelling, simplify BEFORE multiplying: 3/8 × 4/9',opts:['12/72, which must then be simplified to 1/6','1/6, found directly by cancelling 3 with 9 (→1/3) and 4 with 8 (→1/2), then multiplying 1/3 × 1/2','3/9 × 4/8 = 1/3 × 1/2','12/17'],ans:1,exp:'Cross-cancelling: 3 (numerator) and 9 (denominator) share a factor of 3 → becomes 1/3. 4 (numerator) and 8 (denominator) share a factor of 4 → becomes 1/2. Now multiply the simplified fractions: 1/3 × 1/2 = 1/6 — already in simplest form, no extra simplifying needed at the end.'},
+    {q:'1½ × 2/3 = ?',opts:['1','3/2','2/3','1¼'],ans:0,exp:'Convert 1½ to an improper fraction: 1½ = 3/2. Multiply: 3/2 × 2/3 = (3×2)/(2×3) = 6/6 = 1. The 2s and 3s cancel out neatly, leaving exactly 1.'},
+    {q:'What is the reciprocal of 3/7?',opts:['3/7 (it stays the same)','7/3','-3/7','7/3 multiplied by -1'],ans:1,exp:'A reciprocal is found by flipping the fraction — swapping numerator and denominator. The reciprocal of 3/7 is 7/3. Multiplying a fraction by its own reciprocal always equals 1 (e.g. 3/7 × 7/3 = 21/21 = 1).'},
+    {q:'2/3 ÷ 1/6 = ? Use Keep, Change, Flip.',opts:['1/9','2/18','4 — keep 2/3, change ÷ to ×, flip 1/6 to 6/1, giving 2/3 × 6/1 = 12/3 = 4','2/3'],ans:2,exp:'Keep 2/3, change ÷ to ×, flip 1/6 to its reciprocal 6/1: 2/3 × 6/1 = 12/3 = 4. Check using the "how many fit inside" idea: how many sixths fit inside 2/3? 2/3 = 4/6, so four 1/6 pieces fit inside — confirming the answer of 4.'},
+    {q:'A recipe needs 3/4 cup of flour per batch. How many batches can be made from 6 cups of flour?',opts:['4½ batches','8 batches — found by calculating 6 ÷ 3/4 using Keep, Change, Flip: 6/1 × 4/3 = 24/3 = 8','4 batches','6¾ batches'],ans:1,exp:'This is a division word problem: 6 ÷ 3/4. Keep 6/1, change ÷ to ×, flip 3/4 to 4/3: 6/1 × 4/3 = 24/3 = 8. Eight full batches can be made, with no flour left over.'},
+    {q:'2¼ ÷ 1½ = ?',opts:['1½','3⅜','1, found by converting to 9/4 ÷ 3/2, flipping to 9/4 × 2/3, cross-cancelling to 3/2 × 1/1, giving 3/2 = 1½','3¾'],ans:0,exp:'Convert both to improper fractions: 2¼ = 9/4, 1½ = 3/2. Keep, Change, Flip: 9/4 × 2/3. Cross-cancel: 9 and 3 share a factor of 3 (→3/1), 4 and 2 share a factor of 2 (→2/1). Result: 3/1 × 1/2 = 3/2 = 1½.'},
+  ],
+  science:[
+    {q:'In the photosynthesis word equation, what are the TWO reactants (raw materials going in)?',opts:['Glucose and oxygen','Carbon dioxide and water','Chlorophyll and sunlight','Starch and nitrogen'],ans:1,exp:'The word equation is: carbon dioxide + water --(light energy)--> glucose + oxygen. Carbon dioxide and water are the reactants (raw materials); glucose and oxygen are the products made by the reaction.'},
+    {q:'What is the specific role of chlorophyll in photosynthesis?',opts:['It is the sugar produced by the reaction','It is the green pigment that absorbs light energy, found inside chloroplasts','It is a gas released as a waste product','It transports water from the roots to the leaves'],ans:1,exp:'Chlorophyll is the green pigment found inside chloroplasts that absorbs light energy, allowing the photosynthesis reaction to take place. Without chlorophyll, a plant cannot capture the light energy it needs.'},
+    {q:'The oxygen we breathe is mainly a result of which process?',opts:['Respiration in animals','Photosynthesis in plants, algae and some bacteria, which releases oxygen as a product','Evaporation from the oceans','Combustion of fossil fuels'],ans:1,exp:'Oxygen is released as a product of photosynthesis — historically, plants, algae and certain bacteria have produced most of the oxygen in Earth\'s atmosphere over billions of years through this process.'},
+    {q:'Which leaf layer contains the HIGHEST number of chloroplasts and is the main site of photosynthesis?',opts:['Upper epidermis','Palisade mesophyll','Spongy mesophyll','Lower epidermis'],ans:1,exp:'The palisade mesophyll sits just below the upper epidermis, positioned to catch maximum light. Its tightly packed, column-shaped cells contain a very high concentration of chloroplasts, making it the primary site of photosynthesis.'},
+    {q:'What is the function of stomata and guard cells in a leaf?',opts:['They transport water up from the roots','They control gas exchange — letting carbon dioxide in and oxygen/water vapour out, by opening and closing the pores','They absorb light energy directly','They store glucose produced by photosynthesis'],ans:1,exp:'Stomata are tiny pores (mostly on the underside of the leaf) that allow gas exchange. Guard cells control whether each stoma is open or closed, helping to balance gas exchange against water loss.'},
+    {q:'Which of these is NOT one of the three main limiting factors of photosynthesis?',opts:['Light intensity','Carbon dioxide concentration','Temperature','Soil colour'],ans:3,exp:'The three recognised limiting factors of photosynthesis are light intensity, carbon dioxide concentration, and temperature. Soil colour has no direct effect on the rate of photosynthesis itself.'},
+    {q:'Which structures are found in PLANT cells but NEVER in animal cells?',opts:['Nucleus and cytoplasm','Mitochondria and cell membrane','Cell wall, chloroplasts, and a large permanent vacuole','Ribosomes only'],ans:2,exp:'Plant cells have three structures animal cells never have: a rigid cell wall (made of cellulose, for support), chloroplasts (site of photosynthesis), and a large permanent vacuole (stores water, helps keep the cell rigid). Nucleus, cytoplasm, cell membrane and mitochondria are found in BOTH cell types.'},
+  ],
+  history:[
+    {q:'What is the key difference between latitude and longitude lines?',opts:['They are exactly the same thing with different names','Latitude lines run horizontally and measure distance north/south of the Equator; longitude lines run vertically and measure distance east/west of the Prime Meridian','Latitude only exists in the Southern Hemisphere','Longitude lines measure temperature, not distance'],ans:1,exp:'Latitude lines run horizontally (like rungs of a ladder) and measure distance north or south of the Equator (0°). Longitude lines run vertically, pole to pole, and measure distance east or west of the Prime Meridian (0°).'},
+    {q:'Where does the Prime Meridian (0° longitude) pass through?',opts:['New York, USA','Greenwich, London','Sydney, Australia','Cairo, Egypt'],ans:1,exp:'The Prime Meridian passes through Greenwich, London, and serves as the reference point (0°) for measuring longitude both east and west around the globe.'},
+    {q:'On a compass rose, which direction sits exactly between North and East?',opts:['Southwest','Northeast','South','West'],ans:1,exp:'Northeast (NE) is one of the four intercardinal directions, sitting exactly between North and East on a compass rose. The four intercardinal directions are NE, SE, SW, and NW.'},
+    {q:'A map has a scale of 1:50,000. If two towns are 4 cm apart on the map, what is the real-world distance between them?',opts:['4 km','2 km — calculated as 4 cm × 50,000 = 200,000 cm = 2,000 m = 2 km','200,000 km','40 km'],ans:1,exp:'1 cm on the map represents 50,000 cm in real life. So 4 cm represents 4 × 50,000 = 200,000 cm. Converting: 200,000 cm ÷ 100 = 2,000 m, and 2,000 m ÷ 1,000 = 2 km.'},
+    {q:'Which type of map would be most useful for showing the borders between different countries?',opts:['Physical map','Climate map','Political map','Topographic map'],ans:2,exp:'A political map shows human-made borders — countries, states, cities and capitals — making it the right tool for studying how land is divided and governed, rather than its natural features.'},
+    {q:'Why does a flat map ALWAYS involve some distortion, unlike a globe?',opts:['Flat maps are always drawn incorrectly by mistake','It is mathematically impossible to flatten a sphere onto a flat surface without stretching or distorting size, shape, distance, or direction somewhere','Flat maps only show oceans, never land','Globes are not actually round'],ans:1,exp:'A sphere cannot be perfectly flattened without some distortion — this is a mathematical reality, not a mistake. Different map projections (like the Mercator projection) distort different things; for example, Mercator maps make Greenland look similar in size to Africa, even though Africa is about 14 times larger.'},
+    {q:'When writing coordinates, which is given FIRST — latitude or longitude?',opts:['Longitude is always given first','Latitude is always given first, followed by longitude','It depends on which hemisphere you are in','Coordinates do not have a fixed order'],ans:1,exp:'Coordinates are always written latitude first, then longitude — for example, London is approximately 51.5°N, 0.1°W (latitude 51.5°N, then longitude 0.1°W).'},
+  ],
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{
+  quizState[s]={idx:0,score:0};
+  renderQuiz(s);
+});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){
+    container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';
+    celebrate();return;
+  }
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){
+    quizState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='quiz-fb ok';fb.style.display='block';
+    fb.innerHTML='✅ Correct! '+q.exp;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='quiz-fb bad';fb.style.display='block';
+    fb.innerHTML='❌ Not quite. '+q.exp;
+  }
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+
+function celebrate(){
+  const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];
+  for(let i=0;i<70;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=cols[Math.floor(Math.random()*cols.length)];
+      el.style.animationDuration=(1.8+Math.random()*2.2)+'s';
+      el.style.animationDelay=(Math.random()*0.3)+'s';
+      el.style.width=(7+Math.random()*7)+'px';
+      el.style.height=(9+Math.random()*9)+'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),5000);
+    },i*25);
+  }
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('HOS_Week5_Lessons');</script>
+</body>
+</html>

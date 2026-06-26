@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 5 · Day 4 · REVISION Weeks 1–5 · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;gap:10px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);white-space:nowrap;}
+.rev-badge{background:linear-gradient(90deg,rgba(109,40,217,0.3),rgba(30,58,138,0.3));border:1px solid rgba(109,40,217,0.4);border-radius:99px;padding:4px 14px;font-size:0.72rem;font-weight:800;color:#C4B5FD;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:4px;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 14px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.tab[data-s="mega"].active{background:linear-gradient(90deg,rgba(109,40,217,0.3),rgba(30,58,138,0.3));color:#E0D7FF;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:4.5rem;opacity:0.13;line-height:1;}
+.hero-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:8px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:8px;color:var(--bright);}
+.hero-subtitle{font-size:0.9rem;font-weight:500;opacity:0.7;max-width:480px;line-height:1.6;}
+.week-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.week-pill{padding:3px 11px;border-radius:99px;font-size:0.7rem;font-weight:700;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.1);}
+.section-header{display:flex;align-items:center;gap:12px;margin:28px 0 16px;}
+.sh-icon{font-size:1.4rem;}
+.sh-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--bright);}
+.sh-week{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-left:auto;padding:3px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:99px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:12px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:0.75rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:8px;}
+.q-text{font-size:0.92rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.88rem;resize:vertical;min-height:74px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:120px;}
+.q-input.xwide{min-height:160px;}
+.q-input.narrow{min-height:48px;}
+.q-input::placeholder{color:var(--muted);font-size:0.83rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 9px;font-size:0.7rem;font-weight:700;color:var(--muted);margin-left:7px;vertical-align:middle;}
+.ma-toggle{margin-top:8px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:7px 13px;cursor:pointer;font-size:0.78rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.68rem;}
+.ma-body{display:none;margin-top:7px;padding:11px 14px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.84rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:5px 12px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.92rem;width:100px;text-align:center;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:22px;}
+.name-field label{display:block;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.88rem;}
+.divider{display:flex;align-items:center;gap:12px;margin:22px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.div-label{font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:620px){.mega-grid{grid-template-columns:1fr;}.hero-icon{display:none;}.name-row{grid-template-columns:1fr;}}
+.subject-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:0.7rem;font-weight:700;margin-bottom:8px;}
+.chip-bible{background:rgba(109,40,217,0.2);color:#C4B5FD;border:1px solid rgba(109,40,217,0.3);}
+.chip-english{background:rgba(190,18,60,0.2);color:#FCA5A5;border:1px solid rgba(190,18,60,0.3);}
+.chip-maths{background:rgba(180,83,9,0.2);color:#FCD34D;border:1px solid rgba(180,83,9,0.3);}
+.chip-science{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.3);}
+.chip-history{background:rgba(30,58,138,0.2);color:#93C5FD;border:1px solid rgba(30,58,138,0.3);}
+.progress-bar{height:4px;background:var(--border);border-radius:4px;margin:20px 0 0;}
+.progress-fill{height:4px;border-radius:4px;background:linear-gradient(90deg,#7C3AED,#2563EB);}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 5</div>
+  <div class="rev-badge">🔁 Day 4 — REVISION Weeks 1–5</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+    <button class="tab" data-s="mega" onclick="show('mega')">🌟 Mega Review</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE REVISION ═══ -->
+<div id="pg-bible" class="page active">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">📖</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Day 4 · REVISION</div>
+  <div class="hero-title">Weeks 1–5<br>Bible Revision</div>
+  <div class="hero-subtitle">Creation · The Fall · Cain & Abel · Noah · Abraham — the full arc of Genesis 1–22</div>
+  <div class="week-pills">
+    <span class="week-pill">W1: Creation</span><span class="week-pill">W2: Fall & Cain</span><span class="week-pill">W3: Noah's Call</span><span class="week-pill">W4: Noah's Covenant</span><span class="week-pill">W5: Abraham</span>
+  </div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="section-header"><span class="sh-icon">🌍</span><span class="sh-text">Weeks 1–2: Creation & The Fall</span><span class="sh-week">W1 + W2</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">What does the phrase "In the beginning God created the heavens and the earth" establish about God's nature? Name TWO theological truths it implies. <span class="marks">2 marks</span></div>
+    <textarea class="q-input narrow" placeholder="Truth 1: &#10;Truth 2: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>God is pre-existent</strong> — he existed before time and space and was not created. 2. <strong>God is Creator/sovereign</strong> — he is the source and owner of all that exists; nothing in creation is independent of him or rivals him.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Explain the three consequences of The Fall that affect all humans, according to the lesson. Then: which of these do you think has the most far-reaching impact and why? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Three consequences: &#10;Most far-reaching + why: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Three consequences: 1. <strong>Broken relationship with God</strong> — Adam and Eve were expelled from Eden; direct, easy fellowship with God was disrupted. 2. <strong>Broken relationship with each other</strong> — blame, shame, and conflict entered human relationships (immediately visible in Cain and Abel). 3. <strong>Broken relationship with the earth</strong> — work became hard, the ground now produces "thorns and thistles," death enters. Most far-reaching: many would argue the broken relationship with God, because it is the root from which the other two flow — without the disruption of that primary relationship, the secondary and tertiary consequences would not have followed.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">Why did God accept Abel's offering but reject Cain's? What did Cain do in response, and what does this reveal about the nature of sin? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Why God accepted/rejected: &#10;Cain's response: &#10;What it reveals about sin: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The text doesn't give a fully explicit reason, but Hebrews 11:4 says Abel's offering was made "by faith" — suggesting the issue was the <strong>attitude and heart behind the offering</strong>, not merely its contents. Abel gave the "firstborn" and "fat portions" — the best he had; Cain simply gave "some of the fruits." Cain responded with anger and ultimately murdered his brother. This reveals that sin is not just isolated action but a <strong>growing pattern</strong>: resentment → anger → violence. God warned Cain beforehand that "sin is crouching at your door" — showing sin as an active force that gains power if not confronted at the attitude stage.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="section-header"><span class="sh-icon">🌊</span><span class="sh-text">Weeks 3–4: Noah</span><span class="sh-week">W3 + W4</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">What made Noah "righteous" in God's sight? Does the Bible claim he was perfect? What does this tell us about what "righteousness" means in the Old Testament? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="What made Noah righteous: &#10;Was he perfect? Evidence: &#10;What 'righteousness' means here: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Genesis 6:9 describes Noah as "a righteous man, blameless among the people of his time" who "walked with God." However, after the flood Noah becomes drunk and dishonoured (Genesis 9:20–21) — showing he was not sinless. Righteousness here means <strong>a right orientation toward God</strong> — living in faithful relationship with God, choosing obedience in a culture that had abandoned him. Old Testament righteousness is about faithfulness and right relationship, not sinless perfection.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">Describe Noah's covenant: who initiated it, what did God promise, what was the sign, and who was it for? How is this covenant different in scope from Abraham's (Week 5)? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Noah's covenant details: &#10;Difference from Abraham's covenant: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Noah's covenant: <strong>God initiated it</strong> — it was not earned or negotiated. God promised <strong>never to destroy the earth by flood again</strong>. The sign was the <strong>rainbow</strong>. It was made with <strong>Noah, all his descendants, and every living creature</strong> — a universal, protective covenant for all life. Difference from Abraham's: Noah's covenant is <strong>protective and universal</strong> (God will not destroy). Abraham's covenant is <strong>purposeful and missional</strong> (God will build a nation and bless the world through it). Noah's looks backward (preventing destruction); Abraham's looks forward (building something).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="section-header"><span class="sh-icon">🐫</span><span class="sh-text">Week 5: Abraham</span><span class="sh-week">W5</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">What were the FOUR things God promised Abraham in Genesis 12:1–3? Write each promise precisely. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Promise 1: &#10;Promise 2: &#10;Promise 3: &#10;Promise 4: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Land</strong> — "Go to the land I will show you." 2. <strong>A great nation</strong> — "I will make you into a great nation." 3. <strong>A great name/blessing</strong> — "I will bless you; I will make your name great." 4. <strong>Universal blessing</strong> — "All peoples on earth will be blessed through you." The four promises encompass land, people, reputation, and global impact.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">The arc from Creation (Week 1) to Abraham (Week 5) shows a pattern: creation → fall → judgement → grace → new beginning. Map each of the five weeks' stories onto this pattern and explain how they connect. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="W1 Creation: &#10;W2 The Fall / Cain: &#10;W3 Noah called: &#10;W4 Noah's Covenant: &#10;W5 Abraham: &#10;How they connect as one story: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">W1 <strong>Creation</strong> — the good beginning: God creates an ordered, beautiful world and places humanity in it as his image-bearers with a mandate to steward creation. W2 <strong>The Fall / Cain</strong> — the problem: humanity chooses independence from God; sin enters; consequences ripple outward into murder, broken relationships, and spreading corruption. W3 <strong>Noah called</strong> — judgement and preservation: God responds to cosmic corruption with the flood, but preserves a remnant through Noah's obedience. W4 <strong>Noah's Covenant</strong> — grace after judgement: God makes an unconditional promise never to destroy again; the rainbow seals it; a new start is given. W5 <strong>Abraham</strong> — purposeful new beginning: God does not just reset the story — he launches a rescue plan. By calling one man from one family, he begins the project of blessing the whole world. The entire arc shows a God who responds to humanity's failure not with abandonment but with increasingly specific, purposeful acts of grace — from universal preservation (Noah) to specific covenant-mission (Abraham).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">BIG QUESTION: Looking across all five weeks, what do you think is the central message of Genesis 1–22? Write a sustained answer (at least 6 sentences) using evidence from at least THREE different weeks. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your sustained answer here, drawing from at least 3 weeks..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The central message of Genesis 1–22, read as a unified narrative, is that <strong>God's purpose for humanity and creation cannot be permanently derailed — and that his response to human failure is always a deeper act of grace</strong>. Creation (Week 1) establishes that God made humanity in his image for a relationship of love and stewardship — but The Fall (Week 2) shows this relationship was quickly broken through disobedience, and the consequences spread rapidly (Cain murdering Abel shows sin is not contained but grows). God's response to the flood (Week 3) might look like destruction, but it is actually preservation: Noah and his family are kept alive specifically so the story can continue. The rainbow covenant (Week 4) shows God's commitment to not give up — he makes an unconditional promise, binding himself to the restoration of creation. By Week 5, God's plan becomes more specific: through one man, Abraham, he begins to construct a path by which "all nations on earth will be blessed." The cumulative message is not about human achievement or moral progress — every major character fails at some point — but about a God whose faithfulness to his own purposes outlasts every human failure. Genesis 1–22 is not primarily a book about humanity; it is a book about the character of God.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div style="font-size:0.8rem;color:var(--muted);font-weight:600;">Total Score — Bible Revision</div><div style="font-size:0.75rem;color:var(--muted);margin-top:3px;">Weeks 1–5 · 8 Questions</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.83rem;">Score:</span><input class="score-input" type="text" placeholder="  / 50" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div>
+
+<!-- ═══ ENGLISH REVISION ═══ -->
+<div id="pg-english" class="page">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">✏️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Day 4 · REVISION</div>
+  <div class="hero-title">Weeks 1–5<br>English Revision</div>
+  <div class="hero-subtitle">Comprehension · Grammar · Narrative · Descriptive writing — all five weeks reviewed</div>
+  <div class="week-pills">
+    <span class="week-pill">W1: Reading</span><span class="week-pill">W2: Grammar</span><span class="week-pill">W3: Narrative</span><span class="week-pill">W4: Author's Craft</span><span class="week-pill">W5: Descriptive</span>
+  </div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="section-header"><span class="sh-icon">📚</span><span class="sh-text">Weeks 1–2: Reading & Grammar</span><span class="sh-week">W1 + W2</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Define: inference · explicit information · implicit meaning. Then explain: why is the ability to infer important in reading? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Inference: &#10;Explicit: &#10;Implicit: &#10;Why inference matters: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Inference:</strong> reading between the lines — working out meaning that is suggested but not directly stated. <strong>Explicit information:</strong> information that is directly stated in the text — the reader does not have to guess. <strong>Implicit meaning:</strong> meaning that is implied or hinted at through language choices, tone, or context — the reader must "read between the lines." <strong>Why inference matters:</strong> most skilled writing does not state everything directly. Authors use implicit meaning to create richer, more layered texts — if you can only read what is explicitly stated, you miss most of what the writer is actually doing.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Identify and correct the grammatical error in each sentence. Name the type of error. <span class="marks">4 marks</span><br><br>a) "The team are playing good today."<br>b) "She runned to the store quickly."<br>c) "Its the best book I have ever read."<br>d) "Me and him went to the market yesterday."</div>
+    <textarea class="q-input" placeholder="a) Error type:    Corrected: &#10;b) Error type:    Corrected: &#10;c) Error type:    Corrected: &#10;d) Error type:    Corrected: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Adverb error</strong> — "good" is an adjective; should be "well" (adverb modifying "playing"). Corrected: "The team are playing <strong>well</strong> today." b) <strong>Irregular verb error</strong> — "run" is irregular; past tense is "ran" not "runned." Corrected: "She <strong>ran</strong> to the store." c) <strong>Apostrophe error</strong> — "Its" (possessive) should be "It's" (it is). Corrected: "<strong>It's</strong> the best book I have ever read." d) <strong>Pronoun case error</strong> — "Me and him" are object pronouns; as subjects they should be "He and I." Corrected: "<strong>He and I</strong> went to the market yesterday."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="section-header"><span class="sh-icon">📖</span><span class="sh-text">Weeks 3–4: Narrative & Author's Craft</span><span class="sh-week">W3 + W4</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">What are the FIVE key elements of narrative structure? Briefly define each and give an example of where you have seen each element in a text you have read (any text). <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Exposition</strong> — introduction of setting, characters, and situation. Example: the opening of any story that establishes the world. 2. <strong>Rising action</strong> — complications and events that build tension toward the climax. 3. <strong>Climax</strong> — the turning point, moment of highest tension. 4. <strong>Falling action</strong> — consequences following the climax; the story begins to resolve. 5. <strong>Resolution/Denouement</strong> — the final outcome; loose ends are tied up. (Accept any valid examples from texts the student has read.)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Read this passage and answer: (a) identify the narrative perspective used, (b) find ONE example of the author choosing specific words for effect — quote it and explain the effect, (c) what mood is created overall and how? <span class="marks">6 marks</span><br><br><em>"Tariq had not spoken since Tuesday. His mother left food outside his door each morning — warm bread, a cup of sweet tea — and by evening it was always gone, but she never saw him take it. She had stopped knocking. The room behind his door was perfectly silent, the way a held breath is silent."</em></div>
+    <textarea class="q-input wide" placeholder="a) Narrative perspective: &#10;b) Word choice + effect (use short quote, then explain): &#10;c) Overall mood + how created: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Third-person limited</strong> — the narrator follows the mother's perspective; we see Tariq only through her observations and cannot access his inner thoughts directly. b) Word choice example: <strong>"She had stopped knocking"</strong> — the past perfect tense and the specific action of stopping knocking implies she has given up trying to reach him; it is quietly devastating. Or: <strong>"the way a held breath is silent"</strong> — the simile makes the silence feel tense and unstable, like something waiting to break. c) <strong>Mood:</strong> quiet grief, helplessness, and strained separation. Created through: the mundane domestic detail (warm bread, sweet tea) contrasted with the invisible barrier; the repeated absence of Tariq despite evidence of his presence; the final simile that turns the silence into something physically tense and anticipatory.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="section-header"><span class="sh-icon">🎨</span><span class="sh-text">Week 5: Descriptive Writing</span><span class="sh-week">W5</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Name and define ALL the descriptive writing techniques from Week 5. Then rank the THREE you think are most powerful for creating vivid writing, explaining your reasoning. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="All techniques (name + definition): &#10;&#10;My top 3 most powerful + reasoning: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Techniques: <strong>simile</strong> (comparison using like/as), <strong>metaphor</strong> (saying something IS something else), <strong>personification</strong> (giving human qualities to non-human things), <strong>imagery</strong> (language that appeals to the senses), <strong>show don't tell</strong> (reveal through action/detail, not statement), <strong>varied sentence length</strong> (control of pace and rhythm), <strong>opening hook</strong> (first-line attention-grabber), <strong>writer's voice</strong> (distinctive combination of word choice, rhythm, attitude), <strong>structural shift</strong> (a deliberate change of tone/focus partway through). Top 3 — <em>accept any well-justified answer</em>. Example: show don't tell (creates immersive reading rather than telling), metaphor (makes a single comparison resonate throughout), varied sentence length (controls how fast the reader moves — this is structural power, not just decoration).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">TIMED PIECE (15 minutes): Write a descriptive paragraph of 10–12 sentences about "The Moment Before." Use at least FOUR different techniques from Week 5 and draw on any skills from Weeks 1–4 (precise word choice, sentence structure, mood creation). <span class="marks">16 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your timed descriptive piece here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Teacher reference — mark for: (1) Strong opening hook that establishes tension. (2) At least 4 named techniques used correctly and effectively. (3) Sensory detail (at least 2–3 senses). (4) At least one clear "show don't tell" moment. (5) Varied sentence lengths that control the pace appropriately for a moment of anticipation. (6) A closing line that resonates. (7) Overall coherence and sense of a distinctive writer's voice. Full marks (16) = all elements present and executed with real craft. 12–15 = most elements present, some stronger than others. 8–11 = techniques used but inconsistently or mechanically. Below 8 = limited technique use or significant writing issues.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">CONNECTION QUESTION: Descriptive writing techniques appear in ALL types of writing — not just creative pieces. Identify ONE example of descriptive language used effectively in any text from Weeks 1–4 (a passage you read in class) and explain why the author made that choice. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Text and week it's from: &#10;The descriptive language used: &#10;Why the author made this choice + effect: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Accept any valid example from Weeks 1–4. Markers should look for: (1) accurate identification of a specific technique. (2) a brief quote or close reference. (3) a clear explanation of the author's intent and the effect on the reader. Example: "In Week 4's passage about the Roman road, the writer described the road as 'a scar across the landscape' — a metaphor. This choice emphasises that the Roman Empire did not simply pass through land gently but imposed itself on it, leaving a permanent mark. The word 'scar' carries connotations of violence and permanence that a neutral word like 'path' would not."</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div style="font-size:0.8rem;color:var(--muted);font-weight:600;">Total Score — English Revision</div><div style="font-size:0.75rem;color:var(--muted);margin-top:3px;">Weeks 1–5 · 7 Questions</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.83rem;">Score:</span><input class="score-input" type="text" placeholder="  / 50" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div>
+
+<!-- ═══ MATHS REVISION ═══ -->
+<div id="pg-maths" class="page">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">🧮</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Day 4 · REVISION</div>
+  <div class="hero-title">Weeks 1–5<br>Maths Revision</div>
+  <div class="hero-subtitle">Number · Algebra · Percentages · Fractions — all five weeks reviewed</div>
+  <div class="week-pills">
+    <span class="week-pill">W1: Number</span><span class="week-pill">W2: Algebra</span><span class="week-pill">W3: Percentages</span><span class="week-pill">W4: Fractions +/−</span><span class="week-pill">W5: Fractions ×÷</span>
+  </div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="section-header"><span class="sh-icon">🔢</span><span class="sh-text">Weeks 1–2: Number & Algebra</span><span class="sh-week">W1 + W2</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">a) Write 360 as a product of its prime factors. b) Find the HCF and LCM of 24 and 36. Show your method. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="a) 360 = &#10;b) HCF of 24 and 36: &#10;LCM of 24 and 36: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 360 = 2 × 180 = 2 × 2 × 90 = 2 × 2 × 2 × 45 = 2 × 2 × 2 × 3 × 15 = 2 × 2 × 2 × 3 × 3 × 5 = <strong>2³ × 3² × 5</strong>. b) 24 = 2³ × 3; 36 = 2² × 3². HCF = 2² × 3 = <strong>12</strong>. LCM = 2³ × 3² = <strong>72</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Solve these algebraic equations. Show full working. <span class="marks">6 marks</span><br><br>a) 3x + 7 = 22 &nbsp;&nbsp; b) 5(2x − 3) = 25 &nbsp;&nbsp; c) 4x/3 = 16 &nbsp;&nbsp; d) 2(x + 4) = 3(x − 1)</div>
+    <textarea class="q-input" placeholder="a) &#10;b) &#10;c) &#10;d) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 3x = 15 → <strong>x = 5</strong>. b) 10x − 15 = 25 → 10x = 40 → <strong>x = 4</strong>. c) 4x = 48 → <strong>x = 12</strong>. d) 2x + 8 = 3x − 3 → 8 + 3 = 3x − 2x → <strong>x = 11</strong>.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="section-header"><span class="sh-icon">💯</span><span class="sh-text">Week 3: Percentages</span><span class="sh-week">W3</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">a) A price rises from £80 to £100. Calculate the percentage increase. b) A population falls from 5,000 to 4,200. Calculate the percentage decrease. c) After a 30% increase, a price is £91. What was the original price? <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="a) Working + answer: &#10;b) Working + answer: &#10;c) Working + answer (reverse percentage): "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Change = £20. % increase = 20/80 × 100 = <strong>25%</strong>. b) Change = 800. % decrease = 800/5000 × 100 = <strong>16%</strong>. c) Reverse percentage: 130% = £91 → 1% = £91/130 = £0.70 → 100% = £0.70 × 100 = <strong>£70</strong>. Or: £91 ÷ 1.30 = £70.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">An investment of £5,000 earns 3% compound interest per year. Calculate the total value after 3 years using the multiplier method. How much interest was earned in total? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Multiplier: &#10;After 3 years: &#10;Interest earned: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Multiplier = 1.03. After 3 years: £5000 × 1.03³ = £5000 × 1.092727 = <strong>£5,463.64</strong> (to nearest penny). Interest earned: £5,463.64 − £5,000 = <strong>£463.64</strong>.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="section-header"><span class="sh-icon">½</span><span class="sh-text">Weeks 4–5: Fractions</span><span class="sh-week">W4 + W5</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Calculate. Show all working and simplify all answers. <span class="marks">8 marks</span><br><br>a) 2/3 + 5/6 &nbsp;&nbsp; b) 3¼ − 1⅔ &nbsp;&nbsp; c) 4/5 × 3/8 &nbsp;&nbsp; d) 2¾ ÷ 1⅛ &nbsp;&nbsp; e) 5/6 + 1/4 − 1/3 &nbsp;&nbsp; f) 3/7 × 14/9 &nbsp;&nbsp; g) find x: 3/4 of x = 27 &nbsp;&nbsp; h) 5/9 ÷ 10/3</div>
+    <textarea class="q-input wide" placeholder="a) &#10;b) &#10;c) &#10;d) &#10;e) &#10;f) &#10;g) &#10;h) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 4/6 + 5/6 = 9/6 = <strong>3/2 = 1½</strong>. b) 3¼ − 1⅔ = 13/4 − 5/3 = 39/12 − 20/12 = 19/12 = <strong>1 7/12</strong>. c) 4/5 × 3/8 = 12/40 = <strong>3/10</strong>. d) 2¾ ÷ 1⅛ = 11/4 ÷ 9/8 = 11/4 × 8/9 = 88/36 = <strong>22/9 = 2 4/9</strong>. e) 5/6 + 1/4 − 1/3 = 10/12 + 3/12 − 4/12 = <strong>9/12 = 3/4</strong>. f) 3/7 × 14/9: cancel 3&9 (÷3→1,3) and 7&14 (÷7→1,2) → 1/1 × 2/3 = <strong>2/3</strong>. g) x = 27 ÷ 3 × 4 = <strong>36</strong>. h) 5/9 ÷ 10/3 = 5/9 × 3/10 = 15/90 = <strong>1/6</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">CONNECTING QUESTION: Explain the key procedural difference between adding/subtracting fractions (Week 4) and multiplying/dividing fractions (Week 5). Why does multiplication NOT require a common denominator but addition DOES? Illustrate your explanation with a simple example of each. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Key procedural difference: &#10;Why multiplication doesn't need common denominator: &#10;Example (addition): &#10;Example (multiplication): "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Adding</strong> fractions combines parts of the same whole, so both fractions must refer to the same-sized pieces — that's why you need a common denominator first. Example: 1/2 + 1/3 — you cannot add them until they are in the same "language": 3/6 + 2/6 = 5/6. <strong>Multiplying</strong> fractions is asking "what is a fraction OF a fraction" — a completely different operation. You are not combining pieces of the same whole; you are scaling one fraction by another. The denominator of the result tells you how many total pieces the new whole is divided into, and the numerator tells you how many you have. Example: 1/2 × 1/3 = 1/6 — you have one-half of one-third, which is one-sixth of the whole. No common denominator is needed because you are not adding — you are multiplying. This is the single most important conceptual distinction in the fractions unit.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">MULTI-STEP PROBLEM: A company's profit was £120,000. It increased by 15% in year 2, then decreased by 10% in year 3. In year 3, 3/8 of the profit was reinvested. How much was reinvested? Show every step. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="Year 1: £120,000 &#10;Year 2 (+ 15%): &#10;Year 3 (− 10%): &#10;3/8 of year 3 profit = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Year 2: £120,000 × 1.15 = <strong>£138,000</strong>. Year 3: £138,000 × 0.90 = <strong>£124,200</strong>. 3/8 reinvested: £124,200 ÷ 8 × 3 = £15,525 × 3 = <strong>£46,575 reinvested</strong>.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div style="font-size:0.8rem;color:var(--muted);font-weight:600;">Total Score — Maths Revision</div><div style="font-size:0.75rem;color:var(--muted);margin-top:3px;">Weeks 1–5 · 7 Questions</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.83rem;">Score:</span><input class="score-input" type="text" placeholder="  / 50" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div>
+
+<!-- ═══ SCIENCE REVISION ═══ -->
+<div id="pg-science" class="page">
+<div class="hero" style="background:linear-gradient(135deg,#022C22,#065F46);">
+  <div class="hero-icon">🔬</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Day 4 · REVISION</div>
+  <div class="hero-title">Weeks 1–5<br>Science Revision</div>
+  <div class="hero-subtitle">Cells · Chemistry · Physics · Biology · Photosynthesis — all five weeks reviewed</div>
+  <div class="week-pills">
+    <span class="week-pill">W1: Scientific Method</span><span class="week-pill">W2: Cells</span><span class="week-pill">W3: Chemistry</span><span class="week-pill">W4: Biology</span><span class="week-pill">W5: Photosynthesis</span>
+  </div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="section-header"><span class="sh-icon">🧪</span><span class="sh-text">Weeks 1–2: Scientific Method & Cells</span><span class="sh-week">W1 + W2</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Name the steps of the scientific method in the correct order and briefly explain what happens at each step. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. &#10;6. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Observation</strong> — notice a phenomenon or pattern that raises a question. 2. <strong>Research/Background</strong> — find out what is already known about the topic. 3. <strong>Hypothesis</strong> — make a testable, falsifiable prediction. 4. <strong>Experiment/Data collection</strong> — design and carry out a controlled investigation to test the hypothesis. 5. <strong>Analysis</strong> — examine results, identify patterns, calculate averages, draw graphs. 6. <strong>Conclusion</strong> — state whether the hypothesis was supported or refuted, suggest improvements, consider further investigation.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Compare a plant cell and an animal cell. Name ALL the organelles they share, ALL the structures unique to plant cells, and explain the function of each unique structure. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="Shared organelles: &#10;Unique to plant cells (name + function): &#10;1. &#10;2. &#10;3. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Shared:</strong> nucleus, cell membrane, cytoplasm, mitochondria, ribosomes. <strong>Unique to plant cells:</strong> 1. <strong>Cell wall</strong> (cellulose) — provides rigid structural support, maintaining cell shape. 2. <strong>Chloroplasts</strong> — contain chlorophyll; site of photosynthesis, converting light energy to glucose. 3. <strong>Large permanent vacuole</strong> — stores water and dissolved substances; provides turgor pressure that keeps the plant firm/upright.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="section-header"><span class="sh-icon">⚗️</span><span class="sh-text">Weeks 3–4: Chemistry & Body Biology</span><span class="sh-week">W3 + W4</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">a) What is the difference between a physical change and a chemical change? Give ONE example of each. b) Name THREE signs that a chemical reaction has taken place. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Physical change: definition + example: &#10;Chemical change: definition + example: &#10;Three signs of chemical reaction: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Physical change:</strong> a change in the form or appearance of a substance that does NOT produce new substances — it is reversible. Example: ice melting to water (still H₂O). <strong>Chemical change:</strong> a change that produces one or more new substances with different properties — usually irreversible. Example: burning wood produces ash and CO₂ (cannot be un-burnt). b) Signs of chemical reaction: (1) colour change, (2) gas produced (bubbling/effervescence), (3) temperature change (exothermic = gets hot; endothermic = gets cold), (4) light produced, (5) a precipitate (solid) forming in a solution — accept any three.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">Name the FOUR main types of digestive enzymes, what they digest, and where in the body they work. Then: what is the role of bile and where is it produced? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Enzyme 1: digests:    works in: &#10;Enzyme 2: digests:    works in: &#10;Enzyme 3: digests:    works in: &#10;Enzyme 4: digests:    works in: &#10;Bile: role + where produced: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Amylase</strong> — digests starch → simple sugars. Works in: mouth (salivary amylase) and small intestine. 2. <strong>Protease</strong> — digests proteins → amino acids. Works in: stomach (pepsin), small intestine. 3. <strong>Lipase</strong> — digests fats/lipids → fatty acids + glycerol. Works in: small intestine. 4. <strong>Cellulase</strong> (or note this is not produced in humans — accept variation). <strong>Bile:</strong> produced in the <strong>liver</strong>, stored in the <strong>gall bladder</strong>. Role: emulsifies fats — breaks large fat droplets into smaller ones, increasing surface area for lipase to work on. Bile is NOT an enzyme (it does not speed up a reaction chemically — it is a physical emulsifier).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="section-header"><span class="sh-icon">🌿</span><span class="sh-text">Week 5: Photosynthesis</span><span class="sh-week">W5</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">Write the full balanced symbol equation for photosynthesis. Then: (a) identify what happens to each atom — where does the carbon go? Where does the oxygen come from? (b) explain the role of chlorophyll — is it a reactant or a catalyst, and why does the distinction matter? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Balanced equation: &#10;a) Where carbon goes: &#10;Where oxygen comes from: &#10;b) Role of chlorophyll: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (requires light energy). a) <strong>Carbon</strong> from CO₂ is fixed into the glucose molecule (C₆H₁₂O₆) — this is "carbon fixation." <strong>Oxygen</strong>: research has shown the oxygen released (O₂) comes from the splitting of water (H₂O) molecules, not from CO₂ — the water's oxygen atoms are released as O₂. b) <strong>Chlorophyll is a light-absorbing pigment</strong>, not consumed in the reaction — it absorbs light energy and transfers it to drive the reaction. It functions more like a <strong>catalyst</strong> (not consumed, not appearing in the equation). The distinction matters because: if it were a reactant it would be used up; because it is not used up, plants can continuously photosynthesize as long as light is available.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">SYNTHESIS QUESTION: How are photosynthesis (Week 5) and respiration (a topic across multiple weeks) opposite but complementary processes? Write at least 5 sentences. Include equations, molecules, and the concept of energy. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your synthesis answer here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Photosynthesis and respiration are, in many ways, reverse processes. Photosynthesis: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (requires light energy, occurs only in plants with chlorophyll). Respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + energy (occurs in ALL living cells, all the time). Photosynthesis <strong>stores energy</strong> — it takes light energy from the sun and locks it into the chemical bonds of glucose. Respiration <strong>releases energy</strong> — it breaks those same chemical bonds and releases the stored energy (as ATP) for the cell to use. The molecules involved are the same set but flowing in opposite directions: CO₂ and H₂O are the products of respiration and the reactants of photosynthesis; glucose and O₂ are the products of photosynthesis and the reactants of respiration. Together they form a cycle that keeps oxygen in the atmosphere and carbon cycling through living systems. Plants do both — photosynthesising during the day (net gain of glucose) and respiring all the time to fuel their own life processes.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">7</div>
+    <div class="q-text">BIG PICTURE: Looking across all five weeks of science, what is the ONE most important scientific principle you have learned? Write a paragraph (5–6 sentences) explaining it, using evidence from at least TWO different topics to show its importance. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Most important principle: &#10;&#10;Evidence from Topic 1: &#10;Evidence from Topic 2: &#10;Why it matters: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Accept any well-argued, evidence-based answer. Example: <strong>Structure determines function</strong>. This principle appears across every topic in five weeks of science. In cell biology (Week 2): the shape and structure of each organelle is precisely matched to its function — the mitochondria's folded inner membrane (cristae) maximises surface area for the reactions of respiration. The palisade mesophyll cell in a leaf (Week 5) is tall and column-shaped to pack in as many chloroplasts as possible — its shape directly serves its function of photosynthesis. In chemistry (Week 3): the structure of molecules determines how they react — different arrangements of the same atoms produce different substances with different properties. In digestion (Week 4): the villi and microvilli of the small intestine are folded to dramatically increase surface area — again, structure optimised for function (absorption). This principle is not just a biological observation but a deep design principle: understanding how something is built usually explains why it works the way it does.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div style="font-size:0.8rem;color:var(--muted);font-weight:600;">Total Score — Science Revision</div><div style="font-size:0.75rem;color:var(--muted);margin-top:3px;">Weeks 1–5 · 7 Questions</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.83rem;">Score:</span><input class="score-input" type="text" placeholder="  / 50" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div>
+
+<!-- ═══ HISTORY REVISION ═══ -->
+<div id="pg-history" class="page">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">🏛️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Day 4 · REVISION</div>
+  <div class="hero-title">Weeks 1–5<br>History & Geography Revision</div>
+  <div class="hero-subtitle">Ancient worlds · Medieval · Rome · Maps & Geographic tools — full review</div>
+  <div class="week-pills">
+    <span class="week-pill">W1: Ancient History</span><span class="week-pill">W2: Medieval</span><span class="week-pill">W3: Ancient Greece</span><span class="week-pill">W4: Roman Empire</span><span class="week-pill">W5: Maps & Geography</span>
+  </div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="section-header"><span class="sh-icon">🏺</span><span class="sh-text">Weeks 1–2: Ancient & Medieval</span><span class="sh-week">W1 + W2</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Name the FOUR early river valley civilisations. For each, name the river(s), the region (modern country), and ONE major achievement or contribution to world history. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="1. Civilisation:   River:   Region:   Achievement: &#10;2. &#10;3. &#10;4. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Mesopotamia</strong> — Tigris & Euphrates — modern Iraq — first writing system (cuneiform), first legal codes (Hammurabi). 2. <strong>Egyptian</strong> — River Nile — Egypt — pyramids, hieroglyphics, and a sophisticated calendar. 3. <strong>Indus Valley</strong> — Indus & Saraswati — modern Pakistan/northwest India — advanced urban planning (grid cities, sewage systems at Mohenjo-daro). 4. <strong>Chinese</strong> — Yellow River (Huang He) — China — early writing, silk, and the foundations of Chinese imperial culture.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">What was the feudal system? Describe the hierarchy from king to serf. What held it together and what were its main weaknesses? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="The feudal system: &#10;Hierarchy (top to bottom): &#10;What held it together: &#10;Main weaknesses: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The <strong>feudal system</strong> was the social, political, and economic structure of medieval Europe — based on an exchange of land for loyalty and military service. <strong>Hierarchy:</strong> King → Nobles/Lords/Barons → Knights → Peasants/Serfs. Each level owed service and loyalty to the level above in exchange for land and protection. <strong>What held it together:</strong> the mutual obligation of land and service, reinforced by oath, religion, and the threat of military force. <strong>Main weaknesses:</strong> (1) power was decentralised — local lords often had more practical power than the king. (2) The Black Death (14th century) killed so many peasants that serfs gained bargaining power, breaking the feudal labour structure. (3) Rising merchant classes accumulated wealth outside the feudal land system.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="section-header"><span class="sh-icon">🏛️</span><span class="sh-text">Weeks 3–4: Greece & Rome</span><span class="sh-week">W3 + W4</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Compare Athens and Sparta: complete this table with at least TWO facts per row. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Government: Athens =            Sparta = &#10;Education/Society: Athens =     Sparta = &#10;Military: Athens =               Sparta = &#10;Legacy: Athens =                 Sparta = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Government:</strong> Athens = democracy (first in world, from ~508BC), all male citizens voted in the Assembly. Sparta = oligarchy, ruled by two kings and a council of elders (Gerousia). <strong>Education:</strong> Athens = valued philosophy, rhetoric, arts, and literacy; focused on the mind. Sparta = agoge military training from age 7; boys trained in discipline, endurance, and combat — girls also trained physically. <strong>Military:</strong> Athens = powerful navy (trireme fleet); won Battle of Salamis. Sparta = finest land army in Greece; 300 Spartans at Thermopylae. <strong>Legacy:</strong> Athens = democracy, philosophy (Socrates, Plato, Aristotle), drama, the Parthenon. Sparta = military discipline, the concept of the "Spartan" lifestyle.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">What were THREE reasons for the fall of the Western Roman Empire? For each, explain it as a long-term cause rather than a single event. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Cause 1 (long-term): &#10;Cause 2 (long-term): &#10;Cause 3 (long-term): "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Military overstretch and barbarian pressure</strong> — the empire had grown too large to defend effectively; the Rhine and Danube frontiers required enormous armies, and as Germanic and Hunnic peoples pushed against the borders over centuries, the military became increasingly unsustainable and dependent on non-Roman mercenaries who had less loyalty to Rome. 2. <strong>Economic decline and instability</strong> — centuries of military spending, currency debasement, heavy taxation, and the disruption of trade routes weakened the economy progressively; the wealth that funded the army, the roads, and the administration slowly dried up. 3. <strong>Political instability and weak leadership</strong> — in the 3rd century alone there were over 50 emperors, many assassinated; without stable central leadership, the empire fragmented in practice before it formally collapsed in 476 AD.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="section-header"><span class="sh-icon">🗺️</span><span class="sh-text">Week 5: Maps & Geography</span><span class="sh-week">W5</span></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">a) What is the difference between the Equator and the Prime Meridian? b) Give the coordinates of: Islamabad · London · New York (approximate). c) A map has scale 1:50,000. A road measures 7.4 cm on the map. How long is it in real life (in km)? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="a) Equator vs Prime Meridian: &#10;b) Islamabad: &#10;   London: &#10;   New York: &#10;c) Working + answer: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) The <strong>Equator</strong> is 0° latitude — a horizontal circle dividing North and South hemispheres. The <strong>Prime Meridian</strong> is 0° longitude — a vertical line from pole to pole through Greenwich, London, dividing East and West hemispheres. b) Islamabad: <strong>33.7°N, 73.1°E</strong>. London: <strong>51.5°N, 0.1°W</strong>. New York: <strong>40.7°N, 74.0°W</strong>. c) 7.4 cm × 50,000 = 370,000 cm = 3,700 m = <strong>3.7 km</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">6</div>
+    <div class="q-text">BIG QUESTION: Choose ONE major historical civilisation from Weeks 1–4 and write a sustained geographical analysis (at least 6 sentences) explaining how their physical geography (location, terrain, rivers, climate) shaped their rise, achievements, and eventual decline or transformation. Use at least THREE specific geographical features or tools in your answer. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Civilisation chosen: &#10;&#10;Write your geographical analysis here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Example — <strong>Ancient Egypt:</strong> Egypt's geography is essentially a long, thin, fertile corridor created by the River Nile flowing through the Sahara Desert. The Nile's annual floods deposited rich silt, creating the only agricultural land in an otherwise arid region — this geographical gift made Egypt one of the most food-productive civilisations in the ancient world and allowed a large non-farming class (priests, -e 
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week5_Day4');</script>
