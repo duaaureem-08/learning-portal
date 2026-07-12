@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 6 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:260px;height:260px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;animation:cardIn 0.5s cubic-bezier(0.22,0.68,0,1.2) both;}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.18s}.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.30s}.card:nth-child(7){animation-delay:.36s}.card:nth-child(8){animation-delay:.42s}.card:nth-child(9){animation-delay:.48s}.card:nth-child(10){animation-delay:.54s}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:130px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-sm{padding:8px 16px;font-size:0.82rem;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent,#555);color:var(--text);background:rgba(255,255,255,0.04);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.fwall{display:flex;flex-direction:column;gap:3px;margin:14px 0;}
+.fwall-row{display:flex;gap:3px;height:32px;}
+.fwall-cell{display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:0.75rem;font-weight:700;color:white;flex:1;transition:opacity 0.2s;}
+.fwall-cell:hover{opacity:0.8;}
+.acc-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.acc-card:hover,.acc-card.open{border-color:var(--accent,#555);}
+.acc-head{display:flex;justify-content:space-between;align-items:center;}
+.acc-title{font-weight:700;color:var(--bright);font-size:0.95rem;}
+.acc-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.acc-toggle{color:var(--muted);transition:transform 0.25s;}
+.acc-card.open .acc-toggle{transform:rotate(180deg);}
+.acc-body{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:0.87rem;color:var(--muted);line-height:1.65;}
+.acc-card.open .acc-body{display:block;}
+.acc-body strong{color:var(--bright);}
+.peel-row{display:flex;margin:14px 0;border-radius:10px;overflow:hidden;flex-wrap:wrap;}
+.peel-cell{flex:1;min-width:140px;padding:14px 12px;text-align:center;}
+.peel-letter{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:white;line-height:1;}
+.peel-word{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;color:rgba(255,255,255,0.65);}
+.peel-desc{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4;}
+.genre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:12px;}
+.genre-tile{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;transition:all 0.2s;}
+.genre-tile:hover{border-color:var(--accent,#555);transform:translateY(-2px);}
+.genre-name{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:4px;}
+.genre-book{font-size:0.75rem;color:var(--muted);margin-bottom:6px;}
+.genre-def{font-size:0.82rem;color:#B0B0C8;line-height:1.4;}
+.inf-chain{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;margin:14px 0;}
+.inf-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:0.85rem;flex:1;min-width:140px;}
+.inf-box .label{font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:700;}
+.inf-box .value{color:var(--bright);font-weight:600;line-height:1.4;}
+.inf-arrow{color:var(--muted);font-size:1.2rem;flex-shrink:0;align-self:center;}
+.cell-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;min-height:160px;transition:border-color 0.3s;}
+.cip-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--bright);margin-bottom:8px;}
+.cip-body{font-size:0.87rem;color:var(--muted);line-height:1.6;}
+.cip-body strong{color:var(--bright);}
+.cip-analogy{font-size:0.82rem;margin-top:10px;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;}
+.hier-wrap{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:16px 0;}
+.hier-box{padding:8px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;color:white;text-align:center;}
+.hier-arrow{color:var(--muted);font-size:1.1rem;}
+.size-compare{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.size-row{display:flex;align-items:center;gap:10px;}
+.size-label{width:150px;font-size:0.8rem;color:var(--muted);flex-shrink:0;}
+.size-track{flex:1;background:var(--surface2);border-radius:8px;height:24px;overflow:hidden;}
+.size-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding-left:10px;font-size:0.72rem;font-weight:700;color:white;white-space:nowrap;transition:width 1s ease;}
+.frac-add-block{margin:16px 0;}
+.frac-row-label{font-size:0.78rem;color:var(--muted);margin-bottom:5px;font-weight:600;}
+.frac-bar{display:flex;height:32px;border-radius:6px;overflow:hidden;border:1px solid var(--border);margin-bottom:10px;}
+.frac-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:white;border-right:1px solid rgba(255,255,255,0.15);}
+.frac-seg:last-child{border-right:none;}
+.frac-seg.empty{background:var(--surface2);color:var(--muted);}
+.frac-op{text-align:center;font-size:1.3rem;color:var(--muted);margin:2px 0 10px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.grid-model{display:grid;gap:3px;margin:14px 0;border:1px solid var(--border);padding:6px;border-radius:10px;background:var(--surface2);}
+.grid-cell{aspect-ratio:1;border-radius:4px;background:rgba(255,255,255,0.05);transition:background 0.3s;}
+.compass{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6px;max-width:280px;margin:18px auto;}
+.compass-cell{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;border-radius:10px;padding:18px 4px;color:white;text-align:center;}
+@media(max-width:600px){
+  .hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}
+  .compare{grid-template-columns:1fr;}.peel-row{flex-direction:column;}
+  .inf-chain{flex-direction:column;}.inf-arrow{transform:rotate(90deg);}
+  .size-label{width:90px;font-size:0.7rem;}
+}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 6</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+<!-- ═══════════════════════════════════════════════════════════
+     BIBLE — Abraham: Called to Trust God
+═══════════════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🧥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 6</div>
+  <div class="hero-title">Joseph —<br>Character Through Suffering</div>
+  <div class="hero-subtitle">Genesis 37, 39–45 · Dreams, Betrayal &amp; Forgiveness · God's Purposes in Difficult Circumstances</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Genesis 50:20</span><span class="hero-tag">Genesis 37–45</span><span class="hero-tag">Forgiveness</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"You intended to harm me, but God intended it for good, to accomplish what is now being done, the saving of many lives."</div>
+    <div class="verse-ref">Genesis 50:20 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word breakdown:</strong> <em>"You intended to harm me"</em> = Joseph names the wrong done to him honestly — he does not pretend his brothers' betrayal was not real or painful. <em>"God intended it for good"</em> = the SAME events can carry two intentions at once — human evil and divine purpose are not the same thing. <em>"to accomplish... the saving of many lives"</em> = the good that came was not small or private; it rescued an entire region from famine. This is the key verse of Joseph's whole story — said only at the very END, after twenty-two years and after he had already chosen to forgive.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">favouritism</div><div class="esl-def">Treating one person better or with more love than others, often unfairly. Jacob's open favouritism toward Joseph is the spark that lights this whole story.</div></div>
+    <div class="esl-row"><div class="esl-word">betrayal</div><div class="esl-def">An act of deep disloyalty against someone who trusted you. Joseph's own brothers betray him by selling him into slavery.</div></div>
+    <div class="esl-row"><div class="esl-word">interpret / interpretation</div><div class="esl-def">To explain the MEANING of something unclear, such as a dream. Joseph's gift for dream interpretation shapes his entire future.</div></div>
+    <div class="esl-row"><div class="esl-word">integrity</div><div class="esl-def">Doing what is right even when no one is watching and it costs you something. Joseph shows integrity by refusing to do wrong even as a slave.</div></div>
+    <div class="esl-row"><div class="esl-word">steward</div><div class="esl-def">A person trusted to manage someone else's household, property or affairs. Joseph becomes a steward first to Potiphar, later to all of Egypt.</div></div>
+    <div class="esl-row"><div class="esl-word">famine</div><div class="esl-def">A severe shortage of food, often caused by drought or crop failure. (Remember this word from Week 5 — Abraham's famine. Egypt's famine is far more severe and lasts seven years.)</div></div>
+    <div class="esl-row"><div class="esl-word">reconcile / reconciliation</div><div class="esl-def">To restore a broken relationship — making peace between people who were once divided. Joseph's reconciliation with his brothers is the emotional centre of the story.</div></div>
+    <div class="esl-row"><div class="esl-word">providence</div><div class="esl-def">God's wise and unseen guidance over events, often only recognisable by looking BACKWARD over a long stretch of time — exactly as Joseph does in Genesis 50:20.</div></div>
+    <div class="esl-row"><div class="esl-word">famine relief</div><div class="esl-def">Organised food storage and distribution to help people survive a famine. Joseph's 14-year grain plan (7 years storing, 7 years distributing) becomes Egypt's famine relief system.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🧥</span> A Family Torn by Favouritism — Genesis 37</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">Joseph was the eleventh of Jacob's twelve sons, but the first son of his beloved wife Rachel. Jacob made no secret of his favourite — he gave Joseph an elaborate robe (often translated "a coat of many colours"), and his ten older half-brothers noticed and resented it bitterly.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">😠 What Fuelled the Brothers' Hatred</div>
+      <div class="cmp-row">Jacob's open, unequal favouritism toward Joseph</div>
+      <div class="cmp-row">The expensive, symbolic robe — a visible sign of status</div>
+      <div class="cmp-row">Joseph reporting his brothers' misdeeds to their father</div>
+      <div class="cmp-row">Joseph's two dreams, both showing his family bowing to him</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">⚖️ How Far the Hatred Went</div>
+      <div class="cmp-row">"They hated him and could not speak a kind word to him" (37:4)</div>
+      <div class="cmp-row">Some brothers wanted to kill him outright (37:20)</div>
+      <div class="cmp-row">Reuben persuades them to throw him in a pit instead (37:22)</div>
+      <div class="cmp-row">Judah suggests selling him to traders for silver (37:26-27)</div>
+    </div>
+  </div>
+  <div class="callout key" style="margin-top:14px;">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>KS3 thinking point:</strong> Joseph was only about 17 years old (Genesis 37:2) when his brothers turned on him. Unlike Noah or Abraham, who were called by God directly into hardship, Joseph's suffering begins entirely through other PEOPLE'S choices — making this a story about how God works even through human wrongdoing.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">💭</span> Joseph's Two Dreams — Genesis 37:5-11</div>
+  <div class="callout warn">
+    <div class="ci">📖</div>
+    <div class="ct">Joseph has TWO dreams, both pointing to the same future, told to his family at the worst possible moment.</div>
+  </div>
+  <div class="inf-chain">
+    <div class="inf-box"><div class="label">Dream One</div><div class="value">Sheaves of wheat in a field — Joseph's sheaf stands upright, and his brothers' sheaves bow down to it.</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Dream Two</div><div class="value">The sun, moon, and eleven stars bow down to Joseph — even his father Jacob is troubled by this one.</div></div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Both dreams turn out to be literally true — but not for over twenty years, and not before unimaginable suffering. This is the first hint of a pattern that runs through the whole story: God's promises can be TRUE long before they look true.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">⛓️</span> From the Pit to the Palace — Joseph's Long Road</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#6D28D9;"></div><div class="tl-date">Stage 1</div><div class="tl-title">Sold into Slavery (Genesis 37)</div><div class="tl-desc">Joseph's brothers throw him into a pit, then sell him to Midianite/Ishmaelite traders for twenty pieces of silver. He is taken to Egypt and sold to Potiphar, an Egyptian official.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#8B5CF6;"></div><div class="tl-date">Stage 2</div><div class="tl-title">Falsely Accused &amp; Imprisoned (Genesis 39)</div><div class="tl-desc">Joseph serves Potiphar with such integrity that he is placed in charge of the whole household — until Potiphar's wife falsely accuses him, and he is thrown into prison despite doing nothing wrong.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#A78BFA;"></div><div class="tl-date">Stage 3</div><div class="tl-title">Interpreting Dreams in Prison (Genesis 40-41)</div><div class="tl-desc">In prison, Joseph correctly interprets the dreams of two royal officials. Two years later, when Pharaoh has two troubling dreams no one can explain, Joseph is remembered and brought before him.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#C4B5FD;"></div><div class="tl-date">Stage 4</div><div class="tl-title">Second-in-Command of Egypt (Genesis 41)</div><div class="tl-desc">Joseph interprets Pharaoh's dreams as a warning of 7 years of plenty followed by 7 years of famine, and proposes a grain-storage plan. Pharaoh makes him second-in-command over all of Egypt — at around age 30.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#EDE9FE;"></div><div class="tl-date">Stage 5</div><div class="tl-title">Reunion &amp; Forgiveness (Genesis 42-45)</div><div class="tl-desc">When famine strikes Canaan too, Joseph's brothers travel to Egypt for grain and unknowingly bow before the brother they once sold. Joseph eventually reveals himself and forgives them completely.</div></div>
+  </div>
+  <div class="callout tip" style="margin-top:10px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>KS3 timeline link:</strong> Roughly 13 years pass between Joseph being sold (age 17) and standing before Pharaoh (age 30) — and another 9 years pass before his brothers arrive in Egypt. The dreams of Genesis 37 are not fulfilled for over two decades.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🤝</span> The Moment of Forgiveness — Genesis 45:4-8</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden idea of this lesson:</strong> Joseph could easily have used his power to punish his brothers — instead, he weeps, reassures them, and reframes the whole story around God's purpose rather than his own pain.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>What the Brothers Expected</th><th>What Joseph Actually Said</th></tr></thead>
+    <tbody>
+      <tr><td>Revenge, imprisonment, or execution</td><td>"Come close to me... I am Joseph your brother, whom you sold into Egypt!" (45:4)</td></tr>
+      <tr><td>Permanent rejection and shame</td><td>"Do not be distressed and do not be angry with yourselves" (45:5)</td></tr>
+      <tr><td>Blame placed entirely on them</td><td>"It was not you who sent me here, but God" (45:8)</td></tr>
+      <tr><td>Being sent away in disgrace</td><td>He invites the whole family to live safely in Egypt's best land, Goshen</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>ESL note:</strong> Forgiveness in this story does NOT mean pretending the wrong didn't happen (Joseph names it plainly: "whom you sold"). It means choosing not to let that wrong control how you treat the person now.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">⚖️</span> Comparing Three Examples of Faith — Noah, Abraham, Joseph</div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Noah (Wk 4)</th><th>Abraham (Wk 5)</th><th>Joseph (Wk 6)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Source of the hardship</strong></td><td>An unprecedented natural disaster</td><td>His own choice to obey God's call</td><td>Other people's cruelty and betrayal</td></tr>
+      <tr><td><strong>Length of the trial</strong></td><td>Decades of building, then a year on the ark</td><td>A lifetime as a nomad</td><td>About 13 years as a slave/prisoner</td></tr>
+      <tr><td><strong>How character is shown</strong></td><td>Patient obedience to detailed instructions</td><td>Willingness to leave everything familiar</td><td>Integrity in slavery and forgiveness in power</td></tr>
+      <tr><td><strong>The "golden idea"</strong></td><td>Trusting before you see the result</td><td>Trusting before you know the destination</td><td>Trusting God's purpose even through suffering caused by others</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info" style="margin-top:12px;">
+    <div class="ci">🔗</div>
+    <div class="ct"><strong>The pattern deepens:</strong> Joseph's story adds something new — it is the first major Bible story where the difficulty comes not from God's instruction or a natural disaster, but from the sin of OTHER PEOPLE. Yet God's purpose still moves forward through it.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> What Trusting God Through Suffering Looks Like — Application</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">Integrity matters most when no one is checking</div><div class="step-desc">Joseph refused to do wrong even as an enslaved foreigner with no family to answer to — character is most visible under pressure, not comfort.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">Unfair seasons do not always end quickly</div><div class="step-desc">Joseph spent roughly 13 years in slavery and prison before things changed. Faithfulness sometimes means continuing to do right with no end date in sight.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">Looking back can reveal a purpose you couldn't see at the time</div><div class="step-desc">Joseph could only say "God intended it for good" at the END of the story, looking backward — not while he was still in the pit or the prison.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">4</div><div><div class="step-title">Forgiveness can exist alongside honesty about being wronged</div><div class="step-desc">Joseph names what his brothers did plainly, then chooses not to let it define how he treats them — the two are not contradictions.</div></div></div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">✍️</div>
+    <div class="ct"><strong>Sentence starters for reflection:</strong> "Joseph's integrity is shown through his ___ because ___." / "Genesis 50:20 teaches that ___." / "A time I had to keep doing the right thing even when things felt unfair was ___."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title"><span class="icon">🎯</span> Knowledge Check — Joseph</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🧩</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 6</div>
+  <div class="hero-title">Spelling Strategies<br>&amp; Vocabulary</div>
+  <div class="hero-subtitle">Word roots · Prefixes and suffixes · Building academic vocabulary · Spelling patterns that actually work</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Word Roots</span><span class="hero-tag">Prefixes &amp; Suffixes</span><span class="hero-tag">Academic Vocabulary</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these — they unlock thousands of other words</div>
+    <div class="esl-row"><div class="esl-word">root word</div><div class="esl-def">The CORE part of a word that carries its basic meaning, often borrowed from Latin or Greek. "Port" (to carry) is the root of transport, export, portable.</div></div>
+    <div class="esl-row"><div class="esl-word">prefix</div><div class="esl-def">A group of letters added to the BEGINNING of a root word that changes its meaning. "Un-" + happy = unhappy (NOT happy).</div></div>
+    <div class="esl-row"><div class="esl-word">suffix</div><div class="esl-def">A group of letters added to the END of a root word, often changing its word class (noun, verb, adjective). "-ful" + hope = hopeful (an adjective).</div></div>
+    <div class="esl-row"><div class="esl-word">etymology</div><div class="esl-def">The study of where a word came from and how its meaning has changed over time.</div></div>
+    <div class="esl-row"><div class="esl-word">syllable</div><div class="esl-def">A single unbroken sound in a spoken word. "Beautiful" has three syllables: beau-ti-ful.</div></div>
+    <div class="esl-row"><div class="esl-word">synonym</div><div class="esl-def">A word with a SIMILAR meaning to another word. "Enormous" is a synonym of "huge."</div></div>
+    <div class="esl-row"><div class="esl-word">antonym</div><div class="esl-def">A word with the OPPOSITE meaning to another word. "Ancient" is an antonym of "modern."</div></div>
+    <div class="esl-row"><div class="esl-word">derivative</div><div class="esl-def">A new word formed by adding a prefix or suffix to a root word. "Disagreement" is a derivative of "agree."</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🌳</span> Word Roots — One Root, Many Words</div>
+  <div class="callout info">
+    <div class="ci">🔍</div>
+    <div class="ct">English borrowed heavily from Latin and Greek. Once you recognise a common root, you can often work out the meaning of an unfamiliar word WITHOUT a dictionary.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Root</th><th>Meaning</th><th>Example Words</th></tr></thead>
+    <tbody>
+      <tr><td><em>scrib / script</em></td><td>to write</td><td>describe, manuscript, transcript, subscribe</td></tr>
+      <tr><td><em>dict</em></td><td>to speak / say</td><td>predict, dictionary, contradict, dictate</td></tr>
+      <tr><td><em>port</em></td><td>to carry</td><td>transport, export, portable, report</td></tr>
+      <tr><td><em>struct</em></td><td>to build</td><td>construct, structure, instruct, destruction</td></tr>
+      <tr><td><em>tele</em></td><td>far / distant</td><td>telephone, television, telescope, telepathy</td></tr>
+      <tr><td><em>bio</em></td><td>life</td><td>biology, biography, biodegradable</td></tr>
+      <tr><td><em>photo</em></td><td>light</td><td>photograph, photosynthesis, photogenic</td></tr>
+      <tr><td><em>spect</em></td><td>to look / see</td><td>spectator, inspect, spectacle, respect</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Subject link:</strong> Recognise <em>photo</em> + <em>synthesis</em> ("putting together using light") from this week's Science lesson? Roots connect across every subject you study — not just English.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🔬</span> Word-Building Lab — Click Each Prefix/Suffix Type to Explore</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('negprefix')">1️⃣ Negative Prefixes</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('otherprefix')">2️⃣ Other Prefixes</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('nounsuffix')">3️⃣ Noun Suffixes</button>
+    <button class="btn btn-sm" style="background:#BE123C;" onclick="showFig('adjsuffix')">4️⃣ Adjective Suffixes</button>
+  </div>
+  <div class="cell-panel" id="fig-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click a word-part type to see its meaning, examples, and how to spot it.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">⚠️</span> Tricky Prefix Spellings — Where Mistakes Happen</div>
+  <table class="data-table">
+    <thead><tr><th>❌ Common Error</th><th>✅ Correct Spelling</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>imposible</td><td>impossible</td><td>"in-" changes to "im-" before words starting with p, b, or m — but the root "possible" still has a double s.</td></tr>
+      <tr><td>dissapear</td><td>disappear</td><td>"dis-" has ONE s; the root word is "appear" (one p). Don't double the wrong letter.</td></tr>
+      <tr><td>missunderstand</td><td>misunderstand</td><td>"mis-" has only one s — the root "understand" starts cleanly with "u."</td></tr>
+      <tr><td>iresponsible</td><td>irresponsible</td><td>"in-" changes to "ir-" before words starting with r, doubling the r.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Most prefix spelling mistakes happen when a prefix's spelling CHANGES to match the first letter of the root (in- → im-/ir-/il-). Learn the pattern, not just individual words.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🏗️</span> Building Academic Vocabulary — Step by Step</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">Break the word into its parts</div><div class="step-desc">Split an unfamiliar word into prefix + root + suffix wherever possible: "in-flex-ible" = not + bend + able to be.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">Guess the meaning from the parts</div><div class="step-desc">"Inflexible" = "not able to be bent" — and by extension, a person or rule that won't change.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">Check the word in context</div><div class="step-desc">Read the full sentence around the word to confirm your guess matches how it is actually being used.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">4</div><div><div class="step-title">Collect the word family</div><div class="step-desc">Note related forms: flex, flexible, inflexible, flexibility, flexibly — learning one root often gives you five words at once.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">5</div><div><div class="step-title">Use the new word actively</div><div class="step-desc">Write your own sentence with the word the same day you learn it — active use is far more effective than just reading a definition.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">📝</span> Spelling Strategies That Actually Work</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">👀 Look, Say, Cover, Write, Check</div><div class="vc-def">Look closely at the word, say it aloud, cover it, write it from memory, then check — repeat until correct.</div></div>
+    <div class="vocab-card"><div class="vc-word">✂️ Break into Syllables</div><div class="vc-def">Split long words into sound chunks: "ne-ces-sa-ry" is far easier to spell than "necessary" attempted all at once.</div></div>
+    <div class="vocab-card"><div class="vc-word">🔗 Spot the Root</div><div class="vc-def">"Definitely" contains "finite" — remembering the root helps avoid the common misspelling "definately."</div></div>
+    <div class="vocab-card"><div class="vc-word">🎵 Use a Memory Phrase</div><div class="vc-def">"Necessary" = one Collar, two Sleeves (1 c, 2 s) — silly phrases for tricky letter patterns can stick for years.</div></div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>ESL tip:</strong> English spelling often does not match pronunciation exactly because words were borrowed from many different languages (Old English, French, Latin, Greek) at different points in history — this is exactly what etymology studies.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title"><span class="icon">🎯</span> Spelling Strategies &amp; Vocabulary — Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D2200,#7A3D00);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">💯</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 6</div>
+  <div class="hero-title">Decimals &amp;<br>Percentages</div>
+  <div class="hero-subtitle">Converting between fractions, decimals and percentages · Finding a percentage of an amount · Real-life percentage problems</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Decimals</span><span class="hero-tag">Percentages</span><span class="hero-tag">Conversions</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 5 — multiplying and dividing fractions</div>
+    <div class="esl-row"><div class="esl-word">decimal</div><div class="esl-def">A number written using a DECIMAL POINT to show parts of a whole, e.g. 0.75. Each digit after the point has a place value (tenths, hundredths, thousandths).</div></div>
+    <div class="esl-row"><div class="esl-word">percentage</div><div class="esl-def">A way of expressing a number as a fraction of 100. "Per cent" literally means "out of one hundred." 50% means 50 out of every 100.</div></div>
+    <div class="esl-row"><div class="esl-word">equivalent</div><div class="esl-def">Having the same VALUE, even when written in a different form. 1/2, 0.5, and 50% are all equivalent.</div></div>
+    <div class="esl-row"><div class="esl-word">place value</div><div class="esl-def">The value of a digit based on its POSITION in a number. In 0.75, the 7 is in the tenths place and the 5 is in the hundredths place.</div></div>
+    <div class="esl-row"><div class="esl-word">recurring decimal</div><div class="esl-def">A decimal where one or more digits repeat forever, e.g. 1/3 = 0.333... Written with a dot above the repeating digit.</div></div>
+    <div class="esl-row"><div class="esl-word">percentage increase</div><div class="esl-def">How much a value has GROWN, expressed as a percentage of the original amount.</div></div>
+    <div class="esl-row"><div class="esl-word">percentage decrease</div><div class="esl-def">How much a value has SHRUNK, expressed as a percentage of the original amount.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🔺</span> The Fraction–Decimal–Percentage Triangle</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Fractions, decimals, and percentages are three different ways of writing the SAME value. You should be able to convert confidently between all three.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Fraction</th><th>Decimal</th><th>Percentage</th></tr></thead>
+    <tbody>
+      <tr><td><em>1/2</em></td><td>0.5</td><td>50%</td></tr>
+      <tr><td><em>1/4</em></td><td>0.25</td><td>25%</td></tr>
+      <tr><td><em>3/4</em></td><td>0.75</td><td>75%</td></tr>
+      <tr><td><em>1/5</em></td><td>0.2</td><td>20%</td></tr>
+      <tr><td><em>1/10</em></td><td>0.1</td><td>10%</td></tr>
+      <tr><td><em>1/3</em></td><td>0.333... (recurring)</td><td>33.3% (approx.)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Memorising this small table of common conversions makes mental maths far faster — you will meet 1/2, 1/4, 1/5 and 1/10 constantly in everyday percentage problems.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">➗</span> Converting Fractions to Decimals — Divide!</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden rule:</strong> a fraction is really just a division. To convert any fraction to a decimal, divide the NUMERATOR by the DENOMINATOR.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Example: Convert 3/8 to a decimal</span><br><br>
+    3/8 means <span class="hl">3 ÷ 8</span><br>
+    3 ÷ 8 = <span class="hl2">0.375</span><br><br>
+    <span class="comment">Final answer: 3/8 = 0.375</span>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Identify numerator and denominator</div><div class="step-desc">For 3/8: numerator = 3, denominator = 8.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Divide numerator by denominator</div><div class="step-desc">Use short or long division: 3 ÷ 8 = 0.375.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Check for recurring decimals</div><div class="step-desc">Some fractions, like 1/3 or 1/7, never divide exactly and repeat forever — mark the repeating digit(s) with a dot.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">💯</span> Converting Decimals to Percentages — ×100</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> students often forget that multiplying by 100 simply MOVES the decimal point two places to the right — it does not add random zeros.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Decimal → Percentage: multiply by 100</span><br><br>
+    0.375 &times; 100 = <span class="hl">37.5</span> → write as <span class="hl2">37.5%</span><br>
+    0.6 &times; 100 = <span class="hl">60</span> → write as <span class="hl2">60%</span><br><br>
+    <span class="comment">Percentage → Decimal: divide by 100 (the reverse)</span><br>
+    82% &divide; 100 = <span class="hl3">0.82</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🧮</span> Finding a Percentage of an Amount</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">There are two reliable methods — choose whichever is faster for the numbers in front of you.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Method A — Decimal multiplier</div><div class="step-desc">Convert the percentage to a decimal, then multiply. To find 30% of 80: 0.30 × 80 = 24.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Method B — Find 1%, then scale up</div><div class="step-desc">To find 30% of 80: first find 1% (80 ÷ 100 = 0.8), then multiply by 30: 0.8 × 30 = 24.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Mental shortcut — use 10% and 50%</div><div class="step-desc">10% of 80 = 8 (divide by 10). 5% = half of that = 4. So 15% = 10% + 5% = 8 + 4 = 12 — fast, no calculator needed.</div></div></div>
+  </div>
+  <div class="formula" style="margin-top:8px;">
+    <span class="comment">Worked example: Find 65% of 220</span><br><br>
+    Decimal multiplier: 0.65 &times; 220 = <span class="hl">143</span><br>
+    Check using 10% method: 10% = 22, so 60% = 132, and 5% = 11, giving 60%+5% = <span class="hl2">143</span> ✓
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">📈</span> Percentage Increase &amp; Decrease — Real-Life Maths</div>
+  <table class="data-table">
+    <thead><tr><th>Scenario</th><th>Working</th><th>Answer</th></tr></thead>
+    <tbody>
+      <tr><td>A £40 jacket has a 25% discount. New price?</td><td>25% of 40 = 10. £40 − £10 =</td><td><strong>£30</strong></td></tr>
+      <tr><td>A town's population of 5,000 grows by 12%.</td><td>12% of 5,000 = 600. 5,000 + 600 =</td><td><strong>5,600</strong></td></tr>
+      <tr><td>A £15 book is increased by 20% for a sale, then the sale gives 20% OFF.</td><td>£15 → £18 → 20% of £18 = £3.60 → £14.40</td><td><strong>£14.40 — not £15!</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn" style="margin-top:12px;">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>KS3 key idea:</strong> A 20% increase followed by a 20% decrease does NOT return you to the original amount — because the second 20% is calculated on a DIFFERENT (larger) number. This surprises many students and is a favourite exam trap.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title"><span class="icon">🎯</span> Decimals &amp; Percentages — Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🦉</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 6</div>
+  <div class="hero-title">Ecosystems &amp;<br>Food Webs</div>
+  <div class="hero-subtitle">Producers, consumers, decomposers · Food chains and food webs · Habitats around the world</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Biology</span><span class="hero-tag">Food Webs</span><span class="hero-tag">Habitats</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL Biology Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 5 — remember producer, photosynthesis and glucose</div>
+    <div class="esl-row"><div class="esl-word">ecosystem</div><div class="esl-def">All the living organisms in an area, together with the non-living parts (water, soil, climate) they interact with.</div></div>
+    <div class="esl-row"><div class="esl-word">habitat</div><div class="esl-def">The natural HOME or environment of a particular organism — where it lives and finds everything it needs to survive.</div></div>
+    <div class="esl-row"><div class="esl-word">producer</div><div class="esl-def">An organism that makes its OWN food, usually through photosynthesis. Plants, algae and some bacteria are producers — the starting point of almost every food chain.</div></div>
+    <div class="esl-row"><div class="esl-word">consumer</div><div class="esl-def">An organism that gets its energy by EATING other organisms, because it cannot make its own food.</div></div>
+    <div class="esl-row"><div class="esl-word">decomposer</div><div class="esl-def">An organism (such as fungi or bacteria) that breaks down dead plants and animals, returning nutrients to the soil.</div></div>
+    <div class="esl-row"><div class="esl-word">predator</div><div class="esl-def">An animal that hunts and eats other animals (its prey).</div></div>
+    <div class="esl-row"><div class="esl-word">prey</div><div class="esl-def">An animal that is hunted and eaten by a predator.</div></div>
+    <div class="esl-row"><div class="esl-word">food chain</div><div class="esl-def">A simple diagram showing the flow of energy from one organism to the next, in a single straight line.</div></div>
+    <div class="esl-row"><div class="esl-word">food web</div><div class="esl-def">A network of MANY overlapping food chains, showing the real, more complicated feeding relationships within an ecosystem.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🍃</span> Producers, Consumers &amp; Decomposers — The Three Roles</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Every organism in an ecosystem plays one of three energy roles. Together, these three roles keep nutrients and energy cycling endlessly through the system.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Role</th><th>How It Gets Energy</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Producer</strong></td><td>Makes its own food via photosynthesis (Week 5 link!)</td><td>Grass, trees, algae, seaweed</td></tr>
+      <tr><td><strong>Consumer — Primary</strong></td><td>Eats producers directly (a herbivore)</td><td>Rabbit, grasshopper, deer</td></tr>
+      <tr><td><strong>Consumer — Secondary</strong></td><td>Eats primary consumers (a carnivore or omnivore)</td><td>Fox, frog, small fish</td></tr>
+      <tr><td><strong>Consumer — Tertiary</strong></td><td>Top predator, eats secondary consumers</td><td>Eagle, lion, shark</td></tr>
+      <tr><td><strong>Decomposer</strong></td><td>Breaks down dead organisms and waste</td><td>Fungi, bacteria, earthworms</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Without decomposers, dead material would simply pile up forever, and the nutrients locked inside it could never be recycled back into the soil for new producers to use.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">➡️</span> Building a Food Chain</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">A food chain ALWAYS starts with a producer, and the arrows show the direction energy FLOWS — not "eats." An arrow points FROM the organism being eaten TO the one eating it.</div>
+  </div>
+  <div class="inf-chain">
+    <div class="inf-box"><div class="label">Producer</div><div class="value">🌾 Grass</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Primary Consumer</div><div class="value">🐇 Rabbit</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Secondary Consumer</div><div class="value">🦊 Fox</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Decomposer</div><div class="value">🍄 Fungi</div></div>
+  </div>
+  <div class="callout tip" style="margin-top:10px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>ESL tip:</strong> Read the arrow as "energy flows to" rather than "eats" — grass → rabbit means energy flows FROM the grass TO the rabbit (because the rabbit eats the grass).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🕸️</span> Food Web Explorer — Click Each Organism</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showWeb('grass')">🌾 Grass</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showWeb('rabbit')">🐇 Rabbit</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showWeb('mouse')">🐭 Mouse</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showWeb('fox')">🦊 Fox</button>
+    <button class="btn btn-sm" style="background:#065F46;" onclick="showWeb('owl')">🦉 Owl</button>
+  </div>
+  <div class="cell-panel" id="web-panel">
+    <div style="font-size:2rem;text-align:center;opacity:0.3;margin-bottom:8px;">👆</div>
+    <div style="text-align:center;opacity:0.4;font-size:0.9rem;">Click an organism to see its role and its connections in a woodland food web.</div>
+  </div>
+  <div class="callout key" style="margin-top:12px;">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The golden idea of this lesson:</strong> a food WEB is more realistic than a food chain because most animals eat — and are eaten by — more than one species. Removing just one organism can affect many others throughout the whole web.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">📊</span> Energy Pyramids — Why Food Chains Are Short</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Energy is LOST as heat at every stage of a food chain — only about 10% of the energy at one level passes on to the next. This is why food chains rarely have more than 4-5 links, and why top predators are always far less numerous than producers.</div>
+  </div>
+  <div class="size-compare">
+    <div class="size-row"><div class="size-label">Producers (grass)</div><div class="size-track"><div class="size-fill" style="width:100%;background:#059669;">100% energy available</div></div></div>
+    <div class="size-row"><div class="size-label">Primary consumers</div><div class="size-track"><div class="size-fill" style="width:55%;background:#10B981;">~10%</div></div></div>
+    <div class="size-row"><div class="size-label">Secondary consumers</div><div class="size-track"><div class="size-fill" style="width:30%;background:#34D399;">~1%</div></div></div>
+    <div class="size-row"><div class="size-label">Tertiary consumers</div><div class="size-track"><div class="size-fill" style="width:15%;background:#6EE7B7;">~0.1%</div></div></div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> This is exactly why a single field can support thousands of blades of grass, hundreds of rabbits, but usually only a handful of foxes — energy shrinks dramatically at each level.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🌍</span> Habitats Around the World</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">🌳 Woodland</div><div class="vc-def">Trees provide shelter and food for foxes, owls, squirrels and countless insects and fungi.</div></div>
+    <div class="vocab-card"><div class="vc-word">🐠 Coral Reef</div><div class="vc-def">One of the most biodiverse habitats on Earth, home to thousands of interconnected marine species.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏜️ Desert</div><div class="vc-def">Extreme heat and scarce water mean only specially adapted producers and consumers survive here.</div></div>
+    <div class="vocab-card"><div class="vc-word">🧊 Polar / Tundra</div><div class="vc-def">Freezing temperatures support short food chains: algae → krill → fish → seals → polar bears.</div></div>
+    <div class="vocab-card"><div class="vc-word">🌾 Grassland</div><div class="vc-def">Wide-open plains where grazing herbivores support large predator populations.</div></div>
+  </div>
+  <div class="callout tip" style="margin-top:14px;">
+    <div class="ci">🌐</div>
+    <div class="ct"><strong>Subject link:</strong> You'll explore these regions and their physical features further in this week's History &amp; Geography lesson on world regions!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title"><span class="icon">🎯</span> Ecosystems &amp; Food Webs — Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌍</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History &amp; Geography · Week 6</div>
+  <div class="hero-title">World Regions —<br>Physical Geography</div>
+  <div class="hero-subtitle">Continents and oceans · Major landforms · Rivers, mountains and deserts · Reading a physical map</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Continents</span><span class="hero-tag">Landforms</span><span class="hero-tag">Oceans</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">📚</span> Key Vocabulary — ESL History &amp; Geography Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 5's map skills — latitude, longitude, scale</div>
+    <div class="esl-row"><div class="esl-word">continent</div><div class="esl-def">One of the seven huge landmasses on Earth: Africa, Antarctica, Asia, Australia, Europe, North America, South America.</div></div>
+    <div class="esl-row"><div class="esl-word">ocean</div><div class="esl-def">A vast body of salt water. There are five named oceans: Pacific, Atlantic, Indian, Southern, and Arctic.</div></div>
+    <div class="esl-row"><div class="esl-word">landform</div><div class="esl-def">A natural feature of the Earth's surface, such as a mountain, valley, plain, or plateau.</div></div>
+    <div class="esl-row"><div class="esl-word">mountain range</div><div class="esl-def">A connected series of mountains formed by the same geological processes, often stretching for thousands of kilometres.</div></div>
+    <div class="esl-row"><div class="esl-word">plateau</div><div class="esl-def">A large, raised area of fairly flat land — sometimes called a "tableland."</div></div>
+    <div class="esl-row"><div class="esl-word">peninsula</div><div class="esl-def">An area of land almost completely surrounded by water, connected to the mainland by a narrow strip.</div></div>
+    <div class="esl-row"><div class="esl-word">archipelago</div><div class="esl-def">A group or chain of many islands close together, such as Indonesia or the Philippines.</div></div>
+    <div class="esl-row"><div class="esl-word">basin (river basin)</div><div class="esl-def">The entire area of land drained by a river and all its tributaries (smaller rivers that flow into it).</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🗺️</span> The Seven Continents &amp; Five Oceans</div>
+  <div class="callout info">
+    <div class="ci">🌐</div>
+    <div class="ct">Geographers divide the world's land into seven continents and its salt water into five named oceans — though in reality all the oceans are one connected body of water.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Continent</th><th>Notable Feature</th><th>Approx. Size Rank</th></tr></thead>
+    <tbody>
+      <tr><td>Asia</td><td>Largest continent; home to Mount Everest, the world's highest peak</td><td>1st (largest)</td></tr>
+      <tr><td>Africa</td><td>Contains the Sahara, the world's largest hot desert</td><td>2nd</td></tr>
+      <tr><td>North America</td><td>Stretches from the Arctic to the tropics</td><td>3rd</td></tr>
+      <tr><td>South America</td><td>Home to the Amazon, the world's largest rainforest and river by volume</td><td>4th</td></tr>
+      <tr><td>Antarctica</td><td>Covered almost entirely by ice; no permanent population</td><td>5th</td></tr>
+      <tr><td>Europe</td><td>Densely populated; many countries in a relatively small area</td><td>6th</td></tr>
+      <tr><td>Australia (Oceania)</td><td>Smallest continent; also an entire country</td><td>7th (smallest)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 memory tip:</strong> The five oceans, largest to smallest: Pacific, Atlantic, Indian, Southern, Arctic — try the phrase "<strong>P</strong>eople <strong>A</strong>lways <strong>I</strong>nvent <strong>S</strong>illy <strong>A</strong>cronyms."</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">⛰️</span> Major Landforms — Reading the Physical World</div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">⛰️ Mountain</div><div class="vc-def">Land that rises sharply, far higher than its surroundings — often formed where two of Earth's plates collide.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏞️ Valley</div><div class="vc-def">Low land between hills or mountains, often carved out over millions of years by a flowing river.</div></div>
+    <div class="vocab-card"><div class="vc-word">🌊 River</div><div class="vc-def">A natural, flowing channel of fresh water that travels from a source (often mountains) toward the sea.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏜️ Desert</div><div class="vc-def">A region with very low rainfall — not always hot; Antarctica is technically the largest desert on Earth.</div></div>
+    <div class="vocab-card"><div class="vc-word">🟫 Plain</div><div class="vc-def">A large area of flat or gently rolling land, often used for farming due to its fertile soil.</div></div>
+    <div class="vocab-card"><div class="vc-word">🗻 Plateau</div><div class="vc-def">A large flat-topped area raised well above the surrounding land — like a "tableland."</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🏆</span> Earth's Record-Breaking Landforms</div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Record</th><th>Location</th></tr></thead>
+    <tbody>
+      <tr><td>Mount Everest</td><td>Highest point on land (8,849 m)</td><td>Nepal / Tibet, Asia</td></tr>
+      <tr><td>The Nile / The Amazon</td><td>Longest river / largest river by volume</td><td>Africa / South America</td></tr>
+      <tr><td>The Sahara</td><td>Largest hot desert (~9.2 million km²)</td><td>North Africa</td></tr>
+      <tr><td>The Andes</td><td>Longest continental mountain range (~7,000 km)</td><td>Western South America</td></tr>
+      <tr><td>The Pacific Ocean</td><td>Largest and deepest ocean on Earth</td><td>Between Asia/Australia and the Americas</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Map skills link:</strong> Use last week's latitude and longitude skills — Mount Everest sits at approximately 27.99°N, 86.93°E. Try locating it on a world map or atlas.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">💧</span> How Rivers Shape the Land — From Source to Sea</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">1</div><div><div class="step-title">Source</div><div class="step-desc">A river begins at its source — often a mountain spring, melting glacier, or a lake high above sea level.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">2</div><div><div class="step-title">Upper Course</div><div class="step-desc">Fast-flowing water cuts steep, narrow valleys through higher ground, eroding rock as it goes.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">3</div><div><div class="step-title">Middle &amp; Lower Course</div><div class="step-desc">The river widens and slows on flatter land, often curving into large bends called meanders, and depositing fertile soil.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">4</div><div><div class="step-title">Mouth (Delta/Estuary)</div><div class="step-desc">The river finally reaches the sea, sometimes splitting into a fan-shaped delta as it deposits the last of its sediment.</div></div></div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Many of the world's earliest civilisations grew up along major rivers (the Nile, Tigris-Euphrates, Indus, Yellow River) because of the fertile farmland river deposits create.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">⚖️</span> Comparing Two Contrasting Regions</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.5);">
+      <div class="cmp-head" style="color:#93C5FD;">🏜️ The Sahara Desert</div>
+      <div class="cmp-row">Largest hot desert on Earth, spanning much of North Africa</div>
+      <div class="cmp-row">Extremely low rainfall and very sparse vegetation</div>
+      <div class="cmp-row">Daytime temperatures can exceed 45°C, but nights can be near freezing</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.4);">
+      <div class="cmp-head" style="color:#93C5FD;">🌳 The Amazon Rainforest</div>
+      <div class="cmp-row">Largest tropical rainforest on Earth, spanning much of South America</div>
+      <div class="cmp-row">Extremely high rainfall and the greatest biodiversity of any biome</div>
+      <div class="cmp-row">Hot and humid year-round, with relatively stable temperatures</div>
+    </div>
+  </div>
+  <div class="callout warn" style="margin-top:14px;">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>KS3 key idea:</strong> "Desert" describes RAINFALL, not necessarily heat — both the Sahara and Antarctica are deserts by definition, despite being opposite in temperature. You'll explore climate zones and biomes further in Week 7.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title"><span class="icon">🎯</span> World Regions — Physical Geography — Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Word-Building Lab (English)
+const figData={
+  negprefix:{title:'Negative Prefixes',sub:'Prefixes that reverse or negate meaning',body:'<strong>Structure:</strong> [Prefix] + [Root word], meaning "NOT" or "the opposite of."<br><br><strong>Examples:</strong><br>• <strong>un-</strong> + happy = unhappy (not happy)<br>• <strong>dis-</strong> + agree = disagree (not agree)<br>• <strong>in-</strong> + visible = invisible (not visible)<br>• <strong>im-</strong> + possible = impossible (not possible — "in-" changes to "im-" before p, b, m)<br>• <strong>ir-</strong> + regular = irregular ("in-" changes to "ir-" before r)<br>• <strong>il-</strong> + legal = illegal ("in-" changes to "il-" before l)<br><br><strong>Why it matters:</strong> Recognising "in-" changes its spelling to match the first letter of the root explains dozens of common spelling mistakes.',analogy:'⚠️ ESL tip: "un-" usually attaches to adjectives and verbs (unhappy, undo); "dis-" often attaches to verbs and nouns (disagree, dishonesty) — neither rule is 100% fixed, so always check a dictionary if unsure.'},
+  otherprefix:{title:'Other Common Prefixes',sub:'Prefixes that add meaning without negating',body:'<strong>Structure:</strong> [Prefix] + [Root word], adding a specific meaning rather than reversing it.<br><br><strong>Examples:</strong><br>• <strong>re-</strong> (again) + write = rewrite<br>• <strong>pre-</strong> (before) + view = preview<br>• <strong>anti-</strong> (against) + clockwise = anticlockwise<br>• <strong>mis-</strong> (wrongly) + understand = misunderstand<br>• <strong>sub-</strong> (under) + marine = submarine<br>• <strong>inter-</strong> (between) + national = international<br><br><strong>Why it matters:</strong> Each prefix carries a consistent meaning across hundreds of words — learning "sub-" means "under" instantly helps with submarine, subway, substandard, and many more.',analogy:'🔁 Compare: "re-" (again) is one of the most productive prefixes in English — try listing five more words starting with "re-" right now.'},
+  nounsuffix:{title:'Noun-Forming Suffixes',sub:'Suffixes that turn words into nouns (things/ideas)',body:'<strong>Structure:</strong> [Root word] + [Suffix], creating a word that names a thing, person, or idea.<br><br><strong>Examples:</strong><br>• <strong>-tion</strong>: inform → information<br>• <strong>-ment</strong>: agree → agreement<br>• <strong>-ness</strong>: happy → happiness<br>• <strong>-ity</strong>: flexible → flexibility<br>• <strong>-er / -or</strong>: teach → teacher, act → actor<br><br><strong>Why it matters:</strong> Academic writing relies heavily on noun-forming suffixes to turn actions and qualities into formal, abstract nouns (e.g. "the development of" rather than "developing").',analogy:'📝 Spelling watch: adding "-ity" to "flexible" requires dropping the final "e" first: flexible → flexibility, not flexibleity.'},
+  adjsuffix:{title:'Adjective-Forming Suffixes',sub:'Suffixes that turn words into describing words',body:'<strong>Structure:</strong> [Root word] + [Suffix], creating a word that describes a noun.<br><br><strong>Examples:</strong><br>• <strong>-ful</strong>: hope → hopeful (full OF hope)<br>• <strong>-less</strong>: hope → hopeless (WITHOUT hope — the opposite!)<br>• <strong>-able / -ible</strong>: avoid → avoidable, flex → flexible<br>• <strong>-ous</strong>: danger → dangerous<br>• <strong>-ive</strong>: act → active<br><br><strong>Why it matters:</strong> "-ful" and "-less" attached to the SAME root can create opposite meanings — hopeful vs hopeless, careful vs careless — a powerful pattern once you spot it.',analogy:'⚠️ ESL tip: "-ful" is spelled with ONE "l" at the end (hopeful, not hopefull) — a very common spelling mistake even among confident writers.'},
+};
+function showFig(id){
+  const o=figData[id];if(!o)return;
+  const p=document.getElementById('fig-panel');
+  p.innerHTML='<div class="cip-name">'+o.title+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sub+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.analogy+'</div></div>';
+  p.style.borderColor='#BE123C';
+}
+
+// Food Web Explorer (Science)
+const webData={
+  grass:{e:'🌾',name:'Grass',sys:'Producer',body:'Grass is a <strong>producer</strong> — it makes its own food through photosynthesis (see Week 5!), using sunlight, water and carbon dioxide. It forms the base energy source for almost the entire woodland food web.',a:'🌾 Connections: eaten by rabbits, mice, and many insects — the starting point of every chain in this web.'},
+  rabbit:{e:'🐇',name:'Rabbit',sys:'Primary Consumer (Herbivore)',body:'The rabbit is a <strong>primary consumer</strong> — it eats only producers like grass, never other animals. It gets its energy directly from plants, one step along the chain from the sun.',a:'🐇 Connections: eats grass; is eaten by foxes and owls — connecting the producer level to two different predators.'},
+  mouse:{e:'🐭',name:'Mouse',sys:'Primary Consumer (Herbivore/Omnivore)',body:'The mouse is also a <strong>primary consumer</strong>, feeding mainly on seeds, grass and grain. Because several different predators hunt mice, it is an important link connecting multiple food chains into a wider web.',a:'🐭 Connections: eats grass and seeds; is eaten by both foxes and owls — this overlap is exactly what turns separate chains into a WEB.'},
+  fox:{e:'🦊',name:'Fox',sys:'Secondary Consumer (Carnivore)',body:'The fox is a <strong>secondary consumer</strong> — a carnivore that hunts primary consumers such as rabbits and mice. As a mid-level predator, it depends entirely on herbivore populations staying healthy.',a:'🦊 Connections: eats rabbits and mice; has very few natural predators in most woodland habitats, making it a near-top predator here.'},
+  owl:{e:'🦉',name:'Owl',sys:'Tertiary Consumer (Top Predator)',body:'The owl is a <strong>tertiary consumer</strong> and a top predator in this woodland web — it hunts both rabbits and mice from above, mainly at night, and has no natural predators of its own in this habitat.',a:'🦉 Connections: eats rabbits and mice; sits at the very top of the energy pyramid, receiving only a tiny fraction of the original energy captured by the grass.'},
+};
+function showWeb(id){
+  const o=webData[id];if(!o)return;
+  const p=document.getElementById('web-panel');
+  p.innerHTML='<div style="font-size:2rem;margin-bottom:8px;">'+o.e+'</div><div class="cip-name">'+o.name+'</div><div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">'+o.sys+'</div><div class="cip-body">'+o.body+'<div class="cip-analogy">'+o.a+'</div></div>';
+  p.style.borderColor='#059669';
+}
+
+// Quiz data
+const quizData={
+  bible:[
+    {q:'According to Genesis 50:20, what does Joseph say about his brothers\' actions against him?',opts:['That they did nothing wrong at all','That they intended harm, but God intended it for good — to save many lives','That God caused them to hate him','That he never truly forgave them'],ans:1,exp:'Joseph names the wrong honestly ("you intended to harm me") while also recognising God\'s deeper purpose ("God intended it for good"). The two statements work together rather than cancelling each other out.'},
+    {q:'What was the main cause of the brothers\' jealousy toward Joseph in Genesis 37?',opts:['Joseph was the eldest son','Jacob\'s open favouritism toward Joseph, shown through the elaborate robe he gave him','Joseph refused to work on the family farm','The brothers were jealous of his wealth'],ans:1,exp:'Jacob openly favoured Joseph — giving him an elaborate robe as a visible sign of status — which, combined with Joseph\'s dreams of his family bowing to him, fuelled deep resentment among his ten older brothers.'},
+    {q:'How did Joseph end up in Egypt?',opts:['He chose to travel there to study','His brothers sold him to traders, who took him to Egypt and sold him to Potiphar','He was sent by his father as an ambassador','He was shipwrecked there by accident'],ans:1,exp:'Joseph\'s brothers threw him into a pit, then sold him to passing traders for silver. The traders took him to Egypt, where he was sold to Potiphar, an Egyptian official.'},
+    {q:'Why was Joseph thrown into prison in Genesis 39, despite having done nothing wrong?',opts:['He was caught stealing from Potiphar','Potiphar\'s wife falsely accused him after he refused to do wrong with her','He failed to manage Potiphar\'s household properly','He was caught practising a foreign religion'],ans:1,exp:'Joseph served Potiphar with great integrity, but when he refused to do wrong with Potiphar\'s wife, she falsely accused him, and he was imprisoned despite his innocence.'},
+    {q:'How did Joseph eventually rise from prison to becoming second-in-command of Egypt?',opts:['He bribed Pharaoh\'s guards','He correctly interpreted Pharaoh\'s dreams, which others in Egypt could not explain','He led a successful military campaign','He married into Pharaoh\'s family'],ans:1,exp:'After correctly interpreting the dreams of two royal officials in prison, Joseph was later remembered and brought before Pharaoh, whose own troubling dreams he interpreted as a warning of coming famine — leading Pharaoh to put him in charge of Egypt\'s famine preparations.'},
+    {q:'When Joseph finally reveals himself to his brothers in Genesis 45, how does he respond to them?',opts:['He has them arrested and punished','He forgives them, reassures them, and reframes events around God\'s purpose rather than revenge','He refuses to speak to them at all','He sends them away permanently in shame'],ans:1,exp:'Rather than seeking revenge, Joseph weeps, reassures his brothers not to be distressed, and tells them "it was not you who sent me here, but God" — choosing forgiveness and reconciliation over punishment.'},
+    {q:'What is the key difference between Joseph\'s story and the stories of Noah and Abraham studied in previous weeks?',opts:['Joseph\'s story does not involve any hardship at all','Joseph\'s suffering comes primarily from other PEOPLE\'S choices, rather than a direct instruction from God or a natural disaster','Joseph never trusted God at any point','Joseph\'s story has no connection to faith or character at all'],ans:1,exp:'Unlike Noah (a natural disaster) and Abraham (a direct call from God), Joseph\'s suffering begins through the sin and betrayal of other people — yet the story shows that God\'s purposes can still move forward even through human wrongdoing.'},
+  ],
+  english:[
+    {q:'What is a "root word"?',opts:['A word that has no meaning on its own','The core part of a word that carries its basic meaning, often from Latin or Greek','A word that only appears at the start of a sentence','A synonym for "prefix"'],ans:1,exp:'A root word is the core part of a word carrying its basic meaning — for example, "port" (to carry) is the root shared by transport, export, and portable.'},
+    {q:'Which sentence correctly explains the difference between a prefix and a suffix?',opts:['A prefix is added to the end of a word; a suffix is added to the beginning','A prefix is added to the BEGINNING of a root word; a suffix is added to the END of a root word','Prefixes and suffixes mean exactly the same thing','Only suffixes can change a word\'s meaning'],ans:1,exp:'A prefix attaches to the beginning of a root word (un- + happy = unhappy), while a suffix attaches to the end (hope + -ful = hopeful).'},
+    {q:'Why does "impossible" use "im-" instead of "in-"?',opts:['It is simply a random spelling exception with no pattern','"In-" changes its spelling to "im-" before root words starting with p, b, or m','"Im-" is an entirely different prefix unrelated to "in-"','English never changes prefix spellings'],ans:1,exp:'"In-" regularly changes its spelling to match the first letter of the root word it attaches to: im- before p/b/m (impossible), ir- before r (irregular), il- before l (illegal).'},
+    {q:'Which suffix would correctly turn the adjective "happy" into a noun?',opts:['-ful, making "happyful"','-ness, making "happiness"','-able, making "happyable"','-ous, making "happyous"'],ans:1,exp:'"-ness" is a noun-forming suffix that turns adjectives into nouns describing a state or quality: happy → happiness, sad → sadness, kind → kindness.'},
+    {q:'"Hopeful" and "hopeless" are built from the same root word but mean opposite things. Why?',opts:['They are unrelated words that happen to look similar','"-ful" means "full of," while "-less" means "without" — opposite suffixes attached to the same root create opposite meanings','"Hopeless" is simply a spelling mistake of "hopeful"','Suffixes never change a word\'s meaning'],ans:1,exp:'"-ful" (full of) and "-less" (without) are opposite suffixes. Attached to the same root "hope," they create opposite meanings: full of hope vs without hope.'},
+    {q:'What is the most effective way to learn the spelling of a long or difficult word?',opts:['Reading it silently just once','Breaking it into syllables and using Look, Say, Cover, Write, Check, repeating until correct','Avoiding the word entirely in your own writing','Copying it out exactly once without checking it'],ans:1,exp:'Breaking a word into syllables makes it far more manageable, and the Look, Say, Cover, Write, Check method actively tests memory rather than simply re-reading the word passively.'},
+    {q:'Why might recognising the root "bio" (life) help you understand an unfamiliar word like "biodegradable"?',opts:['It wouldn\'t help at all — every word must be memorised separately','Knowing "bio" means "life" lets you guess the word relates to living things breaking down naturally, even before checking a dictionary','"Bio" has no fixed meaning across different words','Roots only apply to science vocabulary, not everyday words'],ans:1,exp:'Recognising a familiar root lets you make an educated guess about an unfamiliar word\'s meaning before reaching for a dictionary — "bio" (life) + "degradable" (able to break down) suggests something that breaks down naturally over time.'},
+  ],
+  maths:[
+    {q:'Convert 3/8 to a decimal.',opts:['0.38','0.375 — found by dividing 3 ÷ 8','3.8','0.83'],ans:1,exp:'A fraction is a division: 3/8 means 3 ÷ 8. Dividing gives 0.375. Always divide the numerator by the denominator to convert a fraction to a decimal.'},
+    {q:'Convert 0.6 to a percentage.',opts:['0.6%','6%','60% — found by multiplying 0.6 × 100','600%'],ans:2,exp:'To convert a decimal to a percentage, multiply by 100 (which moves the decimal point two places right): 0.6 × 100 = 60, so 0.6 = 60%.'},
+    {q:'What is 25% of 160?',opts:['25','40 — found using 0.25 × 160, or by finding 1/4 of 160','60','4'],ans:1,exp:'25% is equivalent to the decimal 0.25 or the fraction 1/4. Either 0.25 × 160 = 40, or 160 ÷ 4 = 40, gives the same correct answer.'},
+    {q:'A jacket costs £60 and is reduced by 15% in a sale. What is the sale price?',opts:['£45','£51 — found by calculating 15% of £60 = £9, then £60 − £9','£9','£69'],ans:1,exp:'First find 15% of £60: 0.15 × 60 = £9. Then subtract this discount from the original price: £60 − £9 = £51.'},
+    {q:'Which fraction is equivalent to 0.75?',opts:['1/4','1/2','3/4','3/8'],ans:2,exp:'0.75 means 75 hundredths, or 75/100, which simplifies (dividing by the HCF of 25) to 3/4. This is one of the key fraction-decimal-percentage conversions worth memorising.'},
+    {q:'A town\'s population of 8,000 increases by 12%. What is the new population?',opts:['8,012','8,096','8,960 — found by calculating 12% of 8,000 = 960, then 8,000 + 960','9,600'],ans:2,exp:'First find 12% of 8,000: 0.12 × 8,000 = 960. Then add this increase to the original amount: 8,000 + 960 = 8,960.'},
+    {q:'A £20 item is increased by 10%, then later decreased by 10%. What is the final price?',opts:['Exactly £20, since the percentages cancel out','£19.80 — because the second 10% is calculated on the larger, increased amount, not the original £20','£18','£22'],ans:1,exp:'£20 + 10% = £22. Then £22 − 10% of £22 (£2.20) = £19.80. The two percentages do NOT cancel out, because the second one is calculated on a different (larger) base amount — a common exam trap.'},
+  ],
+  science:[
+    {q:'What is the defining feature of a "producer" in an ecosystem?',opts:['It eats other organisms for energy','It makes its own food, usually through photosynthesis','It breaks down dead organisms','It only lives in water'],ans:1,exp:'A producer, such as a plant or alga, makes its OWN food — usually through photosynthesis — rather than relying on eating other organisms. Producers form the base of almost every food chain.'},
+    {q:'In a food chain, what does the arrow between two organisms actually represent?',opts:['Which organism is bigger','The direction that ENERGY flows, from the organism eaten to the one eating it','The order organisms were discovered by scientists','Which organism lives longer'],ans:1,exp:'The arrow shows the direction energy flows — e.g. "grass → rabbit" means energy flows from the grass to the rabbit, because the rabbit eats the grass, not the other way around.'},
+    {q:'What is the role of decomposers such as fungi and bacteria in an ecosystem?',opts:['They produce oxygen through photosynthesis','They hunt and eat live animals','They break down dead organisms and waste, returning nutrients to the soil','They have no important role in the ecosystem'],ans:2,exp:'Decomposers break down dead plants and animals, recycling nutrients back into the soil so that producers can use them again — without decomposers, nutrients would stay locked inside dead material forever.'},
+    {q:'Why is a food WEB considered more realistic than a single food chain?',opts:['A food web only shows producers','A food web shows the many overlapping feeding relationships in an ecosystem, since most animals eat and are eaten by more than one species','A food web is simply a food chain drawn upside down','Food webs and food chains are exactly the same thing'],ans:1,exp:'A food web links together many overlapping food chains, reflecting the reality that most animals (like a fox eating both rabbits and mice) have more than one food source and more than one predator.'},
+    {q:'Roughly what percentage of energy passes from one level of a food chain to the next?',opts:['About 100%','About 50%','About 10%','About 1%'],ans:2,exp:'Only around 10% of energy at one level of a food chain passes on to the next level — the rest is lost mainly as heat. This is why food chains rarely have more than 4-5 links and why top predators are far less numerous than producers.'},
+    {q:'A primary consumer is best described as which of the following?',opts:['An organism that makes its own food','An organism that eats producers directly, such as a herbivore','An organism that only eats other consumers','An organism that breaks down dead material'],ans:1,exp:'A primary consumer eats producers directly — it is typically a herbivore, such as a rabbit eating grass, getting its energy one step removed from the sun.'},
+    {q:'Why are deserts and rainforests considered very different habitats?',opts:['They have no real differences','Deserts have extremely low rainfall and sparse life, while rainforests have very high rainfall and the greatest biodiversity of any biome','Deserts only exist in cold climates','Rainforests cannot support any food chains'],ans:1,exp:'Deserts are defined by extremely low rainfall, supporting only specially adapted, sparse life, while rainforests have very high rainfall and support the richest biodiversity of any biome on Earth.'},
+  ],
+  history:[
+    {q:'How many continents are there, and which is the largest?',opts:['Five continents; Africa is the largest','Seven continents; Asia is the largest','Six continents; Europe is the largest','Eight continents; North America is the largest'],ans:1,exp:'There are seven recognised continents — Asia, Africa, North America, South America, Antarctica, Europe and Australia (Oceania) — and Asia is the largest by far, home to Mount Everest, the world\'s highest peak.'},
+    {q:'Which is the largest and deepest ocean on Earth?',opts:['The Atlantic Ocean','The Indian Ocean','The Pacific Ocean','The Arctic Ocean'],ans:2,exp:'The Pacific Ocean is both the largest and deepest of the five named oceans, stretching between Asia/Australia and the Americas.'},
+    {q:'What is a "peninsula"?',opts:['A large, raised area of flat land','An area of land almost completely surrounded by water, connected to the mainland by a narrow strip','A group of many islands close together','A region with very low rainfall'],ans:1,exp:'A peninsula is an area of land almost entirely surrounded by water but still connected to the mainland by a narrow strip of land.'},
+    {q:'Why is the Sahara classified as a "desert" despite being extremely hot, while Antarctica is also classified as a desert despite being extremely cold?',opts:['This is a mistake — only one of them can really be a desert','"Desert" is defined by very low RAINFALL, not by temperature — both regions receive very little precipitation','Deserts must always be sandy','Antarctica is not actually classified as a desert'],ans:1,exp:'The term "desert" describes a region with very low rainfall, not necessarily heat. Antarctica receives extremely little precipitation, making it technically the largest desert on Earth despite its freezing temperatures.'},
+    {q:'What happens to a river as it moves from its source to its mouth?',opts:['It stays exactly the same width and speed throughout','It generally moves from a fast, narrow upper course through a widening middle/lower course, before reaching the sea at its mouth','Rivers flow uphill from the sea to the mountains','Rivers disappear completely before reaching any ocean'],ans:1,exp:'A river typically begins fast and narrow near its mountain source, widens and slows through its middle and lower course (often forming meanders), and finally reaches the sea at its mouth, sometimes forming a delta.'},
+    {q:'Why did many early civilisations develop along major rivers like the Nile or the Tigris-Euphrates?',opts:['Rivers provided no practical benefit to early civilisations','Rivers deposit fertile soil and provide water, supporting farming and settled communities','Rivers were used only for transportation, never farming','Early civilisations avoided rivers due to flooding risk'],ans:1,exp:'Rivers deposit fertile sediment along their banks and provide a reliable water source, both of which support successful farming — this is why many of the earliest civilisations grew up along major rivers.'},
+    {q:'What is the key difference between latitude/longitude (Week 5) and the physical landforms studied this week?',opts:['They are entirely unrelated topics with no connection at all','Latitude and longitude form the GRID system used to locate features, while landforms (mountains, rivers, deserts) are the actual physical features being located','Landforms cannot be located using coordinates','Latitude and longitude only apply to oceans, not land'],ans:1,exp:'Latitude and longitude (studied in Week 5) provide the coordinate grid system used to pinpoint exact locations — including the very landforms studied this week, such as Mount Everest at approximately 27.99°N, 86.93°E.'},
+  ],
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{
+  quizState[s]={idx:0,score:0};
+  renderQuiz(s);
+});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){
+    container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';
+    celebrate();return;
+  }
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){
+    quizState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='quiz-fb ok';fb.style.display='block';
+    fb.innerHTML='✅ Correct! '+q.exp;
+  } else {
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='quiz-fb bad';fb.style.display='block';
+    fb.innerHTML='❌ Not quite. '+q.exp;
+  }
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+
+function celebrate(){
+  const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];
+  for(let i=0;i<70;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti';
+      el.style.left=Math.random()*100+'vw';
+      el.style.background=cols[Math.floor(Math.random()*cols.length)];
+      el.style.animationDuration=(1.8+Math.random()*2.2)+'s';
+      el.style.animationDelay=(Math.random()*0.3)+'s';
+      el.style.width=(7+Math.random()*7)+'px';
+      el.style.height=(9+Math.random()*9)+'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),5000);
+    },i*25);
+  }
+}
+</script>
+</body>
+</html>

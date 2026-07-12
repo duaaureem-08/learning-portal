@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 — Day 1 Test Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#FEF3C7;color:#92400E;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #D97706;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-30px;right:60px;width:120px;height:120px;background:rgba(255,255,255,0.07);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.card-title{font-family:'Fredoka One',cursive;font-size:1.3rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px 16px;font-weight:700;font-size:0.92rem;}
+.match-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.match-item select:focus{outline:none;border-color:var(--accent,#888);}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{width:140px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.order-item{background:white;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px 16px;font-weight:700;font-size:0.9rem;display:flex;align-items:center;gap:12px;}
+.order-num{width:32px;height:32px;border-radius:50%;background:var(--accent,#888);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.95rem;flex-shrink:0;}
+.order-select{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.88rem;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn:hover{transform:scale(1.05);}
+.tf-btn.selected-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.selected-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-answer{background:#D1FAE5;border-color:#059669;color:#065F46;font-weight:900;}
+.tf-btn.wrong-answer{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+.esl-box{background:#FFFBEB;border:2px solid #FCD34D;border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0;font-size:0.88rem;line-height:1.6;}
+.esl-box strong{color:#92400E;}
+@media(max-width:600px){
+  .hero-title{font-size:1.6rem;}
+  .hero-emoji{display:none;}
+  .card{padding:16px;}
+  .match-grid{grid-template-columns:1fr;}
+  .info-bar{gap:10px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">📄 Day 1 — Test</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🥗</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🌍</span> Humanities</button>
+</div>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">📖 Bible · Week 6</div>
+    <div class="hero-title">Joseph —<br>Forgiving Those Who Hurt You</div>
+    <div class="hero-sub">Genesis 37 &amp; 50 · Jealousy · Forgiveness · Genesis 50:20</div>
+    <div class="hero-emoji">🕊️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 <strong>In your language:</strong> Joseph = یوسف (Yusuf) · Forgive = معاف کرنا (Urdu) · يغفر (Arabic) · Jealous = حسد</div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Feeling angry because someone has something you want. It can make people do wrong things.<br>
+        B — To choose to stop being angry with someone who hurt you — even when it is very hard.<br>
+        C — The king of Egypt who gave Joseph an important and powerful job.<br>
+        D — A picture you see while sleeping. God used these to speak to Joseph and Pharaoh.<br>
+        E — The brother loved most by his father Jacob. He was given a beautiful coat of many colours.
+      </div>
+    </div>
+    <div id="bible-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkVocab('bible')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Jealous means feeling angry because someone has something you want. Forgive means to choose to stop being angry with someone who hurt you. Pharaoh was the king of Egypt. Dream means a picture you see while sleeping. Favourite means liked most of all.')">🔊 Hear definitions</button>
+    </div>
+    <div id="bible-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — The Story of Joseph <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Put these events in the correct order (choose 1–6):</p>
+    <div id="joseph-order"></div>
+    <div style="margin-top:10px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkOrder('joseph')">Check Order ✅</button>
+      <button class="audio-btn" onclick="speak('Think carefully about what happened first in the story of Joseph. Jacob gave him the coat. Then his brothers became jealous. Then they sold him. Then he went to Egypt. Then he helped Pharaoh. Then he forgave his brothers.')">🔊 Story hint</button>
+    </div>
+    <div id="joseph-order-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+      <span class="word-tag">jealous</span><span class="word-tag">forgave</span><span class="word-tag">dreams</span><span class="word-tag">Egypt</span><span class="word-tag">coat</span><span class="word-tag">prison</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>Jacob gave Joseph a special <em>_____</em> of many colours.</td><td><input class="fill-in" data-ans="coat" placeholder="type here"></td></tr>
+      <tr><td>Joseph's brothers were <em>_____</em> of Joseph and sold him to merchants.</td><td><input class="fill-in" data-ans="jealous" placeholder="type here"></td></tr>
+      <tr><td>Joseph was taken to <em>_____</em> where he worked hard.</td><td><input class="fill-in" data-ans="Egypt" placeholder="type here"></td></tr>
+      <tr><td>Joseph was put in <em>_____</em> even though he did nothing wrong.</td><td><input class="fill-in" data-ans="prison" placeholder="type here"></td></tr>
+      <tr><td>God gave Joseph the gift of explaining <em>_____</em>.</td><td><input class="fill-in" data-ans="dreams" placeholder="type here"></td></tr>
+      <tr><td>When Joseph's brothers came to Egypt, Joseph <em>_____</em> them.</td><td><input class="fill-in" data-ans="forgave" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkFill('bible-fill')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Coat. Jealous. Egypt. Prison. Dreams. Forgave.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="bible-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="bible-tf"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkTF('bible')">Check Answers ✅</button>
+    </div>
+    <div id="bible-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /bible -->
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">✏️ English · Week 6</div>
+    <div class="hero-title">Spelling Rules —<br>Suffixes &amp; Exception Words</div>
+    <div class="hero-sub">4 suffix rules · Year 3/4 exception words · Root words</div>
+    <div class="hero-emoji">📝</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 <strong>In your language:</strong> Suffix = لاحقہ (Urdu) · لاحقة (Arabic) — letters added to the END of a word. Root word = اصل لفظ — the main word before you add anything.</div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Letters added to the END of a word that change its meaning. Example: -ing, -ed, -er.<br>
+        B — The original word before you add a suffix. Example: the root of "running" is "run".<br>
+        C — A word that does NOT follow normal spelling rules — must be learned by heart!<br>
+        D — When you write the last letter TWICE before adding the suffix. Example: hop → hopping.<br>
+        E — When you remove the silent letter 'e' before adding a suffix. Example: bake → baking.
+      </div>
+    </div>
+    <div id="eng-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkVocab('eng')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Suffix. Root word. Exception word. Double the consonant. Drop the e.')">🔊 Hear terms</button>
+    </div>
+    <div id="eng-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Spelling Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Add the suffix -ing to each word. Choose the correct spelling:</p>
+    <div id="eng-suffix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--english);" onclick="nextEngSuffix()">Next ➡️</button>
+      <span id="eng-suffix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Write the exception word that fits each clue:</p>
+    <div class="word-bank" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+      <span class="word-tag">bicycle</span><span class="word-tag">believe</span><span class="word-tag">caught</span><span class="word-tag">different</span><span class="word-tag">busy</span><span class="word-tag">certain</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Clue</th><th>Exception Word</th></tr>
+      <tr><td>Past tense of "catch" — I ___ the ball.</td><td><input class="fill-in" data-ans="caught" placeholder="type here"></td></tr>
+      <tr><td>A vehicle with two wheels that you pedal.</td><td><input class="fill-in" data-ans="bicycle" placeholder="type here"></td></tr>
+      <tr><td>To think something is true — I ___ you!</td><td><input class="fill-in" data-ans="believe" placeholder="type here"></td></tr>
+      <tr><td>When you are sure — "Are you ___ about that?"</td><td><input class="fill-in" data-ans="certain" placeholder="type here"></td></tr>
+      <tr><td>Not the same — The two answers are very ___.</td><td><input class="fill-in" data-ans="different" placeholder="type here"></td></tr>
+      <tr><td>Having a lot to do — She is very ___ today.</td><td><input class="fill-in" data-ans="busy" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--english);" onclick="checkFill('eng-fill')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Caught. Bicycle. Believe. Certain. Different. Busy.')">🔊 Hear words</button>
+    </div>
+    <div id="eng-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="eng-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="eng-tf"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--english);" onclick="checkTF('eng')">Check Answers ✅</button>
+    </div>
+    <div id="eng-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /english -->
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🔢 Maths · Week 6</div>
+    <div class="hero-title">Division —<br>Sharing &amp; Grouping</div>
+    <div class="hero-sub">÷2 ÷3 ÷4 ÷5 ÷8 ÷10 · Fact families · Word problems</div>
+    <div class="hero-emoji">➗</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 <strong>In your language:</strong> Division = تقسیم (Urdu &amp; Arabic) — splitting a total into EQUAL parts. Quotient = حاصل تقسیم — the answer to a division.</div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — The answer to a division calculation. Example: in 12 ÷ 3 = 4, the answer 4 is this.<br>
+        B — Splitting a total into a fixed number of groups — each group gets the same amount.<br>
+        C — The big number you are dividing up. Example: in 12 ÷ 3 = 4, the 12 is this.<br>
+        D — The opposite operation — multiplication is the opposite of division.<br>
+        E — Finding how many equal groups of a certain size fit into the total.
+      </div>
+    </div>
+    <div id="maths-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkVocab('maths')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Quotient means the answer to a division. Sharing means splitting into equal groups. Dividend is the big number you divide up. Inverse means the opposite operation. Grouping means finding how many equal groups fit in the total.')">🔊 Hear definitions</button>
+    </div>
+    <div id="maths-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Work out each division. Type your answer:</p>
+    <div id="maths-divs"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkDivs()">Check All ✅</button>
+      <button class="audio-btn" onclick="speak('Use your times tables backwards to divide. If you know 3 times 4 equals 12, then 12 divided by 3 equals 4.')">🔊 Strategy hint</button>
+    </div>
+    <div id="maths-divs-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Complete the fact families:</p>
+    <table class="fill-table">
+      <tr><th>Multiplication fact</th><th>Division fact 1</th><th>Division fact 2</th></tr>
+      <tr><td><strong>4 × 6 = 24</strong></td><td><input class="fill-in" data-ans="24" placeholder="___"> ÷ 4 = 6</td><td>24 ÷ 6 = <input class="fill-in" data-ans="4" placeholder="___" style="width:60px;"></td></tr>
+      <tr><td><strong>5 × 8 = 40</strong></td><td><input class="fill-in" data-ans="40" placeholder="___"> ÷ 5 = 8</td><td>40 ÷ 8 = <input class="fill-in" data-ans="5" placeholder="___" style="width:60px;"></td></tr>
+      <tr><td><strong>3 × 9 = 27</strong></td><td><input class="fill-in" data-ans="27" placeholder="___"> ÷ 3 = 9</td><td>27 ÷ 9 = <input class="fill-in" data-ans="3" placeholder="___" style="width:60px;"></td></tr>
+    </table>
+    <div style="margin-top:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkFill('maths-fact')">Check ✅</button>
+    </div>
+    <div id="maths-fact-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="maths-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="maths-tf"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkTF('maths')">Check Answers ✅</button>
+    </div>
+    <div id="maths-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /maths -->
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🥗 Science · Week 6</div>
+    <div class="hero-title">Nutrition —<br>What We Eat &amp; Why</div>
+    <div class="hero-sub">5 food groups · Nutrients · Balanced diet · What each food does</div>
+    <div class="hero-emoji">🥦</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 <strong>In your language:</strong> Nutrient = غذائی مادہ (Urdu) · مغذٍ (Arabic). Balanced diet = متوازن غذا (Urdu) · نظام غذائي متوازن (Arabic).</div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — A substance in food that the body needs to grow and stay healthy. Examples: protein, vitamins.<br>
+        B — Helps the body GROW and REPAIR muscles and skin. Found in meat, fish, eggs and beans.<br>
+        C — Gives the body ENERGY for moving, thinking and learning. Found in bread, rice and pasta.<br>
+        D — Keeps us well and fights illness. Mainly found in fruits and vegetables.<br>
+        E — Eating the right amount of all different food groups to stay healthy.
+      </div>
+    </div>
+    <div id="sci-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkVocab('sci')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Nutrient. Protein. Carbohydrate. Vitamin. Balanced diet.')">🔊 Hear terms</button>
+    </div>
+    <div id="sci-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🥗 Part B — Science Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Which food group does each food belong to? Click the correct answer:</p>
+    <div id="sci-food-classify"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the missing words about what nutrients do:</p>
+    <div class="word-bank" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+      <span class="word-tag">energy</span><span class="word-tag">repair</span><span class="word-tag">vitamins</span><span class="word-tag">calcium</span><span class="word-tag">water</span><span class="word-tag">brain</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>Carbohydrates give our body <em>_____</em> to move and think.</td><td><input class="fill-in" data-ans="energy" placeholder="type here"></td></tr>
+      <tr><td>Protein helps our body GROW and <em>_____</em> itself.</td><td><input class="fill-in" data-ans="repair" placeholder="type here"></td></tr>
+      <tr><td>Fruits and vegetables give us <em>_____</em> to fight illness.</td><td><input class="fill-in" data-ans="vitamins" placeholder="type here"></td></tr>
+      <tr><td>Dairy foods like milk and cheese give us <em>_____</em> for strong bones.</td><td><input class="fill-in" data-ans="calcium" placeholder="type here"></td></tr>
+      <tr><td>Fats help store energy and help the <em>_____</em> work well.</td><td><input class="fill-in" data-ans="brain" placeholder="type here"></td></tr>
+      <tr><td>We should drink 6–8 glasses of <em>_____</em> every day.</td><td><input class="fill-in" data-ans="water" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--science);" onclick="checkFill('sci-fill')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Energy. Repair. Vitamins. Calcium. Brain. Water.')">🔊 Hear words</button>
+    </div>
+    <div id="sci-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="sci-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="sci-tf"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--science);" onclick="checkTF('sci')">Check Answers ✅</button>
+    </div>
+    <div id="sci-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /science -->
+
+<!-- ═══════════════ HUMANITIES ═══════════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🌍 Humanities · Week 6</div>
+    <div class="hero-title">Ancient Egypt —<br>Achievements</div>
+    <div class="hero-sub">Writing · Medicine · Farming · Irrigation · The Nile · Legacy</div>
+    <div class="hero-emoji">🏺</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 <strong>In your language:</strong> Papyrus = البردي (Arabic) · Scribe = کاتب · Irrigation = آبپاشی (Urdu) · ري (Arabic)</div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — A plant from the Nile used to make early paper — much lighter and easier than writing on stone.<br>
+        B — A person trained to read and write hieroglyphics. A very important and respected job in Egypt.<br>
+        C — A system of channels that carried water from the Nile to dry fields far from the river.<br>
+        D — An ancient Egyptian writing system using over 700 picture-symbols, each with a meaning.<br>
+        E — Something great that people from the past left behind for us to learn from and use today.
+      </div>
+    </div>
+    <div id="soc-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkVocab('soc')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Papyrus. Scribe. Irrigation. Hieroglyphics. Legacy.')">🔊 Hear terms</button>
+    </div>
+    <div id="soc-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🌍 Part B — Egypt Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Match each achievement to the correct category:</p>
+    <div id="egypt-classify"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+      <span class="word-tag">Nile</span><span class="word-tag">silt</span><span class="word-tag">honey</span><span class="word-tag">365</span><span class="word-tag">scribes</span><span class="word-tag">stone</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>The Egyptian calendar had <em>_____</em> days — almost the same as ours today.</td><td><input class="fill-in" data-ans="365" placeholder="type here"></td></tr>
+      <tr><td>The River <em>_____</em> flooded every year and left rich dark soil behind.</td><td><input class="fill-in" data-ans="Nile" placeholder="type here"></td></tr>
+      <tr><td>The dark, rich soil left by the flood is called <em>_____</em>.</td><td><input class="fill-in" data-ans="silt" placeholder="type here"></td></tr>
+      <tr><td>Egyptian doctors used <em>_____</em> to clean and heal wounds.</td><td><input class="fill-in" data-ans="honey" placeholder="type here"></td></tr>
+      <tr><td>Important messages were carved into <em>_____</em> in temples and tombs.</td><td><input class="fill-in" data-ans="stone" placeholder="type here"></td></tr>
+      <tr><td><em>_____</em> were trained writers who spent years learning all the symbols.</td><td><input class="fill-in" data-ans="scribes" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--social);" onclick="checkFill('soc-fill')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('365. Nile. Silt. Honey. Stone. Scribes.')">🔊 Hear words</button>
+    </div>
+    <div id="soc-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="soc-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="soc-tf"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--social);" onclick="checkTF('soc')">Check Answers ✅</button>
+    </div>
+    <div id="soc-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /social -->
+
+<script>
+// ── NAV ──────────────────────────────────────────────────────────────────
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+  if(!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.rate=0.85; u.lang='en-GB';
+  window.speechSynthesis.speak(u);
+}
+
+// ── VOCAB DATA ────────────────────────────────────────────────────────────
+const vocabData = {
+  bible:{
+    terms:['Jealous','Forgive','Pharaoh','Dream','Favourite'],
+    answers:['A','B','C','D','E'],
+    defs:{A:'Feeling angry because someone has something you want.',B:'To choose to stop being angry with someone who hurt you.',C:'The king of Egypt who gave Joseph an important job.',D:'A picture you see while sleeping — God spoke to Joseph this way.',E:'The brother loved most by his father Jacob.'}
+  },
+  eng:{
+    terms:['Suffix','Root word','Exception word','Double the consonant','Drop the e'],
+    answers:['A','B','C','D','E'],
+    defs:{A:'Letters added to the END of a word.',B:'The original word before you add a suffix.',C:'A word that does NOT follow normal spelling rules.',D:'Write the last letter TWICE before adding the suffix.',E:'Remove the silent e before adding the suffix.'}
+  },
+  maths:{
+    terms:['Quotient','Sharing','Dividend','Inverse','Grouping'],
+    answers:['A','B','C','D','E'],
+    defs:{A:'The answer to a division calculation.',B:'Splitting a total into a fixed number of equal groups.',C:'The big number you are dividing up.',D:'The opposite operation — multiplication is the opposite of division.',E:'Finding how many equal groups of a certain size fit into the total.'}
+  },
+  sci:{
+    terms:['Nutrient','Protein','Carbohydrate','Vitamin','Balanced diet'],
+    answers:['A','B','C','D','E'],
+    defs:{A:'A substance in food that the body needs to grow and stay healthy.',B:'Helps the body grow and repair muscles and skin.',C:'Gives the body energy for moving and thinking.',D:'Keeps us well — mainly found in fruits and vegetables.',E:'Eating the right amount of all different food groups.'}
+  },
+  soc:{
+    terms:['Papyrus','Scribe','Irrigation','Hieroglyphics','Legacy'],
+    answers:['A','B','C','D','E'],
+    defs:{A:'A plant from the Nile used to make early paper.',B:'A person trained to read and write hieroglyphics.',C:'A system of channels carrying water from the Nile to dry fields.',D:'Ancient Egyptian writing system using 700+ picture-symbols.',E:'Something great that people from the past left behind for us.'}
+  }
+};
+
+function buildVocab(key){
+  const d=vocabData[key];
+  const area=document.getElementById(key+'-vocab-area');
+  if(!area) return;
+  let h='<div class="match-grid">';
+  d.terms.forEach((t,i)=>{
+    h+=`<div class="match-item">${t} <button class="audio-btn" onclick="speak('${t}')">🔊</button>
+      <select id="vocab-${key}-${i}">
+        <option value="">— select —</option>
+        <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+      </select></div>`;
+  });
+  h+='</div>';
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildVocab);
+
+function checkVocab(key){
+  const d=vocabData[key];
+  let score=0;
+  d.terms.forEach((t,i)=>{
+    const sel=document.getElementById('vocab-'+key+'-'+i);
+    if(!sel) return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}
+  });
+  const res=document.getElementById(key+'-vocab-result');
+  res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${d.terms.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct. Review and try again!`;}
+}
+
+// ── ORDER QUESTIONS ───────────────────────────────────────────────────────
+const orderData = {
+  joseph:{
+    events:[
+      {text:'Joseph forgave his brothers and the whole family was reunited in Egypt.',correct:6},
+      {text:'Jacob gave Joseph a beautiful coat of many colours.',correct:1},
+      {text:'Pharaoh made Joseph the second most powerful person in all of Egypt.',correct:5},
+      {text:"Joseph's brothers sold him to merchants travelling to Egypt.",correct:3},
+      {text:'Joseph explained Pharaoh\'s two dreams — 7 years of plenty, then 7 of famine.',correct:4},
+      {text:'Jacob loved Joseph most and this made his brothers very jealous.',correct:2},
+    ]
+  }
+};
+
+function buildOrder(key){
+  const d=orderData[key];
+  if(!d) return;
+  const area=document.getElementById(key+'-order');
+  if(!area) return;
+  let h='<div class="order-list">';
+  d.events.forEach((ev,i)=>{
+    h+=`<div class="order-item"><div class="order-num">${i+1}</div>
+      <div style="flex:1;font-size:0.9rem;">${ev.text}</div>
+      <select class="order-select" id="ord-${key}-${i}">
+        <option value="">—</option>
+        ${d.events.map((_,n)=>`<option value="${n+1}">${n+1}</option>`).join('')}
+      </select></div>`;
+  });
+  h+='</div>';
+  area.innerHTML=h;
+}
+buildOrder('joseph');
+
+function checkOrder(key){
+  const d=orderData[key];
+  let score=0;
+  d.events.forEach((ev,i)=>{
+    const sel=document.getElementById('ord-'+key+'-'+i);
+    if(!sel) return;
+    if(parseInt(sel.value)===ev.correct){score++;sel.style.borderColor='#059669';sel.style.background='#D1FAE5';}
+    else{sel.style.borderColor='#DC2626';sel.style.background='#FEE2E2';}
+  });
+  const res=document.getElementById(key+'-order-result');
+  if(res){
+    res.style.display='block';
+    if(score===d.events.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect order! ${score}/${d.events.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.events.length} in the right place. Keep trying!`;}
+  }
+}
+
+// ── FILL IN THE BLANK ─────────────────────────────────────────────────────
+function checkFill(context){
+  let allInputs, resultId;
+  if(context==='bible-fill'){allInputs=document.querySelectorAll('#page-bible .fill-in[data-ans]');resultId='bible-fill-result';}
+  else if(context==='eng-fill'){allInputs=document.querySelectorAll('#page-english .fill-in[data-ans]');resultId='eng-fill-result';}
+  else if(context==='maths-fact'){allInputs=document.querySelectorAll('#page-maths .fill-in[data-ans]');resultId='maths-fact-result';}
+  else if(context==='sci-fill'){allInputs=document.querySelectorAll('#page-science .fill-in[data-ans]');resultId='sci-fill-result';}
+  else if(context==='soc-fill'){allInputs=document.querySelectorAll('#page-social .fill-in[data-ans]');resultId='soc-fill-result';}
+  if(!allInputs) return;
+  let score=0,total=0;
+  allInputs.forEach(inp=>{
+    if(!inp.dataset.ans) return;
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}
+  });
+  const res=document.getElementById(resultId);
+  if(res){
+    res.style.display='block';
+    if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All correct! ${score}/${total}`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. Check your spelling!`;}
+  }
+}
+
+// ── TRUE / FALSE DATA ─────────────────────────────────────────────────────
+const tfData = {
+  bible:[
+    {s:"Joseph's brothers loved him and were very happy when Jacob gave him the special coat.",ans:false,correction:"Joseph's brothers were JEALOUS — they were angry and upset, not happy."},
+    {s:'Joseph was put in prison even though he did nothing wrong.',ans:true},
+    {s:'Pharaoh gave Joseph an important job because Joseph could explain dreams.',ans:true},
+    {s:'When Joseph saw his brothers in Egypt, he punished them immediately.',ans:false,correction:'Joseph FORGAVE his brothers — he wept and said God meant it for good.'},
+    {s:'Genesis 50:20 tells us that God can turn painful things into something good.',ans:true},
+  ],
+  eng:[
+    {s:'A suffix is added to the BEGINNING of a word.',ans:false,correction:'A suffix is added to the END of a word. A prefix goes at the beginning.'},
+    {s:'To add -ing to "hop", you double the p: hopping.',ans:true},
+    {s:'To add -ing to "bake", you write "bakeing" (keep the e).',ans:false,correction:'You DROP the silent e: bake → baking.'},
+    {s:'Exception words follow all the normal spelling rules.',ans:false,correction:'Exception words do NOT follow normal rules — they must be learned by heart!'},
+    {s:'"Caught" is an example of an exception word from the Year 3/4 word list.',ans:true},
+  ],
+  maths:[
+    {s:'12 ÷ 3 = 4',ans:true},
+    {s:'Division means adding numbers together.',ans:false,correction:'Division means SPLITTING a number into equal groups. The opposite of multiplication.'},
+    {s:'In 40 ÷ 8 = 5, the number 40 is called the dividend.',ans:true},
+    {s:'You can check a division answer by using addition.',ans:false,correction:'You check division using MULTIPLICATION — the inverse operation.'},
+    {s:'30 ÷ 10 = 3',ans:true},
+  ],
+  sci:[
+    {s:'Carbohydrates give our body energy.',ans:true},
+    {s:'Protein is found mainly in fruits and vegetables.',ans:false,correction:'Protein is found in meat, fish, eggs and beans. Fruits and veg give us VITAMINS.'},
+    {s:'A balanced diet means eating ONLY fruits and vegetables.',ans:false,correction:'A balanced diet means eating the right amounts of ALL 5 food groups.'},
+    {s:'Calcium in dairy foods helps build strong bones and teeth.',ans:true},
+    {s:'We should drink about 6 to 8 glasses of water every day.',ans:true},
+  ],
+  soc:[
+    {s:'Hieroglyphics was an ancient Egyptian writing system using picture-symbols.',ans:true},
+    {s:'Papyrus was a plant used to make early paper — heavier than stone.',ans:false,correction:'Papyrus made paper that was LIGHTER than stone — that is why it was so useful!'},
+    {s:'Egyptian doctors used honey to help heal wounds.',ans:true},
+    {s:'The Egyptian calendar had 300 days.',ans:false,correction:'The Egyptian calendar had 365 days — almost the same as the one we use today!'},
+    {s:'Irrigation channels helped Egyptian farmers water fields far from the Nile.',ans:true},
+  ]
+};
+
+function buildTF(key){
+  const data=tfData[key];
+  const area=document.getElementById(key+'-tf');
+  if(!area) return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True or False?</th></tr>';
+  data.forEach((item,i)=>{
+    h+=`<tr><td>${item.s}</td><td>
+      <button class="tf-btn" id="tf-${key}-${i}-t" onclick="selectTF('${key}',${i},'T')">True</button>
+      <button class="tf-btn" id="tf-${key}-${i}-f" onclick="selectTF('${key}',${i},'F')">False</button>
+    </td></tr>`;
+  });
+  h+='</table>';
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTF);
+
+function selectTF(key,i,val){
+  ['T','F'].forEach(v=>{
+    const btn=document.getElementById('tf-'+key+'-'+i+'-'+v);
+    if(btn){btn.classList.remove('selected-t','selected-f');}
+  });
+  const btn=document.getElementById('tf-'+key+'-'+i+'-'+val);
+  if(btn) btn.classList.add(val==='T'?'selected-t':'selected-f');
+}
+
+function checkTF(key){
+  const data=tfData[key];
+  let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tf-'+key+'-'+i+'-T');
+    const fBtn=document.getElementById('tf-'+key+'-'+i+'-F');
+    const selected = tBtn?.classList.contains('selected-t') ? true : fBtn?.classList.contains('selected-f') ? false : null;
+    if(selected===null) return;
+    if(selected===item.ans){
+      score++;
+      (item.ans?tBtn:fBtn).classList.add('correct-answer');
+    } else {
+      (selected?tBtn:fBtn).classList.add('wrong-answer');
+      (item.ans?tBtn:fBtn).classList.add('correct-answer');
+    }
+    if(tBtn) tBtn.disabled=true;
+    if(fBtn) fBtn.disabled=true;
+  });
+  const res=document.getElementById(key+'-tf-result');
+  res.style.display='block';
+  if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct answer.`;}
+}
+
+// ── CRITICAL THINKING QUESTIONS ───────────────────────────────────────────
+const critData = {
+  bible:[
+    {q:"Why do you think Joseph's brothers were jealous? What did they do because of their jealousy?",hint:"Think about the coat, their feelings, and what they chose to do next."},
+    {q:'Joseph was put in prison for something he did not do. How do you think he felt? What does the story tell us about what God was doing, even when things seemed unfair?',hint:"The story says: 'God was with Joseph even in prison.'"},
+    {q:'Genesis 50:20 says: "You intended to harm me, but God intended it for good." Explain in your own words what this verse means, using the story of Joseph.',hint:"Joseph was sold as a slave — but what good came from it in the end?"},
+    {q:'Forgiveness can be very hard. Why was it brave and special for Joseph to forgive his brothers? What can WE learn from Joseph\'s example?',hint:"His brothers did something very wrong. Joseph could have punished them. He chose not to."},
+  ],
+  eng:[
+    {q:'Rule 1 says: "just add the suffix" when the word ends in two consonants or has a long vowel sound. Write TWO examples of this rule — one with -ing and one with -ed.',hint:"Try words like: fast, play, jump, help, walk."},
+    {q:'What is the DIFFERENCE between Rule 2 (double) and Rule 3 (drop the e)? Give one example of each rule.',hint:"Rule 2: short vowel + 1 consonant → hop → hopping. Rule 3: silent e at end → bake → baking."},
+    {q:'Choose THREE exception words from the word bank and use each one in a proper sentence. Your sentences must make sense!',hint:"Word bank: accident, address, answer, believe, bicycle, breathe, build, busy, caught, certain, complete, different."},
+    {q:'Explain in your own words WHY exception words are tricky for English learners. Give one example of an exception word and explain what makes it hard.',hint:"Think about: does it follow the rules? Is the spelling surprising?"},
+  ],
+  maths:[
+    {q:'There are 48 children going on a school trip. They travel in groups of 8. How many groups are there? Show your working and write the number sentence.',hint:"48 ÷ 8 = ? Think: 8 × ? = 48"},
+    {q:'A baker bakes 56 rolls and puts them equally into bags of 7. How many bags does she fill? Show your working.',hint:"56 ÷ 7 = ? Use your 7 times table."},
+    {q:'Write the COMPLETE fact family for: 6 × 4 = 24. This means writing 4 number sentences total.',hint:"You need: 6×4, 4×6, and two division facts using 24, 6 and 4."},
+    {q:'A student says: "32 ÷ 8 = 5." Is this correct? Explain how you know, using multiplication to check.',hint:"Check: 8 × 5 = ? Is that 32? What is the correct answer?"},
+  ],
+  sci:[
+    {q:'What is a BALANCED DIET? Why is it important NOT to eat only one type of food? Explain using at least TWO food groups in your answer.',hint:"Think about what each food group does — energy, growth, vitamins..."},
+    {q:'Name the 5 food groups and give ONE example of a food from EACH group.',hint:"Carbohydrates · Proteins · Dairy · Fruits &amp; Vegetables · Fats &amp; Oils"},
+    {q:'A student only eats carbohydrates (bread and pasta) and no protein or vegetables. What HEALTH PROBLEMS might they face? Explain using scientific vocabulary.',hint:"Think: what does protein do? What do vitamins do? What happens without them?"},
+    {q:'Plan a healthy lunch for one day. Include at least 3 food groups. Name each food and explain which group it belongs to and what it does for the body.',hint:"For example: chicken (protein — grows and repairs muscles)..."},
+  ],
+  soc:[
+    {q:'What was HIEROGLYPHICS? Why was it such an important invention? Give TWO reasons why writing was important in ancient Egypt.',hint:"Think about: keeping records, laws, religious texts, history."},
+    {q:'Explain how the Nile River helped Egyptian FARMERS. What is silt? Why was it so valuable?',hint:"The Nile flooded every year. When it went down... what was left behind?"},
+    {q:'Egyptian doctors were among the first scientists in history. Give TWO examples of what they did that showed scientific thinking.',hint:"Think about: observation, records, honey for wounds, herbs, dentistry."},
+    {q:'Name ONE achievement of ancient Egypt that we STILL use today. Explain what it is and why it matters to people in the modern world.',hint:"Think about: the calendar, writing, irrigation, medicine, mathematics."},
+  ]
+};
+
+function buildCrit(key){
+  const data=critData[key];
+  const area=document.getElementById(key+'-crit');
+  if(!area) return;
+  let h='';
+  data.forEach((item,i)=>{
+    h+=`<div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">${i+3}. ${item.q}
+        <button class="audio-btn" onclick="speak('${item.hint.replace(/'/g,"\\'")}')">🔊 Hint</button>
+      </p>
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:6px;font-style:italic;">💡 ${item.hint}</div>
+      <textarea class="open-box" placeholder="Write your answer here…"></textarea>
+    </div>`;
+  });
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildCrit);
+
+// ── ENGLISH SUFFIX QUIZ ───────────────────────────────────────────────────
+const suffixQs=[
+  {q:'Which is the correct spelling of "hop" + ing?',opts:['hoping','hopeing','hopping','hopsing'],ans:2,rule:'Rule 2: short vowel + 1 consonant → double the consonant!'},
+  {q:'Which is the correct spelling of "bake" + ing?',opts:['bakeing','baking','bakking','bakeying'],ans:1,rule:'Rule 3: word ends in silent e → drop the e, then add -ing!'},
+  {q:'Which is the correct spelling of "play" + ed?',opts:['plaid','playyed','plaied','played'],ans:3,rule:'Rule 1: long vowel sound → just add the suffix!'},
+  {q:'Which is the correct spelling of "happy" + er?',opts:['happyer','happier','happyier','happyer'],ans:1,rule:'Rule 4: consonant + y → change y to i, then add!'},
+  {q:'Which is the correct spelling of "run" + ing?',opts:['runing','runeing','running','runging'],ans:2,rule:'Rule 2: short vowel + 1 consonant → double the n!'},
+];
+let engSuffixIdx=0,engSuffixScore=0;
+function renderEngSuffix(){
+  const q=suffixQs[engSuffixIdx];
+  if(!q){document.getElementById('eng-suffix-quiz').innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Done! Score: ${engSuffixScore}/${suffixQs.length}</div>`;if(engSuffixScore===suffixQs.length)celebrate();return;}
+  document.getElementById('eng-suffix-quiz').innerHTML=`<div class="quiz-box">
+    <div class="quiz-q">Q${engSuffixIdx+1}: ${q.q}</div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerEngSuffix(${i})">${o}</button>`).join('')}</div>
+    <div id="eng-suf-fb" class="quiz-feedback"></div>
+  </div>`;
+  document.getElementById('eng-suffix-score').textContent=`Score: ${engSuffixScore}/${engSuffixIdx}`;
+}
+function answerEngSuffix(i){
+  const q=suffixQs[engSuffixIdx];
+  const opts=document.querySelectorAll('#eng-suffix-quiz .quiz-opt');
+  opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById('eng-suf-fb');fb.style.display='block';
+  if(i===q.ans){engSuffixScore++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct! '+q.rule;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ The answer is "${q.opts[q.ans]}". ${q.rule}`;}
+  document.getElementById('eng-suffix-score').textContent=`Score: ${engSuffixScore}/${engSuffixIdx+1}`;
+}
+function nextEngSuffix(){engSuffixIdx++;renderEngSuffix();}
+renderEngSuffix();
+
+// ── MATHS DIVISION SUMS ───────────────────────────────────────────────────
+const divSums=[
+  {q:'24 ÷ 4',ans:6},{q:'35 ÷ 5',ans:7},{q:'48 ÷ 8',ans:6},
+  {q:'30 ÷ 3',ans:10},{q:'80 ÷ 10',ans:8},{q:'16 ÷ 2',ans:8},
+  {q:'36 ÷ 4',ans:9},{q:'45 ÷ 5',ans:9},{q:'64 ÷ 8',ans:8},{q:'70 ÷ 10',ans:7},
+];
+function buildDivs(){
+  const area=document.getElementById('maths-divs');
+  if(!area) return;
+  area.innerHTML=`<table class="fill-table"><tr><th>Calculation</th><th>Your Answer</th></tr>
+  ${divSums.map((s,i)=>`<tr><td><strong style="font-family:'Fredoka One',cursive;font-size:1.1rem;">${s.q}</strong></td>
+    <td><input type="number" class="fill-in" id="div-${i}" data-ans="${s.ans}" placeholder="=?" style="width:90px;"></td></tr>`).join('')}
+  </table>`;
+}
+buildDivs();
+function checkDivs(){
+  let score=0;
+  divSums.forEach((s,i)=>{
+    const inp=document.getElementById('div-'+i);
+    if(!inp) return;
+    if(parseInt(inp.value)===s.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}
+  });
+  const res=document.getElementById('maths-divs-result');
+  res.style.display='block';
+  if(score===divSums.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${divSums.length} correct! Brilliant!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${divSums.length} correct. Use your times tables backwards!`;}
+}
+
+// ── SCIENCE FOOD CLASSIFY ─────────────────────────────────────────────────
+const foodData=[
+  {food:'🍞 Bread',ans:'Carbohydrate',opts:['Carbohydrate','Protein','Dairy','Fruit & Veg','Fat']},
+  {food:'🥚 Eggs',ans:'Protein',opts:['Carbohydrate','Protein','Dairy','Fruit & Veg','Fat']},
+  {food:'🍊 Orange',ans:'Fruit & Veg',opts:['Carbohydrate','Protein','Dairy','Fruit & Veg','Fat']},
+  {food:'🧀 Cheese',ans:'Dairy',opts:['Carbohydrate','Protein','Dairy','Fruit & Veg','Fat']},
+];
+function buildFoodClassify(){
+  const area=document.getElementById('sci-food-classify');
+  if(!area) return;
+  let h='';
+  foodData.forEach((item,i)=>{
+    h+=`<div style="background:#F8FAFF;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;margin-bottom:8px;">${i+1}. ${item.food}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${item.opts.map(opt=>`<button class="tf-btn" id="fd-${i}-${opt.replace(/[^a-z]/gi,'')}" onclick="selectFood(${i},'${opt}')">${opt}</button>`).join('')}
+      </div>
+    </div>`;
+  });
+  h+=`<div style="margin-top:10px;"><button class="btn" style="background:var(--science);" onclick="checkFood()">Check ✅</button></div>
+  <div id="sci-food-result" class="quiz-feedback"></div>`;
+  area.innerHTML=h;
+}
+buildFoodClassify();
+let foodSelections={};
+function selectFood(i,val){
+  foodData[i].opts.forEach(opt=>{
+    const id='fd-'+i+'-'+opt.replace(/[^a-z]/gi,'');
+    const btn=document.getElementById(id);
+    if(btn){btn.classList.remove('selected-t','selected-f');btn.style.background='';}
+  });
+  const id='fd-'+i+'-'+val.replace(/[^a-z]/gi,'');
+  const btn=document.getElementById(id);
+  if(btn){btn.classList.add('selected-t');btn.style.background='#DBEAFE';btn.style.borderColor='#2563EB';}
+  foodSelections[i]=val;
+}
+function checkFood(){
+  let score=0;
+  foodData.forEach((item,i)=>{
+    const correctId='fd-'+i+'-'+item.ans.replace(/[^a-z]/gi,'');
+    item.opts.forEach(opt=>{
+      const id='fd-'+i+'-'+opt.replace(/[^a-z]/gi,'');
+      const btn=document.getElementById(id);
+      if(!btn) return;
+      if(btn.classList.contains('selected-t')){
+        if(opt===item.ans)score++;
+        else btn.classList.add('wrong-answer');
+      }
+      if(opt===item.ans) btn.classList.add('correct-answer');
+      btn.disabled=true;
+    });
+  });
+  const res=document.getElementById('sci-food-result');
+  res.style.display='block';
+  if(score===foodData.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${foodData.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${foodData.length} correct. Green = correct answer.`;}
+}
+
+// ── EGYPT CLASSIFY ────────────────────────────────────────────────────────
+const egyptData=[
+  {achievement:'Writing on papyrus scrolls',ans:'Writing',opts:['Writing','Medicine','Farming']},
+  {achievement:'Using honey to heal wounds',ans:'Medicine',opts:['Writing','Medicine','Farming']},
+  {achievement:'Building irrigation channels to water dry fields',ans:'Farming',opts:['Writing','Medicine','Farming']},
+  {achievement:'Training scribes to keep records of taxes and food',ans:'Writing',opts:['Writing','Medicine','Farming']},
+];
+function buildEgyptClassify(){
+  const area=document.getElementById('egypt-classify');
+  if(!area) return;
+  let h='';
+  egyptData.forEach((item,i)=>{
+    h+=`<div style="background:#F8FAFF;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;margin-bottom:8px;">${i+1}. ${item.achievement}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${item.opts.map(opt=>`<button class="tf-btn" id="eg-${i}-${opt}" onclick="selectEgypt(${i},'${opt}')">${opt}</button>`).join('')}
+      </div>
+    </div>`;
+  });
+  h+=`<div style="margin-top:10px;"><button class="btn" style="background:var(--social);" onclick="checkEgypt()">Check ✅</button></div>
+  <div id="egypt-classify-result" class="quiz-feedback"></div>`;
+  area.innerHTML=h;
+}
+buildEgyptClassify();
+function selectEgypt(i,val){
+  egyptData[i].opts.forEach(opt=>{
+    const btn=document.getElementById('eg-'+i+'-'+opt);
+    if(btn){btn.classList.remove('selected-t','selected-f');btn.style.background='';}
+  });
+  const btn=document.getElementById('eg-'+i+'-'+val);
+  if(btn){btn.classList.add('selected-t');btn.style.background='#DBEAFE';btn.style.borderColor='#2563EB';}
+}
+function checkEgypt(){
+  let score=0;
+  egyptData.forEach((item,i)=>{
+    item.opts.forEach(opt=>{
+      const btn=document.getElementById('eg-'+i+'-'+opt);
+      if(!btn) return;
+      if(btn.classList.contains('selected-t')){
+        if(opt===item.ans)score++;
+        else btn.classList.add('wrong-answer');
+      }
+      if(opt===item.ans) btn.classList.add('correct-answer');
+      btn.disabled=true;
+    });
+  });
+  const res=document.getElementById('egypt-classify-result');
+  res.style.display='block';
+  if(score===egyptData.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${egyptData.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${egyptData.length} correct. Green = correct answer.`;}
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<50;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),4000);
+    },i*30);
+  }
+}
+const style=document.createElement('style');
+style.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(style);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week6_Day1');</script>
+</body>
+</html>

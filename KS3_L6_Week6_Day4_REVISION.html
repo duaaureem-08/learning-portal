@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 6 · Day 4 Revision · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCD34D;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="overview"].active{background:rgba(245,158,11,0.2);color:#FCD34D;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:520px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:180px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+/* Overview grid */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color 0.2s;cursor:pointer;}
+.ov-card:hover{border-color:var(--ov-color,#555);}
+.ov-icon{font-size:2rem;margin-bottom:10px;}
+.ov-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--bright);margin-bottom:6px;}
+.ov-topic{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+.ov-keys{display:flex;flex-direction:column;gap:4px;}
+.ov-key{font-size:0.78rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start;}
+.ov-key::before{content:'✓';color:var(--ov-color,#6EE7B7);flex-shrink:0;font-weight:700;}
+/* Tracker */
+.tracker{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.tracker-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--bright);margin-bottom:16px;}
+.tracker-row{display:grid;grid-template-columns:180px 1fr 100px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.tracker-row:last-child{border-bottom:none;}
+.tracker-subject{font-size:0.88rem;font-weight:600;color:var(--text);}
+.tracker-bar-wrap{background:var(--surface2);border-radius:99px;height:8px;overflow:hidden;}
+.tracker-bar{height:8px;border-radius:99px;width:0%;transition:width 1s ease;}
+.tracker-score{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:center;width:100%;}
+.tracker-score:focus{outline:none;border-color:#F59E0B;}
+/* MC quiz */
+.mc-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.mc-opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.mc-opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.mc-opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.mc-opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.mc-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:0.87rem;font-weight:600;display:none;}
+.mc-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.mc-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.mc-nav{margin-top:14px;display:flex;align-items:center;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:#F59E0B;color:var(--text);background:rgba(255,255,255,0.04);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--muted);font-weight:700;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}.tracker-row{grid-template-columns:1fr 1fr;}.tracker-bar-wrap{display:none;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 6</div>
+  <div class="day-badge">⭐ Day 4 · Revision</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="overview" onclick="show('overview')">📋 Overview</button>
+    <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ OVERVIEW PAGE ═══ -->
+<div id="pg-overview" class="page active">
+<div class="hero" style="background:linear-gradient(135deg,#1A1200,#3D2800);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#F59E0B,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">Day 4 · Week 6 · Full Revision</div>
+  <div class="hero-title">Week 6 Revision —<br>All Subjects</div>
+  <div class="hero-subtitle">Mixed quiz · Topic summaries · Final score tracker · Cross-subject connections. Use this page to check what you know before moving on to Week 7.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">📖 Bible: Joseph</span>
+    <span class="hero-tag">✏️ English: Word Roots</span>
+    <span class="hero-tag">🧮 Maths: Percentages</span>
+    <span class="hero-tag">🔬 Science: Ecosystems</span>
+    <span class="hero-tag">🏛️ Geography: World Regions</span>
+  </div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Week 6 Total</label><input type="text" placeholder="   / 200+"></div>
+</div>
+
+<!-- Week at a glance -->
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--bright);margin-bottom:16px;">Week 6 at a Glance</div>
+<div class="overview-grid">
+  <div class="ov-card" style="--ov-color:#C4B5FD;border-color:rgba(109,40,217,0.3);" onclick="show('bible')">
+    <div class="ov-icon">📖</div>
+    <div class="ov-title" style="color:#C4B5FD;">Bible</div>
+    <div class="ov-topic">Joseph — Genesis 37, 39–45, 50</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Dreams → slavery → prison → ruler of Egypt</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Integrity: doing right when it costs you</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Providence: "God intended it for good" (Gen 50:20)</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Forgiveness without pretending wrong didn't happen</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Connects to Noah (Wk4) and Abraham (Wk5)</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCA5A5;border-color:rgba(190,18,60,0.3);" onclick="show('english')">
+    <div class="ov-icon">✏️</div>
+    <div class="ov-title" style="color:#FCA5A5;">English</div>
+    <div class="ov-topic">Spelling Strategies & Word Roots</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Root words from Latin/Greek carry meaning</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Prefixes change meaning; suffixes often change word class</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">in- → im/ir/il before certain letters</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">5 strategies: LSCWC, syllables, root, memory phrase, word family</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Roots travel across all subjects</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCD34D;border-color:rgba(180,83,9,0.3);" onclick="show('maths')">
+    <div class="ov-icon">🧮</div>
+    <div class="ov-title" style="color:#FCD34D;">Maths</div>
+    <div class="ov-topic">Decimals, Percentages & Real-Life Problems</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCD34D;">Decimal multiplier: % ÷ 100 then × amount</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">10% method: build up from 10%</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">% change = change ÷ original × 100</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Reverse %: divide sale price by (1 − discount)</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Exam trap: 20% up then 20% down ≠ original</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#6EE7B7;border-color:rgba(6,95,70,0.3);" onclick="show('science')">
+    <div class="ov-icon">🔬</div>
+    <div class="ov-title" style="color:#6EE7B7;">Science</div>
+    <div class="ov-topic">Ecosystems & Food Webs</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Producer → consumer → decomposer</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Food web more realistic than food chain</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">10% energy rule: only 10% passes to next level</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">High biodiversity = more stable food web</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">5 habitats: woodland, coral reef, desert, polar, grassland</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#93C5FD;border-color:rgba(30,58,138,0.3);" onclick="show('history')">
+    <div class="ov-icon">🏛️</div>
+    <div class="ov-title" style="color:#93C5FD;">History / Geography</div>
+    <div class="ov-topic">World Regions & Physical Geography</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#93C5FD;">7 continents: Asia, Africa, N/S America, Antarctica, Europe, Australia</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">5 oceans: PAISA — Pacific, Atlantic, Indian, Southern, Arctic</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">4 river stages: source → upper → middle/lower → mouth/delta</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Desert = low precipitation, NOT necessarily hot</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Geography shapes civilisation (Nile vs Tigris/Euphrates)</div>
+    </div>
+  </div>
+</div>
+
+<!-- Score tracker -->
+<div class="tracker">
+  <div class="tracker-title">📊 My Week 6 Score Tracker</div>
+  <div class="tracker-row">
+    <div class="tracker-subject">📖 Bible — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#7C3AED;" id="bar-bible"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('bible',this.value,99)" id="sc-bible">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">✏️ English — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#E11D48;" id="bar-english"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('english',this.value,100)" id="sc-english">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🧮 Maths — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#D97706;" id="bar-maths"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 102" oninput="updateBar('maths',this.value,102)" id="sc-maths">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🔬 Science — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#059669;" id="bar-science"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('science',this.value,100)" id="sc-science">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🏛️ History — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#2563EB;" id="bar-history"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('history',this.value,100)" id="sc-history">
+  </div>
+</div>
+
+<!-- Cross-subject big ideas -->
+<div class="card" style="--accent:#F59E0B;">
+  <div class="slabel" style="background:rgba(245,158,11,0.2);color:#FCD34D;">🌐 Big Ideas That Connect Everything This Week</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:4px;">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Geography shapes everything</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Egypt's Nile geography → pharaonic stability (History) → grain surplus → Joseph's role (Bible) → food chain base analogy (Science). The same idea appears in every subject: physical conditions set the stage.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 The base determines everything above</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Science: healthy producers support the whole food web. Maths: the original value (base) is what every % calculation starts from. Bible: Joseph's foundational integrity enabled everything that followed. The base matters.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Roots unlock meaning</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">English: Latin/Greek roots unlock vocabulary. Science: photo (light) in photosynthesis. Geography: delta from the Greek letter Δ (triangle shape). History: Mesopotamia from Greek meso (middle) + potamos (river). One root, many doors.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Small changes compound</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Maths: compound interest shows small % gains building into large totals. Science: 10% energy loss cascades into dramatic reduction at top. Bible: Joseph's small daily acts of integrity compounded into a character that could handle extraordinary responsibility.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ BIBLE REVISION ═══ -->
+<div id="pg-bible" class="page">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🧥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 6 · Day 4 Revision</div>
+  <div class="hero-title">Joseph — Full Week<br>Revision</div>
+  <div class="hero-subtitle">Multiple choice · Short recall · Extended question · Self-mark</div>
+  <div class="hero-tags"><span class="hero-tag">Memory verse</span><span class="hero-tag">Key events</span><span class="hero-tag">Providence & Integrity</span></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse Check</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse for Week 6 Bible from memory. Then write it in your own words. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Exact verse (Genesis 50:20):&#10;&#10;In my own words:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"You intended to harm me, but God intended it for good, to accomplish what is now being done, the saving of many lives." (Genesis 50:20, NIV). Own words: Joseph tells his brothers that the same events — their act of selling him — were intended differently by each party. They meant it as harm; God meant it as rescue for many people. Both intentions operated on the same events simultaneously.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🎯 Multiple Choice Quiz</div>
+  <div id="bible-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextMC('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Short Recall</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★</div>
+    <div class="q-text">Without notes — write down as much as you can remember about Joseph's story in 5 minutes. Include: key events in order, the THREE theological lessons (integrity, providence, forgiveness), and one connection to Noah or Abraham. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write everything you remember — events, themes, vocabulary, connections:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Key events in order: dreams (Gen 37) → sold by brothers → Potiphar's house (Gen 39) → false accusation → prison → dreams interpreted (Gen 40–41) → before Pharaoh → second-in-command → brothers arrive → reconciliation (Gen 45) → Gen 50:20. <strong>Integrity:</strong> doing right when no one is watching and it costs you something (Potiphar's wife). <strong>Providence:</strong> God's wise unseen guidance over events — visible only looking backward. <strong>Forgiveness:</strong> honest about the wrong, yet choosing not to let it determine the response. <strong>Connection:</strong> Noah — trusted promise before evidence; Abraham — trusted without knowing destination; Joseph — trusted through injustice caused by others. Give credit for vocabulary: covenant, sovereign, ex nihilo (earlier weeks), integrity, providence, reconcile, imago Dei.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Final Extended Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★★</div>
+    <div class="q-text">Choose ONE of these essay questions and write a full response (minimum 8 sentences): <span class="marks">15 marks</span><br><br><strong>Option A:</strong> "The most important word in Genesis 50:20 is 'intended.' Discuss."<br><strong>Option B:</strong> "Joseph's integrity is more important to the story than his ability to interpret dreams." Do you agree?<br><strong>Option C:</strong> "Providence cannot be seen in the moment — only in looking backward." Is this true in Joseph's story? Does it make faith harder or easier?</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A — "intended":</strong> Award marks for: the word appears TWICE with different subjects (you intended / God intended), same event, opposite purposes. This is the heart of the theology — not that God caused the evil but that God worked through it. Distinguishes Christian theology from fatalism (everything was meant to be) and from the view that evil defeats God's purposes. <strong>Option B — integrity vs dream interpretation:</strong> Award marks for: dreams were a gift Joseph didn't earn; integrity was a daily choice consistently made. Without integrity Joseph would have wasted the gift. Potiphar trusted him entirely because of his character. Pharaoh trusted him for the same reason. The dream interpretation opened the door; the integrity is what made him worthy to walk through it. Credit counter-arguments: without the dreams, there would have been nothing to interpret. <strong>Option C — providence in hindsight:</strong> Award marks for: specific examples from the story where each event only revealed its purpose later (sold → Egypt; imprisoned → meets cupbearer; forgotten → perfect timing before Pharaoh). Discussion of whether this makes faith harder (you cannot see the point at the time) or easier (you can look back and see the pattern). Personal reflection if relevant.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Bible Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 28+" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH REVISION ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🌳</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 6 · Day 4 Revision</div>
+  <div class="hero-title">Spelling & Roots —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Spelling test · Root identification · Error correction · Extended writing</div>
+  <div class="hero-tags"><span class="hero-tag">10 roots</span><span class="hero-tag">5 strategies</span><span class="hero-tag">Word families</span></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🎯 Multiple Choice Quiz</div>
+  <div id="english-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextMC('english')">Next →</button>
+    <span class="score-badge" id="english-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📝 Spelling Test — 15 Words</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Spell each word correctly AND write a sentence using it. (Ask your teacher/parent to read the words aloud, or cover each row and write from memory.) <span class="marks">15 marks</span><br><br>1. necessary &nbsp; 2. separate &nbsp; 3. definitely &nbsp; 4. disappear &nbsp; 5. environment &nbsp; 6. accommodate &nbsp; 7. rhythm &nbsp; 8. privilege &nbsp; 9. conscious &nbsp; 10. grammar &nbsp; 11. flexible &nbsp; 12. irresponsible &nbsp; 13. impossible &nbsp; 14. illegal &nbsp; 15. biodegradable</div>
+    <textarea class="q-input xwide" placeholder="1. Correct spelling: ___ Sentence:&#10;2. Correct spelling: ___ Sentence:&#10;3. etc..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>necessary</strong> (1c, 2s) 2. <strong>separate</strong> (sep-A-RAT-e) 3. <strong>definitely</strong> (contains "finite") 4. <strong>disappear</strong> (dis- one s + appear) 5. <strong>environment</strong> (envIRONment) 6. <strong>accommodate</strong> (double c, double m) 7. <strong>rhythm</strong> (Rhythm Helps Your Two Hips Move) 8. <strong>privilege</strong> (no d — priv-i-lege) 9. <strong>conscious</strong> (sc = "sh" sound) 10. <strong>grammar</strong> (ends -ar) 11. <strong>flexible</strong> (flex + -ible) 12. <strong>irresponsible</strong> (ir- before r = double r) 13. <strong>impossible</strong> (im- before p) 14. <strong>illegal</strong> (il- before l = double l) 15. <strong>biodegradable</strong> (bio + degrad + -able)</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🌳 Root Map from Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Without notes, write down all 10 roots from the lesson, their meanings, and at least TWO words for each. <span class="marks">10 marks</span></div>
+    <textarea class="q-input wide" placeholder="Root 1: ___ meaning: ___ words: ___, ___&#10;Root 2: ___ meaning: ___ words: ___, ___&#10;(continue for all 10)"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>scrib/script</strong> (write) — describe, manuscript. 2. <strong>dict</strong> (speak/say) — predict, dictate. 3. <strong>port</strong> (carry) — transport, export. 4. <strong>struct</strong> (build) — construct, instruct. 5. <strong>spect</strong> (look/see) — inspect, spectator. 6. <strong>tele</strong> (far) — telephone, telescope. 7. <strong>bio</strong> (life) — biology, biography. 8. <strong>photo</strong> (light) — photograph, photosynthesis. 9. <strong>flex</strong> (bend) — flexible, inflexible. 10. <strong>vid/vis</strong> (see) — vision, provide, evidence.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">English Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 25+" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS REVISION ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">💯</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 6 · Day 4 Revision</div>
+  <div class="hero-title">Percentages —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Timed drill · Mixed problem set · Common errors · Final exam challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Conversions</span><span class="hero-tag">% change</span><span class="hero-tag">Reverse %</span></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🎯 Multiple Choice Quiz</div>
+  <div id="maths-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextMC('maths')">Next →</button>
+    <span class="score-badge" id="maths-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Timed Drill — 12 Questions (Target: under 10 minutes)</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★</div>
+    <div class="q-text">Work through as quickly and accurately as you can. Show brief working. <span class="marks">12 marks</span><br><br>1. 30% of 90 &nbsp; 2. 5% of 240 &nbsp; 3. 75% of 160 &nbsp; 4. Convert 3/5 to % &nbsp; 5. Convert 0.085 to % &nbsp; 6. A £120 item is discounted 25%. Sale price? &nbsp; 7. Population rises from 5,000 to 5,750. % increase? &nbsp; 8. After 20% VAT, a phone costs £180. Pre-VAT price? &nbsp; 9. Convert 7/8 to decimal &nbsp; 10. £200 increases by 35% then decreases by 20%. Final amount? &nbsp; 11. What % is 45 of 180? &nbsp; 12. A score rises from 36 to 45. % increase?</div>
+    <textarea class="q-input xwide" placeholder="1. ___ 2. ___ 3. ___ 4. ___ 5. ___ 6. ___&#10;7. ___ 8. ___ 9. ___ 10. ___ 11. ___ 12. ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>27</strong> (0.3×90). 2. <strong>12</strong> (0.05×240). 3. <strong>120</strong> (0.75×160). 4. <strong>60%</strong> (3÷5×100). 5. <strong>8.5%</strong> (×100). 6. <strong>£90</strong> (£120−£30). 7. <strong>15%</strong> (750÷5000×100). 8. <strong>£150</strong> (180÷1.20). 9. <strong>0.875</strong> (7÷8). 10. £200×1.35=£270; £270×0.80=<strong>£216</strong>. 11. <strong>25%</strong> (45÷180×100). 12. <strong>25%</strong> (9÷36×100).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Final Challenge Problem</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★★</div>
+    <div class="q-text">A second-hand car was bought for £8,000. In year 1 it lost 20% of its value. In year 2 it lost 15% of its remaining value. In year 3 it gained 5% of its value. (a) What was the car's value at the end of each year? (b) What was the overall percentage change from the original £8,000? (c) The owner says "It lost 20%+15%=35% over two years then gained 5%, so overall I lost 30%." Is this correct? Explain why or why not. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) End Year 1: £___ End Year 2: £___ End Year 3: £___&#10;(b) Overall % change from £8,000: ___&#10;(c) Is the owner correct? Explain:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Year 1: £8,000×0.80 = <strong>£6,400</strong>. Year 2: £6,400×0.85 = <strong>£5,440</strong>. Year 3: £5,440×1.05 = <strong>£5,712</strong>. (b) Change = £8,000−£5,712 = £2,288 loss. % change = 2,288÷8,000×100 = <strong>28.6% overall decrease</strong>. (c) <strong>No, the owner is incorrect.</strong> You cannot simply add and subtract percentages because each percentage is calculated on a different base value. The 15% in year 2 was applied to £6,400 (not £8,000), and the 5% in year 3 was applied to £5,440. Each year's calculation uses that year's starting value. The correct overall change is 28.6%, not 30%. This is the same principle as the "20% up then 20% down" trap from the lesson.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Maths Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE REVISION ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🕸️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 6 · Day 4 Revision</div>
+  <div class="hero-title">Ecosystems —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Quiz · Food web drawing · Energy calculation · Habitat match</div>
+  <div class="hero-tags"><span class="hero-tag">Producers</span><span class="hero-tag">10% rule</span><span class="hero-tag">Biodiversity</span></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🎯 Multiple Choice Quiz</div>
+  <div id="science-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextMC('science')">Next →</button>
+    <span class="score-badge" id="science-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🌿 Food Web & Energy Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">From memory — write out a food web for a GRASSLAND habitat with at least 6 organisms and at least 4 food chain connections. Label each organism's role. Then: the grassland grass contains 80,000 kJ of energy. Trace the energy to the TOP of the longest chain in your web. <span class="marks">10 marks</span></div>
+    <textarea class="q-input wide" placeholder="Food web (write organism → organism with labels):&#10;&#10;Energy trace to top predator:&#10;Grass: 80,000 kJ&#10;Level 2: ___kJ&#10;Level 3: ___kJ&#10;Level 4: ___kJ"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">Grassland example: Grass (producer) → Grasshopper (primary consumer) → Frog (secondary) → Snake (tertiary) → Eagle (quaternary). Also: Grass → Rabbit → Fox → Eagle. Grass → Gazelle → Lion. All dead matter → Fungi/Bacteria (decomposers). <strong>Energy:</strong> Grass 80,000 kJ → Level 2: 8,000 kJ → Level 3: 800 kJ → Level 4: 80 kJ. Award marks for: correct arrows (direction of energy flow), correct labels, correct 10% calculations at each level.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏔️ Habitat Match Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">Match each description to the correct habitat (woodland / coral reef / desert / polar / grassland). Then for each habitat, explain ONE way its physical conditions directly limit what organisms can survive there. <span class="marks">10 marks</span><br><br>a) Warm, shallow, sunlit water with extraordinary species richness<br>b) Vast open land with seasonal drought; fires can reset the food web<br>c) Almost no precipitation; extreme temperature swings day to night<br>d) Freezing temperatures; food chains depend on tiny algae under ice<br>e) Seasonal; deciduous trees form canopy; complex, multi-layered web</div>
+    <textarea class="q-input wide" placeholder="a) Habitat: ___ Physical limitation: ___&#10;b) Habitat: ___ Physical limitation: ___&#10;c) Habitat: ___ Physical limitation: ___&#10;d) Habitat: ___ Physical limitation: ___&#10;e) Habitat: ___ Physical limitation: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Coral reef</strong> — ocean warming above ~30°C causes coral bleaching, destroying the photosynthetic algae inside coral and collapsing the producer base. b) <strong>Grassland</strong> — seasonal drought reduces plant availability, limiting primary consumer numbers; fire can suddenly remove the entire producer layer. c) <strong>Desert</strong> — near-zero water availability means only specially adapted producers (cacti, sparse scrub) can survive, creating an extremely thin base of the energy pyramid. d) <strong>Polar/Tundra</strong> — freezing temperatures and long dark winters severely limit photosynthesis, resulting in very short food chains with few species at each level. e) <strong>Woodland</strong> — seasonal leaf loss in deciduous woodland reduces food availability in winter, forcing many consumers to hibernate, migrate, or switch food sources.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Science Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY REVISION ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌍</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 6 · Day 4 Revision</div>
+  <div class="hero-title">World Geography —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Continent & ocean recall · Landform quiz · River stages · Record-breakers</div>
+  <div class="hero-tags"><span class="hero-tag">7 Continents</span><span class="hero-tag">5 Oceans</span><span class="hero-tag">Rivers & landforms</span></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🎯 Multiple Choice Quiz</div>
+  <div id="history-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextMC('history')">Next →</button>
+    <span class="score-badge" id="history-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🗺️ Memory Maps — From Recall</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★</div>
+    <div class="q-text">Without notes — fill in every answer from memory: <span class="marks">12 marks</span><br><br><strong>7 Continents</strong> (largest to smallest): 1.___ 2.___ 3.___ 4.___ 5.___ 6.___ 7.___<br><br><strong>5 Oceans</strong> (largest to smallest): 1.___ 2.___ 3.___ 4.___ 5.___<br><br><strong>Record-breakers:</strong><br>Highest point on land: ___ Height: ___<br>Longest mountain range: ___ Location: ___<br>Largest hot desert: ___ Location: ___<br>Largest & deepest ocean: ___</div>
+    <textarea class="q-input wide" placeholder="Write your answers here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Continents:</strong> 1. Asia 2. Africa 3. North America 4. South America 5. Antarctica 6. Europe 7. Australia. <strong>Oceans:</strong> 1. Pacific 2. Atlantic 3. Indian 4. Southern 5. Arctic. (PAISA memory aid). <strong>Records:</strong> Highest point — <strong>Mount Everest</strong>, 8,849 m, Nepal/Tibet. Longest range — <strong>The Andes</strong>, ~7,000 km, western South America. Largest hot desert — <strong>The Sahara</strong>, ~9.2 million km², North Africa. Largest & deepest — <strong>Pacific Ocean</strong>.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Final Extended Geography Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★★</div>
+    <div class="q-text">Choose ONE question and write a full response (minimum 8 sentences): <span class="marks">12 marks</span><br><br><strong>Option A:</strong> "Antarctica is the world's largest desert — but most people don't know this." Explain why, using the precise definition of desert and contrasting Antarctica with the Sahara.<br><br><strong>Option B:</strong> "Rivers are the most important geographical feature for human civilisation." Argue for or against, using specific evidence from at least 3 sources (History Weeks 2 and 6, Science Week 6).<br><br><strong>Option C:</strong> Using the physical geography of the Amazon and the polar regions as contrasting examples, explain why biodiversity is so different between them. Connect to the Science lesson.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A:</strong> Award for: defining desert as low precipitation (not heat); Antarctica receives virtually zero annual precipitation; the Sahara — extreme heat, sand, sparse life; Antarctica — extreme cold, ice, specialised life (penguins, seals, krill); both share the defining characteristic of aridity. Credit for etymology of 'desert' (Latin desertus = abandoned, empty). <strong>Option B:</strong> Award for: Week 2 — Nile/Mesopotamian rivers as foundation of civilisation (irrigation, fertile silt, transport, natural defence); Week 6 Geography — river stages, how rivers shape land and settle human populations; Science — rivers support aquatic food webs and provide habitats; the Amazon River system supports the world's greatest biodiversity. Counter-argument: mountains, coastal geography also played key roles. <strong>Option C:</strong> Award for: Amazon — near-equatorial, high rainfall, stable warmth → enormous producer base → greatest biodiversity; polar — freezing, dark winters → minimal photosynthesis → short simple food chains; energy pyramid comparison (wide base in Amazon, narrow in polar); 10% rule means rich producer base multiplies biodiversity all the way up the web.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">History/Geography Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 24+" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+// ── NAVIGATION ──────────────────────────────────────────────────────────────
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── MODEL ANSWER TOGGLES ────────────────────────────────────────────────────
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+
+// ── SCORE TRACKER BARS ─────────────────────────────────────────────────────
+function updateBar(subject, val, max){
+  const num = parseFloat(val);
+  if(!isNaN(num) && num >= 0){
+    const pct = Math.min((num / max) * 100, 100);
+    document.getElementById('bar-'+subject).style.width = pct + '%';
+  }
+}
+
+// ── MC QUIZ ENGINE ──────────────────────────────────────────────────────────
+const mcData = {
+  bible:[
+    {q:"What was Joseph's FIRST dream about?",opts:["Stars and moon bowing to him","Sheaves of grain — his brothers' bowing to his","A ladder reaching to heaven","Seven fat cows and seven thin cows"],ans:1,exp:"The first dream (Gen 37:6–7) involved sheaves of grain — Joseph's sheaf stood upright while his brothers' sheaves gathered around and bowed down to it. The second dream involved sun, moon and stars."},
+    {q:"Genesis 39 says 'the LORD was with Joseph' TWICE. When?",opts:["When Joseph had his dreams, and when he met Pharaoh","As a slave in Potiphar's house, and as a prisoner in jail","When he was sold, and when he arrived in Egypt","When his brothers confessed, and when Jacob died"],ans:1,exp:"The phrase appears in Gen 39:2 (in Potiphar's house) and Gen 39:21 (in prison after the false accusation). Both times God's presence expressed itself through Joseph prospering despite terrible circumstances."},
+    {q:"Why did Joseph refuse the advances of Potiphar's wife?",opts:["He feared losing his job","He was afraid of Potiphar finding out","He said it would be a sin against God","He was not attracted to her"],ans:2,exp:"Gen 39:9 — Joseph's reason is explicitly theological: 'How then could I do such a wicked thing and sin against God?' Not self-interest, but conscience before God. This shows where his integrity came from."},
+    {q:"How long was Joseph forgotten in prison after correctly interpreting the cupbearer's dream?",opts:["One week","Six months","One year","Two full years"],ans:3,exp:"Genesis 40:23 says the cupbearer did not remember Joseph — and Genesis 41:1 begins 'When two full years had passed...' Two years of silence after doing the right thing and making a reasonable request."},
+    {q:"The lesson says Joseph's forgiveness in Genesis 45 is unusual because:",opts:["He cried when he forgave them","He had been wronged by his own family, not strangers","He forgave while being completely honest about what had been done to him","He forgave immediately without any reflection"],ans:2,exp:"Joseph names the wrong plainly ('whom you sold into Egypt' 45:4) but then chooses not to let that wrong control his response. Genuine forgiveness is not denial — it holds the truth of the wrong and still chooses a different response than revenge."}
+  ],
+  english:[
+    {q:"The prefix 'in-' becomes 'im-' before which letter?",opts:["r","l","p, b, and m","s"],ans:2,exp:"'in-' assimilates to match the first letter of the root: im- before p/b/m (impossible, immovable), ir- before r (irresponsible), il- before l (illegal). This explains the spelling — not an exception, but a rule."},
+    {q:"The suffix '-tion' changes a word's class from verb to:",opts:["Adverb","Adjective","Noun","Another verb"],ans:2,exp:"'-tion' is a noun-forming suffix: inform → information; create → creation; instruct → instruction. Knowing this lets you produce the right grammatical form without memorising each word separately."},
+    {q:"Which is the correct spelling?",opts:["definately","definitly","definitely","definetly"],ans:2,exp:"'Definitely' contains the root 'finite' (limited/complete). Once you see the root, the spelling is clear: defin-ite-ly. The most common error ('definately') comes from not knowing the root."},
+    {q:"What does the root 'struct' mean?",opts:["To carry","To write","To build","To speak"],ans:2,exp:"'Struct' (from Latin struere = to build) appears in construct, instruct, destroy (destructio), structure, infrastructure. Once you know one root, you unlock an entire family of words."},
+    {q:"'She spoke incredible loud.' What is wrong?",opts:["'Spoke' should be 'speak'","'Incredible' is an adjective — it cannot modify an adjective. Use the adverb 'incredibly'","'Loud' should be 'loudly'","Nothing is wrong"],ans:1,exp:"Adjectives modify nouns; adverbs modify verbs, adjectives, and other adverbs. 'Incredible' is an adjective — it cannot modify 'loud' (another adjective). You need the adverb form: 'incredibly.'"}
+  ],
+  maths:[
+    {q:"A jacket costs £80. It is reduced by 35%. What is the sale price?",opts:["£45","£52","£55","£28"],ans:1,exp:"35% of £80 = 0.35 × 80 = £28. Sale price = £80 − £28 = £52. Alternatively: sale price = 65% of £80 = 0.65 × 80 = £52."},
+    {q:"Which method correctly finds the original price if a sale price of £63 represents a 30% reduction?",opts:["£63 + 30% of £63","£63 ÷ 0.70","£63 × 1.30","£63 − 30%"],ans:1,exp:"After a 30% reduction, the sale price = 70% of the original. So £63 = 0.70 × original. Original = £63 ÷ 0.70 = £90. You cannot add 30% of £63 because the 30% was taken from the ORIGINAL, not the sale price."},
+    {q:"Price rises from £50 to £65. What is the percentage increase?",opts:["15%","30%","25%","13%"],ans:1,exp:"Change = £15. % change = 15 ÷ 50 × 100 = 30%. Always divide by the ORIGINAL (starting) value, never the new value."},
+    {q:"A 20% increase followed by a 20% decrease on £100 gives:",opts:["£100 exactly","£104","£96","£98"],ans:2,exp:"£100 × 1.20 = £120. £120 × 0.80 = £96. The second 20% is calculated on £120 (not £100), so it removes £24 — more than the £20 that was added. Result: £96, not £100."},
+    {q:"15% of 240 using the 10% method:",opts:["10% = 24, 5% = 12, so 15% = 36","10% = 24, 5% = 24, so 15% = 48","10% = 24, 5% = 14, so 15% = 38","10% = 2.4, 5% = 1.2, so 15% = 3.6"],ans:0,exp:"10% of 240 = 24. 5% = half of 10% = 12. 15% = 24 + 12 = 36. The 10% method works by finding 10% first (move decimal one place left), then building up from there."}
+  ],
+  science:[
+    {q:"What percentage of energy passes from one trophic level to the next?",opts:["50%","25%","10%","1%"],ans:2,exp:"The 10% rule: only about 10% of energy at one trophic level passes to the next. The remaining ~90% is lost as heat through respiration, movement, and waste. This explains why top predators are always far less numerous than producers."},
+    {q:"Why is a food WEB more realistic than a food CHAIN?",opts:["It shows decomposers","It shows that most organisms have multiple food sources and predators","It is easier to draw","It shows energy percentages"],ans:1,exp:"A food chain shows energy flowing in ONE line — one prey, one predator at each stage. A food web shows the real overlapping feeding relationships: most animals eat several different things and are eaten by several predators."},
+    {q:"Which THREE structures are found in plant cells but NOT animal cells?",opts:["Nucleus, mitochondria, vacuole","Cell wall, chloroplasts, large central vacuole","Cell membrane, ribosomes, cytoplasm","Chloroplasts, nucleus, cell wall"],ans:1,exp:"Cell wall (rigid support — plants have no skeleton), chloroplasts (photosynthesis — plants make their own food), large central vacuole (stores water, maintains turgidity). These three connect directly to why plants are producers."},
+    {q:"What would happen to a food web if ALL decomposers were removed?",opts:["Nothing — decomposers are not part of the food web","Dead material would pile up, nutrients could not be recycled, soil fertility would crash, producers would fail","Top predators would increase","Primary consumers would become producers"],ans:1,exp:"Decomposers break down dead material and return nutrients (nitrogen, carbon, minerals) to the soil. Without them, the nutrient cycle breaks. Producers cannot get the minerals they need from the soil, photosynthesis declines, and the entire food web collapses from the base upward."},
+    {q:"Why does the Amazon rainforest have greater biodiversity than a polar habitat?",opts:["It is closer to the equator so receives more rainfall and consistent warmth, maximising photosynthesis and producer diversity","It has more predators","The soil is richer","It is older as a habitat"],ans:0,exp:"High rainfall, stable warmth, and intense sunlight near the equator allow continuous, year-round photosynthesis. This creates an enormous, diverse producer base — and a larger, more varied producer base supports greater diversity at every level above it."}
+  ],
+  history:[
+    {q:"What does 'Mesopotamia' mean in Greek?",opts:["Land of the pharaohs","Land between the rivers","Gift of the Nile","The fertile delta"],ans:1,exp:"Meso (middle) + potamos (river) = land between the rivers. The Tigris and Euphrates rivers in modern Iraq. The same root 'potamos' gives us 'hippopotamus' — horse of the river (hippos = horse)."},
+    {q:"The Sahara is described as the world's largest 'hot desert.' Why the word 'hot'?",opts:["All deserts are hot by definition","Because it is hotter than any other desert","Because Antarctica is technically a larger desert (defined by low precipitation) but is cold","To distinguish it from ocean deserts"],ans:2,exp:"A desert is defined by very low precipitation, not by heat. Antarctica receives virtually no annual precipitation, making it the world's largest desert overall — but it is cold. The Sahara is the largest HOT desert (~9.2 million km²)."},
+    {q:"What happens to a river in its LOWER course that is different from its upper course?",opts:["It flows faster and erodes more","It slows down and deposits sediment, forming meanders","It becomes narrower and deeper","It flows underground"],ans:1,exp:"In the upper course, steep gradient = fast flow = erosion (V-shaped valleys). In the lower course, gentle gradient = slow flow = deposition. Sediment is deposited as the river loses energy, forming meanders and eventually a delta at the mouth."},
+    {q:"Why was Egypt more politically stable than Mesopotamia for thousands of years?",opts:["Egypt had a larger population","Egypt had a better army","The Nile flooded predictably every year, providing reliable agriculture; deserts provided natural defence","Egyptian pharaohs were more intelligent than Mesopotamian kings"],ans:2,exp:"The Nile's predictable annual flood deposited fertile silt on a reliable schedule. Farmers could plan their year around it. Desert borders on both sides provided natural protection from invasion. Mesopotamia's rivers flooded unpredictably and the flat open plains offered no natural defence."},
+    {q:"Which continent is BOTH a continent and a single country?",opts:["Antarctica","South America","Australia","Africa"],ans:2,exp:"Australia is unique — it is the world's smallest continent and is also entirely occupied by one sovereign country (the Commonwealth of Australia). Antarctica has no permanent human population and is not a country."}
+  ]
+};
+
+const mcState = {};
+['bible','english','maths','science','history'].forEach(s=>{
+  mcState[s]={idx:0,score:0};
+  renderMC(s);
+});
+
+function renderMC(s){
+  const st=mcState[s];
+  const qs=mcData[s];
+  const el=document.getElementById(s+'-mc');
+  const sc=document.getElementById(s+'-mc-score');
+  if(st.idx>=qs.length){
+    el.innerHTML=`<div style="padding:18px;background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:1.8rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;">Quiz complete!</div><div style="color:var(--muted);margin-top:6px;">${st.score} / ${qs.length} correct</div></div>`;
+    return;
+  }
+  const q=qs[st.idx];
+  sc.textContent=`${st.score} / ${st.idx} correct`;
+  el.innerHTML=`<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question ${st.idx+1} of ${qs.length}</div>
+  <div style="font-size:0.96rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:14px;">${q.q}</div>
+  <div class="mc-opts">${q.opts.map((o,i)=>`<button class="mc-opt" onclick="answerMC('${s}',${i})">${o}</button>`).join('')}</div>
+  <div id="${s}-mc-fb" class="mc-fb"></div>`;
+}
+
+function answerMC(s,i){
+  const q=mcData[s][mcState[s].idx];
+  const opts=document.querySelectorAll(`#${s}-mc .mc-opt`);
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-mc-fb');
+  if(i===q.ans){
+    mcState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='mc-fb ok';fb.style.display='block';
+    fb.textContent='✅ Correct! '+q.exp;
+  }else{
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='mc-fb bad';fb.style.display='block';
+    fb.textContent='❌ '+q.exp;
+  }
+  document.getElementById(s+'-mc-score').textContent=`${mcState[s].score} / ${mcState[s].idx+1} correct`;
+}
+
+function nextMC(s){
+  mcState[s].idx++;
+  renderMC(s);
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init("KS3_L6_Week6_Day4_REVISION");</script>
+</body>
+</html>

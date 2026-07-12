@@ -1,20 +1,15 @@
 /*
  * worksheet-submit.js  —  HOS International Learning Portal
+ * VERSION 2 — cross-device fix
  *
- * DROP-IN REPLACEMENT: just upload this file to GitHub, replaces the old one.
+ * The student identity now comes from the URL parameter ?student=jessica
+ * set by the portal when the link is clicked. This means answers are tied
+ * to the student PIN, not to whatever they type in a name field, so
+ * loading on any device/browser works correctly.
  *
- * WHAT IT DOES:
- *  - Text boxes     → saves automatically as student types
- *  - MCQ buttons    → locks immediately on click, cannot be changed
- *  - True/False     → locks immediately on click
- *  - All answers    → saved to localStorage instantly (works offline)
- *  - All answers    → saved to Supabase so teacher can see them
- *  - Page reload    → everything restores exactly as left
- *  - Works for ALL students, ALL weeks, ALL future worksheets automatically
- *
- * USAGE (already in every worksheet, no changes needed):
+ * USAGE (same as before, no changes needed in worksheet files):
  *   <script src="worksheet-submit.js"></script>
- *   <script>WorksheetSubmit.init('KS3_L6_Week4_Day3');</script>
+ *   <script>WorksheetSubmit.init('KS3_L6_Week6_Day1');</script>
  */
 
 const WorksheetSubmit = (() => {
@@ -23,70 +18,94 @@ const WorksheetSubmit = (() => {
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
 
   let worksheetId = '';
-  let saveData = {};
-  let saveTimer = null;
-  let studentName = '';
+  let saveData    = {};
+  let saveTimer   = null;
 
-  /* ── localStorage ── */
-  function localKey() { return 'hos_ws_' + worksheetId; }
+  /* ── Student identity from URL (?student=jessica) ── */
+  function getStudentFromURL() {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      return (p.get('student') || '').toLowerCase().trim();
+    } catch(e) { return ''; }
+  }
+
+  let studentName = getStudentFromURL() || 'unknown';
+
+  /* Pre-fill the name field on the page so the student sees their name */
+  function prefillNameFields() {
+    if (!studentName || studentName === 'unknown') return;
+    const display = studentName.charAt(0).toUpperCase() + studentName.slice(1);
+    document.querySelectorAll('input[type="text"], input:not([type])').forEach(el => {
+      const ph = (el.placeholder || '').toLowerCase();
+      if (ph.includes('name') || ph.includes('your name')) {
+        el.value = display;
+        el.readOnly = true; /* name is set by portal — no manual editing */
+      }
+    });
+  }
+
+  /* ── localStorage (same-device instant restore) ── */
+  function localKey() { return 'hos_ws_' + worksheetId + '_' + studentName; }
   function saveToLocal() {
-    try { localStorage.setItem(localKey(), JSON.stringify({ name: studentName, answers: saveData })); } catch(e) {}
+    try { localStorage.setItem(localKey(), JSON.stringify(saveData)); } catch(e) {}
   }
   function loadFromLocal() {
     try {
       const raw = localStorage.getItem(localKey());
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
-      saveData = parsed.answers || {};
-      studentName = parsed.name || '';
+      if (raw) saveData = JSON.parse(raw);
     } catch(e) {}
   }
 
   /* ── Supabase ── */
   async function saveToSupabase() {
-    /* need at least a worksheet id */
-    if (!worksheetId) return;
-    const name = studentName || getNameFromPage() || 'unknown';
+    if (!worksheetId || !studentName) return;
+    const body = {
+      worksheet_id:  worksheetId,
+      student_name:  studentName,
+      answers:       saveData,
+      submitted_at:  new Date().toISOString()
+    };
     try {
-      /* First try to update existing row */
-      const updateRes = await fetch(
-        `${SUPABASE_URL}/rest/v1/worksheet_submissions?worksheet_id=eq.${encodeURIComponent(worksheetId)}&student_name=eq.${encodeURIComponent(name)}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_KEY,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({ answers: saveData, submitted_at: new Date().toISOString() })
-        }
-      );
-      /* If no row existed (nothing was updated), insert a new one */
-      if (updateRes.ok) {
-        const count = updateRes.headers.get('content-range');
-        if (count === '*/0' || count === null) {
-          await fetch(`${SUPABASE_URL}/rest/v1/worksheet_submissions`, {
-            method: 'POST',
-            headers: {
-              'apikey': SUPABASE_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_KEY,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({
-              worksheet_id: worksheetId,
-              student_name: name,
-              answers: saveData,
-              submitted_at: new Date().toISOString()
-            })
-          });
-        }
-      }
+      /* upsert: update if exists, insert if not */
+      await fetch(`${SUPABASE_URL}/rest/v1/worksheet_submissions`, {
+        method: 'POST',
+        headers: {
+          'apikey':        SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type':  'application/json',
+          'Prefer':        'resolution=merge-duplicates,return=minimal'
+        },
+        body: JSON.stringify(body)
+      });
       setSaveStatus('saved');
     } catch(e) {
       setSaveStatus('pending');
     }
+  }
+
+  async function loadFromSupabase() {
+    if (!worksheetId || !studentName || studentName === 'unknown') return;
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/worksheet_submissions` +
+        `?worksheet_id=eq.${encodeURIComponent(worksheetId)}` +
+        `&student_name=eq.${encodeURIComponent(studentName)}` +
+        `&select=answers&limit=1`,
+        {
+          headers: {
+            'apikey':        SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY
+          }
+        }
+      );
+      const rows = await res.json();
+      if (rows && rows[0] && rows[0].answers) {
+        /* merge with localStorage (local is usually newer) */
+        saveData = Object.assign({}, rows[0].answers, saveData);
+        restoreAll();
+        setSaveStatus('saved');
+      }
+    } catch(e) {}
   }
 
   function scheduleSave() {
@@ -101,22 +120,6 @@ const WorksheetSubmit = (() => {
     scheduleSave();
   }
 
-  /* ── Get student name from the page ── */
-  function getNameFromPage() {
-    /* look for any input that looks like a name field */
-    const candidates = document.querySelectorAll('input[type="text"], input:not([type])');
-    for (const el of candidates) {
-      const ph = (el.placeholder || '').toLowerCase();
-      const label = (el.id || el.name || '').toLowerCase();
-      if (ph.includes('name') || label.includes('name')) {
-        return el.value.trim() || '';
-      }
-    }
-    /* fallback: bottom-left student name display */
-    const nameEl = document.querySelector('.student-name, #student-name, .name-tag');
-    return nameEl ? nameEl.textContent.trim() : '';
-  }
-
   /* ── Save status dot ── */
   function addSaveIndicator() {
     if (document.getElementById('hos-save-dot')) return;
@@ -124,72 +127,76 @@ const WorksheetSubmit = (() => {
     dot.id = 'hos-save-dot';
     Object.assign(dot.style, {
       position: 'fixed', bottom: '14px', right: '14px', zIndex: '99999',
-      width: '12px', height: '12px', borderRadius: '50%',
-      background: '#F59E0B', transition: 'background 0.4s',
-      boxShadow: '0 2px 6px rgba(0,0,0,0.3)', cursor: 'default'
+      display: 'flex', alignItems: 'center', gap: '6px',
+      background: 'rgba(0,0,0,0.7)', borderRadius: '99px',
+      padding: '5px 12px 5px 8px', fontSize: '0.75rem',
+      color: 'white', fontFamily: 'sans-serif', cursor: 'default',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.4)', transition: 'opacity 0.3s'
     });
-    dot.title = 'Saving…';
+    dot.innerHTML = '<span id="hos-dot-circle" style="width:9px;height:9px;border-radius:50%;background:#F59E0B;display:inline-block;transition:background 0.4s;flex-shrink:0"></span>' +
+                    '<span id="hos-dot-label">Saving…</span>';
     document.body.appendChild(dot);
+
+    /* show who is logged in */
+    if (studentName && studentName !== 'unknown') {
+      const name = studentName.charAt(0).toUpperCase() + studentName.slice(1);
+      const tag = document.createElement('div');
+      Object.assign(tag.style, {
+        position: 'fixed', bottom: '14px', left: '14px', zIndex: '99999',
+        background: 'rgba(0,0,0,0.7)', borderRadius: '99px',
+        padding: '5px 14px', fontSize: '0.75rem', color: '#A78BFA',
+        fontFamily: 'sans-serif', fontWeight: '700'
+      });
+      tag.textContent = '👤 ' + name;
+      document.body.appendChild(tag);
+    }
   }
 
   function setSaveStatus(status) {
-    const dot = document.getElementById('hos-save-dot');
-    if (!dot) return;
+    const circle = document.getElementById('hos-dot-circle');
+    const label  = document.getElementById('hos-dot-label');
+    if (!circle || !label) return;
     if (status === 'saved') {
-      dot.style.background = '#10B981';
-      dot.title = 'All answers saved ✓';
+      circle.style.background = '#10B981';
+      label.textContent = 'Saved ✓';
     } else {
-      dot.style.background = '#F59E0B';
-      dot.title = 'Saving…';
+      circle.style.background = '#F59E0B';
+      label.textContent = 'Saving…';
     }
   }
 
   /* ── TEXT INPUTS & TEXTAREAS ── */
-  function watchTextInputs() {
-    document.addEventListener('input', e => {
-      const el = e.target;
-      if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
-        /* if it looks like the name field, capture it */
-        const ph = (el.placeholder || '').toLowerCase();
-        if (ph.includes('name')) { studentName = el.value.trim(); }
-        record('field_' + fieldIndex(el), el.value);
-      }
-    });
-  }
-
   function fieldIndex(el) {
     if (el.id) return el.id;
     const all = Array.from(document.querySelectorAll('textarea, input'));
     return 'i' + all.indexOf(el);
   }
 
+  function watchTextInputs() {
+    document.addEventListener('input', e => {
+      const el = e.target;
+      if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+        if (el.readOnly) return; /* skip locked name fields */
+        record('field_' + fieldIndex(el), el.value);
+      }
+    });
+  }
+
   function restoreTextInputs() {
     document.querySelectorAll('textarea, input[type="text"], input[type="number"], input:not([type])').forEach(el => {
+      if (el.readOnly) return;
       const key = 'field_' + fieldIndex(el);
       if (saveData[key] !== undefined) {
         el.value = saveData[key];
-        /* trigger any listeners the page has */
         el.dispatchEvent(new Event('input', { bubbles: true }));
       }
     });
   }
 
   /* ── MCQ BUTTONS ── */
-  function watchMCQ() {
-    document.addEventListener('click', e => {
-      const btn = e.target.closest('.quiz-opt, .option-btn, [data-option]');
-      if (!btn) return;
-      /* find sibling options */
-      const parent = btn.closest('.quiz-options, .options, .quiz-box, .question-box') || btn.parentElement;
-      const siblings = Array.from(parent.querySelectorAll('.quiz-opt, .option-btn, [data-option]'));
-      if (!siblings.length) return;
-      /* already locked? */
-      if (siblings.some(b => b.dataset.hosLocked)) return;
-
-      const key = 'mcq_' + mcqIndex(btn);
-      record(key, btn.textContent.trim());
-      lockGroup(siblings, btn);
-    }, true);
+  function mcqIndex(btn) {
+    const all = Array.from(document.querySelectorAll('.quiz-opt, .option-btn, [data-option]'));
+    return all.indexOf(btn);
   }
 
   function lockGroup(siblings, chosen) {
@@ -206,9 +213,18 @@ const WorksheetSubmit = (() => {
     });
   }
 
-  function mcqIndex(btn) {
-    const all = Array.from(document.querySelectorAll('.quiz-opt, .option-btn, [data-option]'));
-    return all.indexOf(btn);
+  function watchMCQ() {
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.quiz-opt, .option-btn, [data-option]');
+      if (!btn) return;
+      const parent = btn.closest('.quiz-options, .options, .quiz-box, .question-box') || btn.parentElement;
+      const siblings = Array.from(parent.querySelectorAll('.quiz-opt, .option-btn, [data-option]'));
+      if (!siblings.length) return;
+      if (siblings.some(b => b.dataset.hosLocked)) return;
+      const key = 'mcq_' + mcqIndex(btn);
+      record(key, btn.textContent.trim());
+      lockGroup(siblings, btn);
+    }, true);
   }
 
   function restoreMCQ() {
@@ -232,7 +248,6 @@ const WorksheetSubmit = (() => {
       const row = btn.closest('.tf-row, .tf-question, .true-false-row') || btn.parentElement;
       if (row.dataset.hosLocked) return;
       row.dataset.hosLocked = '1';
-
       const allBtns = Array.from(row.querySelectorAll('.tf-btn, .true-btn, .false-btn, [data-tf]'));
       allBtns.forEach(b => {
         b.style.pointerEvents = 'none';
@@ -241,7 +256,6 @@ const WorksheetSubmit = (() => {
       });
       btn.style.outline = '3px solid currentColor';
       btn.style.fontWeight = 'bold';
-
       const rows = Array.from(document.querySelectorAll('.tf-row, .tf-question, .true-false-row'));
       record('tf_' + rows.indexOf(row), btn.textContent.trim());
     }, true);
@@ -265,6 +279,14 @@ const WorksheetSubmit = (() => {
     });
   }
 
+  /* ── RESTORE ALL ── */
+  function restoreAll() {
+    prefillNameFields();
+    restoreTextInputs();
+    restoreTF();
+    setTimeout(restoreMCQ, 400);
+  }
+
   /* ── INIT ── */
   function init(id) {
     worksheetId = id;
@@ -272,32 +294,20 @@ const WorksheetSubmit = (() => {
 
     function setup() {
       addSaveIndicator();
-      restoreTextInputs();
-      restoreTF();
-      setTimeout(restoreMCQ, 400);
+      restoreAll();
       watchTextInputs();
       watchMCQ();
       watchTF();
 
-      /* watch name field changes */
-      document.addEventListener('blur', e => {
-        const el = e.target;
-        if (el.tagName === 'INPUT') {
-          const ph = (el.placeholder || '').toLowerCase();
-          if (ph.includes('name') && el.value.trim()) {
-            studentName = el.value.trim();
-            scheduleSave();
-          }
-        }
-      }, true);
+      /* load from Supabase in background — merges with local */
+      loadFromSupabase();
 
-      /* save when page is about to close */
       window.addEventListener('beforeunload', () => {
         saveToLocal();
         saveToSupabase();
       });
 
-      console.log('[HOS] Worksheet ready:', worksheetId, '| Loaded', Object.keys(saveData).length, 'saved answers');
+      console.log('[HOS] Worksheet ready:', worksheetId, '| Student:', studentName, '| Loaded', Object.keys(saveData).length, 'answers');
     }
 
     if (document.readyState === 'loading') {

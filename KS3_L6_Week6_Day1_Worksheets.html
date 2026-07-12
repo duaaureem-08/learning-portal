@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 6 · Day 1 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(109,40,217,0.2);border:1px solid rgba(109,40,217,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#C4B5FD;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.callout{border-radius:var(--radius-sm);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+.callout .ci{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.callout .ct{font-size:0.88rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);}
+.callout.info{background:rgba(30,58,138,0.13);border:1px solid rgba(30,58,138,0.28);}
+.callout.warn{background:rgba(180,83,9,0.12);border:1px solid rgba(180,83,9,0.28);}
+.callout.good{background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.28);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 6</div>
+  <div class="day-badge">📅 Day 1</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 1 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🧥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 6 · Day 1</div>
+  <div class="hero-title">Joseph —<br>Character Through Suffering</div>
+  <div class="hero-subtitle">Genesis 37, 39–45 · Dreams, Betrayal & Forgiveness · God's Purposes in Difficulty</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Key vocabulary and basic recall. Use your lesson notes if needed.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Vocabulary & Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Providence</strong> is the key theological word in Joseph's story. It means God's wise, unseen guidance over events — often only recognisable by looking BACKWARD over a long stretch of time, exactly as Joseph does in Genesis 50:20.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write out the memory verse for this week in full. Then explain in your own words what Joseph means when he says "God intended it for good." <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Memory verse (Genesis 50:20 NIV):&#10;&#10;'God intended it for good' means: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"You intended to harm me, but God intended it for good, to accomplish what is now being done, the saving of many lives." (Genesis 50:20, NIV). <strong>"God intended it for good"</strong> means that the very same events — Joseph being sold into slavery, falsely accused, and imprisoned — were allowed by God with a completely different purpose in mind. Human beings can intend one thing (harm); God can intend something else (rescue for many people) through those same events. This does not mean the harm was not real — Joseph acknowledges it plainly. It means God's purpose was at work through it all.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Match each vocabulary word to its correct meaning: <em>favouritism · betrayal · integrity · reconcile · providence</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="favouritism = &#10;betrayal = &#10;integrity = &#10;reconcile = &#10;providence = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>favouritism</strong> = treating one person better than others without a fair reason — Jacob's open favouritism toward Joseph sparked the brothers' resentment. <strong>betrayal</strong> = a deep act of disloyalty against someone who trusted you — Joseph's own brothers betray him by selling him into slavery. <strong>integrity</strong> = doing what is right even when no one is watching and it costs you something — Joseph shows this by refusing to do wrong even as a slave. <strong>reconcile</strong> = to restore a broken relationship — Joseph's reunion with his brothers is the emotional climax of the story. <strong>providence</strong> = God's wise, unseen guidance over events, often only recognisable by looking backward.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">List FOUR reasons why Joseph's brothers hated him so much. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="1. &#10;2. &#10;3. &#10;4. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Jacob's open, unequal favouritism</strong> — he openly loved Joseph more than his other sons. 2. <strong>The elaborate robe</strong> (coat of many colours) — a visible, expensive symbol of Jacob's preference that the brothers had to see every day. 3. <strong>Joseph reported his brothers' wrongdoing</strong> to their father, making him appear disloyal to them. 4. <strong>Joseph's two dreams</strong> — in which his brothers (and even his parents) bowed down to him — which felt arrogant and insulting, even if Joseph did not intend them that way.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Understanding and explanation. Think carefully before answering.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Understanding & Explanation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">Describe the five stages that took Joseph from the pit to becoming second-in-command of Egypt. For each stage, name what happened AND what it shows about Joseph's character or God's purpose. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Stage 1 (Gen 37) — What happened / What it shows:&#10;Stage 2 (Gen 39) — What happened / What it shows:&#10;Stage 3 (Gen 40–41) — What happened / What it shows:&#10;Stage 4 (Gen 41) — What happened / What it shows:&#10;Stage 5 (Gen 42–45) — What happened / What it shows:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Stage 1 — Sold into slavery (Gen 37):</strong> Brothers throw him in a pit then sell him to traders for silver; taken to Egypt, sold to Potiphar. Shows: Joseph's suffering begins entirely through other people's sin. <strong>Stage 2 — Falsely accused and imprisoned (Gen 39):</strong> He served Potiphar so well he was put in charge of the whole household — but Potiphar's wife falsely accused him and he was imprisoned despite doing nothing wrong. Shows: integrity is costly — doing right did not protect him from further injustice. <strong>Stage 3 — Interpreting dreams in prison (Gen 40–41):</strong> He correctly interpreted two officials' dreams; two years later brought before Pharaoh. Shows: God's gift continued even in the darkest place. <strong>Stage 4 — Second-in-command (Gen 41):</strong> Interprets Pharaoh's dreams (7 years plenty, 7 years famine), proposes a grain plan, made ruler of Egypt at around age 30. Shows: the dreams of Genesis 37 begin to be fulfilled — but only after 13 years of suffering. <strong>Stage 5 — Reunion and forgiveness (Gen 42–45):</strong> Brothers arrive for grain, unknowingly bow before him; Joseph reveals himself and forgives them. Shows: providence — every painful stage led to the moment where he could save his whole family and a region.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">When Joseph reveals himself to his brothers (Genesis 45), they expect punishment. What does Joseph actually say instead? What does this tell us about his view of what had happened to him? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="What Joseph actually says:&#10;&#10;What this tells us about his view:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Instead of seeking revenge, Joseph says: <strong>"Do not be distressed and do not be angry with yourselves"</strong> (45:5), and crucially: <strong>"It was not you who sent me here, but God"</strong> (45:8). He does not pretend the wrong did not happen — he names it plainly ("whom you sold into Egypt" 45:4) — but he chooses to reframe the whole story around God's purpose rather than his own pain. This tells us that Joseph had come to see his suffering not just as something that happened TO him, but as something that had a purpose THROUGH him. He is not in denial; he has found a framework larger than his own hurt in which to understand what he went through.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">The lesson draws a comparison between Noah, Abraham, and Joseph. What is the KEY NEW element that Joseph's story adds — something that neither Noah's nor Abraham's story included? <span class="marks">3 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 (Noah) and Week 5 (Abraham) — in both those stories, what was the source of the hardship?</div>
+    <textarea class="q-input" placeholder="The key new element in Joseph's story:&#10;&#10;Why this matters theologically:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The key new element is that Joseph's suffering comes from <strong>other people's sin and cruelty</strong>, not from a natural disaster (like Noah's flood) or from a direct call from God to do something costly (like Abraham leaving home). Joseph did not choose hardship — it was done TO him by people who wronged him. This adds a new dimension to the Bible's teaching on faith: it is not just about trusting God when life is hard — it is about trusting God's purpose even when your suffering is caused by someone else's wickedness. This makes Joseph's story personally relevant to anyone who has been betrayed or treated unjustly.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking. Write in full sentences.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Analysis & Application</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">The lesson says "God's promises can be TRUE long before they look true." Joseph's two dreams in Genesis 37 were not fulfilled for over twenty years — during which time everything seemed to contradict them. How does this idea connect to what we learned about Noah (Week 4) and Abraham (Week 5)? Write at least 5 sentences connecting all three stories. <span class="marks">5 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 — Noah trusted a promise before there was any rain. Week 5 — Abraham was promised a great nation when he had no children.</div>
+    <textarea class="q-input wide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">All three stories — Noah, Abraham, and Joseph — involve God making a promise that looks impossible or even contradicted by the available evidence. Noah was warned of a flood when there was no rain; Abraham was promised a nation when he had no children and was old; Joseph was shown through dreams that his family would bow to him, while he was being sold into slavery. In each case, the promise was given long before the circumstances that would fulfil it even existed. What distinguishes Joseph is that during the gap between promise and fulfilment, the evidence actively pointed the other way — he was enslaved, imprisoned, and forgotten. Yet the dreams proved true, just as God's word to Noah and Abraham proved true. Hebrews 11 calls this kind of trust the definition of faith: "being sure of what we hope for and certain of what we do not see." The pattern across all three is clear: God's promises operate on a timescale that humans cannot always see, and the appearance of impossibility is not evidence that the promise has failed — it is often simply part of the journey toward it.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">The lesson identifies four things Joseph's story teaches about "trusting God through suffering." Choose TWO of them and for each: (a) explain the lesson in your own words, and (b) describe a real-life situation where someone today might face something similar. <span class="marks">6 marks</span></div>
+    <div class="q-hint">The four lessons are: (1) Integrity matters most when no one is checking. (2) Unfair seasons do not always end quickly. (3) Looking back can reveal a purpose you couldn't see at the time. (4) Forgiveness can exist alongside honesty about being wronged.</div>
+    <textarea class="q-input wide" placeholder="Lesson 1 (state which one):&#10;Explanation:&#10;Real-life example:&#10;&#10;Lesson 2 (state which one):&#10;Explanation:&#10;Real-life example:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Example using lessons 2 and 4: <strong>Lesson 2 — Unfair seasons do not always end quickly:</strong> Joseph spent roughly 13 years as a slave and prisoner before his situation changed — and there was no indication during that time that it would. Today, a student who studies diligently for years while others seem to get ahead without effort, or a person who does the right thing at work and is overlooked anyway, faces a similar kind of sustained faithfulness with no visible reward. The lesson is that character is formed over time, not tested in a single moment. <strong>Lesson 4 — Forgiveness can coexist with honesty about being wronged:</strong> Joseph doesn't pretend his brothers were kind — he names what they did ("whom you sold into Egypt"). But he chooses not to let that wrong govern his actions toward them now. Today, someone who was bullied at school but later chooses to treat the person who bullied them with dignity — without pretending it didn't happen — demonstrates the same kind of forgiveness. It is honest AND free at the same time.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">9</div>
+    <div class="q-text">Evaluate: Could Joseph have said "God intended it for good" at the beginning of his suffering — or only at the end? Why does the TIMING of this statement matter? Write at least 5 sentences. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your evaluation here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joseph could only say Genesis 50:20 at the END of the story — after the famine had come, after his brothers had bowed before him, and after he had seen how every painful stage had led to the rescue of an entire region. This is crucial because it means the statement is not cheap comfort or blind optimism — it is a conclusion drawn from a completed narrative. At the bottom of the pit, or in Potiphar's prison, Joseph had no way of knowing the purpose. The lesson notes this explicitly: "Looking back can reveal a purpose you couldn't see at the time." If Joseph had said "God intended this for good" while being dragged away by the traders, it would have been a claim of faith before the evidence existed. Said at the end, it is a recognition of something he can now actually see. This makes Genesis 50:20 one of the most profound statements in the whole Bible — not because it was easy to say, but because it took twenty-two years of unseen faithfulness before the one who said it had earned the right to say it. The timing is the message: providence is often only legible in hindsight.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 1 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🌳</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 6 · Day 1</div>
+  <div class="hero-title">Spelling Strategies<br>& Word Roots</div>
+  <div class="hero-subtitle">Root words · Prefixes · Suffixes · Building academic vocabulary · Spelling patterns</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and identification. Use your lesson notes if needed.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Vocabulary & Identification</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> A <strong>root word</strong> is the core part that carries the basic meaning — many English words come from the same Latin or Greek roots. Once you know the root <em>port</em> (to carry), you can work out <em>transport</em>, <em>export</em>, <em>portable</em>, and <em>report</em> without a dictionary.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Define each term and give one original example for each. <span class="marks">6 marks</span><br><br>root word · prefix · suffix</div>
+    <textarea class="q-input" placeholder="root word: definition + my own example&#10;prefix: definition + my own example&#10;suffix: definition + my own example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Root word:</strong> The core part of a word that carries the basic meaning, usually from Latin or Greek. Example: <em>struct</em> (to build) is the root in construct, instruct, and destruction. <strong>Prefix:</strong> A group of letters added to the BEGINNING of a root word to change its meaning. Example: <em>re-</em> + write = rewrite (to write again). <strong>Suffix:</strong> A group of letters added to the END of a root word, often changing its word class. Example: <em>hope</em> + <em>-less</em> = hopeless (turns a noun/verb into an adjective meaning without hope). Any correct, original examples are acceptable.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">The lesson teaches eight key roots. For each root below, write its meaning AND two words that contain it: <span class="marks">8 marks</span><br><br>a) <em>scrib / script</em> &nbsp; b) <em>dict</em> &nbsp; c) <em>port</em> &nbsp; d) <em>struct</em></div>
+    <textarea class="q-input" placeholder="a) scrib/script means: ___ → words: ___, ___&#10;b) dict means: ___ → words: ___, ___&#10;c) port means: ___ → words: ___, ___&#10;d) struct means: ___ → words: ___, ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <em>scrib/script</em> = <strong>to write</strong> → describe, manuscript, transcript, subscribe (any two). b) <em>dict</em> = <strong>to speak / say</strong> → predict, dictionary, contradict, dictate (any two). c) <em>port</em> = <strong>to carry</strong> → transport, export, portable, report (any two). d) <em>struct</em> = <strong>to build</strong> → construct, structure, instruct, destruction (any two).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Application. Use prefixes and suffixes to build and analyse words.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Prefixes, Suffixes & Spelling Patterns</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">The lesson explains that "in-" changes spelling to match the first letter of the root. Correct each misspelling below AND explain the spelling rule that applies: <span class="marks">6 marks</span><br><br>a) imposible &nbsp; b) dissapear &nbsp; c) iresponsible &nbsp; d) missunderstand &nbsp; e) ilegal &nbsp; f) irational</div>
+    <textarea class="q-input" placeholder="a) Correct spelling: ___ Rule: &#10;b) Correct spelling: ___ Rule: &#10;c) Correct spelling: ___ Rule: &#10;d) Correct spelling: ___ Rule: &#10;e) Correct spelling: ___ Rule: &#10;f) Correct spelling: ___ Rule: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>impossible</strong> — "in-" becomes "im-" before p, b, m; the root "possible" keeps its double-s. b) <strong>disappear</strong> — "dis-" has ONE s; don't double the first letter of the root (appear). c) <strong>irresponsible</strong> — "in-" becomes "ir-" before r, so you get a double r. d) <strong>misunderstand</strong> — "mis-" has only ONE s; no doubling needed. e) <strong>illegal</strong> — "in-" becomes "il-" before l, creating a double l. f) <strong>irrational</strong> — "in-" becomes "ir-" before r, creating a double r.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">The suffixes "-ful" and "-less" can give OPPOSITE meanings to the same root. For each root word below, create both the "-ful" and "-less" form, then explain how the meanings differ: <span class="marks">6 marks</span><br><br>a) hope &nbsp;&nbsp; b) care &nbsp;&nbsp; c) power</div>
+    <textarea class="q-input" placeholder="a) hopeful = ___ / hopeless = ___&#10;b) careful = ___ / careless = ___&#10;c) powerful = ___ / powerless = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>hopeful</strong> = full of hope, expecting good things / <strong>hopeless</strong> = without hope, a situation or person with no prospect of improvement. b) <strong>careful</strong> = giving attention and thought to avoid mistakes or harm / <strong>careless</strong> = not giving enough attention; acting without thought of consequences. c) <strong>powerful</strong> = having great strength, influence, or force / <strong>powerless</strong> = having no ability to influence or change a situation. Key rule: "-ful" adds ONE l (not "-full"); "-less" never doubles.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Using the lesson's 5-step method for building academic vocabulary, break down the word <em>"international"</em> and the word <em>"inflexible"</em>. Identify prefix + root + suffix for each, explain the meaning of each part, and write the combined definition. <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Subject link:</strong> This week's Science lesson uses "biodegradable" — can you break that word down using the same method? <em>bio</em> (life) + <em>degrad</em> (to break down) + <em>-able</em> (capable of).</div>
+    <textarea class="q-input" placeholder="international: prefix = ___ (meaning: ___) + root = ___ (meaning: ___) + suffix = ___ (meaning: ___)&#10;Combined meaning: &#10;&#10;inflexible: prefix = ___ + root = ___ + suffix = ___&#10;Combined meaning: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>international:</strong> prefix = <em>inter-</em> (between) + root = <em>nation</em> (a country/people) + suffix = <em>-al</em> (relating to). Combined: relating to or involving multiple nations/countries. <strong>inflexible:</strong> prefix = <em>in-</em> (not) + root = <em>flex</em> (to bend) + suffix = <em>-ible</em> (able to be). Combined: not able to be bent — and by extension, a person or rule that is unwilling or unable to change.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking. Write in full sentences.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Analysis & Extended Application</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">The lesson says "English spelling often does not match pronunciation exactly because words were borrowed from many different languages at different points in history." Using at least THREE examples from the lesson (or your own knowledge), explain why understanding etymology (the history of words) can make you a better speller — and a better reader of unfamiliar words. Write at least 5 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your extended response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Understanding etymology — the history and origin of words — is one of the most powerful spelling and vocabulary tools available to a KS3 student. First, it explains apparently strange spelling patterns: knowing that "definitely" contains the root <em>finite</em> (meaning limited or complete) helps you avoid the extremely common misspelling "definately" — because once you see the root, you know it is "finite" not "finate." Second, roots work across subjects: the lesson points out that <em>photo</em> (light) appears in both <em>photograph</em> (an image produced by light) and <em>photosynthesis</em> (making food using light) — knowing one root unlocks both. Third, understanding that "in-" changes to "im-" before certain letters (impossible, immovable) explains a whole class of spelling patterns at once rather than forcing you to memorise each word separately. Fourth, when you encounter an unfamiliar word like "circumnavigate," you can break it down: <em>circum</em> (around) + <em>navig</em> (to sail/steer) + <em>-ate</em> (to do) = to travel all the way around something — without ever having seen the word before. Etymology does not just help with spelling; it gives you genuine independence as a reader.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">The lesson's spelling strategy "Spot the Root" helps you avoid common errors. Choose THREE of the words below — for each one, (a) identify the root and its meaning, (b) explain what common misspelling the root knowledge prevents, and (c) write a correctly spelled sentence using the word. <span class="marks">6 marks</span><br><br><em>necessary · disappear · environment · government · separate</em></div>
+    <textarea class="q-input wide" placeholder="Word 1: ___&#10;(a) Root and meaning: &#10;(b) Misspelling it prevents:&#10;(c) Correct sentence: &#10;&#10;Word 2: ___&#10;(a) Root:&#10;(b) Misspelling it prevents:&#10;(c) Sentence: &#10;&#10;Word 3: ___&#10;..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>necessary</strong>: root <em>cedere</em> (to go/yield) — the prefix <em>ne-</em> means "not" + <em>cessare</em> (to stop). Memory aid: one Collar, two Sleeves (1 c, 2 s). Prevents "neccessary" or "necesary." Sentence: "It is necessary to show all working in a maths exam." <strong>disappear</strong>: prefix <em>dis-</em> (one s) + root <em>appear</em> (one p). Prevents "dissappear" (doubling both). Sentence: "The mist began to disappear as the sun rose." <strong>separate</strong>: contains the root <em>par</em> (equal/part). Memory tip: there is "a rat" in separate (sep-A-RAT-e). Prevents "seperate." Sentence: "Keep your draft and your final answer on separate pages."</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 1 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">💯</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 6 · Day 1</div>
+  <div class="hero-title">Decimals &<br>Percentages</div>
+  <div class="hero-subtitle">Fractions, decimals, percentages conversions · Finding a percentage of an amount · Real-life problems</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Key vocabulary and conversion facts to memorise. Use your lesson notes.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Vocabulary & Core Conversions</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Percentage</strong> comes from the Latin <em>per centum</em> — "out of one hundred." So 47% simply means 47 out of every 100. This is why converting a percentage to a decimal always means dividing by 100 (moving the decimal point two places LEFT).</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Complete the conversion table. Fill in every missing value: <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="1/2 = ___ (decimal) = ___ (%)&#10;1/4 = 0.25 = ___%&#10;3/4 = ___ = 75%&#10;1/5 = ___ = ___%&#10;1/10 = 0.1 = ___%&#10;1/3 = ___ = ___% (approx.)"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1/2 = <strong>0.5</strong> = <strong>50%</strong> | 1/4 = 0.25 = <strong>25%</strong> | 3/4 = <strong>0.75</strong> = 75% | 1/5 = <strong>0.2</strong> = <strong>20%</strong> | 1/10 = 0.1 = <strong>10%</strong> | 1/3 = <strong>0.333...</strong> = <strong>33.3%</strong> (approx.). Memorise the top five — they appear constantly in exam questions.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Convert each of the following. Show your method clearly. <span class="marks">6 marks</span><br><br>a) Convert 3/8 to a decimal.<br>b) Convert 0.45 to a percentage.<br>c) Convert 72% to a decimal.<br>d) Convert 0.6 to a fraction in its simplest form.<br>e) Convert 5/8 to a decimal.<br>f) Convert 0.375 to a percentage.</div>
+    <textarea class="q-input wide" placeholder="a) 3/8 → decimal: method: ___ answer: ___&#10;b) 0.45 → %: method: ___ answer: ___&#10;c) 72% → decimal: method: ___ answer: ___&#10;d) 0.6 → fraction: method: ___ answer: ___&#10;e) 5/8 → decimal: method: ___ answer: ___&#10;f) 0.375 → %: method: ___ answer: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 3 ÷ 8 = <strong>0.375</strong>. b) 0.45 × 100 = <strong>45%</strong>. c) 72 ÷ 100 = <strong>0.72</strong>. d) 0.6 = 6/10 = <strong>3/5</strong> (divide by 2). e) 5 ÷ 8 = <strong>0.625</strong>. f) 0.375 × 100 = <strong>37.5%</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Finding percentages of amounts using both methods from the lesson.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Finding Percentages & Real-Life Problems</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Find each percentage of an amount using Method A (decimal multiplier) AND check it using the 10% method. Show all working. <span class="marks">6 marks</span><br><br>a) 35% of 160 &nbsp;&nbsp; b) 65% of 220 &nbsp;&nbsp; c) 12% of 450</div>
+    <textarea class="q-input wide" placeholder="a) Method A: 0.35 × 160 = ___&#10;   10% check: 10% = ___, so 30% = ___, 5% = ___, total: ___&#10;&#10;b) Method A: ___&#10;   10% check: ___&#10;&#10;c) Method A: ___&#10;   10% check: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 0.35 × 160 = <strong>56</strong>. Check: 10% of 160 = 16; 30% = 48; 5% = 8; 35% = 48 + 8 = <strong>56 ✓</strong>. b) 0.65 × 220 = <strong>143</strong>. Check: 10% = 22; 60% = 132; 5% = 11; 65% = 132 + 11 = <strong>143 ✓</strong>. c) 0.12 × 450 = <strong>54</strong>. Check: 10% = 45; 2% = 9; 12% = 45 + 9 = <strong>54 ✓</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Solve each real-life problem. For each one, decide whether you need percentage INCREASE or DECREASE, show your calculation, and give a clear final answer with units. <span class="marks">6 marks</span><br><br>a) A pair of trainers costs £80. There is a 35% sale discount. What is the sale price?<br>b) A town has a population of 8,500. It grows by 6% in one year. What is the new population?<br>c) A mobile phone costs £240 but has been reduced by 15%. What is the new price?</div>
+    <textarea class="q-input wide" placeholder="a) Increase or decrease? ___ Calculation: ___ Final price: £___&#10;&#10;b) Increase or decrease? ___ Calculation: ___ New population: ___&#10;&#10;c) Increase or decrease? ___ Calculation: ___ New price: £___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Decrease.</strong> 35% of £80 = 0.35 × 80 = £28. Sale price = £80 − £28 = <strong>£52</strong>. b) <strong>Increase.</strong> 6% of 8,500 = 0.06 × 8,500 = 510. New population = 8,500 + 510 = <strong>9,010</strong>. c) <strong>Decrease.</strong> 15% of £240 = 0.15 × 240 = £36. New price = £240 − £36 = <strong>£204</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step percentage problems and the exam trap from the lesson.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step & Reasoning Problems</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">The lesson warns: "A 20% increase followed by a 20% decrease does NOT return you to the original amount." Prove this using the example of a £60 item. Show full working, explain WHY the final amount is not £60, and calculate exactly how much less (or more) it is. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Step 1 — 20% increase on £60:&#10;Step 2 — 20% decrease on the new price:&#10;Final amount: £___&#10;&#10;Explanation of WHY this is not £60:&#10;&#10;Difference from original: £___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Step 1 — 20% increase:</strong> 20% of £60 = £12. New price = £60 + £12 = <strong>£72</strong>. <strong>Step 2 — 20% decrease on £72:</strong> 20% of £72 = £14.40. Final price = £72 − £14.40 = <strong>£57.60</strong>. <strong>Difference from original:</strong> £60 − £57.60 = <strong>£2.40 less</strong>. <strong>Why?</strong> The second 20% is calculated on <em>£72</em>, not on the original £60. So the amount taken off (£14.40) is larger than the amount added on in step 1 (£12.00) — but because percentages are always calculated on the CURRENT value, the two 20%s are not working on the same base number. This is a favourite exam trap: never assume percentage increases and decreases cancel each other out.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A shopkeeper buys a jacket for £45 and sells it at a 40% profit. A customer then uses a loyalty card to get 15% off the selling price. (a) What is the selling price before the discount? (b) What does the customer actually pay? (c) What is the shopkeeper's actual profit per jacket? Show all steps clearly. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Selling price (40% profit on £45): ___&#10;(b) Customer pays (15% off selling price): ___&#10;(c) Shopkeeper's actual profit (customer pays − cost price): ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Selling price:</strong> 40% of £45 = £18. Selling price = £45 + £18 = <strong>£63</strong>. (b) <strong>Customer pays:</strong> 15% of £63 = £9.45. Customer pays = £63 − £9.45 = <strong>£53.55</strong>. (c) <strong>Shopkeeper's actual profit:</strong> £53.55 − £45 = <strong>£8.55 per jacket</strong>. Note: the shopkeeper's profit is much less than the 40% they originally added, because the discount was applied to the higher selling price.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">A student says: "To find 17.5% of £360, I can't do that in my head." Using the 10% mental shortcut method from the lesson, show them step-by-step how to calculate 17.5% of £360 WITHOUT a calculator. Then explain in one sentence why this method works. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="10% of £360 = ___&#10;5% = ___&#10;2% = ___&#10;0.5% = ___&#10;17.5% = 10% + 5% + 2% + 0.5% = ___&#10;&#10;Why this method works: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">10% of £360 = <strong>£36</strong>. 5% = half of 10% = <strong>£18</strong>. 2% = one fifth of 10% = <strong>£7.20</strong>. 0.5% = half of 1% = (1% = £3.60) → 0.5% = <strong>£1.80</strong>. 17.5% = £36 + £18 + £7.20 + £1.80 = <strong>£63</strong>. <strong>Why it works:</strong> Because percentages are proportional — 17.5% can always be broken into chunks (10% + 5% + 2% + 0.5%) that are easy to calculate separately, then added together to give the exact answer.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 1 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🕸️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 6 · Day 1</div>
+  <div class="hero-title">Ecosystems &<br>Food Webs</div>
+  <div class="hero-subtitle">Producers, consumers, decomposers · Food chains and food webs · Energy pyramids · Habitats</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary, roles, and basic food chains. Use your lesson notes.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Vocabulary & Organism Roles</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The arrows in a food chain do NOT mean "eats." They show the direction energy FLOWS. <em>Grass → Rabbit</em> means energy flows FROM the grass TO the rabbit (because the rabbit eats the grass and gains its energy). Always read an arrow as "is eaten by" or "provides energy for."</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Define each term and give one example organism for each. <span class="marks">6 marks</span><br><br>producer · primary consumer · secondary consumer · decomposer · predator · prey</div>
+    <textarea class="q-input wide" placeholder="producer: definition + example organism&#10;primary consumer: definition + example&#10;secondary consumer: definition + example&#10;decomposer: definition + example&#10;predator: definition + example&#10;prey: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Producer:</strong> Makes its own food via photosynthesis. Example: grass, trees, algae. <strong>Primary consumer:</strong> Eats producers directly (a herbivore). Example: rabbit, grasshopper, deer. <strong>Secondary consumer:</strong> Eats primary consumers. Example: fox, frog, small fish. <strong>Decomposer:</strong> Breaks down dead organisms and returns nutrients to soil. Example: fungi, bacteria, earthworms. <strong>Predator:</strong> An animal that hunts and eats other animals. Example: fox, eagle, shark. <strong>Prey:</strong> An animal that is hunted and eaten by a predator. Example: rabbit, mouse, deer.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Write out a complete food chain using these five organisms in the correct order. Then label each organism's role (producer / primary consumer / secondary consumer / tertiary consumer / decomposer): <span class="marks">5 marks</span><br><br><em>eagle · grass · mouse · fungi · fox</em></div>
+    <textarea class="q-input" placeholder="Correct food chain (with arrows): &#10;&#10;Labels: &#10;grass = &#10;mouse = &#10;fox = &#10;eagle = &#10;fungi = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Correct food chain: <strong>Grass → Mouse → Fox → Eagle → Fungi</strong> (decomposers break down the dead eagle at the end). Labels: grass = <strong>producer</strong>; mouse = <strong>primary consumer</strong>; fox = <strong>secondary consumer</strong>; eagle = <strong>tertiary consumer</strong>; fungi = <strong>decomposer</strong>. Note: the arrow means "energy flows to" — grass is eaten by the mouse, mouse by the fox, fox by the eagle. Fungi are not in the chain itself but break down all dead material.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">List THREE structures found in plant cells but NOT in animal cells, and explain why each is relevant to plants being producers. <span class="marks">3 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 2 Science — cell structure and the difference between plant and animal cells.</div>
+    <textarea class="q-input" placeholder="1. Structure: ___ Relevance to being a producer: &#10;2. Structure: ___ Relevance: &#10;3. Structure: ___ Relevance: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Chloroplasts</strong> — contain chlorophyll and are the site of photosynthesis; this is HOW a plant makes food from sunlight, CO₂, and water — the very reason it is called a producer. 2. <strong>Large permanent vacuole</strong> — stores water essential for photosynthesis and keeps the plant upright and turgid so leaves are presented to sunlight efficiently. 3. <strong>Cell wall</strong> — provides rigid support so the plant can stand upright, maximising leaf exposure to sunlight for photosynthesis.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Food webs, energy loss, and decomposers. Explain your reasoning.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Food Webs, Energy & Decomposers</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">The lesson says a food WEB is more realistic than a food chain. Explain why — what does a food chain fail to show that a food web reveals? Give a specific example of an animal that has more than one food source and explain how removing it would affect other organisms. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Why a food web is more realistic: &#10;&#10;Example animal with more than one food source: &#10;&#10;What would happen if it was removed: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">A food chain shows energy flowing in ONE straight line, suggesting each organism has only one food source and one predator. A food web shows the <strong>real, overlapping feeding relationships</strong> in an ecosystem — most animals eat several different things and are eaten by several different predators. For example, a <strong>fox</strong> eats both rabbits and mice; it is also eaten by larger predators and eventually decomposed by fungi. If foxes were removed, rabbit and mouse populations would increase dramatically (nothing controlling them), leading to overgrazing of grass and potential collapse of the plant layer. Removing one organism in a food web can trigger a cascade of effects throughout many others — which is why food webs, not food chains, give the more accurate picture.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">The lesson states that only about 10% of the energy at one level passes on to the next. (a) If a meadow of grass contains 10,000 kJ of energy, how much energy is available to rabbits? How much is available to foxes? How much to eagles? (b) Use this to explain why top predators are always FAR less numerous than producers. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Energy available to rabbits: ___kJ&#10;Energy available to foxes: ___kJ&#10;Energy available to eagles: ___kJ&#10;&#10;(b) Explanation of why top predators are less numerous: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Grass → rabbits: 10% of 10,000 = <strong>1,000 kJ</strong>. Rabbits → foxes: 10% of 1,000 = <strong>100 kJ</strong>. Foxes → eagles: 10% of 100 = <strong>10 kJ</strong>. (b) By the time you reach a top predator like an eagle, 99.9% of the original energy has been lost as heat at each stage of the food chain. An eagle must eat many foxes to get enough energy, those foxes must eat many rabbits, and those rabbits must eat enormous amounts of grass. The dramatic energy loss at each level means you need a very large base of producers to support even a small number of top predators. This is why a single field can have thousands of grass plants but support only one or two eagles — there simply is not enough energy available at the top to sustain large numbers.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">The lesson says "without decomposers, dead material would simply pile up forever, and nutrients could never be recycled." Explain exactly what decomposers do, and explain what would happen to producers (plants) if there were no decomposers in an ecosystem. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="What decomposers do:&#10;&#10;What would happen to producers without decomposers:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Decomposers (fungi, bacteria, earthworms) break down dead plants and animals and animal waste into simpler substances, releasing the nutrients — particularly nitrogen, carbon, and minerals — back into the soil. They are effectively nature's recycling system. Without decomposers, dead organisms would accumulate without breaking down; the nutrients locked inside dead material would remain unavailable. Producers (plants) obtain vital minerals from the soil through their roots — if those nutrients were never returned, soil fertility would rapidly decline. Plants would have less and less nitrogen and other essential minerals, photosynthesis and growth would slow, and the entire food web — which depends on healthy producers at its base — would begin to collapse. Every trophic level depends, ultimately, on the work of decomposers.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Habitats, analysis, and extended scientific thinking.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Analysis & Extended Science</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">7</div>
+    <div class="q-text">The lesson introduces four contrasting habitats: woodland, coral reef, desert, and polar/tundra. For each habitat, explain ONE way its physical conditions (climate, temperature, rainfall) directly shape its food web — specifically what producers are present and how short or long the food chains are. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Woodland:&#10;&#10;Coral reef:&#10;&#10;Desert:&#10;&#10;Polar / Tundra:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Woodland:</strong> Reliable rainfall and moderate temperatures support large, diverse trees as the dominant producers, providing food and shelter at multiple levels. Rich plant diversity supports a wide range of herbivores (insects, small mammals) and therefore a complex, multi-layered food web with many interconnected chains. <strong>Coral reef:</strong> Warm, shallow, well-lit tropical waters support photosynthetic algae and phytoplankton as producers, as well as corals (which contain photosynthetic algae). The exceptional biodiversity means very complex, interconnected food webs with enormous species richness — some of the most complex on Earth. <strong>Desert:</strong> Extreme heat, scarce water, and low rainfall mean very few producers can survive (mainly drought-adapted cacti and sparse scrub). Because the producer base is small, food chains are short and support relatively few, specialised consumers adapted to conserve water. <strong>Polar/Tundra:</strong> Freezing temperatures and long dark winters limit photosynthesis severely. The food chains are short and simple (algae → krill → fish → seals → polar bears) because only cold-adapted organisms can survive, and the harsh conditions limit the diversity of producers available to start longer chains.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">8</div>
+    <div class="q-text">"A food web is only as strong as its producers." Evaluate this statement using specific evidence from the lesson. Write at least 6 sentences and refer to at least ONE specific habitat. <span class="marks">6 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your evaluation here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This statement is strongly supported by the science of energy flow in ecosystems. Producers are the ONLY organisms that capture energy from the sun and make it available to all other trophic levels — without them, there is no energy entering the food web at all. Because only about 10% of energy transfers between each level, any reduction in the producer layer is amplified dramatically at higher levels: if the grass in a grassland habitat halves in energy content, the rabbit population does not halve — it collapses far more severely because foxes and eagles depend on many rabbits. In the polar/tundra habitat, the lesson notes how short food chains are (algae → krill → fish → seals → polar bears) — this is a direct consequence of how little energy the limited producer base can supply. If Arctic sea ice shrinks and reduces algae, the entire chain from krill upward is threatened. Even in highly biodiverse ecosystems like coral reefs, the photosynthetic algae living inside coral are the invisible foundation; when they die (coral bleaching), the entire reef ecosystem begins to collapse. The statement is therefore accurate: every trophic level's health, population size, and survival depends ultimately on the health, abundance, and productivity of its producers.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 1 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌍</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 6 · Day 1</div>
+  <div class="hero-title">World Regions —<br>Physical Geography</div>
+  <div class="hero-subtitle">Continents & oceans · Major landforms · Rivers · Comparing the Sahara and Amazon</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary, continents, oceans, and landforms. Use your lesson notes.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Vocabulary & Continents</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Continent</strong> and <strong>country</strong> are NOT the same thing. A continent is one of seven huge landmasses (e.g. Africa). A country is a political unit within a continent (e.g. Nigeria is a country within Africa). Australia is unique — it is both a continent AND a country.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Name all SEVEN continents in order from largest to smallest. For each one, give one notable geographic feature mentioned in the lesson. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. (Largest) Continent: ___ Notable feature: &#10;2. Continent: ___ Notable feature: &#10;3. Continent: ___ Notable feature: &#10;4. Continent: ___ Notable feature: &#10;5. Continent: ___ Notable feature: &#10;6. Continent: ___ Notable feature: &#10;7. (Smallest) Continent: ___ Notable feature: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Asia</strong> — Mount Everest, the world's highest peak at 8,849 m. 2. <strong>Africa</strong> — The Sahara, the world's largest hot desert. 3. <strong>North America</strong> — Stretches from Arctic to the tropics; enormous range of climates. 4. <strong>South America</strong> — The Amazon, the world's largest rainforest and largest river by volume. 5. <strong>Antarctica</strong> — Covered almost entirely by ice; no permanent human population. 6. <strong>Europe</strong> — Densely populated; many countries in a relatively small area. 7. <strong>Australia (Oceania)</strong> — Smallest continent; uniquely both a continent and an entire country. Memory aid: "People Always Invent Silly Acronyms" (Pacific, Atlantic, Indian, Southern, Arctic — the five oceans).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Match each landform to its correct definition, then give the lesson's record-breaking example for THREE of them: <span class="marks">5 marks</span><br><br><em>mountain · valley · desert · plain · plateau</em></div>
+    <textarea class="q-input wide" placeholder="mountain = &#10;valley = &#10;desert = &#10;plain = &#10;plateau = &#10;&#10;Record-breaking examples (3):&#10;1. &#10;2. &#10;3. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>mountain</strong> = land that rises sharply, far higher than surroundings — formed where plates collide. <strong>valley</strong> = low land between hills/mountains, often carved by a river. <strong>desert</strong> = a region with very low rainfall (NOT necessarily hot). <strong>plain</strong> = a large flat or gently rolling area, often fertile and used for farming. <strong>plateau</strong> = a large flat-topped area raised well above surrounding land. <strong>Three records:</strong> 1. Mount Everest — highest point on land (8,849 m), Nepal/Tibet. 2. The Sahara — largest hot desert (~9.2 million km²), North Africa. 3. The Andes — longest continental mountain range (~7,000 km), western South America. (Also acceptable: The Nile/Amazon, Pacific Ocean.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Rivers, early civilisations, and comparing contrasting regions.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Rivers, Civilisations & Contrasting Regions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson describes the four stages of a river's journey. For each stage, name it, describe what happens, and explain how the river changes between stages. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Stage 1 (Source): &#10;Stage 2 (Upper Course): &#10;Stage 3 (Middle & Lower Course): &#10;Stage 4 (Mouth/Delta): &#10;&#10;How does the river change from source to mouth?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Stage 1 — Source:</strong> River begins at a mountain spring, melting glacier, or lake high above sea level. <strong>Stage 2 — Upper course:</strong> Fast-flowing water cuts steep, narrow valleys through higher ground, eroding rock (V-shaped valleys). <strong>Stage 3 — Middle & lower course:</strong> River widens and slows on flatter land, forming large bends called meanders; it deposits fertile silt as it loses energy. <strong>Stage 4 — Mouth (delta/estuary):</strong> River reaches the sea, sometimes splitting into a fan-shaped delta, depositing the last of its sediment. <strong>Overall change:</strong> From fast, narrow, erosive, and steep — to wide, slow, depositional, and flat. Energy is lost as gradient decreases, which is why the lower course deposits rather than erodes.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">The lesson states: "Many of the world's earliest civilisations grew up along major rivers." Using what you know about Mesopotamia (Week 2), explain SPECIFICALLY why rivers were so important to early civilisations. Give at least THREE reasons. <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 2 History — Mesopotamia (Tigris & Euphrates) and Egypt (the Nile) — what role did these rivers play?</div>
+    <textarea class="q-input" placeholder="Reason 1: &#10;Reason 2: &#10;Reason 3: &#10;&#10;Specific example from Week 2:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Reason 1 — Fertile farmland:</strong> Rivers deposit nutrient-rich silt on their floodplains. In Egypt, the annual Nile flood left "Black Land" — extraordinarily fertile soil that could feed millions. <strong>Reason 2 — Water for irrigation:</strong> Rivers provided a reliable water source for irrigating crops even in dry seasons — the Mesopotamians developed complex canal systems to distribute river water across their fields. <strong>Reason 3 — Transport and trade:</strong> Rivers were natural highways — goods, people, and ideas moved efficiently along them. <strong>Reason 4 (bonus) — Natural defence:</strong> Living near a river with desert or marshland on other sides (like Egypt) provided natural protection from invasion. <strong>Week 2 example:</strong> "Egypt is the gift of the Nile" (Herodotus) — the predictable Nile flood created the agricultural stability that made Egyptian civilisation possible for 3,000 years.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">6</div>
+    <div class="q-text">The lesson compares the Sahara Desert and the Amazon Rainforest as two contrasting regions. Complete the comparison — for each aspect below, give specific details for BOTH regions: <span class="marks">6 marks</span><br><br>a) Rainfall &nbsp;&nbsp; b) Temperature characteristics &nbsp;&nbsp; c) Vegetation</div>
+    <textarea class="q-input" placeholder="a) Rainfall — Sahara: ___ Amazon: ___&#10;b) Temperature — Sahara: ___ Amazon: ___&#10;c) Vegetation — Sahara: ___ Amazon: ___&#10;&#10;The lesson's key teaching point about the word 'desert':"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Rainfall:</strong> Sahara — extremely low rainfall (less than 250 mm/year); in the driest areas, years may pass between storms. Amazon — extremely high rainfall; some areas receive over 2,000 mm/year, with rain falling almost daily. b) <strong>Temperature:</strong> Sahara — extreme range: daytime temperatures can exceed 45°C, but nights can be near freezing (no cloud cover or moisture to retain heat). Amazon — hot and humid year-round with relatively stable temperatures (typically 25–30°C), as cloud cover and moisture regulate extremes. c) <strong>Vegetation:</strong> Sahara — very sparse; mainly drought-adapted plants like cacti and thorn scrub. Amazon — the greatest biodiversity of any biome on Earth; dense multi-layered tropical rainforest. <strong>Key teaching point:</strong> "Desert" describes LOW RAINFALL, not heat — Antarctica is technically the largest desert on Earth (virtually no precipitation), despite being the coldest place on Earth.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended geographical analysis and cross-subject connections.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Analysis & Extended Geography</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">7</div>
+    <div class="q-text">The lesson connects physical geography to Science by noting that different habitats (Science Week 6) match different physical regions (Geography Week 6). Choose TWO physical regions from the lesson and for each one: (a) describe the physical conditions, (b) explain what kind of producers could survive there and why, and (c) explain how the energy pyramid would look different in each region. Write at least 4 sentences per region. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-subject connection:</strong> Science Day 1 — producers, energy pyramids, and how physical conditions shape food webs.</div>
+    <textarea class="q-input xwide" placeholder="Region 1 (name it): ___&#10;(a) Physical conditions:&#10;(b) What producers survive and why:&#10;(c) How the energy pyramid looks:&#10;&#10;Region 2 (name it): ___&#10;(a) Physical conditions:&#10;(b) What producers survive and why:&#10;(c) How the energy pyramid looks:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Region 1 — Amazon Rainforest (South America):</strong> (a) High rainfall (2,000+ mm/year), stable warm temperatures (25–30°C), abundant sunlight — near-ideal conditions for plant growth. (b) The diversity and abundance of producers is unmatched on Earth — dense, multi-layered forest from forest floor to tall canopy, with thousands of plant species. These conditions (warmth, moisture, sunlight) allow continuous, rapid photosynthesis year-round. (c) The energy pyramid has an extraordinarily wide base — enormous producer biomass supports a vast diversity of primary consumers (insects, birds, mammals), which in turn support many secondary and tertiary consumers. The pyramid is broad and has many layers, reflecting the exceptional biodiversity. <strong>Region 2 — Sahara Desert (North Africa):</strong> (a) Extremely low rainfall (sometimes none for years), extreme daytime heat exceeding 45°C, cold nights — conditions that almost no plant can survive without specialist adaptations. (b) Only drought-adapted producers survive — cacti, thorn scrub, and sparse ground plants with deep root systems or water-storage mechanisms. The producer base is thin and scattered. (c) The energy pyramid has a very narrow, fragile base; because so little plant material exists, very few primary consumers can be supported, and secondary and tertiary consumer populations are tiny. Short, simple food chains; large areas of desert support very few individual organisms at any level above producer.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">8</div>
+    <div class="q-text">Using latitude and longitude (Week 5 skills), Mount Everest sits at approximately 27.99°N, 86.93°E. (a) In which hemisphere (N/S and E/W) is it located? (b) Which continent does this place it on? (c) Explain what the coordinates tell us about its approximate position — roughly how far from the equator and prime meridian? (d) Why is understanding location through coordinates more precise than saying "it is in Asia"? <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 5 Geography — latitude, longitude, and how to read coordinates.</div>
+    <textarea class="q-input" placeholder="(a) Hemisphere (N or S, E or W): &#10;(b) Continent: &#10;(c) Approximate position from equator and prime meridian: &#10;(d) Why coordinates are more precise than just 'Asia': "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Mount Everest is in the <strong>Northern Hemisphere</strong> (27.99°N is north of the equator) and the <strong>Eastern Hemisphere</strong> (86.93°E is east of the prime meridian). (b) It is on the continent of <strong>Asia</strong>, on the border between Nepal and Tibet/China. (c) 27.99°N means it is approximately 28 degrees north of the equator — roughly a third of the way from equator to North Pole, placing it in the subtropical/temperate zone. 86.93°E means it is approximately 87 degrees east of the prime meridian (which passes through Greenwich, London), placing it deep in central/south Asia. (d) Saying "it is in Asia" is imprecise because Asia covers roughly 44 million km² — spanning from Turkey to Japan, from Russia to Indonesia. Coordinates give an exact, unique location on Earth's surface that anyone with a map or GPS can find immediately, without ambiguity. Every other location description is approximate; coordinates are exact.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 1</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init("KS3_L6_Week6_Day1");</script>
+</body>
+</html>

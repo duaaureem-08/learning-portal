@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 — Day 4 Mixed Revision · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}.logo span{color:var(--science);}
+.day-badge{background:#EDE9FE;color:#5B21B6;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #7C3AED;margin-right:8px;}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;background:linear-gradient(135deg,#1E1B4B,#4338CA);}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-30px;right:60px;width:120px;height:120px;background:rgba(255,255,255,0.07);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.4rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:520px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.2;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.section-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:99px;color:white;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:18px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){background:#F3F4F6;}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;color:white;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;margin-top:6px;}
+.open-box:focus{outline:none;border-color:#7C3AED;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;color:white;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn:hover{transform:scale(1.05);}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.ok{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.bad{background:#FEE2E2;border-color:#DC2626;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:#F3F4F6;color:#374151;transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:#E5E7EB;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.progress-wrap{background:#E5E7EB;border-radius:99px;height:10px;margin:8px 0;}
+.progress-bar{height:10px;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#2563EB,#059669,#D97706,#DB2777);transition:width 0.8s ease;width:0%;}
+.esl-box{background:#FFFBEB;border:2px solid #FCD34D;border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0;font-size:0.88rem;line-height:1.6;}
+.esl-box strong{color:#92400E;}
+.subject-strip{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--radius-sm);margin-bottom:14px;color:white;font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.score-display{background:linear-gradient(135deg,#1E1B4B,#4338CA);border-radius:var(--radius);padding:24px;text-align:center;color:white;margin-bottom:24px;}
+.score-display .big-num{font-family:'Fredoka One',cursive;font-size:3rem;line-height:1;}
+.score-display .sub{font-size:0.9rem;opacity:0.8;margin-top:4px;}
+@media(max-width:600px){.hero-title{font-size:1.7rem;}.hero-emoji{display:none;}.card{padding:16px;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">🌟 Day 4 — Mixed Revision</span>
+</div>
+
+<!-- SINGLE PAGE — all subjects in one scroll -->
+<div style="padding:30px 20px 80px;max-width:960px;margin:0 auto;">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-type">🌟 Day 4 — Mixed Revision</div>
+    <div class="hero-week">📚 All 5 Subjects · Week 6 · KS2 Level 3</div>
+    <div class="hero-title">End-of-Week<br>Mixed Revision</div>
+    <div class="hero-sub">Bible · English · Maths · Science · Humanities — all in one big quiz. How much have you learned this week?</div>
+    <div class="hero-emoji">🏆</div>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…" id="student-name"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Total Score</label><input type="text" placeholder="— / 50" id="total-score-field" readonly></div>
+  </div>
+
+  <!-- SCORE TRACKER -->
+  <div class="score-display">
+    <div style="font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;">Your Progress</div>
+    <div class="big-num" id="live-score">0</div>
+    <div class="sub">questions answered correctly</div>
+    <div style="margin-top:14px;background:rgba(255,255,255,0.15);border-radius:99px;height:12px;overflow:hidden;">
+      <div id="main-progress" style="height:12px;border-radius:99px;background:linear-gradient(90deg,#F59E0B,#34D399,#60A5FA);width:0%;transition:width 0.6s ease;"></div>
+    </div>
+    <div style="margin-top:6px;font-size:0.8rem;opacity:0.75;" id="main-prog-label">Complete all sections below</div>
+  </div>
+
+  <div class="esl-box">
+    🌍 <strong>ESL Reminder:</strong> Take your time. You can press 🔊 on any question to hear it read aloud. All key words are explained — use what you have learned this week!
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECTION 1 — BIBLE
+  ══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">📖 Bible — Joseph &amp; Forgiveness <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:12px;">1. Match the word to its meaning: <button class="audio-btn" onclick="speak('Match each Bible word to its correct definition.')">🔊</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--bible);">Word</th><th style="background:var(--bible);">Definition — write A, B, C, D or E</th></tr>
+      <tr><td><strong>Jealous</strong></td><td><input class="fill-in" data-ans="C" id="bvm-0" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Forgive</strong></td><td><input class="fill-in" data-ans="A" id="bvm-1" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Pharaoh</strong></td><td><input class="fill-in" data-ans="E" id="bvm-2" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Dream</strong></td><td><input class="fill-in" data-ans="D" id="bvm-3" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Legacy</strong></td><td><input class="fill-in" data-ans="B" id="bvm-4" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+    </table>
+    <div style="background:var(--bible-l);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;font-weight:700;">
+      A — To stop being angry with someone who hurt you &nbsp;|&nbsp;
+      B — Something great left behind for future generations &nbsp;|&nbsp;
+      C — Feeling angry because someone has something you want &nbsp;|&nbsp;
+      D — A picture seen while sleeping; God spoke to Joseph this way &nbsp;|&nbsp;
+      E — The king of Egypt who gave Joseph an important job
+    </div>
+    <div style="margin-bottom:14px;"><button class="btn" style="background:var(--bible);" onclick="checkBibleVocab()">Check vocab ✅</button></div>
+    <div id="bib-vocab-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">2. Bible MCQ Quiz: <button class="audio-btn" onclick="speak('Answer each Bible question. Press Next to move forward.')">🔊</button></p>
+    <div id="bible-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextMix('bible')">Next ➡️</button>
+      <span id="bible-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:8px;">3. Short written response — write 2–3 sentences:</p>
+    <p style="font-size:0.88rem;margin-bottom:8px;">Joseph suffered greatly — sold as a slave, put in prison — yet he said "God intended it for good." How does this encourage YOU when life feels unfair?
+      <button class="audio-btn" onclick="speak('Think about what Joseph said in Genesis 50:20. How can trusting God help when things go wrong?')">🔊 hint</button>
+    </p>
+    <textarea class="open-box" placeholder="The story of Joseph encourages me because…"></textarea>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECTION 2 — ENGLISH
+  ══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--english-d),var(--english));">✏️ English — Spelling Rules &amp; Suffixes <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">4. Add the suffix -ing using the correct rule: <button class="audio-btn" onclick="speak('Remember the four rules. Rule 1: just add. Rule 2: short vowel, double the consonant. Rule 3: drop the silent e. Rule 4: change y to i.')">🔊 Rules hint</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--english);">Root word</th><th style="background:var(--english);">+ ing = ?</th><th style="background:var(--english);">Rule (1/2/3/4)</th></tr>
+      <tr><td><strong>walk</strong></td>
+        <td><input class="fill-in" data-ans="walking" id="suf-0" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="1" id="suf-r0" placeholder="?" style="width:70px;"></td></tr>
+      <tr><td><strong>sit</strong></td>
+        <td><input class="fill-in" data-ans="sitting" id="suf-1" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="2" id="suf-r1" placeholder="?" style="width:70px;"></td></tr>
+      <tr><td><strong>write</strong></td>
+        <td><input class="fill-in" data-ans="writing" id="suf-2" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="3" id="suf-r2" placeholder="?" style="width:70px;"></td></tr>
+      <tr><td><strong>carry</strong></td>
+        <td><input class="fill-in" data-ans="carrying" id="suf-3" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="4" id="suf-r3" placeholder="?" style="width:70px;"></td></tr>
+    </table>
+    <div style="margin:10px 0;"><button class="btn" style="background:var(--english);" onclick="checkSuffixes()">Check ✅</button></div>
+    <div id="suf-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">5. Spelling MCQ — choose the correctly spelled word: <button class="audio-btn" onclick="speak('Look carefully at each option. Only one is spelled correctly.')">🔊</button></p>
+    <div id="eng-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextMix('eng')">Next ➡️</button>
+      <span id="eng-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">6. Exception word challenge — use THREE of these words correctly in sentences:</p>
+    <div style="background:var(--english-l);border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:0.85rem;font-weight:700;">
+      accident · bicycle · believe · breathe · build · busy · caught · certain · different · complete
+    </div>
+    <textarea class="open-box" placeholder="1. ___&#10;2. ___&#10;3. ___"></textarea>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECTION 3 — MATHS
+  ══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">🔢 Maths — Division <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">7. Quick division facts: <button class="audio-btn" onclick="speak('Use your times tables backwards to find each answer.')">🔊</button></p>
+    <div id="maths-fast-grid"></div>
+    <div style="margin:10px 0;display:flex;gap:10px;"><button class="btn" style="background:var(--maths);" onclick="checkFastMaths()">Check All ✅</button></div>
+    <div id="fast-maths-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">8. Division word problems — show your working:</p>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <div style="font-weight:800;margin-bottom:8px;">🍎 Problem A: A fruit seller has 72 apples. He packs them equally into bags of 8. How many bags does he fill?</div>
+        <textarea class="open-box" style="min-height:60px;" placeholder="Number sentence: 72 ÷ 8 = ___&#10;Answer: ___ bags"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <div style="font-weight:800;margin-bottom:8px;">📚 Problem B: 90 books are put into groups of 10. How many groups are there? Write the COMPLETE fact family for the answer.</div>
+        <textarea class="open-box" style="min-height:80px;" placeholder="90 ÷ 10 = ___&#10;&#10;Fact family:&#10;___ × ___ = ___&#10;___ × ___ = ___&#10;___ ÷ ___ = ___&#10;___ ÷ ___ = ___"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <div style="font-weight:800;margin-bottom:8px;">❓ Problem C: Find the missing number → ___ ÷ 6 = 7. Show how you used the INVERSE to find it.</div>
+        <textarea class="open-box" style="min-height:60px;" placeholder="Inverse: 7 × 6 = ___&#10;So the missing number is: ___"></textarea>
+      </div>
+    </div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">9. Maths MCQ:</p>
+    <div id="maths-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMix('maths')">Next ➡️</button>
+      <span id="maths-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECTION 4 — SCIENCE
+  ══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--science-d),var(--science));">🥗 Science — Nutrition <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">10. Nutrition fill-in: <button class="audio-btn" onclick="speak('Think about what each food group does. Carbohydrates give energy. Protein builds and repairs. Dairy has calcium for bones. Fruits and vegetables give vitamins.')">🔊 reminder</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--science);">Food</th><th style="background:var(--science);">Food Group</th><th style="background:var(--science);">Main benefit</th></tr>
+      <tr><td>🍞 Bread</td>
+        <td><input class="fill-in" data-ans="carbohydrate" id="food-0" placeholder="food group?" style="width:140px;"></td>
+        <td><input class="fill-in" data-ans="energy" id="food-b0" placeholder="it gives…" style="width:120px;"></td></tr>
+      <tr><td>🥚 Eggs</td>
+        <td><input class="fill-in" data-ans="protein" id="food-1" placeholder="food group?" style="width:140px;"></td>
+        <td><input class="fill-in" data-ans="growth and repair" id="food-b1" placeholder="it gives…" style="width:140px;"></td></tr>
+      <tr><td>🍊 Orange</td>
+        <td><input class="fill-in" data-ans="fruit and veg" id="food-2" placeholder="food group?" style="width:140px;"></td>
+        <td><input class="fill-in" data-ans="vitamins" id="food-b2" placeholder="it gives…" style="width:120px;"></td></tr>
+      <tr><td>🧀 Cheese</td>
+        <td><input class="fill-in" data-ans="dairy" id="food-3" placeholder="food group?" style="width:140px;"></td>
+        <td><input class="fill-in" data-ans="calcium" id="food-b3" placeholder="it gives…" style="width:120px;"></td></tr>
+    </table>
+    <div style="margin:10px 0;"><button class="btn" style="background:var(--science);" onclick="checkFoodTable()">Check ✅</button></div>
+    <div id="food-table-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">11. Science MCQ:</p>
+    <div id="sci-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="nextMix('sci')">Next ➡️</button>
+      <span id="sci-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">12. Written response: A friend says "I am eating healthily — I only eat vegetables all day." Explain politely what is MISSING from their diet and why. Use at least TWO food groups and TWO nutrients in your answer.</p>
+    <textarea class="open-box" placeholder="My friend is doing well by eating vegetables, but they are missing…"></textarea>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SECTION 5 — HUMANITIES
+  ══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--social);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--social-d),var(--social));">🌍 Humanities — Ancient Egypt <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">13. Egypt fill-in: <button class="audio-btn" onclick="speak('Think about papyrus, scribes, hieroglyphics, irrigation, silt and the Nile River.')">🔊 reminder</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--social);">Clue</th><th style="background:var(--social);">Answer</th></tr>
+      <tr><td>The ancient Egyptian writing system using 700+ picture-symbols</td>
+        <td><input class="fill-in" data-ans="hieroglyphics" id="eg-0" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>A Nile plant used to make early paper — lighter than stone</td>
+        <td><input class="fill-in" data-ans="papyrus" id="eg-1" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>A trained writer of hieroglyphics — a very respected job</td>
+        <td><input class="fill-in" data-ans="scribe" id="eg-2" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>Rich dark soil left behind after the Nile flooded</td>
+        <td><input class="fill-in" data-ans="silt" id="eg-3" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>Water channels from the Nile to dry fields</td>
+        <td><input class="fill-in" data-ans="irrigation" id="eg-4" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>Egyptians used this from flowers to heal wounds</td>
+        <td><input class="fill-in" data-ans="honey" id="eg-5" placeholder="?" style="width:180px;"></td></tr>
+    </table>
+    <div style="margin:10px 0;"><button class="btn" style="background:var(--social);" onclick="checkEgyptFill()">Check ✅</button></div>
+    <div id="egypt-fill-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">14. Humanities MCQ:</p>
+    <div id="soc-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="nextMix('soc')">Next ➡️</button>
+      <span id="soc-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">15. EXTENDED RESPONSE: Choose ONE achievement of ancient Egypt and explain why it was important THEN and why it STILL matters today. Write at least 4 sentences.
+      <button class="audio-btn" onclick="speak('Choose one: writing and hieroglyphics, medicine and honey, or farming and irrigation. Explain what it was, why it helped Egyptians, and how we still use it or benefit from it today.')">🔊 hint</button>
+    </p>
+    <textarea class="open-box" style="min-height:110px;" placeholder="I have chosen: ___&#10;&#10;In ancient Egypt, this was important because…&#10;&#10;Today it still matters because…"></textarea>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MIXED TRUE / FALSE — ALL SUBJECTS
+  ══════════════════════════════════════ -->
+  <div class="card" style="--accent:#4338CA;border-left-color:#4338CA;">
+    <div class="subject-strip" style="background:linear-gradient(135deg,#1E1B4B,#4338CA);">🔀 Mixed True or False — All 5 Subjects <span class="marks" style="margin-left:auto;">10 marks</span></div>
+    <div id="mixed-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:#4338CA;" onclick="checkMixedTF()">Check All ✅</button></div>
+    <div id="mixed-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <!-- FINAL SCORE -->
+  <div class="card" style="--accent:#F59E0B;border-left-color:#F59E0B;text-align:center;">
+    <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#92400E;margin-bottom:10px;">🏆 Submit &amp; See Your Total Score</div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:16px;">Press the button to count your auto-marked answers and see how you did this week!</p>
+    <button class="btn" style="background:linear-gradient(135deg,#D97706,#7C3AED);font-size:1.05rem;padding:14px 32px;" onclick="calcFinalScore()">Calculate My Score 🎉</button>
+    <div id="final-score-box" style="margin-top:20px;display:none;padding:20px;border-radius:var(--radius);background:linear-gradient(135deg,#EDE9FE,#D1FAE5);">
+      <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:#1E1B4B;margin-bottom:6px;">Great work this week, <span id="final-name">learner</span>! 🌟</div>
+      <div id="final-score-text" style="font-size:1rem;color:#374151;font-weight:700;line-height:1.7;"></div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+function speak(text){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+// ── SCORE TRACKER ─────────────────────────────────────────────────────────
+let totalAutoScore=0;
+const MAX_AUTO=30; // vocab + suffix + fast maths + food table + egypt fill + TF
+function updateProgress(){
+  const bar=document.getElementById('main-progress');
+  const lbl=document.getElementById('main-prog-label');
+  const sc=document.getElementById('live-score');
+  if(bar)bar.style.width=(totalAutoScore/MAX_AUTO*100)+'%';
+  if(sc)sc.textContent=totalAutoScore;
+  if(lbl)lbl.textContent=`${totalAutoScore} auto-marked answers correct so far`;
+}
+
+// ── BIBLE VOCAB ───────────────────────────────────────────────────────────
+function checkBibleVocab(){
+  const keys=['C','A','E','D','B'];
+  let s=0;
+  keys.forEach((ans,i)=>{
+    const el=document.getElementById('bvm-'+i);
+    if(!el)return;
+    if(el.value.trim().toUpperCase()===ans){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('bib-vocab-result');
+  res.style.display='block';
+  if(s===5){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 5/5 correct! +5 to score`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/5 correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── SUFFIX TABLE ──────────────────────────────────────────────────────────
+function checkSuffixes(){
+  const expected=[
+    {id:'suf-0',ans:'walking'},{id:'suf-r0',ans:'1'},
+    {id:'suf-1',ans:'sitting'},{id:'suf-r1',ans:'2'},
+    {id:'suf-2',ans:'writing'},{id:'suf-r2',ans:'3'},
+    {id:'suf-3',ans:'carrying'},{id:'suf-r3',ans:'4'},
+  ];
+  let s=0;
+  expected.forEach(e=>{
+    const el=document.getElementById(e.id);
+    if(!el)return;
+    if(el.value.trim().toLowerCase()===e.ans.toLowerCase()){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('suf-result');
+  res.style.display='block';
+  if(s===8){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 8/8 correct! Perfect suffix skills!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/8 correct. Review the four rules!`;}
+  totalAutoScore+=Math.floor(s/2);updateProgress();
+}
+
+// ── FAST MATHS ────────────────────────────────────────────────────────────
+const fastSums=[
+  {q:'18 ÷ 3',ans:6},{q:'40 ÷ 8',ans:5},{q:'35 ÷ 5',ans:7},
+  {q:'60 ÷ 10',ans:6},{q:'24 ÷ 4',ans:6},{q:'56 ÷ 7',ans:8},
+  {q:'72 ÷ 9',ans:8},{q:'48 ÷ 6',ans:8},{q:'27 ÷ 3',ans:9},{q:'100 ÷ 10',ans:10},
+];
+function buildFastMaths(){
+  const area=document.getElementById('maths-fast-grid');
+  if(!area)return;
+  area.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;">
+    ${fastSums.map((s,i)=>`<div style="background:var(--maths-l);border-radius:10px;padding:12px;text-align:center;">
+      <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:6px;">${s.q} = ?</div>
+      <input type="number" id="fm-${i}" style="width:80px;padding:7px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;text-align:center;" placeholder="?">
+    </div>`).join('')}
+  </div>`;
+}
+buildFastMaths();
+function checkFastMaths(){
+  let s=0;
+  fastSums.forEach((sum,i)=>{
+    const el=document.getElementById('fm-'+i);
+    if(!el)return;
+    if(parseInt(el.value)===sum.ans){s++;el.style.borderColor='#059669';el.style.background='#D1FAE5';}
+    else{el.style.borderColor='#DC2626';el.style.background='#FEE2E2';}
+  });
+  const res=document.getElementById('fast-maths-result');
+  res.style.display='block';
+  if(s===fastSums.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${s}/${fastSums.length} correct! Times tables master!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/${fastSums.length} correct. Keep practising those tables!`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── FOOD TABLE ────────────────────────────────────────────────────────────
+function checkFoodTable(){
+  const expected=[
+    {id:'food-0',ans:'carbohydrate'},{id:'food-b0',ans:'energy'},
+    {id:'food-1',ans:'protein'},{id:'food-b1',ans:'growth'},
+    {id:'food-2',ans:'fruit'},{id:'food-b2',ans:'vitamin'},
+    {id:'food-3',ans:'dairy'},{id:'food-b3',ans:'calcium'},
+  ];
+  let s=0;
+  expected.forEach(e=>{
+    const el=document.getElementById(e.id);
+    if(!el)return;
+    const val=el.value.trim().toLowerCase();
+    if(val.includes(e.ans)){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('food-table-result');
+  res.style.display='block';
+  if(s>=6){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ ${s}/8 correct! Great nutrition knowledge!`;if(s===8)celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/8 correct. Review the 5 food groups!`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── EGYPT FILL ────────────────────────────────────────────────────────────
+function checkEgyptFill(){
+  const expected=[
+    {id:'eg-0',ans:'hieroglyphic'},
+    {id:'eg-1',ans:'papyrus'},
+    {id:'eg-2',ans:'scribe'},
+    {id:'eg-3',ans:'silt'},
+    {id:'eg-4',ans:'irrigation'},
+    {id:'eg-5',ans:'honey'},
+  ];
+  let s=0;
+  expected.forEach(e=>{
+    const el=document.getElementById(e.id);
+    if(!el)return;
+    if(el.value.trim().toLowerCase().includes(e.ans)){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('egypt-fill-result');
+  res.style.display='block';
+  if(s===6){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 6/6 correct! You know your Egypt!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/6 correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── MCQ QUIZZES ───────────────────────────────────────────────────────────
+const mixQuizzes={
+  bible:[
+    {q:"Who sold Joseph to merchants going to Egypt?",opts:["Pharaoh","His brothers","His father Jacob","The serpent"],ans:1,exp:"His jealous brothers sold him."},
+    {q:"What gift from God did Joseph have?",opts:["Great strength","Explaining dreams","Building pyramids","Running fast"],ans:1,exp:"God gave Joseph the ability to explain dreams."},
+    {q:"What job did Pharaoh give Joseph?",opts:["Head scribe","Head soldier","Second-most-powerful ruler","Royal cook"],ans:2,exp:"Pharaoh made Joseph the second most powerful person in Egypt."},
+    {q:"Genesis 50:20 says God intended Joseph's suffering for ___.",opts:["punishment","nothing","good","justice"],ans:2,exp:"'God intended it for good.' — Genesis 50:20"},
+    {q:"Joseph wept when he finally saw his brothers. What did he do next?",opts:["Punished them","Hid from them","Forgave them","Sent them away"],ans:2,exp:"Joseph forgave his brothers with tears and joy."},
+  ],
+  eng:[
+    {q:"'Hop' + ing = ?",opts:["hoping","hopeing","hopping","hopking"],ans:2,exp:"Rule 2: short vowel + 1 consonant → double: hopping."},
+    {q:"'Bake' + ed = ?",opts:["bakeed","baked","bakkeed","bakied"],ans:1,exp:"Rule 3: drop the silent e: baked."},
+    {q:"'Happy' + est = ?",opts:["happyest","happiest","happyiest","hapiest"],ans:1,exp:"Rule 4: consonant + y → change y to i: happiest."},
+    {q:"Which is an exception word?",opts:["jump","fast","bicycle","play"],ans:2,exp:"'Bicycle' doesn't follow normal rules — learn it by heart!"},
+    {q:"What does the suffix -er do to the word 'fast'?",opts:["Turns it into a noun","Turns it into a verb","Makes it a comparison — faster means more fast","Removes the meaning"],ans:2,exp:"Fast + er = faster — a comparative adjective."},
+  ],
+  maths:[
+    {q:"What is 63 ÷ 9?",opts:["6","7","8","9"],ans:1,exp:"9 × 7 = 63, so 63 ÷ 9 = 7."},
+    {q:"In 48 ÷ 6 = 8, what is the dividend?",opts:["6","8","48","Both 6 and 8"],ans:2,exp:"The dividend is the BIG number being divided: 48."},
+    {q:"Which fact is in the same family as 8 × 5 = 40?",opts:["40 + 8 = 48","40 ÷ 8 = 5","5 + 8 = 13","40 − 5 = 35"],ans:1,exp:"40 ÷ 8 = 5 is in the fact family of 8 × 5 = 40."},
+    {q:"___ ÷ 4 = 9. What is the missing number?",opts:["13","36","45","32"],ans:1,exp:"Inverse: 9 × 4 = 36."},
+    {q:"How do you CHECK a division answer?",opts:["Subtract the divisor","Add the quotient","Multiply the quotient by the divisor","Divide again"],ans:2,exp:"Quotient × divisor = dividend. That's the check!"},
+  ],
+  sci:[
+    {q:"Which food group gives the body ENERGY?",opts:["Protein","Dairy","Carbohydrates","Fats"],ans:2,exp:"Carbohydrates (bread, rice, pasta) give us energy."},
+    {q:"Protein is best for:",opts:["Energy","Strong bones","Growth and repair of muscles","Giving vitamins"],ans:2,exp:"Protein builds and repairs the body."},
+    {q:"What does calcium mainly help build?",opts:["Blood cells","Muscles","Strong bones and teeth","Eyes"],ans:2,exp:"Calcium (from dairy foods) builds strong bones and teeth."},
+    {q:"Which food provides the most vitamins?",opts:["White bread","Butter","Chicken","Broccoli and oranges"],ans:3,exp:"Fruits and vegetables are the best source of vitamins."},
+    {q:"Why is drinking water important?",opts:["It gives us protein","It helps all body functions and prevents dehydration","It builds our muscles","It gives us calcium"],ans:1,exp:"Water keeps the body working well — 6 to 8 glasses a day!"},
+  ],
+  soc:[
+    {q:"What did Egyptian scribes do?",opts:["Built pyramids","Read and wrote hieroglyphics","Farmed the land","Treated the sick"],ans:1,exp:"Scribes were trained writers — they kept records for Egypt."},
+    {q:"What is silt?",opts:["A type of stone","Dark rich soil left by Nile floods","A writing tool","An Egyptian boat"],ans:1,exp:"The Nile flooded each year and left behind rich silt — perfect for farming."},
+    {q:"Egyptian doctors used honey to:",opts:["Write on papyrus","Clean and heal wounds","Make bread","Dye clothes"],ans:1,exp:"Honey was used to keep wounds clean — it kills bacteria!"},
+    {q:"How many symbols did hieroglyphics have?",opts:["26","100","Over 700","Exactly 365"],ans:2,exp:"Hieroglyphics used over 700 picture-symbols."},
+    {q:"What is a legacy?",opts:["An Egyptian boat","Something great left behind for future generations","The Nile flood season","A type of writing tool"],ans:1,exp:"A legacy is what great civilisations leave behind for us to use today."},
+  ]
+};
+
+const mixState={};
+['bible','eng','maths','sci','soc'].forEach(key=>{
+  mixState[key]={idx:0,score:0};
+  renderMixQ(key);
+});
+
+function renderMixQ(key){
+  const qs=mixQuizzes[key];
+  const st=mixState[key];
+  const q=qs[st.idx];
+  const area=document.getElementById(key+'-mix-quiz');
+  if(!area)return;
+  if(!q){
+    area.innerHTML=`<div style="padding:14px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Quiz done! ${st.score}/${qs.length} correct!</div>`;
+    if(st.score===qs.length)celebrate();
+    return;
+  }
+  area.innerHTML=`<div class="quiz-box">
+    <div class="quiz-q">Q${st.idx+1} of ${qs.length}: ${q.q} <button class="audio-btn" onclick="speak('${q.q.replace(/'/g,"\\'")}')">🔊</button></div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerMix('${key}',${i})">${o}</button>`).join('')}</div>
+    <div id="${key}-mix-fb" class="quiz-feedback"></div>
+  </div>`;
+  const sc=document.getElementById(key+'-mix-score');
+  if(sc)sc.textContent=`Score: ${st.score}/${st.idx}`;
+}
+
+function answerMix(key,i){
+  const q=mixQuizzes[key][mixState[key].idx];
+  const opts=document.querySelectorAll(`#${key}-mix-quiz .quiz-opt`);
+  opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-mix-fb');
+  fb.style.display='block';
+  if(i===q.ans){
+    mixState[key].score++;
+    totalAutoScore++;updateProgress();
+    fb.style.background='#D1FAE5';fb.style.color='#065F46';
+    fb.textContent='✅ Correct! '+q.exp;
+  } else {
+    opts[i].classList.add('wrong');
+    fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';
+    fb.textContent=`❌ The answer is: ${q.opts[q.ans]}. ${q.exp}`;
+  }
+  const sc=document.getElementById(key+'-mix-score');
+  if(sc)sc.textContent=`Score: ${mixState[key].score}/${mixState[key].idx+1}`;
+}
+function nextMix(key){mixState[key].idx++;renderMixQ(key);}
+
+// ── MIXED TF ──────────────────────────────────────────────────────────────
+const mixedTF=[
+  {sub:'📖 Bible',s:"Joseph's brothers were jealous because Jacob gave him a special coat of many colours.",ans:true},
+  {sub:'📖 Bible',s:'When Joseph became powerful in Egypt, he punished his brothers for selling him.',ans:false,c:'Joseph FORGAVE his brothers — he wept and said God meant it for good.'},
+  {sub:'✏️ English',s:'To add -ing to "run", you write "running" — doubling the n (Rule 2).',ans:true},
+  {sub:'✏️ English',s:'Exception words always follow one of the four suffix rules.',ans:false,c:'Exception words do NOT follow normal rules — they must be learned by heart!'},
+  {sub:'🔢 Maths',s:'54 ÷ 6 = 9',ans:true},
+  {sub:'🔢 Maths',s:'The quotient is the number you divide BY.',ans:false,c:'The quotient is the ANSWER. The number you divide by is the divisor.'},
+  {sub:'🥗 Science',s:'Carbohydrates are the main source of energy for the body.',ans:true},
+  {sub:'🥗 Science',s:'A balanced diet means eating ONLY protein foods every day.',ans:false,c:'A balanced diet means eating the right amounts from ALL 5 food groups.'},
+  {sub:'🌍 Humanities',s:'Egyptian farmers used irrigation channels to carry water from the Nile to dry fields.',ans:true},
+  {sub:'🌍 Humanities',s:'Hieroglyphics was easy to learn because it only had 26 symbols.',ans:false,c:'Hieroglyphics had over 700 symbols — it took scribes many years to master!'},
+];
+
+function buildMixedTF(){
+  const area=document.getElementById('mixed-tf');
+  if(!area)return;
+  let h='<table class="tf-table"><tr><th style="background:#4338CA;">Subject &amp; Statement</th><th style="background:#4338CA;">True / False?</th></tr>';
+  mixedTF.forEach((item,i)=>{
+    h+=`<tr><td><span style="font-size:0.8rem;font-weight:800;color:#4338CA;">${item.sub}</span><br>${item.s}</td><td>
+      <button class="tf-btn" id="mtf-${i}-T" onclick="selMTF(${i},'T')">True</button>
+      <button class="tf-btn" id="mtf-${i}-F" onclick="selMTF(${i},'F')">False</button>
+    </td></tr>`;
+  });
+  h+='</table>';
+  area.innerHTML=h;
+}
+buildMixedTF();
+
+function selMTF(i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('mtf-'+i+'-'+v);if(b){b.classList.remove('sel-t','sel-f');}});
+  const b=document.getElementById('mtf-'+i+'-'+val);
+  if(b)b.classList.add(val==='T'?'sel-t':'sel-f');
+}
+
+function checkMixedTF(){
+  let s=0;
+  mixedTF.forEach((item,i)=>{
+    const tBtn=document.getElementById('mtf-'+i+'-T');
+    const fBtn=document.getElementById('mtf-'+i+'-F');
+    const sel=tBtn?.classList.contains('sel-t')?true:fBtn?.classList.contains('sel-f')?false:null;
+    if(sel===null)return;
+    if(sel===item.ans){s++;(item.ans?tBtn:fBtn).classList.add('ok');}
+    else{(sel?tBtn:fBtn).classList.add('bad');(item.ans?tBtn:fBtn).classList.add('ok');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;
+  });
+  const res=document.getElementById('mixed-tf-result');
+  res.style.display='block';
+  if(s===mixedTF.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${s}/${mixedTF.length} correct! Outstanding!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/${mixedTF.length} correct. Green = correct answer shown above.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── FINAL SCORE ───────────────────────────────────────────────────────────
+function calcFinalScore(){
+  const box=document.getElementById('final-score-box');
+  const nameEl=document.getElementById('student-name');
+  const nameOut=document.getElementById('final-name');
+  const txt=document.getElementById('final-score-text');
+  const field=document.getElementById('total-score-field');
+  if(nameEl&&nameOut)nameOut.textContent=nameEl.value||'learner';
+  if(field)field.value=totalAutoScore+' / '+MAX_AUTO+' (auto-marked)';
+  let grade='',msg='';
+  if(totalAutoScore>=28){grade='🏆 Outstanding!';msg='You have mastered all 5 Week 6 topics. Incredible work!';}
+  else if(totalAutoScore>=22){grade='🌟 Excellent!';msg='Brilliant effort across all subjects. Keep it up!';}
+  else if(totalAutoScore>=16){grade='✅ Good work!';msg='You are getting there — review the sections where you lost marks.';}
+  else if(totalAutoScore>=10){grade='📝 Keep going!';msg='Review your lesson notes and try the sections again. You can do it!';}
+  else{grade='💪 Keep practising!';msg='Go back to the Day 1 and Day 3 worksheets and review the key vocabulary.';}
+  txt.innerHTML=`<div style="font-size:1.4rem;margin-bottom:8px;">${grade}</div>
+  Auto-marked score: <strong>${totalAutoScore} / ${MAX_AUTO}</strong><br>
+  (Plus open-ended written answers marked by your teacher)<br><br>
+  ${msg}<br><br>
+  📖 Bible: Joseph &amp; Forgiveness ✓<br>
+  ✏️ English: Spelling Rules &amp; Suffixes ✓<br>
+  🔢 Maths: Division ✓<br>
+  🥗 Science: Nutrition ✓<br>
+  🌍 Humanities: Ancient Egypt ✓`;
+  box.style.display='block';
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+  celebrate();
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<60;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
+    },i*30);
+  }
+}
+const s=document.createElement('style');
+s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week6_Day4');</script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 6 · Day 2 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.callout{border-radius:var(--radius-sm);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+.callout .ci{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.callout .ct{font-size:0.88rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);}
+.callout.info{background:rgba(30,58,138,0.13);border:1px solid rgba(30,58,138,0.28);}
+.callout.warn{background:rgba(180,83,9,0.12);border:1px solid rgba(180,83,9,0.28);}
+.callout.good{background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.28);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 6</div>
+  <div class="day-badge">📅 Day 2</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 2 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">✨</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 6 · Day 2</div>
+  <div class="hero-title">Joseph — Dreams,<br>Integrity & Providence</div>
+  <div class="hero-subtitle">Deeper analysis: Joseph in Potiphar's house · Prison · God's unseen hand</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and comprehension. What happened and when?</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Recall: Joseph's Two Dreams</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Interpret</strong> means to explain the hidden meaning of something — like a dream, a symbol, or a difficult text. Joseph's gift was not just predicting the future; it was correctly understanding the meaning that God had placed inside the dream. This is why the word <em>interpretation</em> appears so many times in Genesis 40–41.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Describe BOTH of Joseph's dreams from Genesis 37:5–11 in your own words. For each dream, explain what the symbols were and what they represented. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Dream One — what happened, what the symbols were, what they meant:&#10;&#10;Dream Two — what happened, what the symbols were, what they meant:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Dream One (Gen 37:6–7):</strong> Joseph and his brothers were binding sheaves of grain in a field. Joseph's sheaf suddenly stood upright, and his brothers' sheaves gathered around it and bowed down to it. The <strong>sheaves</strong> represent Joseph and his brothers — agricultural workers, as the family was. His sheaf standing upright while theirs bowed represents Joseph rising to authority and his brothers becoming subordinate to him. <strong>Dream Two (Gen 37:9–10):</strong> The sun, moon, and eleven stars all bowed down to Joseph. The <strong>sun and moon</strong> represent his father Jacob and his mother; the <strong>eleven stars</strong> represent his eleven brothers. Even his father was troubled by this dream — it suggested Joseph would have authority not just over siblings but over his parents. Both dreams pointed to the same outcome: Joseph in a position of great authority over his whole family. This came true, but only about twenty-two years later.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Put these events in the correct chronological order by numbering them 1–7: <span class="marks">3 marks</span><br><br>___ Joseph reveals himself to his brothers<br>___ Joseph is thrown into a pit by his brothers<br>___ Joseph interprets Pharaoh's dreams<br>___ Joseph is falsely accused by Potiphar's wife<br>___ Joseph correctly interprets two officials' dreams in prison<br>___ Jacob gives Joseph the elaborate robe<br>___ Joseph is made second-in-command of Egypt</div>
+    <textarea class="q-input narrow" placeholder="Write the number (1=first, 7=last) next to each event above, or rewrite them in order here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Correct order: 1. <strong>Jacob gives Joseph the robe</strong> (Gen 37 — triggers jealousy). 2. <strong>Joseph thrown into a pit</strong> (Gen 37 — brothers act on hatred). 3. <strong>Falsely accused by Potiphar's wife</strong> (Gen 39 — after serving Potiphar faithfully). 4. <strong>Interprets two officials' dreams in prison</strong> (Gen 40 — forgotten for two more years). 5. <strong>Interprets Pharaoh's dreams</strong> (Gen 41 — finally remembered). 6. <strong>Made second-in-command of Egypt</strong> (Gen 41 — age ~30). 7. <strong>Reveals himself to his brothers</strong> (Gen 45 — brothers bow down, fulfilling the dreams).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">What does the word "steward" mean in this context? In what TWO roles does Joseph serve as a steward during the story? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Steward means: &#10;&#10;Role 1 (who does Joseph steward for?): &#10;Role 2: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">A <strong>steward</strong> is a person trusted to manage someone else's affairs or property on their behalf — the owner retains ultimate authority, but the steward has day-to-day responsibility. In the story: <strong>Role 1 — Steward to Potiphar</strong> (Gen 39): Joseph is trusted with everything Potiphar owns; Potiphar has no concern about anything except the food he eats. <strong>Role 2 — Steward of Egypt</strong> (Gen 41): Joseph manages the entire food supply of Egypt for Pharaoh — collecting grain during seven years of plenty and distributing it during seven years of famine. Both roles show Joseph as someone whose integrity makes him trustworthy with enormous responsibility that ultimately belongs to someone above him.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Analysis and explanation. Think carefully about WHY.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Integrity, Injustice & God's Purpose</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">Genesis 39 says: "The LORD was with Joseph." This phrase appears TWICE — once when Joseph is a slave in Potiphar's house, and once when he is in prison. What does this repeated phrase teach us about HOW God's presence works in Joseph's story? <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="What 'the LORD was with Joseph' means (not just that God was there, but HOW He was present):&#10;&#10;What the REPETITION of this phrase teaches:&#10;&#10;What this implies about the relationship between suffering and God's absence/presence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The phrase "the LORD was with Joseph" does NOT mean Joseph's circumstances were comfortable — he was enslaved and then imprisoned, which are among the worst situations a person can be in. Instead, it means God's presence expressed itself through Joseph <strong>prospering within his circumstances</strong>: Potiphar noticed it, the prison warden noticed it, and both gave Joseph more and more responsibility. God's presence is revealed not by removing the hard situation but by enabling Joseph to function with integrity and effectiveness inside it. The <strong>repetition</strong> — once in Potiphar's house, once in prison — teaches something vital: God's presence is not withdrawn when injustice is done to a faithful person. The false accusation did not mean God had abandoned Joseph; it meant God's presence was now operating in a different setting. This directly challenges any assumption that suffering = God's absence. For Joseph, the hardest places were also the places where God's presence was explicitly noted by the narrator.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">Joseph shows integrity when Potiphar's wife tries to tempt him (Gen 39:9). His reason for refusing is NOT "I'll get in trouble" — it's something deeper. What reason does he actually give? What does this tell us about where his moral code comes from? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Joseph's actual reason for refusing (from Gen 39:9):&#10;&#10;What this tells us about where his moral code comes from:&#10;&#10;Why this matters for the concept of 'integrity' from the lesson:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joseph says: <strong>"How then could I do such a wicked thing and sin against God?"</strong> (Gen 39:9). His reason is not "I'll lose my job" or "Potiphar will punish me" — it is that doing so would be a sin against <em>God</em>. This reveals that Joseph's moral code is theologically rooted, not merely consequentialist (based on what happens to him as a result). He is not acting rightly because virtue is rewarded (indeed, his virtue is immediately punished by false accusation) — he is acting rightly because he understands himself as accountable to God regardless of circumstances. This is exactly what the lesson's definition of <strong>integrity</strong> captures: doing what is right even when no one is watching and even when it costs you something. For Joseph, doing right cost him prison. But his refusal is not shaken — it is grounded in something more solid than personal outcome.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">The lesson says Joseph was "forgotten" after correctly interpreting the cupbearer's dream in prison (Gen 40:23). Two years passed. Why does this detail matter to the story's message about providence and timing? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="What happened with the cupbearer and why Joseph expected to be remembered:&#10;&#10;How long Joseph waited:&#10;&#10;Why this delay matters to the story's message:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joseph correctly interpreted the cupbearer's dream and asked him: "But when all goes well with you, remember me... mention me to Pharaoh and get me out of this prison" (Gen 40:14). The cupbearer was restored exactly as Joseph said — and then <strong>forgot Joseph for two full years</strong> (Gen 40:23). Joseph did everything right: he correctly used his God-given gift, made a reasonable request, and waited. And nothing happened. This two-year delay matters enormously because it removes any sense that providence works on a human schedule. Joseph had a perfectly reasonable expectation of being released and it did not happen. The delay teaches that God's timing is not adjustable to human convenience — and it also ensures that when Joseph is finally brought before Pharaoh, it is specifically because Pharaoh needs a dream interpreted, not because of any human initiative. The moment is perfectly set: Pharaoh's dream, Joseph's gift, the famine on its way. The cupbearer's forgetfulness was not a failure of providence; it was part of its timing.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended writing. Synthesise ideas from across the lesson and connect to your own understanding.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Extended Analysis</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">The lesson defines <strong>providence</strong> as "God's wise, unseen guidance over events — often only recognisable looking backward." Using at least FOUR specific events from Joseph's story, show how each individual event seemed negative or random at the time but was later revealed to be part of a larger purpose. Write at least 6 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Event 1 — what it seemed like / what it actually led to:&#10;Event 2 — what it seemed like / what it actually led to:&#10;Event 3 — what it seemed like / what it actually led to:&#10;Event 4 — what it seemed like / what it actually led to:&#10;&#10;Overall conclusion about providence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Each stage of Joseph's story that appeared to be a dead-end was actually a doorway to the next stage of God's purpose: <strong>Event 1 — Being sold by his brothers (Gen 37):</strong> Appeared to be total abandonment and betrayal. It was actually the means of transport to Egypt — the very country where his destiny would unfold. Without being sold, he would never have reached Egypt. <strong>Event 2 — Serving Potiphar (Gen 39):</strong> Appeared to be permanent slavery. It was actually a training ground in administration and management at a senior level — skills he would need to govern Egypt's entire food supply. <strong>Event 3 — False accusation and imprisonment (Gen 39):</strong> Appeared to be the worst possible outcome after doing the right thing. It was actually placement in the prison where royal officials were kept — the only prison where he would meet the cupbearer who would eventually remember him to Pharaoh. <strong>Event 4 — Two years of being forgotten (Gen 40–41):</strong> Appeared to be God ignoring a faithful servant's reasonable request. It was actually precise timing — Joseph was brought to Pharaoh exactly when Pharaoh had a dream that no one could interpret and Egypt needed a plan for the coming famine. Looking back, no event was wasted. Providence does not mean God makes everything comfortable; it means God makes everything purposeful — but this is only visible in retrospect.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">Write a short reflective paragraph (at least 5 sentences) from Joseph's imagined perspective at his lowest point — in prison, forgotten by the cupbearer. What might he have been thinking? How might he have held on to faith? Then write a second paragraph explaining what this teaches a reader today. <span class="marks">6 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Joseph's perspective (imaginative, but rooted in the lesson):&#10;&#10;&#10;What this teaches a reader today:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Joseph's imagined perspective:</strong> "Two years now. I did what was right — I refused her, I served faithfully, I interpreted correctly and asked only to be remembered. And still I am here. The same walls, the same chains, the same silence. Perhaps the dreams were wrong. Perhaps I misunderstood them. Perhaps I am not who I thought I was. Yet the dreams were too clear — the sheaves, the stars — they were not from me. And if they were not from me, they are not finished by my forgetting them. God has not spoken to me since Egypt. But He spoke. And what He speaks does not depend on whether I can see it moving." <strong>What this teaches a reader today:</strong> The period of silence between a promise and its fulfilment is not evidence that the promise has failed — it is simply the gap in which character is formed. Joseph's lowest point was also the point closest to his breakthrough. Anyone who has worked faithfully, done the right thing, and been overlooked for what seems like too long will find in Joseph's story something more than comfort — a framework for understanding that faithfulness in obscurity is not wasted, even when it feels like it might be.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">9</div>
+    <div class="q-text">Evaluate this statement: "Forgiveness in Joseph's story is only possible because he had power over his brothers. Without that power, he could not have forgiven them." Do you agree or disagree? Use evidence from the lesson to support your view. Write at least 4 sentences. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Do you agree or disagree? ___&#10;&#10;Your argument with evidence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This statement has some surface logic — Joseph does have enormous power when he forgives — but the lesson's content suggests it <strong>misunderstands the nature of Joseph's forgiveness</strong>. The lesson notes that forgiveness does NOT mean pretending the wrong didn't happen; it means "choosing not to let that wrong control how you treat the person now." Joseph could have used his power to take revenge (it was entirely within his authority), but he explicitly told his brothers not to be angry with themselves, wept, and invited them to come live safely in Goshen. The forgiveness came from inside him — not from the power itself. If power were the source of forgiveness, powerful people would forgive more easily than powerless people, which is clearly not the case in the real world. What enabled Joseph's forgiveness was his theological framework — his understanding that "God intended it for good" — which reframed the story. That framework was available to him whether or not he was Pharaoh's second-in-command. Power made the forgiveness visible and consequential; it did not generate it.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 2</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 2 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">📝</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 6 · Day 2</div>
+  <div class="hero-title">Suffixes, Word Families<br>& Academic Writing</div>
+  <div class="hero-subtitle">Suffix rules · Word families · Building precision in academic vocabulary use</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Practice</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Suffix identification and word class changes.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Suffixes & Word Classes</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Suffixes do not just change meaning — they often change <strong>word class</strong>. The suffix <em>-tion</em> turns a verb into a noun: <em>inform → information</em>. The suffix <em>-ise/-ize</em> turns a noun or adjective into a verb: <em>organ → organise</em>. Knowing this lets you produce the right grammatical form automatically.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">The lesson lists three types of suffix: noun-forming, adjective-forming, and verb-forming. For each suffix below, write what type it is AND add it to the given word to make a new word: <span class="marks">6 marks</span><br><br>a) <em>-tion</em> (add to: <em>inform</em>) &nbsp; b) <em>-ness</em> (add to: <em>dark</em>) &nbsp; c) <em>-able</em> (add to: <em>avoid</em>) &nbsp; d) <em>-ous</em> (add to: <em>danger</em>) &nbsp; e) <em>-ify</em> (add to: <em>simpl-</em>) &nbsp; f) <em>-ment</em> (add to: <em>agree</em>)</div>
+    <textarea class="q-input wide" placeholder="a) -tion = ___ type. inform + -tion = ___&#10;b) -ness = ___ type. dark + -ness = ___&#10;c) -able = ___ type. avoid + -able = ___&#10;d) -ous = ___ type. danger + -ous = ___&#10;e) -ify = ___ type. simpl- + -ify = ___&#10;f) -ment = ___ type. agree + -ment = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <em>-tion</em> = <strong>noun-forming</strong>. information. b) <em>-ness</em> = <strong>noun-forming</strong>. darkness. c) <em>-able</em> = <strong>adjective-forming</strong>. avoidable. d) <em>-ous</em> = <strong>adjective-forming</strong>. dangerous. e) <em>-ify</em> = <strong>verb-forming</strong>. simplify. f) <em>-ment</em> = <strong>noun-forming</strong>. agreement.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Complete the word family table. Fill in every gap — each row should show the noun, verb, adjective, and adverb form of the same root word: <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="ROOT: flex&#10;Noun: flexibility | Verb: ___ | Adjective: flexible | Adverb: ___&#10;&#10;ROOT: organise&#10;Noun: ___ | Verb: organise | Adjective: ___ | Adverb: ___&#10;&#10;ROOT: danger&#10;Noun: danger | Verb: endanger | Adjective: ___ | Adverb: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>flex:</strong> Noun: flexibility | Verb: <strong>flex / bend</strong> | Adjective: flexible | Adverb: <strong>flexibly</strong>. <strong>organise:</strong> Noun: <strong>organisation</strong> | Verb: organise | Adjective: <strong>organisational / organised</strong> | Adverb: <strong>organisationally</strong>. <strong>danger:</strong> Noun: danger | Verb: endanger | Adjective: <strong>dangerous</strong> | Adverb: <strong>dangerously</strong>. Note: not every root has a perfect form in every column — accept reasonable alternatives.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Applying word knowledge in context and correcting errors.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Words in Context & Error Correction</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Each sentence below contains a word-class error — the wrong form of the word has been used. For each one: (a) identify the error, (b) explain WHY it is wrong (what should modify what?), and (c) rewrite the sentence correctly: <span class="marks">6 marks</span><br><br>a) "The govern of the country changed unexpectedly."<br>b) "She made an incredibly courage decision."<br>c) "He spoke with honesty and with sincere."<br>d) "The solution was simplify."<br>e) "It was an absolute necessary."<br>f) "They acted with extreme fool."</div>
+    <textarea class="q-input wide" placeholder="a) Error: ___ Why wrong: ___ Correct: ___&#10;b) Error: ___ Why wrong: ___ Correct: ___&#10;c) Error: ___ Why wrong: ___ Correct: ___&#10;d) Error: ___ Why wrong: ___ Correct: ___&#10;e) Error: ___ Why wrong: ___ Correct: ___&#10;f) Error: ___ Why wrong: ___ Correct: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) "govern" is a verb — needs the noun: <strong>government</strong>. Correct: "The <strong>government</strong> of the country changed unexpectedly." b) "courage" is a noun — needs the adjective: <strong>courageous</strong>. Correct: "She made an incredibly <strong>courageous</strong> decision." c) "sincere" is an adjective — needs the noun to match "honesty": <strong>sincerity</strong>. Correct: "She spoke with honesty and with <strong>sincerity</strong>." d) "simplify" is a verb — needs the adjective: <strong>simple</strong> or noun: <strong>simplification</strong>. Correct: "The solution was <strong>simple</strong>." e) "necessary" is an adjective — needs the noun: <strong>necessity</strong>. Correct: "It was an absolute <strong>necessity</strong>." f) "fool" is a noun — needs the noun form: <strong>foolishness</strong>. Correct: "They acted with extreme <strong>foolishness</strong>."</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">The lesson teaches five spelling strategies. For each strategy below, explain HOW it works and apply it to the given word: <span class="marks">5 marks</span><br><br>a) <em>Look, Say, Cover, Write, Check</em> — apply to: "necessary"<br>b) <em>Break into syllables</em> — apply to: "beautiful"<br>c) <em>Spot the root</em> — apply to: "definitely"<br>d) <em>Use a memory phrase</em> — create one for: "separate"<br>e) <em>Collect the word family</em> — apply to: "agree"</div>
+    <textarea class="q-input wide" placeholder="a) How it works: ___ Applied to 'necessary': ___&#10;b) How it works: ___ 'beautiful' in syllables: ___&#10;c) How it works: ___ Root in 'definitely': ___&#10;d) How it works: ___ Memory phrase for 'separate': ___&#10;e) How it works: ___ Word family of 'agree': ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Look, Say, Cover, Write, Check:</strong> Study the word carefully, say it aloud, cover it, write it from memory, then reveal and check. Applied: n-e-c-e-s-s-a-r-y. Say "nec-ES-sar-y." Cover. Write from memory. Check: does it have 1 c and 2 s? b) <strong>Break into syllables:</strong> Split the word into its spoken chunks — each chunk is easier to spell. "beautiful" = beau-ti-ful (3 syllables — note: "-ful" has ONE l). c) <strong>Spot the root:</strong> Find the base word hidden inside. "definitely" contains <strong>finite</strong> — so there is no "a" in the middle (not "definately"). d) <strong>Memory phrase for "separate":</strong> There is a RAT in sep<strong>a-rat</strong>e — or "to sep-A-RAT-e is to keep the rat away." e) <strong>Word family of "agree":</strong> agree (verb) → agreement (noun) → agreeable (adjective) → agreeably (adverb) → disagreement (negative noun) → disagree (negative verb).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended academic writing using vocabulary from the lesson.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Academic Writing & Advanced Application</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Write a paragraph (at least 8 sentences) about Joseph's character, deliberately using at least EIGHT words from the lesson's word roots, prefixes, and suffixes. Underline or mark each one. Your paragraph should read naturally — not like a list of vocabulary. <span class="marks">8 marks</span></div>
+    <div class="q-hint">Suggested words to include: integrity, incredible, irresponsible (contrast), transformation, providence, inflexible, reconciliation, sovereignty — but feel free to use others from the lesson.</div>
+    <textarea class="q-input xwide" placeholder="Write your vocabulary-rich paragraph here. Underline your 8 target words:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joseph's story is a remarkable example of <strong>transformation</strong> under the most <strong>incredible</strong> pressure. The <strong>irresponsible</strong> cruelty of his brothers — who sold him into slavery out of jealousy — could have produced a bitter, broken man. Instead, Joseph demonstrated extraordinary <strong>integrity</strong> in every environment: as a slave, he was <strong>incorruptible</strong>; as a prisoner, he was <strong>productive</strong>; as a ruler, he was <strong>compassionate</strong>. His willingness to seek <strong>reconciliation</strong> with the very brothers who wronged him reveals a man who had found a framework — the <strong>sovereignty</strong> and <strong>providence</strong> of God — that was larger than his own pain. He did not become <strong>inflexible</strong> in bitterness; instead, he allowed his experience to <strong>instruct</strong> him in the kind of forgiveness that only those who have truly suffered can offer. That is the <strong>description</strong> the Bible gives of a person who trusted God through the worst. (Note: mark each underlined word and credit any legitimate word from the lesson's roots or affixes.)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">The lesson says: "Collect the word family — flex, flexible, inflexible, flexibility, flexibly." Why is collecting a word family more useful than just learning one word? Write a short argument (at least 4 sentences) then demonstrate your argument by collecting the full word family for the root <em>struct</em> (to build). <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Your argument for why word families are more useful:&#10;&#10;Full word family for 'struct':"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Argument:</strong> Collecting a word family multiplies vocabulary investment: instead of learning five separate, apparently unrelated words, you learn one root and get five (or more) words for the same effort. It also means you can produce the correct grammatical form in context — knowing "structure" (noun) is useful, but knowing "construct" (verb), "structural" (adjective), "instructive" (adjective), and "destruction" (noun) multiplies your range enormously. Furthermore, when you encounter an unfamiliar word in an exam text that shares the root, you have a powerful tool for guessing its meaning accurately. One root, learned deeply, is worth a dozen isolated words memorised shallowly. <strong>Word family for 'struct':</strong> construct (verb — to build), structure (noun — the way something is built), structural (adjective — relating to structure), structurally (adverb), instruct (verb — to build knowledge in someone), instruction (noun), instructive (adjective), destruction (noun — the unbuilding of something), destructive (adjective), reconstruct (verb — to build again), infrastructure (noun — the underlying structure that supports something).</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 2</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 2 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">📊</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 6 · Day 2</div>
+  <div class="hero-title">Percentage Problems<br>& Reverse Percentages</div>
+  <div class="hero-subtitle">Original value from a percentage · VAT problems · Percentage change · Comparing quantities</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Harder Problems</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Consolidating conversion and percentage-of-amount skills.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Consolidation: Conversions & Percentage of Amount</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Percentage change</strong> asks you to describe HOW MUCH something has changed relative to the original — expressed as a percentage. The formula is always: change ÷ original × 100. The original is always the <em>starting</em> value, never the new value.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Without a calculator, work out each percentage of an amount. Show the mental shortcut method (build up from 10%): <span class="marks">6 marks</span><br><br>a) 15% of 240 &nbsp;&nbsp; b) 45% of 80 &nbsp;&nbsp; c) 22% of 150 &nbsp;&nbsp; d) 75% of 360 &nbsp;&nbsp; e) 5% of 460 &nbsp;&nbsp; f) 110% of 90</div>
+    <textarea class="q-input wide" placeholder="a) 10% of 240 = ___ so 15% = ___&#10;b) 10% of 80 = ___ so 45% = ___&#10;c) 10% of 150 = ___ so 22% = ___&#10;d) 50% of 360 = ___ so 75% = ___&#10;e) 10% of 460 = ___ so 5% = ___&#10;f) 100% of 90 = ___ so 110% = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 10% = 24; 5% = 12; 15% = 24 + 12 = <strong>36</strong>. b) 10% = 8; 40% = 32; 5% = 4; 45% = 32 + 4 = <strong>36</strong>. c) 10% = 15; 20% = 30; 2% = 3; 22% = 30 + 3 = <strong>33</strong>. d) 50% = 180; 25% = 90; 75% = 180 + 90 = <strong>270</strong>. e) 10% = 46; 5% = 23. Answer: <strong>£23</strong>. f) 100% = 90; 10% = 9; 110% = 90 + 9 = <strong>99</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Percentage change and comparing percentages.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Percentage Change & Comparison</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Calculate the percentage change in each case. State whether it is an increase or decrease. Show working: change ÷ original × 100. <span class="marks">6 marks</span><br><br>a) Price rises from £40 to £52<br>b) Population falls from 8,000 to 6,800<br>c) Temperature drops from 20°C to 15°C<br>d) Score improves from 48 to 60</div>
+    <textarea class="q-input wide" placeholder="a) Change = ___ Original = £40. Change% = ___ Increase or decrease?&#10;b) Change = ___ Original = 8000. Change% = ___&#10;c) Change = ___ Original = 20. Change% = ___&#10;d) Change = ___ Original = 48. Change% = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Change = £12. 12 ÷ 40 × 100 = <strong>30% increase</strong>. b) Change = 1,200. 1200 ÷ 8000 × 100 = <strong>15% decrease</strong>. c) Change = 5°C. 5 ÷ 20 × 100 = <strong>25% decrease</strong>. d) Change = 12. 12 ÷ 48 × 100 = <strong>25% increase</strong>. Remember: always divide by the ORIGINAL (starting) value, not the new value.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Two students take the same test twice. Aisha scored 48 in Test 1 and 60 in Test 2. Ben scored 55 in Test 1 and 66 in Test 2. (a) Calculate each student's percentage improvement. (b) Who improved more in percentage terms? (c) Who scored higher overall in Test 2? (d) Explain why percentage change and raw score change can give different answers about "who improved more." <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Aisha % improvement: ___ Ben % improvement: ___&#10;(b) Who improved more in % terms? ___&#10;(c) Who scored higher in Test 2? ___&#10;(d) Explanation of the difference:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Aisha:</strong> Change = 12. 12 ÷ 48 × 100 = <strong>25%</strong>. <strong>Ben:</strong> Change = 11. 11 ÷ 55 × 100 = <strong>20%</strong>. (b) <strong>Aisha</strong> improved more in percentage terms (25% vs 20%). (c) <strong>Ben</strong> scored higher in Test 2 (66 vs 60). (d) Percentage change measures improvement <em>relative to the starting point</em>. Ben started higher, so adding 11 points represented a smaller proportion of what he already had. Aisha started lower, so adding 12 points represented a larger proportion of her starting score. This is why raw score improvement and percentage improvement can tell different stories — and why mathematicians are careful to specify which measure they are using when discussing growth or change.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Reverse percentages and multi-step reasoning.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Reverse Percentages & Extended Reasoning</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">A jacket is on sale for £63 after a 30% reduction. What was the original price? Show full working using the multiplier method. Explain in one sentence why you CANNOT just add 30% onto £63 to get the answer. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What % of the original price is £63? ___&#10;As a decimal multiplier: ___&#10;Original price = 63 ÷ ___ = £___&#10;&#10;Why you cannot just add 30% to £63:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">After a 30% reduction, the sale price is 70% of the original. So £63 = 70% of the original price. As a decimal: £63 = 0.70 × original. Original price = 63 ÷ 0.70 = <strong>£90</strong>. <strong>Check:</strong> 30% of £90 = £27. £90 − £27 = £63. ✓ <strong>Why you cannot add 30% to £63:</strong> The 30% reduction was taken from the ORIGINAL price (£90), not from the sale price (£63). Adding 30% of £63 gives you 30% of the wrong number — you must work back from the sale price by dividing, not forward by adding.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">A shop adds 20% VAT to all prices. After VAT, a TV costs £480. What was the pre-VAT price? Show full method. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="£480 = ___% of pre-VAT price&#10;Decimal multiplier: ___&#10;Pre-VAT price = 480 ÷ ___ = £___&#10;Check: ___% of £___ = £___ + pre-VAT = £480 ✓"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">After 20% VAT, the customer pays 120% of the pre-VAT price. £480 = 1.20 × pre-VAT price. Pre-VAT price = 480 ÷ 1.20 = <strong>£400</strong>. Check: 20% of £400 = £80. £400 + £80 = £480. ✓</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A town's population was 12,000 in 2010. It increased by 15% between 2010 and 2015, then decreased by 10% between 2015 and 2020. (a) What was the population in 2015? (b) What was the population in 2020? (c) What was the overall percentage change from 2010 to 2020? Is this the same as 15% − 10% = 5%? Explain. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) 2015 population: 12000 × ___ = ___&#10;(b) 2020 population: ___ × ___ = ___&#10;(c) Overall change from 12000: ___&#10;Overall % change = ___ ÷ 12000 × 100 = ___%&#10;&#10;Is this the same as 5%? Explain why / why not:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) 2015: 12,000 × 1.15 = <strong>13,800</strong>. (b) 2020: 13,800 × 0.90 = <strong>12,420</strong>. (c) Overall change = 12,420 − 12,000 = 420. Percentage change = 420 ÷ 12,000 × 100 = <strong>3.5% increase</strong>. This is NOT the same as 5%. The 10% decrease was applied to 13,800 (a larger number), so it removed more people than the 15% increase added (in absolute terms, the 10% of 13,800 = 1,380 removed, vs 15% of 12,000 = 1,800 added). The percentages can never simply be added or subtracted because they are always calculated on different base values. This is the same principle as the "20% up then 20% down" exam trap from Day 1.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 2</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 2 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🦁</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 6 · Day 2</div>
+  <div class="hero-title">Food Webs, Habitats<br>& Human Impact</div>
+  <div class="hero-subtitle">Food web stability · Biodiversity · Human impacts on ecosystems · Conservation</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Consolidation of food web vocabulary and roles.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Consolidation: Roles & Relationships</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Biodiversity</strong> = bio (life) + diversity (variety). It means the variety of living organisms in a habitat. High biodiversity means many different species — which creates more connections in a food web and makes it more <em>resilient</em> (able to recover from a disturbance).</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">The lesson gives a woodland food web. Using the organisms below, draw (or write out) TWO different food chains that could exist within the same food web — each chain must be different and must include at least 3 organisms: <span class="marks">4 marks</span><br><br><em>Grass · Oak leaves · Rabbit · Mouse · Deer · Fox · Owl · Eagle · Fungi</em></div>
+    <textarea class="q-input" placeholder="Food chain 1 (at least 3 organisms):&#10;&#10;Food chain 2 (different organisms, at least 3):&#10;&#10;What does this show about food webs vs food chains?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Acceptable chains include: <strong>Chain 1:</strong> Grass → Rabbit → Fox → Eagle → Fungi (decomposer). <strong>Chain 2:</strong> Oak leaves → Mouse → Owl → Fungi. <strong>Chain 3:</strong> Grass → Deer → (no natural predator shown) → Fungi. Many combinations are valid — the key is that arrows go in the direction of energy flow (from the eaten to the eater) and all chains eventually lead to decomposers. This shows that a food WEB contains many overlapping chains — the same organisms appear in multiple chains — which is what makes it more realistic and stable than any single chain.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">The lesson mentions five habitats. For each one, write one producer, one consumer, and one challenge the organisms face in that environment: <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Woodland — Producer: ___ Consumer: ___ Challenge: ___&#10;Coral reef — Producer: ___ Consumer: ___ Challenge: ___&#10;Desert — Producer: ___ Consumer: ___ Challenge: ___&#10;Polar/Tundra — Producer: ___ Consumer: ___ Challenge: ___&#10;Grassland — Producer: ___ Consumer: ___ Challenge: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Woodland: Producer — grass/trees; Consumer — fox/squirrel; Challenge — seasonal changes reduce food in winter. Coral reef: Producer — photosynthetic algae in coral/phytoplankton; Consumer — clownfish/shark; Challenge — temperature rise causes coral bleaching. Desert: Producer — cactus/sparse scrub; Consumer — snake/scorpion; Challenge — extreme temperatures and near-zero water availability. Polar/Tundra: Producer — algae; Consumer — krill/seals/polar bears; Challenge — freezing temperatures, long dark winters limiting photosynthesis. Grassland: Producer — grasses; Consumer — zebra/lion; Challenge — drought/fire can destroy plant base rapidly.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Ecosystem stability and predicting effects of change.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Ecosystem Stability & Predicting Change</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Consider this simplified food web:<br><br><em>Grass → Rabbits → Foxes → Eagles<br>Grass → Mice → Owls → Eagles<br>Mice → Foxes</em><br><br>A disease wipes out ALL the foxes. Predict what would happen to: (a) rabbit population, (b) mouse population, (c) eagle population, (d) grass population. Explain your reasoning for each. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Rabbit population: increase / decrease / stay same? Why:&#10;(b) Mouse population: Why:&#10;(c) Eagle population: Why:&#10;(d) Grass population: Why:&#10;&#10;Overall: does removing foxes make the food web MORE or LESS stable?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Rabbit population — increases dramatically.</strong> Foxes are rabbits' main predator; without them, nothing controls rabbit numbers. (b) <strong>Mouse population — also increases.</strong> Foxes also eat mice; without this predation pressure, mouse numbers rise too. (c) <strong>Eagle population — initially increases, then may crash.</strong> More rabbits and mice mean more food for eagles short-term; however, the explosion of rabbits and mice will eventually overgraze the grass, reducing the food base for all herbivores, which then reduces eagle food supply. Long-term, eagle numbers could fall significantly. (d) <strong>Grass population — initially decreases sharply.</strong> More rabbits and mice = more grazing. If overgrazing occurs, grass cover reduces severely, potentially triggering collapse of the whole web. <strong>Overall:</strong> Removing foxes makes the web <strong>less stable</strong> — it demonstrates the "keystone species" concept: some species regulate populations throughout the whole web, and their removal has cascade effects far beyond their immediate prey.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">The lesson says "biodiversity makes a food web more stable." Explain this using the idea of food web connections. What happens in a high-biodiversity web when one species goes extinct, compared to what happens in a low-biodiversity web? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="What happens in a HIGH biodiversity web when one species disappears:&#10;&#10;What happens in a LOW biodiversity web when one species disappears:&#10;&#10;Why biodiversity = stability:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">In a <strong>high-biodiversity food web</strong>, each consumer typically has multiple food sources. If one species goes extinct, the consumer can switch to another prey species and survive — the web continues to function. The loss is absorbed because there are alternative connections. In a <strong>low-biodiversity food web</strong>, each consumer may depend on only one or two species. If one of those disappears, the consumer loses its entire food source and may also go extinct, triggering a cascade of further extinctions throughout the web. Stability comes from redundancy — having multiple "backup" connections at each level. A web with many species and many connections is like a net with many threads: losing a few threads leaves the net intact. A simple web with few connections is like a chain: break one link and the whole chain fails.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">The Amazon rainforest is the most biodiverse habitat on Earth. Using what you know about food webs AND what the geography lesson (Day 1) says about the Amazon's physical conditions, explain WHY such high biodiversity is possible there. <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-subject link:</strong> History/Geography Day 1 — Amazon region: rainfall, temperature, location.</div>
+    <textarea class="q-input" placeholder="Physical conditions that enable biodiversity:&#10;&#10;How those conditions affect the producer base:&#10;&#10;How a rich producer base supports high biodiversity throughout the food web:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The Amazon receives extremely high rainfall (over 2,000 mm/year in many areas) and enjoys stable warm temperatures (around 25–30°C) year-round, near the equator where sunlight is intense and consistent. These conditions are almost ideal for photosynthesis — plants can grow continuously rather than having dormant winter seasons. The result is an extraordinarily dense, multi-layered producer base: from ground-level mosses and ferns, through shrubs and mid-level trees, to a tall forest canopy. Each layer provides different food sources and niches. The richer and more varied the producer base, the greater the number and variety of primary consumers it can support; more varied primary consumers support more varied secondary and tertiary consumers. The Amazon's physical conditions essentially maximise the energy available at the base of the food web — and this multiplies upward through every trophic level to produce the greatest biodiversity on the planet.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analysis and evaluation of ecosystem concepts.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Extended Science Analysis</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">"The energy pyramid explains everything about why ecosystems look the way they do." Evaluate this statement. Use the 10% energy rule, at least TWO habitats from the lesson, and the concepts of biodiversity and food chain length. Write at least 7 sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your evaluation here. Include: energy pyramid, 10% rule, 2 habitats, biodiversity, food chain length:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The energy pyramid is an extremely powerful explanatory tool because the 10% rule generates observable predictions that match what we see in every ecosystem on Earth. Starting with the rule: only about 10% of energy passes from one trophic level to the next (the rest is lost as heat through respiration, movement, and waste). This immediately explains why ecosystems always have far more producers than primary consumers, far more primary consumers than secondary consumers, and why top predators are the rarest organisms in any food web. In the <strong>polar/tundra</strong> habitat, the food chain algae → krill → fish → seals → polar bears is very short (5 levels) and each level has relatively few individuals — there simply is not enough energy flowing from the scarce algae base to support longer, more complex chains or larger populations at the top. In the <strong>Amazon rainforest</strong>, the enormous productive base (continuous warm, wet conditions driving maximum photosynthesis) means the energy entering the base of the pyramid is so large that even after 90% losses at each level, enough energy remains to support extraordinary numbers and diversity of species at multiple levels. The energy pyramid also explains food chain length — most food chains are 4–5 links because by the 5th or 6th level, so little energy remains that it cannot support a viable population of top predators. The statement has strong validity: the pyramid explains population sizes, biodiversity, food chain length, and habitat differences. Its limitation is that it does not explain the specific species that fill each level — for that, climate, geography, and evolutionary history are also needed. But as a structural explanation of why ecosystems have the shape they do, the energy pyramid is foundational.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 2</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 2 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏔️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 6 · Day 2</div>
+  <div class="hero-title">Oceans, Landforms<br>& Record-Breakers</div>
+  <div class="hero-subtitle">Five oceans · Major mountain ranges · Rivers and deltas · Cross-subject geography links</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Oceans, vocabulary and record facts from the lesson.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Oceans & Vocabulary</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Peninsula</strong> = pene (almost) + insula (island). It is land almost surrounded by water but still attached to a mainland. An <strong>archipelago</strong> is the opposite — a group of islands surrounded by water, with no land connection. The Indonesian archipelago has over 17,000 islands!</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Name the five oceans in order from largest to smallest. For each one, name one continent that borders it. Use the memory phrase from the lesson if it helps. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. (Largest) Ocean: ___ Continent that borders it: ___&#10;2. Ocean: ___ Borders: ___&#10;3. Ocean: ___ Borders: ___&#10;4. Ocean: ___ Borders: ___&#10;5. (Smallest) Ocean: ___ Borders: ___&#10;&#10;Memory phrase: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Pacific</strong> — Asia, Australia, North/South America. 2. <strong>Atlantic</strong> — Europe, Africa, North/South America. 3. <strong>Indian</strong> — Asia, Africa, Australia. 4. <strong>Southern</strong> — Antarctica. 5. <strong>Arctic</strong> — North America, Europe, Asia (surrounding the North Pole). Memory phrase: "<strong>P</strong>eople <strong>A</strong>lways <strong>I</strong>nvent <strong>S</strong>illy <strong>A</strong>cronyms" (Pacific, Atlantic, Indian, Southern, Arctic).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Match each term to its definition: <em>river basin · archipelago · peninsula · plateau · delta</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="river basin = &#10;archipelago = &#10;peninsula = &#10;plateau = &#10;delta = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>river basin</strong> = all the land drained by a river and its tributaries (smaller rivers feeding into the main river). <strong>archipelago</strong> = a group or chain of many islands (e.g. Indonesia, the Philippines). <strong>peninsula</strong> = land almost surrounded by water but still connected to the mainland by a strip of land (e.g. the Iberian Peninsula — Spain and Portugal). <strong>plateau</strong> = a large, flat-topped area of land raised well above the surrounding terrain (e.g. the Tibetan Plateau). <strong>delta</strong> = the fan-shaped formation of land at a river's mouth, created when the river deposits its sediment as it slows on meeting the sea.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Landforms, rivers and geographical explanation.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Landforms, Rivers & Explanation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">The lesson gives Earth's record-breaking landforms. For each record below, give the name of the landform and the specific detail (number, location, etc.) from the lesson: <span class="marks">5 marks</span><br><br>a) Highest point on land &nbsp; b) Largest hot desert &nbsp; c) Longest mountain range &nbsp; d) Largest and deepest ocean &nbsp; e) The continent that is also entirely a country</div>
+    <textarea class="q-input wide" placeholder="a) Record: highest point on land. Name: ___ Height: ___ Location: ___&#10;b) Record: largest hot desert. Name: ___ Size: ___ Location: ___&#10;c) Record: longest mountain range. Name: ___ Length: ___ Location: ___&#10;d) Record: largest & deepest ocean. Name: ___ Location: ___&#10;e) Continent that is also a country: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Mount Everest</strong> — 8,849 m — Nepal/Tibet, Asia. b) <strong>The Sahara</strong> — approximately 9.2 million km² — North Africa. c) <strong>The Andes</strong> — approximately 7,000 km — western South America. d) <strong>The Pacific Ocean</strong> — between Asia/Australia and the Americas (also the deepest — Mariana Trench). e) <strong>Australia (Oceania)</strong> — uniquely both the smallest continent and an entire sovereign country.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson explains how rivers shape the land differently at each stage of their journey. Explain what a <strong>meander</strong> is, why meanders form, and where in a river's journey they are found. Then explain what a <strong>delta</strong> is and why it forms at the river's mouth. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What a meander is:&#10;Why meanders form (what changes in the river that causes them):&#10;Where in the river's journey:&#10;&#10;What a delta is:&#10;Why it forms at the mouth:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">A <strong>meander</strong> is a large, sweeping bend or curve in a river's course. Meanders form in the middle and lower course of a river where the gradient (slope) becomes less steep, slowing the water. Slower water loses the energy to flow in a straight line and begins to follow the easiest available path, swinging from side to side. On the outside of each bend, the water moves slightly faster and erodes the bank; on the inside, it slows further and deposits sediment. These two forces — erosion outside, deposition inside — progressively exaggerate the curve into the large S-bends we call meanders. A <strong>delta</strong> forms at the river's mouth where it meets the sea or a lake. The water slows suddenly as it enters the still or tidal water body, losing virtually all remaining energy. The sediment it has been carrying — mud, sand, and silt — is deposited in a fan or triangular shape at the mouth. Over time this builds up into a delta of new land, sometimes splitting the river into many smaller channels (distributaries) as it navigates its own deposited material.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">The lesson draws a cross-subject link: the world's earliest civilisations arose along major rivers. Using the comparison table, explain specifically how the physical geography of the Nile Valley made Egypt MORE stable than Mesopotamia (between the Tigris and Euphrates). <span class="marks">4 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 2 History — "Egypt's predictable Nile floods created stability; Mesopotamia's floods were chaotic, reflecting a more anxious religion."</div>
+    <textarea class="q-input" placeholder="Physical geography of the Nile:&#10;&#10;Why this created political stability:&#10;&#10;How Mesopotamia's rivers were different:&#10;&#10;How this difference shows in each civilisation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The Nile floods <strong>predictably</strong> every year in July, depositing a consistent layer of fertile black silt ("Black Land") on either side before receding — farmers could plan their entire agricultural calendar around this reliable rhythm. Beyond the flood zone, harsh desert ("Red Land") acted as a natural barrier, protecting Egypt from invasion on both sides. This combination of reliable food production and natural defence created the political stability that allowed the 3,000-year pharaonic civilisation to develop. The Tigris and Euphrates, by contrast, flood <strong>unpredictably</strong> — sometimes catastrophically and violently, destroying crops and settlements without warning. Mesopotamia also had no natural defensive barriers (open plains in all directions), making it vulnerable to repeated invasion from surrounding peoples. The lesson notes this is reflected in the two cultures' religions: Mesopotamian gods were anxious and hostile, reflecting an uncertain environment; Egyptian religion emphasised order (Ma'at) and the afterlife, reflecting a more predictable, stable world. Physical geography shaped not just farming but politics and even theology.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended geographical thinking and cross-subject synthesis.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Extended Analysis & Synthesis</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">6</div>
+    <div class="q-text">"Geography is destiny." This famous phrase suggests that where you live determines how your society develops. Using evidence from at least THREE subjects studied this week (Bible, History, Science, Maths), argue either FOR or AGAINST this statement. Write at least 7 sentences. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 You might connect: Egypt/Mesopotamia (History), ecosystems and habitats (Science), Joseph's story (Bible — did geography shape his destiny?)</div>
+    <textarea class="q-input xwide" placeholder="Your position (for or against): ___&#10;&#10;Evidence from Subject 1:&#10;Evidence from Subject 2:&#10;Evidence from Subject 3:&#10;&#10;Counter-argument and response:&#10;Conclusion:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>FOR the statement:</strong> The evidence across multiple subjects this week strongly supports the idea that geography shapes destiny at the level of civilisations and ecosystems. In <strong>History</strong>, the contrast between Egypt and Mesopotamia is almost entirely explained by physical geography: the Nile's predictable floods created agricultural stability, desert borders created natural defence, and the result was 3,000 years of stable pharaonic civilisation. Mesopotamia's unpredictable floods and open plains led to repeated invasions and political instability — not because its people were less intelligent or capable, but because their physical environment created different conditions. In <strong>Science</strong>, the energy pyramid shows this even more clearly at the ecosystem level: the polar/tundra habitat has short food chains and sparse populations because the physical conditions (cold, dark, low rainfall) limit photosynthesis severely; the Amazon rainforest has the world's greatest biodiversity because physical conditions (warm, wet, sunny) maximise photosynthesis. The organisms have no choice in their geography — their food web is shaped by where they live. Even in <strong>Bible</strong>, Joseph's destiny is partly geographical: it was specifically because Egypt was a grain-producing empire (made possible by Nile geography) that it could store food for seven years and feed surrounding regions — without that geographical advantage, Joseph's administrative genius would have had no stage. <strong>Counter-argument:</strong> Joseph's story also demonstrates human agency within geography — his integrity, wisdom, and forgiveness transcended his physical circumstances. The statement "geography is destiny" is too deterministic if taken to mean geography is everything. It is perhaps better to say geography is the stage upon which human choices play out — powerfully shaping the options available but not eliminating human freedom, creativity, or character.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 2</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init("KS3_L6_Week6_Day2");</script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 6 · Day 3 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(6,95,70,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(180,83,9,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(6,95,70,0.2);border:1px solid rgba(6,95,70,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#6EE7B7;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-hint{font-size:0.8rem;color:var(--muted);margin-bottom:10px;line-height:1.4;font-style:italic;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 6</div>
+  <div class="day-badge">📅 Day 3</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 3 — Extended Essays & Cross-Week ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🌟</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 6 · Day 3</div>
+  <div class="hero-title">Joseph — Extended Essays<br>& Cross-Week Connections</div>
+  <div class="hero-subtitle">Noah · Abraham · Joseph: the growing pattern of faith · Theological synthesis</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Essay Writing</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 30"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Consolidation. Quick-fire recall across Weeks 4, 5 and 6.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Cross-Week Quick-Fire Review</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Complete the comparison table for Noah (Week 4), Abraham (Week 5), and Joseph (Week 6): <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Feature | Noah (Wk4) | Abraham (Wk5) | Joseph (Wk6)&#10;Memory verse | | |&#10;Source of hardship | | |&#10;Length of trial | | |&#10;Key act of faith | | |&#10;How God's promise was fulfilled | | |&#10;New thing their story adds to our understanding of faith | | |"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Memory verse:</strong> Noah — Hebrews 11:7 (by faith built the ark); Abraham — Gen 15:6 (believed God, credited as righteousness); Joseph — Gen 50:20 (intended harm, God intended good). <strong>Source of hardship:</strong> Noah — natural disaster (flood); Abraham — his own choice to obey God's call; Joseph — other people's sin and cruelty. <strong>Length of trial:</strong> Noah — decades building; Abraham — a lifetime as a nomad; Joseph — approximately 13 years as slave/prisoner. <strong>Key act of faith:</strong> Noah — building the ark before any rain; Abraham — leaving home without a destination; Joseph — maintaining integrity and forgiveness through sustained injustice. <strong>Fulfilment:</strong> Noah — flood came, ark saved his family; Abraham — son Isaac born, became great nation; Joseph — brothers bowed, family saved from famine. <strong>New element:</strong> Noah — trust before seeing any evidence; Abraham — trust without knowing destination; Joseph — trust when the suffering was caused by someone else's wrongdoing.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Structured paragraphs. Focus on the quality of your explanation.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Structured Paragraphs</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">The lesson says Joseph's forgiveness "does not mean pretending the wrong didn't happen." Write a structured paragraph explaining the difference between genuine forgiveness and either (a) pretending the wrong never occurred, or (b) saying it doesn't matter. Use evidence from Joseph's words in Genesis 45 and 50. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Paragraph structure: Point → Evidence → Explanation → Significance:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Genuine forgiveness, as demonstrated by Joseph, is radically different from both denial and minimisation of wrongdoing. When Joseph reveals himself to his brothers, his first words are: <strong>"I am Joseph your brother, whom you sold into Egypt"</strong> (45:4) — he names the act directly and accurately. He does not say "it doesn't matter" or pretend the slavery and imprisonment did not happen. What changes is not his acknowledgement of the wrong, but his response to it: "Do not be distressed and do not be angry with yourselves" (45:5). Then in Genesis 50:20, he gives his full theological interpretation: the same act carried two different intentions simultaneously — his brothers' intention to harm, and God's intention for good. This is not cheap forgiveness that denies reality; it is a forgiveness that looks the reality of the wrong fully in the face and then chooses a different response than revenge. The significance for the reader is that forgiveness of this kind is only possible if the forgiver has found a larger framework — here, providence — that gives the suffering a meaning without minimising it. It is simultaneously the most honest and the most free response to injustice.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">Write a paragraph explaining how Joseph's story develops the Bible's growing picture of faith from Genesis. Start with Noah, move to Abraham, arrive at Joseph — showing what NEW element each story adds. Use the lesson's phrase "the pattern deepens." <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Paragraph with clear progression: Noah → Abraham → Joseph:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The pattern of faith in Genesis deepens with each story, adding a new dimension to what trusting God requires. With <strong>Noah</strong>, the call is to trust a promise that seems absurd — build a boat because rain is coming when there has been no rain. Faith here means action before evidence. With <strong>Abraham</strong>, the challenge becomes trusting without knowing where you are going: "Go from your country... to the land I will show you" (Gen 12:1). Faith here means obedience without a map. But Joseph's story, the lesson notes, adds something neither Noah nor Abraham faced: his suffering was caused by <strong>other people's sin</strong>. He did not choose hardship; it was done to him. Yet God's purpose still moved forward through it. This is the new element: faith through injustice caused by others. The pattern deepens because each story asks more of the believer. Trusting before evidence; trusting without a destination; trusting when someone else's cruelty is the instrument — together, these three stories construct a theology of faith that covers almost every situation in which trust is tested.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Full essay responses. Write with care, structure, and depth.</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Extended Essay</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">"Joseph's story is the most complete portrait of faith under pressure in the book of Genesis." Write a full essay response evaluating this statement. You must: refer to at least THREE specific episodes from Genesis 37–50; compare with Noah and/or Abraham; address the concepts of integrity, providence, and forgiveness; and write a conclusion that takes a clear position. Minimum 10 sentences. <span class="marks">14 marks</span></div>
+    <div class="q-hint">Suggested structure: Introduction (your position) → Evidence para 1 (integrity in adversity) → Evidence para 2 (providence across time) → Evidence para 3 (forgiveness and reconciliation) → Comparison with Noah/Abraham → Conclusion (why "most complete" may or may not be the right word).</div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="Write your full essay here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joseph's story can be reasonably described as the most complete portrait of faith under pressure in Genesis, though not because it is the most dramatic — it is because it addresses the dimension of suffering that is most personally relevant: suffering caused by other people's wrong. Three specific episodes demonstrate this completeness. First, <strong>integrity in Potiphar's house</strong> (Gen 39): Joseph refuses the advances of Potiphar's wife not for fear of consequences but because to do so would be "a sin against God" — and his virtue is then immediately punished by false accusation and imprisonment. This tests faith at the level of daily moral choices in private. Second, <strong>the two years of being forgotten</strong> (Gen 40–41): Joseph correctly interprets the cupbearer's dream and makes a reasonable request to be remembered, and nothing happens for two years. This tests faith in God's timing when there is no visible progress. Third, <strong>the moment of forgiveness</strong> (Gen 45 and 50): Joseph has absolute power over the brothers who wronged him, and instead of revenge, offers reconciliation, reframing the entire story through the lens of divine providence. This tests faith at the level of the will — choosing a particular response to injustice. Compared with Noah and Abraham, Joseph's story adds the dimension of sustained injustice over years. Noah's trial was finite and physical; Abraham's was the long uncertainty of a nomadic life without a child. Joseph's is closer to what many ordinary people experience: being wronged by those you trusted, serving faithfully and being overlooked, waiting for a promise to come true in circumstances that seem to deny it. For this reason, his story may indeed be the most "complete" — not the most spectacular, but the most broadly applicable. The closing statement of Genesis 50:20 is the theological summary that makes the whole portrait complete: the same events can carry two intentions simultaneously, and what looked like destruction was actually rescue. That is as complete a statement about faith, suffering, and purpose as the book of Genesis contains.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 30" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 3 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🔤</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 6 · Day 3</div>
+  <div class="hero-title">Spelling Mastery<br>& Cross-Subject Vocabulary</div>
+  <div class="hero-subtitle">Hard spelling patterns · Academic vocabulary across all 5 subjects · Writing application</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Mastery Level</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 30"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Spot the root in cross-subject vocabulary. Consolidation.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Cross-Subject Root Words</div>
+  <div class="esl-tip">💡 <strong>Day 3 focus:</strong> This week's five subjects all contain words with the same roots you learned this week. Recognising them across subjects shows you are truly mastering the skill — not just completing exercises but building genuine word knowledge that travels with you.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Each word below comes from this week's lessons (Bible, Maths, Science, History). Break each one into root + prefix/suffix, give the root's meaning, and explain how the meaning of the root connects to how the word is used in its subject: <span class="marks">6 marks</span><br><br>a) <em>photosynthesis</em> (Science) &nbsp; b) <em>biodegradable</em> (Science) &nbsp; c) <em>international</em> (Geography) &nbsp; d) <em>reconcile</em> (Bible) &nbsp; e) <em>providence</em> (Bible) &nbsp; f) <em>equivalent</em> (Maths)</div>
+    <textarea class="q-input wide" placeholder="a) photosynthesis: root(s) = ___ meaning = ___ Subject connection: &#10;b) biodegradable: root(s) = ___ meaning = ___ Subject connection: &#10;c) international: prefix = ___ root = ___ Subject connection: &#10;d) reconcile: root = ___ meaning = ___ Subject connection: &#10;e) providence: root = ___ meaning = ___ Subject connection: &#10;f) equivalent: root = ___ meaning = ___ Subject connection: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <em>photo</em> (light) + <em>synthesis</em> (putting together). Photosynthesis literally = "putting together using light" — which is exactly what plants do: they use light to combine CO₂ and water into glucose. b) <em>bio</em> (life) + <em>degrad</em> (to break down) + <em>-able</em> (capable of). Biodegradable = capable of being broken down by living organisms (decomposers — this week's Science). c) <em>inter-</em> (between) + <em>nation</em> (country). International = between nations — used in Geography to describe relationships or features crossing country borders. d) <em>re-</em> (again) + <em>concil</em> (Latin: conciliare = to bring together). Reconcile = to bring together again — Joseph reconciling with his brothers (Bible) after they had been separated by betrayal. e) <em>pro-</em> (forward/ahead) + <em>vid</em> (to see — same root as "video"). Providence = seeing/providing ahead — God's foresight and guidance over events in Joseph's story (Bible). f) <em>equi-</em> (equal) + <em>val</em> (value). Equivalent = equal in value — 1/2, 0.5, and 50% are equivalent (Maths).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Spelling test and advanced prefix/suffix application.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Spelling Test & Advanced Application</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">The following 10 words are commonly misspelled by KS3 students. Using the strategies from the lesson (spot the root, break into syllables, use a memory phrase), explain how you would remember the correct spelling for each one, then write it correctly: <span class="marks">5 marks</span><br><br>a) accomodate &nbsp; b) concious &nbsp; c) grammer &nbsp; d) neccessary &nbsp; e) enviroment &nbsp; f) persevere &nbsp; g) sieze &nbsp; h) priviledge &nbsp; i) rythm &nbsp; j) definitly</div>
+    <textarea class="q-input wide" placeholder="a) Correct spelling: ___ Strategy: &#10;b) Correct spelling: ___ Strategy: &#10;c) Correct spelling: ___ Strategy: &#10;d) Correct spelling: ___ Strategy: &#10;e) Correct spelling: ___ Strategy: &#10;f-j) continue..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>accommodate</strong> — double c, double m. "It ACCommodates a COMMittee" (double consonants throughout). b) <strong>conscious</strong> — sc makes a "sh" sound; "I am CONscious of the SCIENCE" (sci = knowledge). c) <strong>grammar</strong> — ends in -ar not -er. "Bad GRAMMAR will MAR your writing" (mar = the end). d) <strong>necessary</strong> — 1 collar, 2 sleeves (1c, 2s). "It's NECESSary to have 1 Collar and 2 Sleeves." e) <strong>environment</strong> — contains "iron": envIRONment. f) <strong>persevere</strong> — break into syllables: per-se-vere. The root sever (to cut through) helps: persevere = to keep cutting through. g) <strong>seize</strong> — "I before E except after C" rule applies — but seize is an exception: S-E-I-Z-E. h) <strong>privilege</strong> — break: priv-i-lege. No "d" — privilege comes from privus (private) + lex (law). i) <strong>rhythm</strong> — no traditional vowels: "Rhythm Helps Your Two Hips Move." j) <strong>definitely</strong> — contains "finite": definITEly. Avoid "definately" — there is no "a" in finite.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">The lesson's roots include <em>tele</em> (far), <em>bio</em> (life), <em>photo</em> (light), <em>spect</em> (look/see). For each root, create your own word web: write the root and at least FOUR words that use it. For each word, write a brief definition showing how the root meaning connects. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="tele (far): 1.___ 2.___ 3.___ 4.___&#10;bio (life): 1.___ 2.___ 3.___ 4.___&#10;photo (light): 1.___ 2.___ 3.___ 4.___&#10;spect (look/see): 1.___ 2.___ 3.___ 4.___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>tele (far):</strong> telephone (sound from far away), telescope (see far away), television (see far), telegraph (write/send from far), teleport (carry across distance), telepathy (feel from far). <strong>bio (life):</strong> biology (study of life), biography (life story), biodegradable (broken down by life/organisms), antibiotic (against life — kills bacteria), symbiotic (living together). <strong>photo (light):</strong> photograph (writing with light), photosynthesis (building with light), photovoltaic (electricity from light), photon (particle of light), phosphorescent (light without heat). <strong>spect (look/see):</strong> spectator (one who looks), inspect (look into), respect (look back at = think highly of), spectacular (worth looking at), prospect (look forward), retrospect (look back).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended writing using vocabulary precisely and analytically.</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Extended Academic Writing</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Write a connected paragraph for each subject pair below. Each paragraph must use at least FOUR words from the Week 6 English lesson (roots, prefixes, suffixes, or the spelling words above) AND make a genuine cross-subject connection. Underline your English vocabulary words. <span class="marks">15 marks — 5 per paragraph</span><br><br><strong>Paragraph A:</strong> Connect Bible (Joseph's integrity) and Science (ecosystem stability)<br><strong>Paragraph B:</strong> Connect Maths (percentage change) and History (population change in early civilisations)<br><strong>Paragraph C:</strong> Connect English (word roots) and Science (biodiversity / food web vocabulary)</div>
+    <textarea class="q-input xwide" style="min-height:300px;" placeholder="Paragraph A (Bible + Science, underline vocabulary):&#10;&#10;&#10;Paragraph B (Maths + History, underline vocabulary):&#10;&#10;&#10;Paragraph C (English + Science, underline vocabulary):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Paragraph A:</strong> The <u>integrity</u> that Joseph demonstrated in <u>adverse</u> circumstances — choosing to act rightly when injustice made a different response entirely <u>justifiable</u> — has a surprising parallel in ecosystem science. A food web with high <u>biodiversity</u> is described by the lesson as more "stable" or <u>resilient</u>: it has many <u>interconnected</u> relationships, so the loss of one organism does not destroy the whole. Joseph's character operated similarly — his integrity was not dependent on favourable conditions but was maintained <u>regardless</u> of them, making him stable under pressure in the way a complex food web is stable under disturbance. <strong>Paragraph B:</strong> When mathematicians calculate <u>percentage</u> change, they divide the change by the <u>original</u> value — always the starting point. This <u>principle</u> has a direct <u>application</u> in historical demography: the lesson notes Egypt's population grew significantly due to the Nile's <u>predictable</u> agricultural cycles. A population growth from 5,000 to 5,600 represents a 12% increase — but only if we <u>accurately</u> identify the original value. Early civilisations that could <u>systematically</u> track grain stores and populations (using writing — cuneiform or hieroglyphics) were precisely exercising the mathematical skill of tracking change from a known baseline. <strong>Paragraph C:</strong> The English lesson's roots connect directly to the vocabulary of this week's Science. <u>Biodegradable</u> breaks into <u>bio</u> (life) + <u>degrad</u> (break down) + <u>-able</u> (capable of) — and this <u>analysis</u> immediately explains decomposers: they are the organisms that make biodegradation happen, <u>transforming</u> dead material into reusable nutrients. Similarly, <u>photosynthesis</u> breaks into <u>photo</u> (light) + <u>synthesis</u> (putting together) — which is exactly the <u>description</u> of what producers do: they synthesise (build) food using light. Understanding roots does not just aid <u>spelling</u>; it deepens <u>comprehension</u> of science concepts because the words were designed to describe the processes precisely.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 30" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 3 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🎯</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 6 · Day 3</div>
+  <div class="hero-title">Mixed Percentage<br>Mastery & Exam Practice</div>
+  <div class="hero-subtitle">All percentage skills combined · Exam-style questions · Real-world scenarios · Error analysis</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Exam Practice</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 30"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Mixed conversion and percentage-of-amount practice at speed.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Speed Round — Core Skills</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Work out each one without a calculator. Show brief working: <span class="marks">6 marks</span><br><br>a) 25% of 96 &nbsp;&nbsp; b) 60% of 85 &nbsp;&nbsp; c) Convert 7/20 to % &nbsp;&nbsp; d) Convert 0.035 to % &nbsp;&nbsp; e) What is 40% of £165? &nbsp;&nbsp; f) 18% of 250</div>
+    <textarea class="q-input wide" placeholder="a) 25% of 96 = ___  b) 60% of 85 = ___  c) 7/20 = ___%  d) 0.035 = ___%  e) 40% of £165 = £___  f) 18% of 250 = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 25% = 1/4 of 96 = <strong>24</strong>. b) 60% of 85: 10% = 8.5; 60% = <strong>51</strong>. c) 7/20 = 7 ÷ 20 = 0.35 = <strong>35%</strong>. d) 0.035 × 100 = <strong>3.5%</strong>. e) 40% of 165: 10% = 16.5; 40% = <strong>£66</strong>. f) 18% of 250: 10% = 25; 8% = 20; 18% = <strong>45</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Exam-style mixed problems. Read carefully before calculating.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Exam-Style Mixed Problems</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">A school raised £1,200 for charity last year. This year they raised £1,560. (a) How much more did they raise this year? (b) What is the percentage increase? (c) Next year they aim to increase this year's total by 25%. What would they need to raise? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Difference: £___&#10;(b) % increase: change ÷ original × 100 = ___&#10;(c) 25% increase on £1,560: ___% of £1,560 = £___. Target = £___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) £1,560 − £1,200 = <strong>£360</strong>. (b) 360 ÷ 1,200 × 100 = <strong>30% increase</strong>. (c) 25% of £1,560 = 0.25 × 1,560 = £390. Target = £1,560 + £390 = <strong>£1,950</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Spot and correct the error in each student's working. For each one, explain what the student did wrong and give the correct answer: <span class="marks">6 marks</span><br><br>a) "35% of 80 = 35 ÷ 80 × 100 = 43.75" &nbsp; b) "A price rises from £50 to £60. % increase = 10 ÷ 60 × 100 = 16.7%" &nbsp; c) "After a 20% increase on £30, I have £36. Then a 20% decrease: £36 − £6 = £30." &nbsp; d) "Original price after 25% discount = sale price + 25% = £45 + £11.25 = £56.25"</div>
+    <textarea class="q-input wide" placeholder="a) Error: ___ Correct working: ___ Answer: ___&#10;b) Error: ___ Correct working: ___ Answer: ___&#10;c) Error: ___ Correct working: ___ Answer: ___&#10;d) Error: ___ Correct working: ___ Answer: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Error:</strong> inverted the calculation — divided percentage by amount instead of multiplying. <strong>Correct:</strong> 35% of 80 = 0.35 × 80 = <strong>28</strong>. b) <strong>Error:</strong> divided by the NEW price (60) instead of the ORIGINAL price (50). <strong>Correct:</strong> 10 ÷ 50 × 100 = <strong>20% increase</strong>. c) <strong>Error:</strong> calculated 20% of £30 (= £6) for the decrease instead of 20% of £36 (the current value). <strong>Correct:</strong> 20% of £36 = £7.20. £36 − £7.20 = <strong>£28.80</strong> (not £30). d) <strong>Error:</strong> added 25% of the sale price to find the original — but the 25% was taken off the ORIGINAL, not the sale price. <strong>Correct:</strong> £45 = 75% of original. Original = 45 ÷ 0.75 = <strong>£60</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step real-world problems requiring full mathematical reasoning.</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step Real-World Reasoning</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Egypt's population in 2000 was approximately 68 million. By 2024, it had grown to approximately 106 million. (a) Calculate the overall percentage increase from 2000 to 2024. (b) If the population grows at the same percentage rate again over the next 24 years, what would the population be in 2048? Give your answer to 3 significant figures. (c) What assumption are you making in part (b), and why might this not be accurate? <span class="marks">6 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-subject link:</strong> History/Geography — population growth in the Nile Valley and its continuing importance today.</div>
+    <textarea class="q-input wide" placeholder="(a) % increase 2000–2024: change = ___ ÷ original = ___ × 100 = ___%&#10;(b) Population in 2048: 106 million × ___ = ___ million (3 sig figs)&#10;(c) Assumption and why it may not hold:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Change = 106 − 68 = 38 million. % increase = 38 ÷ 68 × 100 = <strong>55.9% increase</strong> (to 3 sig figs: 55.9%). (b) Apply the same 55.9% increase to 106 million: 106 × 1.559 = approximately <strong>165 million</strong> (3 sig figs). (c) <strong>Assumption:</strong> that the rate of population growth remains constant at ~55.9% per 24-year period. This is unlikely to hold because: birth rates typically fall as countries develop economically; healthcare, education, and urbanisation all tend to slow population growth; resource constraints (food, water — particularly relevant for the Nile valley where water is limited) may also slow growth. Population projections become increasingly unreliable over longer time periods because they cannot account for social, political, or environmental changes.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Three friends each invest money. Anya invests £500 at a 4% increase per year for 3 years. Ben invests £500 at a one-off 12% increase. Priya invests £500: 6% increase in year 1, 3% decrease in year 2, then 9% increase in year 3. (a) Calculate each person's final total to the nearest penny. (b) Who has the most money after 3 years? (c) Explain why Anya's result is NOT the same as a single 12% increase. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Anya: Year 1: ___ Year 2: ___ Year 3: £___&#10;Ben: £500 × ___ = £___&#10;Priya: Year 1: ___ Year 2: ___ Year 3: £___&#10;(b) Most money: ___&#10;(c) Why Anya's 4%×3 ≠ single 12%:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Anya:</strong> Year 1: £500 × 1.04 = £520. Year 2: £520 × 1.04 = £540.80. Year 3: £540.80 × 1.04 = <strong>£562.43</strong>. <strong>Ben:</strong> £500 × 1.12 = <strong>£560.00</strong>. <strong>Priya:</strong> Year 1: £500 × 1.06 = £530. Year 2: £530 × 0.97 = £514.10. Year 3: £514.10 × 1.09 = <strong>£560.37</strong> (to nearest penny). (b) <strong>Anya</strong> has the most money (£562.43). (c) Anya's 4% per year for 3 years gives compound interest: each year's 4% is calculated on the new, larger total, not on the original £500. Ben's 12% is calculated on £500 only. The difference is small here (£562.43 vs £560.00) but it would grow significantly over longer periods — this is the fundamental principle of compound interest that makes long-term savings so powerful.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 30" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 3 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🔄</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 6 · Day 3</div>
+  <div class="hero-title">Ecosystem Mastery:<br>Extended Questions</div>
+  <div class="hero-subtitle">Nutrient cycles · Human impact · Scientific evaluation · Cross-week connections</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Extended Science</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 30"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Quick consolidation of all key Science vocabulary from the week.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Vocabulary Consolidation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Write a definition AND a one-sentence example for each term — without looking at your notes: <span class="marks">6 marks</span><br><br>ecosystem · food web · trophic level · decomposer · habitat · biodiversity</div>
+    <textarea class="q-input wide" placeholder="ecosystem: definition + example&#10;food web: definition + example&#10;trophic level: definition + example&#10;decomposer: definition + example&#10;habitat: definition + example&#10;biodiversity: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>ecosystem:</strong> all the living organisms in an area plus the non-living environment they interact with. Example: a woodland ecosystem includes trees, insects, foxes, fungi, the soil, water, and sunlight. <strong>food web:</strong> many overlapping food chains in one ecosystem, showing the real complexity of feeding relationships. Example: a grassland food web shows that foxes eat both rabbits AND mice, and that both are prey for different predators. <strong>trophic level:</strong> a feeding level in a food chain or web. Example: grass = level 1 (producers); rabbits = level 2 (primary consumers); foxes = level 3. <strong>decomposer:</strong> an organism that breaks down dead material and returns nutrients to the soil. Example: fungi breaking down fallen leaves in woodland. <strong>habitat:</strong> the specific natural home or environment of an organism. Example: the ocean floor is the habitat of deep-sea fish. <strong>biodiversity:</strong> the variety of different species of living organisms in an area. Example: a coral reef has one of the highest biodiversities on Earth — thousands of different species in one habitat.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Scientific evaluation and calculating energy flow.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Energy Calculations & Scientific Reasoning</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">A coral reef food chain contains: Algae → Small fish → Large fish → Shark. The algae layer contains 500,000 kJ of energy. (a) Using the 10% rule, calculate the energy available at each trophic level. (b) How many sharks could theoretically be supported if each shark needs 100 kJ per year? (c) If ocean warming destroyed 60% of the algae, how would this affect shark numbers? Show your calculation. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Algae: 500,000 kJ&#10;Small fish: ___kJ&#10;Large fish: ___kJ&#10;Shark: ___kJ&#10;&#10;(b) Number of sharks: ___kJ available ÷ 100kJ per shark = ___ sharks&#10;&#10;(c) 60% algae lost: remaining algae = ___kJ. Trace through to shark level: ___kJ. New shark number: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Small fish: 10% of 500,000 = <strong>50,000 kJ</strong>. Large fish: 10% of 50,000 = <strong>5,000 kJ</strong>. Shark: 10% of 5,000 = <strong>500 kJ</strong>. (b) 500 kJ ÷ 100 kJ per shark = <strong>5 sharks</strong>. (c) Algae after 60% loss = 40% of 500,000 = <strong>200,000 kJ</strong>. Small fish: 20,000 kJ. Large fish: 2,000 kJ. Shark: 200 kJ. New shark number: 200 ÷ 100 = <strong>2 sharks</strong>. Conclusion: losing 60% of the algae (producer) base reduces shark numbers by 60% — from 5 to 2. The 10% rule means that a loss at the base is felt exactly proportionally all the way up the chain.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">The lesson mentions that the Amazon Rainforest contains the greatest biodiversity on Earth. Give THREE specific reasons why cutting down large areas of the Amazon (deforestation) would have catastrophic effects not just locally but globally. Use science vocabulary from this week in your answer. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Reason 1 (local ecosystem effect): &#10;Reason 2 (global effect): &#10;Reason 3 (connection to another ecosystem): &#10;Overall conclusion: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Reason 1 — Collapse of the local food web:</strong> Trees are the dominant producers in the Amazon food web. Removing them eliminates the energy source for millions of primary consumers (insects, birds, mammals). Without producers, the entire food web collapses from the base upward — a cascading extinction of consumers at every trophic level. <strong>Reason 2 — Destruction of biodiversity and carbon storage:</strong> The Amazon stores enormous quantities of carbon in its biomass. Deforestation releases this carbon as CO₂, accelerating climate change globally. Higher global temperatures affect ecosystems worldwide — including polar/tundra food chains (the lesson notes these are already short and fragile) and coral reefs (already stressed by warming oceans). <strong>Reason 3 — Loss of decomposer-nutrient cycles:</strong> The Amazon's nutrient cycle depends on rapid decomposition — decomposers return nutrients from dead matter to the soil quickly in the hot, wet conditions. Remove the trees and the nutrient cycle breaks down; the soil (which is actually quite thin and nutrient-poor without the tree canopy) becomes unusable for farming or regrowth within years. This connects to the lesson's point that decomposers are essential to the functioning of any ecosystem.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific writing. Evaluate and synthesise across all this week's content.</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Scientific Evaluation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">Write a full scientific evaluation (minimum 10 sentences) responding to this claim: <em>"Humans are just another organism in the food web — removing us would simply make other species flourish, with no more moral significance than removing any other predator."</em><br><br>Your response should: evaluate the scientific claim about food webs; address the uniqueness of human impact on ecosystems; connect to the Bible lesson on stewardship (Week 2 and/or Week 6); and reach a clear, reasoned conclusion. <span class="marks">14 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connections:</strong> Week 2 Bible — stewardship and imago Dei. Week 6 Bible — Joseph as steward. Science — producers, food webs, energy flow, human impact.</div>
+    <textarea class="q-input xwide" style="min-height:260px;" placeholder="Write your scientific and theological evaluation here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The claim that humans are simply another organism in a food web is scientifically partially correct but deeply incomplete in its implications. It is true that humans occupy a position in food webs — primarily as omnivorous consumers, sometimes as top predators — and it is also true that the removal of any top predator tends to allow prey populations to increase initially. However, the scale and nature of human impact on ecosystems is categorically different from that of any other organism. No other species has transformed habitats on a global scale through agriculture, deforestation, urbanisation, pollution, and climate change. Other predators take what they need; humans have the capacity to alter the fundamental physical conditions that all ecosystems depend on — temperature, rainfall, atmospheric composition, and soil chemistry. The 10% energy rule shows us that the energy pyramid is extremely sensitive to changes at the base: destroying producers — as deforestation and ocean warming do — reduces energy at every subsequent trophic level, potentially collapsing entire food webs. Saying humans are "just another predator" ignores this unique capacity for systematic, large-scale alteration of the pyramid's base. The claim also misses a crucial dimension: moral significance. Unlike every other organism, humans are capable of understanding the consequences of their actions on ecosystems — and therefore of choosing differently. The Bible's concept of stewardship (Genesis 1:28, Week 2) argues that the dominion given to humans over creation carries responsibility, not license: a king's steward manages the kingdom on the king's behalf with care, not exploitation. Joseph's role as steward of Egypt's grain supply in this week's Bible lesson is a model: he managed an enormous food system — essentially an ecosystem resource — with wisdom, foresight, and restraint, ensuring it sustained life rather than depleting it. The scientific evaluation therefore leads to a conclusion that goes beyond science: humans are unique not just in their capacity to harm ecosystems but in their capacity to understand, protect, and restore them. "Removing humans" would not simply allow nature to flourish — it would leave ecosystems in states already profoundly shaped by human activity, requiring human effort to restore. The moral question is not whether to be in the food web, but how to occupy that position responsibly.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 30" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 3 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌐</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 6 · Day 3</div>
+  <div class="hero-title">Geography Mastery:<br>Extended Thinking</div>
+  <div class="hero-subtitle">Global patterns · Physical geography and human settlement · Synthesis across all subjects</div>
+  <div class="hero-tags"><span class="hero-tag">Day 3</span><span class="hero-tag">Synthesis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 30"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — All key geography vocabulary from the week. No notes.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Full Geography Vocabulary Recall</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Without notes, write a precise definition and one example for each term: <span class="marks">6 marks</span><br><br>continent · archipelago · plateau · river basin · peninsula · delta</div>
+    <textarea class="q-input wide" placeholder="continent: definition + example&#10;archipelago: definition + example&#10;plateau: definition + example&#10;river basin: definition + example&#10;peninsula: definition + example&#10;delta: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>continent:</strong> one of seven large landmasses on Earth. Example: Africa. <strong>archipelago:</strong> a group or chain of many islands. Example: Indonesia (~17,000 islands). <strong>plateau:</strong> a large, flat-topped area raised above surrounding land. Example: the Tibetan Plateau (the "Roof of the World"). <strong>river basin:</strong> all land drained by a river and its tributaries. Example: the Amazon Basin (drains most of northern South America). <strong>peninsula:</strong> land almost entirely surrounded by water but connected to mainland by a strip of land. Example: the Iberian Peninsula (Spain and Portugal). <strong>delta:</strong> a fan-shaped landform at a river's mouth formed by deposition of sediment. Example: the Nile Delta (where the Nile meets the Mediterranean Sea).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Geographical reasoning and cross-week connections.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Reasoning & Cross-Week Connections</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">The lesson says "geography is the stage upon which human choices play out." Using THREE specific examples from across ALL the weeks studied so far (Weeks 1–6), show how physical geography shaped events, decisions, or developments in that week's topic. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Example 1 (which week/subject):&#10;Geography connection:&#10;&#10;Example 2 (which week/subject):&#10;Geography connection:&#10;&#10;Example 3 (which week/subject):&#10;Geography connection:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Many combinations are valid. Strong examples include: <strong>Week 2 History (Egypt/Mesopotamia):</strong> The Nile's predictable annual flood created the agricultural surplus that made Egypt's civilisation possible; the surrounding desert acted as a natural defence that gave Egypt political stability for 3,000 years. Without this specific geography, the pharaonic civilisation would not have taken the form it did. <strong>Week 6 Science (Ecosystems):</strong> The Amazon's geography — near-equatorial location, high rainfall, stable warm temperatures — creates the physical conditions for maximum photosynthesis year-round. This physical geography directly generates the world's greatest biodiversity by maximising the energy entering the base of the food web. <strong>Week 6 Bible (Joseph in Egypt):</strong> Egypt's ability to store grain for seven years during plenty — made possible by the Nile geography that produced agricultural surpluses — is the reason Joseph's administrative plan could work. Without Egypt's geographical capacity to produce and store large quantities of grain, there would have been nothing to steward. Geography set the stage for the providential plan to unfold.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">The lesson notes that Antarctica is the world's largest "desert" despite being the coldest place on Earth. (a) Explain how this is possible — what defines a desert? (b) How does the Antarctic "desert" differ from the Sahara in terms of: precipitation type, temperature range, and what organisms can survive there? (c) What does this comparison teach us about not relying on stereotypes when studying geography? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="(a) What actually defines a desert:&#10;(b) Comparison — precipitation / temperature / organisms:&#10;(c) What this teaches about geographical thinking:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) A desert is defined by <strong>extremely low precipitation</strong> (rainfall or snowfall below approximately 250 mm per year) — NOT by heat. Antarctica receives almost no precipitation — the ice that covers it fell over millions of years and barely melts. This makes it the driest large landmass on Earth and therefore the world's largest desert by area. (b) <strong>Comparison:</strong> Sahara — precipitation as rain (rare but when it comes, liquid); temperatures ranging from 45°C+ in the day to near freezing at night; organisms include camels, snakes, scorpions, cacti. Antarctica — precipitation as snow (virtually none annually); temperatures averaging −40°C to −60°C inland; organisms include penguins, seals, krill (in the surrounding ocean), and specialised algae under ice. (c) The comparison teaches that <strong>geographical categories must be defined precisely</strong>, not by the most familiar stereotype. "Desert" immediately suggests heat and sand — but the definition is about water scarcity, not temperature. Similarly, "forest" doesn't always mean trees (kelp forests are underwater), and "plains" aren't always flat. Good geographical thinking requires precision in definition and willingness to challenge default mental images with actual evidence.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Full extended response. Bring together everything from Week 6.</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Extended Synthesis Essay</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">Write a full extended response (minimum 10 sentences) to this question:<br><br><em>"Of all the Week 6 subjects, which single lesson has the most important connection to understanding the world we live in today? Justify your choice with specific evidence from at least THREE other Week 6 subjects."</em><br><br>You must: choose one subject; argue for its importance; use specific evidence from at least 3 other subjects; acknowledge a counter-argument; and reach a clear conclusion. <span class="marks">14 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:260px;" placeholder="My chosen subject: ___&#10;&#10;Write your extended justification here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example response choosing Geography:</strong> Of all this week's subjects, Physical Geography has the most important connection to understanding the world today, because it provides the foundational framework within which all other subjects operate. Without understanding where things are, why climates differ, and how landforms shape human activity, none of the other subjects can be fully understood in their real-world context. <strong>Science connection:</strong> This week's ecosystems lesson (food webs, habitats, energy pyramids) cannot be understood without geography: the lesson itself shows that polar, desert, woodland, coral reef, and grassland habitats all have radically different food webs precisely because of their different physical geographies. The Amazon's extraordinary biodiversity, the polar food chain's simplicity, and the Sahara's sparse web are all direct consequences of geographical conditions. <strong>History connection:</strong> The Week 2 lesson on Egypt and Mesopotamia — which provided the foundations of all subsequent history lessons — explained civilisational differences almost entirely through geography: the Nile's predictability vs the Tigris-Euphrates unpredictability produced different levels of political stability, different religions, different architectures. Geography was the first cause. <strong>Bible connection:</strong> Even Joseph's story (this week's Bible) played out in Egypt — a location chosen by God but also a location defined by its geography: only Egypt, with the Nile's agricultural surplus, could store grain for seven years to save a region from famine. Providence, in the biblical narrative, operated through geography. <strong>Maths connection:</strong> Percentage change calculations this week were applied to population growth — and population distribution on Earth is itself a product of physical geography: most of humanity lives near rivers, coasts, and fertile plains. <strong>Counter-argument:</strong> One could argue that the Bible's lesson on Joseph has the most lasting importance because it addresses human character, ethics, and the question of how to behave under suffering — which are arguably more universally and personally relevant than where mountains are. <strong>Conclusion:</strong> Geography provides the stage; the other subjects describe what happens on it. Understanding the physical world is the prerequisite to understanding everything else — which makes it the subject with the broadest and deepest connections to the world we actually inhabit.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 3</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 30" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init("KS3_L6_Week6_Day3");</script>
+</body>
+</html>

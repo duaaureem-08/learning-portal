@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 — Day 2 Challenge Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}.logo span{color:var(--science);}
+.day-badge{background:#FEE2E2;color:#991B1B;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #DC2626;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}.nav-btn[data-sub="english"]{--c:var(--english);}.nav-btn[data-sub="maths"]{--c:var(--maths);}.nav-btn[data-sub="science"]{--c:var(--science);}.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.challenge-banner{background:linear-gradient(135deg,#FEE2E2,#FEF3C7);border:2px solid #DC2626;border-radius:var(--radius-sm);padding:12px 18px;margin-bottom:20px;font-weight:800;color:#7F1D1D;font-size:0.9rem;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{width:140px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.open-box{width:100%;min-height:90px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;margin-top:6px;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.open-box.tall{min-height:130px;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn:hover{transform:scale(1.05);}
+.tf-btn.selected-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.selected-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-answer{background:#D1FAE5;border-color:#059669;color:#065F46;font-weight:900;}
+.tf-btn.wrong-answer{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.esl-box{background:#FFFBEB;border:2px solid #FCD34D;border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0;font-size:0.88rem;line-height:1.6;}
+.esl-box strong{color:#92400E;}
+.source-box{background:var(--accent-l,#f9f9f9);border-left:5px solid var(--accent,#888);border-radius:var(--radius-sm);padding:14px 18px;font-style:italic;font-size:0.95rem;font-weight:600;margin:14px 0;line-height:1.7;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.info-bar{gap:10px;}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">⚠️ Day 2 — Challenge</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">📖 Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')">✏️ English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">🔢 Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')">🥗 Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')">🌍 Humanities</button>
+</div>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">📖 Bible · Week 6</div>
+    <div class="hero-title">Joseph —<br>Forgiveness (Hard)</div>
+    <div class="hero-sub">Deep analysis · Genesis 50:20 · Character comparison · Extended response</div>
+    <div class="hero-emoji">🕊️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 6 topics, harder questions. Read carefully. Write in FULL sentences. Show all thinking.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary: Use Each Word in a Sentence <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 Do NOT just define the word. Write a complete sentence that SHOWS you understand the meaning.</div>
+    <table class="fill-table">
+      <tr><th>Word</th><th>Write a sentence that SHOWS the meaning</th></tr>
+      <tr><td><strong>Jealous</strong></td><td><textarea class="open-box" style="min-height:60px;" placeholder="Write your sentence here…"></textarea></td></tr>
+      <tr><td><strong>Consequence</strong></td><td><textarea class="open-box" style="min-height:60px;" placeholder="Write your sentence here…"></textarea></td></tr>
+      <tr><td><strong>Forgive</strong></td><td><textarea class="open-box" style="min-height:60px;" placeholder="Write your sentence here…"></textarea></td></tr>
+      <tr><td><strong>Covenant</strong></td><td><textarea class="open-box" style="min-height:60px;" placeholder="Write your sentence here…"></textarea></td></tr>
+      <tr><td><strong>Compassion</strong></td><td><textarea class="open-box" style="min-height:60px;" placeholder="Write your sentence here…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — Story Analysis &amp; Evidence <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:12px;">1. Read this passage, then answer ALL questions:</p>
+    <div class="source-box" style="background:var(--bible-l);">
+      "Joseph said to his brothers, 'Do not be distressed and do not be angry with yourselves for selling me here, because it was to save lives that God sent me ahead of you... You intended to harm me, but God intended it for good to accomplish what is now being done, the saving of many lives.'" — Genesis 50:19–20
+    </div>
+    <table class="fill-table">
+      <tr><th>Question</th><th>Your answer — use evidence from the passage</th></tr>
+      <tr><td>a) Joseph tells his brothers NOT to be angry at themselves. Why do you think he says this — what does this tell you about his character?</td>
+        <td><textarea class="open-box" placeholder="Write your answer here…"></textarea></td></tr>
+      <tr><td>b) "God sent me ahead of you." Joseph believes his suffering had a PURPOSE. In your own words, explain what purpose he means.</td>
+        <td><textarea class="open-box" placeholder="Write your answer here…"></textarea></td></tr>
+      <tr><td>c) "You intended to harm me, but God intended it for good." Two intentions are described. What were the BROTHERS intending? What was GOD intending?</td>
+        <td><textarea class="open-box" placeholder="Brothers intended… / God intended…"></textarea></td></tr>
+      <tr><td>d) Joseph wept when he saw his brothers. What does weeping tell us about forgiveness — is forgiveness only about the mind or also about feelings?</td>
+        <td><textarea class="open-box" placeholder="Write your answer here…"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin-top:20px;margin-bottom:10px;">2. Compare each character — write their choice AND consequence:</p>
+    <table class="fill-table">
+      <tr><th>Character</th><th>The choice they made</th><th>Consequence they received</th></tr>
+      <tr><td><strong>Joseph's brothers</strong></td>
+        <td><textarea class="open-box" style="min-height:60px;" placeholder="They chose to…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:60px;" placeholder="The consequence was…"></textarea></td></tr>
+      <tr><td><strong>Joseph</strong></td>
+        <td><textarea class="open-box" style="min-height:60px;" placeholder="He chose to…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:60px;" placeholder="The consequence was…"></textarea></td></tr>
+      <tr><td><strong>Pharaoh</strong></td>
+        <td><textarea class="open-box" style="min-height:60px;" placeholder="He chose to…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:60px;" placeholder="The consequence was…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">3. Connect the story of Joseph to Romans 5:8: <em>"While we were still sinners, Christ died for us."</em> How do BOTH show the same thing about God's character? Give at least TWO specific examples from Genesis 50. <button class="audio-btn" onclick="speak('Think about what God did for Joseph when things were unfair. How does God respond to our mistakes in Romans 5:8? What do both stories show us about whether God waits for us to be perfect before helping us?')">🔊 Thinking hint</button></p>
+      <textarea class="open-box tall" placeholder="Both Genesis 50 and Romans 5:8 show that God…"></textarea>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">4. A classmate says: "Joseph was weak for forgiving his brothers. He should have punished them — they deserved it." Do you AGREE or DISAGREE? Write a careful argument of at least FOUR sentences. Use what you know about: (a) what Joseph said, (b) what happened as a result, (c) what Genesis 50:20 teaches.</p>
+      <textarea class="open-box tall" placeholder="I disagree / agree because…"></textarea>
+    </div>
+
+    <div>
+      <p style="font-weight:800;margin-bottom:6px;">5. EXTENDED RESPONSE: Joseph went through MANY painful experiences — sold by his brothers, became a slave, put in prison for something he did not do. How did each of these experiences prepare him for his final role? Write a paragraph connecting ALL three painful events to the ending of the story. Use the phrase "God intended it for good" in your answer. Write at least FIVE sentences.</p>
+      <textarea class="open-box" style="min-height:160px;" placeholder="First, when Joseph was sold by his brothers…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False: If FALSE, write the correct answer <span class="marks">5 marks</span></div>
+    <div id="bible-challenge-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTF('bible-challenge')">Check ✅</button></div>
+    <div id="bible-challenge-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /bible -->
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">✏️ English · Week 6</div>
+    <div class="hero-title">Spelling Rules<br>(Hard)</div>
+    <div class="hero-sub">Suffix rules · Exception words · Writer's effect · Spelling in context</div>
+    <div class="hero-emoji">📝</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 6 topics, harder questions. Read carefully. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary: Example + Explanation <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 Write a sentence that IS a clear example of each, then explain WHY it follows or breaks the rule.</div>
+    <table class="fill-table">
+      <tr><th>Term / Rule</th><th>Your example</th><th>Why? Explain the rule</th></tr>
+      <tr><td><strong>Rule 1 — Just add</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. fast → faster"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Because…"></td></tr>
+      <tr><td><strong>Rule 2 — Double</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. hop → hopping"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Because…"></td></tr>
+      <tr><td><strong>Rule 3 — Drop the e</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. bake → baking"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Because…"></td></tr>
+      <tr><td><strong>Rule 4 — y to i</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. happy → happier"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Because…"></td></tr>
+      <tr><td><strong>Exception word</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Use it in a sentence…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="It is hard because…"></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Spelling Analysis &amp; Application <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:12px;">1. Read this passage. Then answer ALL questions:</p>
+    <div class="source-box" style="background:var(--english-l);">
+      "She was running as quickly as she could, gripping her bag tightly. The road was getting narrower. She was certain she had forgotten something — but what? She stopped, breathing hard, and believed for a moment she could hear footsteps behind her."
+    </div>
+    <table class="fill-table">
+      <tr><th>Question</th><th>Your answer</th></tr>
+      <tr><td>a) Find THREE words with suffixes in the passage. Write each word, its root word, and which rule was used.</td>
+        <td><textarea class="open-box" placeholder="1. running — root: run — Rule 2 (double)&#10;2. &#10;3. "></textarea></td></tr>
+      <tr><td>b) "Tightly" uses the suffix -ly. What does -ly do to a word — what type of word does it create? Give two more examples from the passage or your own knowledge.</td>
+        <td><textarea class="open-box" placeholder="The suffix -ly creates a…"></textarea></td></tr>
+      <tr><td>c) "Certain" and "believed" are both exception words. Why are they tricky to spell? What makes them NOT follow normal rules?</td>
+        <td><textarea class="open-box" placeholder="'Certain' is tricky because…"></textarea></td></tr>
+      <tr><td>d) The writer uses the word "breathing" not "breatheing". Why? Write the rule AND explain why correct spelling matters to a reader.</td>
+        <td><textarea class="open-box" placeholder="Rule 3 says… The writer chose correct spelling because…"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin-top:20px;margin-bottom:10px;">2. Apply the correct rule — add -ing, -ed, and -er to each word. Show your working:</p>
+    <table class="fill-table">
+      <tr><th>Root word</th><th>+ ing</th><th>+ ed</th><th>+ er / est</th><th>Rule used</th></tr>
+      <tr><td><strong>smile</strong></td>
+        <td><input class="fill-in" data-ans="smiling" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="smiled" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="—" placeholder="?"></td>
+        <td><select style="padding:6px;border-radius:8px;border:2px solid #E5E7EB;"><option>Rule 1</option><option>Rule 2</option><option selected>Rule 3</option><option>Rule 4</option></select></td></tr>
+      <tr><td><strong>carry</strong></td>
+        <td><input class="fill-in" data-ans="carrying" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="carried" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="—" placeholder="?"></td>
+        <td><select style="padding:6px;border-radius:8px;border:2px solid #E5E7EB;"><option>Rule 1</option><option>Rule 2</option><option>Rule 3</option><option selected>Rule 4</option></select></td></tr>
+      <tr><td><strong>fit</strong></td>
+        <td><input class="fill-in" data-ans="fitting" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="fitted" placeholder="?"></td>
+        <td><input class="fill-in" data-ans="fitter" placeholder="?"></td>
+        <td><select style="padding:6px;border-radius:8px;border:2px solid #E5E7EB;"><option>Rule 1</option><option selected>Rule 2</option><option>Rule 3</option><option>Rule 4</option></select></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkEngWords()">Check word forms ✅</button></div>
+    <div id="eng-words-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">3. Write a paragraph of 5–7 sentences about a character who is lost and trying to find their way home. You MUST include: at least FOUR exception words from the word list, TWO words with suffixes (underline them and write the rule used in brackets).</p>
+      <textarea class="open-box tall" placeholder="My paragraph…"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">4. Explain the DIFFERENCE between Rule 2 (double) and Rule 3 (drop the e). Why do these two rules exist? What would happen if you mixed them up — give a WRONG example and explain what goes wrong.</p>
+      <textarea class="open-box" placeholder="Rule 2 is different from Rule 3 because…&#10;&#10;If you mixed them up, for example writing ___ instead of ___…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:6px;">5. EXTENDED: Explain why spelling correctly matters in written English. Use at least TWO of the four suffix rules in your explanation. Give an example of a spelling mistake that could CHANGE the meaning of a sentence. Write at least FOUR sentences.</p>
+      <textarea class="open-box tall" placeholder="Correct spelling matters because…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="eng-challenge-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTF('eng-challenge')">Check ✅</button></div>
+    <div id="eng-challenge-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /english -->
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">🔢 Maths · Week 6</div>
+    <div class="hero-title">Division<br>(Hard)</div>
+    <div class="hero-sub">Multi-step problems · Missing numbers · Reasoning · Fact families</div>
+    <div class="hero-emoji">➗</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Show ALL working. Write the number sentence for every word problem.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary: Define + Give a Numerical Example <span class="marks">5 marks</span></div>
+    <table class="fill-table">
+      <tr><th>Word</th><th>Definition in your own words</th><th>Numerical example</th></tr>
+      <tr><td><strong>Quotient</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="The quotient is…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. 12 ÷ 3 = ___ (quotient)"></td></tr>
+      <tr><td><strong>Dividend</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="The dividend is…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. In ___ ÷ 3 = 4, the dividend is…"></td></tr>
+      <tr><td><strong>Divisor</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="The divisor is…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. In 12 ÷ ___ = 4, the divisor is…"></td></tr>
+      <tr><td><strong>Inverse</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="The inverse of division is…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. 12÷3=4 inverse is ___ × ___ = ___"></td></tr>
+      <tr><td><strong>Grouping</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Grouping means…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="e.g. 20 ÷ 4 = ___ groups"></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Work out each division AND use multiplication to CHECK your answer:</p>
+    <table class="fill-table">
+      <tr><th>Sum</th><th>Answer</th><th>Check: ___ × ___ = ___</th></tr>
+      <tr><td><strong>72 ÷ 8</strong></td>
+        <td><input type="number" class="fill-in" data-ans="9" placeholder="=?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="___ × ___ = ___"></td></tr>
+      <tr><td><strong>63 ÷ 9</strong></td>
+        <td><input type="number" class="fill-in" data-ans="7" placeholder="=?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="___ × ___ = ___"></td></tr>
+      <tr><td><strong>56 ÷ 7</strong></td>
+        <td><input type="number" class="fill-in" data-ans="8" placeholder="=?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="___ × ___ = ___"></td></tr>
+      <tr><td><strong>120 ÷ 10</strong></td>
+        <td><input type="number" class="fill-in" data-ans="12" placeholder="=?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="___ × ___ = ___"></td></tr>
+      <tr><td><strong>48 ÷ 6</strong></td>
+        <td><input type="number" class="fill-in" data-ans="8" placeholder="=?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="___ × ___ = ___"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMathsB()">Check answers ✅</button></div>
+    <div id="maths-b-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Find the MISSING NUMBER. Show how you worked it out:</p>
+    <table class="fill-table">
+      <tr><th>Problem</th><th>Missing number</th><th>Working</th></tr>
+      <tr><td>___ ÷ 4 = 9</td>
+        <td><input type="number" class="fill-in" data-ans="36" placeholder="?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="9 × 4 = ___"></td></tr>
+      <tr><td>64 ÷ ___ = 8</td>
+        <td><input type="number" class="fill-in" data-ans="8" placeholder="?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="64 ÷ 8 = ___"></td></tr>
+      <tr><td>___ ÷ 5 = 11</td>
+        <td><input type="number" class="fill-in" data-ans="55" placeholder="?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="11 × 5 = ___"></td></tr>
+      <tr><td>90 ÷ ___ = 10</td>
+        <td><input type="number" class="fill-in" data-ans="9" placeholder="?"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="90 ÷ 10 = ___"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMathsMissing()">Check missing numbers ✅</button></div>
+    <div id="maths-missing-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Critical Thinking &amp; Word Problems <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">3. A student says: 56 ÷ 8 = 6. Use multiplication to CHECK if this is correct. Show ALL your working. If wrong, explain exactly what the correct answer is and WHY. <button class="audio-btn" onclick="speak('To check a division, multiply your answer by the divisor. If you get back to the dividend, your answer is correct.')">🔊 Check strategy</button></p>
+      <textarea class="open-box" placeholder="Check: 6 × 8 = ___&#10;&#10;Is 56 ÷ 8 = 6 correct? Explain:&#10;&#10;The correct answer is:"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">4. A school has 96 exercise books. They are shared equally among 8 classes. (a) How many books does each class get? (b) Each class then splits their books equally into groups of 4 desks. How many books per desk? Show ALL working with number sentences.</p>
+      <textarea class="open-box" placeholder="(a) 96 ÷ 8 = ___&#10;&#10;(b) ___ ÷ 4 = ___&#10;&#10;Each desk gets ___ books."></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">5. Write the COMPLETE fact family for: 7 × 9 = 63. Write all 4 number sentences AND explain in one sentence what a fact family means.</p>
+      <textarea class="open-box" placeholder="7 × 9 = ___&#10;9 × 7 = ___&#10;63 ÷ 7 = ___&#10;63 ÷ 9 = ___&#10;&#10;A fact family means…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:6px;">6. REASONING: Without calculating, explain how you know that 84 ÷ 7 must give an answer GREATER than 10. Use the words "dividend", "divisor" and "quotient" in your explanation.</p>
+      <textarea class="open-box" placeholder="I know the quotient must be greater than 10 because…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="maths-challenge-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTF('maths-challenge')">Check ✅</button></div>
+    <div id="maths-challenge-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /maths -->
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">🥗 Science · Week 6</div>
+    <div class="hero-title">Nutrition<br>(Hard)</div>
+    <div class="hero-sub">Experiment design · Deficiency analysis · Balanced diet reasoning</div>
+    <div class="hero-emoji">🥦</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Use scientific vocabulary. Write in full sentences. Think carefully!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary: Function + Consequence <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 For each nutrient: write what it does AND what would happen to the body WITHOUT it.</div>
+    <table class="fill-table">
+      <tr><th>Nutrient</th><th>What it does (function)</th><th>What happens WITHOUT it?</th></tr>
+      <tr><td><strong>Protein 💪</strong></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Protein helps the body…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Without protein…"></textarea></td></tr>
+      <tr><td><strong>Carbohydrate ⚡</strong></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Carbohydrates give the body…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Without carbohydrates…"></textarea></td></tr>
+      <tr><td><strong>Vitamin 🌈</strong></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Vitamins help the body…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Without vitamins…"></textarea></td></tr>
+      <tr><td><strong>Calcium 🥛</strong></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Calcium helps to build…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Without calcium…"></textarea></td></tr>
+      <tr><td><strong>Water 💧</strong></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Water helps the body by…"></textarea></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="Without water…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🥗 Part B — Science Investigation <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:12px;">1. Four children ate different diets for one month. Study the results:</p>
+    <table class="fill-table">
+      <tr><th>Child</th><th>What they mostly ate</th><th>What happened</th><th>Why? Use scientific vocabulary.</th></tr>
+      <tr><td><strong>Child A</strong></td><td>Only bread and pasta — no protein or veg</td>
+        <td>Felt very tired. Muscles became weak. Got lots of colds.</td>
+        <td><textarea class="open-box" style="min-height:70px;" placeholder="This happened because…"></textarea></td></tr>
+      <tr><td><strong>Child B</strong></td><td>Only meat and eggs — no carbohydrates</td>
+        <td>Had very little energy. Struggled to concentrate in school.</td>
+        <td><textarea class="open-box" style="min-height:70px;" placeholder="This happened because…"></textarea></td></tr>
+      <tr><td><strong>Child C</strong></td><td>Only fruits and vegetables — no dairy or fat</td>
+        <td>Bones became weak. Felt cold all the time.</td>
+        <td><textarea class="open-box" style="min-height:70px;" placeholder="This happened because…"></textarea></td></tr>
+      <tr><td><strong>Child D</strong></td><td>Balanced diet from all 5 food groups</td>
+        <td>Healthy, energetic and grew well.</td>
+        <td><textarea class="open-box" style="min-height:70px;" placeholder="This happened because…"></textarea></td></tr>
+    </table>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. DESIGN A FAIR TEST: You want to find out if eating breakfast improves concentration at school. Complete the plan:</p>
+    <table class="fill-table">
+      <tr><th>Section</th><th>Your answer</th></tr>
+      <tr><td><strong>My question</strong> (Does ___ affect ___)</td><td><input class="fill-in" style="width:100%;" placeholder="Does eating breakfast affect…?"></td></tr>
+      <tr><td><strong>My prediction</strong></td><td><input class="fill-in" style="width:100%;" placeholder="I think… will… because…"></td></tr>
+      <tr><td><strong>What I will CHANGE</strong> (one thing only)</td><td><input class="fill-in" style="width:100%;" placeholder="I will change…"></td></tr>
+      <tr><td><strong>What I will MEASURE</strong></td><td><input class="fill-in" style="width:100%;" placeholder="I will measure…"></td></tr>
+      <tr><td><strong>What I will KEEP THE SAME — 1</strong></td><td><input class="fill-in" style="width:100%;" placeholder="I will keep the same…"></td></tr>
+      <tr><td><strong>What I will KEEP THE SAME — 2</strong></td><td><input class="fill-in" style="width:100%;" placeholder="I will keep the same…"></td></tr>
+      <tr><td><strong>What I will KEEP THE SAME — 3</strong></td><td><input class="fill-in" style="width:100%;" placeholder="I will keep the same…"></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">3. "A balanced diet is the most important factor for staying healthy." Do you AGREE or DISAGREE? Write a careful argument using at least THREE scientific points. Mention food groups AND nutrients in your answer.</p>
+      <textarea class="open-box tall" placeholder="I agree / disagree because…"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">4. Plan a healthy day of eating for one person — breakfast, lunch, dinner and one snack. For EACH meal, name the foods AND identify which food group each belongs to AND what it does for the body.</p>
+      <textarea class="open-box tall" placeholder="Breakfast: ___ (food group: ___, function: ___)&#10;Lunch: &#10;Dinner: &#10;Snack: "></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:6px;">5. EXTENDED: Explain why a person who eats a lot of food but only from ONE food group is NOT well-nourished. Use at least FOUR scientific vocabulary words in your explanation. Give a specific example and explain the health consequences.</p>
+      <textarea class="open-box" style="min-height:140px;" placeholder="Being well-nourished means…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="sci-challenge-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTF('sci-challenge')">Check ✅</button></div>
+    <div id="sci-challenge-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /science -->
+
+<!-- ═══════════════ HUMANITIES ═══════════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">🌍 Humanities · Week 6</div>
+    <div class="hero-title">Ancient Egypt<br>(Hard)</div>
+    <div class="hero-sub">Source analysis · Legacy · Comparison · Extended reasoning</div>
+    <div class="hero-emoji">🏺</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Use evidence. Think like a historian. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary: Context + Importance <span class="marks">5 marks</span></div>
+    <table class="fill-table">
+      <tr><th>Term</th><th>Use it in a sentence about Egypt</th><th>What would have happened WITHOUT this?</th></tr>
+      <tr><td><strong>Papyrus</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Egyptian scribes used papyrus to…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Without papyrus…"></td></tr>
+      <tr><td><strong>Scribe</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="A scribe in ancient Egypt…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Without scribes…"></td></tr>
+      <tr><td><strong>Irrigation</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Irrigation channels allowed…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Without irrigation…"></td></tr>
+      <tr><td><strong>Hieroglyphics</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Hieroglyphics was important because…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Without hieroglyphics…"></td></tr>
+      <tr><td><strong>Legacy</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="One legacy of ancient Egypt is…"></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Without this legacy today…"></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🌍 Part B — Source &amp; Evidence Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:12px;">1. Study this historical source, then answer ALL questions:</p>
+    <div class="source-box" style="background:var(--social-l);">
+      "The scribes of Egypt were highly respected. A boy who became a scribe would spend many years at school learning the 700+ hieroglyphic symbols. In return, he would never need to farm or do heavy labour. He could work for the Pharaoh, keep records of grain, taxes, and laws, and read sacred religious texts." — Adapted from a modern history book on ancient Egypt.
+    </div>
+    <table class="fill-table">
+      <tr><th>Question</th><th>Your answer — use evidence</th></tr>
+      <tr><td>a) Why was becoming a scribe considered a very GOOD career in ancient Egypt? Give TWO reasons from the source.</td>
+        <td><textarea class="open-box" placeholder="First, the source says… Second, it mentions…"></textarea></td></tr>
+      <tr><td>b) The source says scribes spent "many years" learning. What does this tell us about how difficult hieroglyphics was to learn? Why does this make scribes so valuable?</td>
+        <td><textarea class="open-box" placeholder="The fact that scribes spent many years learning tells us…"></textarea></td></tr>
+      <tr><td>c) Scribes could "read sacred religious texts." Why would this make them powerful in ancient Egyptian society?</td>
+        <td><textarea class="open-box" placeholder="Being able to read religious texts gave scribes power because…"></textarea></td></tr>
+      <tr><td>d) This source is "adapted from a modern history book." Is this a PRIMARY or SECONDARY source? Explain the difference.</td>
+        <td><textarea class="open-box" placeholder="This is a ___ source because…&#10;A primary source is…&#10;A secondary source is…"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin-top:20px;margin-bottom:10px;">2. Rank the THREE achievements of ancient Egypt from most to least important. Justify EACH choice:</p>
+    <table class="fill-table">
+      <tr><th>Rank</th><th>Achievement</th><th>Why you ranked it here</th></tr>
+      <tr><td><strong>Most important</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Writing / Medicine / Farming"></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="I think this is most important because…"></textarea></td></tr>
+      <tr><td><strong>Second</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Writing / Medicine / Farming"></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="This comes second because…"></textarea></td></tr>
+      <tr><td><strong>Third</strong></td>
+        <td><input class="fill-in" style="width:100%;" placeholder="Writing / Medicine / Farming"></td>
+        <td><textarea class="open-box" style="min-height:55px;" placeholder="This comes third because…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">3. A classmate says: "Ancient Egypt was only important because of the pyramids." Do you agree or disagree? Give THREE specific examples of achievements that were MORE important than the pyramids in terms of everyday life. Explain each one.</p>
+      <textarea class="open-box tall" placeholder="I disagree because…&#10;&#10;First, writing was important because…&#10;Second, irrigation was important because…&#10;Third, medicine was important because…"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:6px;">4. How does the Nile River connect to ALL THREE achievements (writing, medicine, farming)? Explain the link for each one — how did the Nile make each achievement possible or easier?</p>
+      <textarea class="open-box tall" placeholder="The Nile connected to farming because…&#10;&#10;The Nile connected to medicine because…&#10;&#10;The Nile connected to writing because…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:6px;">5. EXTENDED REPORT: Choose ONE Egyptian achievement. Write a report explaining: (a) what it was, (b) why it was invented / developed, (c) how it worked, (d) why it mattered THEN, and (e) how it still affects the world TODAY. Write at least SIX sentences.</p>
+      <textarea class="open-box" style="min-height:160px;" placeholder="I have chosen: ___&#10;&#10;(a) What it was:&#10;(b) Why it was invented:&#10;(c) How it worked:&#10;(d) Why it mattered then:&#10;(e) How it affects the world today:"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="soc-challenge-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTF('soc-challenge')">Check ✅</button></div>
+    <div id="soc-challenge-tf-result" class="quiz-feedback"></div>
+  </div>
+</div><!-- /social -->
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+// ── TF DATA ───────────────────────────────────────────────────────────────
+const tfData = {
+  'bible-challenge':[
+    {s:"Joseph sold his brothers into slavery as punishment when he saw them in Egypt.",ans:false,correction:"Joseph FORGAVE his brothers — he wept, embraced them, and said God intended it for good."},
+    {s:"Genesis 50:20 says that even painful events can be part of God's good plan.",ans:true},
+    {s:"Pharaoh put Joseph in prison because he was jealous of his coat.",ans:false,correction:"Pharaoh gave Joseph a PROMOTION — he put Joseph in prison because of a false accusation by Potiphar's wife."},
+    {s:"Joseph's ability to explain dreams was described as a gift from God.",ans:true},
+    {s:"The story of Joseph teaches us that forgiveness is easy and requires no courage.",ans:false,correction:"Forgiveness in Joseph's story took enormous courage — his brothers had sold him as a slave!"},
+  ],
+  'eng-challenge':[
+    {s:'Adding -ing to "write" gives "writting" (double the t).',ans:false,correction:'Rule 3 — "write" ends in silent e, so DROP the e: write → writing.'},
+    {s:'Rule 4 says: when a word ends in consonant + y, change the y to i before adding -er or -ed.',ans:true},
+    {s:'"Different" is an exception word because it follows Rule 2 (double the f).',ans:false,correction:'"Different" is an exception word because it must be LEARNED BY HEART — it does not double.'},
+    {s:'Adding -ly to an adjective usually creates an adverb (a word that describes a verb).',ans:true},
+    {s:'You should always double the last consonant before adding any suffix.',ans:false,correction:'You only double when the word has a SHORT vowel + ONE consonant at the end (Rule 2). Not always!'},
+  ],
+  'maths-challenge':[
+    {s:'The dividend is the number you divide BY.',ans:false,correction:'The dividend is the BIG number being divided up. The divisor is the number you divide BY.'},
+    {s:'72 ÷ 8 = 9',ans:true},
+    {s:'To check a division answer, you multiply the quotient by the dividend.',ans:false,correction:'You multiply the QUOTIENT by the DIVISOR. The result should equal the dividend.'},
+    {s:'If 6 × 7 = 42, then 42 ÷ 6 = 7 and 42 ÷ 7 = 6.',ans:true},
+    {s:'Grouping and sharing always give different answers for the same division.',ans:false,correction:'Both methods give the SAME answer — they are two ways of thinking about the same operation.'},
+  ],
+  'sci-challenge':[
+    {s:'A child who eats only carbohydrates will have strong muscles and a healthy immune system.',ans:false,correction:'Without protein and vitamins, muscles become weak and the immune system is poor.'},
+    {s:'Calcium is found mainly in dairy foods and is essential for strong bones.',ans:true},
+    {s:'Fats should be completely avoided in a healthy diet.',ans:false,correction:'Fats are NEEDED in small amounts — they store energy and help the brain function.'},
+    {s:'A "fair test" changes only ONE variable at a time.',ans:true},
+    {s:'Vitamins and minerals are only important for children, not adults.',ans:false,correction:'Vitamins and minerals are essential throughout life for everyone.'},
+  ],
+  'soc-challenge':[
+    {s:'Hieroglyphics had fewer than 100 symbols, making it easy to learn quickly.',ans:false,correction:'Hieroglyphics had over 700 symbols — it took scribes many years to learn them all.'},
+    {s:'Egyptian farmers used irrigation channels to carry water to dry fields far from the Nile.',ans:true},
+    {s:'Silt is the name for the dark, nutrient-rich soil left behind after the Nile flooded.',ans:true},
+    {s:'A primary source is something created AFTER an event by a historian studying it.',ans:false,correction:'A PRIMARY source was created AT THE TIME of the event. A SECONDARY source is written later.'},
+    {s:'Egyptian doctors were among the first to use observation and records to treat patients.',ans:true},
+  ]
+};
+
+function buildTF(key){
+  const data=tfData[key];
+  const area=document.getElementById(key+'-tf');
+  if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True or False?</th></tr>';
+  data.forEach((item,i)=>{
+    h+=`<tr><td>${item.s}</td><td>
+      <button class="tf-btn" id="tf-${key}-${i}-t" onclick="selectTF('${key}',${i},'T')">True</button>
+      <button class="tf-btn" id="tf-${key}-${i}-f" onclick="selectTF('${key}',${i},'F')">False</button>
+    </td></tr>`;
+  });
+  h+='</table>';
+  area.innerHTML=h;
+}
+Object.keys(tfData).forEach(buildTF);
+
+function selectTF(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('tf-'+key+'-'+i+'-'+v);if(b){b.classList.remove('selected-t','selected-f');}});
+  const b=document.getElementById('tf-'+key+'-'+i+'-'+val);
+  if(b)b.classList.add(val==='T'?'selected-t':'selected-f');
+}
+
+function checkTF(key){
+  const data=tfData[key];
+  let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tf-'+key+'-'+i+'-T');
+    const fBtn=document.getElementById('tf-'+key+'-'+i+'-F');
+    const sel=tBtn?.classList.contains('selected-t')?true:fBtn?.classList.contains('selected-f')?false:null;
+    if(sel===null)return;
+    if(sel===item.ans){score++;(item.ans?tBtn:fBtn).classList.add('correct-answer');}
+    else{(sel?tBtn:fBtn).classList.add('wrong-answer');(item.ans?tBtn:fBtn).classList.add('correct-answer');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;
+  });
+  const res=document.getElementById(key+'-tf-result');
+  if(res){
+    res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct answer.`;}
+  }
+}
+
+// ── ENGLISH WORD FORMS CHECK ──────────────────────────────────────────────
+function checkEngWords(){
+  const answers=['smiling','smiled','—','carrying','carried','—','fitting','fitted','fitter'];
+  const inputs=document.querySelectorAll('#page-english .fill-in[data-ans]');
+  let score=0,total=0;
+  inputs.forEach(inp=>{
+    if(!inp.dataset.ans)return;
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}
+  });
+  const res=document.getElementById('eng-words-result');
+  res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. Check highlighted cells.`;}
+}
+
+// ── MATHS CHECK ───────────────────────────────────────────────────────────
+function checkMathsB(){
+  const divAns=[9,7,8,12,8];
+  let score=0;
+  divAns.forEach((ans,i)=>{
+    const el=document.querySelectorAll('#page-maths input[type=number][data-ans]')[i];
+    if(!el)return;
+    if(parseInt(el.value)===ans){score++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('maths-b-result');
+  res.style.display='block';
+  if(score===5){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 5/5 correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/5 correct.`;}
+}
+function checkMathsMissing(){
+  const missingAns=[36,8,55,9];
+  const inputs=document.querySelectorAll('#page-maths input[type=number][data-ans]');
+  let score=0,offset=5;
+  missingAns.forEach((ans,i)=>{
+    const el=inputs[i+offset];
+    if(!el)return;
+    if(parseInt(el.value)===ans){score++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('maths-missing-result');
+  res.style.display='block';
+  if(score===4){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 4/4 correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/4 correct. Hint: use × to find the missing number!`;}
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
+    },i*30);
+  }
+}
+const s=document.createElement('style');
+s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week6_Day2');</script>
+</body>
+</html>
