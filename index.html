@@ -4,549 +4,605 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HOS International — Learning Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --cream:        #FAF7F2;
+  --cream-dark:   #F0EBE1;
+  --cream-border: #DDD0BC;
+  --maroon:       #7A1C1C;
+  --maroon-light: #9B2626;
+  --maroon-deep:  #5C1414;
+  --maroon-mist:  rgba(122,28,28,0.08);
+  --maroon-glow:  rgba(122,28,28,0.18);
+  --gold:         #C49A3C;
+  --gold-light:   #F0D98A;
+  --ink:          #2C1A0E;
+  --ink-mid:      #5C3D2A;
+  --ink-soft:     #8B6B55;
+  --white:        #FFFFFF;
+  --success:      #2D6A4F;
+  --success-bg:   #D8F3DC;
+  --warn-bg:      #FEF3C7;
+  --warn:         #92400E;
+  --r:            14px;
+  --shadow:       0 2px 12px rgba(122,28,28,0.10);
+  --shadow-lg:    0 8px 32px rgba(122,28,28,0.14);
+}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:#0D0D12;color:#F0EFF8;min-height:100vh;overflow-x:hidden}
-.nav{background:rgba(13,13,18,0.96);backdrop-filter:blur(20px);border-bottom:1px solid #2E2E3E;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300}
-.nav-logo{display:flex;align-items:center;gap:12px}
-.nav-mark{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#7C3AED,#3B82F6);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:white}
-.nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:white}
-.nav-brand span{color:#6B7280;font-weight:400;font-size:0.78rem;display:block;margin-top:-2px}
-.nav-motto{font-size:0.7rem;color:#4B5563;font-style:italic;display:none}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+.nav{
+  background:var(--maroon);
+  padding:0 28px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:300;
+  box-shadow:0 2px 16px rgba(92,20,20,0.25);
+}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.nav-mark{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:900;font-size:1.15rem;color:var(--maroon-deep);
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+.nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--cream)}
+.nav-brand span{color:rgba(250,247,242,0.6);font-weight:400;font-size:0.75rem;display:block;margin-top:-2px}
+.nav-motto{font-size:0.7rem;color:rgba(250,247,242,0.55);font-style:italic;display:none}
 @media(min-width:900px){.nav-motto{display:block}}
-.hero{padding:72px 24px 52px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(124,58,237,0.1) 0%,transparent 70%)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:99px;padding:6px 16px;font-size:0.78rem;font-weight:600;color:#C4B5FD;margin-bottom:18px}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;letter-spacing:-0.03em;line-height:1.1;color:white;margin-bottom:14px}
-.hero h1 span{background:linear-gradient(135deg,#A78BFA,#60A5FA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:1rem;color:#9090A8;max-width:480px;margin:0 auto 36px;line-height:1.6}
-.hero-stats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:white;display:block}
-.stat-label{font-size:0.75rem;color:#6B7280;margin-top:1px}
-.selector{padding:36px 24px 0;max-width:960px;margin:0 auto}
-.selector-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:700px){.selector-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:440px){.selector-grid{grid-template-columns:1fr}}
-.stu-btn{border-radius:16px;padding:22px 16px;cursor:pointer;border:2px solid transparent;transition:all 0.22s;text-align:left;position:relative;overflow:hidden}
-.stu-btn:hover{transform:translateY(-3px)}
-.stu-btn.locked::after{content:'🔒';position:absolute;top:12px;right:12px;font-size:1rem;opacity:0.5}
-.stu-btn.unlocked::after{content:'✅';position:absolute;top:12px;right:12px;font-size:1rem}
-.stu-abrish{background:linear-gradient(135deg,#FEF3C7,#FFF7ED);border-color:#FCD34D}
-.stu-abrish:hover,.stu-abrish.active{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,11,0.2)}
-.stu-jessica{background:linear-gradient(135deg,#1E1B2E,#1a1730);border-color:#4C1D95}
-.stu-jessica:hover,.stu-jessica.active{border-color:#7C3AED;box-shadow:0 0 0 3px rgba(124,58,237,0.3)}
-.stu-areej{background:linear-gradient(135deg,#0F1F2E,#0c1a27);border-color:#1E3A8A}
-.stu-areej:hover,.stu-areej.active{border-color:#3B82F6;box-shadow:0 0 0 3px rgba(59,130,246,0.3)}
-.stu-teacher{background:linear-gradient(135deg,#0F1F18,#0a1f14);border-color:#065F46}
-.stu-teacher:hover,.stu-teacher.active{border-color:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,0.3)}
-.stu-level{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
-.stu-abrish .stu-level{color:#92400E}
-.stu-jessica .stu-level{color:#A78BFA}
-.stu-areej .stu-level{color:#93C5FD}
-.stu-teacher .stu-level{color:#6EE7B7}
-.stu-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;margin-bottom:3px}
-.stu-abrish .stu-name{color:#1C1917}
-.stu-jessica .stu-name,.stu-areej .stu-name,.stu-teacher .stu-name{color:white}
-.stu-desc{font-size:0.75rem}
-.stu-abrish .stu-desc{color:#78716C}
-.stu-jessica .stu-desc,.stu-areej .stu-desc,.stu-teacher .stu-desc{color:#9090A8}
-.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);align-items:center;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal{background:#18181F;border:1px solid #2E2E3E;border-radius:20px;padding:36px 32px;width:100%;max-width:380px;text-align:center;animation:popIn 0.3s cubic-bezier(0.22,0.68,0,1.2) both}
-@keyframes popIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
-.modal-avatar{font-size:3rem;margin-bottom:12px}
-.modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:white;margin-bottom:6px}
-.modal-sub{font-size:0.85rem;color:#9090A8;margin-bottom:24px}
-.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:20px}
-.pin-dot{width:48px;height:56px;border-radius:12px;background:#111118;border:2px solid #2E2E3E;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:white;transition:border-color 0.2s}
-.pin-dot.filled{border-color:#7C3AED}
-.pin-dot.error{border-color:#EF4444;animation:shake 0.4s ease}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:260px;margin:0 auto 20px}
-.key{padding:16px;border-radius:12px;border:1px solid #2E2E3E;background:#111118;color:white;font-size:1.2rem;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif}
-.key:hover{background:#1E1B2E;border-color:#7C3AED}
-.key:active{transform:scale(0.95)}
-.key.del{color:#9090A8;font-size:0.9rem}
-.modal-error{color:#FCA5A5;font-size:0.82rem;min-height:20px;margin-bottom:8px}
-.modal-cancel{background:transparent;border:1px solid #2E2E3E;color:#9090A8;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.modal-cancel:hover{border-color:#6B7280;color:white}
-.panel{display:none;padding:0 24px 60px;max-width:960px;margin:0 auto;animation:fadeUp 0.4s ease both}
-.panel.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.panel-header{border-radius:20px;padding:28px 32px;margin:24px 0;display:flex;align-items:center;gap:18px}
-.panel-header.ks2{background:linear-gradient(135deg,#F59E0B,#EF4444)}
-.panel-header.ks3-j{background:linear-gradient(135deg,#1E1B4B,#4C1D95);border:1px solid rgba(124,58,237,0.3)}
-.panel-header.ks3-a{background:linear-gradient(135deg,#0F172A,#1E3A8A);border:1px solid rgba(59,130,246,0.3)}
-.panel-header.teacher{background:linear-gradient(135deg,#022C22,#065F46);border:1px solid rgba(16,185,129,0.3)}
-.panel-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
-.panel-header h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:white}
-.panel-header p{color:rgba(255,255,255,0.75);font-size:0.85rem;margin-top:3px}
-.lock-btn{margin-left:auto;padding:8px 16px;border-radius:8px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
-.lock-btn:hover{background:rgba(0,0,0,0.35)}
-.week-section{margin-bottom:10px}
-.week-hd{border-radius:14px;padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s;user-select:none}
-.ks2-acc .week-hd{background:#FFF7ED;border:2px solid #FED7AA}
-.ks2-acc .week-hd:hover,.ks2-acc .week-hd.open{border-color:#F59E0B;background:#FEF3C7}
-.ks2-acc .week-hd.open{border-radius:14px 14px 0 0}
-.ks2-acc .week-num{background:#F59E0B;color:white}
-.ks2-acc .week-title{color:#1C1917}
-.ks2-acc .week-topics{color:#92400E}
-.ks3j-acc .week-hd{background:#18181F;border:1px solid #2E2E3E}
-.ks3j-acc .week-hd:hover,.ks3j-acc .week-hd.open{border-color:#7C3AED;background:#1E1B2E}
-.ks3j-acc .week-hd.open{border-radius:14px 14px 0 0}
-.ks3j-acc .week-num{background:#7C3AED;color:white}
-.ks3j-acc .week-title{color:white}
-.ks3j-acc .week-topics{color:#A78BFA}
-.ks3a-acc .week-hd{background:#0F172A;border:1px solid #1E3A8A}
-.ks3a-acc .week-hd:hover,.ks3a-acc .week-hd.open{border-color:#3B82F6;background:#0F1F35}
-.ks3a-acc .week-hd.open{border-radius:14px 14px 0 0}
-.ks3a-acc .week-num{background:#3B82F6;color:white}
-.ks3a-acc .week-title{color:white}
-.ks3a-acc .week-topics{color:#93C5FD}
-.teach-acc .week-hd{background:#0A1F14;border:1px solid #065F46}
-.teach-acc .week-hd:hover,.teach-acc .week-hd.open{border-color:#10B981;background:#0F2A1C}
-.teach-acc .week-hd.open{border-radius:14px 14px 0 0}
-.teach-acc .week-num{background:#10B981;color:white}
-.teach-acc .week-title{color:white}
-.teach-acc .week-topics{color:#6EE7B7}
+
+/* ── PIN SCREEN ──────────────────────────────────────────────── */
+#pin-screen{
+  min-height:calc(100vh - 68px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 24px;
+  background:linear-gradient(160deg, var(--cream) 60%, var(--cream-dark) 100%);
+}
+.pin-hero{text-align:center;margin-bottom:36px}
+.pin-crest{
+  width:88px;height:88px;border-radius:50%;
+  background:var(--maroon);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:900;font-size:2.2rem;color:var(--gold);
+  margin:0 auto 18px;
+  box-shadow:var(--shadow-lg);
+  border:3px solid var(--gold);
+}
+.pin-school{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--maroon);margin-bottom:6px}
+.pin-motto{font-size:0.8rem;color:var(--ink-soft);font-style:italic;max-width:320px;margin:0 auto}
+
+.pin-card{
+  background:var(--white);
+  border:1.5px solid var(--cream-border);
+  border-radius:20px;
+  padding:36px 32px;
+  width:100%;max-width:360px;
+  text-align:center;
+  box-shadow:var(--shadow-lg);
+}
+.pin-label{font-size:0.78rem;font-weight:700;color:var(--maroon);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:6px}
+.pin-dot{
+  width:52px;height:60px;border-radius:12px;
+  background:var(--cream);border:2px solid var(--cream-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;font-weight:900;color:var(--maroon);
+  transition:border-color 0.2s,background 0.2s;
+}
+.pin-dot.filled{border-color:var(--maroon);background:var(--maroon-mist)}
+.pin-dot.error{border-color:#DC2626;background:#FEF2F2;animation:shake 0.4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.pin-error{color:#DC2626;font-size:0.8rem;min-height:22px;margin-bottom:10px;font-weight:600}
+
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:260px;margin:0 auto 0}
+.key{
+  padding:18px;border-radius:12px;
+  border:1.5px solid var(--cream-border);
+  background:var(--cream);
+  color:var(--ink);font-size:1.25rem;font-weight:700;
+  cursor:pointer;transition:all 0.15s;
+  font-family:'DM Sans',sans-serif;
+  box-shadow:0 1px 4px rgba(122,28,28,0.07);
+}
+.key:hover{background:var(--maroon-mist);border-color:var(--maroon);color:var(--maroon)}
+.key:active{transform:scale(0.94)}
+.key.del{color:var(--ink-soft);font-size:0.85rem}
+
+/* ── WELCOME FLASH ───────────────────────────────────────────── */
+#welcome-flash{
+  display:none;
+  position:fixed;inset:0;z-index:600;
+  background:var(--maroon);
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;
+  animation:fadeInFlash 0.35s ease both;
+}
+#welcome-flash.show{display:flex}
+@keyframes fadeInFlash{from{opacity:0}to{opacity:1}}
+.flash-name{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--gold)}
+.flash-msg{font-size:1rem;color:rgba(250,247,242,0.8)}
+
+/* ── PANELS ──────────────────────────────────────────────────── */
+#portal{display:none;animation:fadeUp 0.5s ease both}
+#portal.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+.portal-header{
+  background:var(--maroon);
+  padding:28px 32px;
+  display:flex;align-items:center;gap:18px;
+}
+.portal-avatar{
+  width:60px;height:60px;border-radius:50%;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;flex-shrink:0;
+  border:3px solid rgba(250,247,242,0.3);
+}
+.portal-header h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--cream)}
+.portal-header p{color:rgba(250,247,242,0.7);font-size:0.85rem;margin-top:3px}
+.lock-btn{
+  margin-left:auto;padding:8px 18px;border-radius:8px;
+  background:rgba(250,247,242,0.12);border:1px solid rgba(250,247,242,0.25);
+  color:rgba(250,247,242,0.85);font-size:0.8rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  white-space:nowrap;
+}
+.lock-btn:hover{background:rgba(250,247,242,0.22)}
+
+.panel-body{max-width:960px;margin:0 auto;padding:24px 24px 60px}
+
+/* ── TEACHER OVERVIEW ────────────────────────────────────────── */
+.teacher-overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+.ov-card{border-radius:14px;padding:20px;border:1.5px solid var(--cream-border);cursor:pointer;transition:all 0.2s;background:var(--white);box-shadow:var(--shadow)}
+.ov-card:hover{transform:translateY(-2px);border-color:var(--maroon);box-shadow:var(--shadow-lg)}
+.ov-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--maroon)}
+.ov-detail{font-size:0.75rem;color:var(--ink-soft);margin-top:3px}
+.ov-go{font-size:0.72rem;font-weight:700;margin-top:12px;display:inline-block;padding:5px 12px;border-radius:99px;background:var(--maroon);color:var(--cream)}
+.review-link{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--maroon);border:none;
+  border-radius:14px;padding:16px 20px;margin-bottom:24px;text-decoration:none;transition:all 0.2s;
+  box-shadow:var(--shadow);
+}
+.review-link:hover{background:var(--maroon-light);transform:translateY(-1px)}
+.review-link-text{font-weight:700;color:var(--cream);font-size:0.95rem}
+.review-link-sub{font-size:0.78rem;color:rgba(250,247,242,0.7);margin-top:2px}
+.review-link-arr{color:var(--gold);font-size:1.2rem}
+
+/* ── WEEK ACCORDION ──────────────────────────────────────────── */
+.week-section{margin-bottom:8px}
+.week-hd{
+  border-radius:var(--r);padding:15px 18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.2s;user-select:none;
+  background:var(--white);border:1.5px solid var(--cream-border);
+  box-shadow:0 1px 4px rgba(122,28,28,0.06);
+}
+.week-hd:hover,.week-hd.open{
+  border-color:var(--maroon);background:var(--maroon-mist);
+}
+.week-hd.open{border-radius:var(--r) var(--r) 0 0}
+.week-num{
+  width:36px;height:36px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:0.9rem;
+  background:var(--maroon);color:var(--cream);
+}
 .week-hd-left{display:flex;align-items:center;gap:12px}
-.week-num{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.95rem;flex-shrink:0}
-.week-title{font-weight:700;font-size:0.95rem}
-.week-topics{font-size:0.73rem;margin-top:2px}
-.week-chevron{font-size:1.1rem;transition:transform 0.25s;color:#9090A8}
-.week-hd.open .week-chevron{transform:rotate(180deg)}
-.week-status{padding:3px 10px;border-radius:99px;font-size:0.68rem;font-weight:700}
-.s-complete{background:#D1FAE5;color:#065F46}
-.s-partial{background:#FEF3C7;color:#92400E}
-.s-pending{background:#1F2937;color:#6B7280}
-.week-body{border-radius:0 0 14px 14px;padding:18px;display:none}
+.week-title{font-weight:700;font-size:0.92rem;color:var(--ink)}
+.week-topics{font-size:0.71rem;color:var(--ink-soft);margin-top:2px}
+.week-hd.open .week-title{color:var(--maroon)}
+.week-chevron{font-size:1rem;transition:transform 0.25s;color:var(--ink-soft)}
+.week-hd.open .week-chevron{transform:rotate(180deg);color:var(--maroon)}
+.week-status{padding:3px 10px;border-radius:99px;font-size:0.67rem;font-weight:700;white-space:nowrap}
+.s-complete{background:var(--success-bg);color:var(--success)}
+.s-partial{background:var(--warn-bg);color:var(--warn)}
+.s-pending{background:var(--cream-dark);color:var(--ink-soft)}
+
+.week-body{border-radius:0 0 var(--r) var(--r);padding:16px;display:none;background:var(--cream);border:1.5px solid var(--maroon);border-top:none}
 .week-body.open{display:block}
-.ks2-acc .week-body{background:#FFFBF5;border:2px solid #F59E0B;border-top:none}
-.ks3j-acc .week-body{background:#0D0D12;border:1px solid #7C3AED;border-top:none}
-.ks3a-acc .week-body{background:#060B14;border:1px solid #3B82F6;border-top:none}
-.teach-acc .week-body{background:#060F0A;border:1px solid #10B981;border-top:none}
-.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-.subj-card{border-radius:12px;padding:16px;position:relative;overflow:hidden}
-.ks2-acc .subj-card{background:white;border:1.5px solid #E7E5E4}
-.ks3j-acc .subj-card,.ks3a-acc .subj-card,.teach-acc .subj-card{background:#18181F;border:1px solid #2E2E3E}
+
+/* ── SUBJECT CARDS ───────────────────────────────────────────── */
+.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.subj-card{border-radius:12px;padding:15px;background:var(--white);border:1.5px solid var(--cream-border);position:relative;overflow:hidden;box-shadow:0 1px 4px rgba(122,28,28,0.06)}
 .subj-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .subj-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.subj-name{font-weight:700;font-size:0.9rem}
-.ks2-acc .subj-name{color:#1C1917}
-.ks3j-acc .subj-name,.ks3a-acc .subj-name,.teach-acc .subj-name{color:white}
-.subj-topic{font-size:0.72rem;color:#9CA3AF;margin-top:1px}
+.subj-name{font-weight:700;font-size:0.88rem;color:var(--ink)}
+.subj-topic{font-size:0.7rem;color:var(--ink-soft);margin-top:1px}
 .resources{display:flex;flex-direction:column;gap:7px}
-.res{display:flex;align-items:center;justify-content:space-between;padding:8px 11px;border-radius:8px;text-decoration:none;transition:all 0.18s}
-.ks2-acc .res{background:#F9FAFB;border:1px solid #E5E7EB}
-.ks3j-acc .res,.ks3a-acc .res,.teach-acc .res{background:#111118;border:1px solid #2E2E3E}
-.res:hover{transform:translateX(3px)}
+.res{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 11px;border-radius:8px;text-decoration:none;
+  transition:all 0.18s;background:var(--cream);border:1px solid var(--cream-border);
+}
+.res:hover{transform:translateX(3px);border-color:var(--maroon);background:var(--maroon-mist)}
 .res-left{display:flex;align-items:center;gap:7px}
-.res-label{font-size:0.8rem;font-weight:600}
-.ks2-acc .res-label{color:#374151}
-.ks3j-acc .res-label,.ks3a-acc .res-label,.teach-acc .res-label{color:#D1D5DB}
-.badge{font-size:0.65rem;font-weight:700;padding:2px 7px;border-radius:99px}
-.b-pdf{background:#EEF2FF;color:#4338CA}
+.res-label{font-size:0.78rem;font-weight:600;color:var(--ink)}
+.res:hover .res-label{color:var(--maroon)}
+.badge{font-size:0.63rem;font-weight:700;padding:2px 7px;border-radius:99px}
 .b-html{background:#ECFDF5;color:#065F46}
-.b-tbd{background:#1F2937;color:#6B7280}
-.res-arr{color:#9090A8;font-size:0.8rem}
-.ph-overlay{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:16px}
-.ks2-acc .ph-overlay{background:rgba(255,255,255,0.93)}
-.ks3j-acc .ph-overlay,.ks3a-acc .ph-overlay,.teach-acc .ph-overlay{background:rgba(24,24,31,0.95)}
-.ph-icon{font-size:1.8rem;opacity:0.4}
-.ph-text{font-size:0.8rem;font-weight:700;color:#9CA3AF}
-.ph-path{font-size:0.68rem;font-family:monospace;background:#1F2937;padding:2px 6px;border-radius:4px;color:#D1FAE5}
-.teacher-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
-@media(max-width:600px){.teacher-overview{grid-template-columns:1fr}}
-.ov-card{border-radius:14px;padding:20px;border:1px solid #2E2E3E;cursor:pointer;transition:all 0.2s}
-.ov-card:hover{transform:translateY(-2px)}
-.ov-card.ov-abrish{background:linear-gradient(135deg,#FEF3C7,#FFF7ED);border-color:#FCD34D}
-.ov-card.ov-jessica{background:linear-gradient(135deg,#1E1B2E,#1a1730);border-color:#4C1D95}
-.ov-card.ov-areej{background:linear-gradient(135deg,#0F1F2E,#0c1a27);border-color:#1E3A8A}
-.ov-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900}
-.ov-abrish .ov-name{color:#1C1917}
-.ov-jessica .ov-name,.ov-areej .ov-name{color:white}
-.ov-detail{font-size:0.78rem;margin-top:3px}
-.ov-abrish .ov-detail{color:#78716C}
-.ov-jessica .ov-detail,.ov-areej .ov-detail{color:#9090A8}
-.ov-go{font-size:0.75rem;font-weight:700;margin-top:12px;display:inline-block;padding:5px 12px;border-radius:99px}
-.ov-abrish .ov-go{background:#F59E0B;color:white}
-.ov-jessica .ov-go{background:#7C3AED;color:white}
-.ov-areej .ov-go{background:#3B82F6;color:white}
-.review-link{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#022C22,#065F46);border:1px solid rgba(16,185,129,0.4);border-radius:14px;padding:16px 20px;margin-bottom:28px;text-decoration:none;transition:all 0.2s}
-.review-link:hover{transform:translateY(-2px);border-color:#10B981}
-.review-link-text{font-weight:700;color:white;font-size:0.95rem}
-.review-link-sub{font-size:0.78rem;color:#6EE7B7;margin-top:2px}
-.review-link-arr{color:#6EE7B7;font-size:1.2rem}
-footer{border-top:1px solid #2E2E3E;padding:28px 24px;text-align:center;color:#4B5563;font-size:0.8rem}
-footer strong{color:#6B7280}
-code{background:#1F2937;padding:2px 6px;border-radius:4px;color:#D1FAE5;font-size:0.78rem}
+.b-pdf{background:#EEF2FF;color:#4338CA}
+.b-tbd{background:var(--cream-dark);color:var(--ink-soft)}
+.res-arr{color:var(--ink-soft);font-size:0.8rem}
+.res:hover .res-arr{color:var(--maroon)}
+
+/* placeholder overlay */
+.ph-overlay{
+  position:absolute;inset:0;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;text-align:center;padding:16px;
+  background:rgba(250,247,242,0.93);
+}
+.ph-icon{font-size:1.6rem;opacity:0.35}
+.ph-text{font-size:0.78rem;font-weight:700;color:var(--ink-soft)}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer{border-top:1.5px solid var(--cream-border);padding:28px 24px;text-align:center;color:var(--ink-soft);font-size:0.78rem;background:var(--white)}
+footer strong{color:var(--maroon)}
 </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav class="nav">
-<div class="nav-logo">
-<div class="nav-mark">H</div>
-<div class="nav-brand">HOS International <span>Learning Portal</span></div>
-</div>
-<div class="nav-motto">"I can do all things through Christ who strengthens me." — Philippians 4:13</div>
+  <div class="nav-logo">
+    <div class="nav-mark">H</div>
+    <div class="nav-brand">HOS International <span>Learning Portal</span></div>
+  </div>
+  <div class="nav-motto">"I can do all things through Christ who strengthens me." — Phil 4:13</div>
 </nav>
-<section class="hero">
-<div class="hero-badge">🎓 HOS International · 2025–2026</div>
-<h1>Your <span>Learning</span> Portal</h1>
-<p class="hero-sub">Select your name to access your lessons, worksheets and resources.</p>
-<div class="hero-stats">
-<div class="stat"><span class="stat-num">3</span><div class="stat-label">Students</div></div>
-<div class="stat"><span class="stat-num">24</span><div class="stat-label">Weeks</div></div>
-<div class="stat"><span class="stat-num">5</span><div class="stat-label">Subjects</div></div>
-<div class="stat"><span class="stat-num">4</span><div class="stat-label">Days / Week</div></div>
-</div>
-</section>
-<div class="selector" id="selector">
-<div class="selector-grid">
-<div class="stu-btn stu-abrish locked" onclick="requestAccess('abrish')">
-<div class="stu-level">KS2 · Level 3</div>
-<div class="stu-name">🌟 Abrish</div>
-<div class="stu-desc">Ages 7–9 · 5 Subjects</div>
-</div>
-<div class="stu-btn stu-jessica locked" onclick="requestAccess('jessica')">
-<div class="stu-level">KS3 · Level 6</div>
-<div class="stu-name">✨ Jessica</div>
-<div class="stu-desc">Ages 12–14 · 5 Subjects</div>
+
+<!-- PIN SCREEN -->
+<div id="pin-screen">
+  <div class="pin-hero">
+    <div class="pin-crest">H</div>
+    <div class="pin-school">House of Success</div>
+    <div class="pin-motto">"I can do all things through Christ who strengthens me." — Philippians 4:13</div>
+  </div>
+  <div class="pin-card">
+    <div class="pin-label">Enter your PIN</div>
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="dot0"></div>
+      <div class="pin-dot" id="dot1"></div>
+      <div class="pin-dot" id="dot2"></div>
+      <div class="pin-dot" id="dot3"></div>
+    </div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="keypad">
+      <button class="key" onclick="keyPress('1')">1</button>
+      <button class="key" onclick="keyPress('2')">2</button>
+      <button class="key" onclick="keyPress('3')">3</button>
+      <button class="key" onclick="keyPress('4')">4</button>
+      <button class="key" onclick="keyPress('5')">5</button>
+      <button class="key" onclick="keyPress('6')">6</button>
+      <button class="key" onclick="keyPress('7')">7</button>
+      <button class="key" onclick="keyPress('8')">8</button>
+      <button class="key" onclick="keyPress('9')">9</button>
+      <button class="key del" onclick="keyPress('clear')">CLR</button>
+      <button class="key" onclick="keyPress('0')">0</button>
+      <button class="key del" onclick="keyPress('del')">⌫</button>
+    </div>
+  </div>
 </div>
 
-<div class="stu-btn stu-teacher locked" onclick="requestAccess('teacher')">
-<div class="stu-level">Teacher · All Access</div>
-<div class="stu-name">📋 Teacher</div>
-<div class="stu-desc">View all students</div>
-</div>
-</div>
-</div>
-<div class="modal-overlay" id="modal">
-<div class="modal">
-<div class="modal-avatar" id="modal-avatar">🌟</div>
-<div class="modal-title" id="modal-title">Enter your PIN</div>
-<div class="modal-sub" id="modal-sub">Enter your 4-digit PIN to access your portal.</div>
-<div class="pin-dots" id="pin-dots">
-<div class="pin-dot" id="dot0"></div>
-<div class="pin-dot" id="dot1"></div>
-<div class="pin-dot" id="dot2"></div>
-<div class="pin-dot" id="dot3"></div>
-</div>
-<div class="modal-error" id="modal-error"></div>
-<div class="keypad">
-<button class="key" onclick="keyPress('1')">1</button>
-<button class="key" onclick="keyPress('2')">2</button>
-<button class="key" onclick="keyPress('3')">3</button>
-<button class="key" onclick="keyPress('4')">4</button>
-<button class="key" onclick="keyPress('5')">5</button>
-<button class="key" onclick="keyPress('6')">6</button>
-<button class="key" onclick="keyPress('7')">7</button>
-<button class="key" onclick="keyPress('8')">8</button>
-<button class="key" onclick="keyPress('9')">9</button>
-<button class="key del" onclick="keyPress('clear')">CLR</button>
-<button class="key" onclick="keyPress('0')">0</button>
-<button class="key del" onclick="keyPress('del')">⌫</button>
-</div>
-<button class="modal-cancel" onclick="closeModal()">Cancel</button>
-</div>
-</div>
-<div class="panel" id="panel-abrish">
-<div class="panel-header ks2">
-<div class="panel-avatar">🌟</div>
-<div><h2>Abrish</h2><p>KS2 Level 3 · Ages 7–9 · 24-Week Programme</p></div>
-<button class="lock-btn" onclick="lockPanel('abrish')">🔒 Lock</button>
-</div>
-<div id="weeks-abrish" class="ks2-acc"></div>
-</div>
-<div class="panel" id="panel-jessica">
-<div class="panel-header ks3-j">
-<div class="panel-avatar">✨</div>
-<div><h2>Jessica</h2><p>KS3 Level 6 · Ages 12–14 · 24-Week Programme</p></div>
-<button class="lock-btn" onclick="lockPanel('jessica')">🔒 Lock</button>
-</div>
-<div id="weeks-jessica" class="ks3j-acc"></div>
+<!-- WELCOME FLASH -->
+<div id="welcome-flash">
+  <div class="flash-name" id="flash-name"></div>
+  <div class="flash-msg" id="flash-msg"></div>
 </div>
 
-<div class="panel" id="panel-teacher">
-<div class="panel-header teacher">
-<div class="panel-avatar">📋</div>
-<div><h2>Teacher Overview</h2><p>All students · All weeks · Full access</p></div>
-<button class="lock-btn" onclick="lockPanel('teacher')">🔒 Lock</button>
-</div>
-<a href="Teacher_Review.html" target="_blank" class="review-link">
-<div>
-<div class="review-link-text">📊 Review Student Worksheet Submissions</div>
-<div class="review-link-sub">View answers saved by all students and leave feedback</div>
-</div>
-<span class="review-link-arr">→</span>
-</a>
-<div class="teacher-overview">
-<div class="ov-card ov-abrish" onclick="teacherGoTo('abrish')">
-<div class="ov-name">🌟 Abrish</div>
-<div class="ov-detail">KS2 Level 3 · 5 subjects</div>
-<div><span class="ov-go">View Abrish →</span></div>
-</div>
-<div class="ov-card ov-jessica" onclick="teacherGoTo('jessica')">
-<div class="ov-name">✨ Jessica</div>
-<div class="ov-detail">KS3 Level 6 · 5 subjects</div>
-<div><span class="ov-go">View Jessica →</span></div>
+<!-- PORTAL (shown after PIN) -->
+<div id="portal">
+  <div class="portal-header" id="portal-header">
+    <div class="portal-avatar" id="portal-avatar"></div>
+    <div>
+      <h2 id="portal-title"></h2>
+      <p id="portal-subtitle"></p>
+    </div>
+    <button class="lock-btn" onclick="lockPortal()">🔒 Lock</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
 </div>
 
-</div>
-<p style="color:#6EE7B7;font-weight:700;margin-bottom:12px;">📋 All Students — Week View</p>
-<div id="weeks-teacher" class="teach-acc"></div>
-</div>
 <footer>
-<p><strong>HOS International Learning Portal</strong></p>
-<p style="margin-top:8px">"I can do all things through Christ who strengthens me." — Philippians 4:13</p>
+  <p><strong>HOS International Learning Portal</strong></p>
+  <p style="margin-top:6px">"I can do all things through Christ who strengthens me." — Philippians 4:13</p>
 </footer>
-<script>
-const PINS = {
-  abrish:  '1234',
-  jessica: '5678',
-  teacher: '0000',
-};
-const AVATARS = {abrish:'🌟',jessica:'✨',teacher:'📋'};
-const NAMES   = {abrish:'Abrish',jessica:'Jessica',teacher:'Teacher'};
-const unlocked = {abrish:false,jessica:false,teacher:false};
-let currentTarget=null, currentPin='';
 
-function requestAccess(who){
-  if(unlocked[who]){openPanel(who);return;}
-  currentTarget=who; currentPin=''; updateDots();
-  document.getElementById('modal-avatar').textContent=AVATARS[who];
-  document.getElementById('modal-title').textContent=`Hi ${NAMES[who]} 👋`;
-  document.getElementById('modal-sub').textContent='Enter your 4-digit PIN to access your portal.';
-  document.getElementById('modal-error').textContent='';
-  document.getElementById('modal').classList.add('show');
-}
-function closeModal(){document.getElementById('modal').classList.remove('show');currentPin='';updateDots();}
-function keyPress(k){
-  if(k==='del') currentPin=currentPin.slice(0,-1);
-  else if(k==='clear') currentPin='';
-  else if(currentPin.length<4) currentPin+=k;
+<script>
+// ════════════════════════════════════════════════════════════════
+// STUDENTS — add/remove students here only. One entry per person.
+// PIN must be unique. avatar is an emoji. isTeacher gives full view.
+// ════════════════════════════════════════════════════════════════
+const STUDENTS = [
+  { id:'abrish',  pin:'1234', name:'Abrish',  avatar:'🌟', level:'KS2 · Level 3', greeting:'Welcome back, Abrish!',  isTeacher:false },
+  { id:'jessica', pin:'5678', name:'Jessica', avatar:'✨', level:'KS3 · Level 6', greeting:'Welcome back, Jessica!', isTeacher:false },
+  { id:'teacher', pin:'0000', name:'Teacher', avatar:'📋', level:'All Access',    greeting:'Good day, Teacher!',    isTeacher:true  },
+  // To add a new student: copy one line above, change id/pin/name/avatar/level/greeting
+];
+
+// ── PIN logic ─────────────────────────────────────────────────
+let currentPin = '';
+
+function keyPress(k) {
+  if (k === 'del')   currentPin = currentPin.slice(0,-1);
+  else if (k === 'clear') currentPin = '';
+  else if (currentPin.length < 4) currentPin += k;
   updateDots();
-  document.getElementById('modal-error').textContent='';
-  if(currentPin.length===4) setTimeout(checkPin,120);
+  document.getElementById('pin-error').textContent = '';
+  if (currentPin.length === 4) setTimeout(checkPin, 140);
 }
-function updateDots(){
-  for(let i=0;i<4;i++){
-    const d=document.getElementById('dot'+i);
-    d.textContent=i<currentPin.length?'●':'';
-    d.classList.toggle('filled',i<currentPin.length);
+
+function updateDots() {
+  for (let i=0;i<4;i++) {
+    const d = document.getElementById('dot'+i);
+    d.textContent = i < currentPin.length ? '●' : '';
+    d.classList.toggle('filled', i < currentPin.length);
     d.classList.remove('error');
   }
 }
-function checkPin(){
-  if(currentPin===PINS[currentTarget]){
-    unlocked[currentTarget]=true;
-    const btn=document.querySelector('.stu-'+currentTarget);
-    if(btn){btn.classList.remove('locked');btn.classList.add('unlocked');}
-    closeModal(); openPanel(currentTarget);
+
+function checkPin() {
+  const match = STUDENTS.find(s => s.pin === currentPin);
+  if (match) {
+    showWelcome(match);
   } else {
-    for(let i=0;i<4;i++) document.getElementById('dot'+i).classList.add('error');
-    document.getElementById('modal-error').textContent='❌ Wrong PIN — try again';
-    currentPin=''; setTimeout(updateDots,600);
+    for (let i=0;i<4;i++) document.getElementById('dot'+i).classList.add('error');
+    document.getElementById('pin-error').textContent = '❌ Incorrect PIN — try again';
+    currentPin = '';
+    setTimeout(updateDots, 600);
   }
 }
-function openPanel(who){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.stu-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+who).classList.add('active');
-  const btn=document.querySelector('.stu-'+who);
-  if(btn) btn.classList.add('active');
-  document.getElementById('panel-'+who).scrollIntoView({behavior:'smooth',block:'start'});
+
+// ── Welcome flash then open portal ───────────────────────────
+function showWelcome(student) {
+  const flash = document.getElementById('welcome-flash');
+  document.getElementById('flash-name').textContent = student.greeting;
+  document.getElementById('flash-msg').textContent = 'Loading your portal…';
+  flash.classList.add('show');
+  setTimeout(() => {
+    flash.classList.remove('show');
+    openPortal(student);
+  }, 1400);
 }
-function lockPanel(who){
-  unlocked[who]=false;
-  const btn=document.querySelector('.stu-'+who);
-  if(btn){btn.classList.add('locked');btn.classList.remove('unlocked','active');}
-  document.getElementById('panel-'+who).classList.remove('active');
-  document.getElementById('selector').scrollIntoView({behavior:'smooth'});
+
+// ── Open portal ───────────────────────────────────────────────
+function openPortal(student) {
+  document.getElementById('pin-screen').style.display = 'none';
+  document.getElementById('portal-avatar').textContent = student.avatar;
+  document.getElementById('portal-title').textContent = student.name;
+  document.getElementById('portal-subtitle').textContent =
+    student.level + ' · 24-Week Programme';
+
+  const body = document.getElementById('panel-body');
+  if (student.isTeacher) {
+    body.innerHTML = buildTeacherBody();
+  } else {
+    body.innerHTML = buildStudentBody(student.id);
+    runAutoDiscovery(student.id, body);
+  }
+
+  const portal = document.getElementById('portal');
+  portal.classList.add('active');
+  portal.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function teacherGoTo(who){
-  unlocked[who]=true;
-  const btn=document.querySelector('.stu-'+who);
-  if(btn){btn.classList.remove('locked');btn.classList.add('unlocked');}
-  openPanel(who);
+
+function lockPortal() {
+  currentPin = ''; updateDots();
+  document.getElementById('pin-error').textContent = '';
+  document.getElementById('portal').classList.remove('active');
+  document.getElementById('pin-screen').style.display = 'flex';
+  document.getElementById('pin-screen').scrollIntoView({behavior:'smooth'});
 }
-function toggleWeek(hd){
-  const body=hd.nextElementSibling;
-  const open=hd.classList.contains('open');
+
+// ── Card renderers ────────────────────────────────────────────
+function flatResCard(r, student) {
+  const href = (r.file.endsWith('.html') && student) ? r.file+'?student='+student : r.file;
+  return `<div class="subj-card">
+<div class="subj-top">
+  <div class="subj-icon" style="background:${r.bg}">${r.icon}</div>
+  <div><div class="subj-name">${r.name}</div><div class="subj-topic">${r.topic}</div></div>
+</div>
+<div class="resources">
+  <a href="${href}" class="res" target="_blank">
+    <div class="res-left"><span>▶️</span><span class="res-label">${r.label||'Open'}</span></div>
+    <div style="display:flex;align-items:center;gap:5px"><span class="badge ${r.badge}">${r.badgeText}</span><span class="res-arr">→</span></div>
+  </a>
+</div></div>`;
+}
+
+function phCard() {
+  return `<div class="subj-card" style="min-height:120px">
+<div class="ph-overlay"><div class="ph-icon">📂</div><div class="ph-text">Files not yet uploaded</div></div></div>`;
+}
+
+function weekHTML(w, student) {
+  const weekId = `week-${student}-${w.w}`;
+  const statusText = w.status==='s-complete'?'Complete':w.status==='s-partial'?'Partial':'Coming soon';
+  const inner = phCard();
+  return `<div class="week-section" id="${weekId}">
+<div class="week-hd" onclick="toggleWeek(this)">
+  <div class="week-hd-left">
+    <div class="week-num">${w.w}</div>
+    <div><div class="week-title">Week ${w.w} — ${w.title}</div>
+    <div class="week-topics">${w.topics}</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="week-status ${w.status||'s-pending'}">${statusText}</span>
+    <span class="week-chevron">▼</span>
+  </div>
+</div>
+<div class="week-body"><div class="subjects-grid">${inner}</div></div>
+</div>`;
+}
+
+function toggleWeek(hd) {
+  const body = hd.nextElementSibling;
+  const open = hd.classList.contains('open');
   hd.classList.toggle('open',!open);
   body.classList.toggle('open',!open);
 }
 
-// ── Card renderers ────────────────────────────────────────────
-
-function flatResCard(icon,bg,name,topic,file,badge,badgeText,label,student){
-  // Append ?student=X to HTML worksheet links so saving works cross-device
-  const href=(file.endsWith('.html')&&student)?file+'?student='+student:file;
-  return `<div class="subj-card">
-<div class="subj-top"><div class="subj-icon" style="background:${bg}">${icon}</div>
-<div><div class="subj-name">${name}</div><div class="subj-topic">${topic}</div></div></div>
-<div class="resources">
-<a href="${href}" class="res" target="_blank">
-<div class="res-left"><span>▶️</span><span class="res-label">${label||'Open'}</span></div>
-<div style="display:flex;align-items:center;gap:5px"><span class="badge ${badge}">${badgeText}</span><span class="res-arr">→</span></div>
-</a></div></div>`;
+function patchWeek(weekId, resources, student) {
+  const section = document.getElementById(weekId);
+  if (!section||!resources.length) return;
+  section.querySelector('.subjects-grid').innerHTML =
+    resources.map(r => flatResCard(r, student)).join('');
+  const st = section.querySelector('.week-status');
+  st.className = 'week-status s-complete'; st.textContent = 'Complete';
 }
 
-function phCard(icon,bg,name,topic){
-  return `<div class="subj-card" style="min-height:140px">
-<div class="subj-top"><div class="subj-icon" style="background:${bg}">${icon}</div>
-<div><div class="subj-name">${name}</div><div class="subj-topic">${topic}</div></div></div>
-<div class="ph-overlay"><div class="ph-icon">📂</div><div class="ph-text">Coming soon</div></div></div>`;
+// ── Week data ─────────────────────────────────────────────────
+const KS2_WEEKS = [
+  {w:1, title:'Introduction',         topics:'Creation · Phonics · Place Value · Working Scientifically · My Community', status:'s-pending'},
+  {w:2, title:'Core Foundations',     topics:'Adam & Eve · Sentences · Column Addition · Plants · Maps',                status:'s-pending'},
+  {w:3, title:'Story Writing',        topics:'Noah · Story Sentences · Subtraction · Rocks & Fossils · Ancient Egypt', status:'s-pending'},
+  {w:4, title:'Character & Number',   topics:'Abraham · Nouns & Verbs · Multiplication · Skeletons · Continents',      status:'s-pending'},
+  {w:5, title:'Descriptive Writing',  topics:'Joseph · Descriptive Writing · Times Tables · Muscles · Egypt Achievements', status:'s-pending'},
+  {w:6, title:'Spelling & Forces',    topics:'Moses · Spelling Rules · Division · Nutrition · Stone Age to Iron Age',  status:'s-pending'},
+  {w:7, title:'Non-Fiction',          topics:'Ten Commandments · Non-Fiction · Fractions · Light · Romans in Britain', status:'s-pending'},
+  {w:8, title:'Conjunctions',         topics:'Rahab · Compound Sentences · Fractions Compare · Reflection · Rights',   status:'s-pending'},
+  {w:9, title:'Settings & Magnets',   topics:'Gideon · Settings · Length & Perimeter · Magnets · Local Government',   status:'s-pending'},
+  {w:10,title:'Poetry',               topics:'Ruth · Poetry · Mass & Volume · Habitats · Climate Zones',               status:'s-pending'},
+  {w:11,title:'Adverbs & Sound',      topics:'Samuel · Adverbs · Time · Sound · Famous Explorers',                     status:'s-pending'},
+  {w:12,title:'Review',               topics:'Review & Assessment — All subjects',                                      status:'s-pending'},
+  {w:13,title:'Story Structure',      topics:'David & Goliath · Story Writing · Place Value 10,000 · Forces · Native Peoples', status:'s-pending'},
+  {w:14,title:'Prefixes & Suffixes',  topics:'Solomon · Prefixes & Suffixes · Word Problems · Sound & Hearing · Africa', status:'s-pending'},
+  {w:15,title:'Compare Two Texts',    topics:'Elijah · Compare Texts · Multiplication 6x7x9 · Life Cycles · Asia',    status:'s-pending'},
+  {w:16,title:'Apostrophes',          topics:'Jonah · Apostrophes · 2-digit × 1-digit · Habitats · Economics Basics', status:'s-pending'},
+  {w:17,title:'Information Writing',  topics:'Jesus is Born · Information Writing · Division Remainders · States of Matter · Trade', status:'s-pending'},
+  {w:18,title:'Direct Speech',        topics:'Jesus Loves Children · Direct Speech · Fractions of Amounts · Heating & Cooling · Victorian Era', status:'s-pending'},
+  {w:19,title:'Spelling Part 2',      topics:'Jesus Heals · Spelling Rules 2 · 2D Shapes · Water Cycle · Significant People', status:'s-pending'},
+  {w:20,title:'Paragraphs',           topics:'Good Samaritan · Paragraphs · 3D Shapes · Weather & Seasons · Environment', status:'s-pending'},
+  {w:21,title:'Letter Writing',       topics:'Jesus Dies & Rises · Letter Writing · Bar Charts · Science Project · World Religions', status:'s-pending'},
+  {w:22,title:'Storytelling',         topics:'Holy Spirit · Storytelling · Money · Review Science · Local History',    status:'s-pending'},
+  {w:23,title:'Editing',              topics:'Fruit of the Spirit · Editing Writing · Angles · Cumulative Review · My Country', status:'s-pending'},
+  {w:24,title:'End of Year',          topics:'End-of-Year Review & Showcase — All Subjects',                           status:'s-pending'},
+];
+
+const KS3_WEEKS = [
+  {w:1, title:'Foundations',          topics:'Bible Organisation · Narrative Writing · Place Value · Scientific Enquiry · History Sources', status:'s-pending'},
+  {w:2, title:'Deep Foundations',     topics:'Creation · Parts of Speech · Factors & Primes · Cells · Mesopotamia & Egypt', status:'s-pending'},
+  {w:3, title:'The Fall & Sentences', topics:'Genesis 3 · Simple/Compound/Complex · Fractions · Tissues & Organs · Ancient Greece', status:'s-pending'},
+  {w:4, title:'Noah & Punctuation',   topics:'Noah · Punctuation · Fractions Add/Sub · Nutrition · Roman Empire',      status:'s-pending'},
+  {w:5, title:'Abraham & Figurative', topics:'Abraham · Descriptive Writing · Fractions Mult/Div · Photosynthesis · Maps & Tools', status:'s-pending'},
+  {w:6, title:'Joseph & Percentages', topics:'Joseph · Spelling & Vocabulary · Decimals & % · Ecosystems · World Regions', status:'s-pending'},
+  {w:7, title:'Moses & Ratio',        topics:'Moses · Non-Fiction · Ratio · States of Matter · Climate & Biomes',      status:'s-pending'},
+  {w:8, title:'Ten Commandments',     topics:'Ten Commandments · Informative Writing · Algebra · Mixtures · Population', status:'s-pending'},
+  {w:9, title:'Joshua & Equations',   topics:'Joshua · Presentations · Equations · Elements & Periodic Table · Medieval Europe', status:'s-pending'},
+  {w:10,title:'David & Coordinates',  topics:'David · Poetry · Coordinates · Chemical Changes · The Crusades',         status:'s-pending'},
+  {w:11,title:'Prophets & Negatives', topics:'Prophets · Pronouns · Negative Numbers · Acids & Alkalis · Trade & Exploration', status:'s-pending'},
+  {w:12,title:'Review',               topics:'Review & Assessment — All subjects',                                      status:'s-pending'},
+  {w:13,title:'Birth of Jesus',       topics:'Luke 1-2 · Persuasive Writing · Angles · Forces · Transatlantic Slave Trade', status:'s-pending'},
+  {w:14,title:'Ministry of Jesus',    topics:'Ministry · Dialogue & Speech · 2D Shapes · Friction & Pressure · Industrial Revolution', status:'s-pending'},
+  {w:15,title:'Sermon on the Mount',  topics:'Matthew 5-7 · Compare Texts · Perimeter & Circles · Energy & Transfers · Colonialism', status:'s-pending'},
+  {w:16,title:'Parables',             topics:'Parables · Paragraphing · 3D Shapes · Sound & Light · Government & Democracy', status:'s-pending'},
+  {w:17,title:'Last Supper',          topics:'Last Supper · Letter Writing · Data & Averages · Earth & Space · World War I', status:'s-pending'},
+  {w:18,title:'Crucifixion',          topics:"Crucifixion & Resurrection · Drama & Scripts · Data Charts · Earth's Structure · WW2", status:'s-pending'},
+  {w:19,title:'Holy Spirit',          topics:'Acts 2 · Research & Note-taking · Probability · Reproduction · UN & Human Rights', status:'s-pending'},
+  {w:20,title:'Paul',                 topics:"Paul's Journeys · Verb Tenses · Two-step Equations · Adaptation · Natural Resources", status:'s-pending'},
+  {w:21,title:'Fruit of the Spirit',  topics:'Galatians 5 · Short Story · Sequences · Human Impact · Globalisation',   status:'s-pending'},
+  {w:22,title:'Armour of God',        topics:'Ephesians 6 · Debate · Symmetry · Electricity · Africa Geography',       status:'s-pending'},
+  {w:23,title:'Revelation & Hope',    topics:'Revelation · Editing · Real-world Maths · Science Project · Current Issues', status:'s-pending'},
+  {w:24,title:'End of Year',          topics:'End-of-Year Reflection & Celebration — All Subjects',                     status:'s-pending'},
+];
+
+// ── Build student body ────────────────────────────────────────
+function buildStudentBody(studentId) {
+  const weeks = studentId === 'abrish' ? KS2_WEEKS : KS3_WEEKS;
+  return weeks.map(w => weekHTML(w, studentId)).join('');
 }
 
-function weekHTML(wData,accClass,student){
-  const weekId=`week-${accClass}-${wData.w}`;
-  const isOpen=wData.w===2?' open':'';
-  const bodyOpen=wData.w===2?' open':'';
-  const statusText=wData.status==='s-complete'?'Complete':wData.status==='s-partial'?'Partial':'Coming soon';
+// ── Build teacher body ────────────────────────────────────────
+function buildTeacherBody() {
+  const overviewCards = STUDENTS.filter(s => !s.isTeacher).map(s => `
+<div class="ov-card" onclick="teacherViewStudent('${s.id}')">
+  <div class="ov-name">${s.avatar} ${s.name}</div>
+  <div class="ov-detail">${s.level}</div>
+  <div><span class="ov-go">View portal →</span></div>
+</div>`).join('');
 
-  let inner=`<div style="padding:20px;text-align:center;color:#6B7280;font-size:0.85rem;">
-<div style="font-size:1.8rem;margin-bottom:8px;">📂</div>
-<div style="font-weight:700;margin-bottom:4px;color:#9CA3AF;">Week ${wData.w} — checking for files…</div></div>`;
+  const teacherWeeks = KS3_WEEKS.map(w => weekHTML(w, 'teacher')).join('');
 
-  if(wData.subjects){
-    inner=wData.subjects.map(s=>{
-      const resHTML=s.resources.map(r=>`<a href="${s.base}/${r.file}${r.isWorksheet&&student?'?student='+student:''}" class="res" target="_blank">
-<div class="res-left"><span>${r.icon}</span><span class="res-label">${r.label}</span></div>
-<div style="display:flex;align-items:center;gap:5px"><span class="badge ${r.badge}">${r.badgeText}</span><span class="res-arr">→</span></div></a>`).join('');
-      return `<div class="subj-card">
-<div class="subj-top"><div class="subj-icon" style="background:${s.bg}">${s.icon}</div>
-<div><div class="subj-name">${s.name}</div><div class="subj-topic">${s.topic}</div></div></div>
-<div class="resources">${resHTML}</div></div>`;
-    }).join('');
-  }
-
-  return `<div class="week-section" id="${weekId}">
-<div class="week-hd${isOpen}" onclick="toggleWeek(this)">
-<div class="week-hd-left">
-<div class="week-num">${wData.w}</div>
-<div><div class="week-title">Week ${wData.w} — ${wData.title}</div>
-<div class="week-topics">${wData.topics}</div></div>
-</div>
-<div style="display:flex;align-items:center;gap:10px">
-<span class="week-status ${wData.status||'s-pending'}">${statusText}</span>
-<span class="week-chevron">▼</span>
-</div></div>
-<div class="week-body${bodyOpen}"><div class="subjects-grid">${inner}</div></div>
-</div>`;
+  return `
+<a href="Teacher_Review.html" target="_blank" class="review-link">
+  <div>
+    <div class="review-link-text">📊 Review Student Worksheet Submissions</div>
+    <div class="review-link-sub">View saved answers from all students</div>
+  </div>
+  <span class="review-link-arr">→</span>
+</a>
+<div class="teacher-overview">${overviewCards}</div>
+<p style="color:var(--maroon);font-weight:700;margin-bottom:12px;font-size:0.85rem;">📋 KS3 Week View (Jessica)</p>
+${teacherWeeks}`;
 }
 
-function patchWeek(weekId,resources,student){
-  const section=document.getElementById(weekId);
-  if(!section||!resources.length) return;
-  section.querySelector('.subjects-grid').innerHTML=
-    resources.map(r=>flatResCard(r.icon,r.bg,r.name,r.topic,r.file,r.badge,r.badgeText,r.label,student)).join('');
-  const st=section.querySelector('.week-status');
-  st.className='week-status s-complete'; st.textContent='Complete';
+function teacherViewStudent(id) {
+  const s = STUDENTS.find(x => x.id === id);
+  if (!s) return;
+  const body = document.getElementById('panel-body');
+  body.innerHTML = buildStudentBody(s.id);
+  runAutoDiscovery(s.id, body);
+  document.getElementById('portal').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ── File naming conventions ───────────────────────────────────
-
-function abrishCandidates(w){
-  const dayColors=['#FFF7ED','#EFF6FF','#EDE9FE','#FFF1F2','#ECFDF5'];
-  const list=[{icon:'✍️',bg:'#ECFDF5',name:'Writing Worksheets',
-    topic:'All 5 subjects — type your answers',
-    file:`Week${w}_Interactive_Lessons.html`,badge:'b-html',badgeText:'HTML'}];
-  for(let d=1;d<=5;d++)
-    list.push({icon:'🎮',bg:dayColors[d-1],name:`Day ${d} — Quiz Games`,
-      topic:'All 5 subjects — quizzes & activities',
-      file:`KS2_L3_Week${w}_Day${d}.html`,badge:'b-html',badgeText:'HTML'});
+// ── Auto-discovery ────────────────────────────────────────────
+function abrishCandidates(w) {
+  const cols = ['#FFF7ED','#EFF6FF','#EDE9FE','#FFF1F2','#ECFDF5'];
+  const list = [{icon:'✍️',bg:'#ECFDF5',name:'Writing Worksheets',topic:'All subjects — type your answers',file:`Week${w}_Interactive_Lessons.html`,badge:'b-html',badgeText:'HTML'}];
+  for (let d=1;d<=5;d++) list.push({icon:'🎮',bg:cols[d-1],name:`Day ${d} — Quiz Games`,topic:'All subjects — quizzes & activities',file:`KS2_L3_Week${w}_Day${d}.html`,badge:'b-html',badgeText:'HTML'});
   return list;
 }
-
-function ks3Candidates(w){
-  const dayColors=['rgba(244,63,94,0.12)','rgba(245,158,11,0.12)','rgba(16,185,129,0.12)','rgba(59,130,246,0.12)','rgba(139,92,246,0.12)'];
-  const list=[
-    {icon:'📖',bg:'rgba(139,92,246,0.15)',name:'Interactive Lesson',
-      topic:'All 5 subjects — teaching notes & key vocabulary',
-      file:`HOS_Week${w}_Lessons.html`,badge:'b-html',badgeText:'HTML'},
-    {icon:'📝',bg:'rgba(244,63,94,0.12)',name:'Lesson Notes',
-      topic:'Student-facing notes to read alongside the lesson',
-      file:`HOS_Week${w}_Student_Notes.html`,badge:'b-html',badgeText:'HTML'},
+function ks3Candidates(w) {
+  const cols = ['rgba(244,63,94,0.1)','rgba(245,158,11,0.1)','rgba(16,185,129,0.1)','rgba(59,130,246,0.1)','rgba(139,92,246,0.1)'];
+  const list = [
+    {icon:'📖',bg:'rgba(122,28,28,0.08)',name:'Interactive Lesson',topic:'All subjects — notes & key vocabulary',file:`HOS_Week${w}_Lessons.html`,badge:'b-html',badgeText:'HTML'},
+    {icon:'📝',bg:'rgba(122,28,28,0.06)',name:'Lesson Notes',topic:'Student notes to read alongside the lesson',file:`HOS_Week${w}_Student_Notes.html`,badge:'b-html',badgeText:'HTML'},
   ];
-  for(let d=1;d<=5;d++){
-    list.push({icon:'✍️',bg:dayColors[d-1],name:`Day ${d} Worksheets`,
-      topic:'All 5 subjects — written answers',
-      file:`KS3_L6_Week${w}_Day${d}_Worksheets.html`,badge:'b-html',badgeText:'HTML'});
-    list.push({icon:'🎯',bg:'rgba(124,58,237,0.15)',name:`Day ${d} — Full Revision`,
-      topic:'Cumulative review across all subjects',
-      file:`KS3_L6_Week${w}_Day${d}_REVISION.html`,badge:'b-html',badgeText:'HTML'});
+  for (let d=1;d<=5;d++) {
+    list.push({icon:'✍️',bg:cols[d-1],name:`Day ${d} Worksheets`,topic:'Written answers — saves automatically',file:`KS3_L6_Week${w}_Day${d}_Worksheets.html`,badge:'b-html',badgeText:'HTML'});
+    list.push({icon:'🎯',bg:'rgba(122,28,28,0.08)',name:`Day ${d} — Full Revision`,topic:'Cumulative review across all subjects',file:`KS3_L6_Week${w}_Day${d}_REVISION.html`,badge:'b-html',badgeText:'HTML'});
   }
   return list;
 }
 
-const _cache={};
-async function exists(path){
-  if(_cache[path]!==undefined) return _cache[path];
-  try{const r=await fetch(path,{method:'HEAD',cache:'no-store'});_cache[path]=r.ok;}
-  catch(e){_cache[path]=false;}
+const _cache = {};
+async function fileExists(path) {
+  if (_cache[path] !== undefined) return _cache[path];
+  try { const r = await fetch(path,{method:'HEAD',cache:'no-store'}); _cache[path]=r.ok; }
+  catch(e) { _cache[path]=false; }
   return _cache[path];
 }
-async function discover(candidates){
-  const checks=await Promise.all(candidates.map(async c=>({...c,ok:await exists(c.file)})));
-  return checks.filter(c=>c.ok);
+async function discover(candidates) {
+  const checks = await Promise.all(candidates.map(async c => ({...c, ok: await fileExists(c.file)})));
+  return checks.filter(c => c.ok);
 }
 
-// ── Static week data ──────────────────────────────────────────
-
-const KS2_WEEKS=[
-  {w:1,title:'Introduction',topics:'Creation · Phonics · Place Value · Working Scientifically · My Community',status:'s-pending'},
-  {w:2,title:'Core Foundations',topics:'Adam & Eve · Sentences · Column Addition · Plants · Maps',status:'s-partial',
-    subjects:[
-      {icon:'📖',bg:'#EDE9FE',name:'Bible',topic:'Adam & Eve — The First Family',base:'ks2-abrish/week2/bible',
-        resources:[{icon:'🎮',label:'Interactive Lesson',file:'lesson.html',badge:'b-html',badgeText:'HTML',isWorksheet:false}]},
-      {icon:'✏️',bg:'#FFF1F2',name:'English',topic:'Sentences — Types & Punctuation',base:'ks2-abrish/week2/english',
-        resources:[{icon:'🎮',label:'Interactive Lesson',file:'lesson.html',badge:'b-html',badgeText:'HTML',isWorksheet:false}]},
-      {icon:'🔢',bg:'#FFFBEB',name:'Maths',topic:'Addition — Column Method',base:'ks2-abrish/week2/maths',
-        resources:[{icon:'🎮',label:'Interactive Lesson',file:'lesson.html',badge:'b-html',badgeText:'HTML',isWorksheet:false}]},
-      {icon:'🌱',bg:'#ECFDF5',name:'Science',topic:'Plants — Parts & Functions',base:'ks2-abrish/week2/science',
-        resources:[{icon:'🎮',label:'Interactive Lesson',file:'lesson.html',badge:'b-html',badgeText:'HTML',isWorksheet:false}]},
-      {icon:'🗺️',bg:'#EFF6FF',name:'Social Studies',topic:'Maps — Our Local Area',base:'ks2-abrish/week2/social',
-        resources:[{icon:'🎮',label:'Interactive Lesson',file:'lesson.html',badge:'b-html',badgeText:'HTML',isWorksheet:false}]},
-    ]},
-  ...Array.from({length:22},(_,i)=>({w:i+3,title:['Story Writing','Character & Number','Descriptive Writing','Spelling & Forces','Non-Fiction','Conjunctions','Settings & Magnets','Poetry','Adverbs & Sound','Review','Story Structure','Prefixes & Suffixes','Compare Two Texts','Apostrophes','Information Writing','Direct Speech','Spelling Part 2','Paragraphs','Letter Writing','Storytelling','Editing','End of Year'][i],topics:['Noah · Story Sentences · Subtraction · Rocks & Fossils · Ancient Egypt','Abraham · Nouns & Verbs · Multiplication · Skeletons · Continents','Joseph · Descriptive Writing · Times Tables · Muscles · Ancient Egypt Achievements','Moses · Spelling Rules · Division · Nutrition · Stone Age to Iron Age','Ten Commandments · Non-Fiction · Fractions · Light · Romans in Britain','Rahab · Compound Sentences · Fractions Compare · Reflection · Rules & Rights','Gideon · Settings · Length & Perimeter · Magnets · Local Government','Ruth · Poetry · Mass & Volume · Habitats · Climate Zones','Samuel · Adverbs · Time · Sound · Famous Explorers','Review & Assessment — All subjects','David & Goliath · Story Writing · Place Value 10,000 · Forces · Native Peoples','Solomon · Prefixes & Suffixes · Word Problems · Sound & Hearing · Africa','Elijah · Compare Texts · Multiplication 6x7x9 · Life Cycles · Asia','Jonah · Apostrophes · 2-digit × 1-digit · Habitats · Economics Basics','Jesus is Born · Information Writing · Division Remainders · States of Matter · Trade','Jesus Loves Children · Direct Speech · Fractions of Amounts · Heating & Cooling · Victorian Era','Jesus Heals · Spelling Rules 2 · 2D Shapes · Water Cycle · Significant People','Good Samaritan · Paragraphs · 3D Shapes · Weather & Seasons · Environment','Jesus Dies & Rises · Letter Writing · Bar Charts · Science Project · World Religions','Holy Spirit · Storytelling · Money · Review Science · Local History','Fruit of the Spirit · Editing Writing · Angles · Cumulative Review · My Country','End-of-Year Review & Showcase — All Subjects'][i],status:'s-pending'}))
-];
-
-const KS3_WEEKS=[
-  {w:1,title:'Foundations',topics:'How the Bible is Organised · Narrative Writing · Place Value · Scientific Enquiry · History Sources',status:'s-partial'},
-  {w:2,title:'Deep Foundations',topics:'Creation · Parts of Speech · Factors & Primes · Cells · Mesopotamia & Egypt',status:'s-partial'},
-  ...Array.from({length:22},(_,i)=>({w:i+3,title:['The Fall & Sentences','Noah & Punctuation','Abraham & Figurative','Joseph & Percentages','Moses & Ratio','Ten Commandments','Joshua & Equations','David & Coordinates','Prophets & Negatives','Review','Birth of Jesus','Ministry of Jesus','Sermon on the Mount','Parables','Last Supper','Crucifixion','Holy Spirit','Paul','Fruit of the Spirit','Armour of God','Revelation & Hope','End of Year'][i],topics:['Genesis 3 · Simple/Compound/Complex · Fractions · Tissues & Organs · Ancient Greece','Noah · Punctuation · Fractions Add/Sub · Nutrition · Roman Empire','Abraham · Descriptive Writing · Fractions Mult/Div · Photosynthesis · Maps & Tools','Joseph · Spelling & Vocabulary · Decimals & % · Ecosystems · World Regions','Moses · Non-Fiction · Ratio · States of Matter · Climate & Biomes','Ten Commandments · Informative Writing · Algebra · Mixtures · Population','Joshua · Presentations · Equations · Elements & Periodic Table · Medieval Europe','David · Poetry · Coordinates · Chemical Changes · The Crusades','Prophets · Pronouns · Negative Numbers · Acids & Alkalis · Trade & Exploration','Review & Assessment — All subjects','Luke 1-2 · Persuasive Writing · Angles · Forces · Transatlantic Slave Trade','Ministry · Dialogue & Speech · 2D Shapes · Friction & Pressure · Industrial Revolution','Matthew 5-7 · Compare Texts · Perimeter & Circles · Energy & Transfers · Colonialism','Parables · Paragraphing · 3D Shapes · Sound & Light · Government & Democracy','Last Supper · Letter Writing · Data & Averages · Earth & Space · World War I','Crucifixion & Resurrection · Drama & Scripts · Data Charts · Earth\'s Structure · WW2 & Holocaust','Acts 2 · Research & Note-taking · Probability · Reproduction · UN & Human Rights','Paul\'s Journeys · Verb Tenses · Two-step Equations · Adaptation · Natural Resources','Galatians 5 · Short Story · Sequences · Human Impact · Globalisation','Ephesians 6 · Debate · Symmetry · Electricity · Africa Geography','Revelation · Editing · Real-world Maths · Science Project · Current Issues','End-of-Year Reflection & Celebration — All Subjects'][i],status:'s-pending'}))
-];
-
-// ── Init & auto-discovery ─────────────────────────────────────
-
-function initPanels(){
-  document.getElementById('weeks-abrish').innerHTML=
-    KS2_WEEKS.map(w=>weekHTML(w,'ks2-acc','abrish')).join('');
-  document.getElementById('weeks-jessica').innerHTML=
-    KS3_WEEKS.map(w=>weekHTML(w,'ks3j-acc','jessica')).join('');
-  document.getElementById('weeks-teacher').innerHTML=
-    KS3_WEEKS.map(w=>weekHTML(w,'teach-acc','teacher')).join('');
-  runAutoDiscovery();
-}
-
-async function runAutoDiscovery(){
-  // Abrish
-  await Promise.all(KS2_WEEKS.filter(w=>w.w>=3).map(async w=>{
-    const found=await discover(abrishCandidates(w.w));
-    if(found.length) patchWeek(`week-ks2-acc-${w.w}`,found,'abrish');
+async function runAutoDiscovery(studentId, container) {
+  const isAbrish = studentId === 'abrish';
+  const weeks = isAbrish ? KS2_WEEKS : KS3_WEEKS;
+  await Promise.all(weeks.map(async w => {
+    const cands = isAbrish ? abrishCandidates(w.w) : ks3Candidates(w.w);
+    const found = await discover(cands);
+    if (found.length) patchWeek(`week-${studentId}-${w.w}`, found, studentId);
   }));
-
-  // KS3 — check once, patch jessica + teacher
-  await Promise.all(KS3_WEEKS.filter(w=>w.w>=3).map(async w=>{
-    const found=await discover(ks3Candidates(w.w));
-    if(!found.length) return;
-    patchWeek(`week-ks3j-acc-${w.w}`,found,'jessica');
-    patchWeek(`week-teach-acc-${w.w}`,found,'teacher');
-  }));
+  // teacher view also needs KS3 patched
+  if (studentId === 'teacher') {
+    await Promise.all(KS3_WEEKS.map(async w => {
+      const found = await discover(ks3Candidates(w.w));
+      if (found.length) patchWeek(`week-teacher-${w.w}`, found, 'jessica');
+    }));
+  }
 }
 
 initPanels();
+function initPanels(){}  // no-op — portal builds on demand
 </script>
 </body>
 </html>
