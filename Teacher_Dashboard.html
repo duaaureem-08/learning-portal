@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Dashboard — HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --cream:        #FAF7F2;
+  --cream-dark:   #F0EBE1;
+  --cream-border: #DDD0BC;
+  --maroon:       #7A1C1C;
+  --maroon-light: #9B2626;
+  --maroon-deep:  #5C1414;
+  --maroon-mist:  rgba(122,28,28,0.07);
+  --gold:         #C49A3C;
+  --ink:          #2C1A0E;
+  --ink-mid:      #5C3D2A;
+  --ink-soft:     #8B6B55;
+  --white:        #FFFFFF;
+  --success:      #2D6A4F;
+  --success-bg:   #D8F3DC;
+  --warn:         #92400E;
+  --warn-bg:      #FEF3C7;
+  --danger:       #991B1B;
+  --danger-bg:    #FEE2E2;
+  --shadow:       0 2px 12px rgba(122,28,28,0.10);
+  --shadow-lg:    0 8px 32px rgba(122,28,28,0.14);
+  --r:            12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+
+/* NAV */
+.nav{background:var(--maroon);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 16px rgba(92,20,20,0.25)}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-mark{width:38px;height:38px;border-radius:9px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.05rem;color:var(--maroon-deep)}
+.nav-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--cream)}
+.nav-title span{color:rgba(250,247,242,0.55);font-weight:400;font-size:0.72rem;display:block;margin-top:-2px}
+.back-btn{padding:7px 16px;border-radius:8px;background:rgba(250,247,242,0.12);border:1px solid rgba(250,247,242,0.25);color:var(--cream);font-size:0.8rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s}
+.back-btn:hover{background:rgba(250,247,242,0.22)}
+
+/* LAYOUT */
+.page{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+.page-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--maroon);margin-bottom:6px}
+.page-sub{color:var(--ink-soft);font-size:0.85rem;margin-bottom:28px}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--cream-dark);border-radius:12px;padding:4px;margin-bottom:28px;flex-wrap:wrap}
+.tab{padding:9px 20px;border-radius:9px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all 0.18s;white-space:nowrap}
+.tab.active{background:var(--white);color:var(--maroon);box-shadow:var(--shadow)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--white);border:1.5px solid var(--cream-border);border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.card-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--maroon);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card-title span{font-size:1.2rem}
+
+/* STUDENT SELECTOR */
+.student-pills{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.pill{padding:8px 20px;border-radius:99px;border:2px solid var(--cream-border);background:var(--white);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.18s;color:var(--ink-soft)}
+.pill.active{background:var(--maroon);border-color:var(--maroon);color:var(--white)}
+
+/* FORM ELEMENTS */
+input[type="text"],input[type="email"],input[type="date"],input[type="tel"],input[type="number"],textarea,select{
+  width:100%;padding:9px 13px;border:1.5px solid var(--cream-border);border-radius:9px;
+  font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--ink);background:var(--cream);
+  transition:border-color 0.18s;outline:none;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--maroon);background:var(--white)}
+textarea{resize:vertical;min-height:80px}
+label{display:block;font-size:0.75rem;font-weight:700;color:var(--ink-soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column}
+.btn{padding:10px 24px;border-radius:9px;border:none;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.18s}
+.btn-primary{background:var(--maroon);color:var(--white)}
+.btn-primary:hover{background:var(--maroon-light)}
+.btn-sm{padding:6px 14px;font-size:0.78rem}
+.save-toast{display:none;background:var(--success-bg);color:var(--success);padding:8px 16px;border-radius:8px;font-size:0.8rem;font-weight:700;margin-left:12px}
+.save-toast.show{display:inline-block}
+
+/* ATTENDANCE GRID */
+.att-week-label{font-size:0.7rem;font-weight:700;color:var(--ink-soft);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;margin-top:16px}
+.att-week-label:first-child{margin-top:0}
+.att-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:4px}
+.att-day{
+  border-radius:8px;padding:8px 4px;text-align:center;cursor:pointer;
+  border:1.5px solid var(--cream-border);background:var(--cream);
+  transition:all 0.15s;user-select:none;
+}
+.att-day:hover{border-color:var(--maroon)}
+.att-day .day-name{font-size:0.65rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;margin-bottom:3px}
+.att-day .day-status{font-size:0.75rem;font-weight:700}
+.att-day.present{background:var(--success-bg);border-color:var(--success);color:var(--success)}
+.att-day.present .day-status::before{content:'✓ Present'}
+.att-day.absent{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.att-day.absent .day-status::before{content:'✗ Absent'}
+.att-day.late{background:var(--warn-bg);border-color:#D97706;color:var(--warn)}
+.att-day.late .day-status::before{content:'⚡ Late'}
+.att-day.none .day-status::before{content:'— Mark'}
+.att-day.none .day-status{color:var(--ink-soft)}
+.att-summary{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.att-stat{font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px}
+.att-stat.p{background:var(--success-bg);color:var(--success)}
+.att-stat.a{background:var(--danger-bg);color:var(--danger)}
+.att-stat.l{background:var(--warn-bg);color:var(--warn)}
+
+/* WEEK SELECTOR */
+.week-nav{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.week-nav button{padding:6px 14px;border-radius:8px;border:1.5px solid var(--cream-border);background:var(--white);cursor:pointer;font-size:0.85rem;font-weight:700;color:var(--maroon);transition:all 0.15s}
+.week-nav button:hover{background:var(--maroon-mist);border-color:var(--maroon)}
+.week-nav .wk-label{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);min-width:120px;text-align:center}
+
+/* SCORES TABLE */
+.scores-period-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.period-tab{padding:7px 16px;border-radius:99px;border:1.5px solid var(--cream-border);background:var(--white);font-size:0.8rem;font-weight:700;cursor:pointer;color:var(--ink-soft);transition:all 0.18s}
+.period-tab.active{background:var(--maroon);border-color:var(--maroon);color:var(--white)}
+.period-tab.midterm{border-color:var(--gold);color:var(--warn)}
+.period-tab.midterm.active{background:var(--gold);color:var(--white)}
+.period-tab.finals{border-color:var(--maroon-deep);color:var(--maroon-deep)}
+.period-tab.finals.active{background:var(--maroon-deep);color:var(--white)}
+
+.scores-table{width:100%;border-collapse:collapse}
+.scores-table th{text-align:left;font-size:0.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.06em;padding:8px 12px;border-bottom:1.5px solid var(--cream-border)}
+.scores-table td{padding:10px 12px;border-bottom:1px solid var(--cream-border);vertical-align:middle}
+.scores-table tr:last-child td{border-bottom:none}
+.score-input-wrap{display:flex;align-items:center;gap:6px}
+.score-input-wrap input{width:70px;text-align:center}
+.score-input-wrap .sep{color:var(--ink-soft);font-weight:700}
+.score-input-wrap .total-in{width:60px;text-align:center}
+.grade-badge{padding:3px 10px;border-radius:99px;font-size:0.72rem;font-weight:700;min-width:36px;text-align:center;display:inline-block}
+.grade-A{background:#D1FAE5;color:#065F46}
+.grade-B{background:#DBEAFE;color:#1E40AF}
+.grade-C{background:var(--warn-bg);color:var(--warn)}
+.grade-D{background:#FEE2E2;color:#991B1B}
+.grade-F{background:#F3F4F6;color:#6B7280}
+
+/* CHARTS */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.charts-grid{grid-template-columns:1fr}}
+.chart-wrap{background:var(--white);border:1.5px solid var(--cream-border);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.chart-title{font-size:0.82rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px}
+.chart-canvas{position:relative;height:240px}
+
+/* OVERVIEW STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--white);border:1.5px solid var(--cream-border);border-radius:12px;padding:16px;text-align:center;box-shadow:0 1px 4px rgba(122,28,28,0.06)}
+.stat-card .stat-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--maroon)}
+.stat-card .stat-lbl{font-size:0.72rem;color:var(--ink-soft);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px}
+
+/* PROFILE STUDENT CARDS */
+.profile-student-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .form-grid{grid-template-columns:1fr}
+  .charts-grid{grid-template-columns:1fr}
+  .att-grid{grid-template-columns:repeat(5,1fr);gap:4px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-mark">H</div>
+    <div class="nav-title">Teacher Dashboard <span>HOS International</span></div>
+  </div>
+  <a href="index.html" class="back-btn">← Back to Portal</a>
+</nav>
+
+<div class="page">
+  <div class="page-title">📊 Teacher Dashboard</div>
+  <div class="page-sub">Manage student profiles, attendance, scores and track progress.</div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('overview')">📈 Overview</button>
+    <button class="tab" onclick="switchTab('profiles')">👤 Student Profiles</button>
+    <button class="tab" onclick="switchTab('attendance')">📅 Attendance</button>
+    <button class="tab" onclick="switchTab('scores')">📝 Scores</button>
+    <button class="tab" onclick="switchTab('progress')">📊 Progress Charts</button>
+  </div>
+
+  <!-- ══════════ OVERVIEW ══════════ -->
+  <div class="tab-panel active" id="tab-overview">
+    <div id="overview-content">
+      <p style="color:var(--ink-soft);font-size:0.85rem;">Loading overview…</p>
+    </div>
+  </div>
+
+  <!-- ══════════ PROFILES ══════════ -->
+  <div class="tab-panel" id="tab-profiles">
+    <div class="profile-student-tabs" id="profile-pills"></div>
+    <div class="card">
+      <div class="card-title"><span>👤</span> <span id="profile-heading">Student Profile</span>
+        <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="saveProfile()">Save Profile</button>
+        <span class="save-toast" id="profile-toast">Saved ✓</span>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label>Full Name</label><input type="text" id="p-name" placeholder="e.g. Abrish Khan"></div>
+        <div class="form-group"><label>Date of Birth</label><input type="date" id="p-dob"></div>
+        <div class="form-group"><label>Level / Class</label><input type="text" id="p-level" placeholder="e.g. KS2 Level 3"></div>
+        <div class="form-group"><label>Student Email</label><input type="email" id="p-semail" placeholder="student@email.com"></div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label>Parent / Guardian Name</label><input type="text" id="p-pname" placeholder="e.g. Mrs Khan"></div>
+        <div class="form-group"><label>Parent Email</label><input type="email" id="p-pemail" placeholder="parent@email.com"></div>
+        <div class="form-group"><label>Parent Phone</label><input type="tel" id="p-pphone" placeholder="+92 300 0000000"></div>
+      </div>
+      <div class="form-group"><label>Notes</label><textarea id="p-notes" placeholder="Any additional notes about this student…"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ══════════ ATTENDANCE ══════════ -->
+  <div class="tab-panel" id="tab-attendance">
+    <div class="student-pills" id="att-pills"></div>
+    <div class="card">
+      <div class="card-title"><span>📅</span> Attendance
+        <div class="week-nav" style="margin-left:auto;margin-bottom:0">
+          <button onclick="attWeek(-1)">◀</button>
+          <span class="wk-label" id="att-week-label">Week 1</span>
+          <button onclick="attWeek(1)">▶</button>
+        </div>
+      </div>
+      <div id="att-grid-container"></div>
+      <div class="att-summary" id="att-summary"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>📊</span> Attendance Summary — Full Term</div>
+      <div id="att-term-summary"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ SCORES ══════════ -->
+  <div class="tab-panel" id="tab-scores">
+    <div class="student-pills" id="score-pills"></div>
+    <div class="card">
+      <div class="card-title"><span>📝</span> Scores
+        <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="saveScores()">Save Scores</button>
+        <span class="save-toast" id="scores-toast">Saved ✓</span>
+      </div>
+      <div class="scores-period-tabs" id="period-tabs"></div>
+      <table class="scores-table" id="scores-table">
+        <thead><tr>
+          <th>Subject</th><th>Score / Total</th><th>%</th><th>Grade</th>
+        </tr></thead>
+        <tbody id="scores-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════ PROGRESS ══════════ -->
+  <div class="tab-panel" id="tab-progress">
+    <div class="student-pills" id="progress-pills"></div>
+    <div class="charts-grid">
+      <div class="chart-wrap">
+        <div class="chart-title">Subject Scores — Bar Chart</div>
+        <div class="chart-canvas"><canvas id="bar-chart"></canvas></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Progress Over Time — Line Chart</div>
+        <div class="chart-canvas"><canvas id="line-chart"></canvas></div>
+      </div>
+    </div>
+    <div class="charts-grid" style="margin-top:20px">
+      <div class="chart-wrap">
+        <div class="chart-title">Attendance — This Term</div>
+        <div class="chart-canvas"><canvas id="att-chart"></canvas></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Average Score by Subject — All Periods</div>
+        <div class="chart-canvas"><canvas id="avg-chart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════════════════════════
+const SB_URL = 'https://ldftwnsixhgpfldhlkyq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
+
+// Add students here — matches your portal STUDENTS array
+// To add a new student: add one line below
+const STUDENTS = [
+  { id:'abrish',  name:'Abrish',  avatar:'🌟', level:'KS2 · Level 3' },
+  { id:'jessica', name:'Jessica', avatar:'✨', level:'KS3 · Level 6' },
+];
+
+const SUBJECTS = ['Bible','English','Maths','Science','Humanities'];
+const DAYS     = ['Mon','Tue','Wed','Thu','Fri'];
+const TOTAL_WEEKS = 24;
+
+// Monthly periods + special assessments
+const PERIODS = [
+  { id:'month1',  label:'Month 1',  type:'monthly',  weeks:'Weeks 1–4'   },
+  { id:'month2',  label:'Month 2',  type:'monthly',  weeks:'Weeks 5–8'   },
+  { id:'midterm', label:'Mid-Term', type:'midterm',  weeks:'Week 12'     },
+  { id:'month4',  label:'Month 4',  type:'monthly',  weeks:'Weeks 13–16' },
+  { id:'month5',  label:'Month 5',  type:'monthly',  weeks:'Weeks 17–20' },
+  { id:'finals',  label:'Finals',   type:'finals',   weeks:'Week 24'     },
+];
+
+// ── Supabase helpers ──────────────────────────────────────────
+const sbHeaders = {
+  'apikey': SB_KEY,
+  'Authorization': 'Bearer ' + SB_KEY,
+  'Content-Type': 'application/json',
+  'Prefer': 'resolution=merge-duplicates,return=minimal'
+};
+
+async function sbGet(table, params) {
+  const q = Object.entries(params).map(([k,v])=>`${k}=${encodeURIComponent(v)}`).join('&');
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?${q}`, {headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
+  return r.json();
+}
+async function sbUpsert(table, body) {
+  await fetch(`${SB_URL}/rest/v1/${table}`, {method:'POST', headers:sbHeaders, body:JSON.stringify(body)});
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+let activeStudent = STUDENTS[0].id;
+let attWeekNum    = 1;
+let activePeriod  = PERIODS[0].id;
+let attData       = {};   // attData[studentId][week][day] = status
+let scoresData    = {};   // scoresData[studentId][period][subject] = {score, total}
+let profileData   = {};   // profileData[studentId] = {...}
+let barChart, lineChart, attChart, avgChart;
+
+// ══════════════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active', ['overview','profiles','attendance','scores','progress'][i]===name));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if (name==='overview')   renderOverview();
+  if (name==='progress')   renderCharts();
+}
+
+// ══════════════════════════════════════════════════════════════
+// PILLS (student selector)
+// ══════════════════════════════════════════════════════════════
+function makePills(containerId, onSelect) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = STUDENTS.map(s =>
+    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="selectStudent('${s.id}','${containerId}',${onSelect.toString()})">${s.avatar} ${s.name}</button>`
+  ).join('');
+}
+function selectStudent(id, containerId, cb) {
+  activeStudent = id;
+  document.querySelectorAll(`#${containerId} .pill`).forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
+  cb();
+}
+
+// ══════════════════════════════════════════════════════════════
+// PROFILES
+// ══════════════════════════════════════════════════════════════
+function initProfiles() {
+  const el = document.getElementById('profile-pills');
+  el.innerHTML = STUDENTS.map(s =>
+    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchProfile('${s.id}')">${s.avatar} ${s.name}</button>`
+  ).join('');
+  loadProfile(activeStudent);
+}
+
+function switchProfile(id) {
+  activeStudent = id;
+  document.querySelectorAll('#profile-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
+  loadProfile(id);
+}
+
+async function loadProfile(id) {
+  if (profileData[id]) { fillProfileForm(profileData[id]); return; }
+  try {
+    const rows = await sbGet('student_profiles', {id:`eq.${id}`, select:'*'});
+    const d = (rows&&rows[0]) ? rows[0] : {id};
+    profileData[id] = d;
+    fillProfileForm(d);
+  } catch(e) { fillProfileForm({id}); }
+  document.getElementById('profile-heading').textContent =
+    (STUDENTS.find(s=>s.id===id)||{name:id}).name + ' — Profile';
+}
+
+function fillProfileForm(d) {
+  document.getElementById('p-name').value   = d.name   ||'';
+  document.getElementById('p-dob').value    = d.dob    ||'';
+  document.getElementById('p-level').value  = d.level  ||'';
+  document.getElementById('p-semail').value = d.student_email||'';
+  document.getElementById('p-pname').value  = d.parent_name ||'';
+  document.getElementById('p-pemail').value = d.parent_email||'';
+  document.getElementById('p-pphone').value = d.parent_phone||'';
+  document.getElementById('p-notes').value  = d.notes  ||'';
+}
+
+async function saveProfile() {
+  const id = activeStudent;
+  const d = {
+    id, updated_at: new Date().toISOString(),
+    name:          document.getElementById('p-name').value,
+    dob:           document.getElementById('p-dob').value   ||null,
+    level:         document.getElementById('p-level').value,
+    student_email: document.getElementById('p-semail').value,
+    parent_name:   document.getElementById('p-pname').value,
+    parent_email:  document.getElementById('p-pemail').value,
+    parent_phone:  document.getElementById('p-pphone').value,
+    notes:         document.getElementById('p-notes').value,
+  };
+  profileData[id] = d;
+  await sbUpsert('student_profiles', d);
+  showToast('profile-toast');
+}
+
+// ══════════════════════════════════════════════════════════════
+// ATTENDANCE
+// ══════════════════════════════════════════════════════════════
+function initAttendance() {
+  const el = document.getElementById('att-pills');
+  el.innerHTML = STUDENTS.map(s =>
+    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchAtt('${s.id}')">${s.avatar} ${s.name}</button>`
+  ).join('');
+  loadAttendance(activeStudent);
+}
+
+function switchAtt(id) {
+  activeStudent = id;
+  document.querySelectorAll('#att-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
+  renderAttGrid();
+  renderAttTermSummary();
+}
+
+function attWeek(dir) {
+  attWeekNum = Math.max(1, Math.min(TOTAL_WEEKS, attWeekNum + dir));
+  document.getElementById('att-week-label').textContent = `Week ${attWeekNum}`;
+  renderAttGrid();
+}
+
+async function loadAttendance(id) {
+  if (!attData[id]) attData[id] = {};
+  try {
+    const rows = await sbGet('attendance', {student_id:`eq.${id}`, select:'week,day,status'});
+    if (rows) rows.forEach(r => {
+      if (!attData[id][r.week]) attData[id][r.week] = {};
+      attData[id][r.week][r.day] = r.status;
+    });
+  } catch(e) {}
+  renderAttGrid();
+  renderAttTermSummary();
+}
+
+function getAttStatus(id, week, day) {
+  return (attData[id]&&attData[id][week]&&attData[id][week][day]) || 'none';
+}
+
+function cycleAtt(week, day) {
+  const id = activeStudent;
+  if (!attData[id]) attData[id] = {};
+  if (!attData[id][week]) attData[id][week] = {};
+  const cur = getAttStatus(id, week, day);
+  const next = cur==='none'?'present':cur==='present'?'absent':cur==='absent'?'late':'none';
+  attData[id][week][day] = next;
+  sbUpsert('attendance', {student_id:id, week, day, status:next});
+  renderAttGrid();
+  renderAttTermSummary();
+}
+
+function renderAttGrid() {
+  const id = activeStudent;
+  const w  = attWeekNum;
+  const container = document.getElementById('att-grid-container');
+  let p=0, a=0, l=0;
+  const html = DAYS.map(day => {
+    const st = getAttStatus(id, w, day);
+    if(st==='present') p++;
+    if(st==='absent')  a++;
+    if(st==='late')    l++;
+    return `<div class="att-day ${st}" onclick="cycleAtt(${w},'${day}')">
+      <div class="day-name">${day}</div>
+      <div class="day-status"></div>
+    </div>`;
+  }).join('');
+  container.innerHTML = `<div class="att-grid">${html}</div>`;
+
+  const summary = document.getElementById('att-summary');
+  summary.innerHTML = `
+    <span class="att-stat p">✓ Present: ${p}</span>
+    <span class="att-stat a">✗ Absent: ${a}</span>
+    <span class="att-stat l">⚡ Late: ${l}</span>
+    <span style="font-size:0.78rem;color:var(--ink-soft);padding:4px 0">Click a day to cycle: Mark → Present → Absent → Late</span>`;
+}
+
+function renderAttTermSummary() {
+  const id = activeStudent;
+  let totP=0, totA=0, totL=0, totDays=0;
+  for (let w=1;w<=TOTAL_WEEKS;w++) {
+    DAYS.forEach(day=>{
+      const st=getAttStatus(id,w,day);
+      if(st!=='none') totDays++;
+      if(st==='present') totP++;
+      if(st==='absent')  totA++;
+      if(st==='late')    totL++;
+    });
+  }
+  const pct = totDays ? Math.round((totP+totL)*100/totDays) : 0;
+  document.getElementById('att-term-summary').innerHTML = `
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-val" style="color:var(--success)">${totP}</div><div class="stat-lbl">Days Present</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--danger)">${totA}</div><div class="stat-lbl">Days Absent</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--warn)">${totL}</div><div class="stat-lbl">Days Late</div></div>
+      <div class="stat-card"><div class="stat-val">${pct}%</div><div class="stat-lbl">Attendance Rate</div></div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// SCORES
+// ══════════════════════════════════════════════════════════════
+function initScores() {
+  const el = document.getElementById('score-pills');
+  el.innerHTML = STUDENTS.map(s =>
+    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchScores('${s.id}')">${s.avatar} ${s.name}</button>`
+  ).join('');
+
+  const ptabs = document.getElementById('period-tabs');
+  ptabs.innerHTML = PERIODS.map(p =>
+    `<button class="period-tab ${p.id===activePeriod?'active':''} ${p.type==='midterm'?'midterm':p.type==='finals'?'finals':''}"
+      onclick="switchPeriod('${p.id}')">${p.label}<br><small style="font-weight:400;opacity:0.7">${p.weeks}</small></button>`
+  ).join('');
+
+  loadScores(activeStudent);
+}
+
+function switchScores(id) {
+  activeStudent = id;
+  document.querySelectorAll('#score-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
+  renderScoresTable();
+}
+
+function switchPeriod(id) {
+  activePeriod = id;
+  document.querySelectorAll('.period-tab').forEach(t=>t.classList.toggle('active', t.textContent.startsWith(PERIODS.find(p=>p.id===id).label)));
+  renderScoresTable();
+}
+
+async function loadScores(id) {
+  if (!scoresData[id]) scoresData[id] = {};
+  try {
+    const rows = await sbGet('scores', {student_id:`eq.${id}`, select:'period,subject,score,total,score_type'});
+    if (rows) rows.forEach(r => {
+      if (!scoresData[id][r.period]) scoresData[id][r.period] = {};
+      scoresData[id][r.period][r.subject] = {score:r.score, total:r.total};
+    });
+  } catch(e) {}
+  renderScoresTable();
+}
+
+function getScore(id, period, subject) {
+  return (scoresData[id]&&scoresData[id][period]&&scoresData[id][period][subject]) || {score:'',total:100};
+}
+
+function gradeFromPct(pct) {
+  if (pct===null||pct===''||isNaN(pct)) return {letter:'—', cls:'grade-F'};
+  if (pct>=90) return {letter:'A+', cls:'grade-A'};
+  if (pct>=80) return {letter:'A',  cls:'grade-A'};
+  if (pct>=70) return {letter:'B',  cls:'grade-B'};
+  if (pct>=60) return {letter:'C',  cls:'grade-C'};
+  if (pct>=50) return {letter:'D',  cls:'grade-D'};
+  return {letter:'F', cls:'grade-F'};
+}
+
+function renderScoresTable() {
+  const id = activeStudent;
+  const p  = activePeriod;
+  const tbody = document.getElementById('scores-tbody');
+  tbody.innerHTML = SUBJECTS.map(sub => {
+    const d = getScore(id, p, sub);
+    const pct = d.score!==''&&d.total ? Math.round(d.score/d.total*100) : null;
+    const g = gradeFromPct(pct);
+    return `<tr>
+      <td style="font-weight:700">${sub}</td>
+      <td><div class="score-input-wrap">
+        <input type="number" min="0" max="9999" placeholder="—"
+          id="sc-${sub}" value="${d.score}"
+          oninput="onScoreInput('${sub}')">
+        <span class="sep">/</span>
+        <input type="number" min="1" max="9999" placeholder="100"
+          id="tot-${sub}" value="${d.total||100}"
+          oninput="onScoreInput('${sub}')">
+      </div></td>
+      <td id="pct-${sub}" style="font-weight:700;color:var(--maroon)">${pct!==null?pct+'%':'—'}</td>
+      <td><span class="grade-badge ${g.cls}" id="grade-${sub}">${g.letter}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function onScoreInput(sub) {
+  const sc  = parseFloat(document.getElementById('sc-'+sub).value);
+  const tot = parseFloat(document.getElementById('tot-'+sub).value)||100;
+  const pct = !isNaN(sc) ? Math.round(sc/tot*100) : null;
+  const g   = gradeFromPct(pct);
+  document.getElementById('pct-'+sub).textContent   = pct!==null ? pct+'%' : '—';
+  document.getElementById('grade-'+sub).textContent = g.letter;
+  document.getElementById('grade-'+sub).className   = 'grade-badge '+g.cls;
+}
+
+async function saveScores() {
+  const id = activeStudent;
+  const p  = activePeriod;
+  const period = PERIODS.find(x=>x.id===p);
+  if (!scoresData[id]) scoresData[id] = {};
+  if (!scoresData[id][p]) scoresData[id][p] = {};
+
+  const rows = SUBJECTS.map(sub => {
+    const sc  = document.getElementById('sc-'+sub).value;
+    const tot = document.getElementById('tot-'+sub).value||100;
+    scoresData[id][p][sub] = {score:sc, total:tot};
+    return {student_id:id, period:p, subject:sub, score:parseFloat(sc)||0, total:parseFloat(tot)||100, score_type:period.type};
+  });
+  await sbUpsert('scores', rows);
+  showToast('scores-toast');
+}
+
+// ══════════════════════════════════════════════════════════════
+// OVERVIEW
+// ══════════════════════════════════════════════════════════════
+function renderOverview() {
+  const rows = STUDENTS.map(s => {
+    const profile = profileData[s.id]||{};
+    let totP=0, totA=0, totL=0, totDays=0;
+    for(let w=1;w<=TOTAL_WEEKS;w++) DAYS.forEach(day=>{
+      const st=getAttStatus(s.id,w,day);
+      if(st!=='none') totDays++;
+      if(st==='present') totP++;
+      if(st==='absent')  totA++;
+      if(st==='late')    totL++;
+    });
+    const attPct = totDays ? Math.round((totP+totL)*100/totDays) : null;
+
+    // latest period score average
+    let latestPeriod = null, latestAvg = null;
+    for (let i=PERIODS.length-1;i>=0;i--) {
+      const pid = PERIODS[i].id;
+      const pd = scoresData[s.id]&&scoresData[s.id][pid];
+      if (pd) {
+        const vals = SUBJECTS.map(sub=>pd[sub]&&pd[sub].score&&pd[sub].total?pd[sub].score/pd[sub].total*100:null).filter(v=>v!==null);
+        if (vals.length) { latestAvg=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length); latestPeriod=PERIODS[i].label; break; }
+      }
+    }
+
+    return `<div class="card" style="margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <div style="font-size:2rem">${s.avatar}</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--maroon)">${profile.name||s.name}</div>
+          <div style="font-size:0.78rem;color:var(--ink-soft)">${s.level}${profile.parent_name?' · Parent: '+profile.parent_name:''}</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-val" style="color:var(--success)">${totP}</div><div class="stat-lbl">Days Present</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--danger)">${totA}</div><div class="stat-lbl">Days Absent</div></div>
+        <div class="stat-card"><div class="stat-val">${attPct!==null?attPct+'%':'—'}</div><div class="stat-lbl">Attendance</div></div>
+        <div class="stat-card"><div class="stat-val">${latestAvg!==null?latestAvg+'%':'—'}</div><div class="stat-lbl">${latestPeriod||'No scores yet'}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('overview-content').innerHTML = rows;
+}
+
+// ══════════════════════════════════════════════════════════════
+// CHARTS
+// ══════════════════════════════════════════════════════════════
+function initProgressPills() {
+  const el = document.getElementById('progress-pills');
+  el.innerHTML = STUDENTS.map(s =>
+    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchProgress('${s.id}')">${s.avatar} ${s.name}</button>`
+  ).join('');
+}
+
+function switchProgress(id) {
+  activeStudent = id;
+  document.querySelectorAll('#progress-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
+  renderCharts();
+}
+
+const COLORS = ['#7A1C1C','#C49A3C','#2D6A4F','#1E40AF','#6B21A8'];
+const COLORS_LIGHT = ['rgba(122,28,28,0.15)','rgba(196,154,60,0.15)','rgba(45,106,79,0.15)','rgba(30,64,175,0.15)','rgba(107,33,168,0.15)'];
+
+function renderCharts() {
+  const id = activeStudent;
+  initProgressPills();
+
+  // ── Bar chart: latest period scores by subject ──
+  const latestPeriod = [...PERIODS].reverse().find(p => scoresData[id]&&scoresData[id][p.id]&&SUBJECTS.some(s=>scoresData[id][p.id][s]?.score!==''));
+  const barData = SUBJECTS.map(sub => {
+    if (!latestPeriod) return null;
+    const d = scoresData[id]&&scoresData[id][latestPeriod.id]&&scoresData[id][latestPeriod.id][sub];
+    return d&&d.score!==''&&d.total ? Math.round(d.score/d.total*100) : null;
+  });
+
+  if (barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('bar-chart'), {
+    type:'bar',
+    data:{ labels:SUBJECTS, datasets:[{
+      label: latestPeriod ? latestPeriod.label+' (%)' : 'No data',
+      data: barData,
+      backgroundColor: COLORS,
+      borderRadius: 8,
+    }]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ y:{ min:0, max:100, ticks:{callback:v=>v+'%'} } } }
+  });
+
+  // ── Line chart: average score per period over time ──
+  const lineDatasets = SUBJECTS.map((sub,i) => ({
+    label: sub,
+    data: PERIODS.map(p => {
+      const d = scoresData[id]&&scoresData[id][p.id]&&scoresData[id][p.id][sub];
+      return d&&d.score!==''&&d.total ? Math.round(d.score/d.total*100) : null;
+    }),
+    borderColor: COLORS[i],
+    backgroundColor: COLORS_LIGHT[i],
+    tension: 0.3,
+    spanGaps: true,
+    pointRadius: 5,
+  }));
+
+  if (lineChart) lineChart.destroy();
+  lineChart = new Chart(document.getElementById('line-chart'), {
+    type:'line',
+    data:{ labels: PERIODS.map(p=>p.label), datasets: lineDatasets },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:10, font:{size:10} } } },
+      scales:{ y:{ min:0, max:100, ticks:{callback:v=>v+'%'} } } }
+  });
+
+  // ── Attendance doughnut ──
+  let totP=0, totA=0, totL=0;
+  for(let w=1;w<=TOTAL_WEEKS;w++) DAYS.forEach(day=>{
+    const st=getAttStatus(id,w,day);
+    if(st==='present') totP++;
+    if(st==='absent')  totA++;
+    if(st==='late')    totL++;
+  });
+
+  if (attChart) attChart.destroy();
+  attChart = new Chart(document.getElementById('att-chart'), {
+    type:'doughnut',
+    data:{ labels:['Present','Absent','Late'],
+      datasets:[{ data:[totP,totA,totL], backgroundColor:['#2D6A4F','#991B1B','#D97706'], borderWidth:0 }]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:10, font:{size:10} } } } }
+  });
+
+  // ── Avg bar: average per subject across all periods ──
+  const avgData = SUBJECTS.map(sub => {
+    const vals = PERIODS.map(p=>{
+      const d=scoresData[id]&&scoresData[id][p.id]&&scoresData[id][p.id][sub];
+      return d&&d.score!==''&&d.total?d.score/d.total*100:null;
+    }).filter(v=>v!==null);
+    return vals.length ? Math.round(vals.reduce((a,b)=>a+b,0)/vals.length) : null;
+  });
+
+  if (avgChart) avgChart.destroy();
+  avgChart = new Chart(document.getElementById('avg-chart'), {
+    type:'bar',
+    data:{ labels:SUBJECTS, datasets:[{
+      label:'Average %',
+      data: avgData,
+      backgroundColor: COLORS_LIGHT,
+      borderColor: COLORS,
+      borderWidth: 2,
+      borderRadius: 8,
+    }]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ y:{ min:0, max:100, ticks:{callback:v=>v+'%'} } } }
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════════════════
+function showToast(id) {
+  const el = document.getElementById(id);
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+// ══════════════════════════════════════════════════════════════
+// INIT — load all data on page open
+// ══════════════════════════════════════════════════════════════
+async function init() {
+  await Promise.all(STUDENTS.map(async s => {
+    await loadAttendance(s.id);
+    await loadScores(s.id);
+  }));
+  initProfiles();
+  initAttendance();
+  initScores();
+  initProgressPills();
+  renderOverview();
+}
+
+init();
+</script>
+</body>
+</html>
