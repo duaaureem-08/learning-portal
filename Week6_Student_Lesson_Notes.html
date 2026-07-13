@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 6 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--mgray:#CFD8DC;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+.dt{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:8px 0}
+.dt-cell{background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:6px;padding:6px 3px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;color:var(--teal)}
+.dt-cell input{width:100%;border:none;background:transparent;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;color:var(--teal);outline:none}
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.rule-card{border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px;border:2px solid}
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:14px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+.rbow-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.rbow-bar{width:4px;border-radius:4px;min-height:40px;flex-shrink:0}
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}.dt{grid-template-columns:repeat(3,1fr)}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 6 · My Lesson Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS = [
+  {id:'cover', label:'🏠 Cover',   col:'#0F6E56'},
+  {id:'eng',   label:'📖 English', col:'#185FA5'},
+  {id:'maths', label:'🔢 Maths',   col:'#0F6E56'},
+  {id:'sci',   label:'🥗 Science', col:'#C2410C'},
+  {id:'hum',   label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',   label:'✝️ Bible',   col:'#B71C1C'},
+];
+
+const PAGES = {
+
+/* ══════════════════════════════════════════════════════════
+   COVER PAGE
+══════════════════════════════════════════════════════════ */
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#185FA5);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 6 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Spelling Rules — Year 3/4 Word List','#1E40AF','#DBEAFE'],
+      ['🔢','Maths','Division — Sharing and Grouping','#065F46','#D1FAE5'],
+      ['🥗','Science','Nutrition — What We Eat and Why','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','Ancient Egypt — Achievements','#3730A3','#E0E7FF'],
+      ['✝️','Bible','Joseph — Forgiving Those Who Hurt You','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Use this booklet to read, learn and practise. Every page has words in English, Arabic and Urdu! 🌍</div>
+</div>`,
+
+/* ══════════════════════════════════════════════════════════
+   ENGLISH — Spelling Rules
+══════════════════════════════════════════════════════════ */
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#185FA5,#1E40AF)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 6</div>
+  <div class="banner-title">📖 English — Spelling Rules</div>
+  <div class="banner-sub">Year 3/4 Word List · Suffixes &amp; Exception Words · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Suffix = <strong>لاحقہ (lāhiqa)</strong> — Urdu · <strong>لاحقة</strong> — Arabic<br/>
+A suffix is a group of letters added to the END of a word to change its meaning!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK — KEY WORDS</div>
+${[
+  ['✏️ Suffix','Letters added to the END of a word. E.g. -ing, -ed, -er, -est.','لاحقہ / لاحقة','\"run + ning = running\"'],
+  ['📏 Root word','The main word BEFORE you add anything to it.','اصل لفظ / جذر الكلمة','\"The root word of running is run.\"'],
+  ['⚡ Exception word','A word that does NOT follow the normal rules — must be learned!','استثنا / استثناء','\"The word \'caught\' is an exception word.\"'],
+  ['🔄 Double','Write the last letter TWICE before adding the suffix.','دوہرانا / مضاعفة','\"hop → hopp-ing (double the p!)\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:#185FA5">
+  <div class="v-word" style="color:#185FA5">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE 4 SPELLING RULES FOR ADDING SUFFIXES</div>
+
+<div class="rule-card" style="border-color:#185FA5;background:#E6F1FB">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#185FA5;margin-bottom:6px">📘 RULE 1 — Just ADD the suffix</div>
+  <div style="font-size:13px;line-height:1.8">When does it apply? → The word ends in TWO consonants OR has a long vowel sound.<br/>
+  ✅ <strong>fast</strong> → fast<u>er</u>, fast<u>est</u> &nbsp;·&nbsp; <strong>play</strong> → play<u>ing</u>, play<u>ed</u> &nbsp;·&nbsp; <strong>kind</strong> → kind<u>er</u>, kind<u>est</u></div>
+</div>
+
+<div class="rule-card" style="border-color:#C2410C;background:#FFF0E6">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#C2410C;margin-bottom:6px">🔴 RULE 2 — DOUBLE the last consonant</div>
+  <div style="font-size:13px;line-height:1.8">When does it apply? → Short vowel sound + ONE consonant at the end.<br/>
+  ✅ <strong>hop</strong> → hopp<u>ing</u> &nbsp;·&nbsp; <strong>big</strong> → bigg<u>er</u> &nbsp;·&nbsp; <strong>run</strong> → runn<u>ing</u> &nbsp;·&nbsp; <strong>hot</strong> → hott<u>er</u></div>
+</div>
+
+<div class="rule-card" style="border-color:#0F6E56;background:#E1F5EE">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#0F6E56;margin-bottom:6px">🟢 RULE 3 — DROP the silent 'e'</div>
+  <div style="font-size:13px;line-height:1.8">When does it apply? → The word ends in a silent 'e'.<br/>
+  ✅ <strong>bake</strong> → bak<u>ing</u> &nbsp;·&nbsp; <strong>hope</strong> → hop<u>ed</u> &nbsp;·&nbsp; <strong>nice</strong> → nic<u>er</u> &nbsp;·&nbsp; <strong>smile</strong> → smil<u>ing</u></div>
+</div>
+
+<div class="rule-card" style="border-color:#534AB7;background:#EEEDFE">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#534AB7;margin-bottom:6px">💜 RULE 4 — Change 'y' to 'i'</div>
+  <div style="font-size:13px;line-height:1.8">When does it apply? → The word ends in a consonant + 'y'.<br/>
+  ✅ <strong>happy</strong> → happ<u>ier</u>, happ<u>iest</u> &nbsp;·&nbsp; <strong>carry</strong> → carr<u>ied</u> &nbsp;·&nbsp; <strong>funny</strong> → funn<u>ier</u></div>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>SUFFIX PRACTICE TABLE</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Root word</th><th>Rule</th><th>+ -ing</th><th>+ -ed</th><th>+ -er / -est</th></tr></thead>
+<tbody>
+<tr><td><strong>play</strong></td><td>Rule 1</td><td>playing</td><td>played</td><td>—</td></tr>
+<tr><td><strong>hop</strong></td><td>Rule 2</td><td>hopping</td><td>hopped</td><td>—</td></tr>
+<tr><td><strong>bake</strong></td><td>Rule 3</td><td>baking</td><td>baked</td><td>baker</td></tr>
+<tr><td><strong>happy</strong></td><td>Rule 4</td><td>—</td><td>—</td><td>happier / happiest</td></tr>
+<tr><td><strong>run</strong></td><td>Rule 2</td><td>running</td><td>—</td><td>—</td></tr>
+<tr><td><strong>nice</strong></td><td>Rule 3</td><td>—</td><td>—</td><td>nicer / nicest</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>EXCEPTION WORDS — GROUP 1</div>
+<div class="tip"><strong>These words do NOT follow normal rules. Learn them by heart!</strong><br/>Read → look carefully → cover → write → check.</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Word</th><th>Simple meaning</th><th>Write it here!</th></tr></thead>
+<tbody>
+${[
+  ['accident','something that happens by mistake'],
+  ['address','where you live or work'],
+  ['answer','what you say after a question'],
+  ['believe','to think something is true'],
+  ['bicycle','a vehicle with two wheels you pedal'],
+  ['breathe','to take air in and out of the body'],
+].map(([w,m])=>`<tr><td><strong>${w}</strong></td><td>${m}</td><td><input style="width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;padding:2px" placeholder="write here"/></td></tr>`).join('')}
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>EXCEPTION WORDS — GROUP 2</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Word</th><th>Simple meaning</th><th>Write it here!</th></tr></thead>
+<tbody>
+${[
+  ['build','to make something using materials'],
+  ['busy','when you have a lot to do'],
+  ['caught','past tense of catch'],
+  ['certain','when you are sure about something'],
+  ['complete','to finish something fully'],
+  ['different','not the same'],
+].map(([w,m])=>`<tr><td><strong>${w}</strong></td><td>${m}</td><td><input style="width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;padding:2px" placeholder="write here"/></td></tr>`).join('')}
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">6</span>FILL IN THE BLANKS — EXCEPTION WORDS</div>
+${[
+  ['I _______ the ball before it hit the ground.','caught'],
+  ['She rode her _______ to school every morning.','bicycle'],
+  ['He did not _______ me when I told him the news.','believe'],
+  ['The teacher said, "Are you _______ that is correct?"','certain'],
+  ['The two sisters look very _______ from each other.','different'],
+].map(([q,ans],i)=>`
+<div class="q-box">
+  <div class="q-label">Sentence ${i+1} — write the missing word</div>
+  <div class="q-text">${q}</div>
+  <input class="dline" style="margin-top:8px" placeholder="Missing word: _______________"/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>MY SPELLING CHECKLIST</div>
+<div class="q-box">
+${[
+  'I know Rule 1: long vowel or 2 consonants — just add the suffix.',
+  'I know Rule 2: short vowel + 1 consonant — double the consonant.',
+  'I know Rule 3: silent \'e\' — drop the \'e\', then add the suffix.',
+  'I know Rule 4: consonant + \'y\' — change \'y\' to \'i\', then add.',
+  'I can spell all 12 exception words from Groups 1 and 2.',
+].map(item=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px"><span style="width:18px;height:18px;border:2px solid var(--blue);border-radius:4px;flex-shrink:0;display:inline-block"></span>${item}</div>`).join('')}
+</div>
+
+<div class="remember" style="background:#185FA5">⭐ REMEMBER: 4 rules for adding suffixes. Exception words — learn them by heart! A great speller practises every day. 📝</div>`,
+
+/* ══════════════════════════════════════════════════════════
+   MATHS — Division
+══════════════════════════════════════════════════════════ */
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#0F6E56,#065F46)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 6</div>
+  <div class="banner-title">🔢 Maths — Division</div>
+  <div class="banner-sub">Sharing and Grouping · ÷2 ÷3 ÷4 ÷5 ÷8 ÷10 · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Division = <strong>تقسیم (taqseem)</strong> — Urdu &amp; Arabic<br/>
+Division means splitting a total into EQUAL parts. If you share equally, everyone gets the SAME amount!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['➗ Division','Splitting a number into equal groups or equal shares.','تقسیم / قسمة','\"12 ÷ 3 = 4. We divided 12 into 3 equal groups.\"'],
+  ['📦 Dividend','The BIG number we are dividing up.','مقسوم / المقسوم','\"In 12 ÷ 3 = 4, the dividend is 12.\"'],
+  ['🔢 Divisor','The number we divide BY.','مقسوم علیہ / المقسوم عليه','\"In 12 ÷ 3 = 4, the divisor is 3.\"'],
+  ['✅ Quotient','The ANSWER to a division.','حاصل تقسیم / الخارج','\"In 12 ÷ 3 = 4, the quotient is 4.\"'],
+  ['🔄 Inverse','The opposite operation — multiplication is the inverse of division.','الٹا عمل / العكس','\"12 ÷ 3 = 4 is the inverse of 4 × 3 = 12.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:#0F6E56">
+  <div class="v-word" style="color:#0F6E56">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>TWO WAYS TO DIVIDE</div>
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">🤲 SHARING</div>
+  <div style="font-size:13px;line-height:1.8">Split the total into a fixed number of groups — each group gets the same amount.<br/>
+  E.g. "Share 12 sweets between 3 friends." → 12 ÷ 3 = <strong>4 each</strong>.</div>
+</div>
+<div class="card" style="background:#D1FAE5;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#0F6E56;margin-bottom:8px">📦 GROUPING</div>
+  <div style="font-size:13px;line-height:1.8">Count how many groups of a certain size fit into the total.<br/>
+  E.g. "How many groups of 3 are in 12?" → 12 ÷ 3 = <strong>4 groups</strong>.</div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>FACT FAMILIES</div>
+<div class="tip"><strong>Every multiplication fact gives TWO division facts!</strong> These three numbers are a "fact family".</div>
+<div style="background:#D1FAE5;border:2px solid #0F6E56;border-radius:var(--rsm);padding:12px 16px;font-family:'Courier New',monospace;font-size:13px;line-height:2;margin-bottom:14px">
+3 × 4 = 12 &nbsp;→&nbsp; 12 ÷ 3 = 4 &nbsp;and&nbsp; 12 ÷ 4 = 3<br/>
+5 × 8 = 40 &nbsp;→&nbsp; 40 ÷ 5 = 8 &nbsp;and&nbsp; 40 ÷ 8 = 5<br/>
+4 × 9 = 36 &nbsp;→&nbsp; 36 ÷ 4 = 9 &nbsp;and&nbsp; 36 ÷ 9 = 4
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>DIVISION TABLES — ÷2, ÷3, ÷4</div>
+<p style="font-size:12px;color:var(--gray);margin-bottom:6px">Fill in the answers — use your times tables backwards!</p>
+<p style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px">÷ 2</p>
+<div class="dt">
+${[2,4,6,8,10,12,14,16,18,20,22,24].map(n=>`<div class="dt-cell">${n}÷2=<input placeholder="?"/></div>`).join('')}
+</div>
+<p style="font-size:13px;font-weight:700;color:var(--teal);margin:8px 0 4px">÷ 3</p>
+<div class="dt">
+${[3,6,9,12,15,18,21,24,27,30,33,36].map(n=>`<div class="dt-cell">${n}÷3=<input placeholder="?"/></div>`).join('')}
+</div>
+<p style="font-size:13px;font-weight:700;color:var(--teal);margin:8px 0 4px">÷ 4</p>
+<div class="dt">
+${[4,8,12,16,20,24,28,32,36,40,44,48].map(n=>`<div class="dt-cell">${n}÷4=<input placeholder="?"/></div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>DIVISION TABLES — ÷5, ÷8, ÷10</div>
+<p style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px">÷ 5</p>
+<div class="dt">
+${[5,10,15,20,25,30,35,40,45,50,55,60].map(n=>`<div class="dt-cell">${n}÷5=<input placeholder="?"/></div>`).join('')}
+</div>
+<p style="font-size:13px;font-weight:700;color:var(--teal);margin:8px 0 4px">÷ 8</p>
+<div class="dt">
+${[8,16,24,32,40,48,56,64,72,80,88,96].map(n=>`<div class="dt-cell">${n}÷8=<input placeholder="?"/></div>`).join('')}
+</div>
+<p style="font-size:13px;font-weight:700;color:var(--teal);margin:8px 0 4px">÷ 10 — Just remove the zero!</p>
+<div class="dt">
+${[10,20,30,40,50,60,70,80,90,100,110,120].map(n=>`<div class="dt-cell">${n}÷10=<input placeholder="?"/></div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>3 STEPS TO SOLVE DIVISION WORD PROBLEMS</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+${[
+  ['Find the TOTAL (the big number — the dividend).'],
+  ['Find HOW MANY groups or shares (the divisor). Look for words: <em>share between, put into groups of, each, equally</em>.'],
+  ['Write the number sentence: total ÷ groups = answer. Use your times tables to check!'],
+].map((s,i)=>`
+<div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px">
+  <div style="background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:13px;flex-shrink:0">${i+1}</div>
+  <div style="font-size:13px;line-height:1.6">${s[0]}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>WORD PROBLEM PRACTICE</div>
+${[
+  ['🎈','There are 32 balloons shared equally between 4 tables. How many balloons per table?','32 ÷ 4 = ____'],
+  ['🍪','A baker has 40 biscuits. She puts 8 in each bag. How many bags does she fill?','40 ÷ 8 = ____'],
+  ['📚','30 books are put into groups of 5. How many groups?','30 ÷ 5 = ____'],
+  ['🐣','A farmer packs 40 eggs into boxes of 10. How many boxes?','40 ÷ 10 = ____'],
+].map(([ico,q,hint],i)=>`
+<div class="q-box">
+  <div class="q-label">${ico} Problem ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--gray);font-style:italic;margin:4px 0">Hint: ${hint}</div>
+  <input class="dline" placeholder="Number sentence: ____ ÷ ____ = ____  →  Answer: ____"/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">8</span>MIXED PRACTICE</div>
+<div class="three">
+${['12÷3','20÷4','45÷5','48÷8','30÷10','16÷2','36÷4','24÷3','80÷10'].map(q=>`
+<div class="q-box" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:#0F6E56">${q} =</div>
+  <input style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:#0F6E56;margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: Division = splitting equally. Use your multiplication tables BACKWARDS to divide! 3 × 4 = 12 → 12 ÷ 3 = 4 ✓</div>`,
+
+/* ══════════════════════════════════════════════════════════
+   SCIENCE — Nutrition
+══════════════════════════════════════════════════════════ */
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#C2410C,#9A3412)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 6</div>
+  <div class="banner-title">🥗 Science — Nutrition</div>
+  <div class="banner-sub">Food Groups · Nutrients · Balanced Diet · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Nutrient = <strong>غذائی مادہ</strong> — Urdu · <strong>مغذٍ</strong> — Arabic<br/>
+Balanced diet = <strong>متوازن غذا</strong> — Urdu · <strong>نظام غذائي متوازن</strong> — Arabic<br/>
+Our body needs different types of food to stay healthy. This is called a BALANCED DIET!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🥗 Nutrient','A substance in food that our body needs to grow and stay healthy.','غذائی مادہ / مغذٍ','\"Vitamins and protein are important nutrients.\"'],
+  ['💪 Protein','Helps our body GROW and REPAIR itself.','پروٹین / بروتين','\"Meat, fish, eggs and beans are high in protein.\"'],
+  ['⚡ Carbohydrate','Gives our body ENERGY to move and think.','نشاستہ / كربوهيدرات','\"Bread, rice and pasta are carbohydrates.\"'],
+  ['🌈 Vitamin','Keeps us well — mainly found in fruits and vegetables.','وٹامن / فيتامين','\"Oranges give us Vitamin C.\"'],
+  ['⚖️ Balanced diet','Eating the right amount of different foods to stay healthy.','متوازن غذا / نظام متوازن','\"A balanced diet includes all 5 food groups.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:#C2410C">
+  <div class="v-word" style="color:#C2410C">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE 5 FOOD GROUPS</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Food Group</th><th>Examples</th><th>Job in the body</th></tr></thead>
+<tbody>
+<tr><td><strong>🍞 Carbohydrates</strong></td><td>Bread, rice, pasta, potatoes, cereal</td><td>Give us ENERGY for everything we do</td></tr>
+<tr><td><strong>🥩 Proteins</strong></td><td>Meat, fish, eggs, beans, lentils, nuts</td><td>Help us GROW and REPAIR the body</td></tr>
+<tr><td><strong>🥛 Dairy</strong></td><td>Milk, cheese, yoghurt</td><td>CALCIUM for strong bones and teeth</td></tr>
+<tr><td><strong>🍎 Fruits &amp; Vegetables</strong></td><td>All fruits, all vegetables</td><td>VITAMINS and MINERALS to keep us well</td></tr>
+<tr><td><strong>🫒 Fats &amp; Oils</strong></td><td>Butter, olive oil, avocado, nuts</td><td>Store energy; help the brain work</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>WHAT NUTRIENTS DO</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Nutrient</th><th>Main job</th><th>Good foods to eat</th></tr></thead>
+<tbody>
+<tr><td><strong>Carbohydrates</strong></td><td>Fuel for energy — for moving, thinking, learning</td><td>Bread, rice, pasta, potatoes</td></tr>
+<tr><td><strong>Protein</strong></td><td>Build and repair muscles, skin, organs</td><td>Meat, fish, eggs, beans</td></tr>
+<tr><td><strong>Fats</strong></td><td>Energy store; helps brain; keeps us warm</td><td>Butter, oil, avocado, nuts</td></tr>
+<tr><td><strong>Vitamins</strong></td><td>Help the body work properly; fight illness</td><td>Fruits, vegetables</td></tr>
+<tr><td><strong>Minerals</strong></td><td>Calcium → strong bones; Iron → carries oxygen</td><td>Dairy, leafy greens, red meat</td></tr>
+<tr><td><strong>Water</strong></td><td>Keeps everything moving; prevents dehydration</td><td>Drink 6–8 glasses per day!</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>A BALANCED DIET</div>
+<div class="tip"><strong>A balanced diet = eating the RIGHT foods in the RIGHT amounts.</strong> No food group should be left out completely!</div>
+${[
+  ['✅ Eat most:','Fruits, vegetables, and carbohydrates (bread, rice, pasta)'],
+  ['✅ Eat enough:','Protein at every main meal (meat, fish, eggs, beans)'],
+  ['✅ Drink enough:','Water every day — about 6 to 8 glasses'],
+  ['⚠️ Eat some:','Dairy foods for calcium (milk, cheese, yoghurt)'],
+  ['⚠️ Eat small amounts:','Fats and oils — needed but in small amounts'],
+  ['❌ Eat rarely:','Sugary snacks and fizzy drinks — little nutrition!'],
+].map(([label,text])=>`
+<div style="display:flex;gap:8px;align-items:flex-start;font-size:13px;padding:7px 0;border-bottom:1px solid var(--amber-light)">
+  <strong style="color:#C2410C;min-width:90px;flex-shrink:0">${label}</strong>
+  <span>${text}</span>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['What do carbohydrates do for our body?','Carbohydrates give our body ...'],
+  ['Name TWO foods that are good sources of protein.','Two protein foods are ...'],
+  ['Why are fruits and vegetables important?','Fruits and vegetables are important because ...'],
+  ['What is a balanced diet?','A balanced diet means ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:#C2410C;font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your answer here..."/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>PLAN A HEALTHY MEAL</div>
+<div class="q-box">
+  <div class="q-label">🍽️ My Healthy Meal — include at least 3 food groups!</div>
+  <div style="line-height:2.8;font-size:13px;margin-top:8px">
+    Meal name: <input class="inline" style="width:160px" placeholder="..."/><br/>
+    Food 1: <input class="inline" style="width:140px" placeholder="..."/> — Group: <input class="inline" style="width:130px" placeholder="?"/><br/>
+    Food 2: <input class="inline" style="width:140px" placeholder="..."/> — Group: <input class="inline" style="width:130px" placeholder="?"/><br/>
+    Food 3: <input class="inline" style="width:140px" placeholder="..."/> — Group: <input class="inline" style="width:130px" placeholder="?"/><br/>
+    Drink: <input class="inline" style="width:140px" placeholder="..."/><br/>
+    Why healthy? <input class="dline" placeholder="This meal is healthy because..."/>
+  </div>
+</div>
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Our body needs ALL 5 food groups! Carbohydrates = energy · Protein = growth · Dairy = strong bones · Fruits &amp; Veg = vitamins · Fats = brain &amp; warmth 🥗</div>`,
+
+/* ══════════════════════════════════════════════════════════
+   HUMANITIES — Ancient Egypt Achievements
+══════════════════════════════════════════════════════════ */
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#534AB7,#3730A3)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 6</div>
+  <div class="banner-title">🌍 Humanities — Ancient Egypt</div>
+  <div class="banner-sub">Achievements — Writing, Medicine, Farming · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Papyrus = <strong>البردي</strong> — Arabic · <strong>پپائرس</strong> — Urdu<br/>
+Scribe = <strong>کاتب (kātib)</strong> — Urdu &amp; Arabic<br/>
+Irrigation = <strong>آبپاشی</strong> — Urdu · <strong>ري</strong> — Arabic<br/>
+The ancient Egyptians were amazing inventors! Many of their ideas are still used today.</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['📜 Papyrus','A plant from the Nile used to make early paper. Much lighter than stone!','البردي / البردي','\"Scribes wrote on papyrus scrolls.\"'],
+  ['🏺 Scribe','A person trained to read and write hieroglyphics. A very important job!','کاتب / كاتب','\"Scribes kept records of taxes and food.\"'],
+  ['🌾 Irrigation','A system of channels that carry water from the Nile to dry fields.','آبپاشی / ري','\"Irrigation helped farmers grow crops in the desert.\"'],
+  ['💊 Medicine','Treatment for illness. Egyptian doctors were very skilled for their time.','دوا / طب','\"Egyptian medicine included herbs and surgery.\"'],
+  ['🏛️ Legacy','Something great that people from the past left for us to use today.','ورثہ / إرث','\"The calendar is part of Egypt\'s amazing legacy.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:#534AB7">
+  <div class="v-word" style="color:#534AB7">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>ACHIEVEMENT 1 — WRITING (HIEROGLYPHICS)</div>
+<div class="tip"><strong>Ancient Egyptians invented one of the world's first writing systems!</strong> Each picture-symbol stands for a sound or a word.</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>What</th><th>What it was</th><th>Why it mattered</th></tr></thead>
+<tbody>
+<tr><td><strong>Hieroglyphics</strong></td><td>A writing system using over 700 picture-symbols</td><td>Allowed Egyptians to record laws, stories, and history</td></tr>
+<tr><td><strong>Papyrus paper</strong></td><td>Paper made from the papyrus plant beside the Nile</td><td>Much lighter than stone — easy to carry and store</td></tr>
+<tr><td><strong>Scribes</strong></td><td>Special writers who spent years learning all the symbols</td><td>Kept records of food, taxes, religious texts</td></tr>
+<tr><td><strong>Carved in stone</strong></td><td>Important messages carved into temple and tomb walls</td><td>Lasted thousands of years — we can still read them!</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>ACHIEVEMENT 2 — MEDICINE</div>
+<div class="tip"><strong>Egyptian doctors were among the first doctors in history!</strong> They used plants, careful observation, and surgery.</div>
+${[
+  ['🌿','Herbal medicine','Egyptians used plants and herbs to treat illness — garlic for infection, aloe vera for skin.'],
+  ['🔍','Scientific observation','Doctors looked carefully at patients and wrote down what they saw — an early form of science!'],
+  ['🩹','Honey for wounds','They used honey to keep wounds clean. Honey kills bacteria — modern science has proved this works!'],
+  ['🦷','Dentistry','They could treat toothaches and even perform simple surgery on the mouth.'],
+].map(([ico,t,d])=>`
+<div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--purple-light);border-radius:var(--rsm);padding:10px;margin-bottom:8px">
+  <div style="font-size:22px;width:30px;text-align:center">${ico}</div>
+  <div>
+    <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#534AB7">${t}</div>
+    <div style="font-size:12px;color:var(--gray);margin-top:2px">${d}</div>
+  </div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>ACHIEVEMENT 3 — FARMING AND IRRIGATION</div>
+<div class="story">
+Every year, the Nile river <strong>flooded</strong>. When the flood went down, it left behind <strong>rich, dark soil</strong> (called silt). This was perfect for growing crops.<br/><br/>
+Egyptian farmers grew <strong>wheat</strong> and <strong>barley</strong> for bread, <strong>flax</strong> for linen cloth, and many vegetables.<br/><br/>
+To water fields far from the Nile, they built <strong>irrigation channels</strong> — ditches that carried water from the river to the fields. This was a brilliant invention that farmers all around the world still use today!
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>WHAT EGYPT GAVE TO THE WORLD</div>
+<div class="four" style="margin-bottom:14px">
+${[
+  ['✍️','Writing','Hieroglyphics led to modern writing systems used everywhere.','#1E40AF','#DBEAFE'],
+  ['📅','Calendar','365-day calendar — almost the same one we use today!','#065F46','#D1FAE5'],
+  ['💊','Medicine','First use of scientific observation to treat patients.','#9A3412','#FFEDD5'],
+  ['🌾','Irrigation','Water channels — still used by farmers around the world.','#3730A3','#E0E7FF'],
+].map(([ico,t,d,col,bg])=>`
+<div class="card" style="background:${bg};border-color:${col}">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:${col}">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['What was hieroglyphics?','Hieroglyphics was a writing system that ...'],
+  ['What plant did Egyptians use to make early paper?','Egyptians made paper from ...'],
+  ['How did Egyptian farmers water fields far from the Nile?','Egyptian farmers used ...'],
+  ['Name ONE achievement from ancient Egypt that we still use today.','One achievement we still use is ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:#534AB7;font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your answer here..."/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>MY EGYPT ACHIEVEMENT FACT FILE</div>
+<div class="q-box">
+  <div class="q-label">📋 Complete your fact file</div>
+  <div style="line-height:2.8;font-size:13px;margin-top:6px">
+    My favourite Egyptian achievement: <input class="dline" placeholder="My favourite achievement is ..."/><br/>
+    I find it interesting because: <input class="dline" placeholder="I find it interesting because ..."/><br/>
+    One thing Egypt gave the world: <input class="dline" placeholder="Egypt gave the world ..."/><br/>
+    A job in ancient Egypt I would have liked: <input class="dline" placeholder="I would have liked to be a ..."/>
+  </div>
+</div>
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: Ancient Egypt gave us writing, medicine, the calendar, irrigation and more — one of the greatest civilisations in all of history! 🏺</div>`,
+
+/* ══════════════════════════════════════════════════════════
+   BIBLE — Joseph
+══════════════════════════════════════════════════════════ */
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#B71C1C,#991B1B)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 6</div>
+  <div class="banner-title">✝️ Bible — Joseph</div>
+  <div class="banner-sub">Forgiving Those Who Hurt You · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Joseph = <strong>یوسف (Yusuf)</strong> — Urdu &amp; Arabic (also a prophet in the Quran!)<br/>
+Forgive = <strong>معاف کرنا</strong> — Urdu · <strong>يغفر</strong> — Arabic<br/>
+Dream = <strong>خواب</strong> — Urdu · <strong>حلم</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['😍 Favourite','Liked most of all. Jacob loved Joseph more than his other sons.','پسندیدہ / مفضل','\"Joseph was his father\'s favourite son.\"'],
+  ['😤 Jealous','Feeling angry because someone has something you want.','حسد / غيرة','\"Joseph\'s brothers were jealous of his special coat.\"'],
+  ['🕊️ Forgive','To choose to stop being angry with someone who hurt you.','معاف کرنا / يغفر','\"Joseph forgave his brothers even after what they did.\"'],
+  ['👑 Pharaoh','The king of Egypt who gave Joseph an important job.','فرعون / فرعون','\"Pharaoh made Joseph the ruler of all Egypt.\"'],
+  ['💭 Dream','A picture you see while sleeping. God spoke to Joseph through dreams.','خواب / حلم','\"God gave Joseph the gift of explaining dreams.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:#B71C1C">
+  <div class="v-word" style="color:#B71C1C">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY OF JOSEPH</div>
+<div class="story">
+<strong>First,</strong> Jacob had twelve sons. His favourite was Joseph. Jacob gave Joseph a beautiful coat of many colours. His brothers became very <em>jealous</em>.<br/><br/>
+<strong>Then,</strong> Joseph's brothers did something very wrong. They sold Joseph to merchants travelling to Egypt. They told their father he was dead. Jacob was heartbroken.<br/><br/>
+<strong>In Egypt,</strong> Joseph worked hard but was put in prison for something he did not do. It was very unfair. But God was with Joseph even in prison.<br/><br/>
+<strong>After a while,</strong> Pharaoh had two strange dreams nobody could explain. Joseph told Pharaoh the dreams meant 7 years of plenty and then 7 years of famine with no food. Pharaoh was so impressed he made Joseph the second most powerful person in all Egypt!<br/><br/>
+<strong>Finally,</strong> when the famine came, Joseph's brothers came to Egypt to buy food — not knowing Joseph was there. Joseph recognised them. Instead of punishing them, he wept and said: <em>"You intended to harm me, but God intended it for good."</em> He forgave them and the whole family was saved!
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>STORY SEQUENCE — PUT IN ORDER (1–6)</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+${[
+  'Joseph\'s brothers came to Egypt to buy food and Joseph forgave them.',
+  'Jacob gave Joseph a coat of many colours.',
+  'Joseph told Pharaoh the meaning of his two dreams.',
+  'Joseph was put in prison even though he did nothing wrong.',
+  'Pharaoh made Joseph the ruler of all Egypt.',
+  'Joseph\'s brothers were jealous and sold him to merchants.',
+].map((ev,i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--red-light);border-radius:var(--rsm);padding:9px 12px">
+  <input type="text" value="" placeholder="?" style="width:34px;height:34px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:var(--red);background:var(--red-light);outline:none;flex-shrink:0"/>
+  <span style="font-size:13px">${ev}</span>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>THE MEMORY VERSE — LEARN IT!</div>
+<div class="verse-box">
+  <div style="font-family:Nunito,sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8">"You intended to harm me,<br/>but God intended it for good<br/>to accomplish what is now being done,<br/>the saving of many lives."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Genesis 50:20</div>
+</div>
+<div class="tip"><strong>How to learn it:</strong> Read it 3 times → cover 1 word → say it → cover 2 words → say it → keep going until you can say it all from memory!</div>
+<div class="q-box">
+  <div class="q-label">Fill in the missing words:</div>
+  <div style="font-size:14px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+    "You intended to <input class="inline" style="width:65px" placeholder="?"/> me, but God intended it for <input class="inline" style="width:60px" placeholder="?"/>
+    to accomplish what is now being <input class="inline" style="width:60px" placeholder="?"/>, the saving of many <input class="inline" style="width:65px" placeholder="?"/>."<br/>
+    — <input class="inline" style="width:130px" placeholder="book and verse?"/>
+  </div>
+</div>
+<div class="q-box">
+  <div class="q-label">Write the verse from memory — no peeking! 😊</div>
+  <textarea class="tarea" style="min-height:60px" placeholder="You intended to harm me..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['Why did Joseph\'s brothers sell him?','Joseph\'s brothers sold him because they were ...'],
+  ['What gift did God give Joseph in Egypt?','God gave Joseph the ability to ...'],
+  ['What did Pharaoh do after Joseph explained his dreams?','Pharaoh made Joseph ...'],
+  ['What did Joseph do when he saw his brothers again?','When Joseph saw his brothers, he ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--red);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:40px"></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>LIFE APPLICATION — FORGIVENESS</div>
+<div class="tip"><strong>Joseph showed us that God can take something very painful and turn it into something good.</strong> We can trust God even when life feels unfair.</div>
+${[
+  ['#EF5350','❤️ Something Joseph did that was very hard — and brave:'],
+  ['#F97316','🧡 Something I think God\'s "good plan" looks like in a hard situation:'],
+  ['#EAB308','💛 A time someone hurt me — and what it felt like:'],
+  ['#22C55E','💚 What choosing forgiveness means to me:'],
+  ['#3B82F6','💙 How the story of Joseph encourages me when things go wrong:'],
+  ['💜','💜 My prayer or thought to God this week:'],
+].map(([col,label])=>`
+<div class="rbow-row">
+  <div class="rbow-bar" style="background:${col === '💜' ? '#A855F7' : col}"></div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;color:${col === '💜' ? '#A855F7' : col};font-family:Nunito,sans-serif">${label}</div>
+    <input class="dline" style="border-bottom-color:${col === '💜' ? '#A855F7' : col}80"/>
+  </div>
+</div>`).join('')}
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: "You intended to harm me, but God intended it for good." — Genesis 50:20. Trust God even when things are hard. He has a good plan! 🌟</div>`,
+
+};
+
+/* ── Render engine ──────────────────────────────────────── */
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML=''; pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur) el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render()};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week6_Notes');</script>
+</body>
+</html>
