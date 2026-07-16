@@ -326,9 +326,12 @@ async function sbUpsert(table, body) {
 // ══════════════════════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════════════════════
-let activeStudent = STUDENTS[0].id;
-let attWeekNum    = 1;
-let activePeriod  = PERIODS[0].id;
+let activeStudentAtt      = STUDENTS[0].id;
+let activeStudentScores   = STUDENTS[0].id;
+let activeStudentProgress = STUDENTS[0].id;
+let activeStudentProfile  = STUDENTS[0].id;
+let attWeekNum  = 1;
+let activePeriod = PERIODS[0].id;
 let attData       = {};   // attData[studentId][week][day] = status
 let scoresData    = {};   // scoresData[studentId][period][subject] = {score, total}
 let profileData   = {};   // profileData[studentId] = {...}
@@ -351,11 +354,11 @@ function switchTab(name) {
 function makePills(containerId, onSelect) {
   const el = document.getElementById(containerId);
   el.innerHTML = STUDENTS.map(s =>
-    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="selectStudent('${s.id}','${containerId}',${onSelect.toString()})">${s.avatar} ${s.name}</button>`
+    `<button class="pill ${s.id===activeStudentProfile?'active':''}" onclick="selectStudent('${s.id}','${containerId}',${onSelect.toString()})">${s.avatar} ${s.name}</button>`
   ).join('');
 }
 function selectStudent(id, containerId, cb) {
-  activeStudent = id;
+  activeStudentProfile = id;
   document.querySelectorAll(`#${containerId} .pill`).forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
   cb();
 }
@@ -366,13 +369,13 @@ function selectStudent(id, containerId, cb) {
 function initProfiles() {
   const el = document.getElementById('profile-pills');
   el.innerHTML = STUDENTS.map(s =>
-    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchProfile('${s.id}')">${s.avatar} ${s.name}</button>`
+    `<button class="pill ${s.id===activeStudentProfile?'active':''}" onclick="switchProfile('${s.id}')">${s.avatar} ${s.name}</button>`
   ).join('');
-  loadProfile(activeStudent);
+  loadProfile(activeStudentProfile);
 }
 
 function switchProfile(id) {
-  activeStudent = id;
+  activeStudentProfile = id;
   document.querySelectorAll('#profile-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
   loadProfile(id);
 }
@@ -401,7 +404,7 @@ function fillProfileForm(d) {
 }
 
 async function saveProfile() {
-  const id = activeStudent;
+  const id = activeStudentProfile;
   const d = {
     id, updated_at: new Date().toISOString(),
     name:          document.getElementById('p-name').value,
@@ -424,13 +427,13 @@ async function saveProfile() {
 function initAttendance() {
   const el = document.getElementById('att-pills');
   el.innerHTML = STUDENTS.map(s =>
-    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchAtt('${s.id}')">${s.avatar} ${s.name}</button>`
+    `<button class="pill ${s.id===activeStudentAtt?'active':''}" onclick="switchAtt('${s.id}')">${s.avatar} ${s.name}</button>`
   ).join('');
-  loadAttendance(activeStudent);
+  loadAttendance(activeStudentAtt);
 }
 
 function switchAtt(id) {
-  activeStudent = id;
+  activeStudentAtt = id;
   document.querySelectorAll('#att-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
   renderAttGrid();
   renderAttTermSummary();
@@ -460,7 +463,7 @@ function getAttStatus(id, week, day) {
 }
 
 function cycleAtt(week, day) {
-  const id = activeStudent;
+  const id = activeStudentAtt;
   if (!attData[id]) attData[id] = {};
   if (!attData[id][week]) attData[id][week] = {};
   const cur = getAttStatus(id, week, day);
@@ -472,7 +475,7 @@ function cycleAtt(week, day) {
 }
 
 function renderAttGrid() {
-  const id = activeStudent;
+  const id = activeStudentAtt;
   const w  = attWeekNum;
   const container = document.getElementById('att-grid-container');
   let p=0, a=0, l=0;
@@ -497,7 +500,7 @@ function renderAttGrid() {
 }
 
 function renderAttTermSummary() {
-  const id = activeStudent;
+  const id = activeStudentAtt;
   let totP=0, totA=0, totL=0, totDays=0;
   for (let w=1;w<=TOTAL_WEEKS;w++) {
     DAYS.forEach(day=>{
@@ -524,7 +527,7 @@ function renderAttTermSummary() {
 function initScores() {
   const el = document.getElementById('score-pills');
   el.innerHTML = STUDENTS.map(s =>
-    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchScores('${s.id}')">${s.avatar} ${s.name}</button>`
+    `<button class="pill ${s.id===activeStudentScores?'active':''}" onclick="switchScores('${s.id}')">${s.avatar} ${s.name}</button>`
   ).join('');
 
   const ptabs = document.getElementById('period-tabs');
@@ -533,11 +536,11 @@ function initScores() {
       onclick="switchPeriod('${p.id}')">${p.label}<br><small style="font-weight:400;opacity:0.7">${p.weeks}</small></button>`
   ).join('');
 
-  loadScores(activeStudent);
+  loadScores(activeStudentScores);
 }
 
 function switchScores(id) {
-  activeStudent = id;
+  activeStudentScores = id;
   document.querySelectorAll('#score-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
   renderScoresTable();
 }
@@ -575,7 +578,7 @@ function gradeFromPct(pct) {
 }
 
 function renderScoresTable() {
-  const id = activeStudent;
+  const id = activeStudentScores;
   const p  = activePeriod;
   const tbody = document.getElementById('scores-tbody');
   tbody.innerHTML = SUBJECTS.map(sub => {
@@ -610,7 +613,7 @@ function onScoreInput(sub) {
 }
 
 async function saveScores() {
-  const id = activeStudent;
+  const id = activeStudentScores;
   const p  = activePeriod;
   const period = PERIODS.find(x=>x.id===p);
   if (!scoresData[id]) scoresData[id] = {};
@@ -678,12 +681,12 @@ function renderOverview() {
 function initProgressPills() {
   const el = document.getElementById('progress-pills');
   el.innerHTML = STUDENTS.map(s =>
-    `<button class="pill ${s.id===activeStudent?'active':''}" onclick="switchProgress('${s.id}')">${s.avatar} ${s.name}</button>`
+    `<button class="pill ${s.id===activeStudentProgress?'active':''}" onclick="switchProgress('${s.id}')">${s.avatar} ${s.name}</button>`
   ).join('');
 }
 
 function switchProgress(id) {
-  activeStudent = id;
+  activeStudentProgress = id;
   document.querySelectorAll('#progress-pills .pill').forEach(p=>p.classList.toggle('active', p.textContent.includes(STUDENTS.find(s=>s.id===id).name)));
   renderCharts();
 }
@@ -692,7 +695,7 @@ const COLORS = ['#7A1C1C','#C49A3C','#2D6A4F','#1E40AF','#6B21A8'];
 const COLORS_LIGHT = ['rgba(122,28,28,0.15)','rgba(196,154,60,0.15)','rgba(45,106,79,0.15)','rgba(30,64,175,0.15)','rgba(107,33,168,0.15)'];
 
 function renderCharts() {
-  const id = activeStudent;
+  const id = activeStudentProgress;
   initProgressPills();
 
   // ── Bar chart: latest period scores by subject ──
