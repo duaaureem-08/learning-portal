@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Weeks 1–7 Revision · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;gap:0;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:linear-gradient(135deg,rgba(109,40,217,0.3),rgba(30,58,138,0.3));border:1px solid rgba(139,92,246,0.4);border-radius:99px;padding:4px 14px;font-size:0.72rem;font-weight:700;color:#C4B5FD;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.week-map{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:24px;}
+.wm-cell{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 4px;text-align:center;}
+.wm-cell .wn{font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.wm-cell .wt{font-size:0.72rem;font-weight:600;color:var(--text);line-height:1.3;}
+.wm-cell.active-w{border-color:var(--accent,#555);background:rgba(255,255,255,0.05);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.week-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:0.68rem;font-weight:700;background:var(--surface2);border:1px solid var(--border);color:var(--muted);margin-bottom:6px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.synoptic-box{background:linear-gradient(135deg,rgba(109,40,217,0.1),rgba(30,58,138,0.1));border:1px solid rgba(109,40,217,0.3);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:14px;font-size:0.84rem;color:#C4B5FD;line-height:1.6;}
+.synoptic-box strong{color:var(--bright);}
+.formula-box{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:0.88rem;color:var(--bright);margin-bottom:14px;line-height:1.8;overflow-x:auto;}
+.formula-box .hl{color:#FCD34D;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius-sm);padding:16px 20px;text-align:center;margin-bottom:14px;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--bright);line-height:1.5;margin-bottom:5px;}
+.verse-ref{font-size:0.75rem;color:#C4B5FD;font-weight:700;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}.week-map{grid-template-columns:repeat(4,1fr);}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">★ Revision — Weeks 1–7</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     BIBLE REVISION — Weeks 1–7
+══════════════════════════════════════════════════ -->
+<div id="pg-bible" class="page active">
+<style>#pg-bible{--accent:#6D28D9;}</style>
+
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">📖</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Revision Worksheet · Weeks 1–7</div>
+  <div class="hero-title">Old Testament<br>Revision</div>
+  <div class="hero-subtitle">Creation · Imago Dei · Noah · Abraham · Joseph · Moses · The Exodus</div>
+  <div class="hero-tags"><span class="hero-tag">Weeks 1–7</span><span class="hero-tag">Genesis to Exodus</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="week-map" style="--accent:#6D28D9;">
+  <div class="wm-cell active-w"><div class="wn">Wk 1</div><div class="wt">Creation &amp; Genesis</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 2</div><div class="wt">Imago Dei &amp; Stewardship</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 3</div><div class="wt">The Fall &amp; Consequences</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 4</div><div class="wt">Noah &amp; the Flood</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 5</div><div class="wt">Abraham &amp; Faith</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 6</div><div class="wt">Joseph &amp; Providence</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 7</div><div class="wt">Moses &amp; the Exodus</div></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⚡ Section 1 — Quick Recall (Weeks 1–7)</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="week-tag">Weeks 1–7</div>
+    <div class="q-text">Match each key term to the correct week and write a one-sentence definition. <span class="marks">7 marks</span><br><br><em>imago Dei · covenant · providence · calling · Passover · stewardship · the Fall</em></div>
+    <textarea class="q-input wide" placeholder="imago Dei — Week ___: &#10;covenant — Week ___: &#10;providence — Week ___: &#10;calling — Week ___: &#10;Passover — Week ___: &#10;stewardship — Week ___: &#10;the Fall — Week ___: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>imago Dei</strong> — Week 2: Latin for "image of God"; the teaching that every human being is created in God's image, giving all people inherent dignity and worth. <strong>covenant</strong> — Weeks 4/5/7: a serious, binding promise stronger than a contract; God made covenants with Noah (never to flood the earth), Abraham (a great nation and land), and renewed it with Moses at Sinai. <strong>providence</strong> — Week 6: God's unseen guidance of events toward His purposes; Joseph's story is the classic Old Testament example — what looked like disaster (slavery, prison) was God working toward a greater plan. <strong>calling</strong> — Week 7: a deep sense that God has chosen a person for a specific purpose; Moses received his calling at the burning bush (Exodus 3). <strong>Passover</strong> — Week 7: the night God "passed over" Israelite homes marked with lamb's blood during the tenth plague; the annual meal commemorating Israel's deliverance from Egypt. <strong>stewardship</strong> — Week 2: responsible management of something on behalf of another; God gave humans dominion over creation as stewards accountable to Him. <strong>the Fall</strong> — Week 3: Adam and Eve's choice to disobey God in the Garden of Eden; the theological event understood as introducing sin, death, and brokenness into God's creation.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="week-tag">Weeks 1–7</div>
+    <div class="q-text">Write the correct character name next to each description. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Built an ark; the only righteous man in his generation: ___&#10;b) Left his homeland without knowing where he was going; father of the Jewish nation: ___&#10;c) Sold into slavery by his brothers; became second-in-command in Egypt: ___&#10;d) Went before the most powerful ruler on earth ten times and refused to give up: ___&#10;e) Led the women in song with tambourines after the Red Sea crossing: ___&#10;f) Wrestled with God and had his name changed to 'Israel': ___&#10;g) The first human to face a moral choice — and chose to disobey: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Noah</strong> (Week 4). b) <strong>Abraham</strong> (Week 5). c) <strong>Joseph</strong> (Week 6). d) <strong>Moses</strong> (Week 7). e) <strong>Miriam</strong> (Week 7). f) <strong>Jacob</strong> (Week 5/6 — patriarch, father of Joseph). g) <strong>Adam / Eve</strong> (accept either — Week 3).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 2 — Understanding</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Section 2 — Understanding Each Week</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="week-tag">Week 1 — Creation</div>
+    <div class="q-text">The lesson distinguishes between the Bible's creation account and a science textbook. What is the Bible NOT trying to answer in Genesis 1, and what IS it trying to answer? Why does the lesson say asking "which is right, Genesis or science?" is the wrong question? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="What Genesis 1 is NOT trying to answer:&#10;What Genesis 1 IS trying to answer:&#10;Why the science vs Genesis comparison is the wrong question:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Genesis 1 is <strong>NOT</strong> trying to answer: how old the universe is, what mechanism God used to create, or how species evolved — these are scientific questions about process and timeline. Genesis 1 <strong>IS</strong> trying to answer: why anything exists at all, who created it, what the relationship between God and creation is, and what value and meaning the created world has. The lesson says asking "which is right, Genesis or science?" is the wrong question because they are answering different kinds of questions — comparing them is like asking "which is more accurate, a map of London or a painting of London?" They serve different purposes and cannot contradict each other because they are not making the same kind of claim.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="week-tag">Week 2 — Imago Dei</div>
+    <div class="q-text">The lesson argues that imago Dei is the foundation of human rights. Explain this argument in your own words: what does being made in God's image imply about every human being's value, and what does this mean for how we should treat people who are powerful vs people who are weak? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="What imago Dei implies about every person's value:&#10;What this means for the powerful vs the weak:&#10;Why this is described as the 'foundation' of human rights:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Being made in God's image means that every human being — regardless of age, ability, nationality, wealth, or status — carries inherent dignity that was given by God, not earned by achievement. This dignity cannot be taken away. For the powerful, it means their value does not come from their power — and the powerful have no right to treat others as less than human. For the weak — the poor, the disabled, the elderly, the unborn — it means they have exactly the same dignity as the most powerful person on earth, because dignity comes from being made in God's image, not from what you can contribute. The lesson calls this the "foundation" of human rights because if human dignity is grounded in God's image, it is universal and inalienable — no government can grant or remove it. If dignity is merely a social agreement, it can be revoked whenever convenient.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="week-tag">Week 3 — The Fall</div>
+    <div class="q-text">The lesson describes the Fall as a story about a choice, not just a mistake. What was the choice Adam and Eve actually made (beyond eating fruit), and what were its three consequences as described in the lesson? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="The deeper choice Adam and Eve made (not just eating fruit):&#10;Consequence 1:&#10;Consequence 2:&#10;Consequence 3:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The deeper choice was: to place themselves — their own judgment about what was good — above God's word. The serpent's offer was "you will be like God, knowing good and evil" — the temptation was to become the arbiter of right and wrong themselves, rather than trusting God's definition. This is why the lesson says the Fall is not primarily about fruit but about <strong>who is in charge of defining good and evil</strong>. Three consequences: (1) <strong>Broken relationship with God</strong> — they hid from God, felt shame, and were eventually sent out of the Garden; the close relationship of walking with God was ruptured. (2) <strong>Broken relationship with each other</strong> — they immediately blamed each other; the first human relationship became one of blame and self-protection. (3) <strong>Broken relationship with creation</strong> — the ground became harder to work; pain entered childbirth; the harmony between humans and nature was disrupted. The lesson says all three kinds of brokenness we see in the world today trace back to this original fracture.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="week-tag">Weeks 4–7 — The Pattern of Faith</div>
+    <div class="q-text">The lesson traces a repeating pattern across Noah, Abraham, Joseph, and Moses. Complete this table from memory. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Noah (Wk 4):&#10; — Hardship:&#10; — What faith looked like:&#10; — What God did:&#10;&#10;Abraham (Wk 5):&#10; — Hardship:&#10; — What faith looked like:&#10; — What God did:&#10;&#10;Joseph (Wk 6):&#10; — Hardship:&#10; — What faith looked like:&#10; — What God did:&#10;&#10;Moses (Wk 7):&#10; — Hardship:&#10; — What faith looked like:&#10; — What God did:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Noah</strong>: Hardship = facing a global flood, ridicule while building an ark for ~100 years. Faith = building without rain, trusting God's word alone. God did = sent the flood, preserved Noah and his family and all animals, made a covenant never to flood the earth again (rainbow). <strong>Abraham</strong>: Hardship = called to leave his homeland with no destination; later called to sacrifice his son Isaac. Faith = left without knowing where he was going (Hebrews 11:8); was willing to sacrifice Isaac, trusting God would provide. God did = led him to Canaan, gave him descendants as numerous as stars, stopped the sacrifice of Isaac and provided a ram, made the covenant of the promised land and nation. <strong>Joseph</strong>: Hardship = sold into slavery by his own brothers, falsely accused by Potiphar's wife, imprisoned for years. Faith = maintained integrity throughout (refused Potiphar's wife; interpreted dreams faithfully; forgave his brothers fully). God did = elevated Joseph to second-in-command of Egypt; used the suffering to save many lives including Joseph's own family during the famine. Joseph's summary: "you intended to harm me, but God intended it for good" (Genesis 50:20). <strong>Moses</strong>: Hardship = called to confront the most powerful empire on earth on behalf of an enslaved people; went before Pharaoh ten times. Faith = kept going after ten rejections; declared faith at the Red Sea when there was no escape visible (Exodus 14:14). God did = sent ten plagues, delivered Israel through the Red Sea, destroyed Pharaoh's army, gave the Ten Commandments at Sinai.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 3 — Extended Thinking</span></div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⚖️ Section 3 — Synoptic & Extended Questions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="week-tag">Weeks 1–7 — Synoptic</div>
+    <div class="q-text">The lesson describes a single overarching story running from Genesis to Exodus: <em>creation → fall → covenant → rescue</em>. Using specific examples from each week (Weeks 1–7), trace this story arc. Show how each week's content connects to the next step in the arc. Write at least 6 sentences. <span class="marks">10 marks</span></div>
+    <div class="synoptic-box">🌟 <strong>Synoptic question</strong> — this asks you to connect ALL seven weeks into one argument. Don't just list what happened each week — explain how each week LEADS INTO the next step of the story.</div>
+    <textarea class="q-input xwide" placeholder="Creation (Weeks 1–2):&#10;&#10;Fall (Week 3):&#10;&#10;Covenant (Weeks 4–5):&#10;&#10;Rescue (Weeks 6–7):&#10;&#10;How the whole arc holds together as one story:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Creation (Weeks 1–2)</strong>: God creates a world that is "very good" (Genesis 1:31) — ordered, beautiful, and filled with beings made in His image. Humans are given both dignity (imago Dei) and responsibility (stewardship) — they are neither gods nor animals, but image-bearers with a unique calling to care for creation and relate to God. This is the world as it was meant to be. <strong>Fall (Week 3)</strong>: The perfection of creation is shattered by human choice — Adam and Eve choose their own judgment over God's word. The three relationships that define good human existence — with God, with each other, and with creation — are all damaged. The rest of the Bible is the story of how God responds to this damage. <strong>Covenant (Weeks 4–5)</strong>: God does not abandon the world He created. He responds to increasing human corruption not with permanent destruction but with covenant — first with Noah (preserving creation and humanity; the rainbow promise), then with Abraham (choosing one man and one family through whom He will bless "all peoples on earth"). The covenant is God committing to fix what the Fall broke, using human history as the vehicle. <strong>Joseph (Week 6)</strong>: Joseph's story is a bridge — through extraordinary suffering and providence, God preserves the family of Abraham (Jacob's 12 sons, who become the 12 tribes of Israel) in Egypt. What looks like disaster is God preparing the stage for the next act. <strong>Moses and Rescue (Week 7)</strong>: The rescue begins. God acts in history on the most public possible scale — ten plagues, the Red Sea, the destruction of the most powerful army in the world — to deliver His people. The Exodus is not just a political liberation; it is the covenant with Abraham being fulfilled: God is building His nation. The law given at Sinai defines what the rescued community should look like. The arc holds together: God creates → humans break → God restores through covenant and rescue. The Exodus is the Old Testament's defining answer to the question raised by the Fall: does God have both the will and the power to fix what has been broken? The answer is a public, dramatic yes.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="week-tag">Weeks 1–7 — Golden Ideas</div>
+    <div class="q-text">Each week had a "golden idea" — a key takeaway. Write each one from memory and say which week it came from. Then choose the ONE you find most compelling and write 3–4 sentences explaining why. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Week 1 golden idea:&#10;Week 2 golden idea:&#10;Week 3 golden idea:&#10;Week 4 golden idea:&#10;Week 5 golden idea:&#10;Week 6 golden idea:&#10;Week 7 golden idea:&#10;&#10;The one I find most compelling and why:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Accept any close paraphrase. Key golden ideas: Week 1: <strong>"The Bible answers 'why' questions; science answers 'how' questions — they are not in competition."</strong> Week 2: <strong>"Every human being has inherent dignity because every human being is made in the image of God — this dignity cannot be earned or lost."</strong> Week 3: <strong>"The Fall is not primarily about a fruit — it is about who decides what is good. The temptation is always to be your own god."</strong> Week 4: <strong>"Faith is not the absence of fear — it is acting rightly in spite of it. Noah built when no one believed him."</strong> Week 5: <strong>"Abraham was not called because he was perfect — he was called to become something. Calling precedes character."</strong> Week 6: <strong>"Providence means God can work through even the worst things people do to bring about purposes beyond anyone's ability to see. Joseph's story: 'you intended to harm me, but God intended it for good.'"</strong> Week 7: <strong>"God does not call the equipped — He equips the called."</strong> The "most compelling" section is open to any sincere, well-reasoned personal response. Mark on quality of explanation and specific connection to lesson content, not on which week is chosen.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+    <div><div class="score-label">Total Score — Bible Revision</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections 1 + 2 + 3</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 50" style="border-color:rgba(109,40,217,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════════════════════════════════
+     ENGLISH REVISION — Weeks 1–7
+══════════════════════════════════════════════════ -->
+<div id="pg-english" class="page">
+<style>#pg-english{--accent:#BE123C;}</style>
+
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">✏️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Revision Worksheet · Weeks 1–7</div>
+  <div class="hero-title">English<br>Revision</div>
+  <div class="hero-subtitle">Reading Skills · Non-Fiction · Purpose & Audience · Language Features · Critical Analysis</div>
+  <div class="hero-tags"><span class="hero-tag">Weeks 1–7</span><span class="hero-tag">Non-Fiction Focus</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="week-map" style="--accent:#BE123C;">
+  <div class="wm-cell active-w"><div class="wn">Wk 1</div><div class="wt">Reading for Meaning</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 2</div><div class="wt">Vocabulary in Context</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 3</div><div class="wt">Inference &amp; Deduction</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 4</div><div class="wt">Sentence Structure</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 5</div><div class="wt">Text Structure</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 6</div><div class="wt">Writer's Craft</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 7</div><div class="wt">Non-Fiction Analysis</div></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 50"></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">⚡ Section 1 — Core Skill Consolidation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="week-tag">Weeks 1–7 — Key Terms</div>
+    <div class="q-text">Define each term precisely and give a one-line example or illustration for each. <span class="marks">8 marks</span><br><br><em>purpose · audience · inference · rhetorical question · emotive language · counter-argument · fact · opinion</em></div>
+    <textarea class="q-input xwide" placeholder="purpose: definition + example&#10;audience: definition + example&#10;inference: definition + example&#10;rhetorical question: definition + example&#10;emotive language: definition + example&#10;counter-argument: definition + example&#10;fact: definition + example&#10;opinion: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>purpose</strong>: the reason a text was written — what the writer wants to achieve. Five main purposes: inform, persuade, explain, entertain, instruct. Example: a charity leaflet has the primary purpose of persuading people to donate. <strong>audience</strong>: the intended reader or group of readers a text is aimed at. Example: a medical instruction leaflet targets adult patients and carers, not children. <strong>inference</strong>: a conclusion drawn from evidence in the text that is not directly stated. Example: if a character slams a door and doesn't speak at dinner, you can infer they are angry — the text never says so. <strong>rhetorical question</strong>: a question asked to make a point, not to receive an answer. Example: "Can we really afford to ignore the climate crisis?" <strong>emotive language</strong>: words chosen to provoke an emotional response (fear, sympathy, outrage, hope). Example: "innocent children are suffering needlessly every day." <strong>counter-argument</strong>: acknowledging the opposing view before refuting it. Example: "While some argue uniforms are expensive, the evidence shows they reduce long-term clothing costs." <strong>fact</strong>: a statement that can be verified as true or false. Example: "The population of London is approximately 9 million." <strong>opinion</strong>: a statement of belief or judgement that cannot be objectively verified. Example: "London is the best city in the world."</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="week-tag">Weeks 3 & 7 — Inference & Analysis</div>
+    <div class="q-text">Read this short extract and answer the questions below it.<br><br><em>"The factory had been running for thirty years. Fourteen-hour shifts, no weekends, no complaint — until the morning Ahmed did not show up. The foreman checked the roster. Ahmed had been there every single day. Every single one."</em></div>
+    <textarea class="q-input wide" placeholder="a) What can you INFER about Ahmed from this extract? List two inferences with evidence. (4 marks)&#10;&#10;Inference 1: Evidence:&#10;Inference 2: Evidence:&#10;&#10;b) The writer repeats 'Every single one.' What is the EFFECT of this repetition? (2 marks)&#10;&#10;c) The extract ends without telling us what happened to Ahmed. Why might the writer choose to end this way? (2 marks)"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Inference 1: <strong>Ahmed was an extremely dedicated and reliable worker</strong>. Evidence: "every single day" for thirty years of fourteen-hour shifts — this is an extraordinary record of attendance. Inference 2: <strong>Something serious has happened to Ahmed</strong> — either he is ill, injured, dead, or has left under dramatic circumstances. Evidence: the foreman "checked the roster" as if he couldn't believe it — the act of checking implies the absence is so unusual it seems impossible. Ahmed's perfect record makes any absence alarming. b) The repetition of "Every single one" creates <strong>emphasis and weight</strong> — it slows the reader down and forces them to feel the significance of Ahmed's record. It also creates a contrast: the sentence before lists thirty years of routine; the repetition turns one absence into something that feels like a rupture in reality. The rhythm also mimics the relentlessness of Ahmed's attendance. c) Ending without resolution creates <strong>mystery and unease</strong> — the reader is left wondering what happened, which is more powerful than being told. It also mirrors the foreman's experience: he is also in the moment of discovering something wrong, with no explanation yet. The open ending makes the reader complicit — we feel the same unsettling uncertainty the foreman feels. This technique is called an open or ambiguous ending; it invites the reader to engage imaginatively.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 2 — Applied Analysis</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Section 2 — Full Text Analysis</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="week-tag">Week 7 — Non-Fiction</div>
+    <div class="q-text">The revision article below combines techniques from across Weeks 1–7. Read it carefully then answer Questions 4–6.<br><br><em>Headline: LIBRARIES ARE NOT A LUXURY — THEY ARE A LIFELINE</em><br><br>Every week in this country, another library closes. Another community loses its free meeting place, its quiet refuge, its only reliable source of books and internet for people who cannot afford them at home.<br><br>Libraries are not relics. They are not the preserve of the elderly or the bookish. According to the Chartered Institute of Library and Information Professionals, over 15 million people visited public libraries in England last year — and 40% of them were under 25.<br><br>Some local councils argue that budget pressures leave them no choice. But cutting a library is a false economy. Research from the Reading Agency shows that every £1 invested in public library services generates £5 of social value — through reduced loneliness, improved mental health, greater literacy, and stronger communities.<br><br>"When a library closes, it is not just books that disappear," said Dr Fatima Hassan, Professor of Information Science at University College London. "It is the only safe, free, public space that some of the most vulnerable people in our society have access to."<br><br>You can argue about budgets. You can argue about priorities. But you cannot argue that taking away the only safe space from the people who have the least is a good idea. Close a library — and you close a door on the people who most need it open.</em></div>
+    <div class="q-text" style="margin-top:12px;">This question refers to the article above.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="week-tag">Week 7 — Purpose & Audience</div>
+    <div class="q-text">Identify the primary and secondary purpose of this article, and describe the intended audience. Support each answer with one piece of specific evidence from the text. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="Primary purpose: Evidence:&#10;Secondary purpose: Evidence:&#10;Intended audience: Evidence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Primary purpose: to persuade</strong>. Evidence: the article ends with a direct, emotive call to action — "Close a library — and you close a door on the people who most need it open." This is not informing; it is arguing for a position and trying to make inaction feel morally indefensible. <strong>Secondary purpose: to inform</strong>. Evidence: the article cites specific statistics — "15 million people visited public libraries" and "every £1 generates £5 of social value" — to provide factual backing for its argument. The named sources (CILIP, Reading Agency) give it credibility beyond opinion. <strong>Intended audience: adults — particularly local councillors, voters, and policy-interested citizens</strong>. Evidence: the reference to "local councils" arguing about "budget pressures" positions the article as addressing people who can influence or vote on library funding decisions. The vocabulary level (e.g. "false economy," "social value," "Chartered Institute") assumes an educated adult reader.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="week-tag">Week 7 — Language Features</div>
+    <div class="q-text">Identify FOUR different language techniques used in the article. For each: name the technique, quote the exact phrase (keep it short), and explain the effect on the reader. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Technique 1: Quote: Effect:&#10;&#10;Technique 2: Quote: Effect:&#10;&#10;Technique 3: Quote: Effect:&#10;&#10;Technique 4: Quote: Effect:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Accept any four of: <strong>Rule of three</strong>: "its free meeting place, its quiet refuge, its only reliable source" — creates rhythm and completeness, making the library feel like it provides multiple irreplaceable services. <strong>Rhetorical question (implied)</strong>: "You can argue about budgets. You can argue about priorities. But you cannot argue..." — the repeated "you can argue... but" structure builds to a point that feels unanswerable. <strong>Expert quotation</strong>: Dr Fatima Hassan, UCL Professor — gives authority; makes the emotional claim about "the most vulnerable" sound like credentialed analysis, not just sentiment. <strong>Counter-argument</strong>: "Some local councils argue that budget pressures leave them no choice" — acknowledging the opposing view makes the writer appear fair, then the "false economy" rebuttal dismisses it efficiently. <strong>Emotive language</strong>: "the people who most need it open" — framing library closure as harm specifically to the most vulnerable triggers protective instincts and moral discomfort in the reader. <strong>Statistics</strong>: "every £1 generates £5" — a specific ratio feels precise and evidence-based, making the "false economy" claim concrete rather than vague. <strong>Repetition</strong>: "Close a library — and you close a door" — the verb "close" repeated frames the action as a double closure, physical and metaphorical.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="week-tag">Weeks 3 & 7 — Critical Reading</div>
+    <div class="q-text">Apply the critical reader's question: "What is this article NOT telling me?" Identify TWO significant omissions. For each, explain what a more complete picture would include — and whether the omission makes the article dishonest or just persuasive. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="Omission 1: What is missing: Dishonest or just persuasive?&#10;&#10;Omission 2: What is missing: Dishonest or just persuasive?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Omission 1: <strong>No acknowledgment of digital alternatives</strong>. The article doesn't address whether e-books, free online resources, or mobile libraries could partially replace physical libraries — a reasonable point a counter-arguer would make. A more complete picture would acknowledge these exist and then explain why they don't fully substitute (not everyone has a device or data; digital literacy support requires a physical space; social isolation cannot be addressed online). This omission is <strong>persuasive but not dishonest</strong> — the article doesn't claim digital alternatives don't exist; it simply doesn't engage with them. Omission 2: <strong>The "£1 generates £5" figure is uncontextualised</strong>. The article presents this statistic as definitive without explaining how "social value" is calculated — it is an economic concept that can be measured in various ways, and different methodologies can produce very different results. A more complete picture would acknowledge this is one study's estimate with a specific methodology. However, this is a common limitation of statistics in persuasive writing, not fabrication. <strong>Persuasive, not dishonest</strong> — the figure appears to be real research, but selective citation of one favourable study is a normal feature of advocacy writing.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 3 — Extended Writing</span></div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">⚖️ Section 3 — Extended Response</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="week-tag">Weeks 1–7 — Synthesis</div>
+    <div class="q-text">You have studied three non-fiction articles in depth across Weeks 7A, 7B, and 7C, plus the library article above. Write a paragraph (minimum 5 sentences) explaining what makes a non-fiction text effective — using specific techniques from at least THREE of these four articles as examples. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Your analytical paragraph — what makes non-fiction effective:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">An effective non-fiction text combines credibility with emotional engagement in proportions calibrated to its specific audience. The plastic oceans article demonstrates how a dramatic opening statistic — only 9% of plastic ever produced has been recycled — functions as a hook that makes the reader feel the scale of a problem immediately; without this emotional and factual opening, the article's call to action would feel baseless. The young people article shows that effective persuasion often works through what it concedes as well as what it asserts — by acknowledging "yes, there are challenges" before pivoting to its counter-argument, the writer builds trust with a sceptical reader. The library article demonstrates the power of expert quotation: Dr Hassan's comment is not simply informative but strategically placed at the article's emotional centre, immediately after a factual section, to transition from reason to feeling. Across all four articles, the most effective technique is the same: choosing the right emotional register for the specific audience. The school holiday article uses alarm and urgency because its audience (policy-makers and parents) needs to feel the cost of inaction; the young people article uses measured evidence because its audience needs to be persuaded, not panicked. Effective non-fiction is not simply well-argued — it is precisely targeted, combining verifiable facts with techniques that make those facts land as feelings.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">8</div>
+    <div class="week-tag">Weeks 1–7 — Personal Reflection</div>
+    <div class="q-text">Which ONE reading skill from Weeks 1–7 do you think is most important for reading the real world (news, social media, political speeches, advertising) critically? Explain your choice in 4–5 sentences using a real-world example of what would go wrong without this skill. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="Most important reading skill: ___&#10;&#10;Why — and what would go wrong without it:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Open response — mark on quality of reasoning and use of real-world example. Strong answers might choose: <strong>Distinguishing fact from opinion</strong> (vital on social media where opinions are shared as facts and statistics are weaponised without context). <strong>Identifying purpose</strong> (a reader who cannot identify that a news report is actually an opinion column, or that a "health article" is actually advertising, cannot protect themselves from manipulation). <strong>Asking "what is not being said?"</strong> (every political speech, every advertisement, and most news coverage involves selection — understanding what is left out is often more important than understanding what is included). <strong>Recognising emotive language</strong> (once you can see that a headline is designed to trigger anger or fear before you have assessed the evidence, you can choose how to respond — without this skill, emotional reactions substitute for critical thinking). Any of these is defensible; the quality of the reasoning and example is what earns marks.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+    <div><div class="score-label">Total Score — English Revision</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections 1 + 2 + 3</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 50" style="border-color:rgba(190,18,60,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════════════════════════════════
+     MATHS REVISION — Weeks 1–7
+══════════════════════════════════════════════════ -->
+<div id="pg-maths" class="page">
+<style>#pg-maths{--accent:#B45309;}</style>
+
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🧮</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Revision Worksheet · Weeks 1–7</div>
+  <div class="hero-title">Maths<br>Revision</div>
+  <div class="hero-subtitle">Number · Fractions · Algebra · Geometry · Statistics · Ratio & Proportion</div>
+  <div class="hero-tags"><span class="hero-tag">Weeks 1–7</span><span class="hero-tag">Mixed Topics</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="week-map" style="--accent:#B45309;">
+  <div class="wm-cell active-w"><div class="wn">Wk 1</div><div class="wt">Number &amp; Place Value</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 2</div><div class="wt">Fractions &amp; Decimals</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 3</div><div class="wt">Algebra Basics</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 4</div><div class="wt">Geometry</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 5</div><div class="wt">Statistics &amp; Data</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 6</div><div class="wt">Probability</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 7</div><div class="wt">Ratio &amp; Proportion</div></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 60"></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Section 1 — Mixed Recall (One from every week)</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="week-tag">Week 1 — Number</div>
+    <div class="q-text">Calculate. Show all working. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Write 0.00047 in standard form.&#10;b) Round 3.07851 to 3 significant figures.&#10;c) Find the HCF of 48 and 60.&#10;d) Find the LCM of 8 and 14.&#10;e) Calculate: 2³ × 5² ÷ 10&#10;f) A number is written as 2² × 3 × 5. What is the number?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>4.7 × 10⁻⁴</strong>. b) <strong>3.08</strong> (4th sig fig is 5 → round up). c) Factors of 48: 1,2,3,4,6,8,12,16,24,48. Factors of 60: 1,2,3,4,5,6,10,12,15,20,30,60. HCF = <strong>12</strong>. d) Multiples of 8: 8,16,24,32,40,48,56. Multiples of 14: 14,28,42,56. LCM = <strong>56</strong>. e) 2³=8. 5²=25. 8×25=200. 200÷10=<strong>20</strong>. f) 4×3×5=<strong>60</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="week-tag">Week 2 — Fractions & Decimals</div>
+    <div class="q-text">Calculate. Give fractions in their simplest form. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) 3/4 + 5/6 =&#10;b) 2¾ − 1⅓ =&#10;c) 3/5 × 10/9 =&#10;d) 7/8 ÷ 7/4 =&#10;e) Convert 0.36̄ (0.3666...) to a fraction in simplest form.&#10;f) Arrange in ascending order: 7/12, 0.57, 5/9, 0.6"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 9/12 + 10/12 = <strong>19/12 = 1 7/12</strong>. b) 2 9/12 − 1 4/12 = <strong>1 5/12</strong>. c) 30/45 = <strong>2/3</strong>. d) 7/8 × 4/7 = 28/56 = <strong>1/2</strong>. e) Let x=0.3666... → 10x=3.666... → 100x=36.666... → 100x−10x=33 → 90x=33 → x=33/90=<strong>11/30</strong>. f) Convert all to decimals: 7/12≈0.583, 0.57, 5/9≈0.556, 0.6. Ascending: <strong>5/9, 0.57, 7/12, 0.6</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="week-tag">Week 3 — Algebra</div>
+    <div class="q-text">Solve. Show all working. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Expand and simplify: 3(2x − 4) + 2(x + 5)&#10;b) Factorise fully: 12x² − 8x&#10;c) Solve: 5x − 3 = 2x + 9&#10;d) Solve: (x+2)/3 = (2x−1)/4&#10;e) n is a positive integer. Write an expression for: the sum of three consecutive integers starting from n.&#10;f) Prove that the sum of any two consecutive odd numbers is always divisible by 4."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 6x−12+2x+10=<strong>8x−2</strong>. b) <strong>4x(3x−2)</strong>. c) 3x=12 → <strong>x=4</strong>. d) 4(x+2)=3(2x−1) → 4x+8=6x−3 → 11=2x → <strong>x=5.5</strong>. e) <strong>n + (n+1) + (n+2) = 3n+3</strong>. f) Two consecutive odd numbers: (2n+1) and (2n+3). Sum=4n+4=4(n+1). Since 4 is a factor, the sum is always divisible by 4. ✓</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="week-tag">Week 4 — Geometry</div>
+    <div class="q-text">Calculate. Include units in your answers. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Find the area of a trapezium with parallel sides 8cm and 14cm, height 5cm.&#10;b) Find the volume of a cylinder with radius 4cm and height 10cm. (Use π = 3.14)&#10;c) A triangle has angles in the ratio 2:3:5. Find each angle.&#10;d) Find the exterior angle of a regular octagon.&#10;e) A rectangle has perimeter 46cm and width 9cm. Find the length and area.&#10;f) Find the length of the hypotenuse of a right-angled triangle with legs 9cm and 12cm."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) A=½(8+14)×5=½×22×5=<strong>55cm²</strong>. b) V=π×4²×10=3.14×16×10=<strong>502.4cm³</strong>. c) 2+3+5=10 parts. 180÷10=18°. Angles: 2×18=36°, 3×18=54°, 5×18=<strong>90°, 54°, 36°</strong>. d) Exterior angle=360÷8=<strong>45°</strong>. e) Perimeter=2(l+w)=46 → l+9=23 → l=14cm. Area=14×9=<strong>126cm²</strong>. f) h²=9²+12²=81+144=225. h=√225=<strong>15cm</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="week-tag">Week 5 — Statistics</div>
+    <div class="q-text">A class of 10 students scored these marks in a test: 45, 62, 71, 58, 62, 89, 71, 55, 71, 76. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Find the mean.&#10;b) Find the median.&#10;c) Find the mode.&#10;d) Find the range.&#10;e) A new student joins and scores 40. What happens to the mean? Calculate the new mean.&#10;f) The teacher says 'most students scored above 60.' Is this claim accurate? Justify your answer with evidence."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Ordered: 45, 55, 58, 62, 62, 71, 71, 71, 76, 89. a) Sum=660. Mean=660÷10=<strong>66</strong>. b) Median=(62+71)÷2=<strong>66.5</strong>. c) Mode=<strong>71</strong> (appears 3 times). d) Range=89−45=<strong>44</strong>. e) New sum=660+40=700. 11 students. New mean=700÷11≈<strong>63.6</strong> (mean decreased). f) Students above 60: 62, 62, 71, 71, 71, 76, 89 = <strong>7 out of 10</strong>. Yes, the claim is accurate — 70% scored above 60. (The mean is also 66, above 60.)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="week-tag">Week 6 — Probability</div>
+    <div class="q-text">A bag contains 4 red, 3 blue, and 5 green counters. A counter is drawn at random. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) P(red) = ___&#10;b) P(not green) = ___&#10;c) P(blue or red) = ___&#10;d) The red counter is drawn and NOT replaced. What is P(red) on the second draw?&#10;e) What is P(drawing two green counters in a row), without replacement?&#10;f) If the experiment is repeated 60 times (with replacement each time), how many times would you EXPECT to draw green?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Total=12. a) P(red)=4/12=<strong>1/3</strong>. b) P(not green)=7/12. c) P(blue or red)=7/12. d) After removing one red: 3 red, 11 total. P(red)=<strong>3/11</strong>. e) P(1st green)=5/12. P(2nd green|1st green)=4/11. P(both green)=5/12 × 4/11=20/132=<strong>5/33</strong>. f) Expected greens=5/12 × 60=<strong>25</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="week-tag">Week 7 — Ratio & Proportion</div>
+    <div class="q-text">Mixed ratio and proportion problems. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Simplify 36:48:60.&#10;b) Share £140 in the ratio 3:4. Show all steps.&#10;c) 8 workers take 15 days. How long do 12 workers take? (State: direct or inverse)&#10;d) A scale model uses 1:75. The real building is 22.5m tall. How tall is the model in cm?&#10;e) Paint colours mixed in ratio red:white:blue = 2:5:1. How much red is in 4 litres?&#10;f) x and y are in direct proportion. When x=6, y=21. Find y when x=10."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) HCF=12 → <strong>3:4:5</strong>. b) Total parts=7. One part=£140÷7=£20. Shares: <strong>£60 and £80</strong>. Check: £60+£80=£140 ✓. c) <strong>Inverse</strong> proportion. Total worker-days=8×15=120. With 12 workers: 120÷12=<strong>10 days</strong>. d) 22.5m=2,250cm. Model height=2,250÷75=<strong>30cm</strong>. e) Total parts=8. One part=4÷8=0.5L. Red=2×0.5=<strong>1 litre</strong>. f) k=y/x=21/6=3.5. When x=10: y=3.5×10=<strong>35</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 2 — Problem Solving</span></div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚖️ Section 2 — Multi-Step & Reasoning</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">8</div>
+    <div class="week-tag">Weeks 2, 7 — Mixed</div>
+    <div class="q-text">A school collects £1,260 for charity. The money is split between three charities in the ratio 4:3:2. The first charity uses ¾ of its share to buy food and the rest on transport. How much is spent on transport? <span class="marks">4 marks</span></div>
+    <textarea class="q-input narrow" placeholder="Step 1 — shares: Step 2 — first charity's share: Step 3 — transport cost:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Total parts=9. One part=£1,260÷9=£140. First charity=4×£140=<strong>£560</strong>. Food=¾×£560=£420. Transport=£560−£420=<strong>£140</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">9</div>
+    <div class="week-tag">Weeks 3 & 4 — Algebra + Geometry</div>
+    <div class="q-text">A rectangle has length (3x + 2) cm and width (x + 5) cm. Its perimeter is 54cm. (a) Form and solve an equation to find x. (b) Find the area of the rectangle. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Perimeter equation: Solve for x:&#10;(b) Area:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Perimeter=2[(3x+2)+(x+5)]=54 → 2(4x+7)=54 → 4x+7=27 → 4x=20 → <strong>x=5</strong>. (b) Length=3(5)+2=17cm. Width=5+5=10cm. Area=17×10=<strong>170cm²</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">10</div>
+    <div class="week-tag">Weeks 5 & 6 — Stats + Probability</div>
+    <div class="q-text">In a survey of 120 students, 45 said they prefer Maths, 35 said English, and 40 said Science. (a) Draw a frequency table and calculate the relative frequency for each subject. (b) A student is picked at random. What is the probability they prefer English or Science? (c) If 600 more students were surveyed with the same distribution, how many would you expect to prefer Maths? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Frequency table with relative frequencies:&#10;&#10;(b) P(English or Science) =&#10;&#10;(c) Expected Maths preference in 600 more students ="></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Maths: 45, relative freq=45/120=<strong>3/8=0.375</strong>. English: 35, rel.freq=35/120=<strong>7/24≈0.292</strong>. Science: 40, rel.freq=40/120=<strong>1/3≈0.333</strong>. Total=120 ✓. (b) P(English or Science)=(35+40)/120=75/120=<strong>5/8=0.625</strong>. (c) Expected Maths=3/8×600=<strong>225 students</strong>.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+    <div><div class="score-label">Total Score — Maths Revision</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections 1 + 2</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 60" style="border-color:rgba(180,83,9,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════════════════════════════════
+     SCIENCE REVISION — Weeks 1–7
+══════════════════════════════════════════════════ -->
+<div id="pg-science" class="page">
+<style>#pg-science{--accent:#065F46;}</style>
+
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🔬</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Revision Worksheet · Weeks 1–7</div>
+  <div class="hero-title">Science<br>Revision</div>
+  <div class="hero-subtitle">Biology · Chemistry · Physics · Scientific Method · States of Matter</div>
+  <div class="hero-tags"><span class="hero-tag">Weeks 1–7</span><span class="hero-tag">Mixed Sciences</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="week-map" style="--accent:#065F46;">
+  <div class="wm-cell active-w"><div class="wn">Wk 1</div><div class="wt">Scientific Method</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 2</div><div class="wt">Cells &amp; Biology</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 3</div><div class="wt">Forces &amp; Motion</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 4</div><div class="wt">Ecosystems</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 5</div><div class="wt">Energy</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 6</div><div class="wt">Waves &amp; Light</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 7</div><div class="wt">States of Matter</div></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 55"></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">⚡ Section 1 — One Question Per Week</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="week-tag">Week 1 — Scientific Method</div>
+    <div class="q-text">A student investigates whether the colour of light affects plant growth. (a) Write a hypothesis. (b) Name the independent, dependent, and three control variables. (c) Why should the student repeat each colour three times and take a mean? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Hypothesis:&#10;(b) Independent: Dependent: Control variables (3):&#10;(c) Why repeat and take a mean:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Sample hypothesis: "Plants grown under blue light will grow taller than plants grown under red or green light because blue light wavelengths are most efficiently absorbed by chlorophyll for photosynthesis." (b) Independent = colour of light. Dependent = plant growth (measured in cm of height, or mass, or leaf number — specify one). Controls: same species of plant, same volume of water, same temperature, same length of light exposure per day, same soil/nutrient content. (c) Repeating and taking a mean: individual results can be anomalous due to chance variation (one plant might be a poor grower regardless of light colour). Repeating three times and averaging removes the impact of random variation and makes the results more reliable and representative of the true pattern.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="week-tag">Week 2 — Cells & Biology</div>
+    <div class="q-text">Compare a plant cell and an animal cell. (a) List THREE structures found in plant cells but NOT in animal cells. (b) For each, state its function. (c) Why do plant cells need chloroplasts but animal cells do not? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="(a)+(b) Structure 1: Function:&#10;Structure 2: Function:&#10;Structure 3: Function:&#10;(c) Why plant cells need chloroplasts but animal cells do not:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a)+(b): <strong>Cell wall</strong> — made of cellulose; provides structural support and maintains the shape of the cell, preventing it from bursting. <strong>Chloroplasts</strong> — contain chlorophyll; the site of photosynthesis, where light energy is converted into glucose. <strong>Large permanent vacuole</strong> — contains cell sap; maintains cell rigidity through osmotic pressure (turgor). (c) Plant cells need chloroplasts because they are autotrophs — they make their own food through photosynthesis, using sunlight, water, and CO₂ to produce glucose. Animal cells are heterotrophs — they obtain glucose by eating and digesting food from other organisms. Since animals get their glucose externally, they have no need for the machinery to manufacture it from sunlight.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="week-tag">Week 3 — Forces & Motion</div>
+    <div class="q-text">A car accelerates from 10 m/s to 34 m/s in 8 seconds. (a) Calculate the acceleration. (b) The car has mass 1,200kg. Calculate the resultant force causing this acceleration. (c) Explain what "resultant force" means. (d) If the engine force is 6,500N, what is the friction force? <span class="marks">6 marks</span></div>
+    <div class="formula-box">acceleration = <span class="hl">Δv ÷ t</span> &nbsp;&nbsp; force = <span class="hl">mass × acceleration</span></div>
+    <textarea class="q-input" placeholder="(a) Acceleration =&#10;(b) Resultant force =&#10;(c) What 'resultant force' means:&#10;(d) Friction force ="></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) a=(34−10)÷8=24÷8=<strong>3 m/s²</strong>. (b) F=1200×3=<strong>3,600N</strong>. (c) The resultant force is the single net force acting on an object after all forces are added together (taking direction into account). If forces balance, resultant=0 and the object is in equilibrium. If unbalanced, the resultant causes acceleration in the direction of the larger force. (d) Friction=Engine force−Resultant force=6,500−3,600=<strong>2,900N</strong> (acting backwards, opposing motion).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="week-tag">Week 4 — Ecosystems</div>
+    <div class="q-text">A food web: grass → rabbit → fox. Grass → grasshopper → frog → heron. (a) Name one producer, one primary consumer, one secondary consumer, one tertiary consumer. (b) What would happen to the frog population if all foxes were removed? Explain the knock-on effects through TWO other organisms. (c) What is the difference between a food chain and a food web? <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Producer: Primary consumer: Secondary consumer: Tertiary consumer:&#10;(b) Effect of removing foxes — chain of effects:&#10;(c) Food chain vs food web:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Producer: <strong>grass</strong>. Primary consumer: <strong>rabbit or grasshopper</strong>. Secondary consumer: <strong>fox or frog</strong>. Tertiary consumer: <strong>heron</strong>. (b) If foxes are removed: rabbit population increases (no predation) → rabbits eat more grass → grass population decreases. OR: foxes also eat rabbits which may have competed with grasshoppers for grass → with fewer rabbits, grasshoppers may increase → frogs increase (more food) → herons increase (more frogs). Either chain is acceptable; the key is showing cascade effects through at least two organisms with explanations. (c) A food chain shows a single sequence of feeding relationships (A eats B, B eats C). A food web shows the complete network of interconnected food chains in an ecosystem — it is more realistic because most organisms eat more than one thing and are eaten by more than one predator.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="week-tag">Week 5 — Energy</div>
+    <div class="q-text">A 2kg ball is lifted to a height of 5m above the ground. (a) Calculate its gravitational potential energy (g = 10 N/kg). (b) It is then dropped. Calculate its kinetic energy just before it hits the ground (assume no energy is lost). (c) Calculate its speed just before impact. (d) In practice, the ball hits the ground with less kinetic energy than calculated. Where has the missing energy gone? <span class="marks">6 marks</span></div>
+    <div class="formula-box">GPE = <span class="hl">mgh</span> &nbsp;&nbsp; KE = <span class="hl">½mv²</span> &nbsp;&nbsp; rearranged: v = <span class="hl">√(2×KE÷m)</span></div>
+    <textarea class="q-input" placeholder="(a) GPE =&#10;(b) KE just before impact =&#10;(c) Speed =&#10;(d) Where missing energy goes:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) GPE=2×10×5=<strong>100J</strong>. (b) By conservation of energy (no losses): KE=GPE=<strong>100J</strong>. (c) v=√(2×100÷2)=√100=<strong>10 m/s</strong>. (d) In practice, air resistance acts on the falling ball, converting some kinetic energy into <strong>thermal energy (heat)</strong> in the air and in the ball. The ball also deforms slightly on contact, converting energy into sound and heat. Energy is never destroyed — it is transferred to less useful forms. This is why real falling objects arrive slower than theoretical calculations predict.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="week-tag">Week 6 — Waves & Light</div>
+    <div class="q-text">(a) State the wave equation and use it: a wave has frequency 500Hz and wavelength 0.68m. Calculate its speed. (b) Light travels at 3×10⁸ m/s. Calculate the wavelength of red light with frequency 4.3×10¹⁴ Hz. Give your answer in nm (1m = 10⁹ nm). (c) Explain the difference between transverse and longitudinal waves, giving one example of each. <span class="marks">6 marks</span></div>
+    <div class="formula-box">wave speed = <span class="hl">frequency × wavelength</span> &nbsp; (v = fλ)</div>
+    <textarea class="q-input" placeholder="(a) Speed =&#10;(b) Wavelength in nm =&#10;(c) Transverse vs longitudinal — explanation + examples:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) v=500×0.68=<strong>340 m/s</strong> (speed of sound in air). (b) λ=v÷f=3×10⁸÷4.3×10¹⁴=6.977×10⁻⁷m. Convert to nm: ×10⁹=<strong>697.7nm ≈ 698nm</strong> (correctly in the red visible light range). (c) <strong>Transverse wave</strong>: the oscillation (vibration) is perpendicular (at right angles) to the direction of wave travel. Example: light waves, water surface waves, waves on a string. <strong>Longitudinal wave</strong>: the oscillation is parallel to the direction of wave travel — the medium compresses and rarefies (spreads out) in the same direction the wave moves. Example: sound waves, seismic P-waves. Key memory aid: transverse = cross (perpendicular); longitudinal = along (parallel).</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">7</div>
+    <div class="week-tag">Week 7 — States of Matter</div>
+    <div class="q-text">(a) Describe the arrangement, movement, and spacing of particles in a GAS. (b) A substance melts at 801°C and boils at 1,465°C. At room temperature (25°C), what state is it in? (c) Name this substance (clue: it is a very common compound). (d) Explain why this substance has such a high melting point compared to water (0°C) — use the particle model to compare the forces involved. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Gas particles — arrangement: movement: spacing:&#10;(b) State at 25°C: reason:&#10;(c) What substance is it?&#10;(d) Why such a high melting point compared to water:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Gas: arrangement = <strong>random, no fixed positions</strong>. Movement = <strong>very fast, in all directions, completely free</strong>. Spacing = <strong>very far apart</strong> (much larger than in liquid or solid — mostly empty space). (b) 25°C is below the melting point of 801°C, so the substance is a <strong>solid</strong> at room temperature. (c) This is <strong>sodium chloride (NaCl) — common table salt</strong>. Melting point 801°C, boiling point 1,465°C are the correct values for NaCl. (d) NaCl is an ionic compound — its particles are Na⁺ and Cl⁻ ions held together by very strong electrostatic forces (ionic bonds) between opposite charges. To melt salt, you must provide enough energy to overcome these powerful ionic attractions across an entire lattice of millions of ions. Water (H₂O) is a molecular compound — its molecules are held together by much weaker intermolecular forces (hydrogen bonds and van der Waals forces). These are far easier to overcome, so water melts at just 0°C. The enormous difference in melting points reflects the enormous difference in the strength of the forces between particles.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 2 — Synoptic</span></div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">⚖️ Section 2 — Extended & Synoptic</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">8</div>
+    <div class="week-tag">Weeks 1–7 — Synoptic</div>
+    <div class="q-text">Connect THREE different topics from Weeks 1–7 of science (from different weeks) in a single explanation of ONE real-world phenomenon of your choice. Show how concepts from multiple weeks work together to explain something in the world. Write at least 5 sentences. <span class="marks">8 marks</span></div>
+    <div class="synoptic-box">🌟 <strong>Example:</strong> You could explain how a kettle works using: energy transfer (Wk 5), particle model and states of matter (Wk 7), and wave/thermal radiation (Wk 6). Or choose your own phenomenon — the key is connecting THREE weeks of content meaningfully.</div>
+    <textarea class="q-input xwide" placeholder="The phenomenon I am explaining: ___&#10;&#10;Week ___ concept used + how it applies:&#10;Week ___ concept used + how it applies:&#10;Week ___ concept used + how it applies:&#10;&#10;How they connect in one explanation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample: Phenomenon — <strong>a thunderstorm</strong>. Week 5 (Energy): a thunderstorm is powered by enormous transfers of energy. Warm, moist air rises rapidly (convection — thermal energy transfer), carrying water vapour high into the atmosphere. As it rises and cools, the vapour condenses, releasing latent heat (Wk 7 — states of matter) which powers further rising — a positive feedback loop that builds cumulonimbus clouds kilometres high. Week 7 (States of Matter): as water vapour (gas) rises and cools, it undergoes condensation back to liquid water and eventually freezing to ice crystals — both releasing energy (latent heat) that fuels the storm's energy. The state changes of water are central to every stage of storm development. Week 6 (Waves): lightning is an enormous discharge of static electricity, producing both light (electromagnetic wave — transverse) and sound (thunder — longitudinal pressure wave). The 3km per second difference in the speed of light (3×10⁸ m/s) vs sound (340 m/s) explains the delay between seeing lightning and hearing thunder — you can calculate the storm's distance by counting the seconds and multiplying by 340m. All three weeks' concepts — energy transfer, state changes, and wave behaviour — are essential to a complete explanation of a thunderstorm.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+    <div><div class="score-label">Total Score — Science Revision</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections 1 + 2</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 55" style="border-color:rgba(6,95,70,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════════════════════════════════
+     HISTORY REVISION — Weeks 1–7
+══════════════════════════════════════════════════ -->
+<div id="pg-history" class="page">
+<style>#pg-history{--accent:#1E3A8A;}</style>
+
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏛️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Revision Worksheet · Weeks 1–7</div>
+  <div class="hero-title">History &<br>Geography Revision</div>
+  <div class="hero-subtitle">Ancient Civilisations · World History · Geography Skills · Biomes & Climate</div>
+  <div class="hero-tags"><span class="hero-tag">Weeks 1–7</span><span class="hero-tag">History & Geography</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+
+<div class="week-map" style="--accent:#1E3A8A;">
+  <div class="wm-cell active-w"><div class="wn">Wk 1</div><div class="wt">Early Civilisations</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 2</div><div class="wt">Ancient Mesopotamia</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 3</div><div class="wt">Ancient China</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 4</div><div class="wn">Wk 4</div><div class="wt">Ancient India</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 5</div><div class="wt">Ancient Greece</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 6</div><div class="wt">Ancient Rome</div></div>
+  <div class="wm-cell active-w"><div class="wn">Wk 7</div><div class="wt">Climate &amp; Biomes</div></div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 55"></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚡ Section 1 — Core Knowledge (One Topic Per Week)</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="week-tag">Weeks 1–6 — Ancient Civilisations</div>
+    <div class="q-text">For each civilisation, answer these three questions: (i) What river or geography made it possible? (ii) Name ONE major achievement or contribution. (iii) What ultimately caused its decline? <span class="marks">12 marks</span></div>
+    <textarea class="q-input xwide" placeholder="MESOPOTAMIA (Tigris & Euphrates):&#10;(i) Geography: (ii) Achievement: (iii) Decline:&#10;&#10;ANCIENT CHINA (Yellow/Yangtze River):&#10;(i) Geography: (ii) Achievement: (iii) Decline:&#10;&#10;ANCIENT INDIA (Indus River / Ganges):&#10;(i) Geography: (ii) Achievement: (iii) Decline:&#10;&#10;ANCIENT GREECE:&#10;(i) Geography: (ii) Achievement: (iii) Decline:&#10;&#10;ANCIENT ROME:&#10;(i) Geography: (ii) Achievement: (iii) Decline:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Mesopotamia</strong>: (i) Tigris and Euphrates rivers — "land between rivers" provided water, fertile soil, and trade routes. (ii) Writing (cuneiform), the wheel, the Code of Hammurabi (one of the earliest legal codes), mathematical and astronomical advances. (iii) Conquest by successive empires — Assyrians, Babylonians, Persians, then Alexander the Great; soil salinisation over centuries reduced agricultural productivity. <strong>Ancient China</strong>: (i) Yellow River (Huanghe) — nicknamed "China's Sorrow" for its floods but also its fertile soil; and later the Yangtze. China's geographic isolation (deserts, mountains, sea) also protected it. (ii) Paper, printing, gunpowder, silk, the compass, the Great Wall, the Silk Road trade network. (iii) Dynastic cycles — repeated pattern of strong dynasty founding, stability, then corruption, rebellion, and replacement; often combined with external invasion (e.g. Mongols). <strong>Ancient India</strong>: (i) Indus Valley civilisation on the Indus River; later Ganges valley. The monsoon seasonal floods fertilised plains. (ii) Advanced urban planning (Harappa, Mohenjo-Daro had sewage systems); the Hindu decimal number system (0–9); Buddhism and Hinduism — world religions still with billions of followers. (iii) Indus Valley decline likely caused by climate change and river changes; later empires (Mauryan, Gupta) fell to internal conflict and invasion (Huns from Central Asia). <strong>Ancient Greece</strong>: (i) Mediterranean peninsula and islands — the sea was Greece's highway; rocky terrain encouraged city-states rather than one unified kingdom. (ii) Democracy (Athens), philosophy (Socrates, Plato, Aristotle), the Olympic Games, theatre, geometry, medicine (Hippocrates). (iii) Internal warfare between city-states (especially Athens vs Sparta in Peloponnesian War) weakened Greece; conquered by Macedon under Philip II and Alexander the Great. <strong>Ancient Rome</strong>: (i) Italy peninsula — Mediterranean access, fertile volcanic soil (Tiber River valley), defensible hills of Rome. (ii) Roman law (basis of most European legal systems), concrete and road-building engineering, aqueducts, the Roman calendar, Latin (root of Romance languages), Christianity spread across the empire. (iii) Western Roman Empire fell in 476 AD — multiple causes: economic problems, military overstretch, political corruption and instability, pressure from Germanic tribes, and possible climate change and plague.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="week-tag">Week 7 — Climate & Biomes</div>
+    <div class="q-text">Quick-fire biome questions. Answer each in one or two sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) What is the difference between climate and weather?&#10;b) Name the five factors that determine a place's climate.&#10;c) Why do areas near the equator receive more solar energy than areas near the poles?&#10;d) Name one adaptation of a desert plant and explain why it is needed.&#10;e) What is the 'rain shadow effect'? Name one place where it creates a desert.&#10;f) Name the biome with the greatest biodiversity on Earth. Why does it have so much?&#10;g) What is permafrost and in which biome is it found?&#10;h) The lesson gives a chain: climate → vegetation → biome. Explain this chain in your own words."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Weather = short-term, day-to-day atmospheric conditions. Climate = long-term average of weather patterns over 30+ years. "Climate is what you expect; weather is what you get." b) Five factors: <strong>latitude, altitude, distance from the sea, ocean currents, prevailing winds</strong>. c) Near the equator, the sun's rays hit at a direct, concentrated angle — high energy per unit area. Near the poles, the same energy hits at an oblique angle, spread over a much larger area — less energy per square metre, much colder. d) Sample: cactus has a waxy outer layer (cuticle) to prevent water loss through evaporation — essential in a habitat where rainfall is less than 250mm per year and temperatures are extreme. e) The rain shadow is the dry area on the leeward (sheltered) side of a mountain range — moist air rises on the windward side, deposits rain, then descends dry on the other side. Example: Atacama Desert (eastern Andes), Nevada/Great Basin (eastern Cascades). f) Tropical rainforest. It has maximum biodiversity because: year-round heat (close to equator), constant high rainfall (2,000mm+), and a complex layered structure (canopy, understorey, forest floor) creates many different ecological niches for different species to evolve into. g) Permafrost = permanently frozen ground, frozen year-round even in summer. Found in the <strong>tundra</strong> biome (Arctic regions of Russia, Canada, Alaska, Scandinavia). h) The chain means: climate (temperature and rainfall patterns) determines what vegetation can grow → the type of vegetation defines the whole ecosystem (its food chains, soil type, species composition) → therefore climate ultimately shapes the entire biome. Change the climate, and the vegetation changes, and the whole biome transforms.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section 2 — Understanding & Comparison</span></div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Section 2 — Cross-Civilisation Thinking</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="week-tag">Weeks 1–6 — Comparing Civilisations</div>
+    <div class="q-text">The lesson identified a pattern across all ancient civilisations: they all developed in similar conditions. (a) Name THREE conditions shared by most early civilisations. (b) Why did geography matter so much in the ancient world in a way it matters less today? (c) Which of the five civilisations do you think made the greatest contribution to the modern world? Argue your case with specific evidence. Write at least 4 sentences. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Three shared conditions:&#10;1. 2. 3.&#10;&#10;(b) Why geography mattered so much in the ancient world:&#10;&#10;(c) The civilisation with the greatest modern legacy — and evidence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Three shared conditions: (1) <strong>Access to a reliable fresh water source</strong> (river or reliable rainfall) — for drinking, agriculture, and trade. (2) <strong>Fertile land</strong> enabling agricultural surplus — a surplus means some people can do things other than farm, enabling specialisation (scribes, craftsmen, priests, soldiers, rulers). (3) <strong>Some form of natural protection or defined territory</strong> — mountains, deserts, sea, or rivers that offered defence and defined the civilisation's borders, giving it time to develop. (b) In the ancient world, technology, communication, and transport were extremely limited — you could only use what was near you. Fertile river valleys gave food and trade; mountains gave protection; sea access gave connections to other peoples. Without these geographic gifts, populations could not grow, specialize, or sustain the complexity of a civilisation. Today, technology, global trade, irrigation, fertilisers, and shipping allow civilisations to exist and thrive in places no ancient people could have sustained — geography is no longer destiny in the same way. (c) Open response — any choice is defensible with strong evidence. Strong answers for Rome: Roman law, concrete infrastructure, Latin language (ancestor of French, Spanish, Italian, Portuguese, Romanian), and the spread of Christianity have all profoundly shaped the modern West. Strong answers for Ancient India: the decimal numeral system (0–9) that all mathematics globally uses today. Strong answers for Greece: democracy, philosophy, and the foundation of Western intellectual traditions in science, politics, and the arts. Mark on quality of argument and specificity of evidence.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="week-tag">Weeks 1–7 — Synoptic</div>
+    <div class="q-text">The lesson connects history and geography: ancient civilisations rose where geography was favourable, and today's biomes tell us where geography is still shaping human possibility. Write an extended response connecting ONE ancient civilisation from Weeks 1–6 with ONE biome from Week 7 — explaining how climate and geography shaped both the ancient civilisation's possibilities and the modern biome in the same region. Write at least 6 sentences. <span class="marks">10 marks</span></div>
+    <div class="synoptic-box">🌟 <strong>Example:</strong> You might connect Ancient Egypt (Nile Valley) with the desert biome — showing how the same geography (a river in a desert) that made ancient Egypt possible now sits within the Saharan desert biome. Or connect Ancient India with monsoon climate patterns. Choose your own connection.</div>
+    <textarea class="q-input xwide" placeholder="Civilisation chosen: Biome/region chosen:&#10;&#10;How geography shaped the ancient civilisation:&#10;&#10;How the same geography shapes the modern biome:&#10;&#10;Connection — what does this reveal about the relationship between geography, history, and biology?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample — <strong>Mesopotamia + the Middle Eastern semi-arid/desert biome</strong>: Ancient Mesopotamia arose precisely because the Tigris and Euphrates Rivers provided a reliable water and fertile soil strip in an otherwise arid region. The rivers made surplus agriculture possible, enabling specialisation, cities, and civilisation. The same geographic reality — a desert-dominated region with seasonal rivers — still defines this area today. The modern biome of the Tigris-Euphrates region is a mix of semi-arid grassland and desert, punctuated by the "fertile crescent" corridor. Without irrigation (which the ancient Mesopotamians pioneered), the region's natural vegetation would support only sparse dry-adapted plants. Today, much of Iraq and Syria lie in the desert and semi-arid biome — the same climate conditions that made the rivers the only viable basis for ancient life. This connection reveals something profound: geography is long-term destiny. The climate determines the biome; the biome determines where water and food exist; where water and food exist, civilisations arise. Mesopotamia, Egypt, the Indus Valley, and China's Yellow River all followed exactly this pattern — each civilisation was essentially an ecological solution to the question: "where can we grow enough food to build something larger than a village?" Today's biome maps and ancient civilisation maps overlay with remarkable precision — the fertile temperate and river-valley zones contain almost all of humanity's earliest and most enduring civilisations.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="week-tag">Weeks 1–7 — Legacy & Relevance</div>
+    <div class="q-text">Choose ONE legacy from any week (Weeks 1–7) of history — something invented, built, written, or established by an ancient civilisation — that you think is still genuinely important and present in everyday life today. Explain: what it was, how it was developed, why it matters to you personally, and what the world would look like without it. Write at least 5 sentences. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Legacy chosen: From which civilisation and week:&#10;&#10;What it was and how it was developed:&#10;&#10;Why it still matters today — with specific examples:&#10;&#10;What the world would look like without it:&#10;&#10;Why this is the one I find most significant:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Open response. Strong answers will: (1) choose a specific legacy (not vague — not "democracy" but "the Athenian system of choosing officials by election"). (2) Accurately describe its origins and development using lesson content. (3) Connect it specifically to the student's own life or contemporary world. (4) Make a genuine counterfactual argument — what would be missing? (5) Show personal engagement and independent thought. Examples of excellent choices: the decimal number system (Ancient India) — without the numeral zero, modern mathematics, computing, and all technology that depends on binary code would be impossible. The concept of written law (Mesopotamia / Hammurabi) — without the principle that laws should be written down and applied consistently, there is no rule of law and no protection for ordinary people against the powerful. The idea of democracy (Athens) — imperfect in ancient form (excluded women and slaves) but establishing the principle that governance requires consent of the governed, which underpins every modern democracy. Mark on quality of reasoning and personal engagement, not on which legacy is chosen.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+    <div><div class="score-label">Total Score — History Revision</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections 1 + 2</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 55" style="border-color:rgba(30,58,138,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week7_Day4_REVISION');</script>
+</body>
+</html>

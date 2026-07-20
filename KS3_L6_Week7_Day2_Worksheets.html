@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 7 Worksheet B · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;gap:0;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius-sm);padding:18px 22px;text-align:center;margin-bottom:14px;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--bright);line-height:1.5;margin-bottom:6px;}
+.verse-ref{font-size:0.78rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.formula-box{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:0.9rem;color:var(--bright);margin-bottom:14px;line-height:1.8;overflow-x:auto;}
+.formula-box .hl{color:#FCD34D;}
+.formula-box .hl2{color:#6EE7B7;}
+.formula-box .cm{color:var(--muted);font-size:0.8rem;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 7 · Practice B</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ══════════════════  BIBLE  ══════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🌊</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 7 · Practice B</div>
+  <div class="hero-title">Moses &<br>the Exodus</div>
+  <div class="hero-subtitle">Exodus 1–15 · God Delivers His People · The Passover · Courage and Calling</div>
+  <div class="hero-tags"><span class="hero-tag">Practice B — New Questions</span><span class="hero-tag">Exodus 1–15</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and vocabulary. Try without your notes first.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Recall</div>
+  <div class="esl-tip">💡 <strong>Memory check:</strong> Cover your notes and try these from memory. The memory verse is <strong>Exodus 14:14</strong>.</div>
+
+  <div class="verse-box">
+    <div class="verse-text">"The Lord will fight for you; you need only to be still."</div>
+    <div class="verse-ref">Exodus 14:14 — NIV</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Answer these short recall questions in full sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) What was Moses doing when God first appeared to him, and where was he?&#10;&#10;b) What TWO miraculous things happened to the Red Sea — and what caused each one?&#10;&#10;c) What happened to every Egyptian home during the tenth plague, and how were Israelite homes protected?&#10;&#10;d) Name the sister of Moses who led the women in song after the Red Sea crossing. What did they use?&#10;&#10;e) God told Moses His name at the burning bush. What was that name and what does it mean?&#10;&#10;f) Why did God's covenant with Abraham matter during the events of Exodus? Connect the two stories."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Moses was <strong>tending his father-in-law Jethro's flock</strong> on Mount Horeb (Sinai) when God appeared in a burning bush that was not consumed by the fire. b) First, Moses stretched out his hand and <strong>a strong east wind blew all night</strong>, dividing the sea into two walls of water with dry ground between them. Then Moses stretched out his hand a second time and <strong>the sea returned to its normal state</strong>, drowning the entire Egyptian army. c) During the tenth plague, <strong>every firstborn son in Egypt died</strong> — from Pharaoh's son to the prisoner in the dungeon. Israelite homes were protected by <strong>the blood of a perfect lamb painted on the doorposts and top of the door frame</strong> — when God saw the blood, He passed over that house. d) Moses' sister was <strong>Miriam</strong>. She led the women with <strong>tambourines</strong> and dancing. e) God's name was <strong>"I AM WHO I AM"</strong> (Hebrew: YHWH). It means He is self-existent, eternal, and without beginning or end — He simply IS, and has always been. f) God told Moses He had heard the Israelites' cry and <strong>remembered His covenant with Abraham, Isaac, and Jacob</strong> (Exodus 2:24). The covenant had promised Abraham a great nation and a land. The Exodus was the beginning of God fulfilling that specific promise — 430 years later. The rescue of Israel was not a new plan; it was the old covenant being kept.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Sort these events into the correct chronological order (1 = first, 8 = last). <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Write the correct number (1–8) next to each event:&#10;___ The Song of Moses — Israel sings after the Red Sea crossing&#10;___ Moses flees Egypt after killing an Egyptian guard&#10;___ God appears in the burning bush and gives Moses his calling&#10;___ The first Passover — blood on doorposts, unleavened bread&#10;___ Israel walks through the divided Red Sea on dry ground&#10;___ Moses is born and hidden in a basket in the Nile&#10;___ The ninth plague — three days of complete darkness over Egypt&#10;___ Moses goes before Pharaoh for the first time and asks him to release Israel"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1 — Moses is born and hidden in a basket in the Nile. 2 — Moses flees Egypt after killing an Egyptian guard. 3 — God appears in the burning bush and gives Moses his calling. 4 — Moses goes before Pharaoh for the first time. 5 — The ninth plague (darkness). 6 — The first Passover. 7 — Israel walks through the divided Red Sea. 8 — The Song of Moses.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Explanation questions. Write in full sentences using lesson evidence.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Understanding</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">The lesson describes Pharaoh's response to the plagues as a repeated pattern. Describe this pattern precisely — what did Pharaoh do each time a plague struck, and what did he do when the pressure lifted? What does this reveal about his character? Write at least 3 sentences. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Pharaoh's pattern during a plague:&#10;&#10;Pharaoh's pattern after a plague ended:&#10;&#10;What this reveals about his character:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">During each plague, Pharaoh would <strong>summon Moses, make a promise to release Israel, and beg for the plague to stop</strong> — this happened repeatedly from plague 2 onward (the frogs). But each time the plague ended and the pressure was relieved, Pharaoh <strong>broke his promise and hardened his heart</strong>, refusing to let Israel go. The lesson notes this pattern explicitly after the frogs: "he saw that there was relief, he hardened his heart" (Exodus 8:15). This reveals a character driven entirely by immediate self-interest and pride rather than principle or conviction. Pharaoh only responded to pressure — the moment the pressure lifted, his true nature reasserted itself. He was not persuaded by evidence or by conscience; he simply calculated the cost to himself. The lesson says this is also why the escalating plagues make sense theologically: each new plague was a response to a new broken promise.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">The lesson describes the Passover meal as a meal designed to be <em>re-lived, not just remembered</em>. What specific features of the Passover instructions made it a physical, sensory experience rather than just a story? Give THREE specific details and explain what each one was meant to communicate to the people eating it. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Detail 1: ___ What it communicates:&#10;&#10;Detail 2: ___ What it communicates:&#10;&#10;Detail 3: ___ What it communicates:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Detail 1: <strong>Bitter herbs (maror)</strong>. The bitterness was a deliberate physical sensation — you literally tasted what slavery felt like. This was not an intellectual exercise; the lesson says "these physical, edible symbols turn an event into a remembered experience." The bitterness was meant to put the suffering of Egypt in your mouth, not just your mind. Detail 2: <strong>Unleavened bread (matzah) — no yeast</strong>. The instruction to eat bread without yeast was because there was no time to let the dough rise — they were leaving in such a hurry that even the bread was unfinished. Eating this bread communicates urgency: the departure from Egypt was not a leisurely exit. Every bite of flat bread recalled the speed and desperation of that night. Detail 3: <strong>Sandals on, staff in hand, eating in a hurry (Exodus 12:11)</strong>. They were told not to sit and dine comfortably — they were to eat the meal fully dressed and ready to leave immediately. The lesson says: "Faith, in this picture, looks like readiness. They did not eat and then start packing." This physical posture — eating while prepared to move — communicated that the Passover was not a memorial to a past event but a present posture of trust and readiness.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analysis. Use lesson evidence in every point.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⚖️ Critical Thinking</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">The lesson says the Israelites at the Red Sea "blamed Moses" and said it would have been better to stay as slaves. Moses responded with Exodus 14:13–14. Analyse this moment: (a) Why do you think people who had just been miraculously freed were ready to give up so quickly? (b) What does Moses' response demonstrate about his character at this moment? (c) The lesson calls this "Moses at his finest." What makes it his finest moment — and why is it surprising? Write at least 5 sentences. <span class="marks">5 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Why the Israelites wanted to go back to slavery when things got hard:&#10;&#10;(b) What Moses' response demonstrates about his character:&#10;&#10;(c) Why the lesson calls it his 'finest' moment — and what makes it surprising:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) The Israelites had been slaves for generations — slavery was familiar, and familiarity can feel safer than unknown freedom, especially when danger is immediate and visible. With an army behind them and the sea in front, the situation looked completely hopeless from a human perspective. Fear is powerful enough to make even freedom look like a mistake. The lesson notes this was "the first of many times in the wilderness that the Israelites will look back fondly on slavery when things got hard" — it reveals a deeper psychological reality: liberation is not instantly felt as a gift when the journey is dangerous. (b) Moses responded with four remarkable declarations: "Do not be afraid. Stand firm. You will see the deliverance the Lord will bring today. The Egyptians you see today you will never see again." These were not the words of someone with a plan — the sea was still in front of him and there was no visible escape route. Moses responded to an impossible moment with specific, confident declaration, not vague reassurance. (c) The lesson calls it his finest moment precisely because of the internal reality: Moses was almost certainly as terrified as the people he was addressing. The lesson says he was "terrified himself, but choosing to declare faith rather than panic." This is why it is surprising — the finest moments of leadership are often not those of natural courage but of chosen courage, made in the exact moment when giving in to fear would be completely understandable. Moses' greatness was not the absence of fear; it was the refusal to let fear speak.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">The lesson ends with a "golden idea": God does not call the equipped — He equips the called. Using ALL FOUR of Moses' characteristics from the lesson's character table (courage despite fear, humility, intercession, persistence), write a paragraph for EACH that shows how his story demonstrates this idea. Write at least 4 sentences per characteristic. <span class="marks">7 marks — extended writing</span></div>
+    <textarea class="q-input xwide" placeholder="Courage despite fear:&#10;&#10;Humility:&#10;&#10;Intercession:&#10;&#10;Persistence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Courage despite fear</strong>: Moses went before Pharaoh — the most powerful ruler on earth — ten times, after ten rejections. He had no army, no legal standing, and no political power. Each visit was a potential death sentence. The lesson says: "Courage is not the absence of fear. Moses was clearly afraid. Courage is acting rightly despite the fear." His five excuses at the burning bush show that Moses was afraid before he ever began. What God did not remove his fear — He went with him anyway, and Moses found that the presence was enough. <strong>Humility</strong>: Numbers 12:3 calls Moses "more humble than anyone else on the face of the earth" — a remarkable claim for the man who confronted the Egyptian empire. His humility showed in practical ways: he took advice from his father-in-law Jethro about how to delegate leadership, he did not use his position to benefit himself, and he repeatedly put himself between God's anger and the Israelites even when the people had turned against him. True leaders, the lesson says, do not need to be arrogant to have authority. <strong>Intercession</strong>: Multiple times in Exodus, God expressed anger at the Israelites' rebellion, and Moses prayed and argued for mercy on their behalf. In Exodus 32, after the golden calf, God offers to destroy Israel and make a new nation from Moses alone — and Moses refuses the offer, pleading for the people. He could have let them suffer the consequences. Instead, he used every bit of his standing before God on their behalf. This is the lesson's definition of great leadership: using your position to protect others, not yourself. <strong>Persistence</strong>: Moses returned to Pharaoh ten times. Ten rejections. After the first or second, giving up would have been rational. After the fifth or sixth, abandonment would have seemed wise. But Moses kept going — not because the situation looked promising, but because the call was clear. The lesson says: "Faithfulness sometimes just means keeping going when it would be easier to quit." The Exodus happened not because Moses was talented but because he refused to stop.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+    <div><div class="score-label">Total Score — Bible Week 7B</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(109,40,217,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  ENGLISH  ══════════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">📰</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 7 · Practice B</div>
+  <div class="hero-title">Reading<br>Non-Fiction Texts</div>
+  <div class="hero-subtitle">Purpose · Audience · Fact vs Opinion · Language Features · Analysis Skills</div>
+  <div class="hero-tags"><span class="hero-tag">Practice B — New Text</span><span class="hero-tag">Non-Fiction</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 40"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and technique identification without the new article.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Vocabulary & Core Skills</div>
+  <div class="esl-tip">💡 <strong>ESL Reminder:</strong> The five purposes of non-fiction are: <strong>to inform, to persuade, to explain, to entertain, to instruct</strong>. Most texts have a PRIMARY purpose and one or more secondary purposes. Always look for both.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">For each text type, state its PRIMARY purpose and give ONE language feature you would typically expect to find in it. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="a) A newspaper editorial arguing for lower school leaving age:&#10;   Primary purpose: ___  Typical language feature:&#10;&#10;b) An instruction manual for a new phone:&#10;   Primary purpose: ___  Typical language feature:&#10;&#10;c) A biography of a famous scientist:&#10;   Primary purpose: ___  Typical language feature:&#10;&#10;d) A charity leaflet asking for donations to help refugees:&#10;   Primary purpose: ___  Typical language feature:&#10;&#10;e) A Wikipedia article about the water cycle:&#10;   Primary purpose: ___  Typical language feature:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>To persuade</strong>. Typical feature: rhetorical questions, emotive language, one-sided argument. b) <strong>To instruct</strong>. Typical feature: numbered steps, imperative verbs ("Press the button"), second-person address ("you"). c) <strong>To inform</strong> (and entertain). Typical feature: chronological structure, specific dates and facts, quotations from the subject. d) <strong>To persuade</strong>. Typical feature: emotive language, statistics about suffering, direct address ("You can help"), call to action. e) <strong>To inform/explain</strong>. Typical feature: neutral tone, technical vocabulary with definitions, diagrams referenced in text, no personal opinion expressed.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Classify each statement as FACT, OPINION, or INFERENCE. Give a reason for each. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) 'Screen time among children aged 8–12 has increased by 17% since 2019.'&#10;Classification:  Reason:&#10;&#10;b) 'Social media is the greatest threat to the mental health of young people today.'&#10;Classification:  Reason:&#10;&#10;c) An article states: 'The company spent £2.4 million on legal fees last year.' You conclude: the company faced a significant legal challenge.&#10;Classification:  Reason:&#10;&#10;d) 'The first human moon landing took place on 20 July 1969.'&#10;Classification:  Reason:&#10;&#10;e) 'Children today are far less resilient than previous generations.'&#10;Classification:  Reason:&#10;&#10;f) A survey reports: '68% of teachers say workload is the main reason they consider leaving the profession.' You conclude: staff retention is a serious problem in schools.&#10;Classification:  Reason:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>FACT</strong> — specific statistic with a verifiable number and time period; can be checked against research data. b) <strong>OPINION</strong> — "greatest threat" is a superlative value judgement; cannot be objectively measured; people can legitimately disagree. c) <strong>INFERENCE</strong> — the £2.4 million figure is the fact; concluding there was a "significant legal challenge" is a reasonable deduction not directly stated. d) <strong>FACT</strong> — specific, verifiable date and event recorded by multiple independent sources. e) <strong>OPINION</strong> — "far less resilient" and "previous generations" are both vague and involve value judgement; no objective measurement given; "today" and "previous generations" are undefined. f) <strong>INFERENCE</strong> — the 68% survey figure is the fact; concluding "staff retention is a serious problem" is a reasonable conclusion drawn from that figure, but is not directly stated in the data.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Analyse the new article below. Read it carefully first.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Text Analysis — New Article</div>
+  <div class="esl-tip">📰 <strong>Read this article carefully before answering Questions 3–5.</strong><br><br><em>Headline: YOUNG PEOPLE ARE NOT THE PROBLEM — THEY ARE THE SOLUTION</em><br><br>Every generation is told it is the worst generation. Every decade, headlines warn that teenagers are lazy, distracted, or selfishly glued to their phones. And every time, history proves those headlines wrong.<br><br>The facts tell a different story. According to a 2023 report by the Youth Volunteering Institute, 62% of people aged 16–25 volunteered for a community cause in the past year — a higher rate than any other age group. Young entrepreneurs are founding businesses at record rates. Young climate activists have pressured some of the world's largest governments into policy change.<br><br>"This generation is arguably the most globally aware and socially concerned in modern history," said Dr Nadia Osei, a sociologist at the University of Edinburgh. "They have grown up with more information, more interconnection, and more awareness of injustice than any generation before them."<br><br>Yes, there are challenges: mental health pressures, a brutal housing market, and a job market that demands qualifications older generations never needed. These are real. But the response of young people to these challenges — campaigning, creating, connecting, building — deserves recognition, not dismissal.<br><br>The next time an article tells you young people are failing, ask yourself: failing by whose standard? And who wrote that standard?</em></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">What is the primary purpose of this article? What is the secondary purpose? Give specific evidence from the text (using short phrases — no copying of full sentences) to support both answers. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Primary purpose: ___&#10;Evidence (short phrase from text):&#10;&#10;Secondary purpose: ___&#10;Evidence (short phrase from text):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Primary purpose: to persuade</strong>. The article is trying to change the reader's view of young people — from negative stereotypes to a positive, evidence-based picture. Evidence: the final paragraph's rhetorical question ("ask yourself: failing by whose standard?") is a classic persuasive technique designed to make the reader question an assumption rather than accept it. The title's declarative tone ("they ARE the solution") is also persuasive assertion. <strong>Secondary purpose: to inform</strong>. The article uses specific statistics and expert opinion to support its argument. Evidence: "62% of people aged 16–25 volunteered" and the quotation from Dr Nadia Osei with her title and institution — both add factual credibility to what is primarily a persuasive piece.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Identify the intended audience for this article. Give THREE pieces of evidence from the text — one about vocabulary level, one about tone, and one about the type of publication this might appear in. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Intended audience: ___&#10;&#10;Evidence 1 — vocabulary level:&#10;Evidence 2 — tone:&#10;Evidence 3 — publication type / other clue:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Intended audience: general adult readers, particularly parents, educators, and older people who may hold the negative stereotypes the article challenges.</strong> Evidence 1 (vocabulary): The vocabulary is accessible but sophisticated — words like "socially concerned," "interconnection," and "dismissal" are used without definition, suggesting an educated adult reader. Not technical jargon; not simplified for children. Evidence 2 (tone): The tone is direct, confident, and slightly combative — "every time, history proves those headlines wrong." This adversarial tone works best on an audience that might currently hold the opposing view. If the audience were already convinced, the tone would be unnecessary. Evidence 3 (publication type): The column-style structure, the use of a named academic expert with institutional affiliation, and the discursive argumentative format all point to a quality newspaper opinion column or an online magazine piece aimed at adult readers.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Find ONE example of each language feature in the article. For each, quote the phrase (keep it short) and explain the specific effect on the reader. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Rhetorical question:&#10;Quote: ___&#10;Effect on reader:&#10;&#10;b) Rule of three:&#10;Quote: ___&#10;Effect on reader:&#10;&#10;c) Counter-argument / concession:&#10;Quote: ___&#10;Effect on reader (why does including this make the argument STRONGER?):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Rhetorical question</strong>: "failing by whose standard? And who wrote that standard?" These closing questions do not expect literal answers — they challenge the reader to interrogate the premise that young people are failing at all. By ending on a question rather than a statement, the writer leaves the reader unsettled and thinking, which is more persuasive than a final declaration. b) <strong>Rule of three</strong>: "campaigning, creating, connecting, building" — (four items used for rhythmic effect, similar to rule of three). The list of active verbs creates a picture of energetic, purposeful young people in contrast to the "lazy" stereotype the article is fighting against. The rhythm makes the description feel dynamic and complete. c) <strong>Counter-argument/concession</strong>: "Yes, there are challenges: mental health pressures, a brutal housing market, and a job market that demands qualifications older generations never needed. These are real." By explicitly acknowledging real difficulties that young people face — rather than pretending they don't exist — the writer shows intellectual honesty. This makes them appear fair and trustworthy, which actually strengthens the overall argument: even someone who acknowledges these challenges still concludes that young people deserve recognition.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Critical and comparative analysis.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">⚖️ Critical Analysis</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">Compare the article above with the "Our Oceans Are Drowning in Plastic" article from Worksheet A. Both are persuasive non-fiction. For each of the three areas below, explain how the two articles are SIMILAR and how they are DIFFERENT. Write at least one sentence for each similarity and difference. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Purpose — how similar and how different:&#10;&#10;(b) Audience — how similar and how different:&#10;&#10;(c) Language features used — how similar and how different:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Purpose — similar</strong>: Both are primarily persuasive — they want to change the reader's thinking and behaviour. Both also have a secondary informative purpose, using statistics and expert opinion to support their argument. <strong>Different</strong>: The oceans article ends with a direct call to action ("Every bottle you refuse..."), instructing the reader to do something specific. The young people article ends with a question, leaving the reader to draw their own conclusion — a more subtle persuasive strategy. (b) <strong>Audience — similar</strong>: Both target a general adult readership with accessible but sophisticated vocabulary, published in a newspaper or news website format. Both assume readers who care about the topic but may not be specialists. <strong>Different</strong>: The oceans article targets people who may not yet be environmentally engaged and need to be alarmed into action. The young people article seems targeted at people who ALREADY hold the negative stereotype being challenged — older readers, employers, teachers — which requires a more evidence-led, less emotional approach. (c) <strong>Language features — similar</strong>: Both use expert quotations with named, credentialed sources (Dr Cruz / Dr Osei). Both use statistics for credibility. Both use rhetorical questions. <strong>Different</strong>: The oceans article is more emotionally intense — "drowning," "devastating," "our own bodies" — because it is trying to alarm. The young people article uses a more measured, almost argument-based tone — it wins through evidence and logic more than through emotion, because alarming readers about young people's goodness would feel strange. Each article calibrates its emotional intensity to what its specific audience needs.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">The lesson teaches critical readers to ask: "What is this writer NOT telling me?" Apply this to the young people article. Identify TWO pieces of information it omits that would give a more complete picture. Then explain: does this omission make the article dishonest — or is this just how persuasion works? Write at least 4 sentences. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Missing information 1:&#10;&#10;Missing information 2:&#10;&#10;Does this make it dishonest — or is this simply how persuasion works? Explain:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Missing information 1: <strong>The 62% volunteering statistic is uncontextualised</strong>. The article says 62% of 16–25 year olds volunteered — but does not say how long or how often. One hour in a year technically counts as volunteering. The article uses a dramatic-sounding percentage without telling us what level of commitment it represents. A critical reader would want to know the full methodology of the "Youth Volunteering Institute" report. Missing information 2: <strong>The article ignores contrary evidence</strong>. There are studies showing increased rates of anxiety, political disengagement, and declining reading levels in young people. The article dismisses these as "challenges" but does not engage with evidence that some trends concerning young people genuinely are negative. It cherry-picks the positive data while acknowledging problems only briefly. Does omission make it dishonest? Omission is not the same as lying — the statistics the article cites are real and verifiable. All persuasive writing selects evidence that supports its argument; this is the very nature of persuasion. However, a critical reader should recognise the selection happening and seek additional sources. The article is biased, but it is not fabricating. The distinction the lesson teaches is important: bias means selective presentation; dishonesty means false presentation. A biased but factually accurate article can still be useful — but must be read critically alongside other sources.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">8</div>
+    <div class="q-text">Write a short paragraph (5–7 sentences) explaining how you would evaluate whether a non-fiction source is reliable. Use the lesson's criteria for a reliable source — and add one criterion of your own. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Your paragraph on evaluating source reliability:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">A reliable non-fiction source should have four key features from the lesson: a named author (so you can check their credentials and potential bias), a verifiable date (to assess whether the information is current), a credible organisation behind it (a university, government body, or established news outlet rather than an anonymous website), and consistency with other reliable sources on the same topic. If a claim appears in only one place and contradicts all other sources, it should be treated with great suspicion. A fifth criterion to add: a reliable source should clearly separate fact from opinion — responsible journalism and research use phrases like "according to data" for facts and "the author argues" for opinions. A source that presents opinions as facts, or fails to name where statistics come from, is signalling unreliability. No source is completely without bias — but a reliable source is transparent about what it is: a newspaper editorial should look like an editorial, and a scientific study should cite its methodology. When in doubt, find at least three independent sources that agree.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+    <div><div class="score-label">Total Score — English Week 7B</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(190,18,60,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  MATHS  ══════════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">⚖️</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 7 · Practice B</div>
+  <div class="hero-title">Ratio &<br>Proportion</div>
+  <div class="hero-subtitle">Simplifying Ratios · Sharing in a Ratio · Unitary Method · Direct & Inverse Proportion</div>
+  <div class="hero-tags"><span class="hero-tag">Practice B — New Problems</span><span class="hero-tag">Ratio & Proportion</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 40"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Simplifying and sharing. Show all working and always check.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Simplifying & Sharing</div>
+  <div class="esl-tip">💡 <strong>Golden reminder:</strong> To share in a ratio: (1) Total parts, (2) Value of one part, (3) Multiply. Always add your answers at the end to check they sum to the original total.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Simplify each ratio fully. Show the HCF you divided by. <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="a) 20:35     HCF = ___  Simplified: ___&#10;b) 48:64     HCF = ___  Simplified: ___&#10;c) 15:25:40  HCF = ___  Simplified: ___&#10;d) 3.6:5.4   (remove decimals first)  Simplified: ___&#10;e) 45 seconds : 3 minutes  (convert to same unit first)  Simplified: ___&#10;f) 250ml : 1.5 litres  (convert first)  Simplified: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) HCF=5 → <strong>4:7</strong>. b) HCF=16 → <strong>3:4</strong>. c) HCF=5 → <strong>3:5:8</strong>. d) ×10 → 36:54 → HCF=18 → <strong>2:3</strong>. e) 45 sec : 180 sec → HCF=45 → <strong>1:4</strong>. f) 250ml : 1500ml → HCF=250 → <strong>1:6</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Share each amount using the 3-step method. Show all steps and include a check. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Share £84 in the ratio 3:4&#10;Step 1 (total parts): Step 2 (one part): Step 3 (shares): Check:&#10;&#10;b) Share 180 sweets among Fatima, Sara, and Zain in the ratio 1:2:3&#10;Steps: Check:&#10;&#10;c) Two sisters share pocket money in the ratio 5:3. The older sister receives £35.&#10;How much does the younger receive? What is the total?&#10;Working:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Total parts=7. One part=£84÷7=£12. Shares: 3×£12=<strong>£36</strong> and 4×£12=<strong>£48</strong>. Check: £36+£48=£84 ✓. b) Total parts=6. One part=180÷6=30. Fatima=1×30=<strong>30</strong>, Sara=2×30=<strong>60</strong>, Zain=3×30=<strong>90</strong>. Check: 30+60+90=180 ✓. c) 5 parts=£35 → one part=£35÷5=£7. Younger sister=3×£7=<strong>£21</strong>. Total=£35+£21=<strong>£56</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Unitary method and real-life proportion. Show all steps.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔢 Unitary Method & Proportion</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Solve using the unitary method. Show your working in two clear steps: (1) find the value of ONE unit, (2) multiply. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) 5 metres of fabric cost £18.50. How much do 8 metres cost?&#10;Step 1: Step 2:&#10;&#10;b) A printer prints 36 pages in 4 minutes. How long to print 63 pages?&#10;Step 1: Step 2:&#10;&#10;c) A recipe for 10 biscuits uses 125g of butter. A baker needs to make 350 biscuits. How much butter?&#10;Step 1: Step 2:&#10;&#10;d) A tap fills 270 litres in 9 hours. How many litres does it fill in 7 hours? How long to fill 420 litres?&#10;Litres per hour: 7-hour total: Time for 420 litres:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 1m=£18.50÷5=£3.70. 8m=£3.70×8=<strong>£29.60</strong>. b) 1 page=4÷36=1/9 min. 63 pages=63×1/9=<strong>7 minutes</strong>. c) 1 biscuit=125÷10=12.5g. 350 biscuits=12.5×350=<strong>4,375g (4.375kg)</strong>. d) 1 hour=270÷9=30 litres. 7 hours=30×7=<strong>210 litres</strong>. Time for 420 litres=420÷30=<strong>14 hours</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">For each problem: (a) state whether it is DIRECT or INVERSE proportion and explain why, (b) solve it. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Problem 1: A map has scale 1:50,000. Two cities are 14cm apart on the map. What is the real distance in km?&#10;Direct or Inverse? Why? Working:&#10;&#10;Problem 2: 6 machines take 10 days to complete an order. How long would 15 machines take?&#10;Direct or Inverse? Why? Working:&#10;&#10;Problem 3: Lemon squash is mixed with water in the ratio 1:7. How much squash is needed for 280ml of water? What is the total drink volume?&#10;Direct or Inverse? Why? Working:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Problem 1: <strong>DIRECT</strong> — more cm on map = more km in real life. 14×50,000=700,000cm → ÷100÷1000=<strong>7km</strong>. Problem 2: <strong>INVERSE</strong> — more machines = fewer days. Total machine-days=6×10=60. With 15 machines: 60÷15=<strong>4 days</strong>. Problem 3: <strong>DIRECT</strong> — more water = more squash needed. Ratio 1:7, so squash=280÷7=<strong>40ml</strong>. Total=40+280=<strong>320ml</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step reasoning. Show all working and explain your thinking.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚖️ Problem Solving</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">A cake recipe uses flour, sugar, and butter in the ratio 5:3:2. (a) The total mixture weighs 600g. How much of each ingredient is used? (b) Fatima only has 120g of butter. How much flour and sugar should she use to keep the same ratio? What is the total weight? (c) What percentage of the total mixture is flour? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Flour: ___ Sugar: ___ Butter: ___&#10;&#10;(b) If butter = 120g: Flour = ___ Sugar = ___ Total = ___&#10;&#10;(c) Percentage that is flour: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Total parts=5+3+2=10. One part=600÷10=60g. Flour=5×60=<strong>300g</strong>, Sugar=3×60=<strong>180g</strong>, Butter=2×60=<strong>120g</strong>. Check: 300+180+120=600 ✓. (b) Butter=2 parts=120g → one part=60g. Flour=5×60=<strong>300g</strong>, Sugar=3×60=<strong>180g</strong>. Total=120+300+180=<strong>600g</strong>. (The amounts are the same as (a) — confirming the ratio is maintained.) (c) Flour proportion=300/600=1/2=<strong>50%</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A student says: "In inverse proportion, I just divide instead of multiply — that's the only difference from direct proportion." Identify the mistake in this thinking. Give a worked example showing what happens if you incorrectly use the direct proportion method on an inverse proportion problem — and then show the correct method and answer. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What the student's thinking gets wrong:&#10;&#10;Problem: 3 painters take 12 days. How long for 9 painters?&#10;&#10;WRONG method (using direct proportion incorrectly) — what answer does it give?&#10;&#10;CORRECT method (inverse proportion) — working and correct answer:&#10;&#10;Why are the two answers different?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The student's error: inverse proportion is NOT just "divide instead of multiply." The fundamental difference is that in direct proportion you find ONE unit and multiply; in inverse proportion you must find the TOTAL (the invariant product) first, then divide. Applying "divide instead of multiply" would mean: 1 painter takes 12÷3=4 days, so 9 painters take 4÷9=0.44 days — which is nonsensical. <strong>Wrong method (direct applied to inverse)</strong>: 1 painter = 12÷3 = 4 days. 9 painters = 4×9 = 36 days. This says MORE painters take MORE days — which contradicts logic. <strong>Correct method (inverse)</strong>: Total painter-days = 3×12 = 36. With 9 painters: 36÷9 = <strong>4 days</strong>. The key principle: in inverse proportion the PRODUCT of the two quantities is always constant (3×12 = 9×4 = 36). You find that constant first, then divide. The two methods give completely different answers (36 days vs 4 days) because they assume completely different relationships between the variables.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">A class of 30 students sits an exam. The ratio of boys to girls is 2:3. (a) How many boys and girls are there? (b) 80% of boys pass and 90% of girls pass. How many students pass in total? (c) What percentage of the whole class passes? (d) What is the ratio of students who pass to students who fail, in its simplest form? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Boys: ___ Girls: ___&#10;(b) Boys who pass: ___ Girls who pass: ___ Total who pass: ___&#10;(c) Percentage of whole class who pass: ___&#10;(d) Ratio pass:fail (simplified): ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Total parts=5. One part=30÷5=6. Boys=2×6=<strong>12</strong>, Girls=3×6=<strong>18</strong>. (b) Boys who pass=80% of 12=0.8×12=<strong>9.6 → 10</strong> (rounding to nearest whole). Girls who pass=90% of 18=0.9×18=<strong>16.2 → 16</strong>. Total passing=10+16=<strong>26</strong>. (Accept slight variation depending on rounding method. If percentages are treated exactly: 9.6+16.2=25.8, so 26 students pass.) (c) 26÷30×100=<strong>86.7%</strong> (1 d.p.). (d) Pass:Fail=26:4 → HCF=2 → <strong>13:2</strong>.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+    <div><div class="score-label">Total Score — Maths Week 7B</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(180,83,9,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  SCIENCE  ══════════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🧊</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 7 · Practice B</div>
+  <div class="hero-title">States of Matter</div>
+  <div class="hero-subtitle">Solids · Liquids · Gases · Particle Model · Changes of State · Heating & Cooling Curves</div>
+  <div class="hero-tags"><span class="hero-tag">Practice B — New Questions</span><span class="hero-tag">Chemistry</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 40"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and vocabulary. Aim to answer from memory.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Recall</div>
+  <div class="esl-tip">💡 <strong>Key principle to remember:</strong> All state changes going from solid → liquid → gas ABSORB heat. All state changes going from gas → liquid → solid RELEASE heat. Going from more ordered to less ordered = absorb. Going from less ordered to more ordered = release.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Answer these short questions from memory. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) What is the melting point of water? What is its boiling point?&#10;&#10;b) A gas can be compressed but a solid cannot. Explain why, using the particle model.&#10;&#10;c) Name the change of state that is the REVERSE of condensation.&#10;&#10;d) Why does a heating curve for a pure substance have FLAT sections? What is happening during a flat section?&#10;&#10;e) What is the scientific name for the energy absorbed or released during a change of state?&#10;&#10;f) Give one everyday example of sublimation.&#10;&#10;g) True or false: when ice melts into water, new molecules are created. Explain your answer."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Melting point of water = <strong>0°C</strong>. Boiling point = <strong>100°C</strong> (at sea level). b) A gas can be compressed because its particles are <strong>far apart with lots of empty space between them</strong> — so they can be pushed closer together. A solid cannot be compressed because its particles are <strong>already touching and tightly packed</strong> — there is no space for them to move into. c) The reverse of condensation is <strong>evaporation</strong> (or boiling). Condensation: gas → liquid. Reverse: liquid → gas. d) During a flat section, the substance is <strong>changing state</strong>. All the energy being added is going into <strong>breaking the bonds between particles</strong> (to allow them to move more freely) rather than raising the temperature. The temperature stays constant until all particles have completed the state change. e) <strong>Latent heat</strong> (latent heat of fusion at the melting point; latent heat of vaporisation at the boiling point). f) Everyday examples of sublimation: <strong>dry ice (solid CO₂)</strong> going directly from solid to gas; moth balls (naphthalene) slowly disappearing; some air fresheners dissolving without a liquid stage. g) <strong>False</strong>. When ice melts, the H₂O molecules are <strong>exactly the same</strong> — only their arrangement and energy level change. Melting is a physical change, not a chemical one. No new molecules are created and no molecules are destroyed.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Complete this table without using your notes. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Change of state  |  Starting state  |  Ending state  |  Heat absorbed or released?&#10;Melting          |                  |                |&#10;Freezing         |                  |                |&#10;Evaporation      |                  |                |&#10;Boiling          |                  |                |&#10;Condensation     |                  |                |&#10;Sublimation      |                  |                |"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Melting: Solid → Liquid. <strong>Absorbed</strong>. Freezing: Liquid → Solid. <strong>Released</strong>. Evaporation: Liquid → Gas (slowly, at surface). <strong>Absorbed</strong>. Boiling: Liquid → Gas (rapidly, at boiling point). <strong>Absorbed</strong>. Condensation: Gas → Liquid. <strong>Released</strong>. Sublimation: Solid → Gas directly. <strong>Absorbed</strong>. Memory rule: moving toward more freedom (solid→gas direction) = absorb. Moving toward more order (gas→solid direction) = release.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Apply your particle model knowledge to explain situations.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Applying the Particle Model</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Use the particle model to explain each everyday observation. You must refer to particles, their movement, and/or their spacing in every answer. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) When you spray perfume in one corner of a room, you can soon smell it across the whole room.&#10;&#10;b) A metal lid that is stuck on a jar is easier to open after you run it under hot water.&#10;&#10;c) Wet washing dries more quickly on a hot, windy day than on a cool, still day.&#10;&#10;d) You can write on a steamy mirror with your finger.&#10;&#10;e) A balloon filled with air feels hard when you squeeze it, but you can compress it if you push hard enough.&#10;&#10;f) A syringe full of air can be partially pushed down, but a syringe full of water cannot be compressed at all."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Perfume particles are in the gas state and move very quickly in all directions, bouncing off each other and air particles. This random, high-speed movement (called diffusion) gradually spreads perfume particles throughout the room until they are evenly distributed. b) The metal lid is solid — its particles are tightly packed. Hot water transfers energy to the lid particles, making them vibrate faster and move slightly further apart — the lid <strong>expands</strong> (becomes very slightly larger). This breaks the seal and makes it easier to open. c) Evaporation happens when water particles at the surface gain enough energy to escape as gas. On a hot day, more particles have enough energy to escape (faster evaporation). Wind removes the escaped particles from the surface, preventing them from re-condensing into the fabric — so drying is faster. d) The steam is water vapour (gas). When it touches the cooler mirror surface, the gas particles lose energy, slow down, and come close enough together to become liquid water — condensation. Your finger removes this thin water layer, leaving a clear line. e) Air is a gas — particles are far apart with lots of empty space. Squeezing forces the particles closer together into that space. However, you cannot compress air to zero because the particles still repel each other at very short distances. f) Air (gas): compressible because particles are far apart. Water (liquid): particles are already very close together — there is almost no empty space between them. You cannot push them closer, so water (like all liquids and solids) cannot be meaningfully compressed.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">A student heats a mystery substance from −20°C until it becomes a gas. The heating curve has flat sections at 42°C and 115°C. (a) What is the substance's melting point and boiling point? (b) Describe what is happening in each section of the curve (A: rising before 42°C, B: flat at 42°C, C: rising 42–115°C, D: flat at 115°C, E: rising above 115°C). (c) At room temperature (25°C), what state is the substance in? Explain why. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Melting point: ___ Boiling point: ___&#10;&#10;(b) Section A: Section B: Section C: Section D: Section E:&#10;&#10;(c) State at 25°C and explanation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Melting point = <strong>42°C</strong>. Boiling point = <strong>115°C</strong>. (b) Section A: Temperature rises — solid heating up. Particles vibrate faster and faster in their fixed positions. Section B: Temperature stays flat at 42°C — <strong>melting</strong> is occurring. Energy goes into breaking bonds between particles so they can move freely as liquid. No temperature rise. Section C: Temperature rises again — liquid heating up. Particles slide past each other, moving faster and faster. Section D: Temperature stays flat at 115°C — <strong>boiling</strong> is occurring. Energy goes into overcoming all remaining forces between liquid particles so they can escape as gas. Section E: Temperature rises — gas heating up. Particles move very fast in all directions. (c) At 25°C, the substance is a <strong>solid</strong> — because 25°C is below its melting point (42°C). The particles are still locked in a fixed arrangement, vibrating on the spot but unable to flow. A real-world substance with similar properties might be wax or certain fats, which are solid at room temperature but melt easily when warmed.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended reasoning and evaluation.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">⚖️ Critical Thinking</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">Explain clearly how you would use a heating curve experiment to find the melting point and boiling point of an unknown liquid. Include: what equipment you would need, what measurements you would take, what a graph of your results would look like, and how you would read the melting and boiling points from the graph. Write at least 4 sentences. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Equipment needed:&#10;&#10;What measurements to take and how:&#10;&#10;What the graph would look like:&#10;&#10;How to read melting and boiling points from the graph:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Equipment: thermometer, test tube or beaker, Bunsen burner or water bath, stopwatch, graph paper (or data logger). Measurements: heat the substance at a steady rate; record the temperature every 30 seconds (or every minute). Plot temperature on the y-axis and time on the x-axis. The graph would show: rising line (solid heating up), flat line (melting — this is the melting point), rising line (liquid heating up), flat line (boiling — this is the boiling point), rising line (gas heating up). The two flat sections are the most important features: the temperature at which the first flat section occurs is the <strong>melting point</strong>, and the temperature at which the second flat section occurs is the <strong>boiling point</strong>. The flat sections occur because during a state change, all energy input goes into breaking bonds between particles rather than raising temperature — so the temperature stays constant until the state change is complete. Using this method on a known substance (e.g. water) as a control test lets you verify your equipment is accurate before testing the unknown substance.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">The particle model says particles in a solid are "locked in fixed positions." But if that is true, explain how it is possible to: (a) bend a piece of copper wire, (b) dissolve a solid (like salt) in water, (c) slowly deform a piece of soft lead with your hands. What does each of these observations tell us about the limitations of the simple particle model? Write at least 5 sentences total. <span class="marks">5 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Bending copper wire — how is this possible if particles are 'locked'?&#10;&#10;(b) Salt dissolving in water — how does this work?&#10;&#10;(c) Deforming lead — how does this happen?&#10;&#10;What these observations tell us about the limitations of the simple model:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Bending copper wire: "Locked in fixed positions" does not mean particles cannot move at all — it means they vibrate around fixed average positions. In metals, the particles are arranged in layers that can slide over each other when a force is applied, allowing the shape to change without the solid crumbling. This is called plastic deformation, and the simple model does not explain it well because it treats all solids identically. (b) Salt dissolving: the water molecules have electrical polarity (positive and negative ends), and they attract the positive sodium ions and negative chloride ions in the salt crystal, pulling them away from the fixed positions and surrounding them individually in water. This is an electrostatic interaction that the simple sphere model completely ignores — it cannot explain why some solids dissolve and others don't. (c) Lead deforming: lead is a very soft metal — its layers of particles slide very easily over each other under gentle pressure. Again, the model does not distinguish between soft and hard solids. These observations reveal a key limitation: the simple particle model treats all particles as identical rigid spheres with no electrical charge or shape. In reality, particles have complex electrical properties, shapes, and inter-particle forces that determine behaviour. The model works for explaining states and temperature changes, but fails as soon as we ask WHY different substances within the same state behave so differently.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">7</div>
+    <div class="q-text">A student claims: "If you cool something down enough, everything becomes a solid eventually." Is this claim correct? Discuss it using specific examples — including at least one substance that challenges the claim — and explain what this tells us about the range of melting and boiling points in nature. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Is the student's claim correct?&#10;&#10;Evidence that supports the claim:&#10;&#10;A substance that challenges or complicates the claim:&#10;&#10;What this tells us about melting/boiling points in nature:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The claim is <strong>largely correct but oversimplified</strong>. Most substances do become solid if cooled enough — for example, nitrogen (a gas at room temperature) becomes solid at −210°C, and even helium solidifies at −272°C under sufficient pressure. Evidence supporting the claim: every substance has a melting point, so below that temperature it should be solid. A substance that challenges the claim: <strong>helium</strong> — at normal atmospheric pressure, helium never becomes solid no matter how cold it gets (even near absolute zero, −273°C). You need to apply very high pressure AND cool it to make it solidify. This is because helium's inter-atomic forces are so weak that quantum effects prevent it from solidifying at atmospheric pressure. This tells us that melting and boiling points vary enormously across nature — from iron (melts at 1,538°C) to helium (stays liquid to −269°C at normal pressure) — because they depend on the strength of the forces between particles, which vary enormously from substance to substance. The simple model does not explain why these forces differ.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+    <div><div class="score-label">Total Score — Science Week 7B</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(6,95,70,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  HISTORY  ══════════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌍</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Week 7 · Practice B</div>
+  <div class="hero-title">Climate &<br>Biomes</div>
+  <div class="hero-subtitle">Tropical · Polar · Temperate Zones · Rainforests · Tundra · Savannah · Climate vs Weather</div>
+  <div class="hero-tags"><span class="hero-tag">Practice B — New Questions</span><span class="hero-tag">Geography</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 38"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall questions. Aim to answer without your notes first.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Recall</div>
+  <div class="esl-tip">💡 <strong>Key saying to remember:</strong> "Climate is what you EXPECT; weather is what you GET." Climate = long-term, 30+ years. Weather = short-term, day to day. This distinction is tested frequently in exams.</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Answer these short recall questions in full sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Give the lesson's key saying that explains the difference between climate and weather.&#10;&#10;b) What are the THREE main climate zones? For each, state roughly where on Earth it is found.&#10;&#10;c) Name TWO biomes found in tropical climate zones and TWO found in polar or cold zones.&#10;&#10;d) Why are areas near the equator hotter than areas near the poles? Explain using the angle of the sun's rays.&#10;&#10;e) What is precipitation? Name three forms it can take.&#10;&#10;f) A tropical rainforest receives 2,000mm+ of rain per year. A hot desert receives less than 250mm. Explain what this difference means for the food webs in each biome."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>"Climate is what you expect; weather is what you get."</strong> Climate is the long-term average over 30+ years; weather is the short-term, day-to-day conditions. b) Three climate zones: <strong>Tropical</strong> (near the equator — hot year-round); <strong>Temperate</strong> (middle latitudes — moderate seasons); <strong>Polar</strong> (near the North and South Poles — extremely cold). c) Tropical biomes: <strong>tropical rainforest</strong> and <strong>savannah/tropical grassland</strong>. Cold/polar biomes: <strong>tundra</strong> and <strong>taiga (boreal forest)</strong>. d) Near the equator, the sun's rays hit the Earth at a <strong>steep, direct angle</strong> — the energy is concentrated on a small area, making it very hot. Near the poles, the same amount of energy hits at a <strong>shallow, oblique angle</strong> — spread over a much larger area, so each square metre receives far less energy and it is much colder. e) Precipitation = all forms of water falling from the sky. Three forms: <strong>rain, snow, hail</strong> (also sleet). f) In the rainforest, the enormous rainfall supports dense, multi-layered vegetation — providing abundant food for many types of consumer, and creating the richest, most diverse food webs on Earth. In the desert, very little plant life can survive the low rainfall — so the producer base is thin and scattered. This supports very few consumers, and food chains are short and simple. The amount of water determines how much life a biome can support.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Match each adaptation to the biome it belongs in, and explain WHY that adaptation is needed in that specific environment. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Biomes to choose from: Tropical Rainforest / Hot Desert / Tundra / Savannah / Temperate Forest&#10;&#10;a) A plant that loses its leaves in autumn to reduce water loss in winter: Biome: ___ Why:&#10;b) An animal with very large ears that radiate heat away from the body: Biome: ___ Why:&#10;c) A tree with wide, flat leaves to maximise light capture under a dense canopy: Biome: ___ Why:&#10;d) A plant with deep roots to access rare groundwater and a waxy skin to prevent evaporation: Biome: ___ Why:&#10;e) An animal with thick white fur for insulation and camouflage: Biome: ___ Why:&#10;f) A plant with a fire-resistant trunk and seeds that only germinate after fire: Biome: ___ Why:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Temperate Forest</strong>. Losing leaves in autumn reduces water loss during winter when the ground may be frozen (and water unavailable). Fewer leaves also means less photosynthesis surface needed when sunlight is low. b) <strong>Hot Desert</strong>. Large ears have a large surface area with many blood vessels close to the skin — in extreme heat, blood flows to the ears and heat radiates away, cooling the animal. (Example: fennec fox, African elephant.) c) <strong>Tropical Rainforest</strong>. The canopy is so dense that very little light reaches lower layers. Plants in the understorey have evolved very large, flat leaves to capture as much of the limited light as possible for photosynthesis. d) <strong>Hot Desert</strong>. Deep roots access water stored below the dry surface layer. The waxy skin (cuticle) prevents water loss through the plant surface — essential when water is so scarce. (Cactus is the classic example.) e) <strong>Tundra / Polar</strong>. Thick fur provides insulation against temperatures that can drop below −30°C. White colouring provides camouflage in the snow — useful for predators hunting and for prey hiding. (Polar bear, Arctic fox.) f) <strong>Savannah</strong>. Savannahs experience regular seasonal fires during the dry season. A fire-resistant trunk allows the tree to survive the fire. Seeds that germinate after fire are adapted to exploit the nutrients released by burning and the lack of competition immediately after a fire has cleared the vegetation.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Explanation and application. Use the lesson's chain: climate → vegetation → biome.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Understanding & Explanation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Explain the rain shadow effect — one of the five climate factors from the lesson. (a) Describe what happens step-by-step as moist air reaches a mountain range. (b) Give a real-world example of where a rain shadow creates contrasting conditions on two sides of a mountain range. (c) Explain why the rain shadow effect means that latitude alone cannot predict a place's climate. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Step-by-step — what happens to moist air at a mountain range:&#10;&#10;(b) Real-world example of rain shadow:&#10;&#10;(c) Why latitude alone cannot predict climate:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Step-by-step: moist air blowing from the sea reaches a mountain range and is forced to rise. As it rises, it cools. Cool air cannot hold as much water vapour as warm air, so the water condenses and falls as rain on the windward (sea-facing) side of the mountain. By the time the air crosses over the mountain peak, it has lost most of its moisture. It then descends on the leeward (inland) side, warming as it descends, and arrives as dry air. The leeward side receives very little rainfall — this is the rain shadow. (b) Real-world example: the Andes Mountains in South America — the Pacific-facing western side of the Andes (Chile) has lush vegetation and high rainfall, while the eastern leeward side of the mountains includes some of the driest land in the world (the Atacama Desert, one of the driest places on Earth). Another example: the Cascades range in the USA, with wet forests on the Oregon coast and semi-desert in eastern Oregon. (c) Two places can be at exactly the same latitude but have completely different climates if one is on the windward side of a mountain range and the other is in the rain shadow. Latitude tells you about the angle of the sun — important for temperature. But precipitation (and therefore vegetation and biome) depends on many factors beyond latitude: mountain ranges, distance from the sea, and prevailing winds can create deserts or forests at any latitude.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson says the same biome can appear on different continents. Choose ONE biome and explain: (a) which continents it appears on, (b) why the same biome can exist so far apart (what do these regions share?), and (c) whether the specific plants and animals are identical or just similar — and why. Write at least 4 sentences. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Biome chosen: ___&#10;&#10;(a) Which continents:&#10;&#10;(b) Why the same biome can exist on multiple continents (what do these places share?):&#10;&#10;(c) Are the plants/animals identical or just similar — and why?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample — Biome: <strong>Tropical Rainforest</strong>. (a) Tropical rainforests exist on three continents: South America (the Amazon Basin in Brazil, Peru, Colombia), Africa (the Congo Basin in central and west Africa), and Asia (Borneo, Sumatra, the Philippines, and parts of India). (b) All of these regions share the same key climate conditions: they lie near the equator (low latitude, high solar energy), receive over 2,000mm of rainfall per year, and have high temperatures year-round (25–30°C). The climate is what determines the biome — these regions all share the same climate pattern regardless of which continent they're on, so the same type of biome develops. (c) The plants and animals are <strong>similar but not identical</strong>. The Amazon has jaguars; the Congo has leopards. The Amazon has capybaras; Asia has orangutans. Each continent's rainforest evolved independently — the climate conditions are the same, so the ecological niches are similar (large predator, frugivore, insect-eater, etc.), and the species that fill each niche have evolved similar adaptations. But they are different species, because each continent's wildlife evolved separately over millions of years. This is called convergent evolution — different species independently evolving similar traits in response to the same environmental pressures.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended thinking. Use evidence from the lesson in full sentences.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚖️ Critical Thinking</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">The lesson ends with the statement that "biomes are not fixed forever" — human activity and climate change are causing biome shifts. Using the lesson's climate → vegetation → biome chain, explain step-by-step what would happen to the TUNDRA biome if average global temperatures rose by 3°C over the next 50 years. Consider: what would change about the climate, then about the vegetation, then about the animals, then about the wider food chain. Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-subject link:</strong> Week 7 Science (particle model) — temperature affects how fast particles move and how substances change state. The same principle applies at a planetary scale: a 3°C global temperature rise melts permafrost (the permanently frozen ground in the tundra), releasing stored carbon dioxide and methane — gases that accelerate further warming. This is called a feedback loop.</div>
+    <textarea class="q-input xwide" placeholder="Step 1 — Climate changes (what happens to temperature, permafrost, growing season):&#10;&#10;Step 2 — Vegetation changes (what grows instead of tundra plants, and why):&#10;&#10;Step 3 — Animal changes (which species lose their habitat, which species move in):&#10;&#10;Step 4 — Food chain effects (what happens to the whole tundra food web):&#10;&#10;Step 5 — Wider consequences (what does this mean for the biome's future):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Step 1 — Climate changes: A 3°C rise would significantly exceed the tundra's already fragile temperature range (currently −30°C to 5°C in summer). The permanently frozen ground (permafrost) — which sits just below the surface and defines tundra — would begin to thaw. The growing season would lengthen. Precipitation patterns would shift. Crucially, as permafrost thaws, it releases enormous stores of methane and CO₂ that have been locked in the frozen ground for thousands of years — creating a feedback loop that could accelerate warming beyond the initial 3°C. Step 2 — Vegetation changes: The short, ground-hugging tundra plants (mosses, lichens, low shrubs) are adapted to the cold, short growing season. As temperatures rise and the soil deepens (permafrost thawing), shrubs and eventually trees can take root. The tundra "greens" — this is already being observed in the Arctic and is called "Arctic greening." Eventually, forests begin to invade what was previously open tundra, fundamentally altering the biome. Step 3 — Animal changes: Cold-adapted species like polar bears, Arctic foxes, reindeer, and snowy owls lose their habitat and food sources. Species from warmer biomes — wolves, moose, birds from temperate forests — begin to move northward into the former tundra. Some cold-adapted species may have nowhere to retreat to (especially marine mammals dependent on sea ice). Step 4 — Food chain effects: The entire tundra food web was built on a very thin producer base (sparse tundra plants). As that producer base is replaced by new plant communities, every level of the food chain is disrupted. Species that evolved to eat specific tundra plants find their food source disappearing. Predators that relied on prey adapted to tundra find those prey species declining. New species arriving from warmer biomes compete with existing species at every level. Step 5 — The biome's future: In effect, the tundra biome as it currently exists would shrink and potentially disappear in some regions, replaced by a different biome (boreal forest / taiga). The lesson's chain completes: changed climate → changed vegetation → changed biome. This is not a future prediction alone — it is already being observed. The tundra biome demonstrates more clearly than almost any other how directly climate controls the living world.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">6</div>
+    <div class="q-text">The lesson links climate and biomes to the Week 2 Bible lesson on stewardship. In your own words: what does the lesson mean by "stewardship," how does it differ from the idea of "domination" over nature, and why does understanding biomes make stewardship an urgent moral question rather than just an interesting scientific one? Write at least 4 sentences. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="What stewardship means (from Week 2):&#10;&#10;How it differs from domination:&#10;&#10;Why understanding biomes makes stewardship a moral question:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The Week 2 lesson taught that stewardship means <strong>responsible, caring management</strong> — the image of a king's steward who looks after the kingdom on behalf of the king. A steward does not own what they manage; they are accountable for it. Domination, by contrast, implies using power without accountability — treating nature as purely a resource to be consumed for human benefit, with no obligation to future generations or to the ecosystems themselves. The lesson explicitly says dominion does NOT mean licence for destruction. Understanding biomes makes stewardship a moral question because biome shifts are not abstract scientific phenomena — they represent the destruction of entire living communities: millions of species, food webs that took millions of years to develop, and the ecological services (clean air, clean water, climate regulation) that human beings themselves depend on. The lesson's chain "climate → vegetation → biome" shows that the consequences of human actions cascade through entire systems. If people with the greatest capacity to understand those consequences — which education provides — choose to act as though they do not exist, the lesson suggests this is a failure of the imago Dei: the rational, moral consciousness that uniquely equips humans to choose differently.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+    <div><div class="score-label">Total Score — History Week 7B</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 38" style="border-color:rgba(30,58,138,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week7_Day2');</script>
+</body>
+</html>

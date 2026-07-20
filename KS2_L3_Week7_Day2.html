@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 — Day 2 Challenge Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}.logo span{color:var(--science);}
+.day-badge{background:#FEE2E2;color:#991B1B;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #DC2626;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}.nav-btn[data-sub="english"]{--c:var(--english);}.nav-btn[data-sub="maths"]{--c:var(--maths);}.nav-btn[data-sub="science"]{--c:var(--science);}.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.challenge-banner{background:linear-gradient(135deg,#FEE2E2,#FEF3C7);border:2px solid #DC2626;border-radius:var(--radius-sm);padding:12px 18px;margin-bottom:20px;font-weight:800;color:#7F1D1D;font-size:0.9rem;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{width:140px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.open-box{width:100%;min-height:90px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;margin-top:6px;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn:hover{transform:scale(1.05);}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.ok{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.bad{background:#FEE2E2;border-color:#DC2626;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.esl-box{background:#FFFBEB;border:2px solid #FCD34D;border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0;font-size:0.88rem;line-height:1.6;}
+.esl-box strong{color:#92400E;}
+.passage-box{background:#F0F9FF;border:2px solid #93C5FD;border-radius:var(--radius-sm);padding:16px 20px;margin:12px 0;font-size:0.9rem;line-height:1.75;}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.info-bar{gap:10px;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">⚠️ Day 2 — Challenge</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">📖 Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')">✏️ English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">🔢 Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')">🪨 Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')">🌍 Humanities</button>
+</div>
+
+<!-- ═══════════ BIBLE ═══════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">📖 Bible · Week 7</div>
+    <div class="hero-title">Moses —<br>Speaking Up (Hard)</div>
+    <div class="hero-sub">Deep analysis · Exodus 3:14 · Character study · Extended response</div>
+    <div class="hero-emoji">🔥</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 7 topics, harder questions. Read carefully. Write in FULL sentences. Show all thinking.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary: Use Each Word in a Sentence <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 Do NOT just define the word. Write a complete sentence that SHOWS you understand what it means in the story of Moses.</div>
+    <table class="fill-table">
+      <tr><th>Word</th><th>Write a sentence that SHOWS its meaning</th></tr>
+      <tr><td><strong>Courage</strong></td><td><textarea class="open-box" rows="2" placeholder="Moses showed courage when he…"></textarea></td></tr>
+      <tr><td><strong>Burning Bush</strong></td><td><textarea class="open-box" rows="2" placeholder="The burning bush was special because…"></textarea></td></tr>
+      <tr><td><strong>Pharaoh</strong></td><td><textarea class="open-box" rows="2" placeholder="Pharaoh was the ruler who…"></textarea></td></tr>
+      <tr><td><strong>I AM WHO I AM</strong></td><td><textarea class="open-box" rows="2" placeholder="God told Moses His name was…"></textarea></td></tr>
+      <tr><td><strong>Slaves</strong></td><td><textarea class="open-box" rows="2" placeholder="The Israelites were slaves because…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — Story Analysis & Evidence <span class="marks">10 marks</span></div>
+    <div class="passage-box">
+      <strong style="color:#5B21B6;">📖 Read Exodus 3:10–14 carefully:</strong><br><br>
+      <em>"Come, I will send you to Pharaoh that you may bring my people, the children of Israel, out of Egypt." But Moses said to God, "Who am I that I should go to Pharaoh and bring the children of Israel out of Egypt?" He said, "But I will be with you…" Then Moses said to God, "If I come to the people of Israel and say to them, 'The God of your fathers has sent me to you,' and they ask me, 'What is his name?' what shall I say to them?" God said to Moses, "I AM WHO I AM." — Exodus 3:10–14</em>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:14px;">
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1a. Moses asked "Who am I that I should go to Pharaoh?" What does this question tell us about how Moses felt about himself? Use evidence from the passage.</p>
+        <textarea class="open-box" rows="3" placeholder="Moses felt… because he said… This shows…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1b. God's answer to Moses's fear was: "I will be with you." Why is THIS a better answer than giving Moses special power or making him more confident?</p>
+        <textarea class="open-box" rows="3" placeholder="This is better because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1c. God calls Himself "I AM WHO I AM." What does the word "AM" (present tense) tell us about God — is He in the past, future or always present?</p>
+        <textarea class="open-box" rows="3" placeholder="The word 'AM' tells us that God is…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1d. God said "Bring my people out of Egypt." Why do you think God cared about the Israelite slaves? What does this tell us about God's character?</p>
+        <textarea class="open-box" rows="3" placeholder="God cared because… This shows us that God is…"></textarea>
+      </div>
+    </div>
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Compare these two characters. Complete the table:</p>
+    <table class="fill-table">
+      <tr><th>Character</th><th>Their fears or doubts</th><th>How God helped them</th><th>What courage they showed</th></tr>
+      <tr><td><strong>Moses</strong></td><td><textarea class="open-box" rows="2" placeholder="Moses was afraid because…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="God helped Moses by…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Moses showed courage when…"></textarea></td></tr>
+      <tr><td><strong>The Israelites</strong></td><td><textarea class="open-box" rows="2" placeholder="The Israelites were…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="God planned to help them by…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="They would need courage to…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">3. Exodus 3:14 gives God the name "I AM WHO I AM." Using the story of Moses and what you know about God, explain what this name tells us about THREE of God's qualities. Give evidence from the story for each one.</p>
+        <textarea class="open-box" rows="6" placeholder="Quality 1: …&#10;Evidence: …&#10;&#10;Quality 2: …&#10;Evidence: …&#10;&#10;Quality 3: …&#10;Evidence: …"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">4. A classmate says: "Moses was a coward — he kept making excuses not to go to Pharaoh." Do you AGREE or DISAGREE? Write a careful argument using examples from the story. At least 4 sentences.</p>
+        <textarea class="open-box" rows="6" placeholder="I disagree / agree because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">5. EXTENDED RESPONSE: The story of Moses teaches us about speaking up for people who cannot speak for themselves. Think of someone in YOUR community or the world today who needs someone to speak up for them. Write a paragraph connecting this to Moses's story and Exodus 3:14. At least 5 sentences.</p>
+        <textarea class="open-box" rows="8" placeholder="In the story of Moses, God asked him to speak up for the Israelites who were suffering as slaves. This connects to today because…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False: If FALSE write the correction <span class="marks">5 marks</span></div>
+    <table class="tf-table">
+      <tr><th>Statement</th><th>T / F + Correction if False</th></tr>
+      <tr><td>God appeared to Moses inside a pillar of cloud on top of a mountain.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Moses was immediately confident and eager to go to Pharaoh.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>God told Moses to remove his sandals because he was on holy ground.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>"I AM WHO I AM" means God changes over time and adapts to each situation.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>God's promise "I will be with you" was meant to give Moses courage to go.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ ENGLISH ═══════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">✏️ English · Week 7</div>
+    <div class="hero-title">Reading Non-Fiction<br>(Hard)</div>
+    <div class="hero-sub">Writer's purpose · Fact vs opinion · Analysing text structure · Extended writing</div>
+    <div class="hero-emoji">📰</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 7 topics, harder questions. Read carefully. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary: Example + Explanation <span class="marks">5 marks</span></div>
+    <table class="fill-table">
+      <tr><th>Term</th><th>Write a SENTENCE using this term correctly</th><th>Why a reader needs this feature</th></tr>
+      <tr><td><strong>Non-fiction</strong></td><td><textarea class="open-box" rows="2" placeholder="An example of non-fiction is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="A reader needs to know this is non-fiction because…"></textarea></td></tr>
+      <tr><td><strong>Main idea</strong></td><td><textarea class="open-box" rows="2" placeholder="The main idea of this article is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Identifying the main idea helps a reader…"></textarea></td></tr>
+      <tr><td><strong>Key detail</strong></td><td><textarea class="open-box" rows="2" placeholder="One key detail is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Key details help because…"></textarea></td></tr>
+      <tr><td><strong>Fact</strong></td><td><textarea class="open-box" rows="2" placeholder="A fact in the lion passage is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Facts are important because…"></textarea></td></tr>
+      <tr><td><strong>Opinion</strong></td><td><textarea class="open-box" rows="2" placeholder="An example of an opinion is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Readers must notice opinions because…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Reading Analysis & Application <span class="marks">10 marks</span></div>
+    <div class="passage-box">
+      <strong style="color:#9D174D;">🦁 Re-read this non-fiction passage:</strong><br><br>
+      <strong>Why Lions Are Called the King of the Jungle</strong><br>
+      <em style="color:#2563EB;font-size:0.85rem;">What Makes a Lion Special?</em><br>
+      Lions are large, powerful cats that live mainly in Africa. The male lion has a thick mane of fur around his head, which makes him look bigger and more powerful. Lions are the only big cats that live in groups, called prides. A pride usually has one or two male lions, several females and their cubs.<br><br>
+      <em style="color:#2563EB;font-size:0.85rem;">How Do Lions Hunt?</em><br>
+      Female lions, called lionesses, do most of the hunting. They work as a team to catch animals like zebras and wildebeest. Lions are most active at night, when their excellent eyesight helps them spot prey in the dark. A lion can run at 80 km per hour for short bursts — fast enough to catch most animals.
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:14px;">
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1a. Find ONE fact and ONE opinion from the passage. Write each one out and explain HOW you know which is which.</p>
+        <textarea class="open-box" rows="4" placeholder="Fact: … I know this is a fact because it can be proved — for example…&#10;&#10;Opinion: … I know this is an opinion because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1b. The title is "Why Lions Are Called the King of the Jungle." Does the passage actually prove this claim? Does it answer the question in the title? Explain.</p>
+        <textarea class="open-box" rows="4" placeholder="The passage does / does not fully answer the title because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1c. The author uses two subheadings. Write what EACH subheading tells the reader, and explain why having TWO sections (instead of one) makes the text easier to read.</p>
+        <textarea class="open-box" rows="4" placeholder="Subheading 1 tells the reader… Subheading 2 tells the reader…&#10;Having two sections helps because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">1d. The author writes: "A lion can run at 80 km per hour for short bursts — fast enough to catch most animals." What technique does the author use after the dash? What effect does it have on the reader?</p>
+        <textarea class="open-box" rows="3" placeholder="After the dash, the author…  This makes the reader feel…"></textarea>
+      </div>
+    </div>
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Rewrite each sentence — change it from a FACT to an OPINION (or opinion to fact). Explain your change.</p>
+    <table class="fill-table">
+      <tr><th>Original sentence</th><th>Rewritten version (opposite type)</th><th>Explanation</th></tr>
+      <tr><td>"Lions are large, powerful cats." (FACT)</td><td><textarea class="open-box" rows="2" placeholder="Opinion version: …"></textarea></td><td><textarea class="open-box" rows="2" placeholder="This is an opinion because…"></textarea></td></tr>
+      <tr><td>"Lions are the most magnificent animals on Earth." (OPINION)</td><td><textarea class="open-box" rows="2" placeholder="Fact version: …"></textarea></td><td><textarea class="open-box" rows="2" placeholder="This is a fact because…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">3. Write your OWN non-fiction paragraph (5–7 sentences) about an animal of your choice. You MUST include: a clear main idea sentence, at least 2 key details, 1 fact, 1 opinion (label it), and a subheading.</p>
+        <textarea class="open-box" rows="10" placeholder="[Your subheading here]&#10;&#10;Your paragraph…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">4. A student says "All non-fiction texts tell the truth, so you can always believe them." Do you agree? Give TWO reasons why a reader should still read non-fiction critically.</p>
+        <textarea class="open-box" rows="5" placeholder="I disagree because…&#10;Reason 1: …&#10;Reason 2: …"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">5. What is the DIFFERENCE between reading a non-fiction article and reading a fiction story? Give THREE differences. Think about: purpose, language, features, truth.</p>
+        <textarea class="open-box" rows="6" placeholder="Difference 1: …&#10;Difference 2: …&#10;Difference 3: …"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False: If FALSE write the correction <span class="marks">5 marks</span></div>
+    <table class="tf-table">
+      <tr><th>Statement</th><th>T / F + Correction if False</th></tr>
+      <tr><td>A fact can be proved using evidence or data.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>The main idea of a text is found only in the last sentence of the final paragraph.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Subheadings help readers find information quickly within a non-fiction text.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>"Elephants are beautiful" is a fact because it describes a real animal.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Non-fiction writing is about real events, real people and true information.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ MATHS ═══════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">🔢 Maths · Week 7</div>
+    <div class="hero-title">Fractions<br>(Hard)</div>
+    <div class="hero-sub">Multi-step fraction problems · Missing numerators/denominators · Reasoning · Equivalent fractions</div>
+    <div class="hero-emoji">🍕</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Show ALL working. Write the number sentence for every word problem.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary: Define + Give a Numerical Example <span class="marks">5 marks</span></div>
+    <table class="fill-table">
+      <tr><th>Word</th><th>Definition in your own words</th><th>Numerical example</th></tr>
+      <tr><td><strong>Fraction</strong></td><td><textarea class="open-box" rows="2" placeholder="A fraction is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="e.g. ½ means…"></textarea></td></tr>
+      <tr><td><strong>Numerator</strong></td><td><textarea class="open-box" rows="2" placeholder="The numerator is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="In ¾, the numerator is…"></textarea></td></tr>
+      <tr><td><strong>Denominator</strong></td><td><textarea class="open-box" rows="2" placeholder="The denominator is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="In ¾, the denominator is…"></textarea></td></tr>
+      <tr><td><strong>Equivalent fraction</strong></td><td><textarea class="open-box" rows="2" placeholder="Equivalent fractions are…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="e.g. ½ = ___/4 because…"></textarea></td></tr>
+      <tr><td><strong>Unit fraction</strong></td><td><textarea class="open-box" rows="2" placeholder="A unit fraction has a numerator of…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Examples: ½, ⅓, ___"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Find the fractions of amounts. Show ALL working step by step.</p>
+    <table class="fill-table">
+      <tr><th>Question</th><th>Working (show step by step)</th><th>Answer</th></tr>
+      <tr><td>¾ of 24</td><td><textarea class="open-box" rows="2" placeholder="Step 1: ¼ of 24 = 24 ÷ 4 = …&#10;Step 2: ¾ = 3 × … = …"></textarea></td><td><input class="fill-in" data-ans="18" placeholder="?" style="width:80px;"></td></tr>
+      <tr><td>⅓ of 27</td><td><textarea class="open-box" rows="2" placeholder="27 ÷ 3 = …"></textarea></td><td><input class="fill-in" data-ans="9" placeholder="?" style="width:80px;"></td></tr>
+      <tr><td>¾ of 40</td><td><textarea class="open-box" rows="2" placeholder="Step 1: …&#10;Step 2: …"></textarea></td><td><input class="fill-in" data-ans="30" placeholder="?" style="width:80px;"></td></tr>
+      <tr><td>⅔ of 30</td><td><textarea class="open-box" rows="2" placeholder="Step 1: ⅓ of 30 = …&#10;Step 2: ⅔ = 2 × …"></textarea></td><td><input class="fill-in" data-ans="20" placeholder="?" style="width:80px;"></td></tr>
+    </table>
+    <div style="margin-top:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkFill('maths-ch')">Check Answers ✅</button>
+    </div>
+    <div id="maths-ch-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Find the MISSING numerator or denominator:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;font-size:1rem;font-weight:800;font-family:'Fredoka One',cursive;">
+      <div style="background:var(--maths-l);border-radius:12px;padding:14px;text-align:center;">½ = <input class="fill-in" data-ans="2" placeholder="?" style="width:50px;font-family:'Fredoka One',cursive;font-size:1.1rem;">/4</div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:14px;text-align:center;"><input class="fill-in" data-ans="3" placeholder="?" style="width:50px;font-family:'Fredoka One',cursive;font-size:1.1rem;">/9 = ⅓</div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:14px;text-align:center;">¾ = 6/<input class="fill-in" data-ans="8" placeholder="?" style="width:50px;font-family:'Fredoka One',cursive;font-size:1.1rem;"></div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:14px;text-align:center;">⅔ = <input class="fill-in" data-ans="4" placeholder="?" style="width:50px;font-family:'Fredoka One',cursive;font-size:1.1rem;">/6</div>
+    </div>
+    <div style="margin-top:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="checkFill('maths-eq')">Check ✅</button>
+    </div>
+    <div id="maths-eq-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Critical Thinking & Word Problems <span class="marks">10 marks</span></div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <p style="font-weight:800;margin-bottom:8px;">3. A farmer has 48 sheep. ¼ are black, ⅓ are white, and the rest are brown.<br>(a) How many black sheep? (b) How many white sheep? (c) How many brown sheep? Show ALL working.</p>
+        <textarea class="open-box" rows="6" placeholder="(a) ¼ of 48 = 48 ÷ 4 = … black sheep&#10;(b) ⅓ of 48 = 48 ÷ 3 = … white sheep&#10;(c) Total so far = … + … = … Brown = 48 − … = …"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <p style="font-weight:800;margin-bottom:8px;">4. A student says: "¾ of 20 is 5 because 20 ÷ 4 = 5." Find and explain their mistake. Then show the CORRECT working and answer.</p>
+        <textarea class="open-box" rows="5" placeholder="Their mistake is that they only found ¼ of 20, not ¾. The correct working is:&#10;Step 1: ¼ of 20 = …&#10;Step 2: ¾ = 3 × … = …"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <p style="font-weight:800;margin-bottom:8px;">5. A ribbon is 60 cm long. ⅓ is cut off and given to Ali. Half of what is LEFT is given to Sara. How much ribbon is left? Show all working.</p>
+        <textarea class="open-box" rows="6" placeholder="Step 1: ⅓ of 60 = … cm cut off&#10;Step 2: Remaining = 60 − … = … cm&#10;Step 3: Half of remaining = … ÷ 2 = … cm given to Sara&#10;Step 4: Left = … − … = … cm"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <p style="font-weight:800;margin-bottom:8px;">6. REASONING: Without calculating, explain how you know that ¾ of any number will ALWAYS be more than ½ of the same number. Use the words numerator and denominator.</p>
+        <textarea class="open-box" rows="4" placeholder="¾ is always more than ½ because…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False: If FALSE write the correction <span class="marks">5 marks</span></div>
+    <table class="tf-table">
+      <tr><th>Statement</th><th>T / F + Correction if False</th></tr>
+      <tr><td>The numerator tells us how many equal parts the whole is split into.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>¼ of 24 = 6</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>½ and 3/6 are equivalent fractions.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>To find ¾ of an amount, you divide by 3 then multiply by 4.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>⅓ of 30 = 10</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ SCIENCE ═══════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">🪨 Science · Week 7</div>
+    <div class="hero-title">Rocks — Types<br>& Properties (Hard)</div>
+    <div class="hero-sub">Rock formation · Fossil analysis · Fair test design · Scientific reasoning</div>
+    <div class="hero-emoji">🌋</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 7 topics. Use scientific vocabulary. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary: Explain with an Analogy <span class="marks">5 marks</span></div>
+    <div class="esl-box">🌍 An ANALOGY is a comparison that helps explain something. Example: "Sedimentary rock is like a layer cake — each layer was added one at a time over many years."</div>
+    <table class="fill-table">
+      <tr><th>Rock type / term</th><th>What it is (function/formation)</th><th>Analogy — "It is like ___ because ___"</th></tr>
+      <tr><td><strong>Igneous rock</strong></td><td><textarea class="open-box" rows="2" placeholder="Forms when…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="It is like…because…"></textarea></td></tr>
+      <tr><td><strong>Sedimentary rock</strong></td><td><textarea class="open-box" rows="2" placeholder="Forms when…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="It is like…because…"></textarea></td></tr>
+      <tr><td><strong>Metamorphic rock</strong></td><td><textarea class="open-box" rows="2" placeholder="Forms when…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="It is like…because…"></textarea></td></tr>
+      <tr><td><strong>Fossil</strong></td><td><textarea class="open-box" rows="2" placeholder="A fossil is…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="It is like…because…"></textarea></td></tr>
+      <tr><td><strong>Permeable</strong></td><td><textarea class="open-box" rows="2" placeholder="A permeable rock…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="It is like…because…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🪨 Part B — Science Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. A geologist finds four rock samples. Study each description and identify the rock type. Explain your reasoning.</p>
+    <table class="fill-table">
+      <tr><th>Sample description</th><th>Rock type</th><th>Explain your reasoning</th></tr>
+      <tr><td>Contains the outline of a shell preserved inside it. Has visible layers. Crumbles slightly when wet.</td><td><input class="fill-in" placeholder="?" style="width:140px;"></td><td><textarea class="open-box" rows="2" placeholder="I think this is … because…"></textarea></td></tr>
+      <tr><td>Very hard, sparkly with large crystals. No layers, no fossils. Dark grey colour.</td><td><input class="fill-in" placeholder="?" style="width:140px;"></td><td><textarea class="open-box" rows="2" placeholder="I think this is … because…"></textarea></td></tr>
+      <tr><td>Extremely hard, shiny surface with swirling patterns. Formed deep underground.</td><td><input class="fill-in" placeholder="?" style="width:140px;"></td><td><textarea class="open-box" rows="2" placeholder="I think this is … because…"></textarea></td></tr>
+      <tr><td>Small crystals — cooled quickly. No fossils. Found near an old volcano.</td><td><input class="fill-in" placeholder="?" style="width:140px;"></td><td><textarea class="open-box" rows="2" placeholder="I think this is … because…"></textarea></td></tr>
+    </table>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Put these stages of rock formation in order for SEDIMENTARY rock. Write 1–5:</p>
+    <table class="fill-table">
+      <tr><th>Stage</th><th>Order (1–5)</th></tr>
+      <tr><td>Pressure from more layers above squeezes everything together into rock.</td><td><input class="fill-in" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>Wind and water break rocks into tiny pieces (sand, mud, shells).</td><td><input class="fill-in" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>Millions of years pass — many layers build up on top of each other.</td><td><input class="fill-in" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>The tiny pieces are carried by rivers and deposited at the bottom of seas or lakes.</td><td><input class="fill-in" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>The sedimentary rock is pushed up by Earth's movements and appears at the surface.</td><td><input class="fill-in" placeholder="?" style="width:60px;"></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">3. Fossils are only found in sedimentary rock. Explain in detail WHY fossils cannot survive the formation of igneous or metamorphic rock. Use the words: lava, heat, pressure, preserve.</p>
+        <textarea class="open-box" rows="5" placeholder="Fossils cannot form in igneous rock because… They cannot survive in metamorphic rock because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">4. Scientists use rocks to learn about Earth's history and ancient life. Give TWO specific examples of what rocks or fossils can tell us about the past. For each one, explain HOW scientists use that information.</p>
+        <textarea class="open-box" rows="6" placeholder="Example 1: …&#10;How scientists use this: …&#10;&#10;Example 2: …&#10;How scientists use this: …"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">5. DESIGN A FAIR TEST: You want to find out which of three rocks (granite, limestone, sandstone) is the most permeable (lets the most water through). Plan your experiment below.</p>
+        <table class="fill-table">
+          <tr><th>Section</th><th>Your plan</th></tr>
+          <tr><td>My question (Does ___ affect ___):</td><td><textarea class="open-box" rows="1" placeholder="…"></textarea></td></tr>
+          <tr><td>My prediction (I think … will … because …):</td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td></tr>
+          <tr><td>What I will CHANGE (one thing only):</td><td><textarea class="open-box" rows="1" placeholder="…"></textarea></td></tr>
+          <tr><td>What I will MEASURE:</td><td><textarea class="open-box" rows="1" placeholder="…"></textarea></td></tr>
+          <tr><td>What I will KEEP THE SAME (name 3):</td><td><textarea class="open-box" rows="2" placeholder="1. … 2. … 3. …"></textarea></td></tr>
+          <tr><td>My conclusion will say: "I found that…"</td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False: If FALSE write the correction <span class="marks">5 marks</span></div>
+    <table class="tf-table">
+      <tr><th>Statement</th><th>T / F + Correction if False</th></tr>
+      <tr><td>Igneous rock forms when lava or magma cools and becomes solid.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Fossils can be found in metamorphic rock because of the high heat.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Granite has large crystals because it cooled very slowly deep underground.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Sedimentary rock forms from layers of sand, mud and shells pressed together.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Marble is a sedimentary rock made from heated limestone.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ HUMANITIES ═══════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">⚠️ Challenge Worksheet</div>
+    <div class="hero-week">🌍 Humanities · Week 7</div>
+    <div class="hero-title">Prehistoric Britain<br>(Hard)</div>
+    <div class="hero-sub">Chronological reasoning · Change over time · Source analysis · Extended writing</div>
+    <div class="hero-emoji">🪨</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 7 topics. Write in full sentences. Use historical vocabulary.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary: Use in Real Context <span class="marks">5 marks</span></div>
+    <table class="fill-table">
+      <tr><th>Term</th><th>Write a sentence using it correctly</th><th>What would change if this did NOT exist?</th></tr>
+      <tr><td><strong>Stone Age</strong></td><td><textarea class="open-box" rows="2" placeholder="During the Stone Age, people…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Without the Stone Age, we would not have…"></textarea></td></tr>
+      <tr><td><strong>Bronze Age</strong></td><td><textarea class="open-box" rows="2" placeholder="The Bronze Age began when…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Without bronze tools…"></textarea></td></tr>
+      <tr><td><strong>Iron Age</strong></td><td><textarea class="open-box" rows="2" placeholder="During the Iron Age, the Celts…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Without iron…"></textarea></td></tr>
+      <tr><td><strong>Hunter-gatherer</strong></td><td><textarea class="open-box" rows="2" placeholder="Hunter-gatherers survived by…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Without farming, people today would still need to…"></textarea></td></tr>
+      <tr><td><strong>Stonehenge</strong></td><td><textarea class="open-box" rows="2" placeholder="Stonehenge is important because…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="Without Stonehenge, historians would not know…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🌍 Part B — History Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Complete the change-over-time table. Compare life in each prehistoric age.</p>
+    <table class="fill-table">
+      <tr><th>Aspect of life</th><th>Stone Age</th><th>Bronze Age</th><th>Iron Age</th></tr>
+      <tr><td><strong>Tools/weapons</strong></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Food / how they ate</strong></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Where they lived</strong></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Social organisation</strong></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td><td><textarea class="open-box" rows="2" placeholder="…"></textarea></td></tr>
+    </table>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Source analysis: A historian finds cave paintings in Britain showing animals being hunted with spears. Answer all questions:</p>
+    <div style="background:var(--social-l);border-radius:10px;padding:14px;margin-bottom:14px;font-size:0.9rem;">🖼️ <strong>Source:</strong> Cave paintings discovered in a cave in Yorkshire, England. They show deer, mammoths and humans carrying pointed stone spears. Estimated age: 12,000 years old.</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div><p style="font-weight:800;margin-bottom:4px;">a) Which prehistoric period do these paintings most likely come from? Give a reason.</p><textarea class="open-box" rows="2" placeholder="These paintings are most likely from the … because…"></textarea></div>
+      <div><p style="font-weight:800;margin-bottom:4px;">b) What does this source tell us about how these people got their food?</p><textarea class="open-box" rows="2" placeholder="The source tells us…"></textarea></div>
+      <div><p style="font-weight:800;margin-bottom:4px;">c) Give ONE thing this source does NOT tell us about Stone Age life.</p><textarea class="open-box" rows="2" placeholder="This source does not tell us…"></textarea></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">3. "The most important change in prehistoric Britain was the move from stone tools to iron tools." Do you AGREE or DISAGREE? Write a balanced argument — give evidence for AND against this view. At least 5 sentences.</p>
+        <textarea class="open-box" rows="8" placeholder="I agree / disagree because…&#10;&#10;On one hand, iron tools were important because…&#10;&#10;However, one could argue that the discovery of farming was equally important because…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">4. Stonehenge was built during the Stone Age without any metal tools or machines. The largest stones weigh 25 tonnes and were brought from Wales — over 200 miles away. What does this tell us about Stone Age people? Write 3–4 sentences.</p>
+        <textarea class="open-box" rows="5" placeholder="Stonehenge shows us that Stone Age people were…"></textarea>
+      </div>
+      <div>
+        <p style="font-weight:800;margin-bottom:6px;">5. EXTENDED RESPONSE: Imagine you are a historian writing a short encyclopaedia entry about prehistoric Britain. Write 6–8 sentences that cover all THREE ages, describing the most important changes over time. Use chronological vocabulary: first, then, later, by the time, eventually.</p>
+        <textarea class="open-box" rows="10" placeholder="Prehistoric Britain spans thousands of years, beginning with the Stone Age. First, …"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False: If FALSE write the correction <span class="marks">5 marks</span></div>
+    <table class="tf-table">
+      <tr><th>Statement</th><th>T / F + Correction if False</th></tr>
+      <tr><td>The Bronze Age came before the Stone Age in British prehistory.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Hunter-gatherers moved from place to place following food sources.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>The Celts built hill forts to protect their communities during the Iron Age.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Bronze is made by mixing copper and gold together.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+      <tr><td>Stonehenge is thought to have been built during the Stone and Bronze Ages.</td><td><textarea class="open-box" rows="2" placeholder="T or F — correction: …"></textarea></td></tr>
+    </table>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function checkFill(context){
+  let allInputs,resultId;
+  if(context==='maths-ch'){allInputs=document.querySelectorAll('#page-maths .fill-table .fill-in[data-ans]');resultId='maths-ch-result';}
+  else if(context==='maths-eq'){
+    // get all fill-ins without data-ans in the equivalents grid
+    const page=document.getElementById('page-maths');
+    allInputs=Array.from(page.querySelectorAll('.fill-in[data-ans]')).filter(el=>!el.closest('.fill-table'));
+    resultId='maths-eq-result';
+  }
+  if(!allInputs||!allInputs.length)return;
+  let score=0,total=0;
+  allInputs.forEach(inp=>{
+    if(!inp.dataset.ans)return;
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}
+  });
+  const res=document.getElementById(resultId);
+  if(res){res.style.display='block';
+    if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All correct! ${score}/${total}`;}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+  }
+}
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<40;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*30);}
+}
+const s=document.createElement('style');s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week7_Day2');</script>
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 7 · KS2 Level 3 · Interactive Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:12px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh;font-size:15px}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1;min-width:100px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:20px;border:2px solid transparent;font-size:12px;font-weight:700;cursor:pointer;transition:.13s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab.active{color:var(--white)!important}
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.subject-tabs{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap}
+.stab{padding:9px 18px;border-radius:22px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:var(--white)}
+.page{display:none;padding:14px 18px 50px}
+.page.active{display:block}
+.ws-header{background:linear-gradient(130deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.4px;display:inline-block;margin-bottom:4px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--teal);margin:2px 0}
+.ws-sub{font-size:12px;color:var(--gray);font-weight:600}
+.name-line{border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none;width:130px}
+.section{margin-bottom:18px}
+.sec-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num{background:var(--teal);color:var(--white);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:60px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6}
+.l1-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.circle-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.opt{border:2px solid var(--amber);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);transition:.12s;background:var(--white)}
+.opt:hover{opacity:.8}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+.tbl-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+table.ws-table input[type=text]{width:100%;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;border-bottom:1px dashed var(--teal-mid);padding:2px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.highlight-box{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--rsm);padding:12px 14px;font-size:13px;line-height:1.8;margin:8px 0}
+.remember-box{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--white);text-align:center;margin-top:12px}
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.6}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:10px 0}
+.info-card{border-radius:var(--rsm);padding:12px;text-align:center;border:2px solid}
+.card-icon{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px;line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:2px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.chk.done{background:var(--teal);color:var(--white)}
+.frac-shape{display:inline-flex;flex-wrap:wrap;gap:3px;margin:6px 4px}
+.frac-cell{width:32px;height:32px;border:2px solid var(--teal);border-radius:4px;cursor:pointer;transition:.12s}
+.frac-cell.filled{background:var(--teal)}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.rock-card{border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px;border:2px solid}
+.passage-box{background:#F0F9FF;border:2px solid #0EA5E9;border-radius:var(--radius);padding:14px 16px;font-size:14px;line-height:1.85;margin:8px 0}
+.passage-heading{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:#185FA5;margin-bottom:8px;border-bottom:2px solid #0EA5E9;padding-bottom:6px}
+.passage-subhead{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#185FA5;margin:10px 0 5px}
+@media(max-width:600px){.two-col,.three-col{grid-template-columns:1fr}}
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">📚 HOS · KS2 Level 3 · Week 7</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const SUBJECTS=[
+  {id:'eng',   label:'📖 English',    col:'#185FA5'},
+  {id:'maths', label:'🔢 Maths',      col:'#0F6E56'},
+  {id:'sci',   label:'🪨 Science',    col:'#C2410C'},
+  {id:'hum',   label:'🌍 Humanities', col:'#534AB7'},
+  {id:'bib',   label:'✝️ Bible',      col:'#B71C1C'},
+];
+
+const WS={
+/* ══════════════════════════════════════════════════════
+   ENGLISH — Reading Non-Fiction
+══════════════════════════════════════════════════════ */
+eng:[
+  {num:1,badge:'Reading Non-Fiction',title:'What is Non-Fiction?',
+   secs:[{t:'Learn the key words',c:'eng_nf_vocab'},{t:'Non-fiction features',c:'eng_nf_features'},{t:'Spot the difference!',c:'eng_nf_spot'}]},
+  {num:2,badge:'Reading Non-Fiction',title:'Finding the Main Idea',
+   secs:[{t:'Read the passage',c:'eng_nf_passage'},{t:'Main idea questions',c:'eng_nf_main'},{t:'Key detail questions',c:'eng_nf_detail'}]},
+  {num:3,badge:'Reading Non-Fiction',title:'Headings and Subheadings',
+   secs:[{t:'What are headings and subheadings?',c:'eng_nf_heads'},{t:'Practise with a real text',c:'eng_nf_practise'},{t:'Write your own fact paragraph',c:'eng_nf_write'}]},
+],
+/* ══════════════════════════════════════════════════════
+   MATHS — Fractions
+══════════════════════════════════════════════════════ */
+maths:[
+  {num:1,badge:'Fractions — Equal Parts',title:'What is a Fraction?',
+   secs:[{t:'Learn the key words',c:'maths_fr_vocab'},{t:'Equal and unequal parts',c:'maths_fr_equal'},{t:'Colour the fraction!',c:'maths_fr_colour'}]},
+  {num:2,badge:'Fractions — Equal Parts',title:'Fractions of Shapes and Sets',
+   secs:[{t:'Fractions of shapes',c:'maths_fr_shapes'},{t:'Fractions of a set (objects)',c:'maths_fr_sets'},{t:'Find the fraction!',c:'maths_fr_find'}]},
+  {num:3,badge:'Fractions — Equal Parts',title:'Comparing Fractions',
+   secs:[{t:'Which fraction is bigger?',c:'maths_fr_compare'},{t:'Fractions on a number line',c:'maths_fr_numline'},{t:'Fraction challenge',c:'maths_fr_challenge'}]},
+],
+/* ══════════════════════════════════════════════════════
+   SCIENCE — Rocks
+══════════════════════════════════════════════════════ */
+sci:[
+  {num:1,badge:'Rocks — Types and Properties',title:'The Three Types of Rock',
+   secs:[{t:'Learn the key words',c:'sci_rock_vocab'},{t:'The 3 rock types',c:'sci_rock_types'},{t:'Match the rock!',c:'sci_rock_match'}]},
+  {num:2,badge:'Rocks — Types and Properties',title:'Rock Properties',
+   secs:[{t:'How we describe rocks',c:'sci_rock_props'},{t:'Comparing rocks',c:'sci_rock_compare'},{t:'True or False?',c:'sci_rock_tf'}]},
+  {num:3,badge:'Rocks — Types and Properties',title:'Rocks in Everyday Life',
+   secs:[{t:'Where do we use rocks?',c:'sci_rock_uses'},{t:'Comprehension questions',c:'sci_rock_comp'},{t:'Rock quiz!',c:'sci_rock_quiz'}]},
+],
+/* ══════════════════════════════════════════════════════
+   HUMANITIES — Stone Age to Iron Age
+══════════════════════════════════════════════════════ */
+hum:[
+  {num:1,badge:'Stone Age to Iron Age — Britain',title:'The Stone Age',
+   secs:[{t:'Learn the key words',c:'hum_sa_vocab'},{t:'Who were the Stone Age people?',c:'hum_sa_who'},{t:'Stone Age vs today',c:'hum_sa_compare'}]},
+  {num:2,badge:'Stone Age to Iron Age — Britain',title:'Bronze Age and Iron Age',
+   secs:[{t:'The Bronze Age',c:'hum_ba_bronze'},{t:'The Iron Age',c:'hum_ba_iron'},{t:'Comprehension questions',c:'hum_ba_questions'}]},
+  {num:3,badge:'Stone Age to Iron Age — Britain',title:'How Tools Changed Everything',
+   secs:[{t:'Tools and technology through the ages',c:'hum_tools_tech'},{t:'True or False?',c:'hum_tools_tf'},{t:'My prehistoric fact file',c:'hum_tools_factfile'}]},
+],
+/* ══════════════════════════════════════════════════════
+   BIBLE — Moses
+══════════════════════════════════════════════════════ */
+bib:[
+  {num:1,badge:'Moses — Speaking Up for Others',title:'The Story of Moses',
+   secs:[{t:'Learn the key words',c:'bib_mos_vocab'},{t:'Read the story',c:'bib_mos_story'},{t:'Put the story in order',c:'bib_mos_sequence'}]},
+  {num:2,badge:'Moses — Speaking Up for Others',title:'The Burning Bush',
+   secs:[{t:'Comprehension questions',c:'bib_mos_questions'},{t:'I AM WHO I AM — Exodus 3:14',c:'bib_mos_iam'},{t:'The memory verse',c:'bib_mos_verse'}]},
+  {num:3,badge:'Moses — Speaking Up for Others',title:'Speaking Up — My Life Application',
+   secs:[{t:'What does it mean to speak up?',c:'bib_mos_speakup'},{t:'When should I speak up?',c:'bib_mos_apply'},{t:'Draw and write',c:'bib_mos_draw'}]},
+],
+};
+
+function vc(word,meaning,l1,eg,col){
+  col=col||'teal';
+  return `<div class="vocab-card" style="border-left-color:var(--${col})">
+  <div class="vocab-word" style="color:var(--${col})">${word}</div>
+  <div class="vocab-meaning">${meaning}</div>
+  <div class="vocab-l1">🌍 ${l1}</div>
+  <div class="vocab-eg">✏️ e.g. ${eg}</div>
+</div>`;
+}
+
+function C(key){switch(key){
+
+/* ─── ENGLISH ───────────────────────────────────────── */
+case 'eng_nf_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Non-fiction = غیر افسانوی (Urdu) · غير خيالي (Arabic). Non-fiction texts are REAL — they contain true facts and information, not made-up stories!</div>
+${vc('📰 Non-fiction','Writing that is about REAL things — facts, true events, real people.','غیر افسانوی / غير خيالي','\"An encyclopaedia article about elephants is non-fiction.\"','blue')}
+${vc('💡 Main idea','The MOST important point a text is talking about.','مرکزی خیال / الفكرة الرئيسية','\"The main idea of the paragraph is that volcanoes are dangerous.\"','blue')}
+${vc('🔍 Key detail','An important fact that SUPPORTS the main idea.','اہم تفصیل / التفاصيل الرئيسية','\"A key detail is that lava can reach 1,200°C.\"','blue')}
+${vc('📋 Heading','A title for a whole text or section. Tells you the topic.','سرخی / العنوان','\"Heading: All About Volcanoes\"','blue')}
+${vc('🔖 Subheading','A smaller title inside a text. Tells you what one section is about.','ذیلی سرخی / العنوان الفرعي','\"Subheading: What Makes a Volcano Erupt?\"','blue')}
+<div class="q-block"><div class="q-text">A text about real facts is called <input class="inline-ans" style="width:90px" placeholder="?"/>. The most important point is called the <input class="inline-ans" style="width:80px" placeholder="?"/> idea.</div></div>`;
+
+case 'eng_nf_features': return `
+<div class="tip-box"><strong>Non-fiction texts look different from stories!</strong> They have special features to help the reader find information quickly.</div>
+<div class="card-grid">
+${[
+  ['📋','Heading','A big title at the top. Tells you what the WHOLE text is about.'],
+  ['🔖','Subheading','A smaller title inside. Tells you what ONE section is about.'],
+  ['💡','Main idea sentence','Usually the FIRST sentence of a paragraph. The most important point.'],
+  ['🔍','Key details','Facts and information that support and explain the main idea.'],
+  ['📷','Photos/diagrams','Pictures that help explain the information.'],
+  ['📝','Captions','Writing under a photo that explains what you can see.'],
+  ['📌','Bold words','Important words printed in BOLD so they are easy to spot.'],
+  ['📚','Contents page','A list showing what topics are covered and which page they are on.'],
+].map(([i,t,d])=>`<div class="info-card" style="background:var(--blue-light);border-color:var(--blue)">
+  <div class="card-icon">${i}</div>
+  <div class="card-title" style="color:var(--blue)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>`;
+
+case 'eng_nf_spot': return `
+<div class="tip-box"><strong>Can you spot whether each text is FICTION (made-up story) or NON-FICTION (real facts)?</strong> Click your answer!</div>
+${[
+  ['"Once upon a time, a dragon lived in a tall mountain..."','Fiction','Fiction','Non-fiction'],
+  ['"The blue whale is the largest animal on Earth. It can grow up to 30 metres long."','Non-fiction','Fiction','Non-fiction'],
+  ['"Sarah ran through the enchanted forest, looking for the golden key."','Fiction','Fiction','Non-fiction'],
+  ['"The River Nile flows through Egypt and is 6,650 km long."','Non-fiction','Fiction','Non-fiction'],
+  ['"Volcanoes are openings in the Earth\'s crust where hot lava erupts."','Non-fiction','Fiction','Non-fiction'],
+  ['"Tom and his magic bicycle flew over the rainbow."','Fiction','Fiction','Non-fiction'],
+].map(([text,ans,o1,o2],i)=>`
+<div class="q-block"><div class="q-num">Text ${i+1}</div>
+<div class="q-text" style="font-style:italic;background:var(--gray-light);padding:8px;border-radius:6px;margin-bottom:6px">${text}</div>
+<div class="circle-opts">
+  <div class="opt" onclick="chk(this,'nfs${i}','Fiction','${ans}')">📖 Fiction</div>
+  <div class="opt" onclick="chk(this,'nfs${i}','Non-fiction','${ans}')">📰 Non-fiction</div>
+</div></div>`).join('')}`;
+
+case 'eng_nf_passage': return `
+<div class="tip-box"><strong>Read this non-fiction passage carefully.</strong> Look for the heading, subheadings, main idea, and key details.</div>
+<div class="passage-box">
+  <div class="passage-heading">🦋 BUTTERFLIES</div>
+  <div class="passage-subhead">What is a butterfly?</div>
+  A butterfly is an insect. It has six legs, two antennae, and four wings covered in tiny, colourful scales. Butterflies can be found on every continent except Antarctica.
+  <div class="passage-subhead">The life cycle of a butterfly</div>
+  Butterflies go through four stages of life. First, a butterfly lays an <strong>egg</strong> on a leaf. Then, a tiny caterpillar (called a <strong>larva</strong>) hatches from the egg and eats leaves to grow. Next, the caterpillar forms a hard shell called a <strong>chrysalis</strong>. Finally, a beautiful butterfly breaks out of the chrysalis. This process is called <strong>metamorphosis</strong>.
+  <div class="passage-subhead">What do butterflies eat?</div>
+  Adult butterflies drink a sweet liquid called <strong>nectar</strong> from flowers. They use a long, tube-shaped tongue called a <strong>proboscis</strong> to suck up the nectar — like drinking with a straw!
+  <div class="passage-subhead">Why are butterflies important?</div>
+  Butterflies are important <strong>pollinators</strong>. When they visit flowers to drink nectar, they carry tiny grains of pollen from flower to flower. This helps plants to make seeds and grow new plants.
+</div>`;
+
+case 'eng_nf_main': return `
+<div class="tip-box"><strong>The main idea</strong> is the most important point. It tells us WHAT the whole paragraph is about — not just one small detail.</div>
+${[
+  ['What is the MAIN IDEA of the whole text?','The main idea of the whole text is ...','Butterflies are insects that go through metamorphosis and play an important role in nature.'],
+  ['What is the main idea of the section "The life cycle of a butterfly"?','The main idea of this section is ...','Butterflies go through four stages of life — egg, caterpillar, chrysalis, and butterfly.'],
+  ['What is the main idea of the section "Why are butterflies important"?','The main idea of this section is ...','Butterflies are important because they help plants make seeds by carrying pollen.'],
+].map(([q,frame,hint],i)=>`
+<div class="q-block">
+  <div class="q-num">Main Idea Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--blue);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="ans-line" placeholder="Write your answer here..."/>
+  <div style="font-size:11px;color:var(--green);margin-top:4px">💡 Hint: ${hint}</div>
+</div>`).join('')}`;
+
+case 'eng_nf_detail': return `
+<div class="tip-box"><strong>Key details</strong> are facts that support and explain the main idea. They answer questions like Who? What? When? Where? How many?</div>
+${[
+  ['How many legs does a butterfly have?','A butterfly has ______ legs.','six / 6'],
+  ['What does a caterpillar do when it hatches from the egg?','When it hatches, the caterpillar ...','eats leaves to grow'],
+  ['What is a chrysalis?','A chrysalis is ...','a hard shell the caterpillar forms around itself'],
+  ['What do adult butterflies eat?','Adult butterflies eat ...','nectar from flowers'],
+  ['What is the name of a butterfly\'s long tube-shaped tongue?','The butterfly\'s long tongue is called a ...','proboscis'],
+  ['Why do butterflies visit flowers?','Butterflies visit flowers to ...','drink nectar (and carry pollen)'],
+].map(([q,frame,ans],i)=>`
+<div class="q-block">
+  <div class="q-num">Key Detail ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--blue);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="ans-line" placeholder="Write your answer..."/>
+</div>`).join('')}`;
+
+case 'eng_nf_heads': return `
+<div class="tip-box"><strong>Headings and subheadings</strong> are very important in non-fiction writing. They help the reader navigate — like a map!</div>
+<div class="two-col">
+  <div class="q-block" style="background:var(--blue-light);border-color:var(--blue)">
+    <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--blue);margin-bottom:8px">📋 HEADING</div>
+    <div style="font-size:13px;line-height:1.7">• The BIG title at the top<br/>• Tells you the WHOLE topic<br/>• Usually large and bold<br/>• One per text<br/>Example: <strong>Butterflies</strong></div>
+  </div>
+  <div class="q-block" style="background:var(--teal-light);border-color:var(--teal)">
+    <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--teal);margin-bottom:8px">🔖 SUBHEADING</div>
+    <div style="font-size:13px;line-height:1.7">• A smaller title INSIDE the text<br/>• Tells you what ONE section is about<br/>• Helps you find specific information<br/>• Many per text<br/>Example: <strong>What do butterflies eat?</strong></div>
+  </div>
+</div>
+<div class="tip-box" style="margin-top:8px"><strong>How to write a good subheading:</strong> It should be SHORT (3–6 words), tell the reader exactly what the section is about, and often asks a question.</div>`;
+
+case 'eng_nf_practise': return `
+<div class="tip-box"><strong>Look at these facts.</strong> Write a good subheading for each group of facts!</div>
+${[
+  ['Facts about WHAT elephants eat:\n• Elephants eat grass, fruit, bark, and roots.\n• An adult elephant can eat up to 150kg of food per day!\n• They spend about 16 hours a day eating.','What do elephants eat?'],
+  ['Facts about HOW LONG elephants live:\n• Elephants can live up to 70 years in the wild.\n• Baby elephants are called calves.\n• Calves stay with their mothers for many years.','How long do elephants live? / Elephant families and life'],
+  ['Facts about WHERE elephants live:\n• Elephants live in Africa and Asia.\n• They live in grasslands, forests, and deserts.\n• They need large areas of land to roam and find food.','Where do elephants live?'],
+].map(([facts,hint],i)=>`
+<div class="q-block">
+  <div class="q-num">Section ${i+1}</div>
+  <div style="background:var(--gray-light);border-radius:6px;padding:8px;font-size:13px;line-height:1.7;white-space:pre-line;margin-bottom:8px">${facts}</div>
+  <div class="q-text">Write a subheading for this section:</div>
+  <input class="ans-line" placeholder="My subheading: ___________________"/>
+  <div style="font-size:11px;color:var(--green);margin-top:4px">💡 Possible answer: ${hint}</div>
+</div>`).join('')}`;
+
+case 'eng_nf_write': return `
+<div class="tip-box"><strong>Now write your OWN non-fiction paragraph!</strong> Choose a topic you know about. Use the frame below.</div>
+<div class="q-block">
+  <div class="q-num">📝 My Non-Fiction Paragraph</div>
+  <div style="font-size:13px;line-height:2.8;margin-top:8px">
+    <strong>My heading:</strong> <input class="ans-line" placeholder="All About ________________"/><br/>
+    <strong>My subheading:</strong> <input class="ans-line" placeholder="What is a ________________ ?"/><br/>
+    <strong>My main idea sentence (sentence 1):</strong><br/>
+    <input class="ans-line" placeholder="A ________ is _________________________."/><br/>
+    <strong>Key detail 1 (sentence 2):</strong><br/>
+    <input class="ans-line" placeholder="It has / lives / eats __________________."/><br/>
+    <strong>Key detail 2 (sentence 3):</strong><br/>
+    <input class="ans-line" placeholder="It is important because _______________."/><br/>
+    <strong>A question subheading I could add:</strong><br/>
+    <input class="ans-line" placeholder="Where does a __________ live?"/>
+  </div>
+</div>
+<div class="remember-box" style="background:#185FA5">⭐ REMEMBER: Non-fiction = real facts! Look for the HEADING (big title), SUBHEADINGS (section titles), MAIN IDEA (most important point), and KEY DETAILS (supporting facts). 📰</div>`;
+
+/* ─── MATHS ─────────────────────────────────────────── */
+case 'maths_fr_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Fraction = کسر (Urdu/Arabic). A fraction tells us how many EQUAL parts of something we have!</div>
+${vc('🍕 Fraction','A number that shows part of a WHOLE. Written with a line in the middle.','کسر / كسر','\"1/2 means one out of two equal parts.\"','teal')}
+${vc('⬆️ Numerator','The TOP number of a fraction. Shows HOW MANY parts we have.','صورہ / البسط','\"In 3/4, the numerator is 3.\"','teal')}
+${vc('⬇️ Denominator','The BOTTOM number. Shows how many EQUAL parts the whole is split into.','مخرج / المقام','\"In 3/4, the denominator is 4. The whole is cut into 4 equal parts.\"','teal')}
+${vc('⚖️ Equal parts','Parts that are exactly the SAME size. Fractions MUST use equal parts!','برابر حصے / أجزاء متساوية','\"Cut the pizza into 4 equal parts. Each part is 1/4.\"','teal')}
+${vc('🔄 Equivalent','Two fractions that look different but are equal in value.','مساوی / مساوٍ','\"1/2 and 2/4 are equivalent — they are the same amount!\"','teal')}
+<div class="q-block"><div class="q-text">In the fraction 2/5 — the numerator is <input class="inline-ans" style="width:40px" placeholder="?"/> and the denominator is <input class="inline-ans" style="width:40px" placeholder="?"/>. The whole is split into <input class="inline-ans" style="width:40px" placeholder="?"/> equal parts.</div></div>`;
+
+case 'maths_fr_equal': return `
+<div class="tip-box"><strong>A fraction ONLY works when the parts are EQUAL!</strong> If the parts are different sizes, it is NOT a fraction.</div>
+${[
+  ['Cut into 2 equal parts','✅ Equal — each part is 1/2','#0F6E56','#E1F5EE'],
+  ['Cut into 4 equal parts','✅ Equal — each part is 1/4','#0F6E56','#E1F5EE'],
+  ['Cut unevenly','❌ NOT equal — cannot write a fraction!','#B71C1C','#FFEBEE'],
+  ['Cut into 3 equal parts','✅ Equal — each part is 1/3','#0F6E56','#E1F5EE'],
+].map(([s,r,col,bg])=>`
+<div class="step-box">
+  <div style="font-size:18px;width:28px;text-align:center">${r.startsWith('✅')?'✅':'❌'}</div>
+  <div>
+    <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px">${s}</div>
+    <div style="font-size:12px;color:${col};margin-top:2px;font-weight:700">${r}</div>
+  </div>
+</div>`).join('')}
+<div class="q-block"><div class="q-text">True or False? A shape cut into 3 parts of different sizes shows thirds.
+<div class="circle-opts">
+  <div class="opt" onclick="chk(this,'eq1','False','False')">❌ False — parts must be EQUAL</div>
+  <div class="opt" onclick="chk(this,'eq1','True','False')">✅ True</div>
+</div></div></div>`;
+
+case 'maths_fr_colour': return `
+<div class="tip-box"><strong>Click the boxes to colour the correct fraction!</strong> Each row of boxes is the WHOLE. Colour the right number of parts.</div>
+${[
+  ['1/2',2,1,'Colour 1 out of 2 parts'],
+  ['1/4',4,1,'Colour 1 out of 4 parts'],
+  ['3/4',4,3,'Colour 3 out of 4 parts'],
+  ['1/3',3,1,'Colour 1 out of 3 parts'],
+  ['2/3',3,2,'Colour 2 out of 3 parts'],
+].map(([frac,total,shade,tip],i)=>`
+<div class="q-block">
+  <div class="q-num">Fraction: <strong style="font-size:18px">${frac}</strong></div>
+  <div class="q-text">${tip}</div>
+  <div class="frac-shape" id="fs${i}">
+    ${Array.from({length:total},(_,j)=>`<div class="frac-cell${j<shade?' filled':''}" onclick="toggleFrac(this)"></div>`).join('')}
+  </div>
+</div>`).join('')}`;
+
+case 'maths_fr_shapes': return `
+<div class="tip-box"><strong>To find the fraction of a shape:</strong><br/>1. Count the total equal parts (denominator).<br/>2. Count the shaded parts (numerator).<br/>3. Write the fraction!</div>
+${[
+  ['A rectangle cut into 4 equal parts. 1 part is shaded.','1/4','The rectangle is cut into ____ equal parts. ____ part is shaded. Fraction shaded = ____'],
+  ['A circle cut into 3 equal parts. 2 parts are shaded.','2/3','The circle is cut into ____ equal parts. ____ parts are shaded. Fraction shaded = ____'],
+  ['A square cut into 8 equal parts. 5 parts are shaded.','5/8','The square is cut into ____ equal parts. ____ parts are shaded. Fraction shaded = ____'],
+  ['A bar cut into 6 equal parts. 3 parts are shaded.','3/6 (or 1/2)','The bar is cut into ____ equal parts. ____ parts are shaded. Fraction = ____'],
+].map(([desc,ans,frame],i)=>`
+<div class="q-block">
+  <div class="q-num">Shape ${i+1}</div>
+  <div class="q-text">${desc}</div>
+  <div style="font-size:12px;color:var(--gray);font-style:italic;margin:5px 0">${frame}</div>
+  <input class="ans-line" placeholder="Fraction = ____"/>
+</div>`).join('')}`;
+
+case 'maths_fr_sets': return `
+<div class="tip-box"><strong>Fractions of a set</strong> means finding a fraction of a GROUP of objects. Count all the objects first!</div>
+<div class="highlight-box">Example: What is 1/4 of 12 apples?<br/>
+Step 1: Denominator = 4. Divide into 4 equal groups: 12 ÷ 4 = 3.<br/>
+Step 2: Numerator = 1. Take 1 group: 3 apples.<br/>
+So 1/4 of 12 = <strong>3</strong>.</div>
+${[
+  ['What is 1/2 of 10 🍎?','1/2','10','10 ÷ 2 = ____ → 1/2 of 10 = ____','5'],
+  ['What is 1/4 of 8 🍌?','1/4','8','8 ÷ 4 = ____ → 1/4 of 8 = ____','2'],
+  ['What is 1/3 of 9 🍪?','1/3','9','9 ÷ 3 = ____ → 1/3 of 9 = ____','3'],
+  ['What is 2/4 of 12 🌟?','2/4','12','12 ÷ 4 = ____ groups. Take 2 → 2/4 of 12 = ____','6'],
+  ['What is 3/4 of 20 🔵?','3/4','20','20 ÷ 4 = ____ groups. Take 3 → 3/4 of 20 = ____','15'],
+].map(([q,frac,total,hint,ans],i)=>`
+<div class="q-block">
+  <div class="q-num">Set ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:12px;color:var(--gray);font-style:italic;margin:4px 0">${hint}</div>
+  <input class="ans-line" placeholder="Answer: ____"/>
+</div>`).join('')}`;
+
+case 'maths_fr_find': return `
+<div class="tip-box"><strong>Look at the picture. Write the fraction!</strong></div>
+${[
+  ['🍕🍕🍕🍕 — 4 pizza slices in total. Ahmed eats 1 slice.','What fraction did Ahmed eat?','1/4'],
+  ['⭐⭐⭐⭐⭐⭐ — 6 stars. 2 are gold, 4 are white.','What fraction are gold stars?','2/6 (or 1/3)'],
+  ['🔴🔴🔴🔵🔵🔵🔵🔵 — 8 circles total. 3 are red.','What fraction are red?','3/8'],
+  ['🐑🐑🐑🐑🐑🐑🐑🐑🐑🐑 — 10 sheep. The farmer sells 5.','What fraction are sold?','5/10 (or 1/2)'],
+].map(([pic,q,ans],i)=>`
+<div class="q-block">
+  <div class="q-num">Problem ${i+1}</div>
+  <div style="font-size:18px;margin:6px 0">${pic}</div>
+  <div class="q-text">${q}</div>
+  <input class="ans-line" placeholder="Fraction = ____"/>
+</div>`).join('')}`;
+
+case 'maths_fr_compare': return `
+<div class="tip-box"><strong>To compare fractions with the SAME denominator</strong> — the bigger the numerator, the bigger the fraction!<br/>To compare fractions with the SAME numerator — the bigger the denominator, the SMALLER the fraction (more cuts = smaller pieces).</div>
+${[
+  ['1/4 and 3/4','3/4','Same denominator (4). 3 > 1 so 3/4 is bigger.'],
+  ['2/5 and 4/5','4/5','Same denominator (5). 4 > 2 so 4/5 is bigger.'],
+  ['1/2 and 1/4','1/2','Same numerator (1). 2 < 4 so halves are BIGGER than quarters!'],
+  ['3/8 and 5/8','5/8','Same denominator (8). 5 > 3 so 5/8 is bigger.'],
+  ['1/3 and 1/6','1/3','Same numerator (1). 3 < 6 so thirds are BIGGER than sixths!'],
+].map(([q,ans,exp],i)=>`
+<div class="q-block">
+  <div class="q-num">Compare ${i+1}</div>
+  <div class="q-text">Which is bigger: <strong>${q}</strong>?</div>
+  <div class="circle-opts">${q.split(' and ').map(f=>`<div class="opt" onclick="chk(this,'fc${i}','${f}','${ans}')">${f}</div>`).join('')}<div class="opt" onclick="chk(this,'fc${i}','Equal','${ans}')">They are equal</div></div>
+  <div style="font-size:11px;color:var(--green);margin-top:6px">💡 ${exp}</div>
+</div>`).join('')}`;
+
+case 'maths_fr_numline': return `
+<div class="tip-box"><strong>A number line helps us see where fractions live between 0 and 1.</strong> The denominator tells us how many equal jumps to make!</div>
+<div style="background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:14px;margin-bottom:14px">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--teal);margin-bottom:10px">Halves: 0 ──── 1/2 ──── 1</div>
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#185FA5;margin-bottom:10px">Quarters: 0 ── 1/4 ── 2/4 ── 3/4 ── 1</div>
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#534AB7">Thirds: 0 ──────── 1/3 ──────── 2/3 ──────── 1</div>
+</div>
+${[
+  ['On the halves number line, mark where 1/2 is.','1/2 is exactly in the middle between 0 and 1.'],
+  ['On the quarters line — which fraction is the same as 1/2?','2/4 is in the same place as 1/2!'],
+  ['Which is closer to 1 — 3/4 or 1/4?','3/4 is closer to 1 because 3 is closer to 4 (the denominator).'],
+].map(([q,hint],i)=>`
+<div class="q-block">
+  <div class="q-num">Number Line ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <input class="ans-line" placeholder="Write your answer..."/>
+  <div style="font-size:11px;color:var(--green);margin-top:4px">💡 ${hint}</div>
+</div>`).join('')}`;
+
+case 'maths_fr_challenge': return `
+<div class="tip-box"><strong>Mixed fraction challenge!</strong></div>
+<div class="three-col">
+${[
+  ['1/2 of 6 =','3'],['1/4 of 8 =','2'],['1/3 of 9 =','3'],
+  ['3/4 of 8 =','6'],['2/3 of 12 =','8'],['1/2 of 20 =','10'],
+  ['1/4 of 16 =','4'],['3/4 of 12 =','9'],['2/4 of 10 =','5'],
+].map(([q,a])=>`
+<div class="q-block" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:17px;font-weight:700;color:var(--teal)">${q}</div>
+  <input type="text" style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal);margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">🌟 Challenge: 2/4 and 1/2 — are these equal? <input class="inline-ans" style="width:40px" placeholder="?"/> Explain: <input class="ans-line" placeholder="They are both ___ of the whole..."/></div></div>`;
+
+/* ─── SCIENCE ────────────────────────────────────────── */
+case 'sci_rock_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Rock = پتھر (Urdu) · صخرة (Arabic). Did you know ALL rocks on Earth are made in one of only THREE ways?</div>
+${vc('🌋 Igneous rock','Rock made when hot liquid (lava or magma) cools and becomes solid.','آگنیس پتھر / صخرة نارية','\"Basalt and granite are igneous rocks.\"','orange')}
+${vc('🌊 Sedimentary rock','Rock made from tiny pieces (sediment) that build up in layers over millions of years.','تلچھٹی پتھر / صخرة رسوبية','\"Sandstone and limestone are sedimentary rocks.\"','orange')}
+${vc('🔥 Metamorphic rock','Rock that has been CHANGED by great heat and pressure deep underground.','متامورفک پتھر / صخرة متحولة','\"Marble and slate are metamorphic rocks.\"','orange')}
+${vc('💎 Hardness','How hard or soft a rock is — tested by scratching it.','سختی / صلابة','\"Diamond is the hardest rock on Earth.\"','orange')}
+${vc('🔍 Texture','How a rock FEELS and LOOKS — rough, smooth, grainy, shiny.','ساخت / ملمس','\"Granite has a rough, grainy texture.\"','orange')}
+<div class="q-block"><div class="q-text">Name the 3 types of rock: 1. <input class="inline-ans" style="width:90px" placeholder="?"/> 2. <input class="inline-ans" style="width:100px" placeholder="?"/> 3. <input class="inline-ans" style="width:100px" placeholder="?"/></div></div>`;
+
+case 'sci_rock_types': return `
+<div class="tip-box"><strong>There are exactly 3 types of rock.</strong> Each one is made in a different way!</div>
+<div class="rock-card" style="border-color:#C2410C;background:#FFF0E6">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#C2410C;font-size:14px;margin-bottom:8px">🌋 IGNEOUS ROCK — "Fire rock"</div>
+  <div style="font-size:13px;line-height:1.8"><strong>How it forms:</strong> Deep inside the Earth, rock melts into a liquid called <strong>magma</strong>. When it reaches the surface (as <strong>lava</strong>), it cools and turns solid.<br/>
+  <strong>Examples:</strong> Granite (speckled, coarse) · Basalt (dark, smooth) · Obsidian (black, glassy)<br/>
+  <strong>Texture:</strong> Can be rough/coarse (cools slowly underground) or smooth/glassy (cools fast on surface)</div>
+</div>
+<div class="rock-card" style="border-color:#185FA5;background:#E6F1FB">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#185FA5;font-size:14px;margin-bottom:8px">🌊 SEDIMENTARY ROCK — "Layer rock"</div>
+  <div style="font-size:13px;line-height:1.8"><strong>How it forms:</strong> Tiny bits of sand, shells, or mud fall to the bottom of rivers and seas. Over MILLIONS of years, the layers press together and harden into rock.<br/>
+  <strong>Examples:</strong> Sandstone (sandy, grainy) · Limestone (often has fossils!) · Chalk (soft, white)<br/>
+  <strong>Texture:</strong> Often grainy or layered — you can sometimes see the layers!</div>
+</div>
+<div class="rock-card" style="border-color:#534AB7;background:#EEEDFE">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#534AB7;font-size:14px;margin-bottom:8px">🔥 METAMORPHIC ROCK — "Changed rock"</div>
+  <div style="font-size:13px;line-height:1.8"><strong>How it forms:</strong> Existing rocks are buried deep underground, where extreme <strong>heat and pressure</strong> change them completely into a new type of rock.<br/>
+  <strong>Examples:</strong> Marble (smooth, beautiful — from limestone) · Slate (splits into flat sheets — from mud)<br/>
+  <strong>Texture:</strong> Often smooth or with banded layers from the pressure</div>
+</div>`;
+
+case 'sci_rock_match': return `
+<div class="tip-box"><strong>Match each rock to the correct rock type!</strong></div>
+${[
+  ['Granite','Igneous',['Igneous','Sedimentary','Metamorphic'],'Igneous'],
+  ['Sandstone','Sedimentary',['Igneous','Sedimentary','Metamorphic'],'Sedimentary'],
+  ['Marble','Metamorphic',['Igneous','Sedimentary','Metamorphic'],'Metamorphic'],
+  ['Limestone','Sedimentary',['Igneous','Sedimentary','Metamorphic'],'Sedimentary'],
+  ['Obsidian','Igneous',['Igneous','Sedimentary','Metamorphic'],'Igneous'],
+  ['Slate','Metamorphic',['Igneous','Sedimentary','Metamorphic'],'Metamorphic'],
+  ['Chalk','Sedimentary',['Igneous','Sedimentary','Metamorphic'],'Sedimentary'],
+  ['Basalt','Igneous',['Igneous','Sedimentary','Metamorphic'],'Igneous'],
+].map(([rock,ans,opts],i)=>`
+<div class="q-block"><div class="q-num">🪨 ${rock}</div>
+<div class="circle-opts">${opts.map(o=>`<div class="opt" onclick="chk(this,'rm${i}','${o}','${ans}')">${o}</div>`).join('')}</div>
+</div>`).join('')}`;
+
+case 'sci_rock_props': return `
+<div class="tip-box"><strong>Scientists describe rocks using these properties:</strong></div>
+<div class="tbl-wrap"><table class="ws-table">
+<thead><tr><th>Property</th><th>What it means</th><th>How to test it</th></tr></thead>
+<tbody>
+<tr><td><strong>🔨 Hardness</strong></td><td>How easy or difficult it is to scratch the rock</td><td>Try to scratch the rock with your fingernail, a coin, or a steel nail</td></tr>
+<tr><td><strong>🔍 Texture</strong></td><td>How the rock feels and looks on the surface</td><td>Feel it: rough/smooth? Look: grainy/glassy/layered?</td></tr>
+<tr><td><strong>🎨 Colour</strong></td><td>The colour(s) of the rock</td><td>Look at it! Some rocks have many colours (e.g. granite)</td></tr>
+<tr><td><strong>💧 Permeability</strong></td><td>Whether water can pass through the rock</td><td>Pour a little water on it — does it soak in or run off?</td></tr>
+<tr><td><strong>📦 Weight</strong></td><td>How heavy it is for its size (density)</td><td>Hold rocks of the same size and compare how heavy they feel</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-text">If a rock lets water through it, we say it is <input class="inline-ans" style="width:110px" placeholder="?"/>. If you test how easy it is to scratch a rock, you are testing its <input class="inline-ans" style="width:80px" placeholder="?"/>.</div></div>`;
+
+case 'sci_rock_compare': return `
+<div class="tip-box"><strong>Complete the rock comparison table!</strong></div>
+<div class="tbl-wrap"><table class="ws-table">
+<thead><tr><th>Rock</th><th>Type</th><th>Texture</th><th>Hardness</th><th>Fossils?</th></tr></thead>
+<tbody>
+<tr><td><strong>Granite</strong></td><td>Igneous</td><td>Rough, coarse, grainy</td><td>Very hard</td><td>No</td></tr>
+<tr><td><strong>Sandstone</strong></td><td>Sedimentary</td><td>Grainy, sandy</td><td>Medium — can crumble</td><td>Sometimes</td></tr>
+<tr><td><strong>Limestone</strong></td><td>Sedimentary</td><td>Rough, sometimes chalky</td><td>Medium</td><td><strong>Yes!</strong></td></tr>
+<tr><td><strong>Marble</strong></td><td>Metamorphic</td><td>Smooth, shiny</td><td>Hard</td><td>No</td></tr>
+<tr><td><strong>Slate</strong></td><td>Metamorphic</td><td>Smooth, splits in flat sheets</td><td>Medium-hard</td><td>No</td></tr>
+<tr><td><strong>Chalk</strong></td><td>Sedimentary</td><td>Soft, white, crumbly</td><td>Very soft</td><td>Yes</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-text">Which rock type is most likely to contain fossils? <input class="inline-ans" style="width:120px" placeholder="?"/> Why? <input class="ans-line" placeholder="Because ..."/></div></div>`;
+
+case 'sci_rock_tf': return `
+<p style="font-size:14px;margin-bottom:10px">Read each statement. True or False?</p>
+${[
+  ['Igneous rocks form when lava cools and becomes solid.','True'],
+  ['Sedimentary rocks form from layers of sediment over millions of years.','True'],
+  ['Metamorphic rocks are changed by heat and pressure underground.','True'],
+  ['All rocks form in exactly the same way.','False'],
+  ['Limestone is an igneous rock.','False'],
+  ['Marble was originally limestone before being changed by heat and pressure.','True'],
+  ['Fossils are most commonly found in metamorphic rocks.','False'],
+  ['Granite is a rough, hard igneous rock.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'rtf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'rtf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_rock_uses': return `
+<div class="tip-box"><strong>Rocks are used EVERYWHERE in everyday life!</strong> Different rocks are chosen for different jobs because of their properties.</div>
+<div class="card-grid">
+${[
+  ['🏛️','Granite','Used to build kitchen counters, statues, and buildings — very hard and beautiful'],
+  ['🖼️','Marble','Used for floors, sculptures, and buildings — smooth and elegant (e.g. the Taj Mahal!)'],
+  ['🏫','Sandstone','Used for old buildings and walls — medium hard and easy to cut into blocks'],
+  ['🏫','Limestone','Used in buildings and to make cement — the pyramids of Egypt are limestone!'],
+  ['🏠','Slate','Used for roof tiles — splits into flat sheets and is waterproof'],
+  ['✏️','Chalk','Used on blackboards and in classrooms — very soft and crumbly'],
+].map(([i,t,d])=>`<div class="info-card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-icon">${i}</div>
+  <div class="card-title" style="color:var(--orange)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>`;
+
+case 'sci_rock_comp': return `
+${[
+  ['How does igneous rock form?','Igneous rock forms when ...'],
+  ['What is the difference between sedimentary and metamorphic rock?','Sedimentary rock forms from ... but metamorphic rock forms when ...'],
+  ['Why are fossils found in sedimentary rocks but not usually in igneous rocks?','Fossils are found in sedimentary rocks because ...'],
+  ['Name one rock and explain why it is used for that purpose.','________ is used for ________ because ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:11px;color:var(--orange);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+<input class="ans-line" placeholder="Write your answer..."/>
+</div>`).join('')}`;
+
+case 'sci_rock_quiz': return `
+<p style="font-size:14px;margin-bottom:10px">Rock quiz — click the correct answer!</p>
+${[
+  ['Which rock type forms from cooled lava or magma?','Igneous','Sedimentary','Metamorphic','Igneous'],
+  ['Which property describes how easy a rock is to scratch?','Hardness','Texture','Colour','Hardness'],
+  ['Which rock is most likely to contain fossils?','Limestone (Sedimentary)','Granite (Igneous)','Marble (Metamorphic)','Limestone (Sedimentary)'],
+  ['What happens to a rock to make it metamorphic?','It is changed by heat and pressure','It cools from lava','It builds up in layers','It is changed by heat and pressure'],
+  ['Which rock is used for roof tiles because it splits into flat sheets?','Slate','Granite','Chalk','Slate'],
+  ['What is magma called when it comes out of a volcano?','Lava','Sediment','Metamorphic','Lava'],
+].map(([q,o1,o2,o3,ans],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div class="circle-opts">
+  ${[o1,o2,o3].map(o=>`<div class="opt" onclick="chk(this,'rq${i}','${o}','${ans}')">${o}</div>`).join('')}
+</div></div>`).join('')}`;
+
+/* ─── HUMANITIES ────────────────────────────────────── */
+case 'hum_sa_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Stone Age = پتھر کا زمانہ (Urdu) · العصر الحجري (Arabic). These were the very first people to live in Britain — thousands of years before writing, cities, or schools existed!</div>
+${vc('🪨 Stone Age','A very long period when early humans used STONE to make all their tools.','پتھر کا دور / العصر الحجري','\"The Stone Age started about 3 million years ago.\"','purple')}
+${vc('⚒️ Bronze Age','A period when people learned to mix metals to make BRONZE for tools and weapons.','کانسی کا دور / العصر البرونزي','\"The Bronze Age started around 2,000 BC in Britain.\"','purple')}
+${vc('⚔️ Iron Age','A period when people learned to make much harder tools and weapons from IRON.','لوہے کا دور / العصر الحديدي','\"The Iron Age ended when the Romans invaded Britain in 43 AD.\"','purple')}
+${vc('🏺 Artefact','An object made by humans in the past. Artefacts help us understand history.','آثار قدیمہ / أثر تاريخي','\"A Stone Age arrowhead is an artefact.\"','purple')}
+${vc('🔬 Archaeologist','A scientist who digs up and studies objects from the past.','ماہر آثار قدیمہ / عالم الآثار','\"Archaeologists found tools and bones at ancient sites.\"','purple')}`;
+
+case 'hum_sa_who': return `
+<div class="tip-box"><strong>Stone Age people lived in Britain for thousands and thousands of years!</strong> They were the very first humans here.</div>
+<div class="story-box">
+<strong>When:</strong> From about 900,000 BC to around 2,500 BC — a very, very long time!<br/><br/>
+<strong>🏕️ Where they lived:</strong> Early Stone Age people were <strong>hunter-gatherers</strong>. They did not have permanent homes — they moved from place to place, following animals and finding food. Later, Stone Age people settled down and began <strong>farming</strong>.<br/><br/>
+<strong>🥩 What they ate:</strong> They hunted wild animals (deer, mammoths, wild boar), caught fish, and gathered berries, nuts, and roots from the wild.<br/><br/>
+<strong>🪨 Tools:</strong> They made all their tools from STONE — especially a hard rock called <strong>flint</strong>. They chipped it into sharp points for spears, arrows, and knives.<br/><br/>
+<strong>🏚️ Shelter:</strong> They lived in caves or built simple huts from wood, animal skins, and branches.<br/><br/>
+<strong>🔥 Fire:</strong> Stone Age people learned to make fire — one of the most important discoveries in all of human history! Fire gave them warmth, light, and a way to cook food.
+</div>`;
+
+case 'hum_sa_compare': return `
+<div class="tip-box"><strong>Compare Stone Age life to life today!</strong></div>
+<div class="tbl-wrap"><table class="ws-table">
+<thead><tr><th>Aspect of life</th><th>Stone Age</th><th>Today</th></tr></thead>
+<tbody>
+<tr><td><strong>Tools</strong></td><td>Made from stone, bone, and wood</td><td><input type="text" placeholder="Made from..."/></td></tr>
+<tr><td><strong>Food</strong></td><td>Hunted animals and gathered wild plants</td><td><input type="text" placeholder="We..."/></td></tr>
+<tr><td><strong>Homes</strong></td><td>Caves or simple shelters made of sticks and skins</td><td><input type="text" placeholder="Houses made from..."/></td></tr>
+<tr><td><strong>Writing</strong></td><td>No writing — stories passed on by speaking</td><td><input type="text" placeholder="We use..."/></td></tr>
+<tr><td><strong>Travel</strong></td><td>On foot or by simple boat</td><td><input type="text" placeholder="Cars, planes..."/></td></tr>
+<tr><td><strong>Communication</strong></td><td>Spoken language and cave paintings</td><td><input type="text" placeholder="We use..."/></td></tr>
+</tbody></table></div>`;
+
+case 'hum_ba_bronze': return `
+<div class="tip-box"><strong>After the Stone Age came the Bronze Age</strong> — a time of big changes for the people of Britain!</div>
+<div class="card-grid">
+${[
+  ['⚒️','New metal — bronze!','People learned to mix copper and tin to make BRONZE — a hard metal, much better than stone for tools and weapons.'],
+  ['🌾','Better farming','Bronze tools made farming much easier. People could clear land and grow more food.'],
+  ['🏡','Permanent villages','People began to live in settled villages instead of always moving. They built round houses with thatched roofs.'],
+  ['⚱️','New craft skills','Bronze Age people were skilled at making pots (pottery), jewellery, and cloth (weaving). This shows creative thinking!'],
+  ['🏛️','Stonehenge','One of the most famous Bronze Age monuments is <strong>Stonehenge</strong> in England — huge standing stones arranged in a circle. Nobody is completely sure why it was built.'],
+  ['⚔️','Trade and conflict','With better tools came more organised societies — and also warfare. Bronze Age tribes sometimes fought over land and resources.'],
+].map(([i,t,d])=>`<div class="info-card" style="background:var(--amber-light);border-color:var(--amber)">
+  <div class="card-icon">${i}</div>
+  <div class="card-title" style="color:#7B5B00">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>`;
+
+case 'hum_ba_iron': return `
+<div class="tip-box"><strong>The Iron Age was the last prehistoric period in Britain</strong> — it ended when the Romans arrived in 43 AD!</div>
+<div class="story-box">
+<strong>When:</strong> About 800 BC to 43 AD in Britain.<br/><br/>
+<strong>⚔️ Iron tools and weapons:</strong> People discovered that IRON is much harder and stronger than bronze. They made better swords, spears, and farm tools. Iron is also more common in the ground, so tools were cheaper to make.<br/><br/>
+<strong>🏰 Hill forts:</strong> Iron Age people built large forts on hills to defend their communities. These were called <strong>hill forts</strong> and had banks and ditches for defence. One famous example is Maiden Castle in Dorset, England.<br/><br/>
+<strong>👑 Tribes and chiefs:</strong> Britain was divided into many tribes, each with their own chief or king. The tribes sometimes traded peacefully and sometimes fought each other for land.<br/><br/>
+<strong>🌾 Farming communities:</strong> Iron Age people were good farmers. They grew wheat and barley, and kept cattle, pigs, and sheep. They stored grain in large pits or buildings.<br/><br/>
+<strong>🎨 Art and culture:</strong> Iron Age people were talented artists — they made beautiful spiral and swirling patterns on metal objects, pots, and shields. This style is called <strong>Celtic art</strong>.
+</div>`;
+
+case 'hum_ba_questions': return `
+${[
+  ['What new material was used in the Bronze Age to make tools?','In the Bronze Age, people made tools from ...'],
+  ['What is Stonehenge? Where is it?','Stonehenge is ...'],
+  ['Why was iron better than bronze for making tools?','Iron was better because ...'],
+  ['What was a hill fort? Why did Iron Age people build them?','A hill fort was ... They built them because ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:11px;color:var(--purple);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+<input class="ans-line" placeholder="Write your answer..."/>
+</div>`).join('')}`;
+
+case 'hum_tools_tech': return `
+<div class="tip-box"><strong>Over thousands of years, tools went from simple stones to sophisticated iron weapons and farming equipment.</strong> Each new tool changed how people lived!</div>
+<div class="tbl-wrap"><table class="ws-table">
+<thead><tr><th>Age</th><th>Main material</th><th>Tools made</th><th>Biggest change</th></tr></thead>
+<tbody>
+<tr><td><strong>🪨 Stone Age</strong></td><td>Flint and stone</td><td>Spears, arrowheads, scrapers, hand axes</td><td>Learned to make fire</td></tr>
+<tr><td><strong>⚒️ Bronze Age</strong></td><td>Bronze (copper + tin)</td><td>Better axes, swords, farming tools, pots</td><td>Settled farming villages</td></tr>
+<tr><td><strong>⚔️ Iron Age</strong></td><td>Iron</td><td>Stronger swords, ploughs, nails, shields</td><td>Hill forts and organised tribes</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-text">Why is it important that the materials changed from stone → bronze → iron?<br/><input class="ans-line" placeholder="As materials got stronger, people could ..."/></div></div>`;
+
+case 'hum_tools_tf': return `
+<p style="font-size:14px;margin-bottom:10px">True or False?</p>
+${[
+  ['Stone Age people were hunter-gatherers who moved around to find food.','True'],
+  ['Bronze is made by mixing copper and iron together.','False'],
+  ['Stonehenge was built during the Bronze Age.','True'],
+  ['Iron Age people built hill forts to defend their communities.','True'],
+  ['Stone Age people had no way to make fire.','False'],
+  ['The Iron Age ended when the Romans invaded Britain in 43 AD.','True'],
+  ['Bronze Age people did not know how to farm.','False'],
+  ['Celtic art was associated with the Iron Age people of Britain.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'htf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'htf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'hum_tools_factfile': return `
+<div class="q-block">
+  <div class="q-num">📋 My Prehistoric Britain Fact File</div>
+  <div style="line-height:2.8;font-size:13px;margin-top:8px">
+    My favourite prehistoric period: <input class="ans-line" placeholder="My favourite is the _____ Age because..."/><br/>
+    The most important invention of prehistoric Britain: <input class="ans-line" placeholder="I think the most important invention was ..."/><br/>
+    A famous prehistoric site in Britain: <input class="ans-line" placeholder="One famous site is ..."/><br/>
+    How life changed from Stone Age to Iron Age: <input class="ans-line" placeholder="Life changed because ..."/><br/>
+    A question I still have about prehistoric Britain: <input class="ans-line" placeholder="I wonder ..."/>
+  </div>
+</div>
+<div class="remember-box" style="background:#534AB7">⭐ REMEMBER: Stone Age → Bronze Age → Iron Age. Each new material made tools STRONGER and life EASIER. Without these early people, there would be no Britain today! 🏰</div>`;
+
+/* ─── BIBLE ─────────────────────────────────────────── */
+case 'bib_mos_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Moses = موسی (Musa) — Urdu &amp; Arabic. Moses is a prophet in Islam too! Muslims call him Musa (عليه السلام). Both the Bible and Quran tell his story.</div>
+${vc('👑 Pharaoh','The powerful king of Egypt who treated the Israelites very badly.','فرعون / فرعون','\"Pharaoh ordered that all Israelite baby boys be killed.\"','red')}
+${vc('🌿 Burning bush','A bush that was on fire but did not burn up. God spoke to Moses from it.','جلتی جھاڑی / الشجرة المشتعلة','\"Moses saw a burning bush and went to look at it.\"','red')}
+${vc('🕊️ Courage','The strength to do something even when you are frightened or feel weak.','ہمت / الشجاعة','\"Moses needed courage to stand before Pharaoh.\"','red')}
+${vc('⛓️ Slavery','When people are forced to work without freedom or payment.','غلامی / العبودية','\"The Israelites were slaves in Egypt for many years.\"','red')}
+${vc('🙌 Exodus','The great journey when Moses led the Israelite people OUT of Egypt to freedom.','مصر سے نکلنا / الخروج','\"The Exodus is one of the most famous stories in the Bible.\"','red')}`;
+
+case 'bib_mos_story': return `
+<div class="tip-box"><strong>Read the story of Moses carefully.</strong> It is a story about courage, trust in God, and speaking up for those who cannot speak for themselves.</div>
+<div class="story-box">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:var(--red)">📖 Moses — From Baby to Leader</strong><br/><br/>
+<strong>First,</strong> the Israelite people were slaves in Egypt. They worked very hard and were treated very badly. Pharaoh was afraid that there were too many Israelites, so he gave a terrible order — all Israelite baby boys must be killed!<br/><br/>
+<strong>Then,</strong> one Israelite mother hid her baby boy to save him. She put him in a basket and placed it in the River Nile. Pharaoh's daughter found the baby and felt sorry for him. She took him home and named him <strong>Moses</strong>. Moses grew up in the palace — as an Egyptian prince!<br/><br/>
+<strong>Later,</strong> Moses grew up and knew he was really an Israelite. He saw how badly his people were treated. One day, he ran away into the desert after defending an Israelite slave. He became a shepherd and lived quietly for many years.<br/><br/>
+<strong>Then something amazing happened.</strong> Moses saw a bush that was burning — but was NOT burning up! He went closer. God spoke to him from the bush and said: <em>"I AM WHO I AM. I have seen my people suffering. I am sending YOU, Moses, to go to Pharaoh and lead my people out of Egypt."</em><br/><br/>
+<strong>Moses was afraid.</strong> He said: <em>"But I am not a good speaker! Why would Pharaoh listen to me?"</em> But God promised: <em>"I will be with you."</em><br/><br/>
+<strong>Finally,</strong> with God's help, Moses went to Pharaoh and said: <strong>"Let my people go!"</strong> After many difficult events (called the Ten Plagues), Pharaoh let the Israelites go free. Moses led God's people out of Egypt in the great journey called the <strong>Exodus</strong>!
+</div>`;
+
+case 'bib_mos_sequence': return `
+<div class="tip-box"><strong>Put the story in order! Write numbers 1–6.</strong></div>
+${[
+  ['God spoke to Moses from the burning bush and called him to lead the Israelites.','4'],
+  ['An Israelite mother put baby Moses in a basket on the River Nile.','2'],
+  ['Moses led the Israelite people out of Egypt — the Exodus!','6'],
+  ['The Israelite people were slaves in Egypt under a cruel Pharaoh.','1'],
+  ['Moses grew up in Pharaoh\'s palace as an Egyptian prince.','3'],
+  ['Moses said to Pharaoh: "Let my people go!" — and God sent the Ten Plagues.','5'],
+].map(([ev],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--red-light);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" placeholder="?" style="width:36px;height:36px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--red);background:var(--red-light);outline:none;flex-shrink:0"/>
+  <span style="font-size:13px">${ev}</span>
+</div>`).join('')}`;
+
+case 'bib_mos_questions': return `
+${[
+  ['Why was Moses\' mother afraid for her baby?','Moses\' mother was afraid because Pharaoh had ordered ...'],
+  ['How did Moses end up growing up in Pharaoh\'s palace?','Moses ended up in the palace because ...'],
+  ['What did Moses see in the desert that amazed him?','Moses saw ...'],
+  ['What did God ask Moses to do?','God asked Moses to ...'],
+  ['What reason did Moses give for why he couldn\'t do the job?','Moses said he couldn\'t do it because ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:11px;color:var(--red);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+<input class="ans-line" placeholder="Write your answer..."/>
+</div>`).join('')}`;
+
+case 'bib_mos_iam': return `
+<div class="verse-box">
+  <div class="verse-text">"I AM WHO I AM."</div>
+  <div style="font-size:12px;color:var(--gray);margin-top:6px">— Exodus 3:14</div>
+</div>
+<div class="tip-box"><strong>What does "I AM WHO I AM" mean?</strong> When Moses asked God his name, God said "I AM WHO I AM." This means:<br/>
+• God has always existed — no beginning, no end.<br/>
+• God does not depend on anything else — He just IS.<br/>
+• God is always present — not just in the past or future — right NOW.<br/>
+• For Moses, it meant: "The God who IS will be WITH you — right now."</div>
+${[
+  ['Why do you think Moses asked God for his name?','Moses asked for God\'s name because ...'],
+  ['What does "I AM WHO I AM" tell us about God?','"I AM WHO I AM" tells us that God ...'],
+  ['How might knowing this have encouraged Moses to be brave?','This might have encouraged Moses because ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Think about it ${i+1}</div>
+<div class="q-text">${q}</div>
+<input class="ans-line" placeholder="${frame}"/>
+</div>`).join('')}
+<div class="remember-box" style="background:#B71C1C">⭐ KEY IDEA: God does not send us to do hard things ALONE. He says: "I AM — I am with you right now." 🔥</div>`;
+
+case 'bib_mos_verse': return `
+<div class="verse-box">
+  <div class="verse-text">"I AM WHO I AM."</div>
+  <div style="font-size:12px;color:var(--gray);margin-top:6px">— Exodus 3:14</div>
+</div>
+<div class="tip-box"><strong>How to learn it:</strong> Read it three times → cover and say it → write it → say it without looking.</div>
+<div class="q-block"><div class="q-num">Fill in the missing words:</div>
+<div style="font-size:16px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+"<input class="inline-ans" style="width:40px" placeholder="?"/> AM <input class="inline-ans" style="width:40px" placeholder="?"/> <input class="inline-ans" style="width:40px" placeholder="?"/> AM."<br/>
+— <input class="inline-ans" style="width:100px" placeholder="book &amp; verse"/>
+</div></div>
+<div class="q-block"><div class="q-num">Write the verse and reference from memory:</div>
+<textarea class="ans-box" style="min-height:55px" placeholder="I AM WHO I AM..."></textarea>
+</div>
+<div class="q-block"><div class="q-text">In your OWN WORDS, what does this verse mean to you?<br/><textarea class="ans-box" style="min-height:45px" placeholder="To me, this verse means that God ..."></textarea></div></div>`;
+
+case 'bib_mos_speakup': return `
+<div class="tip-box"><strong>Moses "spoke up" for the Israelite people — people who were suffering and could not speak for themselves.</strong> Speaking up for others is one of the bravest things a person can do.</div>
+<div class="card-grid">
+${[
+  ['😔','Who needs someone to speak up?','People who are being treated unfairly, left out, bullied, or who are too afraid to speak for themselves.'],
+  ['💪','What does speaking up look like?','Telling a teacher about bullying. Asking for help for a friend. Standing with someone who is alone.'],
+  ['😰','Why is it hard?','We might be afraid of getting in trouble, of what others will say, or of making things worse.'],
+  ['✝️','Why Moses did it anyway','God promised: "I will be with you." He trusted that God\'s presence was enough to make him brave.'],
+].map(([i,t,d])=>`<div class="info-card" style="background:var(--red-light);border-color:var(--red)">
+  <div class="card-icon">${i}</div>
+  <div class="card-title" style="color:var(--red)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">What is the difference between speaking up and being a bully yourself?<br/><textarea class="ans-box" style="min-height:45px" placeholder="Speaking up means..."></textarea></div></div>`;
+
+case 'bib_mos_apply': return `
+${[
+  ['#EF5350','❤️ Have you ever seen someone being treated unfairly? What did you do — or wish you had done?'],
+  ['#F97316','🧡 Is there anyone in your life right now who needs someone to speak up for them?'],
+  ['#EAB308','💛 What stops people from speaking up even when they know something is wrong?'],
+  ['#22C55E','💚 Moses felt he was "not good enough" to do what God asked. Have you ever felt that way? What happened?'],
+  ['#3B82F6','💙 God said to Moses: "I will be with you." How does that same promise apply to YOU today?'],
+].map(([col,q])=>`
+<div class="q-block">
+  <div class="q-text" style="color:${col};font-weight:700;margin-bottom:6px">${q}</div>
+  <textarea class="ans-box" style="min-height:45px;border-color:${col}80" placeholder="Write your thoughts here..."></textarea>
+</div>`).join('')}`;
+
+case 'bib_mos_draw': return `
+<div class="q-block"><div class="q-text">Draw the burning bush — Moses at the moment he hears God's voice. What do you think Moses looked like in that moment?</div>
+<div style="border:2px dashed var(--red);border-radius:8px;height:160px;background:var(--red-light);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:13px;font-style:italic">🔥 Draw Moses and the burning bush here!</div></div>
+<div class="q-block"><div class="q-text">Write the most important thing you learned from the story of Moses this week:</div>
+<input class="ans-line" placeholder="I learned that ..."/></div>
+<div class="remember-box" style="background:#B71C1C">⭐ REMEMBER: "I AM WHO I AM." — Exodus 3:14. God called Moses — a scared, ordinary man — and promised to be WITH him. God can use YOU too! 🔥</div>`;
+
+default: return '<p>Content coming soon!</p>';
+}}
+
+/* ══ RENDER ════════════════════════════════════════════ */
+let curSubj='eng',curLesson=1;
+function chk(el,group,val,ans){
+  el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));
+  if(val===ans){el.classList.add('correct');}
+  else{el.classList.add('wrong');el.parentElement.querySelectorAll('.opt').forEach(o=>{if(o.textContent.trim()===ans)o.classList.add('correct');});}
+}
+function toggleChk(el){el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';}
+function toggleFrac(el){el.classList.toggle('filled');}
+function render(){
+  const subjectTabs=document.getElementById('subjectTabs');
+  const navTabs=document.getElementById('navTabs');
+  const pages=document.getElementById('pages');
+  subjectTabs.innerHTML='';
+  SUBJECTS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===curSubj?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===curSubj?'#fff':s.col;
+    if(s.id===curSubj)el.style.background=s.col;
+    el.onclick=()=>{curSubj=s.id;curLesson=1;render();};
+    subjectTabs.appendChild(el);
+  });
+  const subj=SUBJECTS.find(s=>s.id===curSubj);
+  const lessons=WS[curSubj];
+  navTabs.innerHTML='';
+  lessons.forEach(l=>{
+    const el=document.createElement('div');
+    el.className='tab'+(l.num===curLesson?' active':'');
+    el.textContent='Lesson '+l.num;
+    el.style.borderColor=subj.col;
+    el.style.color=l.num===curLesson?'#fff':subj.col;
+    if(l.num===curLesson)el.style.background=subj.col;
+    el.onclick=()=>{curLesson=l.num;render();};
+    navTabs.appendChild(el);
+  });
+  const lesson=lessons.find(l=>l.num===curLesson);
+  pages.innerHTML=`<div class="page active">
+    <div class="ws-header">
+      <div>
+        <div class="ws-badge">${lesson.badge}</div>
+        <div class="ws-title">${lesson.title}</div>
+        <div class="ws-sub">Lesson ${lesson.num} of ${lessons.length} · ${subj.label} · Week 7</div>
+      </div>
+      <div>Name: <input class="name-line"/></div>
+    </div>
+    ${lesson.secs.map((sec,i)=>`<div class="section">
+      <div class="sec-title"><span class="sec-num">${i+1}</span>${sec.t}</div>
+      ${C(sec.c)}
+    </div>`).join('')}
+  </div>`;
+}
+render();
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week7_Lessons');</script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 Lesson Notes · KS3 Level 6 · HOS International</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#6D28D9; --bible-l:#F3EEFD;
+  --english:#BE123C; --english-l:#FDF1F4;
+  --maths:#B45309; --maths-l:#FDF4E9;
+  --science:#065F46; --science-l:#EAF6F1;
+  --history:#1E3A8A; --history-l:#EBF0FB;
+  --ink:#1F2430; --muted:#6B7280; --line:#E3E6EC; --paper:#FFFFFF; --cream:#FBFAF7;
+  --radius:14px; --radius-sm:9px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;}
+.shell{max-width:880px;margin:0 auto;padding:28px 20px 80px;}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:0 20px;display:flex;align-items:center;height:58px;gap:4px;overflow-x:auto;}
+.brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.05rem;color:var(--ink);margin-right:18px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);}
+.tab{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:0.8rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.tab:hover{border-color:#bbb;color:var(--ink);}
+.tab.active{color:#fff;}
+.tab[data-s="bible"].active{background:var(--bible);border-color:var(--bible);}
+.tab[data-s="english"].active{background:var(--english);border-color:var(--english);}
+.tab[data-s="maths"].active{background:var(--maths);border-color:var(--maths);}
+.tab[data-s="science"].active{background:var(--science);border-color:var(--science);}
+.tab[data-s="history"].active{background:var(--history);border-color:var(--history);}
+.print-btn{margin-left:auto;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:0.8rem;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap;}
+.print-btn:hover{border-color:#bbb;}
+.page{display:none;}
+.page.active{display:block;animation:fade .35s ease both;}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.cover{background:linear-gradient(135deg,#1B2A4A,#2D1266);border-radius:20px;padding:46px 36px;color:#fff;margin-bottom:24px;text-align:center;}
+.cover .brandline{font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;margin-bottom:10px;}
+.cover h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;margin-bottom:8px;}
+.cover .sub{opacity:0.8;font-size:0.95rem;margin-bottom:18px;}
+.cover .fields{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:14px;}
+.cover .field{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:10px;padding:10px 18px;font-size:0.85rem;min-width:160px;text-align:left;}
+.cover .field label{display:block;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;margin-bottom:4px;}
+.cover .field input{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.35);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;width:100%;padding:2px 0;}
+.cover .field input::placeholder{color:rgba(255,255,255,0.4);}
+.toc{display:grid;gap:8px;margin-top:6px;}
+.toc-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 16px;}
+.toc-icon{font-size:1.3rem;}
+.toc-subj{font-weight:700;min-width:120px;}
+.toc-topic{color:var(--muted);font-size:0.88rem;}
+.banner{border-radius:16px;padding:26px 28px;margin-bottom:18px;color:#fff;}
+.banner h2{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:800;margin-bottom:4px;}
+.banner .sub{font-size:0.88rem;opacity:0.85;}
+.banner .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.banner .tag{background:rgba(255,255,255,0.18);border-radius:99px;padding:3px 11px;font-size:0.7rem;font-weight:700;}
+.sec{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;}
+.sec h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec h3 .bar{display:inline-block;width:4px;height:18px;border-radius:2px;background:var(--accent,#999);}
+.sec p{font-size:0.92rem;color:#3A3F4B;margin-bottom:8px;}
+.vtable{width:100%;border-collapse:collapse;font-size:0.86rem;margin-top:6px;}
+.vtable th{background:var(--accent-l,#F4F4F6);color:var(--accent,#333);text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;padding:8px 10px;border-bottom:2px solid var(--line);}
+.vtable td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:#3A3F4B;}
+.vtable td:first-child{font-weight:700;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:0.82rem;white-space:nowrap;}
+.vtable tr:nth-child(even) td{background:#FBFBFC;}
+.diagram{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;margin:10px 0;}
+.diagram .cap{text-align:center;font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:10px;}
+.hier{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;}
+.hbox{padding:8px 16px;border-radius:8px;font-size:0.78rem;font-weight:700;color:#fff;}
+.harrow{color:var(--muted);font-weight:700;}
+.note{border-radius:var(--radius-sm);padding:12px 16px;margin:10px 0;font-size:0.88rem;border:1px solid;}
+.note.info{background:#EFF6FF;border-color:#BFDBFE;color:#1E3A8A;}
+.note.tip{background:#F3EEFD;border-color:#DDD6FE;color:#5B21B6;}
+.note.warn{background:#FFFBEB;border-color:#FDE68A;color:#92400E;}
+.note.good{background:#ECFDF5;border-color:#A7F3D0;color:#065F46;}
+.note strong{color:inherit;}
+.fill{margin:14px 0;}
+.fill-q{font-size:0.9rem;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.fill textarea{width:100%;border:1.5px dashed #CBD0D8;border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--ink);background:#FCFCFD;resize:vertical;min-height:54px;}
+.fill textarea:focus{outline:none;border-color:var(--accent,#999);background:#fff;}
+.reflect{background:var(--accent-l,#F4F4F6);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;}
+.verse{background:linear-gradient(135deg,#F3EEFD,#EDE6FB);border:1px solid #DDD6FE;border-radius:var(--radius);padding:22px 26px;text-align:center;margin-bottom:14px;}
+.verse .vtext{font-family:'Playfair Display',serif;font-size:1.15rem;color:#3F2A78;line-height:1.5;margin-bottom:6px;}
+.verse .vref{font-size:0.78rem;color:#7C3AED;font-weight:700;letter-spacing:0.06em;}
+.cmpgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.cmpcol{border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;background:var(--cream);}
+.cmpcol h4{font-size:0.85rem;font-weight:700;margin-bottom:8px;color:var(--ink);}
+.cmpcol ul{padding-left:18px;font-size:0.84rem;color:#3A3F4B;}
+.cmpcol li{margin-bottom:5px;}
+.snum{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.snum .n{width:26px;height:26px;border-radius:50%;background:var(--accent,#999);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;flex-shrink:0;}
+.snum .t{font-size:0.88rem;color:#3A3F4B;}
+.snum .t strong{color:var(--ink);}
+.formula-box{font-family:'JetBrains Mono',monospace;background:#F1F5F9;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:0.88rem;color:#1F2430;margin:10px 0;line-height:1.8;}
+.formula-box .hl{color:#B45309;font-weight:700;}
+.formula-box .hl2{color:#065F46;font-weight:700;}
+.state-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
+.state-box{border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px;text-align:center;background:var(--cream);}
+.state-box .state-name{font-weight:700;font-size:0.9rem;margin-bottom:4px;}
+.state-box .state-body{font-size:0.78rem;color:var(--muted);line-height:1.45;}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0;}
+.chain-box{background:var(--accent,#999);color:#fff;font-size:0.75rem;font-weight:700;padding:6px 12px;border-radius:6px;}
+.chain-arrow{color:var(--muted);font-size:1.1rem;font-weight:700;}
+.biome-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+.biome-mini-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px;background:var(--cream);}
+.biome-mini-name{font-size:0.78rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.biome-mini-body{font-size:0.74rem;color:var(--muted);line-height:1.4;}
+@media print{
+  .topbar,.print-btn{display:none;}
+  .page{display:block !important;}
+  .sec,.banner,.cover{break-inside:avoid;}
+  .page-break{break-before:page;}
+  body{background:#fff;}
+}
+@media(max-width:640px){
+  .cmpgrid{grid-template-columns:1fr;}
+  .state-grid{grid-template-columns:1fr;}
+  .biome-mini{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">HOS<sup>KS3·L7</sup></div>
+  <button class="tab active" data-s="cover" onclick="show('cover')">📔 Cover</button>
+  <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+  <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+  <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+  <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+  <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+</div>
+
+<div class="shell">
+
+<!-- ── COVER ─────────────────────────────────────────────── -->
+<div id="pg-cover" class="page active">
+  <div class="cover">
+    <div class="brandline">HOS International · Discover · Learn · Succeed</div>
+    <h1>Week 7 — Lesson Notes</h1>
+    <div class="sub">KS3 · Level 6 · All 5 Subjects · Your Personal Study Guide</div>
+    <div class="fields">
+      <div class="field"><label>My Name</label><input type="text" placeholder="Write your name here"></div>
+      <div class="field"><label>Class / Level</label><input type="text" placeholder="KS3 Level 6"></div>
+      <div class="field"><label>Date</label><input type="text" placeholder="Week 7"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Contents — Week 7 Topics</h3>
+    <div class="toc">
+      <div class="toc-row"><div class="toc-icon">📖</div><div class="toc-subj" style="color:#6D28D9;">Bible Studies</div><div class="toc-topic">Moses &amp; the Exodus — God Delivers His People · The Passover · Courage &amp; Calling (Exodus 14:14)</div></div>
+      <div class="toc-row"><div class="toc-icon">✏️</div><div class="toc-subj" style="color:#BE123C;">English</div><div class="toc-topic">Reading Non-Fiction Texts — Purpose, Audience, Fact vs Opinion, Language Features</div></div>
+      <div class="toc-row"><div class="toc-icon">🧮</div><div class="toc-subj" style="color:#B45309;">Maths</div><div class="toc-topic">Ratio &amp; Proportion — Simplifying Ratios, Sharing in a Ratio, Unitary Method</div></div>
+      <div class="toc-row"><div class="toc-icon">🔬</div><div class="toc-subj" style="color:#065F46;">Science</div><div class="toc-topic">States of Matter — Solids, Liquids, Gases · Particle Model · Changes of State · Heating Curves</div></div>
+      <div class="toc-row"><div class="toc-icon">🏛️</div><div class="toc-subj" style="color:#1E3A8A;">Humanities</div><div class="toc-topic">Climate &amp; Biomes — Tropical, Polar, Temperate Zones · Rainforest, Tundra, Savannah</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#9090A8;"></span>How to Use This Booklet</h3>
+    <p>Each subject has: key vocabulary with simple meanings, diagrams to help you understand the topic, important notes to remember, and questions for you to answer in the boxes provided. Type your answers directly into the text boxes — your work will stay on the page while you study. Use the <strong>Print / Save PDF</strong> button if you want a paper copy to write on by hand.</p>
+  </div>
+</div>
+
+<!-- ── BIBLE ──────────────────────────────────────────────── -->
+<style>.pg-bible-b{--accent:#6D28D9;--accent-l:#F3EEFD;}</style>
+<div id="pg-bible" class="page pg-bible-b">
+
+  <div class="banner" style="background:linear-gradient(135deg,#2D1266,#6D28D9);">
+    <h2>📖 Moses &amp; the Exodus</h2>
+    <div class="sub">Exodus 1–15 · God Delivers His People · The Passover · Courage &amp; Calling</div>
+    <div class="tags"><span class="tag">Exodus 14:14</span><span class="tag">Ten Plagues</span><span class="tag">Passover</span><span class="tag">KS3 Level 7</span></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Memory Verse</h3>
+    <div class="verse">
+      <div class="vtext">"The Lord will fight for you; you need only to be still."</div>
+      <div class="vref">Exodus 14:14 — NIV</div>
+    </div>
+    <p style="font-size:0.85rem;color:#3A3F4B;"><strong>"The Lord will fight for you"</strong> = God promises to ACT on behalf of His people. <strong>"you need only to be still"</strong> = Said at the most hopeless moment — trapped between Pharaoh's army and the Red Sea — God asks for trust, not panic. Faith here means stillness, not fighting.</p>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Key Vocabulary</h3>
+    <table class="vtable" style="--accent:#6D28D9;--accent-l:#F3EEFD;">
+      <tr><th>Word</th><th>What It Means</th><th>Example / Note</th></tr>
+      <tr><td>oppression</td><td>Treating people in a cruel, controlling, unjust way using power against them.</td><td>Egypt oppressed Israel through forced labour and slavery.</td></tr>
+      <tr><td>Pharaoh</td><td>The title of the king of ancient Egypt — absolute power over everyone.</td><td>He refused to release Israel even after nine plagues.</td></tr>
+      <tr><td>plague</td><td>A terrible disaster sent as punishment or warning.</td><td>God sent ten plagues — each targeting what Egypt worshipped.</td></tr>
+      <tr><td>Passover</td><td>The night God "passed over" homes marked with lamb's blood, protecting Israel's firstborn.</td><td>Also the name of the special meal eaten that night.</td></tr>
+      <tr><td>exodus</td><td>A large group leaving a place all at once. From Greek: <em>ex</em> (out) + <em>hodos</em> (road).</td><td>Israel's departure from Egypt after 430 years.</td></tr>
+      <tr><td>covenant</td><td>A serious, binding promise — stronger than a contract.</td><td>The Exodus fulfils God's covenant with Abraham (Week 5).</td></tr>
+      <tr><td>deliverance</td><td>Rescue from danger or captivity.</td><td>God "delivers" Israel — a word meaning saved from what you could not escape alone.</td></tr>
+      <tr><td>calling</td><td>A deep sense that God has chosen you for a specific purpose.</td><td>Moses receives his calling at the burning bush.</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Israel in Egypt — The Background</h3>
+    <p>Joseph (Week 6) brought his family — 70 people — to Egypt during the famine. Over 430 years they became a nation of over a million. A new Pharaoh who "did not know Joseph" feared their numbers and enslaved them with forced labour. God heard their cries and remembered His covenant with Abraham.</p>
+    <div class="note info"><strong>Connection:</strong> The Exodus is the fulfilment of what God promised Abraham in Week 5 — a great nation, a land, and blessing. It took 430 years but God kept His promise.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Moses and the Burning Bush — Exodus 3–4</h3>
+    <p><strong>Who is Moses?</strong> An Israelite baby hidden in the Nile, raised as an Egyptian prince, fled to Midian after killing an Egyptian guard, worked as a shepherd for 40 years — called by God at age 80.</p>
+
+    <div class="diagram">
+      <div class="cap">Moses' Five Excuses and God's Five Answers</div>
+      <table class="vtable">
+        <tr><th>Moses' Excuse</th><th>God's Answer</th></tr>
+        <tr><td>"Who am I to go?" (Insecurity)</td><td>"I will be with you." — God's presence is enough.</td></tr>
+        <tr><td>"What is Your name?" (Uncertainty)</td><td>"I AM WHO I AM." — The eternal, self-existent name.</td></tr>
+        <tr><td>"What if they don't believe me?" (Fear)</td><td>Three miraculous signs: staff → snake; leprous hand; water → blood.</td></tr>
+        <tr><td>"I am not a good speaker." (Inadequacy)</td><td>"Who gave humans mouths? I will help you speak."</td></tr>
+        <tr><td>"Please send someone else." (Reluctance)</td><td>Aaron (his brother) will speak for him. God does not give up.</td></tr>
+      </table>
+    </div>
+    <div class="note tip"><strong>KS3 key idea:</strong> Moses argued with God five times before saying yes. Calling does not require instant courage — it requires eventually saying yes, even feeling unqualified.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>The Ten Plagues — Why Ten? Why These?</h3>
+    <p>Each plague targeted something Egypt worshipped or relied on, showing God's power over every Egyptian god. The Israelites in Goshen were protected from plagues 4–10 — a visible sign that God was distinguishing His people.</p>
+    <table class="vtable">
+      <tr><th>#</th><th>Plague</th><th>What It Targeted</th></tr>
+      <tr><td>1</td><td>Water → Blood 🩸</td><td>The Nile — Egypt's most sacred river (god Hapi)</td></tr>
+      <tr><td>2</td><td>Frogs 🐸</td><td>Frog goddess Heqet — symbol of fertility</td></tr>
+      <tr><td>3</td><td>Gnats/Lice 🪲</td><td>Egypt's own magicians say: "This is the finger of God"</td></tr>
+      <tr><td>4–5</td><td>Flies &amp; Livestock Disease 🪰🐄</td><td>Israeli land protected from here on. Sacred bull god Apis.</td></tr>
+      <tr><td>6</td><td>Boils 🤒</td><td>Magicians can no longer stand before Moses</td></tr>
+      <tr><td>7–8</td><td>Hail &amp; Locusts ⛈️🌾</td><td>Destroys crops completely</td></tr>
+      <tr><td>9</td><td>Darkness 🌑</td><td>Ra — the sun god (whom Pharaoh represented). 3 days of total darkness.</td></tr>
+      <tr><td>10</td><td>Death of firstborn 💔</td><td>Including Pharaoh's own son. Final and complete.</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>The Passover — Exodus 12</h3>
+    <p>The Israelites were given specific instructions for the night of the tenth plague. Every detail carries meaning, and Jewish people still celebrate Passover today. Christians connect the Passover to Jesus — "the Lamb of God."</p>
+    <div class="snum"><div class="n" style="background:#6D28D9;">🐑</div><div class="t"><strong>A perfect lamb without defect</strong> — selected and kept for four days. Represents something of full, uncorrupted value.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">🩸</div><div class="t"><strong>Blood on the two doorposts and top of the door frame</strong> — when God saw the blood, He "passed over" that home. The blood, not the family's merit, was the protection.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">🌿</div><div class="t"><strong>Bitter herbs and unleavened bread</strong> — bitter herbs = remembering the bitterness of slavery. No yeast = no time for dough to rise. They were leaving in a hurry.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">👟</div><div class="t"><strong>Sandals on, staff in hand, eating in a hurry</strong> (Exodus 12:11) — faith looked like readiness. They were packed before they left.</div></div>
+    <div class="note tip"><strong>Cross-reference:</strong> Jesus held His "Last Supper" during the Passover meal and deliberately connected His death to the Passover lamb — "This is my blood of the new covenant." He is called "the Lamb of God" throughout the New Testament.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>The Red Sea Crossing — Exodus 14</h3>
+    <p>After releasing Israel, Pharaoh changed his mind and sent 600 chariots. The Israelites were trapped — army behind them, Red Sea in front. Moses declared Exodus 14:14. Then God acted:</p>
+    <div class="snum"><div class="n" style="background:#6D28D9;">1</div><div class="t"><strong>The pillar of cloud moved</strong> to stand between Israel and the army — giving the Egyptians darkness and Israel light.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">2</div><div class="t"><strong>Moses stretched out his hand</strong> — a strong east wind blew all night and the sea divided. The Israelites walked through on dry ground.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">3</div><div class="t"><strong>The Egyptians followed</strong> into the sea, but God threw them into confusion — wheels fell off chariots. Moses stretched out his hand again and the sea returned, drowning the entire army.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">4</div><div class="t"><strong>The Song of Moses (Exodus 15)</strong> — Israel's response was to sing. "The Lord is my strength and my song; he has become my salvation." Deliverance → praise.</div></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Comparing Four Old Testament Faith Stories — Weeks 4–7</h3>
+    <table class="vtable">
+      <tr><th>Feature</th><th>Noah (Wk4)</th><th>Abraham (Wk5)</th><th>Joseph (Wk6)</th><th>Moses (Wk7)</th></tr>
+      <tr><td>Source of hardship</td><td>Natural disaster</td><td>God's own call to leave</td><td>Other people's cruelty</td><td>Political oppression + impossible assignment</td></tr>
+      <tr><td>Faith looked like</td><td>Building for decades</td><td>Leaving without destination</td><td>Integrity in suffering</td><td>Going back 10 times; standing at the Red Sea</td></tr>
+      <tr><td>Key verse</td><td>Heb 11:7</td><td>Gen 12:2</td><td>Gen 50:20</td><td>Ex 14:14</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#6D28D9;"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. What are Moses' five excuses at the burning bush, and how does God answer each one?</div><textarea rows="4" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Why were the ten plagues specifically chosen? What was each one targeting?</div><textarea rows="4" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. Explain the significance of the blood on the doorposts during the Passover.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. What does Exodus 14:14 mean? What was the situation when it was spoken?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. What is the "golden idea" of Moses' story — what does it teach about calling and qualification?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">6. How does the Passover lamb connect to Jesus in the New Testament?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">7. Describe a time you had to keep going even when you felt unqualified or afraid.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="reflect" style="background:#F3EEFD;margin-top:14px;">
+      <div style="font-weight:700;font-size:0.88rem;color:#6D28D9;margin-bottom:8px;">My Reflection</div>
+      <div class="fill"><div class="fill-q">Two things I learned about courage and calling this week:</div><textarea rows="3" placeholder="1. &#10;2."></textarea></div>
+      <div class="fill"><div class="fill-q">One question this lesson raised for me:</div><textarea rows="2" placeholder="Write your question here..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ENGLISH ─────────────────────────────────────────────── -->
+<style>.pg-english-b{--accent:#BE123C;--accent-l:#FDF1F4;}</style>
+<div id="pg-english" class="page pg-english-b">
+
+  <div class="banner" style="background:linear-gradient(135deg,#881337,#BE123C);">
+    <h2>✏️ Reading Non-Fiction Texts</h2>
+    <div class="sub">Purpose · Audience · Key Information · Fact vs Opinion · Language Features</div>
+    <div class="tags"><span class="tag">Non-Fiction</span><span class="tag">Purpose &amp; Audience</span><span class="tag">Critical Reading</span><span class="tag">KS3 Level 7</span></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Key Vocabulary</h3>
+    <table class="vtable" style="--accent:#BE123C;--accent-l:#FDF1F4;">
+      <tr><th>Word</th><th>What It Means</th><th>Example</th></tr>
+      <tr><td>non-fiction</td><td>Writing about real events, real people, and real facts — not made up.</td><td>Articles, reports, biographies, speeches, textbooks.</td></tr>
+      <tr><td>purpose</td><td>WHY the text was written — what the writer is trying to DO.</td><td>To inform, persuade, instruct, explain, or entertain.</td></tr>
+      <tr><td>audience</td><td>WHO the text was written FOR — the intended readers.</td><td>Adults, children, experts, general public.</td></tr>
+      <tr><td>tone</td><td>The "feeling" or attitude in a piece of writing.</td><td>Formal, informal, urgent, humorous, serious.</td></tr>
+      <tr><td>fact</td><td>A statement that can be checked and proven true or false.</td><td>"Mount Everest is 8,849m tall" — verifiable.</td></tr>
+      <tr><td>opinion</td><td>A personal view or judgement — cannot be proven true or false.</td><td>"Everest is the most beautiful mountain" — subjective.</td></tr>
+      <tr><td>bias</td><td>A one-sided viewpoint — leaving out information that would disagree with the argument.</td><td>A company's own advertising is likely to be biased.</td></tr>
+      <tr><td>source</td><td>Where information comes from. Reliable sources have an author, date, and verifiable organisation.</td><td>BBC News, Oxford University research, gov.uk.</td></tr>
+      <tr><td>inference</td><td>A conclusion you work out from evidence — not directly stated in the text.</td><td>"Sales rose 40%" → you can infer public interest is growing.</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Types of Non-Fiction — Quick Reference</h3>
+    <table class="vtable" style="--accent:#BE123C;--accent-l:#FDF1F4;">
+      <tr><th>Type</th><th>Main Purpose</th><th>Key Features</th></tr>
+      <tr><td>News article</td><td>Inform</td><td>Headline, inverted pyramid (most important facts first), WHO/WHAT/WHERE/WHEN/WHY/HOW</td></tr>
+      <tr><td>Feature article</td><td>Inform + entertain</td><td>More personal voice, anecdotes, quotations, images</td></tr>
+      <tr><td>Formal report</td><td>Inform objectively</td><td>Headings, formal language, evidence, no personal opinion</td></tr>
+      <tr><td>Advertisement</td><td>Persuade</td><td>Emotional language, images, short punchy sentences</td></tr>
+      <tr><td>Speech</td><td>Persuade / inspire</td><td>Direct address ("you"), repetition, rule of three, rhetorical questions</td></tr>
+      <tr><td>Biography</td><td>Inform — true life story</td><td>Chronological order, personal details, researched facts</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Purpose — WHY Was This Written?</h3>
+    <p>Most non-fiction has MORE THAN ONE purpose. Identify the PRIMARY (main) purpose and any secondary ones.</p>
+    <table class="vtable" style="--accent:#BE123C;--accent-l:#FDF1F4;">
+      <tr><th>Purpose</th><th>Clues to Look For</th></tr>
+      <tr><td><strong>To Persuade</strong></td><td>One-sided arguments, emotional language, opinions presented as facts, rhetorical questions, repetition</td></tr>
+      <tr><td><strong>To Inform</strong></td><td>Statistics, dates, factual statements, neutral balanced language, no obvious preference</td></tr>
+      <tr><td><strong>To Explain</strong></td><td>Simple vocabulary, step-by-step structure, definitions, diagrams, second-person address</td></tr>
+      <tr><td><strong>To Entertain</strong></td><td>Humour, vivid descriptions, personal anecdotes, witty or informal tone</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Audience — WHO Is This Written For?</h3>
+    <p>Infer the audience from textual clues — it is rarely stated directly.</p>
+    <table class="vtable" style="--accent:#BE123C;--accent-l:#FDF1F4;">
+      <tr><th>Audience Clue</th><th>What It Tells You</th></tr>
+      <tr><td>Vocabulary level</td><td>Simple = non-specialist/younger. Technical jargon without definitions = expert audience.</td></tr>
+      <tr><td>Formal vs informal tone</td><td>Formal = professional/older. Informal/conversational = younger/general public.</td></tr>
+      <tr><td>What is NOT explained</td><td>If basic concepts are assumed, the audience already knows them.</td></tr>
+      <tr><td>Use of "you" vs "one"</td><td>"You" = direct and informal. "One" = very formal.</td></tr>
+      <tr><td>Publication type</td><td>Academic journal vs tabloid newspaper vs children's magazine.</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Fact vs Opinion vs Inference</h3>
+    <div class="cmpgrid">
+      <div class="cmpcol">
+        <h4 style="color:#BE123C;">✅ FACT</h4>
+        <ul>
+          <li>Can be checked — true or false</li>
+          <li>"Only 9% of all plastic ever produced has been recycled"</li>
+          <li>Contains specific numbers, dates, names</li>
+          <li>Can be verified against evidence</li>
+        </ul>
+      </div>
+      <div class="cmpcol">
+        <h4 style="color:#BE123C;">💬 OPINION</h4>
+        <ul>
+          <li>Personal view — cannot be proven</li>
+          <li>"Plastic is the world's most serious crisis"</li>
+          <li>Look for: "I believe," "should," "obviously," "clearly"</li>
+          <li>Even experts' judgements can be opinions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note warn" style="margin-top:10px;"><strong>Inference:</strong> A conclusion you work out from evidence — not directly stated. Always show the evidence from the text that led to your inference. e.g. "Sales rose 40%" → inference: public interest is growing.</div>
+    <div class="note tip" style="margin-top:8px;"><strong>Spotting opinion disguised as fact:</strong> Look for value-loaded adjectives ("devastating," "brilliant"), blame or praise without evidence, and statistics without named sources. "Studies show..." without naming the study is a warning sign.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Language Features — What to Look For and Why</h3>
+    <table class="vtable" style="--accent:#BE123C;--accent-l:#FDF1F4;">
+      <tr><th>Feature</th><th>What It Is</th><th>Effect on Reader</th></tr>
+      <tr><td>Rhetorical question</td><td>A question that does not expect an answer</td><td>Makes reader feel the "obvious" answer supports the writer's view</td></tr>
+      <tr><td>Statistic</td><td>A specific number or percentage used as evidence</td><td>Makes the argument seem objective — but check the source!</td></tr>
+      <tr><td>Expert quotation</td><td>A direct quote from someone with authority</td><td>Adds credibility — "it's not just my opinion"</td></tr>
+      <tr><td>Emotive language</td><td>Words chosen to create an emotional reaction</td><td>Makes reader feel sympathy, outrage, or hope — more likely to agree</td></tr>
+      <tr><td>Direct address ("you")</td><td>Speaking directly to the reader</td><td>Creates personal connection; makes reader feel responsible</td></tr>
+      <tr><td>Rule of three</td><td>Three examples or adjectives used together</td><td>Creates rhythm and emphasis — feels more convincing</td></tr>
+      <tr><td>Anecdote</td><td>A short personal story used as an example</td><td>Makes abstract issues feel real and human</td></tr>
+    </table>
+    <div class="note good"><strong>Exam tip:</strong> Always explain WHY the writer chose a feature — what effect does it have on the reader? Never just name it. Full answer = feature + effect + how it serves the purpose.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Structure of a Non-Fiction Text</h3>
+    <div class="snum"><div class="n" style="background:#BE123C;">1</div><div class="t"><strong>Headline/Subheadings</strong> — Read these first to get the outline quickly.</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">2</div><div class="t"><strong>Opening paragraph</strong> — In news: most important info first (WHO, WHAT, WHERE, WHEN, WHY, HOW). In features/opinion: a dramatic hook or anecdote.</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">3</div><div class="t"><strong>Body paragraphs</strong> — Each develops ONE point. First sentence of each paragraph usually states the main point of that paragraph.</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">4</div><div class="t"><strong>Images and captions</strong> — Not decoration! Captions sometimes contain information NOT in the main text. Always read them.</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">5</div><div class="t"><strong>Conclusion</strong> — What the writer most wants you to take away. Often: a call to action, a restatement of the main argument, or a look ahead.</div></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#BE123C;"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. What is the difference between PURPOSE and AUDIENCE? Give an example of each.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Identify ONE fact and ONE opinion in this sentence: "Over 8 million tonnes of plastic enter the ocean every year — this is clearly the biggest environmental disaster in human history."</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. How do you identify the AUDIENCE of a text when it is not directly stated? Name three clues you would look for.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. A text says: "Surely we cannot ignore the suffering of millions?" What technique is this and what effect does it have on the reader?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. What is the INVERTED PYRAMID structure in a news article? Why is it used?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">6. Why should you always ask "Where did this statistic come from?" when reading non-fiction?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="reflect" style="background:#FDF1F4;margin-top:14px;">
+      <div style="font-weight:700;font-size:0.88rem;color:#BE123C;margin-bottom:8px;">My Reflection</div>
+      <div class="fill"><div class="fill-q">Two things I learned this week about reading non-fiction:</div><textarea rows="3" placeholder="1. &#10;2."></textarea></div>
+      <div class="fill"><div class="fill-q">A real-life example of non-fiction I have read recently, and what its purpose and audience might be:</div><textarea rows="2" placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MATHS ──────────────────────────────────────────────── -->
+<style>.pg-maths-b{--accent:#B45309;--accent-l:#FDF4E9;}</style>
+<div id="pg-maths" class="page pg-maths-b">
+
+  <div class="banner" style="background:linear-gradient(135deg,#78350F,#B45309);">
+    <h2>🧮 Ratio &amp; Proportion</h2>
+    <div class="sub">Simplifying Ratios · Sharing in a Ratio · Unitary Method · Direct Proportion</div>
+    <div class="tags"><span class="tag">Ratio</span><span class="tag">Proportion</span><span class="tag">Unitary Method</span><span class="tag">KS3 Level 7</span></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#B45309;"></span>Key Vocabulary</h3>
+    <table class="vtable" style="--accent:#B45309;--accent-l:#FDF4E9;">
+      <tr><th>Word</th><th>What It Means</th><th>Example</th></tr>
+      <tr><td>ratio</td><td>Compares two or more quantities — parts to parts. Written with a colon.</td><td>3 boys, 2 girls → ratio 3:2 (no units)</td></tr>
+      <tr><td>proportion</td><td>Compares a PART to the WHOLE — what fraction of the total.</td><td>3 boys in 5 total → proportion = 3/5</td></tr>
+      <tr><td>simplify a ratio</td><td>Divide all parts by their HCF to get the simplest form.</td><td>12:18 ÷ 6 = 2:3</td></tr>
+      <tr><td>equivalent ratios</td><td>Ratios that express the same relationship using different numbers.</td><td>1:2 = 2:4 = 5:10 = 50:100</td></tr>
+      <tr><td>share in a ratio</td><td>Dividing a total amount between people according to a ratio.</td><td>Share £30 in ratio 2:3</td></tr>
+      <tr><td>unitary method</td><td>Find the value of ONE unit first, then multiply to find any amount.</td><td>5 pens = £3.50, so 1 pen = £0.70</td></tr>
+      <tr><td>direct proportion</td><td>Two quantities increase/decrease by the same factor.</td><td>More pens = more cost. Double the pens = double the cost.</td></tr>
+      <tr><td>inverse proportion</td><td>As one quantity increases, the other DECREASES.</td><td>More workers = fewer days to finish a job.</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#B45309;"></span>Ratio vs Proportion — The Key Difference</h3>
+    <div class="cmpgrid">
+      <div class="cmpcol">
+        <h4 style="color:#B45309;">⚖️ RATIO — Part to Part</h4>
+        <ul>
+          <li>Compares one group against ANOTHER group</li>
+          <li>3 red, 5 blue → ratio = 3:5</li>
+          <li>Order matters: red:blue ≠ blue:red</li>
+          <li>No units — just a relationship</li>
+        </ul>
+      </div>
+      <div class="cmpcol">
+        <h4 style="color:#B45309;">📊 PROPORTION — Part to Whole</h4>
+        <ul>
+          <li>Compares one group against the TOTAL</li>
+          <li>3 red in 8 total → proportion = 3/8</li>
+          <li>Can be written as fraction, decimal, or %</li>
+          <li>Link to Week 6: 3/8 = 0.375 = 37.5%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#B45309;"></span>Simplifying Ratios — Step by Step</h3>
+    <div class="snum"><div class="n" style="background:#B45309;">1</div><div class="t"><strong>Write the ratio clearly</strong> in the correct order as given in the question.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">2</div><div class="t"><strong>Find the HCF</strong> (Highest Common Factor) of all parts.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">3</div><div class="t"><strong>Divide every part</strong> by the HCF.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">4</div><div class="t"><strong>Check:</strong> can you divide any further? If no — done.</div></div>
+    <div class="formula-box">
+      8:12 → HCF = 4 → <span class="hl">2:3</span><br>
+      15:25 → HCF = 5 → <span class="hl">3:5</span><br>
+      24:36:48 → HCF = 12 → <span class="hl">2:3:4</span>
+    </div>
+    <div class="note warn"><strong>⚠️ Different units — always convert first!</strong> "3cm : 1.5m" → convert: "3cm : 150cm" → simplify: <strong>1:50</strong>. This is a common exam trap.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#B45309;"></span>Sharing in a Ratio — The 3-Step Method</h3>
+    <div class="note tip"><strong>Always use these 3 steps:</strong> (1) Total parts. (2) Value of ONE part. (3) Multiply for each share.</div>
+
+    <div class="diagram">
+      <div class="cap">Worked Example 1 — Money</div>
+      <p style="font-size:0.88rem;"><strong>Share £60 between Aisha and Ben in ratio 2:3.</strong></p>
+      <p style="font-size:0.88rem;margin-top:6px;">Step 1: Total parts = 2 + 3 = <strong>5</strong></p>
+      <p style="font-size:0.88rem;">Step 2: 1 part = £60 ÷ 5 = <strong>£12</strong></p>
+      <p style="font-size:0.88rem;">Step 3: Aisha = 2 × £12 = <strong>£24</strong> · Ben = 3 × £12 = <strong>£36</strong></p>
+      <p style="font-size:0.88rem;">Check: £24 + £36 = £60 ✓</p>
+    </div>
+
+    <div class="diagram">
+      <div class="cap">Worked Example 2 — When You Know One Person's Share</div>
+      <p style="font-size:0.88rem;"><strong>Tom and Sam share sweets in ratio 3:5. Tom gets 24. How many does Sam get?</strong></p>
+      <p style="font-size:0.88rem;margin-top:6px;">Tom = 3 parts = 24 → 1 part = 24 ÷ 3 = <strong>8</strong></p>
+      <p style="font-size:0.88rem;">Sam = 5 × 8 = <strong>40 sweets</strong> · Total = 24 + 40 = <strong>64</strong></p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#B45309;"></span>The Unitary Method — Find ONE, Then Scale</h3>
+    <div class="snum"><div class="n" style="background:#B45309;">1</div><div class="t"><strong>Identify the two quantities</strong> and what you know vs what you need.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">2</div><div class="t"><strong>Divide to find the value of ONE unit</strong> — this gives you the "per one" rate.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">3</div><div class="t"><strong>Multiply by the required number</strong> of units. Always include the unit in your answer.</div></div>
+
+    <div class="formula-box">
+      <span style="color:var(--muted);">Example 1: 4 books cost £22. Cost of 7 books?</span><br>
+      1 book = £22 ÷ 4 = <span class="hl">£5.50</span><br>
+      7 books = £5.50 × 7 = <span class="hl2">£38.50</span><br><br>
+      <span style="color:var(--muted);">Example 2: Recipe uses 300g flour for 12 biscuits. How much for 20?</span><br>
+      1 biscuit = 300 ÷ 12 = <span class="hl">25g</span><br>
+      20 biscuits = 25 × 20 = <span class="hl2">500g</span>
+    </div>
+
+    <div class="note warn"><strong>⚠️ Inverse proportion:</strong> "3 workers take 8 days. How long for 6 workers?" More workers = FEWER days. Total work = 3 × 8 = 24 worker-days. 6 workers: 24 ÷ 6 = <strong>4 days</strong>. Always identify which type you have before solving.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#B45309;"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Simplify the ratio 20:35.</div><textarea rows="2" placeholder="Show your working..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Share £120 between Fatima and Omar in the ratio 3:5. Show all steps.</div><textarea rows="3" placeholder="Step 1: Total parts = &#10;Step 2: 1 part = &#10;Step 3: Fatima = , Omar ="></textarea></div>
+    <div class="fill"><div class="fill-q">3. 6 identical notebooks cost £9. Using the unitary method, find the cost of 11 notebooks.</div><textarea rows="3" placeholder="1 notebook = &#10;11 notebooks ="></textarea></div>
+    <div class="fill"><div class="fill-q">4. Zara and Leila share 56 marbles in ratio 1:3. Zara receives how many?</div><textarea rows="2" placeholder="Show your working..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. A map scale is 1:25,000. A road measures 6cm on the map. How long is the real road in km?</div><textarea rows="3" placeholder="Real length (cm) = &#10;Convert to km ="></textarea></div>
+    <div class="fill"><div class="fill-q">6. Explain, in your own words, the difference between DIRECT proportion and INVERSE proportion. Give an example of each.</div><textarea rows="4" placeholder="Direct proportion: &#10;&#10;Inverse proportion:"></textarea></div>
+    <div class="reflect" style="background:#FDF4E9;margin-top:14px;">
+      <div style="font-weight:700;font-size:0.88rem;color:#B45309;margin-bottom:8px;">My Reflection</div>
+      <div class="fill"><div class="fill-q">Two things I learned this week about ratio and proportion:</div><textarea rows="3" placeholder="1. &#10;2."></textarea></div>
+      <div class="fill"><div class="fill-q">A real-life situation where I could use ratio or proportion:</div><textarea rows="2" placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SCIENCE ─────────────────────────────────────────────── -->
+<style>.pg-science-b{--accent:#065F46;--accent-l:#EAF6F1;}</style>
+<div id="pg-science" class="page pg-science-b">
+
+  <div class="banner" style="background:linear-gradient(135deg,#022C22,#065F46);">
+    <h2>🔬 States of Matter</h2>
+    <div class="sub">Solids · Liquids · Gases · Particle Model · Changes of State · Heating Curves</div>
+    <div class="tags"><span class="tag">Chemistry</span><span class="tag">Particle Model</span><span class="tag">Changes of State</span><span class="tag">KS3 Level 7</span></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#065F46;"></span>Key Vocabulary</h3>
+    <table class="vtable" style="--accent:#065F46;--accent-l:#EAF6F1;">
+      <tr><th>Word</th><th>What It Means</th><th>Example</th></tr>
+      <tr><td>matter</td><td>Anything that has mass and takes up space.</td><td>Air, water, rock, you — all matter.</td></tr>
+      <tr><td>particle</td><td>An extremely tiny piece of matter. Everything is made of particles.</td><td>Atoms and molecules are particles.</td></tr>
+      <tr><td>solid</td><td>Particles closely packed in fixed arrangement. Definite shape AND volume.</td><td>Ice, rock, wood.</td></tr>
+      <tr><td>liquid</td><td>Particles close but can flow. Definite volume — takes container's shape.</td><td>Water, oil, mercury.</td></tr>
+      <tr><td>gas</td><td>Particles far apart, moving very fast. No fixed shape or volume.</td><td>Steam, oxygen, carbon dioxide.</td></tr>
+      <tr><td>melting point</td><td>The temperature at which a solid becomes a liquid.</td><td>Water/ice: 0°C</td></tr>
+      <tr><td>boiling point</td><td>The temperature at which a liquid becomes a gas rapidly throughout.</td><td>Water: 100°C at sea level</td></tr>
+      <tr><td>evaporation</td><td>Liquid → gas slowly, at the surface, below boiling point.</td><td>Wet clothes drying at room temperature.</td></tr>
+      <tr><td>condensation</td><td>Gas → liquid by cooling.</td><td>Water droplets on a cold glass.</td></tr>
+      <tr><td>sublimation</td><td>Solid → gas DIRECTLY without passing through liquid.</td><td>Dry ice (solid CO₂).</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#065F46;"></span>The Three States of Matter — Comparison</h3>
+    <div class="state-grid">
+      <div class="state-box" style="border-color:#2563EB;">
+        <div class="state-name" style="color:#2563EB;">🧊 SOLID</div>
+        <div class="state-body">
+          <strong>Arrangement:</strong> Tight, regular, fixed<br>
+          <strong>Movement:</strong> Vibrate on the spot only<br>
+          <strong>Shape:</strong> Fixed ✅<br>
+          <strong>Volume:</strong> Fixed ✅<br>
+          <strong>Compressible:</strong> No ❌
+        </div>
+      </div>
+      <div class="state-box" style="border-color:#059669;">
+        <div class="state-name" style="color:#059669;">💧 LIQUID</div>
+        <div class="state-body">
+          <strong>Arrangement:</strong> Close but random<br>
+          <strong>Movement:</strong> Slide past each other<br>
+          <strong>Shape:</strong> No — takes container ❌<br>
+          <strong>Volume:</strong> Fixed ✅<br>
+          <strong>Compressible:</strong> Barely ❌
+        </div>
+      </div>
+      <div class="state-box" style="border-color:#D97706;">
+        <div class="state-name" style="color:#D97706;">💨 GAS</div>
+        <div class="state-body">
+          <strong>Arrangement:</strong> Far apart, random<br>
+          <strong>Movement:</strong> Fast, in all directions<br>
+          <strong>Shape:</strong> No — fills container ❌<br>
+          <strong>Volume:</strong> No — expands ❌<br>
+          <strong>Compressible:</strong> Yes ✅
+        </div>
+      </div>
+    </div>
+    <div class="note info"><strong>Key principle:</strong> The STATE of matter depends on how far apart particles are and how fast they move. Temperature controls BOTH of these. Higher temperature = faster particles = more likely to be liquid or gas.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#065F46;"></span>Changes of State — Every Change Has a Name</h3>
+    <div class="chain" style="--accent:#065F46;">
+      <div class="chain-box" style="background:#2563EB;">SOLID 🧊</div>
+      <div class="chain-arrow">→ melting →</div>
+      <div class="chain-box" style="background:#059669;">LIQUID 💧</div>
+      <div class="chain-arrow">→ boiling/evaporation →</div>
+      <div class="chain-box" style="background:#D97706;">GAS 💨</div>
+    </div>
+    <div class="chain" style="--accent:#065F46;">
+      <div class="chain-box" style="background:#D97706;">GAS 💨</div>
+      <div class="chain-arrow">→ condensation →</div>
+      <div class="chain-box" style="background:#059669;">LIQUID 💧</div>
+      <div class="chain-arrow">→ freezing →</div>
+      <div class="chain-box" style="background:#2563EB;">SOLID 🧊</div>
+    </div>
+    <div class="chain">
+      <div class="chain-box" style="background:#2563EB;">SOLID 🧊</div>
+      <div class="chain-arrow">→ sublimation (directly) →</div>
+      <div class="chain-box" style="background:#D97706;">GAS 💨</div>
+    </div>
+
+    <table class="vtable" style="--accent:#065F46;--accent-l:#EAF6F1;margin-top:10px;">
+      <tr><th>Process</th><th>Change</th><th>Heat?</th><th>Example</th></tr>
+      <tr><td>Melting</td><td>Solid → Liquid</td><td>Absorbed</td><td>Ice melting, chocolate melting</td></tr>
+      <tr><td>Freezing</td><td>Liquid → Solid</td><td>Released</td><td>Water turning to ice</td></tr>
+      <tr><td>Evaporation</td><td>Liquid → Gas (slow, surface)</td><td>Absorbed</td><td>Wet clothes drying</td></tr>
+      <tr><td>Boiling</td><td>Liquid → Gas (rapid, throughout)</td><td>Absorbed at fixed temp</td><td>Kettle boiling at 100°C</td></tr>
+      <tr><td>Condensation</td><td>Gas → Liquid</td><td>Released</td><td>Water on cold glass</td></tr>
+      <tr><td>Sublimation</td><td>Solid → Gas directly</td><td>Absorbed</td><td>Dry ice disappearing</td></tr>
+    </table>
+
+    <div class="note good"><strong>All changes of state are REVERSIBLE physical changes.</strong> The substance itself does not change — only the arrangement and movement of particles. Water, ice, and steam are all H₂O.</div>
+    <div class="note warn"><strong>Evaporation vs Boiling:</strong> Evaporation = slow, surface only, any temperature below boiling. Boiling = rapid, throughout liquid, only at the boiling point (100°C for water).</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#065F46;"></span>Heating Curve for Water — Reading the Graph</h3>
+    <div class="diagram">
+      <div class="cap">What Each Section of a Heating Curve Means</div>
+      <table class="vtable">
+        <tr><th>Section</th><th>What Is Happening</th><th>Temperature</th></tr>
+        <tr><td><strong>A — Rising line</strong></td><td>Solid (ice) heating up — particles vibrate faster</td><td>Below 0°C, rising</td></tr>
+        <tr><td><strong>B — FLAT line at 0°C</strong></td><td>MELTING — all energy breaks bonds. Temperature does NOT rise even though heat is added. This is <em>latent heat of fusion.</em></td><td>Stays at 0°C</td></tr>
+        <tr><td><strong>C — Rising line</strong></td><td>Liquid (water) heating up — particles flow faster</td><td>0°C to 100°C, rising</td></tr>
+        <tr><td><strong>D — FLAT line at 100°C</strong></td><td>BOILING — all energy separates particles into gas. Temperature stays constant. This is <em>latent heat of vaporisation.</em></td><td>Stays at 100°C</td></tr>
+        <tr><td><strong>E — Rising line</strong></td><td>Gas (steam) heating up further</td><td>Above 100°C, rising</td></tr>
+      </table>
+    </div>
+    <div class="note tip"><strong>⭐ The most important exam point:</strong> A FLAT LINE on a heating curve means a CHANGE OF STATE is happening at that temperature. Temperature does NOT change during a change of state because all energy goes into breaking bonds (latent heat), not raising temperature.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#065F46;"></span>The Particle Model — Strengths and Limitations</h3>
+    <div class="cmpgrid">
+      <div class="cmpcol">
+        <h4 style="color:#065F46;">✅ What It Explains Well</h4>
+        <ul>
+          <li>Why solids keep their shape</li>
+          <li>Why liquids flow but take up fixed volume</li>
+          <li>Why gases expand to fill containers</li>
+          <li>Why gases can be compressed</li>
+          <li>Why heating raises temperature</li>
+          <li>Why changes of state happen at fixed temperatures</li>
+        </ul>
+      </div>
+      <div class="cmpcol">
+        <h4 style="color:#065F46;">⚠️ Limitations</h4>
+        <ul>
+          <li>Treats all particles as identical spheres — not accurate</li>
+          <li>Does not show forces between particles</li>
+          <li>Does not explain why some substances dissolve in others</li>
+          <li>Cannot explain plasma (the 4th state of matter — found in stars)</li>
+          <li>Ignores quantum mechanical behaviour</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note good"><strong>KS3 key idea:</strong> A model having limitations does not mean it is useless — like a map of your school. The particle model explains most observable behaviour of matter well. We use it because it works.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#065F46;"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Compare how particles are arranged and how they move in a solid, liquid, and gas.</div><textarea rows="4" placeholder="Solid: &#10;Liquid: &#10;Gas:"></textarea></div>
+    <div class="fill"><div class="fill-q">2. Why can gases be compressed but solids and liquids cannot?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. On a heating curve for water, the line goes FLAT at 0°C. What is happening at this point? Why does the temperature not rise?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. What is the difference between EVAPORATION and BOILING?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Is freezing a chemical or physical change? Explain how you know.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">6. What is sublimation? Give one example from everyday life.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">7. Name ONE limitation of the particle model and explain why it matters.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="reflect" style="background:#EAF6F1;margin-top:14px;">
+      <div style="font-weight:700;font-size:0.88rem;color:#065F46;margin-bottom:8px;">My Reflection</div>
+      <div class="fill"><div class="fill-q">Two things I learned this week about states of matter:</div><textarea rows="3" placeholder="1. &#10;2."></textarea></div>
+      <div class="fill"><div class="fill-q">One example from everyday life where I now recognise a change of state happening:</div><textarea rows="2" placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── HISTORY ─────────────────────────────────────────────── -->
+<style>.pg-history-b{--accent:#1E3A8A;--accent-l:#EBF0FB;}</style>
+<div id="pg-history" class="page pg-history-b">
+
+  <div class="banner" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+    <h2>🏛️ Climate &amp; Biomes</h2>
+    <div class="sub">Tropical · Polar · Temperate Zones · Rainforests · Tundra · Savannah · Climate vs Weather</div>
+    <div class="tags"><span class="tag">Climate Zones</span><span class="tag">Biomes</span><span class="tag">Geography</span><span class="tag">KS3 Level 7</span></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>Key Vocabulary</h3>
+    <table class="vtable" style="--accent:#1E3A8A;--accent-l:#EBF0FB;">
+      <tr><th>Word</th><th>What It Means</th><th>Example</th></tr>
+      <tr><td>weather</td><td>Day-to-day atmospheric conditions — temperature, rainfall, wind on a specific day.</td><td>"It is raining in Lahore today."</td></tr>
+      <tr><td>climate</td><td>Long-term average weather patterns over at least 30 years.</td><td>"Pakistan has a monsoon season every year."</td></tr>
+      <tr><td>climate zone</td><td>A large region with broadly similar long-term climate.</td><td>Tropical, temperate, polar.</td></tr>
+      <tr><td>biome</td><td>A large area defined by BOTH specific climate AND specific plant and animal communities adapted to it.</td><td>Tropical rainforest, tundra, savannah.</td></tr>
+      <tr><td>equator</td><td>The imaginary line at 0° latitude — the hottest part of Earth because the sun's rays hit most directly.</td><td>Rainforests and savannahs are near the equator.</td></tr>
+      <tr><td>latitude</td><td>Distance north or south of the equator in degrees. The most important factor in determining climate.</td><td>Low latitude (near equator) = hot. High latitude (near poles) = cold.</td></tr>
+      <tr><td>precipitation</td><td>All forms of water from the sky — rain, snow, sleet, hail. Key factor in classifying biomes.</td><td>Rainforest: 2,000mm+/yr. Desert: under 250mm/yr.</td></tr>
+      <tr><td>adaptation</td><td>A feature or behaviour helping an organism survive in its environment.</td><td>Camel's wide feet; cactus's thick waxy skin.</td></tr>
+      <tr><td>permafrost</td><td>A layer of permanently frozen soil beneath the tundra surface — prevents tree growth.</td><td>Found across Arctic tundra in Canada, Russia.</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>Weather vs Climate — The Most Important Distinction</h3>
+    <div class="cmpgrid">
+      <div class="cmpcol">
+        <h4 style="color:#1E3A8A;">🌩️ WEATHER — Short Term</h4>
+        <ul>
+          <li>Changes day to day — even hour to hour</li>
+          <li>"It is hot and sunny in Rawalpindi today"</li>
+          <li>Difficult to predict beyond 10 days</li>
+          <li>One unusual week does NOT change a climate description</li>
+        </ul>
+      </div>
+      <div class="cmpcol">
+        <h4 style="color:#1E3A8A;">🌡️ CLIMATE — Long Term</h4>
+        <ul>
+          <li>Average weather patterns over 30+ years</li>
+          <li>"Pakistan has hot summers and monsoon rains in July–September"</li>
+          <li>Used to design buildings, plan farming, classify biomes</li>
+          <li>Climate CHANGE = long-term shifts in these patterns</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note warn"><strong>Common confusion:</strong> "It was cold last winter — what happened to global warming?" One cold winter is WEATHER. Global warming is a CLIMATE trend measured over decades. These operate on completely different timescales.</div>
+    <div class="note info"><strong>Memory phrase:</strong> "Climate is what you EXPECT; weather is what you GET."</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>Climate Zones — Overview</h3>
+    <table class="vtable" style="--accent:#1E3A8A;--accent-l:#EBF0FB;">
+      <tr><th>Zone</th><th>Latitude</th><th>Temperature</th><th>Rainfall</th><th>Examples</th></tr>
+      <tr><td><strong>Tropical</strong></td><td>0°–23.5°</td><td>Hot year-round</td><td>High — heavy or seasonal</td><td>Amazon, Congo, SE Asia</td></tr>
+      <tr><td><strong>Arid / Desert</strong></td><td>15°–35°</td><td>Very hot days, cold nights</td><td>Under 250mm/year</td><td>Sahara, Arabian Desert</td></tr>
+      <tr><td><strong>Mediterranean</strong></td><td>30°–45°</td><td>Hot dry summers, mild winters</td><td>Seasonal — summer drought</td><td>Southern Europe, California</td></tr>
+      <tr><td><strong>Temperate</strong></td><td>45°–65°</td><td>4 seasons, mild</td><td>Moderate year-round</td><td>UK, Germany, northern USA</td></tr>
+      <tr><td><strong>Polar / Tundra</strong></td><td>66.5°–90°</td><td>Extremely cold year-round</td><td>Very low (cold desert)</td><td>Arctic, Antarctic</td></tr>
+    </table>
+    <div class="note tip"><strong>Key principle:</strong> Latitude → climate zone → vegetation → biome. The chain: how far from the equator determines what plants can grow, which determines what animals can live there, which together form the biome.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>The Major Biomes — Summary</h3>
+    <div class="biome-mini">
+      <div class="biome-mini-card">
+        <div class="biome-mini-name">🌧️ Tropical Rainforest</div>
+        <div class="biome-mini-body"><strong>Climate:</strong> Hot (25–30°C), wet year-round, 2,000–4,000mm rain.<br><strong>Location:</strong> Amazon, Congo, SE Asia — near equator.<br><strong>Features:</strong> Four vegetation layers (emergent, canopy, understorey, floor). 80% of land species in 6% of land area.<br><strong>Threat:</strong> Deforestation — loss of habitat and carbon store.</div>
+      </div>
+      <div class="biome-mini-card">
+        <div class="biome-mini-name">🦁 Savannah</div>
+        <div class="biome-mini-body"><strong>Climate:</strong> Warm year-round with distinct wet and dry seasons. 500–1,500mm rain/year, mostly in wet season.<br><strong>Location:</strong> Sub-Saharan Africa, parts of Brazil, northern Australia.<br><strong>Features:</strong> Grasses + scattered trees (acacia, baobab). Fire-resistant. Africa's largest wildlife migrations.<br><strong>Animals:</strong> Lions, elephants, zebras, wildebeest, cheetahs.</div>
+      </div>
+      <div class="biome-mini-card">
+        <div class="biome-mini-name">🏜️ Hot Desert</div>
+        <div class="biome-mini-body"><strong>Climate:</strong> Defined by LOW RAINFALL (under 250mm) — NOT necessarily temperature. Day: up to 50°C. Night: near 0°C.<br><strong>Location:</strong> Sahara, Arabian Desert, Atacama (driest), Australian Outback.<br><strong>Adaptations:</strong> Cacti store water in stems; animals mostly nocturnal; camels store fat.</div>
+      </div>
+      <div class="biome-mini-card">
+        <div class="biome-mini-name">🍂 Temperate Forest</div>
+        <div class="biome-mini-body"><strong>Climate:</strong> 4 distinct seasons. 5–20°C. ~800mm rain year-round.<br><strong>Location:</strong> UK, Western Europe, eastern USA, Japan.<br><strong>Features:</strong> DECIDUOUS trees (shed leaves in autumn to survive winter cold and frozen water).<br><strong>Animals:</strong> Foxes, deer, owls, squirrels. Many hibernate or migrate.</div>
+      </div>
+      <div class="biome-mini-card">
+        <div class="biome-mini-name">🌲 Taiga / Boreal Forest</div>
+        <div class="biome-mini-body"><strong>Climate:</strong> Very cold winters (−20 to −40°C), short cool summers. Largest land biome on Earth.<br><strong>Location:</strong> Canada, Russia (Siberia), Scandinavia.<br><strong>Features:</strong> CONIFEROUS (evergreen) trees with needles — adapted for cold. Wolves, bears, moose, lynx.</div>
+      </div>
+      <div class="biome-mini-card">
+        <div class="biome-mini-name">🧊 Tundra / Polar</div>
+        <div class="biome-mini-body"><strong>Climate:</strong> Extremely cold year-round. Very low precipitation (cold desert). 24-hour daylight in summer; darkness in winter.<br><strong>Features:</strong> PERMAFROST below surface — prevents drainage and tree growth → treeless. Low-growing mosses and lichens.<br><strong>Animals:</strong> Polar bears, Arctic foxes, reindeer. Most have thick fur/blubber.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>Factors That Affect Climate — Beyond Latitude</h3>
+    <div class="snum"><div class="n" style="background:#1E3A8A;">1</div><div class="t"><strong>Latitude</strong> — most important. Near equator: sun's rays hit directly (concentrated, hot). Near poles: rays hit at shallow angle (spread out, cold).</div></div>
+    <div class="snum"><div class="n" style="background:#1E3A8A;">2</div><div class="t"><strong>Altitude</strong> — higher = colder. Temperature drops ~6.5°C per 1,000m. Explains snow on tropical mountains (Kilimanjaro, in Tanzania, near the equator).</div></div>
+    <div class="snum"><div class="n" style="background:#1E3A8A;">3</div><div class="t"><strong>Distance from sea</strong> — maritime (near sea) = mild, wet. Continental (far from sea) = extremes. Compare London vs Moscow (same latitude, very different climates).</div></div>
+    <div class="snum"><div class="n" style="background:#1E3A8A;">4</div><div class="t"><strong>Ocean currents</strong> — warm currents (like the Gulf Stream) heat nearby land. The Gulf Stream makes the UK much warmer than its latitude would suggest.</div></div>
+    <div class="snum"><div class="n" style="background:#1E3A8A;">5</div><div class="t"><strong>Prevailing winds</strong> — winds from the sea bring moisture; winds from land/desert bring dry air. Rain shadow effect: one side of a mountain = wet; the other = dry.</div></div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>Biome Adaptations — Link to Science</h3>
+    <table class="vtable" style="--accent:#1E3A8A;--accent-l:#EBF0FB;">
+      <tr><th>Biome</th><th>Climate Challenge</th><th>Plant Adaptation</th><th>Animal Adaptation</th></tr>
+      <tr><td>Tropical Rainforest</td><td>Competition for sunlight under dense canopy</td><td>Giant leaves; tall straight trunks</td><td>Bright colours; prehensile tails for climbing</td></tr>
+      <tr><td>Hot Desert</td><td>Extreme heat; almost no water</td><td>Waxy skin; water stored in stem; deep roots</td><td>Nocturnal; concentrated urine; pale colouring</td></tr>
+      <tr><td>Tundra</td><td>Freezing temperatures; 6-week growing season</td><td>Low-growing; antifreeze chemicals in cells</td><td>Thick fur/blubber; white camouflage; migration</td></tr>
+      <tr><td>Temperate Forest</td><td>Cold dark winters</td><td>Deciduous — shed leaves to save energy</td><td>Hibernation; migration; seed-caching for winter</td></tr>
+      <tr><td>Savannah</td><td>Long dry season</td><td>Deep roots; fire-resistant bark; rapid regrowth</td><td>Long migrations following seasonal rain</td></tr>
+    </table>
+    <div class="note good"><strong>Cross-subject link (Science Week 6):</strong> Each biome is home to a specific FOOD WEB. The climate determines what producers (plants) grow; the plants determine what consumers (animals) can survive. Climate → biome → food web. These systems are connected.</div>
+  </div>
+
+  <div class="sec">
+    <h3><span class="bar" style="background:#1E3A8A;"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Explain the difference between WEATHER and CLIMATE. Give one example of each from somewhere you know.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Why is the equator hotter than the poles? Explain using the angle of the sun's rays.</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. Why is Antarctica classified as a desert, even though it is extremely cold?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. What is permafrost, and why does it mean the tundra has no trees?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Why do deciduous trees lose their leaves in autumn? What adaptation does this represent?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">6. Name THREE factors (other than latitude) that affect the climate of a place and explain each one briefly.</div><textarea rows="5" placeholder="1. &#10;2. &#10;3."></textarea></div>
+    <div class="fill"><div class="fill-q">7. How does the Gulf Stream affect the climate of the UK? Why is this surprising given the UK's latitude?</div><textarea rows="3" placeholder="Write your answer here..."></textarea></div>
+    <div class="reflect" style="background:#EBF0FB;margin-top:14px;">
+      <div style="font-weight:700;font-size:0.88rem;color:#1E3A8A;margin-bottom:8px;">My Reflection</div>
+      <div class="fill"><div class="fill-q">Two things I learned this week about climate and biomes:</div><textarea rows="3" placeholder="1. &#10;2."></textarea></div>
+      <div class="fill"><div class="fill-q">One connection I noticed between this lesson and another subject this week:</div><textarea rows="2" placeholder="e.g. Science food webs / Bible Passover and Egypt's climate / Maths proportion in measuring rainfall..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .shell -->
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const pg=document.getElementById('pg-'+s);
+  const tb=document.querySelector('[data-s="'+s+'"]');
+  if(pg)pg.classList.add('active');
+  if(tb)tb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week7_Notes');</script>
+</body>
+</html>

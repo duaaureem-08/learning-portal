@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 7 Worksheet C · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;gap:0;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);line-height:1.4;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}
+.q-input.xwide{min-height:170px;}
+.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius-sm);padding:18px 22px;text-align:center;margin-bottom:14px;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--bright);line-height:1.5;margin-bottom:6px;}
+.verse-ref{font-size:0.78rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.formula-box{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:0.9rem;color:var(--bright);margin-bottom:14px;line-height:1.8;overflow-x:auto;}
+.formula-box .hl{color:#FCD34D;}
+.formula-box .hl2{color:#6EE7B7;}
+.formula-box .cm{color:var(--muted);font-size:0.8rem;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 7 · Practice C</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible"   onclick="show('bible')">📖 Bible</button>
+    <button class="tab"        data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab"        data-s="maths"   onclick="show('maths')">🧮 Maths</button>
+    <button class="tab"        data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab"        data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ══════════════════  BIBLE  ══════════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🔥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 7 · Practice C</div>
+  <div class="hero-title">Moses &<br>the Exodus</div>
+  <div class="hero-subtitle">Exodus 1–15 · Deeper Understanding · Extended Writing · Cross-Topic Connections</div>
+  <div class="hero-tags"><span class="hero-tag">Practice C — Stretch Questions</span><span class="hero-tag">Exodus 1–15</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 38"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Definitions and short recall. No notes needed.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Definitions & Recall</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Define each word in ONE clear sentence and give a specific example from the Exodus story. <span class="marks">5 marks</span><br><br><em>intercession · covenant · deliverance · calling · plague</em></div>
+    <textarea class="q-input" placeholder="intercession: definition + Exodus example&#10;covenant: definition + Exodus example&#10;deliverance: definition + Exodus example&#10;calling: definition + Exodus example&#10;plague: definition + Exodus example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>intercession</strong>: praying or speaking on behalf of someone else before God or another authority. Example: Moses cried out to God on behalf of the Israelites multiple times — including asking God to remove the frogs and other plagues after Pharaoh promised to let the people go. <strong>covenant</strong>: a serious, binding promise stronger than a contract. Example: God told Moses He remembered His covenant with Abraham, Isaac, and Jacob (Exodus 2:24) — the Exodus was the fulfilment of that ancient promise of a nation and a land. <strong>deliverance</strong>: rescue from danger or captivity that you could not escape on your own. Example: Israel's deliverance from 430 years of slavery in Egypt — the central event of the Exodus — is the defining Old Testament example of God delivering His people. <strong>calling</strong>: a deep sense that God has chosen you for a specific purpose. Example: Moses received his calling at the burning bush on Mount Horeb — God specifically named Moses and gave him the task of returning to Egypt to confront Pharaoh. <strong>plague</strong>: a terrible disaster or judgment. Example: God sent ten plagues against Egypt — from water turning to blood to the death of every firstborn — each targeting something Egypt worshipped or relied on.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">The comparison table from the lesson compares Noah, Abraham, Joseph, and Moses. Without looking at your notes, fill in as much as you can remember. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="NOAH (Week 4):&#10;Source of hardship:&#10;What faith looked like:&#10;Key verse:&#10;&#10;ABRAHAM (Week 5):&#10;Source of hardship:&#10;What faith looked like:&#10;Key verse:&#10;&#10;JOSEPH (Week 6):&#10;Source of hardship:&#10;What faith looked like:&#10;Key verse:&#10;&#10;MOSES (Week 7):&#10;Source of hardship:&#10;What faith looked like:&#10;Key verse:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>NOAH</strong>: Source of hardship: a natural disaster (the flood). Faith looked like: building an enormous boat for ~100 years without rain, based solely on God's word. Key verse: Hebrews 11:7. <strong>ABRAHAM</strong>: Source of hardship: God's own call to leave home, family, and country. Faith looked like: leaving without knowing the destination; being willing to sacrifice his son Isaac. Key verse: Genesis 12:2. <strong>JOSEPH</strong>: Source of hardship: other people's cruelty — sold into slavery by his brothers, falsely imprisoned. Faith looked like: maintaining integrity and forgiveness through years of suffering; seeing God's hand in retrospect ("you intended to harm me, but God intended it for good"). Key verse: Genesis 50:20. <strong>MOSES</strong>: Source of hardship: political oppression (an enslaved nation) combined with an impossible divine assignment (confront the most powerful empire on earth). Faith looked like: going back to Pharaoh ten times after ten rejections; standing at the Red Sea with no visible escape and declaring Exodus 14:14. Key verse: Exodus 14:14.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Focused explanation and application.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Explanation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">The lesson says the ten plagues were "a theological battle, not just a political one." Choose FOUR of the ten plagues and for each one: name the Egyptian god it targeted, explain what that god was supposed to control, and explain what the plague demonstrated about that god's power (or lack of it). <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Plague 1: ___ God targeted: ___ That god controlled: ___ What the plague demonstrated:&#10;&#10;Plague 2: ___ God targeted: ___ That god controlled: ___ What the plague demonstrated:&#10;&#10;Plague 3: ___ God targeted: ___ That god controlled: ___ What the plague demonstrated:&#10;&#10;Plague 4: ___ God targeted: ___ That god controlled: ___ What the plague demonstrated:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Accept any four of: <strong>Plague 1 (water to blood)</strong>: targeted the god Hapi (deity of the Nile floods) and the Nile itself — Egypt's most sacred and vital resource. Demonstrated that the God of Israel controlled what Egypt depended on most. <strong>Plague 2 (frogs)</strong>: targeted the frog goddess Heqet, a symbol of fertility and new life. Demonstrated that Egypt's symbol of birth and abundance could become an instrument of horror. <strong>Plague 5 (livestock disease)</strong>: targeted the sacred bull god Apis. The death of Egypt's cattle — economically devastating — showed Apis had no power to protect his own domain. <strong>Plague 6 (boils)</strong>: targeted the Egyptian priests and magicians directly — they couldn't even stand before Moses. Egypt's own religious intermediaries were publicly incapacitated, unable to counter or replicate the plague. <strong>Plague 9 (darkness)</strong>: targeted Ra, the supreme sun god whom Pharaoh himself was supposed to represent as his earthly embodiment. Three days of total, tangible darkness — while Israelites had light — completely humiliated the most powerful deity in the Egyptian pantheon. <strong>Plague 10 (death of firstborn)</strong>: targeted Pharaoh himself (his son died) — the man who claimed to be divine. Demonstrated that even the "living god" of Egypt could not protect his own household.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">The lesson makes a distinction between what God said to Moses at the burning bush ("I will be with you") and what Moses might have expected God to say ("I will make you qualified"). Why does this distinction matter? What does "I will be with you" communicate about the basis of Moses' calling — and what does it demand from Moses in response? Write at least 3 sentences. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Why the distinction between 'I will be with you' and 'I will make you qualified' matters:&#10;&#10;What 'I will be with you' communicates about the basis of the calling:&#10;&#10;What it demands from Moses in response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The distinction matters because it locates the source of the calling entirely in God rather than in Moses. If God had said "I will make you qualified," the relationship would be transactional — Moses would gain personal capabilities and then go do the job. Instead, "I will be with you" means Moses remains exactly who he is — an unqualified, reluctant shepherd — but God's presence is what makes the mission possible. Every step of the Exodus journey would require Moses to trust in a presence rather than rely on personal ability. What it communicates: the basis of Moses' calling is not his CV or character — it is God's faithfulness to His own purposes. Moses was not chosen because he was the best available option; he was chosen because God decided to act through him. What it demands: it demands ongoing trust rather than a one-time act of courage. Moses could not spend forty years in the wilderness building qualifications and then launch the Exodus. He had to go now, unqualified, with only a promise. That is the call — and the lesson's golden idea: God does not call the equipped; He equips the called.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Stretch writing. Develop your thinking fully with evidence.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⚖️ Extended Writing</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">The lesson says the Passover "is not just a historical meal — it is a theological prototype." Using the lesson's specific connections between the Passover lamb and Jesus (called "the Lamb of God" in John 1:29), write an extended response explaining: (a) what specific features of the Passover lamb point forward to Jesus in Christian understanding, (b) how the Last Supper connects to the Passover, and (c) why the lesson says understanding the Passover makes the New Testament "significantly richer" to read. Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Features of the Passover lamb that point to Jesus:&#10;&#10;(b) How the Last Supper connects to Passover:&#10;&#10;(c) Why understanding Passover makes the New Testament richer:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) The Passover lamb had to be <strong>perfect and without defect</strong> — selected four days before it was killed. In the New Testament, Jesus is repeatedly described as sinless and "without blemish." The <strong>blood on the doorposts</strong> was what protected the household — it was not the family's goodness but the blood that distinguished a protected house. Christians see this as a picture of the blood of Jesus providing protection: "the blood of the Lamb" is a repeated phrase in Revelation. The <strong>lamb was substitutionary</strong> — an innocent animal died in place of the firstborn. This is the same logic Christians see in Jesus' death: an innocent person dying in place of those who deserved judgment. (b) Jesus held his final meal with his disciples specifically during the Passover (Luke 22:7-20). When he took the unleavened bread and wine of the Passover meal, he gave them new meaning: "This is my body broken for you... this is my blood of the new covenant." He was not abolishing the Passover but deliberately reinterpreting it — placing himself as the new Passover lamb. The phrase "new covenant" echoes Exodus 24 (the Sinai covenant) and Jeremiah 31 (the promised new covenant). (c) Without knowing the Passover, a reader of the New Testament misses layer upon layer of meaning. When John the Baptist calls Jesus "the Lamb of God who takes away the sin of the world" (John 1:29), a reader who knows the Passover understands immediately: this is the ultimate Passover sacrifice. When Paul writes "Christ, our Passover lamb, has been sacrificed" (1 Corinthians 5:7), the entire theological logic depends on knowing what a Passover lamb was and what it did. The Exodus is not background history — it is the conceptual vocabulary of the New Testament.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">Write a structured argument (for or against) responding to this statement: <em>"The story of Moses teaches that great things are accomplished by exceptional people with exceptional abilities."</em> Use at least FOUR specific pieces of evidence from the Exodus story to support your position. Write at least 5 sentences. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Your position (agree or disagree):&#10;&#10;Evidence 1:&#10;Evidence 2:&#10;Evidence 3:&#10;Evidence 4:&#10;&#10;Your conclusion:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Model position: <strong>Disagree</strong> — the story of Moses actively contradicts this statement. Evidence 1: Moses gave five separate excuses at the burning bush explaining why he was the wrong person — including "I am not a good speaker" and "please send someone else." The text does not present him as exceptionally confident or gifted. Evidence 2: Moses was 80 years old, had been living as a shepherd for 40 years, and had no political standing in Egypt. His credentials were the opposite of impressive. Evidence 3: When the Israelites panicked at the Red Sea, Moses' first response was to cry out to God — not to devise a military strategy. The sea did not part because Moses had exceptional engineering skills; it parted because God acted. Evidence 4: Moses' greatest moments of failure (Exodus 32 — rage at the golden calf; Numbers 20 — striking the rock in anger) came even at the height of his leadership. He was not a perfected person. Conclusion: The lesson's golden idea directly inverts the statement: "God does not call the equipped — He equips the called." Moses' story is specifically constructed to show that what matters is not the person's abilities but the presence and faithfulness of God working through them. If the story were about exceptional ability, it would have begun with an extraordinary person. Instead, it begins with a reluctant shepherd arguing himself out of a divine assignment five times. The whole point is precisely the contrast between Moses' ordinariness and what God accomplished through him.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+    <div><div class="score-label">Total Score — Bible Week 7C</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 38" style="border-color:rgba(109,40,217,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  ENGLISH  ══════════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🖊️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 7 · Practice C</div>
+  <div class="hero-title">Reading<br>Non-Fiction Texts</div>
+  <div class="hero-subtitle">Exam-Style Practice · Timed Analysis · Comparing Two Texts · Extended Writing</div>
+  <div class="hero-tags"><span class="hero-tag">Practice C — Exam Style</span><span class="hero-tag">Non-Fiction</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 40"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Quick-fire identification. One sentence answers.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Quick-Fire Identification</div>
+  <div class="esl-tip">💡 <strong>Exam technique reminder:</strong> When asked to identify a language feature, always quote a SHORT phrase (not a whole sentence) and then explain the EFFECT on the reader. "The writer uses..." → quote → "This makes the reader feel/think..."</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Name the language technique and explain its effect in one sentence for each. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder='a) "We need schools that are safe, well-funded, and inspiring."&#10;Technique: Effect:&#10;&#10;b) "Can we really call ourselves a fair society when 1 in 4 children goes to school hungry?"&#10;Technique: Effect:&#10;&#10;c) "Dr Sarah Okonkwo, Professor of Education at University College London, says: \'reading aloud for just ten minutes a day doubles a child\'s vocabulary by age seven.\'"&#10;Technique: Effect:&#10;&#10;d) "You already know the answer. You\'ve always known the answer."&#10;Technique: Effect:&#10;&#10;e) "Some critics argue that stricter phone policies would harm young people. But the evidence says otherwise."&#10;Technique: Effect:'></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Rule of three</strong>: the three parallel adjectives create rhythm and a sense of completeness, making the argument feel thorough and well-considered. b) <strong>Rhetorical question with statistic</strong>: the question makes the reader feel the injustice is obvious and undeniable; the specific figure "1 in 4" makes it feel concrete and hard to dismiss. c) <strong>Expert quotation with credentials</strong>: naming the expert's full title and institution (UCL professor) adds authority — the reader thinks "this isn't opinion, this is verified expertise." d) <strong>Direct address / repetition</strong>: "you" places the statement in the reader's mind as their own belief; the repetition creates emphasis and makes it sound like the reader is being reminded of something they already know. e) <strong>Counter-argument followed by rebuttal</strong>: acknowledging the opposing view ("some critics argue") then immediately refuting it ("but the evidence says otherwise") makes the writer appear fair-minded while actually dismissing the criticism efficiently.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Match each text extract to its most likely text type. Then explain ONE clue in the extract that reveals the text type. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder='Text types: News article / Charity appeal / Instruction manual / Government report / Travel feature&#10;&#10;a) "Press and hold the power button for three seconds until the screen lights up. If the device does not respond, ensure it is charged."&#10;Text type: Clue:&#10;&#10;b) "Unemployment among 18–24-year-olds rose to 14.2% in Q3, compared with 11.8% in Q2, according to the Office for National Statistics."&#10;Text type: Clue:&#10;&#10;c) "For just £3 a month — less than a cup of coffee — you could give a child clean water, a hot meal, and the chance to go to school."&#10;Text type: Clue:&#10;&#10;d) "The committee recommends that local authorities implement a standardised framework for assessing housing need by April 2026."&#10;Text type: Clue:&#10;&#10;e) "By morning, Marrakech had woken up. The smell of spices drifted through the medina, and somewhere a muezzin called the faithful to prayer."&#10;Text type: Clue:'></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Instruction manual</strong>. Clue: imperative verbs ("Press," "ensure") and numbered/sequential instructions give directions without a personal voice. b) <strong>News article</strong>. Clue: specific statistics with a named, credible source (ONS) in the same format as journalism — who, what, when, where in the data. c) <strong>Charity appeal</strong>. Clue: "just £3 a month — less than a cup of coffee" is a classic charity comparison technique to minimise the cost and maximise the emotional benefit. d) <strong>Government report</strong>. Clue: formal passive construction ("it is recommended"), specific official body language ("local authorities"), precise deadline (April 2026), and no personal voice. e) <strong>Travel feature</strong>. Clue: vivid sensory description ("smell of spices," "muezzin") with a literary, engaging tone designed to make the reader feel they are there — the goal is to entertain as well as inform.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Full text analysis. Read this new article carefully.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Analysis — Third Article</div>
+  <div class="esl-tip">📰 <strong>Read this article carefully before answering Questions 3–5.</strong><br><br><em>Headline: THE SCHOOL HOLIDAY IS KILLING YOUR CHILD'S FUTURE</em><br><br>This summer, millions of children across the country will fall behind. Not because they are not clever. Not because they lack potential. But because six weeks without structured learning is enough — according to educational researchers — to undo two months of progress made in school.<br><br>This "summer slide" is not a myth invented by overanxious parents. A comprehensive review by the National Literacy Foundation found that children from lower-income households lose an average of 2.7 months of reading progress over the summer holiday, while their wealthier peers maintain or even gain ground through tutors, museum visits, and enrichment programmes.<br><br>"The long summer holiday is a relic of Victorian agricultural Britain," said Professor James Adeyemi of Oxford University's Department of Education. "It was designed for a farming calendar, not a modern knowledge economy. We are paying for it with our children's futures."<br><br>There is a simple solution, and other countries have already found it. Finland, South Korea, and Singapore all have shorter summer breaks and longer, distributed holiday periods across the year. Their educational outcomes consistently rank among the highest in the world.<br><br>It is time to stop pretending that six weeks of unstructured time is somehow good for children. For the children of the wealthy, it might be. For everyone else, it is six weeks of lost ground that may never be fully recovered. We cannot keep accepting a system that advantages the already-advantaged. Reform the school calendar — now.</em></div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Identify the purpose and audience. Support each answer with ONE specific piece of evidence from the text. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Primary purpose: Evidence:&#10;&#10;Audience: Evidence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Primary purpose: to persuade</strong>. Evidence: the final paragraph is an explicit call to action — "Reform the school calendar — now" — a direct instruction to the reader (or policymakers reading) to demand change. The entire article argues one side without presenting a balanced view. <strong>Audience: adult readers — particularly parents, educators, and policy-interested citizens</strong>. Evidence: the reference to "overanxious parents" speaks directly to an adult parental audience; the mention of countries like Finland and South Korea assumes readers who are aware of international educational comparisons, suggesting politically or educationally engaged adults rather than a general or younger audience.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">The article uses THREE specific persuasive techniques beyond simple argument. Identify all three, quote the relevant phrase, and explain the intended effect on the reader for each. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Technique 1: Quote: Effect:&#10;&#10;Technique 2: Quote: Effect:&#10;&#10;Technique 3: Quote: Effect:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Technique 1: <strong>Expert quotation</strong>: Professor James Adeyemi, Oxford. Effect: gives credibility — an Oxford professor calling the long holiday a "relic" makes the critique sound authoritative and researched, not just the journalist's opinion. Technique 2: <strong>Statistics</strong>: "2.7 months of reading progress lost." Effect: a specific decimal figure makes the claim feel precise and research-based rather than anecdotal; it also makes the loss tangible — readers can picture what 2.7 months of progress means. Technique 3: <strong>Emotive language / contrast</strong>: "For the children of the wealthy, it might be [good]. For everyone else, it is six weeks of lost ground." Effect: the sharp contrast between "the wealthy" and "everyone else" frames this as a social justice issue, triggering feelings of unfairness and injustice in the reader — making inaction feel morally wrong. (Also accept: call to action — "Reform the school calendar — now"; rhetorical construction — "Not because they are not clever. Not because they lack potential." — the parallelism creates emphasis.)</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Apply the critical reader's question: "What is this writer NOT telling me?" Identify TWO significant omissions from this article. For each, explain what information is missing and how its inclusion might change the reader's response. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Omission 1: What is missing: How its inclusion might change the reader's response:&#10;&#10;Omission 2: What is missing: How its inclusion might change the reader's response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Omission 1: <strong>No evidence from countries that have successfully shortened summer holidays</strong>. The article claims Finland, South Korea, and Singapore rank highly educationally AND have shorter summer breaks — but does not establish that the shorter break is the cause of their educational success. These countries differ in many other ways (culture, teacher pay, school funding, parental involvement). A critical reader would want to know: is there a controlled study showing that reducing summer holidays specifically improves outcomes, independent of other factors? Omission 2: <strong>No response to the potential benefits of long holidays</strong>. The article dismisses the idea that "six weeks of unstructured time is somehow good for children" — but doesn't engage with evidence about the developmental value of unstructured play, family time, and rest for children's mental health and creativity. Educational researchers have argued that children in high-performing but high-pressure systems like South Korea experience significant mental health challenges. Including this evidence would force a more nuanced conclusion. If the reader knew about mental health concerns in South Korean schools, they might be less enthusiastic about adopting that model.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended response and evaluation.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">⚖️ Extended Analysis & Writing</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">You have now read THREE non-fiction articles across Worksheets A, B, and C: (1) "Our Oceans Are Drowning in Plastic," (2) "Young People Are Not the Problem — They Are the Solution," and (3) "The School Holiday Is Killing Your Child's Future." Write a paragraph comparing how ALL THREE use statistics. For each article, explain: what kind of statistic is used, what it is meant to prove, and whether it is used effectively or whether a critical reader might question it. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Article 1 (Plastic) — statistic used: What it proves: Is it effective or questionable?&#10;&#10;Article 2 (Young People) — statistic used: What it proves: Is it effective or questionable?&#10;&#10;Article 3 (School Holiday) — statistic used: What it proves: Is it effective or questionable?&#10;&#10;Overall comparison — how are the three uses of statistics similar and how are they different?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Article 1 (Plastic): Statistic — "only 9% of all plastic ever produced has been recycled." Proves: that plastic recycling is a largely failed solution, making the problem seem more urgent. Effective/questionable: effective because the figure is specific and dramatically low, making the reader feel alarmed. A critical reader might ask: which study produced this figure, and how was "recycled" defined? If the figure includes recycling in any country globally, it's verifiable; if it's a single study's estimate, it needs more context. Article 2 (Young People): Statistic — "62% of people aged 16–25 volunteered for a community cause in the past year." Proves: that young people are more civic-minded than stereotypes suggest. Effective/questionable: the statistic sounds impressive but a critical reader asks: what counts as volunteering? One hour counts technically. The source — "Youth Volunteering Institute" — sounds credible but is not a household-name institution. The article doesn't compare the 62% to other age groups' volunteering rates, which would make the comparison meaningful. Article 3 (School Holiday): Statistic — "2.7 months of reading progress lost." Proves: that the summer holiday causes specific, measurable educational harm — particularly for lower-income children. Effective/questionable: the decimal point (2.7 not "about 3") gives it an air of precision, which is persuasive. However, measuring "months of progress" is methodologically complicated — different assessment tools might give different figures. The article doesn't say how children from higher-income households are measured or what their loss/gain actually is. Overall comparison: All three use statistics for credibility. All three present single figures without full methodological context. The plastic article's statistic (9%) is the most globally accepted and verifiable. The school holiday statistic is the most specific and precise-sounding, making it feel most authoritative — but also the most dependent on a specific measurement methodology.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">Write a 150-word response to the school holiday article from the perspective of a parent who disagrees with its argument. Use at least THREE language techniques from the lesson (label them). Your response should feel like a letter to the editor of the newspaper that published the article. <span class="marks">7 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Dear Editor,&#10;&#10;(write your letter — aim for ~150 words; label your techniques in brackets)"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample response: "Dear Editor, I write in response to your recent article claiming that the school holiday is 'killing children's futures.' [EMOTIVE LANGUAGE in original headline — my response mirrors the register.] Surely, in a world of increasing screen time, academic pressure, and childhood anxiety, six weeks of unstructured freedom is not a problem to be solved but a gift to be protected? [RHETORICAL QUESTION] My children spend summer reading, playing, exploring, arguing, laughing, and learning things no curriculum has ever taught them — creativity, independence, and how to be bored and survive it. Your article quotes Professor Adeyemi calling the summer holiday a 'relic.' But I would call it one of the last reliably unscheduled spaces in a childhood that is otherwise managed, assessed, and optimised to within an inch of its life. [COUNTER-ARGUMENT] The solution to educational inequality is not to take away the only breathing space our children have. It is to ensure that all families have the resources to make those six weeks rich." [CALL TO ALTERNATIVE ACTION] Techniques labelled: emotive language, rhetorical question, counter-argument.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+    <div><div class="score-label">Total Score — English Week 7C</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(190,18,60,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  MATHS  ══════════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🔢</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 7 · Practice C</div>
+  <div class="hero-title">Ratio &<br>Proportion</div>
+  <div class="hero-subtitle">Mixed Problems · Exam-Style Questions · Error Analysis · Multi-Step Reasoning</div>
+  <div class="hero-tags"><span class="hero-tag">Practice C — Exam Style</span><span class="hero-tag">Ratio & Proportion</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 42"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Core skills. Aim for full marks — these are must-know methods.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Core Skills Consolidation</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Spot the mistake in each solution and write the correct answer. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) 'Simplify 18:24. I divide both by 6 → 3:4.' Is this correct? If not, what is the correct simplified ratio?&#10;&#10;b) 'Share £60 in ratio 2:3. Total parts = 5, one part = £60÷5 = £12. Shares: 2×£12 = £24 and 3×£12 = £36. Check: £24+£36 = £60.' Any errors?&#10;&#10;c) 'If 5 workers take 20 days, how long do 10 workers take? More workers = more days, so 20×2 = 40 days.' Error?&#10;&#10;d) 'Ratio boys:girls = 3:5 in a class of 40. Number of boys = 3/5 × 40 = 24.' Error?&#10;&#10;e) '4cm on a map with scale 1:25,000 = 4×25,000 = 100,000cm = 100m.' Error in the unit conversion?&#10;&#10;f) 'Orange squash : water = 1:6. For 300ml of squash, I need 300÷6 = 50ml of water.' Error?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 18:24 → HCF=6 → 3:4. <strong>Correct</strong> ✓. b) <strong>Correct</strong> ✓ — all steps and check are accurate. c) <strong>Error</strong>: This is inverse proportion — more workers = fewer days, not more. Total worker-days=5×20=100. With 10 workers: 100÷10=<strong>10 days</strong>. d) <strong>Error</strong>: The ratio 3:5 has 3+5=8 total parts, not 5. Boys = 3/8 × 40 = <strong>15 boys</strong>. (Writing 3/5 confuses ratio with proportion.) e) <strong>Error in unit conversion</strong>: 100,000cm ÷ 100 = 1,000m = <strong>1km</strong>, not 100m. 1m=100cm; 1km=100,000cm. The answer should be 1km. f) <strong>Error</strong>: The ratio is squash:water = 1:6. For 300ml of squash (1 part), water = 6 parts = 6×300 = <strong>1,800ml</strong>. The student divided instead of multiplied — they found 1 part of the squash's total but needed to multiply for the water.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Mixed recall practice. Show all working. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Write three ratios equivalent to 2:5.&#10;&#10;b) In a class of 35 students, the ratio of students who walk to school to those who don't is 3:4. How many walk?&#10;&#10;c) A recipe uses milk and cream in ratio 5:2. If you use 350ml of milk, how much cream do you need?&#10;&#10;d) Two numbers are in ratio 7:3. Their sum is 90. Find both numbers.&#10;&#10;e) A map scale is 1:20,000. How many centimetres on the map represents 4.5km in real life?&#10;&#10;f) A car travels 252km on 28 litres of petrol. How far does it travel on a full tank of 42 litres?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Any three: 4:10, 6:15, 10:25, 20:50 etc. b) Total parts=7. One part=35÷7=5. Walk=3×5=<strong>15 students</strong>. c) 1 part of ratio 5:2 = 350÷5=70ml. Cream=2×70=<strong>140ml</strong>. d) Total parts=10. One part=90÷10=9. Numbers: 7×9=<strong>63</strong> and 3×9=<strong>27</strong>. Check: 63+27=90 ✓. e) 4.5km=450,000cm. ÷20,000=<strong>22.5cm on the map</strong>. f) Per litre=252÷28=9km. On 42 litres=9×42=<strong>378km</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Multi-step real-life problems. Show every step.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔢 Multi-Step Problems</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">A paint company makes a colour called "Ocean Blue" by mixing blue, white, and grey paint in the ratio 5:3:2. <br>(a) How much of each colour is needed for 4 litres of Ocean Blue?<br>(b) The company has 6 litres of blue, 4 litres of white, and 3 litres of grey. What is the maximum total volume of Ocean Blue they can make? (Hint: check which colour runs out first.)<br>(c) After making the Ocean Blue, how much of each colour is left over? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) For 4 litres: Blue = ___ White = ___ Grey = ___&#10;&#10;(b) Maximum volume working — check each colour:&#10;Blue allows: White allows: Grey allows: Maximum volume = ___&#10;&#10;(c) Leftover: Blue = ___ White = ___ Grey = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Total parts=10. One part=4÷10=0.4L. Blue=5×0.4=<strong>2L</strong>, White=3×0.4=<strong>1.2L</strong>, Grey=2×0.4=<strong>0.8L</strong>. (b) Check each colour as the limiting factor: Blue (6L): 6÷5=1.2L per part → total=1.2×10=12L. White (4L): 4÷3=1.333L per part → total=1.333×10=13.3L. Grey (3L): 3÷2=1.5L per part → total=1.5×10=15L. <strong>Blue is the limiting colour</strong> → maximum total = <strong>12 litres</strong>. (c) At 12L total: Blue used=5/10×12=6L → leftover=<strong>0L</strong>. White used=3/10×12=3.6L → leftover=4−3.6=<strong>0.4L</strong>. Grey used=2/10×12=2.4L → leftover=3−2.4=<strong>0.6L</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">A school's student council has 12 members. The ratio of Year 7 to Year 8 to Year 9 students is 1:2:3. Next year, the council will expand to 20 members, maintaining the SAME ratio. (a) How many from each year group are on the council now? (b) How many from each year group will there be after the expansion? (c) How many NEW members will join from each year group? <span class="marks">6 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Current: Y7 = ___ Y8 = ___ Y9 = ___&#10;(b) After expansion: Y7 = ___ Y8 = ___ Y9 = ___&#10;(c) New members joining: Y7 = ___ Y8 = ___ Y9 = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Total parts=6. One part=12÷6=2. Y7=1×2=<strong>2</strong>, Y8=2×2=<strong>4</strong>, Y9=3×2=<strong>6</strong>. (b) With 20 members: one part=20÷6=3.33... → not a whole number. Accept: Y7≈3.3, Y8≈6.7, Y9≈10 (round: Y7=3, Y8=7, Y9=10 → total=20 ✓ with rounding). Or note: the ratio 1:2:3 does not divide evenly into 20 members — a real-world observation. Best answer: 20÷6 doesn't give whole numbers, so the expansion would likely adjust to a nearby total that works (e.g. 18: Y7=3, Y8=6, Y9=9). Accept sensible responses that note the division issue. (c) From answer (b): new Y7=1, new Y8=3, new Y9=4 (using rounded values). Total new members=8. This question tests whether students notice that 1:2:3 doesn't divide into 20 evenly — a real-world constraint.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Reasoning, proof, and explanation. Full marks require explanation as well as calculation.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚖️ Reasoning & Proof</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Two taps fill a tank. Tap A fills it in 6 hours alone. Tap B fills it in 4 hours alone. (a) What fraction of the tank does each tap fill per hour? (b) If both taps are open, what fraction of the tank is filled per hour? (c) How long does it take to fill the whole tank with both taps open? (d) This is a proportion problem — is it direct or inverse, and why? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Tap A fills ___ per hour. Tap B fills ___ per hour.&#10;(b) Together they fill ___ per hour.&#10;(c) Time to fill whole tank = ___ hours&#10;(d) Direct or inverse proportion — explain why:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Tap A: 1/6 of tank per hour. Tap B: 1/4 of tank per hour. (b) Together: 1/6 + 1/4 = 2/12 + 3/12 = <strong>5/12 per hour</strong>. (c) Time to fill whole tank = 1 ÷ 5/12 = 12/5 = <strong>2.4 hours (2 hours 24 minutes)</strong>. (d) This is <strong>inverse proportion</strong> — more taps (or more filling capacity) means less time to fill the tank. If you double the combined rate, you halve the time. Rate × time = 1 tank (a constant product), which is the defining property of inverse proportion.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">Prove algebraically that if two quantities x and y are in direct proportion (y = kx for some constant k), then: (a) doubling x doubles y, (b) the ratio y₁:y₂ always equals x₁:x₂ for any two values. Then give a real-world ratio/proportion example that demonstrates both of these properties. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Proof that doubling x doubles y (use y = kx):&#10;&#10;(b) Proof that y₁:y₂ = x₁:x₂:&#10;&#10;Real-world example demonstrating both properties:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) If y = kx, and we double x to 2x: new y = k(2x) = 2(kx) = 2y. So doubling x gives 2y — i.e. y also doubles. ✓ (b) Let x₁ and x₂ be any two values of x. Then y₁ = kx₁ and y₂ = kx₂. The ratio y₁:y₂ = kx₁ : kx₂. Dividing both parts by k: = x₁ : x₂. So y₁:y₂ = x₁:x₂ for any values. ✓ Real-world example: Cost of apples at £2 per kg. If x = mass (kg) and y = cost (£), then y = 2x. (a) 3kg costs £6; 6kg costs £12 — doubling mass doubles cost. ✓ (b) The ratio of costs for 3kg and 5kg = £6:£10 = 3:5, which is exactly the ratio of masses (3:5). ✓ This is why the unitary method always works for direct proportion: the ratio of outputs equals the ratio of inputs.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">A nutritionist says a healthy meal should have protein, carbohydrates, and fat in the ratio 2:5:1 by mass. (a) A meal weighs 400g total. How much of each macronutrient should it contain? (b) Protein provides 4 calories per gram, carbohydrates provide 4 cal/g, and fat provides 9 cal/g. How many calories come from each macronutrient? (c) What is the total calorie count? (d) What percentage of the total calories comes from fat? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Protein: ___ g  Carbohydrates: ___ g  Fat: ___ g&#10;(b) Calories from protein: ___ Calories from carbs: ___ Calories from fat: ___&#10;(c) Total calories: ___&#10;(d) % from fat: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Total parts=2+5+1=8. One part=400÷8=50g. Protein=2×50=<strong>100g</strong>, Carbs=5×50=<strong>250g</strong>, Fat=1×50=<strong>50g</strong>. Check: 100+250+50=400 ✓. (b) Protein: 100×4=<strong>400 cal</strong>. Carbs: 250×4=<strong>1,000 cal</strong>. Fat: 50×9=<strong>450 cal</strong>. (c) Total calories=400+1,000+450=<strong>1,850 calories</strong>. (d) % from fat=450÷1,850×100=<strong>24.3%</strong> (1 d.p.). Note: although fat is only 1/8 of the mass, it provides 24.3% of the calories — because fat has more than twice the calories per gram as protein or carbohydrates. This is a real-world example of why mass ratio alone doesn't tell the whole nutritional story.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+    <div><div class="score-label">Total Score — Maths Week 7C</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 42" style="border-color:rgba(180,83,9,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  SCIENCE  ══════════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">⚗️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 7 · Practice C</div>
+  <div class="hero-title">States of Matter</div>
+  <div class="hero-subtitle">Exam-Style Questions · Application · Evaluating Scientific Claims</div>
+  <div class="hero-tags"><span class="hero-tag">Practice C — Exam Style</span><span class="hero-tag">Chemistry</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 40"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — One-mark style questions. No notes.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Rapid Recall</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Rapid-fire questions — answer each in one sentence or a few words. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Which state of matter has particles that vibrate in fixed positions?&#10;b) Name a substance that sublimates at room temperature.&#10;c) What happens to the temperature during a change of state on a heating curve?&#10;d) Why can gases be compressed but solids cannot?&#10;e) What is the name of the energy absorbed or released during a state change?&#10;f) Is the change from liquid to gas (boiling) a physical change or a chemical change? How do you know?&#10;g) Which has more energy: a water molecule in steam at 100°C or a water molecule in liquid water at 100°C? Explain.&#10;h) State ONE limitation of the simple particle model that is mentioned in the lesson."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Solid</strong> — particles are locked in a fixed lattice and can only vibrate. b) <strong>Dry ice (solid CO₂)</strong>; also accept: naphthalene (mothballs), some air fresheners. c) <strong>Temperature stays constant / does not rise</strong> — all energy goes into breaking bonds between particles during the state change. d) Gas particles have <strong>lots of empty space between them</strong>; solid particles are already touching/tightly packed with no space to compress into. e) <strong>Latent heat</strong>. f) <strong>Physical change</strong> — you can condense the steam back to liquid water; the H₂O molecules are unchanged. A chemical change would produce new substances that cannot be reversed. g) The <strong>steam molecule has more energy</strong> — both are at 100°C (same temperature = same kinetic energy) BUT the steam molecule has absorbed latent heat of vaporisation to escape the liquid state. It contains more total energy even though both are at 100°C. h) Any one of: it treats all particles as identical spheres with no electrical charge; it doesn't explain forces between particles; it doesn't account for plasma; it doesn't explain why some substances dissolve and others don't.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Apply your knowledge to unfamiliar situations.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Application Questions</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">A nurse notices that when she applies alcohol (ethanol) to a patient's skin before an injection, the skin quickly feels cold. Use the particle model to explain this observation fully. Include: what state change is occurring, whether heat is absorbed or released, where the heat comes from, and why the skin feels cold. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="State change occurring:&#10;&#10;Heat absorbed or released:&#10;&#10;Where the heat comes from:&#10;&#10;Why the skin feels cold:&#10;&#10;Why alcohol evaporates faster than water (bonus):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">State change: The alcohol is <strong>evaporating</strong> — changing from liquid to gas. This is the liquid → gas state change (evaporation, not boiling, since it happens below the boiling point of alcohol at the surface). Heat absorbed or released: Evaporation <strong>absorbs heat</strong> — this is always the case when a liquid turns to gas. Where the heat comes from: The alcohol absorbs heat energy from <strong>the patient's skin</strong> — the skin is providing the thermal energy needed for the alcohol particles to escape as gas. Why the skin feels cold: Because the alcohol is removing thermal energy (heat) from the skin surface, the skin temperature drops — this is detected by the patient as a cold sensation. The faster the evaporation, the more heat is removed and the colder it feels. Bonus: Alcohol has weaker forces between its molecules than water does, meaning its particles need less energy to escape as gas — so it evaporates faster at the same temperature.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">A student heats 200g of ice at −10°C in a beaker using a steady heat source. Describe what happens to the temperature and the particles during each of these five stages, and explain why stage B and stage D look different from the others on a graph. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="Stage A (−10°C to 0°C): Temperature: Particles:&#10;&#10;Stage B (stays at 0°C for a time): Temperature: Particles: Why flat on graph:&#10;&#10;Stage C (0°C to 100°C): Temperature: Particles:&#10;&#10;Stage D (stays at 100°C for a time): Temperature: Particles: Why flat on graph:&#10;&#10;Stage E (above 100°C): Temperature: Particles:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Stage A (−10°C to 0°C): Temperature <strong>rises steadily</strong>. Particles are solid (ice) — they vibrate faster and faster as energy is added, but remain locked in fixed positions. Stage B (stays at 0°C): Temperature <strong>stays constant</strong> even though heat continues to be added. Particles are breaking free from their fixed lattice structure as melting occurs — energy goes entirely into breaking the bonds between particles, not into raising temperature. This is why stage B is flat on the graph — all the latent heat of fusion is being absorbed. Stage C (0°C to 100°C): Temperature <strong>rises steadily again</strong>. Particles are now liquid — they slide past each other and move faster and faster as energy increases. Stage D (stays at 100°C): Temperature <strong>stays constant</strong> again. Particles are escaping from the liquid surface and throughout the liquid as gas — all energy goes into overcoming the remaining forces between liquid particles (latent heat of vaporisation). Flat on graph for the same reason as B, but the flat is longer because more energy is needed to vaporise than to melt. Stage E (above 100°C): Temperature <strong>rises steadily</strong>. Particles are gas (steam) — they move very fast in all directions, speeding up further as more energy is added.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Evaluating scientific claims. Think like a scientist.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">⚖️ Evaluating Scientific Claims</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">A science magazine claims: <em>"Ice at −1°C is colder than water at 1°C — and ice at −1°C contains more energy than water at 1°C."</em> Evaluate this claim carefully. (a) Is the first part correct? (b) Is the second part correct? Explain using what you know about latent heat. (c) What does this tell us about the relationship between temperature and energy? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Is ice at −1°C colder than water at 1°C? Explain:&#10;&#10;(b) Does ice at −1°C contain more energy than water at 1°C? Explain using latent heat:&#10;&#10;(c) What this tells us about temperature vs energy:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Yes, the first part is correct</strong>. Ice at −1°C has a lower temperature than water at 1°C. Temperature measures the average kinetic energy of particles — at −1°C, particles have less kinetic energy than at 1°C. (b) <strong>No, the second part is incorrect</strong>. Water at 1°C contains MORE energy than ice at −1°C, not less. Here is why: to convert ice at 0°C into water at 0°C, you must add the latent heat of fusion — a significant amount of energy that goes entirely into breaking the bonds between ice particles, without raising the temperature. Water at 1°C (which has already absorbed this latent heat during melting) contains more total energy than ice at −1°C, even though the temperature difference is only 2°C. The latent heat absorbed during melting is far more energy than the small difference in kinetic energy between −1°C and 1°C. (c) This reveals the crucial distinction the lesson makes: <strong>temperature and total energy content are not the same thing</strong>. Temperature measures the kinetic energy of particles (how fast they move). Total energy includes latent heat — energy stored in the breaking of intermolecular bonds during state changes. Two samples of the same substance at almost the same temperature can have very different total energy contents if one has undergone a phase change. This is why it takes so much energy to boil water even after it reaches 100°C.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">The lesson says: "The fact that a model has limitations does not mean it is wrong or useless." Using the particle model as your example, write a structured scientific argument (minimum 5 sentences) that defends this principle. Your argument should: acknowledge a real limitation, explain why the model is still useful despite that limitation, and compare it to another area of life where an imperfect model or simplified framework is still valuable. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Your scientific argument defending the value of imperfect models:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample answer: The particle model of matter has genuine limitations: it represents all particles as identical small spheres with no electrical charge, no shape, and no inter-particle forces — none of which are true for real atoms. A real atom has a complex electron structure, positive-negative charge interactions, and a specific geometric shape that determines how it bonds with other atoms. Yet despite these inaccuracies, the particle model correctly predicts and explains the most important observable properties of matter: why solids keep their shape (particles locked), why liquids flow and take the container's shape (particles mobile but close), why gases expand to fill any volume (particles fast and far apart), why heating raises temperature (particles move faster), and why changes of state happen at specific temperatures (energy used to break bonds). These are the phenomena students encounter in the real world, and the particle model handles all of them elegantly. The model should be judged not by whether it captures every quantum-mechanical detail, but by whether it provides reliable, testable predictions at the scale we are working at — and it does. A useful parallel: a map of a city does not show every person, every pipe, or every brick, but it reliably tells you how to get from one place to another. We do not discard the map because it omits detail; we understand its purpose and use it accordingly. Scientific models are purpose-built simplifications, and their value lies in what they get right, not in their incompleteness.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">Design a simple experiment to test whether sugar dissolves faster in hot water than in cold water. Write up your experiment using the following headings: Hypothesis, Variables (independent, dependent, control), Method (in steps), Expected results, and How you would present your data. <span class="marks">6 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Hypothesis:&#10;&#10;Variables:&#10;Independent variable:&#10;Dependent variable:&#10;Control variables (at least 3):&#10;&#10;Method (numbered steps):&#10;&#10;Expected results — and explain using the particle model WHY you expect this:&#10;&#10;How you would present the data:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Hypothesis</strong>: Sugar will dissolve faster in hot water than in cold water because higher temperature means water particles move faster and collide more energetically with sugar particles, breaking them apart more quickly. <strong>Variables</strong>: Independent = temperature of water (e.g. 20°C, 40°C, 60°C, 80°C). Dependent = time for sugar to fully dissolve (measured in seconds). Control variables: same mass of sugar (e.g. 5g), same volume of water (e.g. 100ml), same type of sugar, same stirring rate (or no stirring), same container. <strong>Method</strong>: 1. Heat water samples to four different temperatures and confirm with a thermometer. 2. Measure exactly 5g of sugar on a balance for each trial. 3. Add the sugar to the water and start the timer simultaneously. 4. Stir at a consistent rate (or don't stir, but be consistent). 5. Stop the timer when no sugar crystals are visible. 6. Record the time. 7. Repeat each temperature three times and take an average (to improve reliability). <strong>Expected results</strong>: As temperature increases, dissolving time decreases — because hotter water particles have more kinetic energy, collide more frequently and energetically with sugar molecules, and break the bonds holding the sugar crystals together more quickly. <strong>Data presentation</strong>: A line graph with temperature on the x-axis and average time to dissolve on the y-axis. A downward sloping line would confirm the hypothesis. A table of results (with three repeats and averages) should accompany the graph.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+    <div><div class="score-label">Total Score — Science Week 7C</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(6,95,70,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+
+<!-- ══════════════════  HISTORY  ══════════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌿</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Week 7 · Practice C</div>
+  <div class="hero-title">Climate &<br>Biomes</div>
+  <div class="hero-subtitle">Exam-Style Questions · Case Studies · Extended Analysis · Synoptic Thinking</div>
+  <div class="hero-tags"><span class="hero-tag">Practice C — Exam Style</span><span class="hero-tag">Geography</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 40"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Core knowledge check. Short answers.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Knowledge Check</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">True or False? If false, write the correct statement. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Climate describes the weather on a specific day in a specific place.&#10;True / False — Correct statement if false:&#10;&#10;b) Latitude is the distance east or west of the Prime Meridian.&#10;True / False — Correct statement if false:&#10;&#10;c) The same biome can appear on different continents if they share the same climate conditions.&#10;True / False — Correct statement if false:&#10;&#10;d) A hot desert receives less than 250mm of precipitation per year.&#10;True / False — Correct statement if false:&#10;&#10;e) Animals in the tundra have light-coloured fur to absorb more heat from the sun.&#10;True / False — Correct statement if false:&#10;&#10;f) The Gulf Stream is an ocean current that makes Western Europe warmer than it would otherwise be at its latitude.&#10;True / False — Correct statement if false:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>False</strong>. Climate describes the long-term average weather patterns of a region over 30+ years. Weather describes conditions on a specific day. b) <strong>False</strong>. Latitude is the distance north or south of the equator, measured in degrees (0°–90°). Longitude measures east/west from the Prime Meridian. c) <strong>True</strong>. d) <strong>True</strong>. e) <strong>False (partially)</strong>. Tundra animals have white or light-coloured fur primarily for camouflage (to blend with snow, either to hide from predators or to hunt). Insulation is provided by the thickness and density of the fur/blubber, not its colour. (However, some fur does trap heat in the structure of the hair shaft — accept nuanced answers.) f) <strong>True</strong>.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Put these five climate factors in order of impact on a coastal city in Western Europe (most important first) and briefly explain why you have ranked them that way. <span class="marks">5 marks</span><br><br><em>Latitude · Altitude · Distance from the sea · Ocean currents · Prevailing winds</em></div>
+    <textarea class="q-input" placeholder="1st: ___ Because:&#10;2nd: ___ Because:&#10;3rd: ___ Because:&#10;4th: ___ Because:&#10;5th: ___ Because:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Accept reasoned answers — there is no single correct ranking. A well-reasoned answer might be: 1st: <strong>Latitude</strong> — the most fundamental determinant of how much solar energy a place receives; all other factors modify the baseline set by latitude. 2nd: <strong>Ocean currents</strong> — for a coastal city in Western Europe, the Gulf Stream has an enormous moderating effect (the UK is far warmer than Canada at the same latitude). 3rd: <strong>Distance from the sea</strong> — being coastal means the sea moderates temperature extremes (maritime climate — mild and wet year-round). 4th: <strong>Prevailing winds</strong> — westerly winds bring moist Atlantic air that drives the rainfall patterns of Western Europe. 5th: <strong>Altitude</strong> — least significant for a typical coastal city at low elevation; altitude matters most for highland or mountain regions. Mark on quality of reasoning, not specific order.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Case study questions. Apply the lesson's framework to specific examples.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Case Studies</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Use the lesson's chain (climate → vegetation → biome) to explain why the SAVANNAH biome has a distinctive two-season pattern — wet and dry — rather than the continuous rainfall of the rainforest. Explain: what causes the wet and dry seasons, what vegetation has adapted to this pattern, and what animals have adapted to survive both seasons. Write at least 4 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="What causes the wet and dry seasons in savannah regions:&#10;&#10;How vegetation has adapted to the two-season pattern:&#10;&#10;How animals have adapted to survive both seasons:&#10;&#10;How the savannah's food web differs from the rainforest's because of this pattern:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The savannah's two-season pattern is caused by the movement of the Inter-Tropical Convergence Zone (ITCZ) — a belt of low pressure near the equator where trade winds meet, causing heavy rainfall. As the Earth orbits the sun, the ITCZ shifts north and south — bringing the wet season when it moves into a region and leaving the dry season when it retreats. Savannah regions are close enough to the equator to receive high rainfall when the ITCZ passes, but not directly on the equator (where rainfall is year-round, creating rainforest). The wet season lasts roughly 6–8 months; the dry season 4–6 months. Vegetation has adapted with: deep roots that access underground water during the dry season; trees with thick fire-resistant bark (fires occur in the dry season); grasses that can grow back rapidly after fire, exploiting the nutrients released by burning; and deciduous trees that lose leaves in the dry season to reduce water loss. Animals have adapted with: migration — many large herbivores (wildebeest in the Serengeti) follow the rains, covering thousands of kilometres annually to access fresh grass; burrowing — some small animals estivate (a summer equivalent of hibernation) during the driest months; opportunistic predation — predators like lions concentrate near waterholes in the dry season when prey animals must come to drink. The savannah food web is seasonal in a way the rainforest's is not: during the wet season, grass production is enormous and herbivore populations boom; during the dry season, prey concentrates and predators benefit — creating a cycle that structures the entire ecosystem.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson distinguishes between climate and weather using the example of a single cold day not disproving a warming trend. Now apply this distinction to a DIFFERENT example of your own — one NOT from the lesson — and use it to explain why the climate-weather distinction matters for understanding news reports about extreme weather events. Write at least 3 sentences. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Your own example (not from the lesson):&#10;&#10;How this illustrates the climate-weather distinction:&#10;&#10;Why this matters when reading news reports about extreme weather:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample example: In 2021, a record-breaking cold spell hit Texas, USA, with temperatures far below what the region normally experiences — infrastructure froze, power grids failed, and some pointed to this as evidence against global warming. This is a classic example of confusing weather (one extreme cold event in one location in one winter) with climate (the long-term average global temperature trend measured over decades). A single cold event in one place at one time cannot tell us anything about the 30-year average global temperature — especially since climate change is predicted to make extreme weather events (including unusual cold snaps in some regions) more frequent and severe, not just warmer on average everywhere. This matters for news reports because extreme weather events are, by definition, unusual and dramatic — making them newsworthy. But news operates on a daily timescale (weather) while climate change operates on a decades timescale. A critical reader must always ask: is this one event, or a systematic pattern? One flood, one drought, or one cold week is weather. An increasing frequency of floods, droughts, and temperature anomalies over 30 years is a climate trend.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Synoptic extended writing. Connect across subjects and ideas.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">⚖️ Synoptic Extended Writing</div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">The lesson uses the phrase "climate is what you expect; weather is what you get." Write an extended analogy — using a completely different area of life — that captures the same distinction between long-term patterns and short-term events. Your analogy should: be original, clearly explain the parallel, and explain what a "policy-maker" or "decision-maker" in your analogy would be making a mistake if they confused the two levels. Write at least 5 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Your original analogy:&#10;&#10;The parallel to climate vs weather:&#10;&#10;What mistake a decision-maker would make by confusing the two:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample analogy — <strong>a student's academic performance over a year vs one exam result</strong>: A student's underlying academic ability is like "climate" — it represents their consistent, long-term level of understanding built up through regular study, engagement, and practice across months. A single exam result is like "weather" — it is what happened on one specific day, affected by how well the student slept, whether they were anxious, whether the questions happened to match topics they had revised well. A teacher who saw a brilliant student fail one exam and concluded "this student is struggling" would be making the climate-weather error — mistaking one data point for a pattern. Equally, a student who had one excellent exam result and concluded "I understand everything about this topic" would be making the same error in the opposite direction. Good educational decision-making — like good climate science — requires looking at patterns over time (multiple assessments, consistent engagement, long-term progress) rather than reacting to individual results as if they revealed the whole truth. The analogy captures both the distinction and its practical importance for decision-makers.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">6</div>
+    <div class="q-text">Write an extended essay-style response to the following question (minimum 6 sentences): <em>"Biomes are not just interesting geography — they are the foundation of human survival. Do you agree?"</em> Use evidence from the lesson about at least TWO biomes and explain specifically how each one provides services that humans depend on. Then address the counterargument: can't modern technology replace what biomes provide? <span class="marks">10 marks</span></div>
+    <div class="cross-week">🔗 <strong>Final cross-week challenge:</strong> Connect to ALL THREE of this week's other subjects: Bible (stewardship and imago Dei), Science (particle model and temperature), and English (persuasive non-fiction writing techniques). If you choose to make your essay persuasive, deliberately use at least TWO techniques from the English lesson.</div>
+    <textarea class="q-input xwide" placeholder="Your extended essay (minimum 6 sentences):&#10;&#10;Optional: label any English techniques you use in brackets."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Sample essay: "Biomes are not merely geographical curiosities — they are the life-support systems of a planet on which human beings have lived for 300,000 years. [EMOTIVE LANGUAGE — 'life-support systems'] Can any honest observer look at the services biomes provide and still argue that their loss would be manageable? [RHETORICAL QUESTION] Take the tropical rainforest. It produces an estimated 20% of the world's oxygen, regulates regional rainfall patterns through transpiration, and contains over half of the world's known species — many producing compounds that have given us antibiotics, anti-cancer drugs, and anaesthetics. The Amazon alone has been called 'the lungs of the world.' Take the tundra — its permafrost stores carbon accumulated over thousands of years; as it thaws, that carbon is released, accelerating a warming process that affects every biome on Earth and every human civilisation that depends on a stable climate. Some argue that technology can replace what biomes provide — solar panels can generate energy, vertical farms can grow food, desalination plants can produce water. But no technology yet devised can replace the carbon-sequestration capacity of forests at scale, the biodiversity that underpins food-chain stability, or the climate-regulating effects of intact biomes built up over millions of years of evolution. To believe otherwise would be like saying we can replace a human heart with a machine that merely pumps blood — technically possible in one narrow function, but missing everything else the organ does. [ANALOGY] The lesson's chain — climate → vegetation → biome — shows that biomes are not independent of human welfare; they are the physical precondition of the stable climate that all agriculture, all cities, and all civilisations have depended upon. The stewardship argument from Week 2 Bible connects here: we manage these systems on behalf of something larger than ourselves. [CROSS-WEEK LINK] Not to manage them responsibly is not merely an ecological failure — it is, as the lesson argues, a moral one." [TECHNIQUES: emotive language, rhetorical question, analogy, cross-week connections.] Mark holistically: 10 marks for a response that covers two biomes with specific evidence, addresses counterargument, uses clear reasoning, and writes persuasively with developed sentences.</div>
+  </div>
+
+  <div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+    <div><div class="score-label">Total Score — History Week 7C</div><div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sections A + B + C</div></div>
+    <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 40" style="border-color:rgba(30,58,138,0.4);"></div>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week7_Day3');</script>
+</body>
+</html>

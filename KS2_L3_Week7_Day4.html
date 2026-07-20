@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 — Day 4 Mixed Revision · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}.logo span{color:var(--science);}
+.day-badge{background:#EDE9FE;color:#5B21B6;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #7C3AED;margin-right:8px;}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;background:linear-gradient(135deg,#1E1B4B,#4338CA);}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-30px;right:60px;width:120px;height:120px;background:rgba(255,255,255,0.07);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.4rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:520px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.2;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.section-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:99px;color:white;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:18px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){background:#F3F4F6;}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;color:white;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;margin-top:6px;}
+.open-box:focus{outline:none;border-color:#7C3AED;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;color:white;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn:hover{transform:scale(1.05);}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.ok{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.bad{background:#FEE2E2;border-color:#DC2626;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:#F3F4F6;color:#374151;transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:#E5E7EB;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.esl-box{background:#FFFBEB;border:2px solid #FCD34D;border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0;font-size:0.88rem;line-height:1.6;}
+.esl-box strong{color:#92400E;}
+.subject-strip{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--radius-sm);margin-bottom:14px;color:white;font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.score-display{background:linear-gradient(135deg,#1E1B4B,#4338CA);border-radius:var(--radius);padding:24px;text-align:center;color:white;margin-bottom:24px;}
+.score-display .big-num{font-family:'Fredoka One',cursive;font-size:3rem;line-height:1;}
+.score-display .sub{font-size:0.9rem;opacity:0.8;margin-top:4px;}
+@media(max-width:600px){.hero-title{font-size:1.7rem;}.hero-emoji{display:none;}.card{padding:16px;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">🌟 Day 4 — Mixed Revision</span>
+</div>
+
+<div style="padding:30px 20px 80px;max-width:960px;margin:0 auto;">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-type">🌟 Day 4 — Mixed Revision</div>
+    <div class="hero-week">📚 All 5 Subjects · Week 7 · KS2 Level 3</div>
+    <div class="hero-title">End-of-Week<br>Mixed Revision</div>
+    <div class="hero-sub">Bible · English · Maths · Science · Humanities — all in one big revision. How much have you learned this week?</div>
+    <div class="hero-emoji">🏆</div>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…" id="student-name"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Total Score</label><input type="text" placeholder="— / 50" id="total-score-field" readonly></div>
+  </div>
+
+  <!-- SCORE TRACKER -->
+  <div class="score-display">
+    <div style="font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;">Your Progress</div>
+    <div class="big-num" id="live-score">0</div>
+    <div class="sub">questions answered correctly</div>
+    <div style="margin-top:14px;background:rgba(255,255,255,0.15);border-radius:99px;height:12px;overflow:hidden;">
+      <div id="main-progress" style="height:12px;border-radius:99px;background:linear-gradient(90deg,#F59E0B,#34D399,#60A5FA);width:0%;transition:width 0.6s ease;"></div>
+    </div>
+    <div style="margin-top:6px;font-size:0.8rem;opacity:0.75;" id="main-prog-label">Complete all sections below</div>
+  </div>
+
+  <div class="esl-box">
+    🌍 <strong>ESL Reminder:</strong> Take your time. Press 🔊 to hear any question read aloud. Use what you have learned this week — you know more than you think!
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 1 — BIBLE: Moses
+  ═══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--bible);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">📖 Bible — Moses &amp; The Burning Bush <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:12px;">1. Match the word to its meaning: <button class="audio-btn" onclick="speak('Match each Bible word to its correct definition.')">🔊</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--bible);">Word</th><th style="background:var(--bible);">Definition — write A, B, C, D or E</th></tr>
+      <tr><td><strong>Pharaoh</strong></td><td><input class="fill-in" data-ans="D" id="bvm-0" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Burning Bush</strong></td><td><input class="fill-in" data-ans="B" id="bvm-1" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>I AM WHO I AM</strong></td><td><input class="fill-in" data-ans="A" id="bvm-2" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Courage</strong></td><td><input class="fill-in" data-ans="C" id="bvm-3" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+      <tr><td><strong>Slaves</strong></td><td><input class="fill-in" data-ans="E" id="bvm-4" placeholder="A/B/C/D/E" style="width:80px;"></td></tr>
+    </table>
+    <div style="background:var(--bible-l);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;font-weight:700;">
+      A — The name God gave Himself in Exodus 3:14 — showing He always exists &nbsp;|&nbsp;
+      B — A bush on fire that did NOT burn up — God spoke from inside it &nbsp;|&nbsp;
+      C — Bravery to do what is right even when afraid &nbsp;|&nbsp;
+      D — The powerful king of Egypt who enslaved the Israelites &nbsp;|&nbsp;
+      E — People forced to work with no pay and no freedom
+    </div>
+    <div style="margin-bottom:14px;"><button class="btn" style="background:var(--bible);" onclick="checkBibleVocab()">Check vocab ✅</button></div>
+    <div id="bib-vocab-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">2. Bible MCQ Quiz — Moses &amp; Burning Bush: <button class="audio-btn" onclick="speak('Answer each question about Moses. Press Next to move forward.')">🔊</button></p>
+    <div id="bible-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextMix('bible')">Next ➡️</button>
+      <span id="bible-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:8px;">3. Short written response — write 2–3 sentences:</p>
+    <p style="font-size:0.88rem;margin-bottom:8px;">God told Moses "I will be with you." Moses was afraid but obeyed. How does knowing God is with you give a person the courage to do hard things?
+      <button class="audio-btn" onclick="speak('Think about what it means to know you are not alone. How did that help Moses? How can it help you?')">🔊 hint</button>
+    </p>
+    <textarea class="open-box" placeholder="Knowing God is with you gives courage because…"></textarea>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 2 — ENGLISH: Non-Fiction
+  ═══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--english);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--english-d),var(--english));">✏️ English — Reading Non-Fiction <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">4. Non-fiction text features fill-in: <button class="audio-btn" onclick="speak('Think about the special features that help you read non-fiction: headings, subheadings, captions, index, table of contents, facts and opinions.')">🔊 reminder</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--english);">Clue</th><th style="background:var(--english);">Feature / Word</th></tr>
+      <tr><td>A bold title telling you what a section is about</td><td><input class="fill-in" data-ans="heading" id="eng-0" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>Something that can be proved true using evidence</td><td><input class="fill-in" data-ans="fact" id="eng-1" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>A short description written under a photograph</td><td><input class="fill-in" data-ans="caption" id="eng-2" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>What someone thinks or feels — cannot be proved</td><td><input class="fill-in" data-ans="opinion" id="eng-3" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>A list at the back of a book to find specific topics quickly</td><td><input class="fill-in" data-ans="index" id="eng-4" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>Writing about REAL events, facts and true information</td><td><input class="fill-in" data-ans="non-fiction" id="eng-5" placeholder="?" style="width:180px;"></td></tr>
+    </table>
+    <div style="margin:10px 0;"><button class="btn" style="background:var(--english);" onclick="checkEngFill()">Check ✅</button></div>
+    <div id="eng-fill-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">5. Reading MCQ — Fact or Opinion + Text Features: <button class="audio-btn" onclick="speak('Remember: a fact can be proved. An opinion is what someone thinks. Look carefully at each option.')">🔊</button></p>
+    <div id="eng-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextMix('eng')">Next ➡️</button>
+      <span id="eng-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">6. Write TWO sentences about any animal — one FACT and one OPINION. Label each one.</p>
+    <textarea class="open-box" placeholder="FACT: …&#10;OPINION: …"></textarea>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 3 — MATHS: Fractions
+  ═══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--maths);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">🔢 Maths — Fractions <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">7. Quick fraction calculations — type your answer: <button class="audio-btn" onclick="speak('Remember: divide by the denominator, then multiply by the numerator.')">🔊</button></p>
+    <div id="maths-fast-grid"></div>
+    <div style="margin:10px 0;display:flex;gap:10px;"><button class="btn" style="background:var(--maths);" onclick="checkFastMaths()">Check All ✅</button></div>
+    <div id="fast-maths-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">8. Fraction word problems — show your working:</p>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <div style="font-weight:800;margin-bottom:8px;">🎂 Problem A: A cake is cut into 12 equal slices. ¾ of the slices are eaten at a party. How many slices were eaten? How many are left?</div>
+        <textarea class="open-box" style="min-height:60px;" placeholder="¼ of 12 = 12 ÷ 4 = ___, so ¾ = 3 × ___ = ___ slices eaten&#10;Slices left = 12 − ___ = ___"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <div style="font-weight:800;margin-bottom:8px;">👟 Problem B: A shop has 60 pairs of shoes. ⅓ are trainers and ¼ are boots. How many trainers? How many boots? How many are neither trainers nor boots?</div>
+        <textarea class="open-box" style="min-height:80px;" placeholder="Trainers: ⅓ of 60 = 60 ÷ 3 = ___&#10;Boots: ¼ of 60 = 60 ÷ 4 = ___&#10;Neither: 60 − ___ − ___ = ___"></textarea>
+      </div>
+      <div style="background:var(--maths-l);border-radius:12px;padding:16px;">
+        <div style="font-weight:800;margin-bottom:8px;">❓ Problem C: ¾ of a number is 18. What is the whole number? Use the inverse to work it out.</div>
+        <textarea class="open-box" style="min-height:60px;" placeholder="If ¾ = 18, then ¼ = 18 ÷ 3 = ___, so the whole = ___ × 4 = ___"></textarea>
+      </div>
+    </div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">9. Fractions MCQ:</p>
+    <div id="maths-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMix('maths')">Next ➡️</button>
+      <span id="maths-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 4 — SCIENCE: Rocks
+  ═══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--science);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--science-d),var(--science));">🪨 Science — Rocks <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">10. Rocks fill-in — name the rock type or term: <button class="audio-btn" onclick="speak('Think about igneous, sedimentary and metamorphic rocks. Remember: igneous from lava, sedimentary from layers, metamorphic from heat and pressure.')">🔊 reminder</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--science);">Description</th><th style="background:var(--science);">Rock type or term</th></tr>
+      <tr><td>🌋 Forms when hot lava cools and hardens above ground</td><td><input class="fill-in" data-ans="igneous" id="sci-0" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>🏔️ Forms from layers of sand, mud and shells pressed together</td><td><input class="fill-in" data-ans="sedimentary" id="sci-1" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>💎 Forms when rocks are changed by great heat and pressure deep underground</td><td><input class="fill-in" data-ans="metamorphic" id="sci-2" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>The remains of an ancient plant or animal preserved in rock</td><td><input class="fill-in" data-ans="fossil" id="sci-3" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>A rock type that allows water to pass through it</td><td><input class="fill-in" data-ans="permeable" id="sci-4" placeholder="?" style="width:180px;"></td></tr>
+      <tr><td>A metamorphic rock formed from heated and pressurised limestone</td><td><input class="fill-in" data-ans="marble" id="sci-5" placeholder="?" style="width:180px;"></td></tr>
+    </table>
+    <div style="margin:10px 0;"><button class="btn" style="background:var(--science);" onclick="checkSciFill()">Check ✅</button></div>
+    <div id="sci-fill-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">11. Science MCQ — Rocks:</p>
+    <div id="sci-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="nextMix('sci')">Next ➡️</button>
+      <span id="sci-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">12. Written response: A scientist finds a rock with a fossil of a fish inside it. What type of rock is it? Explain WHY in 2–3 sentences using scientific vocabulary.</p>
+    <textarea class="open-box" placeholder="The rock must be … because fossils are only found in … rock. This is because …"></textarea>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 5 — HUMANITIES: Prehistoric Britain
+  ═══════════════════════════════════════ -->
+  <div class="card" style="--accent:var(--social);">
+    <div class="subject-strip" style="background:linear-gradient(135deg,var(--social-d),var(--social));">🌍 Humanities — Prehistoric Britain <span class="marks" style="margin-left:auto;">10 questions</span></div>
+
+    <p style="font-weight:800;margin-bottom:10px;">13. Prehistoric Britain fill-in: <button class="audio-btn" onclick="speak('Remember the three prehistoric ages: Stone Age, Bronze Age, Iron Age. Think about flint, hill forts, bronze, iron, the Celts and Stonehenge.')">🔊 reminder</button></p>
+    <table class="fill-table">
+      <tr><th style="background:var(--social);">Clue</th><th style="background:var(--social);">Answer</th></tr>
+      <tr><td>The oldest prehistoric period — people used stone tools</td><td><input class="fill-in" data-ans="stone age" id="soc-0" placeholder="?" style="width:200px;"></td></tr>
+      <tr><td>A hard stone chipped into sharp tools by Stone Age people</td><td><input class="fill-in" data-ans="flint" id="soc-1" placeholder="?" style="width:200px;"></td></tr>
+      <tr><td>An alloy made by mixing copper and tin</td><td><input class="fill-in" data-ans="bronze" id="soc-2" placeholder="?" style="width:200px;"></td></tr>
+      <tr><td>Large defended settlements built on hilltops in the Iron Age</td><td><input class="fill-in" data-ans="hill forts" id="soc-3" placeholder="?" style="width:200px;"></td></tr>
+      <tr><td>The people who lived in Britain during the Iron Age</td><td><input class="fill-in" data-ans="celts" id="soc-4" placeholder="?" style="width:200px;"></td></tr>
+      <tr><td>A famous ring of giant standing stones in Wiltshire, England</td><td><input class="fill-in" data-ans="stonehenge" id="soc-5" placeholder="?" style="width:200px;"></td></tr>
+    </table>
+    <div style="margin:10px 0;"><button class="btn" style="background:var(--social);" onclick="checkSocFill()">Check ✅</button></div>
+    <div id="soc-fill-result" class="quiz-feedback"></div>
+
+    <p style="font-weight:800;margin:16px 0 8px;">14. Humanities MCQ — Prehistoric Britain:</p>
+    <div id="soc-mix-quiz"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="nextMix('soc')">Next ➡️</button>
+      <span id="soc-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">15. EXTENDED RESPONSE: What was the MOST IMPORTANT change in prehistoric Britain — moving from stone to bronze tools, OR from bronze to iron tools? Give your opinion and support it with at least TWO reasons. Write at least 4 sentences.
+      <button class="audio-btn" onclick="speak('Think about what each change made possible. Bronze allowed farming and settled life. Iron allowed stronger tools, better weapons and hill forts. Which changed life more?')">🔊 hint</button>
+    </p>
+    <textarea class="open-box" style="min-height:110px;" placeholder="I think the most important change was…&#10;&#10;Reason 1: …&#10;&#10;Reason 2: …"></textarea>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MIXED TRUE / FALSE — ALL SUBJECTS
+  ═══════════════════════════════════════ -->
+  <div class="card" style="--accent:#4338CA;border-left-color:#4338CA;">
+    <div class="subject-strip" style="background:linear-gradient(135deg,#1E1B4B,#4338CA);">🔀 Mixed True or False — All 5 Subjects <span class="marks" style="margin-left:auto;">10 marks</span></div>
+    <div id="mixed-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:#4338CA;" onclick="checkMixedTF()">Check All ✅</button></div>
+    <div id="mixed-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <!-- FINAL SCORE -->
+  <div class="card" style="--accent:#F59E0B;border-left-color:#F59E0B;text-align:center;">
+    <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#92400E;margin-bottom:10px;">🏆 Submit &amp; See Your Total Score</div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:16px;">Press the button to count your auto-marked answers and see how you did this week!</p>
+    <button class="btn" style="background:linear-gradient(135deg,#D97706,#7C3AED);font-size:1.05rem;padding:14px 32px;" onclick="calcFinalScore()">Calculate My Score 🎉</button>
+    <div id="final-score-box" style="margin-top:20px;display:none;padding:20px;border-radius:var(--radius);background:linear-gradient(135deg,#EDE9FE,#D1FAE5);">
+      <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:#1E1B4B;margin-bottom:6px;">Great work this week, <span id="final-name">learner</span>! 🌟</div>
+      <div id="final-score-text" style="font-size:1rem;color:#374151;font-weight:700;line-height:1.7;"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function speak(text){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+let totalAutoScore=0;
+const MAX_AUTO=32;
+function updateProgress(){
+  const bar=document.getElementById('main-progress');
+  const lbl=document.getElementById('main-prog-label');
+  const sc=document.getElementById('live-score');
+  if(bar)bar.style.width=(totalAutoScore/MAX_AUTO*100)+'%';
+  if(sc)sc.textContent=totalAutoScore;
+  if(lbl)lbl.textContent=`${totalAutoScore} auto-marked answers correct so far`;
+}
+
+// ── BIBLE VOCAB ───────────────────────────────────────────────────────────
+function checkBibleVocab(){
+  const keys=['D','B','A','C','E'];
+  let s=0;
+  keys.forEach((ans,i)=>{
+    const el=document.getElementById('bvm-'+i);if(!el)return;
+    if(el.value.trim().toUpperCase()===ans){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('bib-vocab-result');res.style.display='block';
+  if(s===5){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 5/5 correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/5 correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── ENGLISH FILL ──────────────────────────────────────────────────────────
+function checkEngFill(){
+  const ids=['eng-0','eng-1','eng-2','eng-3','eng-4','eng-5'];
+  let s=0;
+  ids.forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    if(el.value.trim().toLowerCase()===el.dataset.ans){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('eng-fill-result');res.style.display='block';
+  if(s===6){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 6/6 correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/6 correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── SCIENCE FILL ──────────────────────────────────────────────────────────
+function checkSciFill(){
+  const ids=['sci-0','sci-1','sci-2','sci-3','sci-4','sci-5'];
+  let s=0;
+  ids.forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    if(el.value.trim().toLowerCase().includes(el.dataset.ans)){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('sci-fill-result');res.style.display='block';
+  if(s===6){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 6/6 correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/6 correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── SOCIAL FILL ───────────────────────────────────────────────────────────
+function checkSocFill(){
+  const ids=['soc-0','soc-1','soc-2','soc-3','soc-4','soc-5'];
+  let s=0;
+  ids.forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    if(el.value.trim().toLowerCase().includes(el.dataset.ans)){s++;el.classList.add('correct');el.classList.remove('wrong');}
+    else{el.classList.add('wrong');el.classList.remove('correct');}
+  });
+  const res=document.getElementById('soc-fill-result');res.style.display='block';
+  if(s===6){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All 6/6 correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/6 correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── FAST FRACTIONS ────────────────────────────────────────────────────────
+const fastSums=[
+  {q:'½ of 18',ans:9},{q:'¼ of 24',ans:6},{q:'⅓ of 15',ans:5},
+  {q:'¾ of 20',ans:15},{q:'½ of 36',ans:18},{q:'¼ of 40',ans:10},
+  {q:'⅓ of 27',ans:9},{q:'¾ of 28',ans:21},{q:'½ of 50',ans:25},{q:'¼ of 32',ans:8},
+];
+function buildFastMaths(){
+  const area=document.getElementById('maths-fast-grid');if(!area)return;
+  area.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;">
+    ${fastSums.map((s,i)=>`<div style="background:var(--maths-l);border-radius:10px;padding:12px;text-align:center;">
+      <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:6px;">${s.q} =</div>
+      <input type="number" id="fm-${i}" style="width:80px;padding:7px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;text-align:center;" placeholder="?">
+    </div>`).join('')}
+  </div>`;
+}
+buildFastMaths();
+function checkFastMaths(){
+  let s=0;
+  fastSums.forEach((sum,i)=>{
+    const el=document.getElementById('fm-'+i);if(!el)return;
+    if(parseInt(el.value)===sum.ans){s++;el.style.borderColor='#059669';el.style.background='#D1FAE5';}
+    else{el.style.borderColor='#DC2626';el.style.background='#FEE2E2';}
+  });
+  const res=document.getElementById('fast-maths-result');res.style.display='block';
+  if(s===fastSums.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${s}/${fastSums.length} correct! Fraction master!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/${fastSums.length} correct.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── MCQ QUIZZES ───────────────────────────────────────────────────────────
+const mixQuizzes={
+  bible:[
+    {q:"Where was Moses when he saw the burning bush?",opts:["In Pharaoh's palace","By the River Nile","In the desert tending sheep","On top of a mountain"],ans:2,exp:"Moses was in the desert, working as a shepherd for his father-in-law Jethro."},
+    {q:"What did God tell Moses to do when he approached the burning bush?",opts:["Kneel down and pray","Bring water to put it out","Remove his sandals — holy ground","Run back to Egypt"],ans:2,exp:"God said to remove his sandals because he was standing on holy ground."},
+    {q:"What is God's name according to Exodus 3:14?",opts:["The Almighty","Lord of Hosts","I AM WHO I AM","King of Kings"],ans:2,exp:"God said 'I AM WHO I AM' — showing He always exists and never changes."},
+    {q:"What message did God want Moses to take to Pharaoh?",opts:["'Build us a pyramid'","'Let my people go!'","'Give us more food'","'Make us your soldiers'"],ans:1,exp:"God commanded Moses to tell Pharaoh 'Let my people go!' to free the Israelite slaves."},
+    {q:"Moses said he was not good at speaking. What did God promise him?",opts:["God would give Moses a magic staff","God would speak for him","'I will be with you'","God would make him brave instantly"],ans:2,exp:"God simply said 'I will be with you' — His presence was all the courage Moses needed."},
+  ],
+  eng:[
+    {q:"Which of these is a NON-FICTION text?",opts:["Cinderella","A poem about the moon","An encyclopaedia about volcanoes","A dragon story"],ans:2,exp:"Non-fiction is about real, true information — an encyclopaedia article is non-fiction."},
+    {q:"What is the PURPOSE of a subheading?",opts:["To end the article","To show the author","To tell readers what the next section is about","To make it look colourful"],ans:2,exp:"Subheadings guide readers by labelling what each section of a text is about."},
+    {q:"Which sentence is a FACT?",opts:["Elephants are the most wonderful animals.","Football is better than cricket.","The Amazon rainforest is in South America.","History is boring."],ans:2,exp:"A fact can be proved — the Amazon IS in South America. The others are opinions."},
+    {q:"What is a CAPTION?",opts:["The title on the front cover","A short description under a photograph","A question at chapter end","A word in the glossary"],ans:1,exp:"A caption is a short description written under an image to explain what it shows."},
+    {q:"Which of these is an OPINION?",opts:["Water boils at 100°C.","Lions live in groups called prides.","Pandas are the cutest animals on Earth.","The Nile is in Africa."],ans:2,exp:"'Cutest' is a personal judgement — it's an opinion, not a fact."},
+  ],
+  maths:[
+    {q:"What is the DENOMINATOR in the fraction ¾?",opts:["3","4","7","1"],ans:1,exp:"The denominator is the BOTTOM number. In ¾, the denominator is 4."},
+    {q:"¼ of 28 = ?",opts:["4","6","7","8"],ans:2,exp:"28 ÷ 4 = 7. So ¼ of 28 = 7."},
+    {q:"Which fraction is equivalent to ½?",opts:["⅓","2/6","3/4","1/5"],ans:1,exp:"2/6 = ⅓ — no wait. 2/6 is NOT ½. The equivalent is 3/6. Best check: 3/6 = ½ because 3÷6=0.5."},
+    {q:"¾ of 24 = ?",opts:["6","12","18","20"],ans:2,exp:"Step 1: ¼ of 24 = 6. Step 2: ¾ = 3 × 6 = 18."},
+    {q:"Which is LARGER: ¼ or ⅓?",opts:["¼ is larger","⅓ is larger","They are the same","Cannot tell"],ans:1,exp:"⅓ ≈ 0.33 and ¼ = 0.25 — so ⅓ is larger."},
+  ],
+  sci:[
+    {q:"What type of rock is granite?",opts:["Sedimentary","Metamorphic","Igneous","Fossil rock"],ans:2,exp:"Granite is igneous — it forms when magma cools slowly deep underground, creating large crystals."},
+    {q:"Why can fossils ONLY be found in sedimentary rock?",opts:["Because it is the oldest rock","Because it forms gently from layers — preserving organisms","Because it contains lava","Because it is the hardest rock"],ans:1,exp:"Sedimentary rock forms slowly from compressed layers — gentle enough to preserve the remains of organisms."},
+    {q:"Marble is formed from limestone. What type of rock is marble?",opts:["Igneous","Sedimentary","Metamorphic","Fossil rock"],ans:2,exp:"Marble is metamorphic — limestone is changed by heat and pressure underground."},
+    {q:"What does PERMEABLE mean when describing a rock?",opts:["Very hard","Allows water to pass through it","Contains fossils","Made from cooled lava"],ans:1,exp:"A permeable rock has gaps that allow water to seep through it — like sandstone."},
+    {q:"Which rock type has large crystals because it cooled SLOWLY?",opts:["Sandstone","Basalt","Limestone","Granite"],ans:3,exp:"Granite cooled slowly underground — slow cooling = time for large crystals to form."},
+  ],
+  soc:[
+    {q:"Which is the CORRECT order of the three prehistoric ages?",opts:["Bronze → Stone → Iron","Iron → Bronze → Stone","Stone → Bronze → Iron","Iron → Stone → Bronze"],ans:2,exp:"Stone Age (oldest) → Bronze Age → Iron Age (most recent)."},
+    {q:"What did Stone Age people use to make sharp tools?",opts:["Bronze","Flint","Iron","Copper"],ans:1,exp:"Flint is a hard rock that can be chipped into very sharp edges — perfect for Stone Age tools and weapons."},
+    {q:"Bronze is made by mixing which two metals?",opts:["Iron and copper","Gold and silver","Copper and tin","Iron and tin"],ans:2,exp:"Bronze = copper + tin. It is stronger than either metal alone."},
+    {q:"Which people built HILL FORTS during the Iron Age?",opts:["The Romans","The Vikings","The Celts","The Anglo-Saxons"],ans:2,exp:"The Celts built large hill forts on high ground to defend their Iron Age communities."},
+    {q:"What is Stonehenge?",opts:["An Iron Age hill fort","A famous ring of standing stones in Wiltshire, England","A Bronze Age farming village","A Stone Age burial cave"],ans:1,exp:"Stonehenge is a prehistoric monument — a ring of enormous standing stones in Wiltshire, thought to be built in the Stone and Bronze Ages."},
+  ],
+};
+
+const mixState={};
+['bible','eng','maths','sci','soc'].forEach(key=>{mixState[key]={idx:0,score:0};renderMixQ(key);});
+
+function renderMixQ(key){
+  const qs=mixQuizzes[key];const st=mixState[key];const q=qs[st.idx];
+  const area=document.getElementById(key+'-mix-quiz');if(!area)return;
+  if(!q){area.innerHTML=`<div style="padding:14px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Quiz done! ${st.score}/${qs.length} correct!</div>`;if(st.score===qs.length)celebrate();return;}
+  area.innerHTML=`<div class="quiz-box">
+    <div class="quiz-q">Q${st.idx+1} of ${qs.length}: ${q.q} <button class="audio-btn" onclick="speak('${q.q.replace(/'/g,"\\'")}')">🔊</button></div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerMix('${key}',${i})">${o}</button>`).join('')}</div>
+    <div id="${key}-mix-fb" class="quiz-feedback"></div>
+  </div>`;
+  const sc=document.getElementById(key+'-mix-score');if(sc)sc.textContent=`Score: ${st.score}/${st.idx}`;
+}
+function answerMix(key,i){
+  const q=mixQuizzes[key][mixState[key].idx];
+  const opts=document.querySelectorAll(`#${key}-mix-quiz .quiz-opt`);
+  opts.forEach(o=>o.disabled=true);opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-mix-fb');fb.style.display='block';
+  if(i===q.ans){mixState[key].score++;totalAutoScore++;updateProgress();fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct! '+q.exp;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ The answer is: ${q.opts[q.ans]}. ${q.exp}`;}
+  const sc=document.getElementById(key+'-mix-score');if(sc)sc.textContent=`Score: ${mixState[key].score}/${mixState[key].idx+1}`;
+}
+function nextMix(key){mixState[key].idx++;renderMixQ(key);}
+
+// ── MIXED TF ──────────────────────────────────────────────────────────────
+const mixedTF=[
+  {sub:'📖 Bible',s:"Moses was working as a fisherman when God appeared to him in the burning bush.",ans:false,c:'Moses was a shepherd — he was tending sheep when he saw the burning bush.'},
+  {sub:'📖 Bible',s:"God's name 'I AM WHO I AM' shows that He always exists and never changes.",ans:true},
+  {sub:'✏️ English',s:"A fact can be proved using evidence or data.",ans:true},
+  {sub:'✏️ English',s:"'Elephants are beautiful' is a fact because it is about a real animal.",ans:false,c:"That is an OPINION — 'beautiful' is a personal judgement, not provable evidence."},
+  {sub:'🔢 Maths',s:"The denominator is the TOP number in a fraction.",ans:false,c:'The denominator is the BOTTOM number. The TOP number is the numerator.'},
+  {sub:'🔢 Maths',s:"¾ of 24 = 18",ans:true},
+  {sub:'🪨 Science',s:"Fossils can be found inside igneous rock.",ans:false,c:'Fossils are only found in SEDIMENTARY rock — igneous rock forms from melted rock, which destroys fossils.'},
+  {sub:'🪨 Science',s:"Metamorphic rock is formed when existing rocks are changed by heat and pressure.",ans:true},
+  {sub:'🌍 Humanities',s:"The Stone Age is the oldest of the three prehistoric periods.",ans:true},
+  {sub:'🌍 Humanities',s:"Bronze is made by mixing iron and copper together.",ans:false,c:'Bronze is made from COPPER + TIN. Iron is used in the Iron Age, not to make bronze.'},
+];
+
+function buildMixedTF(){
+  const area=document.getElementById('mixed-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th style="background:#4338CA;">Subject &amp; Statement</th><th style="background:#4338CA;">True / False?</th></tr>';
+  mixedTF.forEach((item,i)=>{
+    h+=`<tr><td><span style="font-size:0.8rem;font-weight:800;color:#4338CA;">${item.sub}</span><br>${item.s}</td><td>
+      <button class="tf-btn" id="mtf-${i}-T" onclick="selMTF(${i},'T')">True</button>
+      <button class="tf-btn" id="mtf-${i}-F" onclick="selMTF(${i},'F')">False</button>
+    </td></tr>`;
+  });
+  h+='</table>';area.innerHTML=h;
+}
+buildMixedTF();
+function selMTF(i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('mtf-'+i+'-'+v);if(b){b.classList.remove('sel-t','sel-f');}});
+  const b=document.getElementById('mtf-'+i+'-'+val);if(b)b.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkMixedTF(){
+  let s=0;
+  mixedTF.forEach((item,i)=>{
+    const tBtn=document.getElementById('mtf-'+i+'-T');const fBtn=document.getElementById('mtf-'+i+'-F');
+    const sel=tBtn?.classList.contains('sel-t')?true:fBtn?.classList.contains('sel-f')?false:null;
+    if(sel===null)return;
+    if(sel===item.ans){s++;(item.ans?tBtn:fBtn).classList.add('ok');}
+    else{(sel?tBtn:fBtn).classList.add('bad');(item.ans?tBtn:fBtn).classList.add('ok');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;
+  });
+  const res=document.getElementById('mixed-tf-result');res.style.display='block';
+  if(s===mixedTF.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${s}/${mixedTF.length} correct! Outstanding!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${s}/${mixedTF.length} correct. Green = correct answer shown above.`;}
+  totalAutoScore+=s;updateProgress();
+}
+
+// ── FINAL SCORE ───────────────────────────────────────────────────────────
+function calcFinalScore(){
+  const box=document.getElementById('final-score-box');
+  const nameEl=document.getElementById('student-name');
+  const nameOut=document.getElementById('final-name');
+  const txt=document.getElementById('final-score-text');
+  const field=document.getElementById('total-score-field');
+  if(nameEl&&nameOut)nameOut.textContent=nameEl.value||'learner';
+  if(field)field.value=totalAutoScore+' / '+MAX_AUTO+' (auto-marked)';
+  let grade='',msg='';
+  if(totalAutoScore>=29){grade='🏆 Outstanding!';msg='You have mastered all 5 Week 7 topics. Incredible work!';}
+  else if(totalAutoScore>=23){grade='🌟 Excellent!';msg='Brilliant effort across all subjects. Keep it up!';}
+  else if(totalAutoScore>=16){grade='✅ Good work!';msg='You are getting there — review the sections where you lost marks.';}
+  else if(totalAutoScore>=10){grade='📝 Keep going!';msg='Review your lesson notes and try the sections again. You can do it!';}
+  else{grade='💪 Keep practising!';msg='Go back to the Day 1 and Day 3 worksheets and review the key vocabulary.';}
+  txt.innerHTML=`<div style="font-size:1.4rem;margin-bottom:8px;">${grade}</div>
+  Auto-marked score: <strong>${totalAutoScore} / ${MAX_AUTO}</strong><br>
+  (Plus open-ended written answers marked by your teacher)<br><br>
+  ${msg}<br><br>
+  📖 Bible: Moses &amp; the Burning Bush ✓<br>
+  ✏️ English: Reading Non-Fiction ✓<br>
+  🔢 Maths: Fractions ✓<br>
+  🪨 Science: Rocks ✓<br>
+  🌍 Humanities: Prehistoric Britain ✓`;
+  box.style.display='block';box.scrollIntoView({behavior:'smooth',block:'center'});celebrate();
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<60;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*30);}
+}
+const s=document.createElement('style');s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week7_Day4');</script>
+</body>
+</html>

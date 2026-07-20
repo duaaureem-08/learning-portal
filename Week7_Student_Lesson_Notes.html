@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 7 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:60px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.rock-card{border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px;border:2px solid}
+.passage-box{background:#F0F9FF;border:2px solid #0EA5E9;border-radius:var(--radius);padding:14px 16px;font-size:14px;line-height:1.85;margin:8px 0}
+.passage-heading{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:#185FA5;margin-bottom:8px;border-bottom:2px solid #0EA5E9;padding-bottom:6px}
+.passage-subhead{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#185FA5;margin:10px 0 5px}
+.rbow-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.rbow-bar{width:4px;border-radius:4px;min-height:40px;flex-shrink:0}
+.frac-box{display:flex;gap:4px;margin:8px 0}
+.frac-cell{width:30px;height:30px;border:2px solid var(--teal);border-radius:4px}
+.frac-filled{background:var(--teal)}
+@media(max-width:600px){.two,.three{grid-template-columns:1fr}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 7 · My Lesson Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover', label:'🏠 Cover',    col:'#0F6E56'},
+  {id:'eng',   label:'📖 English',  col:'#185FA5'},
+  {id:'maths', label:'🔢 Maths',    col:'#0F6E56'},
+  {id:'sci',   label:'🪨 Science',  col:'#C2410C'},
+  {id:'hum',   label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',   label:'✝️ Bible',    col:'#B71C1C'},
+];
+
+const PAGES={
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#185FA5);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 7 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Reading Non-Fiction — Main Idea & Headings','#1E40AF','#DBEAFE'],
+      ['🔢','Maths','Fractions — Equal Parts (½ ⅓ ¼)','#065F46','#D1FAE5'],
+      ['🪨','Science','Rocks — Igneous, Sedimentary, Metamorphic','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','Stone Age to Iron Age — Britain','#3730A3','#E0E7FF'],
+      ['✝️','Bible','Moses — Speaking Up for Others (Ex 3:14)','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Every page has vocabulary in English, Urdu and Arabic! 🌍</div>
+</div>`,
+
+/* ══════════════════════════════════════════════════════
+   ENGLISH — Reading Non-Fiction
+══════════════════════════════════════════════════════ */
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#185FA5,#1E40AF)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 7</div>
+  <div class="banner-title">📖 English — Reading Non-Fiction</div>
+  <div class="banner-sub">Main Idea · Key Details · Headings &amp; Subheadings · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Non-fiction = <strong>غیر افسانوی</strong> (Urdu) · <strong>غير خيالي</strong> (Arabic)<br/>
+Main idea = <strong>مرکزی خیال</strong> (Urdu) · <strong>الفكرة الرئيسية</strong> (Arabic)<br/>
+Non-fiction texts are REAL. They contain true facts and information!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['📰 Non-fiction','Writing about REAL things — facts, true events, real people.','غیر افسانوی / غير خيالي','\"An encyclopaedia article about elephants is non-fiction.\"'],
+  ['💡 Main idea','The MOST important point a text is talking about.','مرکزی خیال / الفكرة الرئيسية','\"The main idea of the paragraph is that butterflies are pollinators.\"'],
+  ['🔍 Key detail','An important fact that SUPPORTS the main idea.','اہم تفصیل / تفصيل رئيسي','\"A key detail: butterflies drink nectar using a proboscis.\"'],
+  ['📋 Heading','A title for the whole text. Tells you the topic.','سرخی / العنوان','\"Heading: Butterflies\"'],
+  ['🔖 Subheading','A smaller title inside the text. Tells you what ONE section is about.','ذیلی سرخی / العنوان الفرعي','\"Subheading: What do butterflies eat?\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:var(--blue)">
+  <div class="v-word" style="color:var(--blue)">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>NON-FICTION FEATURES</div>
+<div class="two" style="margin-bottom:14px">
+  <div class="q-box" style="background:var(--blue-light);border-color:var(--blue)">
+    <div style="font-family:Nunito,sans-serif;font-weight:800;color:var(--blue);margin-bottom:8px">📋 HEADING</div>
+    <div style="font-size:13px;line-height:1.8">• Big title at the top<br/>• Tells you the WHOLE topic<br/>• One per text<br/>E.g. <strong>Butterflies</strong></div>
+  </div>
+  <div class="q-box" style="background:var(--teal-light);border-color:var(--teal)">
+    <div style="font-family:Nunito,sans-serif;font-weight:800;color:var(--teal);margin-bottom:8px">🔖 SUBHEADING</div>
+    <div style="font-size:13px;line-height:1.8">• Smaller title inside<br/>• Tells you what ONE section is about<br/>• Many per text<br/>E.g. <strong>What do butterflies eat?</strong></div>
+  </div>
+</div>
+<div class="tip"><strong>Other non-fiction features:</strong> bold key words · photos with captions · contents page · bullet points · diagrams. These help the reader FIND information quickly.</div>
+
+<div class="sec-head"><span class="sec-num">3</span>MAIN IDEA vs KEY DETAILS</div>
+<div class="tip"><strong>Main idea</strong> = the MOST important point (what the whole paragraph is about).<br/><strong>Key details</strong> = the supporting FACTS that explain the main idea.</div>
+<div class="q-box" style="background:#F0F9FF;border-color:#0EA5E9">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#185FA5;margin-bottom:8px">Example paragraph:</div>
+  <div style="font-size:13px;line-height:1.85"><strong>Butterflies are important pollinators.</strong> When they visit flowers to drink nectar, they carry tiny pollen grains from flower to flower. This helps plants to make seeds. Without pollinators like butterflies, many plants would not be able to grow.</div>
+  <div style="margin-top:10px;font-size:12px;color:#185FA5"><strong>Main idea:</strong> Butterflies are important pollinators.<br/><strong>Key details:</strong> They carry pollen from flower to flower; this helps plants make seeds.</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>THE BUTTERFLY READING PASSAGE</div>
+<div class="passage-box">
+  <div class="passage-heading">🦋 BUTTERFLIES</div>
+  <div class="passage-subhead">What is a butterfly?</div>
+  A butterfly is an insect with six legs, two antennae, and four colourful wings. Butterflies are found on every continent except Antarctica.
+  <div class="passage-subhead">The life cycle of a butterfly</div>
+  Butterflies go through four stages: <strong>egg → caterpillar (larva) → chrysalis → butterfly</strong>. This change is called <strong>metamorphosis</strong>.
+  <div class="passage-subhead">What do butterflies eat?</div>
+  Adult butterflies drink <strong>nectar</strong> from flowers using a long tongue called a <strong>proboscis</strong>.
+  <div class="passage-subhead">Why are butterflies important?</div>
+  Butterflies are <strong>pollinators</strong>. They carry pollen from flower to flower, helping plants make seeds and grow.
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['What is the MAIN IDEA of the whole text?','The main idea of the whole text is ...'],
+  ['Name the FOUR stages of a butterfly\'s life cycle.','The four stages are: 1. ___ 2. ___ 3. ___ 4. ___'],
+  ['What does a butterfly use to drink nectar?','A butterfly uses a ________ to drink nectar.'],
+  ['Why are butterflies important for plants?','Butterflies are important because they carry ...'],
+  ['What is the word for the change a caterpillar goes through to become a butterfly?','The word is ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--blue);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your answer..."/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>HEADINGS PRACTICE</div>
+<div class="q-box">
+  <div class="q-label">Write a subheading for each group of facts below:</div>
+  <div style="font-size:13px;line-height:2.4;margin-top:8px">
+    <em>Facts: Elephants eat grass, fruit, bark, and roots. They can eat up to 150kg of food per day!</em><br/>
+    My subheading: <input class="dline" placeholder="________________"/><br/>
+    <em>Facts: Elephants live in Africa and Asia. They need large areas of land to roam.</em><br/>
+    My subheading: <input class="dline" placeholder="________________"/>
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>WRITE YOUR OWN NON-FICTION PARAGRAPH</div>
+<div class="q-box">
+  <div style="font-size:13px;line-height:2.8;margin-top:8px">
+    <strong>My heading:</strong> <input class="dline" placeholder="All About ________________"/><br/>
+    <strong>My subheading:</strong> <input class="dline" placeholder="What is a ________________ ?"/><br/>
+    <strong>Main idea sentence:</strong> <input class="dline" placeholder="A ________ is _________________________."/><br/>
+    <strong>Key detail 1:</strong> <input class="dline" placeholder="It _______________________________."/><br/>
+    <strong>Key detail 2:</strong> <input class="dline" placeholder="It is important because _______________."/>
+  </div>
+</div>
+
+<div class="remember" style="background:#185FA5">⭐ REMEMBER: Non-fiction = real facts! Heading → whole topic. Subheading → one section. Main idea → most important point. Key details → supporting facts. 📰</div>`,
+
+/* ══════════════════════════════════════════════════════
+   MATHS — Fractions
+══════════════════════════════════════════════════════ */
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#0F6E56,#065F46)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 7</div>
+  <div class="banner-title">🔢 Maths — Fractions</div>
+  <div class="banner-sub">Equal Parts · ½ ⅓ ¼ of shapes and sets · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Fraction = <strong>کسر (kasr)</strong> — Urdu &amp; Arabic<br/>
+Numerator = <strong>صورہ (sūra)</strong> — Urdu · <strong>البسط</strong> — Arabic (top number)<br/>
+Denominator = <strong>مخرج (makhraj)</strong> — Urdu · <strong>المقام</strong> — Arabic (bottom number)</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🍕 Fraction','A number that shows PART of a whole. Written with a line in the middle.','کسر / كسر','\"1/2 means one out of two equal parts.\"'],
+  ['⬆️ Numerator','The TOP number. Shows HOW MANY parts we have.','صورہ / البسط','\"In 3/4, the numerator is 3.\"'],
+  ['⬇️ Denominator','The BOTTOM number. Shows how many equal parts the whole is cut into.','مخرج / المقام','\"In 3/4, the denominator is 4.\"'],
+  ['⚖️ Equal parts','Parts that are exactly the SAME size. Fractions MUST use equal parts!','برابر حصے / أجزاء متساوية','\"Cut the pizza into 4 equal slices — each slice is 1/4.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:var(--teal)">
+  <div class="v-word" style="color:var(--teal)">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>HOW TO READ AND WRITE FRACTIONS</div>
+<div class="q-box" style="background:var(--teal-light);border-color:var(--teal)">
+<div style="text-align:center;margin:10px 0">
+  <div style="font-size:40px;font-family:Nunito,sans-serif;font-weight:800;color:var(--teal);line-height:1">3</div>
+  <div style="width:60px;height:3px;background:var(--teal);margin:4px auto"></div>
+  <div style="font-size:40px;font-family:Nunito,sans-serif;font-weight:800;color:var(--teal);line-height:1">4</div>
+</div>
+<div style="font-size:13px;line-height:2;text-align:center">
+  <strong>3</strong> = Numerator (top) — HOW MANY parts we have<br/>
+  <strong>4</strong> = Denominator (bottom) — how many EQUAL parts the whole is split into<br/>
+  We say: <strong>"three quarters"</strong>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>KEY FRACTIONS TO KNOW</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Fraction</th><th>Written as</th><th>We say</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><strong style="font-size:20px">½</strong></td><td>1/2</td><td>one half</td><td>The whole is cut into 2 equal parts. We have 1.</td></tr>
+<tr><td><strong style="font-size:20px">¼</strong></td><td>1/4</td><td>one quarter</td><td>The whole is cut into 4 equal parts. We have 1.</td></tr>
+<tr><td><strong style="font-size:20px">¾</strong></td><td>3/4</td><td>three quarters</td><td>The whole is cut into 4 equal parts. We have 3.</td></tr>
+<tr><td><strong style="font-size:20px">⅓</strong></td><td>1/3</td><td>one third</td><td>The whole is cut into 3 equal parts. We have 1.</td></tr>
+<tr><td><strong style="font-size:20px">⅔</strong></td><td>2/3</td><td>two thirds</td><td>The whole is cut into 3 equal parts. We have 2.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>FRACTIONS OF SHAPES — HOW TO FIND THEM</div>
+<div class="tip"><strong>Count total equal parts → that is the denominator. Count shaded parts → that is the numerator.</strong></div>
+${[
+  ['A rectangle cut into 4 equal parts. 1 is shaded.','1/4'],
+  ['A circle cut into 3 equal parts. 2 are shaded.','2/3'],
+  ['A bar cut into 8 equal parts. 5 are shaded.','5/8'],
+].map(([desc,ans],i)=>`
+<div class="q-box">
+  <div class="q-label">Shape ${i+1}</div>
+  <div class="q-text">${desc}</div>
+  <div style="font-size:12px;color:var(--teal);margin:4px 0">Fraction = total parts = denominator. Shaded = numerator.</div>
+  <input class="dline" placeholder="Fraction shaded = ____"/>
+  <div style="font-size:11px;color:var(--green)">Answer: ${ans}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>FRACTIONS OF A SET — 3 STEPS</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+${[
+  ['Look at the denominator — divide the total into that many equal groups (use division!).'],
+  ['Look at the numerator — count that many groups.'],
+  ['Write the answer!'],
+].map((s,i)=>`
+<div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px">
+  <div style="background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:13px;flex-shrink:0">${i+1}</div>
+  <div style="font-size:13px;line-height:1.6">${s[0]}</div>
+</div>`).join('')}
+</div>
+<div style="background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--rsm);padding:12px;font-size:13px;line-height:1.9;margin-bottom:14px">
+<strong>Example: 1/4 of 12</strong><br/>
+Step 1: Denominator = 4 → 12 ÷ 4 = 3 (each group has 3)<br/>
+Step 2: Numerator = 1 → take 1 group = 3<br/>
+<strong>1/4 of 12 = 3 ✓</strong>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>FRACTIONS OF SETS — PRACTICE</div>
+<div class="three">
+${[
+  ['1/2 of 10 =','5'],['1/4 of 8 =','2'],['1/3 of 9 =','3'],
+  ['3/4 of 8 =','6'],['2/3 of 12 =','8'],['1/2 of 20 =','10'],
+  ['1/4 of 16 =','4'],['3/4 of 12 =','9'],['2/4 of 10 =','5'],
+].map(([q,ans])=>`
+<div class="q-box" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:16px;font-weight:700;color:var(--teal)">${q}</div>
+  <input style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:var(--teal);margin-top:4px" placeholder="?"/>
+  <div style="font-size:11px;color:var(--green);margin-top:3px">= ${ans}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>COMPARING FRACTIONS</div>
+<div class="tip"><strong>Same denominator:</strong> bigger numerator = bigger fraction (3/5 &gt; 1/5).<br/>
+<strong>Same numerator:</strong> bigger denominator = SMALLER fraction (1/2 &gt; 1/4 because halves are bigger than quarters!).</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Comparison</th><th>Which is bigger?</th><th>Why?</th></tr></thead>
+<tbody>
+<tr><td>1/4 vs 3/4</td><td><strong>3/4</strong></td><td>Same denominator. 3 &gt; 1.</td></tr>
+<tr><td>1/2 vs 1/4</td><td><strong>1/2</strong></td><td>Same numerator. 2 &lt; 4 — halves are bigger!</td></tr>
+<tr><td>2/5 vs 4/5</td><td><strong>4/5</strong></td><td>Same denominator. 4 &gt; 2.</td></tr>
+<tr><td>1/3 vs 1/6</td><td><strong>1/3</strong></td><td>Same numerator. 3 &lt; 6 — thirds are bigger!</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">8</span>FRACTIONS ON A NUMBER LINE</div>
+<div style="background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:14px;margin-bottom:14px">
+  <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px">Halves:</div>
+  <div style="font-size:14px;font-family:'Courier New',monospace;margin-bottom:10px">0 ─────────── 1/2 ─────────── 1</div>
+  <div style="font-size:13px;font-weight:700;color:#185FA5;margin-bottom:6px">Quarters:</div>
+  <div style="font-size:14px;font-family:'Courier New',monospace;margin-bottom:10px">0 ──── 1/4 ──── 2/4 ──── 3/4 ──── 1</div>
+  <div style="font-size:13px;font-weight:700;color:#534AB7;margin-bottom:6px">Thirds:</div>
+  <div style="font-size:14px;font-family:'Courier New',monospace">0 ──────── 1/3 ──────── 2/3 ──────── 1</div>
+  <div style="margin-top:10px;font-size:12px;color:var(--teal);font-weight:700">💡 Notice: 2/4 and 1/2 are in the SAME place — they are equal!</div>
+</div>
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: Fraction = equal parts of a whole. Numerator (top) = how many parts. Denominator (bottom) = total parts. 1/2 of 12 = 12 ÷ 2 = 6 ✓</div>`,
+
+/* ══════════════════════════════════════════════════════
+   SCIENCE — Rocks
+══════════════════════════════════════════════════════ */
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#C2410C,#9A3412)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 7</div>
+  <div class="banner-title">🪨 Science — Rocks</div>
+  <div class="banner-sub">Types and Properties · Igneous · Sedimentary · Metamorphic · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Rock = <strong>پتھر (pathar)</strong> — Urdu · <strong>صخرة (sakhra)</strong> — Arabic<br/>
+Igneous = <strong>آتشی</strong> (Urdu) · <strong>ناري</strong> (Arabic) — "fire rock"<br/>
+Sedimentary = <strong>تلچھٹی</strong> (Urdu) · <strong>رسوبية</strong> (Arabic) — "layer rock"<br/>
+Metamorphic = <strong>متامورفک</strong> (Urdu) · <strong>متحولة</strong> (Arabic) — "changed rock"</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🌋 Igneous rock','Made when hot liquid rock (lava or magma) cools and turns solid.','آتشی پتھر / صخرة نارية','\"Granite and basalt are igneous rocks.\"'],
+  ['🌊 Sedimentary rock','Made from layers of tiny pieces (sediment) pressed together over millions of years.','تلچھٹی پتھر / صخرة رسوبية','\"Sandstone and limestone are sedimentary rocks.\"'],
+  ['🔥 Metamorphic rock','Rock changed by great HEAT and PRESSURE deep underground.','متامورفک / صخرة متحولة','\"Marble and slate are metamorphic rocks.\"'],
+  ['💎 Hardness','How hard or soft a rock is — tested by scratching.','سختی / صلابة','\"Granite is very hard — a steel nail cannot scratch it.\"'],
+  ['🔍 Texture','How a rock FEELS and LOOKS — rough, smooth, grainy, glassy.','ساخت / ملمس','\"Sandstone has a rough, grainy texture.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:var(--orange)">
+  <div class="v-word" style="color:var(--orange)">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE 3 ROCK TYPES</div>
+<div class="rock-card" style="border-color:#C2410C;background:#FFF0E6">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#C2410C;font-size:14px;margin-bottom:6px">🌋 IGNEOUS — "fire rock"</div>
+  <div style="font-size:13px;line-height:1.8">
+    <strong>How it forms:</strong> Magma (melted rock underground) or lava (magma on the surface) cools and turns solid.<br/>
+    <strong>Examples:</strong> Granite · Basalt · Obsidian<br/>
+    <strong>Texture:</strong> Coarse/grainy (cooled slowly) or smooth/glassy (cooled fast)</div>
+</div>
+<div class="rock-card" style="border-color:#185FA5;background:#E6F1FB">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#185FA5;font-size:14px;margin-bottom:6px">🌊 SEDIMENTARY — "layer rock"</div>
+  <div style="font-size:13px;line-height:1.8">
+    <strong>How it forms:</strong> Tiny pieces (sediment) of rock, shells, and mud collect in layers. Over MILLIONS of years, the layers press together and harden.<br/>
+    <strong>Examples:</strong> Sandstone · Limestone · Chalk<br/>
+    <strong>Texture:</strong> Grainy, layered — often contains <strong>fossils</strong>!</div>
+</div>
+<div class="rock-card" style="border-color:#534AB7;background:#EEEDFE">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;color:#534AB7;font-size:14px;margin-bottom:6px">🔥 METAMORPHIC — "changed rock"</div>
+  <div style="font-size:13px;line-height:1.8">
+    <strong>How it forms:</strong> Existing rocks are buried deep underground. Extreme HEAT and PRESSURE change them into a new type of rock.<br/>
+    <strong>Examples:</strong> Marble (from limestone) · Slate (from mudstone)<br/>
+    <strong>Texture:</strong> Smooth or banded — pressure creates layers</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>ROCK COMPARISON TABLE</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Rock</th><th>Type</th><th>Texture</th><th>Hardness</th><th>Fossils?</th><th>Used for...</th></tr></thead>
+<tbody>
+<tr><td><strong>Granite</strong></td><td>Igneous</td><td>Rough, coarse</td><td>Very hard</td><td>No</td><td>Kitchen surfaces, statues</td></tr>
+<tr><td><strong>Basalt</strong></td><td>Igneous</td><td>Dark, smooth</td><td>Hard</td><td>No</td><td>Road building</td></tr>
+<tr><td><strong>Sandstone</strong></td><td>Sedimentary</td><td>Grainy, sandy</td><td>Medium</td><td>Sometimes</td><td>Buildings, walls</td></tr>
+<tr><td><strong>Limestone</strong></td><td>Sedimentary</td><td>Rough</td><td>Medium</td><td><strong>Yes!</strong></td><td>Cement, buildings</td></tr>
+<tr><td><strong>Chalk</strong></td><td>Sedimentary</td><td>Soft, crumbly</td><td>Very soft</td><td>Yes</td><td>Blackboards, paths</td></tr>
+<tr><td><strong>Marble</strong></td><td>Metamorphic</td><td>Smooth, shiny</td><td>Hard</td><td>No</td><td>Sculpture, floors</td></tr>
+<tr><td><strong>Slate</strong></td><td>Metamorphic</td><td>Smooth, flat</td><td>Medium</td><td>No</td><td>Roof tiles</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>ROCK PROPERTIES — HOW TO TEST THEM</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Property</th><th>How to test it</th></tr></thead>
+<tbody>
+<tr><td><strong>🔨 Hardness</strong></td><td>Scratch with fingernail → coin → steel nail. The harder it is to scratch, the harder the rock.</td></tr>
+<tr><td><strong>🔍 Texture</strong></td><td>Feel it and look at it. Is it rough or smooth? Grainy or glassy? Layered?</td></tr>
+<tr><td><strong>💧 Permeability</strong></td><td>Drop water on it. Does the water soak in (permeable) or run off (impermeable)?</td></tr>
+<tr><td><strong>🎨 Colour</strong></td><td>Look at it carefully. One colour? Many colours? Speckled?</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['How does igneous rock form?','Igneous rock forms when ...'],
+  ['Why are fossils found in sedimentary rocks but not in igneous rocks?','Fossils are found in sedimentary rock because ...'],
+  ['What makes metamorphic rock different from the other two types?','Metamorphic rock is different because ...'],
+  ['Why is slate used for roof tiles?','Slate is used for roof tiles because ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--orange);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your answer..."/>
+</div>`).join('')}
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: 3 rock types — 🌋 IGNEOUS (cooled lava) · 🌊 SEDIMENTARY (layers pressed together) · 🔥 METAMORPHIC (changed by heat &amp; pressure). Fossils = sedimentary! 🪨</div>`,
+
+/* ══════════════════════════════════════════════════════
+   HUMANITIES — Stone Age to Iron Age
+══════════════════════════════════════════════════════ */
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#534AB7,#3730A3)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 7</div>
+  <div class="banner-title">🌍 Humanities — Prehistoric Britain</div>
+  <div class="banner-sub">Stone Age → Bronze Age → Iron Age · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Stone Age = <strong>پتھر کا زمانہ</strong> (Urdu) · <strong>العصر الحجري</strong> (Arabic)<br/>
+Bronze Age = <strong>کانسی کا دور</strong> (Urdu) · <strong>العصر البرونزي</strong> (Arabic)<br/>
+Iron Age = <strong>لوہے کا دور</strong> (Urdu) · <strong>العصر الحديدي</strong> (Arabic)</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🪨 Stone Age','A very long period when early humans made ALL their tools from stone.','پتھر کا دور / العصر الحجري','\"The Stone Age started about 900,000 BC in Britain.\"'],
+  ['⚒️ Bronze Age','A period when people mixed copper and tin to make BRONZE for tools.','کانسی کا دور / العصر البرونزي','\"The Bronze Age began around 2,000 BC in Britain.\"'],
+  ['⚔️ Iron Age','A period when people made stronger tools from IRON.','لوہے کا دور / العصر الحديدي','\"The Iron Age ended when the Romans came in 43 AD.\"'],
+  ['🏺 Artefact','An object made by people in the past that helps us understand history.','آثار قدیمہ / أثر','\"A Stone Age arrowhead is an artefact.\"'],
+  ['🔬 Archaeologist','A scientist who digs up and studies objects from the past.','ماہر آثار / عالم آثار','\"Archaeologists found Bronze Age tools at Stonehenge.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:var(--purple)">
+  <div class="v-word" style="color:var(--purple)">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>OVERVIEW — 3 PREHISTORIC AGES</div>
+<div class="tbl-wrap"><table class="t">
+<thead><tr><th>Age</th><th>When</th><th>Main material</th><th>How people lived</th><th>Biggest change</th></tr></thead>
+<tbody>
+<tr><td><strong>🪨 Stone Age</strong></td><td>~900,000 BC – 2,500 BC</td><td>Stone (especially flint)</td><td>Hunter-gatherers; lived in caves or simple shelters; later became farmers</td><td>Learned to make FIRE</td></tr>
+<tr><td><strong>⚒️ Bronze Age</strong></td><td>~2,500 BC – 800 BC</td><td>Bronze (copper + tin)</td><td>Settled villages; farming; building monuments</td><td>STONEHENGE; settled farming</td></tr>
+<tr><td><strong>⚔️ Iron Age</strong></td><td>~800 BC – 43 AD</td><td>Iron</td><td>Organised tribes; hill forts; skilled farmers and artists</td><td>IRON tools (stronger than bronze)</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>THE STONE AGE IN DETAIL</div>
+<div class="story">
+<strong>Who:</strong> The very first people to live in Britain. They were called <strong>hunter-gatherers</strong>.<br/><br/>
+<strong>🏕️ How they lived:</strong> They moved from place to place following animals and finding food. Later Stone Age people settled and began farming.<br/><br/>
+<strong>🥩 Food:</strong> Hunted wild animals (deer, mammoths), caught fish, gathered berries, nuts and roots.<br/><br/>
+<strong>🪨 Tools:</strong> Made from FLINT (a type of stone). Chipped into spears, arrows, and knives.<br/><br/>
+<strong>🔥 Fire:</strong> One of the most important discoveries in human history — gave warmth, light, and cooked food.<br/><br/>
+<strong>🏚️ Shelter:</strong> Lived in caves or simple shelters made of wood, branches, and animal skins.
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>THE BRONZE AGE IN DETAIL</div>
+<div class="story">
+<strong>New discovery:</strong> Mixing <strong>copper + tin = bronze</strong> — much harder and better than stone!<br/><br/>
+<strong>🌾 Better farming:</strong> Bronze tools made it easier to clear land and grow more food.<br/><br/>
+<strong>🏡 Settled villages:</strong> People lived in permanent <strong>round houses</strong> with thatched roofs.<br/><br/>
+<strong>🏛️ Stonehenge:</strong> A famous monument of HUGE standing stones arranged in a circle. Built in Britain during the Bronze Age — one of the world's most mysterious ancient sites.<br/><br/>
+<strong>⚱️ Skills:</strong> Bronze Age people made pottery, jewellery, and woven cloth.
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>THE IRON AGE IN DETAIL</div>
+<div class="story">
+<strong>New discovery:</strong> Iron is stronger than bronze AND more common in the ground!<br/><br/>
+<strong>⚔️ Better tools and weapons:</strong> Stronger swords, ploughs for farming, and nails for building.<br/><br/>
+<strong>🏰 Hill forts:</strong> Large forts built on hills to defend communities. Banks and ditches kept enemies out. Famous example: <strong>Maiden Castle</strong>, Dorset.<br/><br/>
+<strong>👑 Tribes and chiefs:</strong> Britain was divided into many tribes, each with their own chief. Some traded, some fought.<br/><br/>
+<strong>🎨 Celtic art:</strong> Iron Age people created beautiful spiral patterns on metal, pots, and shields. This style is called <strong>Celtic art</strong>.<br/><br/>
+<strong>End of the Iron Age:</strong> The Romans invaded Britain in <strong>43 AD</strong> — this began recorded British history!
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['What was a "hunter-gatherer"?','A hunter-gatherer was someone who ...'],
+  ['What is bronze made from?','Bronze is made by mixing ...'],
+  ['What was Stonehenge? When was it built?','Stonehenge was ... It was built during the ...'],
+  ['Why did the Iron Age end in Britain in 43 AD?','The Iron Age ended because ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--purple);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your answer..."/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>MY PREHISTORIC BRITAIN FACT FILE</div>
+<div class="q-box">
+  <div style="font-size:13px;line-height:2.8;margin-top:6px">
+    My favourite prehistoric period: <input class="dline" placeholder="My favourite is ..."/><br/>
+    The most important discovery of prehistoric Britain: <input class="dline" placeholder="I think the most important was ..."/><br/>
+    One famous prehistoric site: <input class="dline" placeholder="One famous site is ..."/><br/>
+    How life changed from Stone Age to Iron Age: <input class="dline" placeholder="Life changed because ..."/>
+  </div>
+</div>
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: Stone Age (stone tools) → Bronze Age (copper+tin = bronze) → Iron Age (stronger iron tools). The Romans ended the Iron Age in 43 AD! 🏰</div>`,
+
+/* ══════════════════════════════════════════════════════
+   BIBLE — Moses
+══════════════════════════════════════════════════════ */
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#B71C1C,#991B1B)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 7</div>
+  <div class="banner-title">✝️ Bible — Moses</div>
+  <div class="banner-sub">Speaking Up for Others · Exodus 3:14 · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Moses = <strong>موسی (Musa عليه السلام)</strong> — Urdu &amp; Arabic (a prophet in Islam too!)<br/>
+Burning bush = <strong>جلتی جھاڑی</strong> (Urdu) · <strong>الشجرة المشتعلة</strong> (Arabic)<br/>
+Courage = <strong>ہمت (himmat)</strong> (Urdu) · <strong>الشجاعة</strong> (Arabic)</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['👑 Pharaoh','The powerful king of Egypt who forced the Israelites to work as slaves.','فرعون / فرعون','\"Pharaoh ordered all Israelite baby boys to be killed.\"'],
+  ['🌿 Burning bush','A bush on fire that did not burn up. God spoke to Moses from inside it.','جلتی جھاڑی / الشجرة المشتعلة','\"Moses saw the burning bush and was amazed.\"'],
+  ['🕊️ Courage','The strength to do something even when you feel afraid.','ہمت / الشجاعة','\"Moses showed great courage by speaking to Pharaoh.\"'],
+  ['⛓️ Slavery','Being forced to work without freedom or pay.','غلامی / العبودية','\"The Israelites lived in slavery in Egypt for many years.\"'],
+  ['🙌 Exodus','The great journey when Moses led the Israelites out of Egypt to freedom.','مصر سے نکلنا / الخروج','\"The Exodus is one of the most important events in the Bible.\"'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:var(--red)">
+  <div class="v-word" style="color:var(--red)">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY OF MOSES</div>
+<div class="story">
+<strong>First,</strong> the Israelite people were slaves in Egypt. Pharaoh gave a terrible order — all Israelite baby boys must be killed.<br/><br/>
+<strong>Then,</strong> one brave mother put her baby in a basket on the River Nile. Pharaoh's daughter found him and named him <strong>Moses</strong>. He grew up as an Egyptian prince!<br/><br/>
+<strong>Later,</strong> Moses discovered he was an Israelite and ran away to the desert after defending one of his people. He became a shepherd and lived quietly for years.<br/><br/>
+<strong>Then something amazing happened.</strong> Moses saw a bush on fire that was NOT burning up. God spoke to him from the bush: <em>"I AM WHO I AM. I have seen my people suffering. Go to Pharaoh — lead my people out of Egypt!"</em><br/><br/>
+<strong>Moses was afraid.</strong> He said: <em>"I am not a good speaker. Why would Pharaoh listen to me?"</em><br/>
+God replied: <em>"I will be with you."</em><br/><br/>
+<strong>Finally,</strong> with God's help, Moses stood before Pharaoh and said: <strong>"Let my people go!"</strong> After the Ten Plagues, Pharaoh released the Israelites. Moses led them to freedom — this was the great <strong>Exodus</strong>!
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>STORY SEQUENCE</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+${[
+  'God spoke to Moses from a burning bush and called him to lead the Israelites.',
+  'An Israelite mother put baby Moses in a basket on the River Nile.',
+  'Moses led the Israelite people out of Egypt — the Exodus!',
+  'The Israelite people were slaves in Egypt.',
+  'Moses grew up in Pharaoh\'s palace as an Egyptian prince.',
+  'Moses said to Pharaoh: "Let my people go!"',
+].map((ev,i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--red-light);border-radius:var(--rsm);padding:9px 12px">
+  <input type="text" placeholder="?" style="width:34px;height:34px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:var(--red);background:var(--red-light);outline:none;flex-shrink:0"/>
+  <span style="font-size:13px">${ev}</span>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>THE MEMORY VERSE — EXODUS 3:14</div>
+<div class="verse-box">
+  <div style="font-family:Nunito,sans-serif;font-size:17px;font-weight:800;color:var(--teal);line-height:1.8">"I AM WHO I AM."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Exodus 3:14</div>
+</div>
+<div class="tip"><strong>What does it mean?</strong><br/>
+• God has ALWAYS existed — no beginning, no end.<br/>
+• God does not depend on anything — He simply IS.<br/>
+• God is always PRESENT — not just in the past, but right NOW.<br/>
+• For Moses: "The God who IS will BE WITH YOU — right now."</div>
+<div class="q-box">
+  <div class="q-label">Fill in the missing words — no peeking!</div>
+  <div style="font-size:16px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+    "<input class="inline" style="width:40px" placeholder="?"/> AM <input class="inline" style="width:40px" placeholder="?"/>
+    <input class="inline" style="width:40px" placeholder="?"/> AM."
+    — <input class="inline" style="width:100px" placeholder="reference?"/>
+  </div>
+</div>
+<div class="q-box">
+  <div class="q-label">Write the full verse from memory:</div>
+  <textarea class="tarea" style="min-height:55px" placeholder="I AM WHO I AM..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['Why was Moses placed in a basket on the River Nile?','Moses was placed in the basket because ...'],
+  ['What made the burning bush so amazing?','The burning bush was amazing because ...'],
+  ['What did God ask Moses to do?','God asked Moses to ...'],
+  ['What reason did Moses give for why he felt he couldn\'t do it?','Moses felt he couldn\'t do it because ...'],
+  ['How did God encourage Moses to be brave?','God encouraged Moses by saying ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--red);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your answer..."/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>SPEAKING UP — LIFE APPLICATION</div>
+<div class="tip"><strong>Moses spoke up for people who were suffering and had no voice.</strong> God calls us to do the same!</div>
+${[
+  ['#EF5350','❤️ Moses felt he was not good enough. When have you felt that way?'],
+  ['#F97316','🧡 Who around you might need someone to speak up for them?'],
+  ['#EAB308','💛 What gives you courage to do hard things?'],
+  ['#22C55E','💚 God said "I will be with you." What difference does that make?'],
+  ['#3B82F6','💙 Write a short prayer asking God for courage to speak up when needed:'],
+].map(([col,q])=>`
+<div class="rbow-row">
+  <div class="rbow-bar" style="background:${col}"></div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;color:${col};font-family:Nunito,sans-serif;margin-bottom:4px">${q}</div>
+    <input class="dline" style="border-bottom-color:${col}80"/>
+  </div>
+</div>`).join('')}
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: "I AM WHO I AM." — Exodus 3:14. God sent an ordinary, scared man to do something extraordinary — and promised: "I will be with you." The same promise is for you! 🔥</div>`,
+};
+
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML=''; pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur)el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render()};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'';
+  pages.appendChild(pg);
+}
+render();
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week7_Notes');</script>
+</body>
+</html>

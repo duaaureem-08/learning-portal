@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 7 Lessons · HOS International</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;animation:cardIn 0.5s cubic-bezier(0.22,0.68,0,1.2) both;}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.18s}.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.30s}.card:nth-child(7){animation-delay:.36s}.card:nth-child(8){animation-delay:.42s}.card:nth-child(9){animation-delay:.48s}.card:nth-child(10){animation-delay:.54s}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:130px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-sm{padding:8px 16px;font-size:0.82rem;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent,#555);color:var(--text);background:rgba(255,255,255,0.04);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.acc-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.acc-card:hover,.acc-card.open{border-color:var(--accent,#555);}
+.acc-head{display:flex;justify-content:space-between;align-items:center;}
+.acc-title{font-weight:700;color:var(--bright);font-size:0.95rem;}
+.acc-sub{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.acc-toggle{color:var(--muted);transition:transform 0.25s;}
+.acc-card.open .acc-toggle{transform:rotate(180deg);}
+.acc-body{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:0.87rem;color:var(--muted);line-height:1.65;}
+.acc-card.open .acc-body{display:block;}
+.acc-body strong{color:var(--bright);}
+.particle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0;}
+.particle-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;text-align:center;}
+.particle-box.active{border-color:var(--accent,#555);}
+.particle-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:8px;}
+.particle-dots{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;min-height:60px;align-items:center;margin:10px 0;}
+.pdot{width:14px;height:14px;border-radius:50%;background:var(--accent,#555);transition:all 0.3s;}
+.particle-desc{font-size:0.78rem;color:var(--muted);line-height:1.4;}
+.biome-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:12px;}
+.biome-tile{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;transition:all 0.2s;cursor:pointer;}
+.biome-tile:hover,.biome-tile.active{border-color:var(--accent,#555);transform:translateY(-2px);}
+.biome-icon{font-size:1.8rem;margin-bottom:6px;}
+.biome-name{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:4px;}
+.biome-temp{font-size:0.73rem;color:var(--muted);margin-bottom:4px;}
+.biome-def{font-size:0.80rem;color:#B0B0C8;line-height:1.4;}
+.biome-detail{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;margin-top:10px;min-height:100px;}
+.ratio-demo{display:flex;gap:4px;margin:14px 0;align-items:flex-end;}
+.ratio-bar{border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:white;transition:all 0.4s;}
+.nf-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;margin-bottom:10px;}
+.nf-label{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.nf-content{font-size:0.88rem;color:#B0B0C8;line-height:1.65;}
+.nf-content strong{color:var(--bright);}
+.temp-bar{height:32px;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:0.75rem;font-weight:700;color:white;margin:4px 0;transition:width 0.5s;}
+@media(max-width:600px){
+  .hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}
+  .compare{grid-template-columns:1fr;}.particle-grid{grid-template-columns:1fr 1fr;}
+  .biome-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">HOS<sup>KS3·L7</sup></div>
+  <div class="week-badge">Week 7</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BIBLE — Moses & The Exodus
+═══════════════════════════════════════════════════════════ -->
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+
+<div id="pg-bible" class="page pg-bible-a active">
+
+  <div class="hero" style="background:linear-gradient(135deg,#1B0A45 0%,#2D1266 60%,#4C1D95 100%);">
+    <div class="hero-eyebrow" style="color:#C4B5FD;">📖 Bible Studies · Week 7</div>
+    <div class="hero-title">Moses &amp; the Exodus</div>
+    <div class="hero-subtitle">Exodus 1–15 · God Delivers His People · The Passover · Courage and Calling</div>
+    <div class="hero-icon">🌊</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Exodus 14:14</span>
+      <span class="hero-tag">Exodus 1–15</span>
+      <span class="hero-tag">Passover</span>
+      <span class="hero-tag">KS3 Level 7</span>
+    </div>
+  </div>
+
+  <!-- Memory Verse -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="slabel" style="background:rgba(109,40,217,0.15);color:#C4B5FD;">⭐ Memory Verse</div>
+    <div class="verse-box">
+      <div class="verse-text">"The Lord will fight for you; you need only to be still."</div>
+      <div class="verse-ref">Exodus 14:14 — NIV</div>
+    </div>
+    <div class="callout tip">
+      <div class="ci">🧠</div>
+      <div class="ct">Word-by-word breakdown: <strong>"The Lord will fight for you"</strong> = God is promising to act on behalf of His people — this is not a passive promise but an active one. He is about to do something. <strong>"you need only to be still"</strong> = The people of Israel are terrified, standing between a massive army behind them and the Red Sea in front of them. God is not asking them to fight — He is asking them to <em>trust</em> and stop panicking. This verse is said at the most hopeless-looking moment in the whole story — which is exactly what makes it so powerful.</div>
+    </div>
+  </div>
+
+  <!-- Key Vocabulary -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+    <div class="callout info"><div class="ci">📖</div><div class="ct"><strong>Learn these words before you continue.</strong> Many of these words appear in both the Bible text and in history lessons about ancient Egypt.</div></div>
+    <div class="esl-box">
+      <div class="esl-title">Core Vocabulary</div>
+      <div class="esl-row"><div class="esl-word">oppression</div><div class="esl-def">Treating a group of people in a cruel, unjust, and controlling way, especially using power against them. The Egyptians oppressed the Israelites by forcing them into hard labour as slaves.</div></div>
+      <div class="esl-row"><div class="esl-word">Pharaoh</div><div class="esl-def">The title given to the king of ancient Egypt. In Moses' story, Pharaoh had absolute power over everyone in Egypt — including the enslaved Israelites. (Pronounced: FAIR-oh)</div></div>
+      <div class="esl-row"><div class="esl-word">plague</div><div class="esl-def">A terrible disaster or disease sent as a punishment or warning. In Exodus, God sends ten plagues — each one targeting something Egypt worshipped or depended on — to force Pharaoh to release the Israelites.</div></div>
+      <div class="esl-row"><div class="esl-word">Passover</div><div class="esl-def">The name of both the final plague and the special meal the Israelites were commanded to eat the night before they left Egypt. The word "Passover" refers to God <em>passing over</em> the homes of the Israelites and protecting them from the final plague.</div></div>
+      <div class="esl-row"><div class="esl-word">exodus</div><div class="esl-def">A large group of people leaving a place all at once. The word comes from Greek: <em>ex</em> (out) + <em>hodos</em> (road/journey). In the Bible, the Exodus refers specifically to the Israelites leaving Egypt after 430 years.</div></div>
+      <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A serious, binding agreement or promise — much stronger than a normal contract. God's covenant with Abraham (Week 5) promised a land and a great nation. The Exodus is the beginning of God keeping that very promise.</div></div>
+      <div class="esl-row"><div class="esl-word">deliver / deliverance</div><div class="esl-def">To rescue someone from danger, captivity, or suffering. In Exodus, God "delivers" His people — the same word used in many languages for saving someone from something they could not escape on their own.</div></div>
+      <div class="esl-row"><div class="esl-word">calling / called</div><div class="esl-def">A deep sense that God has chosen you for a specific purpose or task. Moses' calling comes through a burning bush — but he does not feel qualified and argues with God repeatedly before accepting it.</div></div>
+      <div class="esl-row"><div class="esl-word">intercession</div><div class="esl-def">Praying or speaking on behalf of someone else. Moses intercedes for the Israelites many times — he stands between God and the people, arguing for mercy.</div></div>
+    </div>
+  </div>
+
+  <!-- Background: Israelites in Egypt -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">⛓️ The People of Israel in Egypt — How It All Began</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct"><strong>Connecting to last week:</strong> Remember Joseph from Week 6? He was the one who brought his family to Egypt to survive the famine. That family — 70 people — grew over 430 years into a nation of possibly over a million people. But a new Pharaoh came who did not remember Joseph, and he was afraid of how numerous the Israelites had become.</div></div>
+
+    <div class="compare" style="margin-top:14px;">
+      <div class="cmp-col">
+        <div class="cmp-head">😰 What Egypt Did to Israel</div>
+        <div class="cmp-row">Put them into forced labour — building cities like Pithom and Rameses (Exodus 1:11)</div>
+        <div class="cmp-row">Made their lives "bitter with hard service" in brick-making and farming (Exodus 1:14)</div>
+        <div class="cmp-row">Ordered all newborn Israelite baby boys to be thrown into the River Nile (Exodus 1:22)</div>
+        <div class="cmp-row">Refused to listen to Moses, even as the plagues fell — hardening his heart ten times</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head">🙏 How God Responded</div>
+        <div class="cmp-row">Heard the Israelites' cry for help and remembered His covenant with Abraham, Isaac, and Jacob (Exodus 2:24)</div>
+        <div class="cmp-row">Called Moses — an unlikely leader — through the burning bush (Exodus 3)</div>
+        <div class="cmp-row">Sent ten plagues to demonstrate His power over every aspect of Egyptian life</div>
+        <div class="cmp-row">Ultimately led the people out through the Red Sea — permanently destroying Pharaoh's army</div>
+      </div>
+    </div>
+
+    <div class="callout tip" style="margin-top:14px;">
+      <div class="ci">🔑</div>
+      <div class="ct"><strong>KS3 thinking point:</strong> The Israelites did not escape Egypt because they were powerful or clever. They left because God intervened. The whole Exodus story is built around the idea that the most powerful empire in the ancient world — Egypt — could not hold God's people when God decided to act. This is what makes the story so radical.</div>
+    </div>
+  </div>
+
+  <!-- The Burning Bush -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">🔥 Moses and the Burning Bush — Exodus 3–4</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct"><strong>Who is Moses?</strong> Moses was an Israelite baby whose mother hid him in a basket in the Nile to save him from Pharaoh's order. He was found by Pharaoh's own daughter and raised as an Egyptian prince. As a young man, he killed an Egyptian who was beating a Hebrew slave and then fled to Midian, where he worked as a shepherd for 40 years — before God called him at the burning bush at age 80.</div></div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">1</div>
+        <div>
+          <div class="step-title">The Strange Sight (Exodus 3:1-3)</div>
+          <div class="step-desc">Moses is tending his father-in-law's sheep on Mount Horeb (also called Sinai) when he sees a bush that is burning but is not burning up — it is not being destroyed by the fire. He turns aside to look more carefully. This is what gets his attention. God often works through the unexpected and the "strange" to get people to pay attention.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">2</div>
+        <div>
+          <div class="step-title">God Calls Him by Name (Exodus 3:4-6)</div>
+          <div class="step-desc">God calls "Moses! Moses!" from within the bush. Moses answers "Here I am." God then tells him: "Do not come any closer. Take off your sandals, for the place where you are standing is holy ground." God then introduces Himself as "the God of Abraham, the God of Isaac, and the God of Jacob." He is not a new God — He is the same God who made promises generations earlier. Moses hides his face because he is afraid to look at God.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">3</div>
+        <div>
+          <div class="step-title">God Reveals His Plan (Exodus 3:7-10)</div>
+          <div class="step-desc">God says He has "seen the misery of my people... heard them crying out... I am concerned about their suffering." This is deeply important — God is not distant or unaware. He knows. Then He says: "So I have come down to rescue them." And then — the challenge: "So now, go. I am sending YOU to Pharaoh to bring my people the Israelites out of Egypt."</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">4</div>
+        <div>
+          <div class="step-title">Moses' Five Excuses — and God's Answers</div>
+          <div class="step-desc">Moses does not say "yes" immediately. He gives five reasons why he is the wrong person for the job — and God answers every single one of them. This is one of the most honest and human exchanges in the entire Bible.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table" style="margin-top:14px;">
+      <tr><th>Moses' Excuse</th><th>What He Was Really Feeling</th><th>God's Answer</th></tr>
+      <tr><td><strong>"Who am I to go to Pharaoh?"</strong> (3:11)</td><td>Insecurity — "I'm a nobody shepherd, not a prince any more"</td><td>"I will be with you." God does not argue with Moses' self-assessment — He simply says His presence is enough.</td></tr>
+      <tr><td><strong>"What if they ask Your name?"</strong> (3:13)</td><td>Uncertainty — "How do I explain who sent me?"</td><td>"I AM WHO I AM." God gives Moses His eternal, self-existent name — the name that cannot be reduced to anything else.</td></tr>
+      <tr><td><strong>"What if they don't believe me?"</strong> (4:1)</td><td>Fear of rejection — "What if no one listens?"</td><td>God gives Moses three miraculous signs to perform as proof: a staff that becomes a snake, a hand made leprous then healed, and water turned to blood.</td></tr>
+      <tr><td><strong>"I am not a good speaker"</strong> (4:10)</td><td>Inadequacy — "I'm slow of speech and tongue"</td><td>"Who gave human beings their mouths?... Now go; I will help you speak." God invented speech — He can certainly help one man with it.</td></tr>
+      <tr><td><strong>"Please send someone else"</strong> (4:13)</td><td>Pure reluctance — Moses simply does not want to go</td><td>God's anger burns against Moses, but He still provides a practical solution — his brother Aaron will speak for him. God does not give up on Moses even when Moses tries to give up on himself.</td></tr>
+    </table>
+
+    <div class="callout good" style="margin-top:14px;">
+      <div class="ci">✅</div>
+      <div class="ct"><strong>KS3 key idea — what "calling" really looks like:</strong> Moses is one of the greatest figures in the Old Testament — and yet he argued with God five times before saying yes. This is actually very comforting. It shows that calling does not require instant courage. It requires eventually saying yes — even when you feel completely unqualified.</div>
+    </div>
+  </div>
+
+  <!-- The Ten Plagues -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">⚡ The Ten Plagues — Why Ten? What Do They Mean?</div>
+    <div class="callout tip"><div class="ci">🧠</div><div class="ct"><strong>Before you read:</strong> Each plague is not random. Ancient Egypt was deeply religious, worshipping many gods who were connected to nature — the Nile, frogs, the sun, livestock, etc. The plagues systematically target exactly what Egypt worshipped and relied on — showing that the God of Israel is more powerful than all of Egypt's gods combined. This is a theological battle, not just a political one.</div></div>
+
+    <div class="timeline" style="margin-top:14px;">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#6D28D9;"></div>
+        <div class="tl-date">Plague 1 — Exodus 7:14-25</div>
+        <div class="tl-title">Water Turned to Blood 🩸</div>
+        <div class="tl-desc">The Nile River — Egypt's lifeblood, worshipped as sacred — turns to blood. All the fish die. Egypt cannot drink from it. The Egyptian god Hapi was the god of the Nile floods. This plague directly targeted what Egypt revered most. Pharaoh's heart is hardened; he walks away.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#6D28D9;"></div>
+        <div class="tl-date">Plague 2 — Exodus 8:1-15</div>
+        <div class="tl-title">Frogs 🐸</div>
+        <div class="tl-desc">Frogs cover every surface of Egypt — beds, ovens, kneading troughs, everywhere. The frog goddess Heqet was worshipped in Egypt as a symbol of fertility. Pharaoh begs Moses to take the frogs away, promising to let the people go — but once the frogs die, he goes back on his word. This is the first time we see his pattern: promise under pressure, break the promise when pressure lifts.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#6D28D9;"></div>
+        <div class="tl-date">Plague 3 — Exodus 8:16-19</div>
+        <div class="tl-title">Gnats / Lice 🪲</div>
+        <div class="tl-desc">The dust of the ground becomes gnats or lice all across Egypt. For the first time, Egypt's own magicians — who had been copying some of Moses' signs — cannot replicate this plague. They say to Pharaoh: "This is the finger of God." Even his own court recognises something greater is at work. But Pharaoh refuses to listen even to his own advisors.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#6D28D9;"></div>
+        <div class="tl-date">Plagues 4–6 — Exodus 8:20–9:12</div>
+        <div class="tl-title">Flies, Livestock Disease, Boils 🪰🐄🤒</div>
+        <div class="tl-desc">A key change begins here: the Israelites living in the region of Goshen are specifically protected from the plagues of flies and livestock disease. This is a clear sign that God is distinguishing between His people and the Egyptians — the plagues are not just natural disasters but targeted judgements. Egypt's cattle die (targeting the god Apis, a sacred bull); boils break out on Egyptians and animals. Pharaoh's own magicians cannot even stand before Moses because of their boils.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#6D28D9;"></div>
+        <div class="tl-date">Plagues 7–9 — Exodus 9:13–10:29</div>
+        <div class="tl-title">Hail, Locusts, Darkness ⛈️🌾🌑</div>
+        <div class="tl-desc">The plagues now become catastrophic. Hail destroys crops and livestock still in the field. Locusts devour everything the hail left. Then — for three days — complete, tangible darkness covers Egypt (targeting Ra, the sun god, whom Pharaoh was supposed to represent). Not even candles can pierce it. Egypt literally cannot see. But in all the Israelites' homes, there is light. Each time, Pharaoh promises, then breaks his promise. His advisors beg him to let the people go. He refuses.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#6D28D9;box-shadow:0 0 0 3px rgba(109,40,217,0.4);"></div>
+        <div class="tl-date">Plague 10 — Exodus 11–12</div>
+        <div class="tl-title">Death of the Firstborn 💔</div>
+        <div class="tl-desc">The final plague — and the most devastating. God warns that the firstborn son in every Egyptian household, from Pharaoh's own son to the prisoner in the dungeon, will die at midnight. This is also the night of the very first Passover. The Israelites are given specific instructions to protect themselves — and God passes over their homes. At midnight, every Egyptian firstborn dies. Pharaoh — his own son included — finally, completely, releases the Israelites to leave.</div>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin-top:10px;">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>Understanding "Pharaoh's hardened heart":</strong> The Bible says both that God hardened Pharaoh's heart (e.g. 9:12) AND that Pharaoh hardened his own heart (e.g. 8:15). Scholars understand this to mean that Pharaoh's own stubborn nature — choosing power and pride over truth — was the same spiritual condition that God used as the vehicle for His judgement. It is like how the same sun both melts wax and hardens clay — the nature of the object determines the result.</div>
+    </div>
+  </div>
+
+  <!-- The Passover -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">🍞 The Passover — Exodus 12 — Every Detail Has a Meaning</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">God gives the Israelites very specific instructions for the night of the tenth plague. Every detail carries a meaning — and these same details become central to Jewish worship for thousands of years afterward. Christians also connect the Passover directly to Jesus, calling Him "the Lamb of God" (John 1:29).</div></div>
+
+    <div class="steps" style="margin-top:12px;">
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">🐑</div>
+        <div>
+          <div class="step-title">A Perfect Lamb — No Defects</div>
+          <div class="step-desc">Each household was to select a one-year-old male lamb without any defect on the 10th of the month and keep it until the 14th. The idea of a "perfect" sacrificial animal — without blemish — runs through the entire Old Testament sacrificial system. It represents something of full, uncorrupted value being given in place of the sinner.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">🩸</div>
+        <div>
+          <div class="step-title">The Blood on the Doorposts</div>
+          <div class="step-desc">The blood of the lamb was to be placed on the <em>two doorposts</em> and the <em>top of the door frame</em> — forming what some scholars note resembles a cross shape. When God saw the blood, He would "pass over" that house and the firstborn inside would be protected. The blood was not just symbolic — it was the specific thing that distinguished a protected house from an unprotected one.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">🌿</div>
+        <div>
+          <div class="step-title">Bitter Herbs and Unleavened Bread</div>
+          <div class="step-desc">The meal included bitter herbs (maror) — to remember the bitterness of slavery — and unleavened bread (matzah) — bread made without yeast, because they were leaving in such a hurry there was no time to let dough rise. These physical, edible symbols turn an event into a remembered experience. Every time the bread is eaten without yeast, the urgency of the night is felt again.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">👟</div>
+        <div>
+          <div class="step-title">Dressed, Ready to Leave</div>
+          <div class="step-desc">They were to eat the meal with their sandals on their feet, staff in hand, and in a hurry (Exodus 12:11). This is not a relaxed dinner — it is a people ready to move the moment the word comes. Faith, in this picture, looks like readiness. They did not eat and then start packing. They ate packed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip" style="margin-top:12px;">
+      <div class="ci">🔗</div>
+      <div class="ct"><strong>The Passover and Jesus — a connection to learn:</strong> In the New Testament, Jesus holds his "Last Supper" specifically during the Passover meal. When he holds up the bread and wine, he is deliberately connecting his own death to the Passover lamb — "This is my body broken for you... this is my blood of the new covenant." Christians believe Jesus is the ultimate Passover Lamb: perfect, without defect, whose blood protects those who trust in it. This is why Jesus is called "the Lamb of God" throughout the New Testament.</div>
+    </div>
+  </div>
+
+  <!-- The Red Sea Crossing -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">🌊 The Red Sea Crossing — Exodus 14 — Faith at the Impossible Moment</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">After Pharaoh releases the Israelites, he changes his mind — again. He sends 600 of his best chariots and his entire army after the fleeing Israelites. The Israelites look up and see the Egyptian army behind them — and the Red Sea in front of them. There is nowhere to go. This is the exact moment of Exodus 14:14.</div></div>
+
+    <div class="compare" style="margin-top:14px;">
+      <div class="cmp-col">
+        <div class="cmp-head">😱 The Israelites' Reaction (14:10-12)</div>
+        <div class="cmp-row">They "were terrified and cried out to the Lord"</div>
+        <div class="cmp-row">They blamed Moses: "Was it because there were no graves in Egypt that you brought us to the desert to die?"</div>
+        <div class="cmp-row">They said it would have been better to stay as slaves in Egypt</div>
+        <div class="cmp-row">This is the first of many times in the wilderness that the Israelites will look back fondly on slavery when things get hard</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head">✊ Moses' Response (14:13-14)</div>
+        <div class="cmp-row">"Do not be afraid. Stand firm and you will see the deliverance the Lord will bring today."</div>
+        <div class="cmp-row">"The Egyptians you see today you will never see again."</div>
+        <div class="cmp-row">"The Lord will fight for you; you need only to be still."</div>
+        <div class="cmp-row">This is Moses at his finest — terrified himself, but choosing to declare faith rather than panic</div>
+      </div>
+    </div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">1</div>
+        <div>
+          <div class="step-title">The Cloud Moves (Exodus 14:19-20)</div>
+          <div class="step-desc">The pillar of cloud that had been leading the Israelites moves to stand between the Israelite camp and the Egyptian army — giving darkness to the Egyptians and light to the Israelites all through the night. God literally places Himself between His people and their enemy.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">2</div>
+        <div>
+          <div class="step-title">The Sea Splits (Exodus 14:21-22)</div>
+          <div class="step-desc">Moses stretches out his hand over the sea. A strong east wind blows all night, and the sea is divided. The water becomes walls on either side, and the Israelites walk through on dry ground. This is the centrepiece miracle of the Old Testament — a national memory so powerful that it is referenced over 100 times in the rest of the Bible.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">3</div>
+        <div>
+          <div class="step-title">The Egyptians Follow — and Drown (Exodus 14:23-28)</div>
+          <div class="step-desc">The Egyptian army follows the Israelites into the divided sea. But then God throws the Egyptian army into confusion — wheels fall off chariots, the army cannot move properly. Moses stretches out his hand again, the sea returns to normal, and the entire Egyptian army drowns. Not one soldier survives. The greatest military power in the world is destroyed in a single night.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#6D28D9;">
+        <div class="step-n" style="background:#6D28D9;">4</div>
+        <div>
+          <div class="step-title">The Song of Moses (Exodus 15:1-21)</div>
+          <div class="step-desc">The Israelites' response to deliverance is to sing. Moses leads a song of praise, and his sister Miriam leads the women with tambourines. "The Lord is my strength and my song; he has become my salvation." The Exodus doesn't end in silence — it ends in worship. This is a pattern throughout the Bible: deliverance → praise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Character of Moses -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">👤 The Character of Moses — What Made Him Great?</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">Moses is described in Deuteronomy 34:10 as a prophet unlike any other — one whom God knew "face to face." Yet the Bible is also completely honest about his weaknesses, his doubts, his anger, and his failures. Understanding Moses means understanding that God uses very imperfect people to do extraordinary things.</div></div>
+
+    <table class="data-table" style="margin-top:12px;">
+      <tr><th>Quality Shown</th><th>Where We See It</th><th>What It Means for Us</th></tr>
+      <tr><td><strong>Courage despite fear</strong></td><td>Standing before Pharaoh ten times — the most powerful ruler in the known world</td><td>Courage is not the absence of fear. Moses was clearly afraid. Courage is acting rightly despite the fear.</td></tr>
+      <tr><td><strong>Humility</strong></td><td>Numbers 12:3 says he was "more humble than anyone else on the face of the earth"</td><td>The most influential leader in the Old Testament was not proud. True leadership does not require arrogance.</td></tr>
+      <tr><td><strong>Intercession</strong></td><td>He prays for the Israelites when God is angry at them (Exodus 32:11-14)</td><td>A leader who uses their position to protect others — not just themselves — is worth following.</td></tr>
+      <tr><td><strong>Persistence</strong></td><td>Goes back to Pharaoh ten times after ten rejections</td><td>Faithfulness sometimes just means keeping going when it would be easier to quit.</td></tr>
+      <tr><td><strong>Human weakness</strong></td><td>His anger, his excuses, and his eventual failure (Numbers 20) — he never entered the Promised Land</td><td>Even the greatest people in the Bible were flawed. Their stories are honest about this. This is part of why they are trustworthy records.</td></tr>
+    </table>
+
+    <div class="callout good" style="margin-top:12px;">
+      <div class="ci">🎯</div>
+      <div class="ct"><strong>The golden idea of this lesson:</strong> Moses' story teaches us that God does not call the equipped — He equips the called. Moses had no qualifications, no military power, no political position. He had five excuses. Yet God used him to accomplish the defining event of the entire Old Testament. The difference was not Moses' ability. It was God's presence: "I will be with you" (Exodus 3:12).</div>
+    </div>
+  </div>
+
+  <!-- Comparison -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">⚖️ Comparing Four Old Testament Stories of Faith — Weeks 4–7</div>
+    <table class="data-table">
+      <tr><th>Feature</th><th>Noah (Wk 4)</th><th>Abraham (Wk 5)</th><th>Joseph (Wk 6)</th><th>Moses (Wk 7)</th></tr>
+      <tr><td><strong>Source of hardship</strong></td><td>A natural disaster (the flood)</td><td>God's own call to leave home</td><td>Other people's cruelty</td><td>Political oppression + God's impossible assignment</td></tr>
+      <tr><td><strong>What faith looked like</strong></td><td>Building a boat for 100 years</td><td>Leaving without a destination</td><td>Integrity in slavery, forgiveness in power</td><td>Going back to Pharaoh 10 times; standing at the Red Sea</td></tr>
+      <tr><td><strong>The "impossible moment"</strong></td><td>The flood rising around the boat</td><td>Being asked to sacrifice Isaac</td><td>Falsely accused in prison with no hope</td><td>Army behind, Red Sea in front, nowhere to go</td></tr>
+      <tr><td><strong>What God provided</strong></td><td>Rescue through the water; a rainbow promise</td><td>A ram in the thicket; the covenant kept</td><td>A position of power; reunion with family</td><td>The parting of the sea; freedom after 430 years</td></tr>
+      <tr><td><strong>Key verse</strong></td><td>Hebrews 11:7</td><td>Genesis 12:2</td><td>Genesis 50:20</td><td>Exodus 14:14</td></tr>
+    </table>
+    <div class="callout tip" style="margin-top:12px;">
+      <div class="ci">🔗</div>
+      <div class="ct"><strong>The pattern that is building:</strong> Each story adds a new dimension of what trusting God through difficulty looks like. Moses' story is the first one where the difficulty involves an entire nation rather than one family — and where God's power is put on the largest, most public display yet. The stories are building toward something.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#6D28D9;">
+    <div class="card-title">🎯 Knowledge Check — Moses &amp; the Exodus</div>
+    <div id="quiz-bible-wrap">
+      <div class="quiz-wrap" id="qb-box">
+        <div class="quiz-q" id="qb-q"></div>
+        <div class="opts" id="qb-opts"></div>
+        <div class="quiz-fb" id="qb-fb"></div>
+        <div class="quiz-nav">
+          <button class="btn btn-sm" id="qb-next" style="background:#6D28D9;display:none;" onclick="nextQ('bible')">Next Question →</button>
+          <span class="score-badge" id="qb-score"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ENGLISH — Reading Non-Fiction Texts
+═══════════════════════════════════════════════════════════ -->
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+
+<div id="pg-english" class="page pg-english-a">
+  <div class="hero" style="background:linear-gradient(135deg,#4C0519 0%,#881337 60%,#BE123C 100%);">
+    <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 7</div>
+    <div class="hero-title">Reading Non-Fiction Texts</div>
+    <div class="hero-subtitle">Purpose · Audience · Key Information · Articles &amp; Reports · Fact vs Opinion</div>
+    <div class="hero-icon">📰</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Non-Fiction</span>
+      <span class="hero-tag">Purpose &amp; Audience</span>
+      <span class="hero-tag">Fact vs Opinion</span>
+      <span class="hero-tag">KS3 Level 7</span>
+    </div>
+  </div>
+
+  <!-- Key Vocabulary -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+    <div class="esl-box">
+      <div class="esl-title">Master these — they unlock non-fiction reading</div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">non-fiction</div><div class="esl-def">Writing about real events, real people, and real facts — not made-up stories. Examples: newspaper articles, science reports, encyclopaedia entries, biographies, textbooks, speeches, advertisements, and instruction manuals.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">purpose</div><div class="esl-def">The <em>reason</em> a text was written — what the writer is trying to DO. Common purposes: to inform (give facts), to persuade (change someone's mind), to instruct (tell you how to do something), to entertain (even some non-fiction tries to be fun to read), or to explain (make something complex easier to understand).</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">audience</div><div class="esl-def">The group of people a text is written FOR. A text's audience affects everything — the vocabulary used, the level of detail, the tone, and what is assumed the reader already knows. A medical journal and a children's health leaflet can be about the same disease but written for completely different audiences.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">tone</div><div class="esl-def">The "feeling" or attitude in a piece of writing — the way it "sounds." A text can be formal, informal, serious, humorous, urgent, reassuring, aggressive, neutral, or emotional. Tone is created through word choice, sentence length, and punctuation.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">fact</div><div class="esl-def">A statement that can be checked and proven to be true or false. "Mount Everest is 8,849 metres tall" is a fact — you can measure it. Facts are the building blocks of reliable non-fiction.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">opinion</div><div class="esl-def">A statement that expresses a personal view or judgement — it cannot be proven true or false, only agreed with or disagreed with. "Mount Everest is the most beautiful mountain in the world" is an opinion. Skilled readers always distinguish facts from opinions in non-fiction.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">bias</div><div class="esl-def">When a writer shows a one-sided viewpoint — either leaving out information that would disagree with their argument, or using language that strongly favours one side. Bias is not always intentional; sometimes writers are biased without knowing it. Critical readers always ask: "What is this writer NOT telling me?"</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">headline</div><div class="esl-def">The title of a newspaper or online article, usually in large, bold text. Headlines are carefully chosen to attract readers — they often use wordplay, shock, or strong emotion. A headline is NOT always a neutral summary of the article's content.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCA5A5;">source</div><div class="esl-def">Where information comes from. A reliable source has an author, a date, a verifiable organisation behind it, and matches information found in other reliable sources. Understanding sources is essential for evaluating whether to trust a text.</div></div>
+    </div>
+  </div>
+
+  <!-- What is Non-Fiction? -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">📰 What Is Non-Fiction? — The Many Types</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct"><strong>Key idea:</strong> Non-fiction is not just one thing. Different types of non-fiction have different structures, different purposes, and different rules about what they include. Recognising what <em>type</em> of non-fiction you are reading is the first step to reading it well.</div></div>
+
+    <table class="data-table" style="margin-top:12px;">
+      <tr><th>Type of Non-Fiction</th><th>Main Purpose</th><th>Key Features</th><th>Example</th></tr>
+      <tr><td><strong>News article</strong></td><td>To inform — what happened, where, when, who, why</td><td>Headline, byline (writer's name), columns, inverted pyramid structure (most important facts first)</td><td>A BBC article about a flood in Pakistan</td></tr>
+      <tr><td><strong>Feature article / magazine</strong></td><td>To inform AND entertain or engage</td><td>More personal voice, more detail, anecdotes, quotations, images with captions</td><td>A National Geographic piece on ocean plastics</td></tr>
+      <tr><td><strong>Report (formal)</strong></td><td>To inform objectively — data, findings, recommendations</td><td>Sections with headings, formal language, evidence, no personal opinion unless it is clearly labelled</td><td>A school inspection report; a scientific study</td></tr>
+      <tr><td><strong>Advertisement</strong></td><td>To persuade you to buy, believe, or do something</td><td>Emotionally charged language, images, short sentences, statistics that may be selectively chosen</td><td>A product poster; a charity campaign</td></tr>
+      <tr><td><strong>Biography / autobiography</strong></td><td>To inform and tell a true life story</td><td>Chronological order usually; personal details; may have the writer's own perspective (autobiography) or a researched outside view (biography)</td><td>A book about Nelson Mandela</td></tr>
+      <tr><td><strong>Speech / transcript</strong></td><td>To persuade or inspire, usually in person</td><td>Direct address ("you"), rule of three, repetition, rhetorical questions, emotional language</td><td>Martin Luther King's "I Have a Dream" speech</td></tr>
+      <tr><td><strong>Textbook</strong></td><td>To explain and teach</td><td>Chapters with headings, diagrams, definitions, exercises</td><td>Your KS3 science textbook</td></tr>
+    </table>
+  </div>
+
+  <!-- Purpose -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">🎯 Identifying Purpose — WHY Was This Written?</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct"><strong>Remember PEETLE:</strong> Purpose · Entertain · Explain · Teach · Inform · LEt others know. Most non-fiction has MORE THAN ONE purpose at the same time — a news article might both inform AND entertain; a report might both explain AND persuade. Your job is to identify the PRIMARY (main) purpose and any secondary ones.</div></div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">📢</div>
+        <div>
+          <div class="step-title">To Persuade — Changing Your Mind or Behaviour</div>
+          <div class="step-desc">The writer wants you to agree with them, buy something, vote for something, or change how you act. Clues: one-sided arguments, emotional language, opinions presented as if they were facts, use of repetition and rhetorical questions ("Surely we can all agree that...?"). Example: a charity asking for donations, an opinion piece in a newspaper arguing about climate policy.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">📋</div>
+        <div>
+          <div class="step-title">To Inform — Giving You Facts</div>
+          <div class="step-desc">The writer wants to tell you something you did not know. Clues: statistics, dates, factual statements, neutral (balanced) language, no obvious preference expressed. Example: a weather report, a news story about a court case, a Wikipedia article. Purely informative texts try to avoid taking sides.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">📖</div>
+        <div>
+          <div class="step-title">To Explain — Making Complex Things Clear</div>
+          <div class="step-desc">The writer wants to help you understand something complicated. Clues: simple vocabulary chosen deliberately, diagrams and examples, definitions of technical words, step-by-step structure, second-person address ("When you look at the diagram..."). Example: an instruction manual, an explainer article on how vaccines work.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">😊</div>
+        <div>
+          <div class="step-title">To Entertain — Even in Non-Fiction</div>
+          <div class="step-desc">Some non-fiction is written to be enjoyable as well as informative. Clues: humour, vivid descriptions, personal anecdotes, interesting character details, informal or witty tone. Example: a travel article, a funny personal essay, a nature documentary script. Entertainment does not make a text less trustworthy — but you still need to separate the facts from the fun.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audience -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">👥 Identifying Audience — WHO Is This Written For?</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">A text's audience is not always stated. You have to work it out by looking at clues inside the text itself. This is called <strong>inferring the audience</strong> — using evidence to reach a conclusion that is not directly stated.</div></div>
+
+    <table class="data-table" style="margin-top:12px;">
+      <tr><th>Audience Clue</th><th>What It Tells You</th><th>Example</th></tr>
+      <tr><td><strong>Vocabulary level</strong></td><td>Simple words → younger or non-specialist audience. Technical jargon without definitions → specialist audience already familiar with the subject.</td><td>"The patient presented with acute myocardial infarction" vs "He had a heart attack"</td></tr>
+      <tr><td><strong>Tone — formal vs informal</strong></td><td>Formal = professional, official, or older audience. Informal or conversational = younger, general, or friendly audience.</td><td>A government report vs a teenagers' magazine</td></tr>
+      <tr><td><strong>What is assumed without explaining</strong></td><td>If a text does not explain basic concepts, it assumes the reader already knows them. This tells you the audience is already knowledgeable.</td><td>A medical journal assumes readers know what DNA is</td></tr>
+      <tr><td><strong>Use of "you" vs "one"</strong></td><td>"You" is direct and informal. "One should consider..." is very formal. "We" builds a sense of community with the reader.</td><td>"You can try this at home" vs "Members of the public are encouraged to..."</td></tr>
+      <tr><td><strong>Images and design</strong></td><td>Bright colours, large fonts, and cartoons → children. Black and white, dense text, small print → adults or professionals.</td><td>A children's science magazine vs an academic paper</td></tr>
+      <tr><td><strong>Publication type</strong></td><td>Where was this published? A tabloid newspaper, a scientific journal, a government website, and a social media post all have different intended audiences.</td><td>The Daily Mail vs The Lancet medical journal</td></tr>
+    </table>
+
+    <div class="callout warn" style="margin-top:12px;">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>KS3 key idea:</strong> Audience and purpose together determine almost everything about how a text is written. Before you read any non-fiction text in an exam, identify BOTH — write them down. Then check every feature of the text against those two things. Does the writer's choice of words, structure, and tone serve their purpose for their audience?</div>
+    </div>
+  </div>
+
+  <!-- Fact vs Opinion -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">⚖️ Fact vs Opinion vs Inference — The Critical Reading Triangle</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct"><strong>This is the most important skill in non-fiction reading.</strong> Many students lose marks because they cannot tell the difference between facts, opinions, and inferences. In an exam, you will always be asked about at least one of these.</div></div>
+
+    <div class="compare" style="margin-top:14px;">
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#FCA5A5;">✅ FACT</div>
+        <div class="cmp-row">Can be checked — it is either true or false</div>
+        <div class="cmp-row">"The Amazon rainforest covers about 5.5 million km²"</div>
+        <div class="cmp-row">"The 2022 FIFA World Cup was held in Qatar"</div>
+        <div class="cmp-row">"Plastic takes 450 years to decompose"</div>
+        <div class="cmp-row">Facts use numbers, dates, specific names, and research findings</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#FCA5A5;">💬 OPINION</div>
+        <div class="cmp-row">Expresses a personal view — cannot be proven true or false</div>
+        <div class="cmp-row">"The Amazon rainforest is the most beautiful place on Earth"</div>
+        <div class="cmp-row">"The 2022 World Cup should not have been held in Qatar"</div>
+        <div class="cmp-row">"Plastic packaging is the most serious environmental problem"</div>
+        <div class="cmp-row">Opinions often contain: "I believe," "in my view," "should," "must," "it is clear that," "obviously"</div>
+      </div>
+    </div>
+
+    <div class="nf-box" style="margin-top:12px;">
+      <div class="nf-label">🔍 INFERENCE — Somewhere In Between</div>
+      <div class="nf-content">An inference is a conclusion that is not directly stated in the text but that you can reasonably work out from the evidence given. For example, if an article says "Sales of electric cars rose by 40% in a single year," you can <strong>infer</strong> that public interest in electric cars is growing — even though the article does not directly say this. Good non-fiction readers make inferences constantly. <strong>Always show the evidence</strong> from the text that led to your inference.</div>
+    </div>
+
+    <div class="callout key" style="margin-top:10px;">
+      <div class="ci">🔑</div>
+      <div class="ct"><strong>Spotting opinion disguised as fact:</strong> This is one of the most important skills a reader can have. Look for: value-loaded adjectives ("devastating," "brilliant," "shocking"), words that assign blame or praise without evidence, and statistics presented without a source. "Studies show that..." without naming which study is a common red flag. Always ask: <em>How do they know this? Where did this come from?</em></div>
+    </div>
+  </div>
+
+  <!-- Structural Features -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">🏗️ Structural Features of Non-Fiction Texts</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">Non-fiction texts are organised deliberately. Understanding the structure helps you find key information quickly — which is especially important in timed reading exams where you cannot read every word carefully.</div></div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">1</div>
+        <div>
+          <div class="step-title">Headline and Subheading</div>
+          <div class="step-desc">The headline grabs attention and gives the main topic. Subheadings break the article into sections and help the reader navigate. Reading ONLY the headline and all subheadings will give you a rough outline of the whole article — useful when you need to find specific information quickly.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">2</div>
+        <div>
+          <div class="step-title">Opening Paragraph (the "Hook")</div>
+          <div class="step-desc">The first paragraph of a news article usually contains the most important information — answering the questions: WHO? WHAT? WHERE? WHEN? WHY? HOW? This is called the <strong>inverted pyramid</strong> structure — the most important information is at the top, and the detail comes after. In a feature article or opinion piece, the opening might be a dramatic anecdote or shocking statistic designed to pull the reader in emotionally.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">3</div>
+        <div>
+          <div class="step-title">Body Paragraphs — Evidence and Development</div>
+          <div class="step-desc">Each paragraph usually develops one point or piece of information. In good non-fiction, each paragraph has a clear TOPIC (the main point of that paragraph, usually in the first sentence). Evidence, statistics, and quotations from experts are used to support the points. Watch for the relationship between paragraphs — does the writer agree, contradict, build on, or contrast from paragraph to paragraph?</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">4</div>
+        <div>
+          <div class="step-title">Captions, Images, and Graphs</div>
+          <div class="step-desc">These are NOT decoration — they carry information. A chart can communicate data that would take a whole paragraph to explain in words. A photograph can set tone and emotion. A caption (the small text below an image) sometimes contains information NOT in the main text. Always read captions carefully in an exam.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#BE123C;">
+        <div class="step-n" style="background:#BE123C;">5</div>
+        <div>
+          <div class="step-title">Concluding Paragraph</div>
+          <div class="step-desc">A news article's conclusion often ends with a broader context or a look ahead. An opinion piece usually ends with a call to action or a strong restatement of the writer's view. A report's conclusion usually contains recommendations. The conclusion tells you what the writer most wants you to take away from the text.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Features -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">🔤 Language Features in Non-Fiction — What to Look For</div>
+    <table class="data-table">
+      <tr><th>Language Feature</th><th>What It Is</th><th>Why Writers Use It</th><th>Example</th></tr>
+      <tr><td><strong>Rhetorical question</strong></td><td>A question that does not expect an answer — it makes the reader think or agree</td><td>To engage the reader and make them feel the "obvious" answer supports the writer's argument</td><td>"Surely we cannot ignore the suffering of millions?"</td></tr>
+      <tr><td><strong>Statistic</strong></td><td>A specific number or percentage used as evidence</td><td>To make the argument seem objective and based on research — though statistics can also be selectively chosen</td><td>"Over 8 million tonnes of plastic enter the ocean every year"</td></tr>
+      <tr><td><strong>Expert quotation</strong></td><td>A direct quote from someone in authority or with expertise</td><td>To add credibility — "it's not just my opinion, an expert agrees"</td><td>"'This is the most significant climate event of the decade,' said Dr Patel."</td></tr>
+      <tr><td><strong>Emotive language</strong></td><td>Words chosen specifically to create an emotional reaction</td><td>To make the reader feel something — sympathy, outrage, hope — which makes them more likely to agree</td><td>"Innocent children are suffering" vs "Children are affected"</td></tr>
+      <tr><td><strong>Direct address</strong></td><td>Writing that speaks directly to the reader using "you"</td><td>To create a personal connection and make the reader feel responsible or involved</td><td>"You can make a difference today."</td></tr>
+      <tr><td><strong>Rule of three</strong></td><td>Three examples or adjectives used together</td><td>Creates rhythm and emphasis — three things feel more complete and convincing than one</td><td>"We need action that is urgent, comprehensive, and global."</td></tr>
+      <tr><td><strong>Anecdote</strong></td><td>A short, personal story used as an example</td><td>Makes abstract issues feel real and human — gives the reader someone to connect with emotionally</td><td>An article about poverty beginning with the story of one specific family</td></tr>
+    </table>
+    <div class="callout good" style="margin-top:12px;">
+      <div class="ci">✅</div>
+      <div class="ct"><strong>Exam tip:</strong> When you identify a language feature, always explain WHY the writer chose it — what effect it has on the reader. Never just name the feature. "The writer uses a rhetorical question to make the reader feel that the answer is obvious, drawing them into agreeing with the argument" is a full answer. "The writer uses a rhetorical question" is only half an answer.</div>
+    </div>
+  </div>
+
+  <!-- Interactive Non-Fiction Analysis -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">🗞️ Practice: Analysing a Sample Non-Fiction Extract</div>
+    <div class="callout warn"><div class="ci">⚠️</div><div class="ct">Read the sample article extract below carefully. Then click the questions to see model answers. Try to answer each question yourself first before revealing the answer.</div></div>
+
+    <div class="nf-box" style="margin-top:14px;border-left:3px solid #BE123C;">
+      <div class="nf-label">📰 Sample Article Extract — "Our Oceans Are Drowning in Plastic"</div>
+      <div class="nf-content">
+        <p><strong>Headline: OUR OCEANS ARE DROWNING IN PLASTIC — AND WE ARE TO BLAME</strong></p>
+        <br>
+        <p>Every minute of every day, the equivalent of a rubbish truck full of plastic is dumped into our oceans. Scientists estimate that by 2050, there could be more plastic in the sea than fish. <em>Surely</em> this is a crisis we can no longer ignore?</p>
+        <br>
+        <p>"We are witnessing the most devastating pollution event in human history," said Dr Elena Cruz, marine biologist at the University of Oxford. Her research team found that 90% of seabirds now have plastic particles in their stomachs — a figure that was just 5% in 1960.</p>
+        <br>
+        <p>Some argue that plastic recycling programmes will solve the problem. But the uncomfortable truth is that only 9% of all plastic ever produced has been recycled. The rest sits in landfill, floats in our oceans, or breaks into invisible microplastics that enter our food chain — and our own bodies.</p>
+        <br>
+        <p>You have the power to change this. Every bottle you refuse, every reusable bag you carry, every company you stop buying from — it adds up. Our oceans cannot wait.</p>
+      </div>
+    </div>
+
+    <div id="acc-nf-wrap" style="margin-top:14px;">
+      <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-head">
+          <div><div class="acc-title">Q1: What is the main PURPOSE of this article?</div><div class="acc-sub">Click to reveal model answer</div></div>
+          <div class="acc-toggle">▼</div>
+        </div>
+        <div class="acc-body">The primary purpose is <strong>to persuade</strong> the reader to care about plastic pollution and to change their behaviour. This is shown by the emotional language ("drowning," "devastating"), the direct address in the final paragraph ("You have the power"), and the call to action at the end. There is also a secondary purpose <strong>to inform</strong>, as the article includes statistics and expert quotations.</div>
+      </div>
+      <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-head">
+          <div><div class="acc-title">Q2: Who is the intended AUDIENCE for this article?</div><div class="acc-sub">Click to reveal model answer</div></div>
+          <div class="acc-toggle">▼</div>
+        </div>
+        <div class="acc-body">The intended audience is likely <strong>general adult readers</strong> — probably from a national newspaper. The vocabulary is accessible but not simplified (words like "microplastics" and "marine biologist" are used without detailed definition, suggesting the reader has general knowledge). The direct address ("You have the power") and emotional language suggest this is aimed at people who care about the environment but may not yet be taking action.</div>
+      </div>
+      <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-head">
+          <div><div class="acc-title">Q3: Identify ONE fact and ONE opinion in this extract.</div><div class="acc-sub">Click to reveal model answer</div></div>
+          <div class="acc-toggle">▼</div>
+        </div>
+        <div class="acc-body"><strong>Fact:</strong> "only 9% of all plastic ever produced has been recycled" — this is a statistic that can be checked against research data. It has a specific number, making it verifiable.<br><br><strong>Opinion:</strong> "We are witnessing the most devastating pollution event in human history" — this is Dr Cruz's judgement. While she is an expert, "most devastating" is a comparative value judgement that cannot be objectively measured. It is an opinion even when said by an expert.</div>
+      </div>
+      <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-head">
+          <div><div class="acc-title">Q4: Identify a language feature and explain its effect on the reader.</div><div class="acc-sub">Click to reveal model answer</div></div>
+          <div class="acc-toggle">▼</div>
+        </div>
+        <div class="acc-body"><strong>Rhetorical question:</strong> "Surely this is a crisis we can no longer ignore?" The word "surely" suggests the answer is so obvious that any reasonable person must agree. This technique makes the reader feel that disagreeing would be unreasonable or irresponsible — drawing them toward the writer's viewpoint without presenting a balanced argument. It creates a sense of shared urgency between writer and reader.<br><br><strong>Alternatively — Emotive language:</strong> The headline uses "drowning" — a word usually associated with death and panic. Applying it to oceans gives the pollution a sense of life-threatening urgency and suffering, making the reader feel emotionally alarmed rather than simply informed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#BE123C;">
+    <div class="card-title">🎯 Reading Non-Fiction — Quiz</div>
+    <div class="quiz-wrap">
+      <div class="quiz-q" id="qe-q"></div>
+      <div class="opts" id="qe-opts"></div>
+      <div class="quiz-fb" id="qe-fb"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-sm" id="qe-next" style="background:#BE123C;display:none;" onclick="nextQ('english')">Next →</button>
+        <span class="score-badge" id="qe-score"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MATHS — Ratio & Proportion
+═══════════════════════════════════════════════════════════ -->
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+
+<div id="pg-maths" class="page pg-maths-a">
+  <div class="hero" style="background:linear-gradient(135deg,#451A03 0%,#78350F 60%,#B45309 100%);">
+    <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 7</div>
+    <div class="hero-title">Ratio &amp; Proportion</div>
+    <div class="hero-subtitle">Simplifying Ratios · Sharing in a Ratio · Unitary Method · Direct Proportion</div>
+    <div class="hero-icon">⚖️</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Ratio</span>
+      <span class="hero-tag">Proportion</span>
+      <span class="hero-tag">Unitary Method</span>
+      <span class="hero-tag">KS3 Level 7</span>
+    </div>
+  </div>
+
+  <!-- Key Vocabulary -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+    <div class="callout info"><div class="ci">📖</div><div class="ct"><strong>Builds on Week 6</strong> — make sure you are comfortable converting between fractions, decimals, and percentages before starting ratios.</div></div>
+    <div class="esl-box">
+      <div class="esl-title">Core Vocabulary</div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">ratio</div><div class="esl-def">A way of comparing two or more quantities by showing how many times one is bigger than the other. Written with a colon: 3:2 is read as "three to two." A ratio does NOT have units — it is a pure comparison. If there are 3 boys and 2 girls in a group, the ratio of boys to girls is 3:2.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">proportion</div><div class="esl-def">A proportion tells you what <em>fraction</em> of a whole something is. In the group above, the proportion of boys is 3 out of 5 total = 3/5. Proportion compares a part to the WHOLE. Ratio compares parts to parts.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">simplify a ratio</div><div class="esl-def">Dividing all parts of a ratio by their HCF (Highest Common Factor) to get the simplest form. Just as 4/8 simplifies to 1/2, the ratio 4:8 simplifies to 1:2. The relationship between the numbers stays the same — only the numbers get smaller.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">equivalent ratios</div><div class="esl-def">Ratios that express the same relationship using different numbers. 1:2, 2:4, 5:10, and 50:100 are all equivalent ratios — they all say "one part to every two parts." Like equivalent fractions.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">share in a ratio</div><div class="esl-def">Dividing a total amount between two or more people or groups according to a given ratio. For example, sharing £30 in the ratio 2:3 means one person gets 2 parts and the other gets 3 parts — out of 5 total parts.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">unitary method</div><div class="esl-def">A method where you first find the value of ONE unit, then multiply to find any other amount. "Unitary" means "one unit." It is the most reliable method for solving proportion problems.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#FCD34D;">direct proportion</div><div class="esl-def">Two quantities are in direct proportion when they increase or decrease by the same factor. If you double one, the other doubles. If you halve one, the other halves. This is the foundation of the unitary method.</div></div>
+    </div>
+  </div>
+
+  <!-- What is a Ratio? -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">⚖️ What Is a Ratio? — Understanding It Deeply</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct"><strong>The most important thing to understand:</strong> A ratio compares PARTS to PARTS. A proportion compares a PART to the WHOLE. Many students mix these up. Let's be very clear.</div></div>
+
+    <div class="compare" style="margin-top:14px;">
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#FCD34D;">RATIO — Part to Part</div>
+        <div class="cmp-row">In a bag with 3 red balls and 5 blue balls, the ratio of red to blue is <strong>3:5</strong></div>
+        <div class="cmp-row">This compares the red balls AGAINST the blue balls</div>
+        <div class="cmp-row">Order matters: red to blue (3:5) is different from blue to red (5:3)</div>
+        <div class="cmp-row">A ratio has no unit — it just shows the relationship</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#FCD34D;">PROPORTION — Part to Whole</div>
+        <div class="cmp-row">In the same bag, the proportion of red balls is <strong>3/8</strong> (3 out of 8 total)</div>
+        <div class="cmp-row">This compares red balls against the TOTAL in the bag</div>
+        <div class="cmp-row">Can also be written as a percentage: 3/8 = 37.5%</div>
+        <div class="cmp-row">Proportion is a fraction — and you can convert it using Week 6 skills!</div>
+      </div>
+    </div>
+
+    <div class="nf-box" style="margin-top:14px;">
+      <div class="nf-label">🎨 Visualising a Ratio — Paint Mixing Example</div>
+      <div style="margin-top:8px;">
+        <p style="font-size:0.87rem;color:#B0B0C8;margin-bottom:10px;">A painter mixes red and blue paint in the ratio <strong style="color:var(--bright);">2:3</strong>. For every 2 parts red, there are 3 parts blue. Total parts = 5.</p>
+        <div class="ratio-demo" id="paint-demo">
+          <div class="ratio-bar" style="width:80px;height:40px;background:#DC2626;">2 parts red</div>
+          <div class="ratio-bar" style="width:120px;height:40px;background:#2563EB;">3 parts blue</div>
+        </div>
+        <p style="font-size:0.83rem;color:var(--muted);">If the painter needs 500ml total: each "part" = 500 ÷ 5 = 100ml. Red = 2 × 100 = 200ml. Blue = 3 × 100 = 300ml. Check: 200 + 300 = 500ml ✓</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simplifying Ratios -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">✂️ Simplifying Ratios — Step by Step</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">Simplifying a ratio works exactly like simplifying a fraction. Divide ALL parts of the ratio by the same number (their Highest Common Factor) until you cannot divide any further.</div></div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">1</div>
+        <div>
+          <div class="step-title">Write the ratio clearly</div>
+          <div class="step-desc">Make sure the ratio is in the right order — the question will tell you which comes first. For example: "Simplify the ratio 12:18" — write it out exactly as given.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">2</div>
+        <div>
+          <div class="step-title">Find the HCF (Highest Common Factor) of all parts</div>
+          <div class="step-desc">For 12:18 — the factors of 12 are 1, 2, 3, 4, 6, 12. The factors of 18 are 1, 2, 3, 6, 9, 18. The HIGHEST factor in BOTH lists is 6. So HCF = 6.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">3</div>
+        <div>
+          <div class="step-title">Divide every part by the HCF</div>
+          <div class="step-desc">12 ÷ 6 = 2. 18 ÷ 6 = 3. So 12:18 simplifies to <strong>2:3</strong>. You cannot simplify further because 2 and 3 have no common factor other than 1. This is the simplest form.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">4</div>
+        <div>
+          <div class="step-title">Check — are the numbers as small as possible?</div>
+          <div class="step-desc">Ask: "Is there any number I can divide both parts by?" If yes, you have not finished simplifying. If no — you are done. The simplified form is 2:3, which represents the same relationship as 12:18 but is much cleaner to work with.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      <span class="comment">— Worked Examples —</span><br>
+      8:12 → HCF = 4 → <span class="hl">2:3</span><br>
+      15:25 → HCF = 5 → <span class="hl">3:5</span><br>
+      24:36:48 → HCF = 12 → <span class="hl">2:3:4</span> (three-part ratio, same method)<br>
+      1.5:2.5 → ×2 to remove decimals → 3:5 → already simplified → <span class="hl">3:5</span>
+    </div>
+
+    <div class="callout warn" style="margin-top:10px;">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>Ratios with different units — ALWAYS convert first!</strong> "3cm to 1.5m" cannot be simplified as 3:1.5. First convert to the same unit: 3cm to 150cm. Then simplify: 3:150 → divide by 3 → <strong>1:50</strong>. This is a common exam trap — always check that both (or all) parts of a ratio are in the same unit before simplifying.</div>
+    </div>
+  </div>
+
+  <!-- Sharing in a Ratio -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">🍰 Sharing in a Ratio — The Key Method</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct"><strong>The golden method — always use these 3 steps:</strong> (1) Find the total number of parts. (2) Find the value of ONE part. (3) Multiply to find each share. This works for EVERY sharing-in-a-ratio problem, no matter how complex.</div></div>
+
+    <div class="nf-box" style="margin-top:14px;">
+      <div class="nf-label">📌 Worked Example 1 — Money</div>
+      <div class="nf-content">
+        <p><strong>Problem:</strong> Share £60 between Aisha and Ben in the ratio 2:3.</p>
+        <p style="margin-top:8px;"><strong>Step 1 — Total parts:</strong> 2 + 3 = <strong>5 parts</strong> total.</p>
+        <p><strong>Step 2 — Value of one part:</strong> £60 ÷ 5 = <strong>£12 per part</strong>.</p>
+        <p><strong>Step 3 — Each person's share:</strong><br>
+        Aisha = 2 × £12 = <strong>£24</strong><br>
+        Ben = 3 × £12 = <strong>£36</strong></p>
+        <p><strong>Check:</strong> £24 + £36 = £60 ✓</p>
+      </div>
+    </div>
+
+    <div class="nf-box">
+      <div class="nf-label">📌 Worked Example 2 — Three-way share</div>
+      <div class="nf-content">
+        <p><strong>Problem:</strong> Share 120 marbles among Zara, Jake, and Leila in the ratio 1:2:3.</p>
+        <p style="margin-top:8px;"><strong>Step 1 — Total parts:</strong> 1 + 2 + 3 = <strong>6 parts</strong>.</p>
+        <p><strong>Step 2 — Value of one part:</strong> 120 ÷ 6 = <strong>20 marbles per part</strong>.</p>
+        <p><strong>Step 3 — Each share:</strong><br>
+        Zara = 1 × 20 = <strong>20</strong><br>
+        Jake = 2 × 20 = <strong>40</strong><br>
+        Leila = 3 × 20 = <strong>60</strong></p>
+        <p><strong>Check:</strong> 20 + 40 + 60 = 120 ✓</p>
+      </div>
+    </div>
+
+    <div class="nf-box">
+      <div class="nf-label">📌 Worked Example 3 — When You Know One Person's Share</div>
+      <div class="nf-content">
+        <p><strong>Problem:</strong> Tom and Sam share some sweets in the ratio 3:5. Tom receives 24 sweets. How many sweets does Sam receive? How many sweets were there altogether?</p>
+        <p style="margin-top:8px;"><strong>Find value of one part:</strong> Tom's share = 3 parts = 24 sweets. So 1 part = 24 ÷ 3 = <strong>8 sweets</strong>.</p>
+        <p><strong>Sam's share:</strong> 5 × 8 = <strong>40 sweets</strong></p>
+        <p><strong>Total:</strong> 24 + 40 = <strong>64 sweets</strong></p>
+        <p style="color:#FCD34D;margin-top:6px;">⚠️ Notice: you did not need the total first here — you worked backwards from the known share. This is a common exam variation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unitary Method -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">1️⃣ The Unitary Method — Find ONE, Then Scale</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">The unitary method is the most powerful tool for proportion problems. The idea is simple: find the value of ONE unit first, then multiply (or divide) to find any amount you need. It works because quantities in direct proportion always change by the same factor.</div></div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">1</div>
+        <div>
+          <div class="step-title">Identify the two quantities and what you know</div>
+          <div class="step-desc">Look at what is given and what is asked. Write it out in a small table or two columns. Which quantity changes? Which direction are you going — scaling up or scaling down?</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">2</div>
+        <div>
+          <div class="step-title">Divide to find the value of ONE unit</div>
+          <div class="step-desc">Divide the given amount by the number of units. This always gives you the rate — "per one." For example, if 5 pens cost £3.50, then one pen costs £3.50 ÷ 5 = £0.70.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#B45309;">
+        <div class="step-n" style="background:#B45309;">3</div>
+        <div>
+          <div class="step-title">Multiply by the required number of units</div>
+          <div class="step-desc">Once you know the value of one, multiply by however many you need. For example, to find the cost of 8 pens: £0.70 × 8 = £5.60. Always state the unit in your answer.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula" style="margin-top:12px;">
+      <span class="comment">— Unitary Method Worked Examples —</span><br><br>
+      <span class="comment">Example 1: If 4 identical books cost £22, how much do 7 books cost?</span><br>
+      Cost of 1 book: £22 ÷ 4 = <span class="hl">£5.50</span><br>
+      Cost of 7 books: £5.50 × 7 = <span class="hl2">£38.50</span><br><br>
+      <span class="comment">Example 2: A recipe uses 300g of flour for 12 biscuits. How much flour for 20 biscuits?</span><br>
+      Flour for 1 biscuit: 300 ÷ 12 = <span class="hl">25g</span><br>
+      Flour for 20 biscuits: 25 × 20 = <span class="hl2">500g</span><br><br>
+      <span class="comment">Example 3: 3 workers take 8 days to finish a job. How many days would 6 workers take?</span><br>
+      <span class="comment">⚠️ CAREFUL: This is INVERSE proportion — more workers = FEWER days</span><br>
+      Total work = 3 × 8 = <span class="hl">24 worker-days</span><br>
+      With 6 workers: 24 ÷ 6 = <span class="hl2">4 days</span>
+    </div>
+
+    <div class="callout warn" style="margin-top:10px;">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>Inverse proportion — the opposite relationship:</strong> In DIRECT proportion, more of one thing means more of the other (more pens = more cost). In INVERSE proportion, more of one thing means LESS of the other (more workers = fewer days). Always read the question carefully to identify which type you have before applying the unitary method.</div>
+    </div>
+  </div>
+
+  <!-- Real-Life Applications -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">🌍 Real-Life Ratio and Proportion — Practice Problems</div>
+    <table class="data-table">
+      <tr><th>Scenario</th><th>Working</th><th>Answer</th></tr>
+      <tr><td>A map has scale 1:50,000. A road measures 4cm on the map. How long is the real road?</td><td>4 × 50,000 = 200,000cm → convert: ÷ 100,000</td><td><strong>2km</strong></td></tr>
+      <tr><td>Orange squash is mixed with water in ratio 1:4. How much water for 60ml of squash?</td><td>1 part = 60ml. Water = 4 × 60ml</td><td><strong>240ml water</strong></td></tr>
+      <tr><td>A class has boys and girls in ratio 3:5. There are 24 boys. How many students in total?</td><td>1 part = 24 ÷ 3 = 8. Total = 8 × 8</td><td><strong>64 students</strong></td></tr>
+      <tr><td>Gold alloy is 18 parts gold to 6 parts other metals. What percentage is gold?</td><td>Total parts = 24. Gold = 18/24 = 3/4 × 100</td><td><strong>75% gold</strong></td></tr>
+      <tr><td>Petrol costs £1.60 per litre. How much for 35 litres?</td><td>Unitary: £1.60 × 35</td><td><strong>£56.00</strong></td></tr>
+    </table>
+    <div class="callout good" style="margin-top:12px;">
+      <div class="ci">✅</div>
+      <div class="ct"><strong>KS3 exam tip:</strong> Map scales are almost always written as a ratio (e.g. 1:25,000) and always mean "1cm on the map = 25,000cm in real life." The key skill is converting the real-life measurement into a useful unit (cm → km) at the end.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#B45309;">
+    <div class="card-title">🎯 Ratio &amp; Proportion — Quiz</div>
+    <div class="quiz-wrap">
+      <div class="quiz-q" id="qm-q"></div>
+      <div class="opts" id="qm-opts"></div>
+      <div class="quiz-fb" id="qm-fb"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-sm" id="qm-next" style="background:#B45309;display:none;" onclick="nextQ('maths')">Next →</button>
+        <span class="score-badge" id="qm-score"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCIENCE — States of Matter
+═══════════════════════════════════════════════════════════ -->
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+
+<div id="pg-science" class="page pg-science-a">
+  <div class="hero" style="background:linear-gradient(135deg,#022C22 0%,#065F46 60%,#059669 100%);">
+    <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 7</div>
+    <div class="hero-title">States of Matter</div>
+    <div class="hero-subtitle">Solids · Liquids · Gases · Particle Model · Changes of State · Heating &amp; Cooling Curves</div>
+    <div class="hero-icon">🧊</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Chemistry</span>
+      <span class="hero-tag">Particle Model</span>
+      <span class="hero-tag">Changes of State</span>
+      <span class="hero-tag">KS3 Level 7</span>
+    </div>
+  </div>
+
+  <!-- Key Vocabulary -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title">📚 Key Vocabulary — ESL Science Guide</div>
+    <div class="esl-box">
+      <div class="esl-title">Core Vocabulary for States of Matter</div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">matter</div><div class="esl-def">Anything that has mass and takes up space. Everything you can see, touch, smell, or measure is made of matter. Air is matter. Water is matter. This book is matter.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">particle</div><div class="esl-def">An extremely tiny piece of matter — so small you cannot see it with the naked eye. Everything in the universe is made of particles (atoms and molecules). The way particles are arranged and how much they move determines which state of matter something is in.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">solid</div><div class="esl-def">A state of matter where particles are packed very closely together in a fixed arrangement. Solids have a definite shape and volume that do not change unless force is applied.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">liquid</div><div class="esl-def">A state of matter where particles are close together but can flow past each other. Liquids have a definite volume but take the shape of whatever container they are placed in.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">gas</div><div class="esl-def">A state of matter where particles are far apart and move very fast in all directions. Gases have no fixed shape or volume — they spread out to fill any container completely.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">melting point</div><div class="esl-def">The specific temperature at which a solid turns into a liquid. For water (ice), the melting point is 0°C. Every pure substance has its own unique melting point.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">boiling point</div><div class="esl-def">The specific temperature at which a liquid turns into a gas (boils/evaporates rapidly throughout the whole liquid). For water, the boiling point is 100°C at sea level.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">evaporation</div><div class="esl-def">When a liquid turns into a gas slowly at the surface, at temperatures BELOW the boiling point. Wet clothes dry by evaporation — the water does not need to boil, it just slowly escapes as gas from the surface.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">condensation</div><div class="esl-def">When a gas turns into a liquid by cooling down. The water droplets on a cold glass of water on a hot day are condensation — water vapour from the air has cooled against the cold glass and turned back into liquid.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#6EE7B7;">sublimation</div><div class="esl-def">When a solid turns directly into a gas WITHOUT going through the liquid stage. Dry ice (solid carbon dioxide) sublimates — it goes straight from solid to gas, which is why it seems to "smoke" and disappear.</div></div>
+    </div>
+  </div>
+
+  <!-- The Three States -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title">🔵🔴🟡 The Three States of Matter — Everything You Need to Know</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct"><strong>Key principle:</strong> All matter is made of particles. The state of matter (solid, liquid, or gas) depends entirely on two things: how far apart the particles are from each other, and how fast they are moving. Temperature controls both of these.</div></div>
+
+    <div class="particle-grid">
+      <div class="particle-box">
+        <div class="particle-title">🧊 SOLID</div>
+        <div class="particle-dots">
+          <div class="pdot" style="background:#2563EB;"></div><div class="pdot" style="background:#2563EB;"></div><div class="pdot" style="background:#2563EB;"></div>
+          <div class="pdot" style="background:#2563EB;"></div><div class="pdot" style="background:#2563EB;"></div><div class="pdot" style="background:#2563EB;"></div>
+          <div class="pdot" style="background:#2563EB;"></div><div class="pdot" style="background:#2563EB;"></div><div class="pdot" style="background:#2563EB;"></div>
+        </div>
+        <div class="particle-desc"><strong style="color:var(--bright);">Arranged:</strong> In tight, regular rows — very close together<br><strong style="color:var(--bright);">Movement:</strong> Only vibrate on the spot — cannot move freely<br><strong style="color:var(--bright);">Shape/Volume:</strong> Fixed shape, fixed volume<br><strong style="color:var(--bright);">Compressible:</strong> No — particles already touching</div>
+      </div>
+      <div class="particle-box">
+        <div class="particle-title">💧 LIQUID</div>
+        <div class="particle-dots" style="gap:6px;">
+          <div class="pdot" style="background:#059669;transform:translateX(3px)"></div><div class="pdot" style="background:#059669;transform:translateY(2px)"></div><div class="pdot" style="background:#059669;transform:translateX(-4px)"></div>
+          <div class="pdot" style="background:#059669;transform:translateY(-3px)"></div><div class="pdot" style="background:#059669;"></div><div class="pdot" style="background:#059669;transform:translateX(5px)"></div>
+          <div class="pdot" style="background:#059669;transform:translateX(-2px)"></div><div class="pdot" style="background:#059669;transform:translateY(4px)"></div><div class="pdot" style="background:#059669;transform:translateX(2px)"></div>
+        </div>
+        <div class="particle-desc"><strong style="color:var(--bright);">Arranged:</strong> Close together but randomly — no fixed pattern<br><strong style="color:var(--bright);">Movement:</strong> Flow and slide past each other — faster than in a solid<br><strong style="color:var(--bright);">Shape/Volume:</strong> No fixed shape — takes container's shape. Fixed volume<br><strong style="color:var(--bright);">Compressible:</strong> Not really — particles still close</div>
+      </div>
+      <div class="particle-box">
+        <div class="particle-title">💨 GAS</div>
+        <div class="particle-dots" style="gap:14px;padding:4px;">
+          <div class="pdot" style="background:#D97706;opacity:0.8;"></div><div class="pdot" style="background:#D97706;opacity:0.7;"></div>
+          <div class="pdot" style="background:#D97706;opacity:0.9;"></div><div class="pdot" style="background:#D97706;opacity:0.6;"></div>
+          <div class="pdot" style="background:#D97706;opacity:0.8;"></div>
+        </div>
+        <div class="particle-desc"><strong style="color:var(--bright);">Arranged:</strong> Spread very far apart — random and widely spaced<br><strong style="color:var(--bright);">Movement:</strong> Move very fast, in all directions, bouncing off each other and the container walls<br><strong style="color:var(--bright);">Shape/Volume:</strong> No fixed shape, no fixed volume — fills any container completely<br><strong style="color:var(--bright);">Compressible:</strong> Yes — lots of empty space between particles</div>
+      </div>
+    </div>
+
+    <table class="data-table" style="margin-top:14px;">
+      <tr><th>Property</th><th>Solid</th><th>Liquid</th><th>Gas</th></tr>
+      <tr><td><strong>Fixed shape?</strong></td><td>✅ Yes</td><td>❌ No</td><td>❌ No</td></tr>
+      <tr><td><strong>Fixed volume?</strong></td><td>✅ Yes</td><td>✅ Yes</td><td>❌ No</td></tr>
+      <tr><td><strong>Can flow?</strong></td><td>❌ No</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+      <tr><td><strong>Can be compressed?</strong></td><td>❌ No</td><td>❌ Barely</td><td>✅ Yes</td></tr>
+      <tr><td><strong>Particle spacing</strong></td><td>Very close, regular</td><td>Close, random</td><td>Far apart, random</td></tr>
+      <tr><td><strong>Particle movement</strong></td><td>Vibrate in place</td><td>Slide past each other</td><td>Move freely at high speed</td></tr>
+      <tr><td><strong>Example</strong></td><td>Ice, rock, wood</td><td>Water, oil, mercury</td><td>Steam, oxygen, carbon dioxide</td></tr>
+    </table>
+  </div>
+
+  <!-- Changes of State -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title">🔄 Changes of State — Every Change Has a Name</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct"><strong>The golden principle of changes of state:</strong> When a substance changes state, it is NOT a new substance — it is the SAME substance with its particles at a different energy level. Water, ice, and steam are all H₂O. Only the arrangement and movement of the particles changes. The substance itself stays the same.</div></div>
+
+    <div class="callout good" style="margin-top:14px;">
+      <div class="ci">♻️</div>
+      <div class="ct"><strong>Changes of state are REVERSIBLE physical changes</strong> — they are not chemical changes. You can melt ice into water and freeze it back again endlessly. The water molecules are not changed or destroyed — just rearranged. This is different from a chemical change, like burning wood, where new substances are formed.</div>
+    </div>
+
+    <div class="formula" style="margin-top:14px;">
+      <span class="hl">SOLID</span> <span style="color:#6EE7B7;">→ melting →</span> <span class="hl2">LIQUID</span> <span style="color:#6EE7B7;">→ boiling/evaporation →</span> <span class="hl3">GAS</span><br>
+      <span class="hl3">GAS</span> <span style="color:#6EE7B7;">→ condensation →</span> <span class="hl2">LIQUID</span> <span style="color:#6EE7B7;">→ freezing →</span> <span class="hl">SOLID</span><br>
+      <span class="hl">SOLID</span> <span style="color:#6EE7B7;">→ sublimation →</span> <span class="hl3">GAS</span> <span class="comment">  (skipping the liquid stage entirely)</span>
+    </div>
+
+    <table class="data-table" style="margin-top:12px;">
+      <tr><th>Process</th><th>What Changes</th><th>Heat Absorbed or Released?</th><th>Everyday Example</th></tr>
+      <tr><td><strong>Melting</strong></td><td>Solid → Liquid</td><td>Heat ABSORBED (particles gain energy to move)</td><td>Ice cream melting, chocolate melting in your hands</td></tr>
+      <tr><td><strong>Freezing</strong></td><td>Liquid → Solid</td><td>Heat RELEASED (particles lose energy, slow down, lock together)</td><td>Water turning to ice in the freezer</td></tr>
+      <tr><td><strong>Evaporation</strong></td><td>Liquid → Gas (slowly, at surface)</td><td>Heat ABSORBED</td><td>Wet clothes drying, puddles disappearing after rain</td></tr>
+      <tr><td><strong>Boiling</strong></td><td>Liquid → Gas (rapidly, throughout)</td><td>Heat ABSORBED at a fixed temperature (the boiling point)</td><td>Water boiling in a kettle at exactly 100°C</td></tr>
+      <tr><td><strong>Condensation</strong></td><td>Gas → Liquid</td><td>Heat RELEASED</td><td>Water droplets on a cold window, steam turning to water</td></tr>
+      <tr><td><strong>Sublimation</strong></td><td>Solid → Gas directly</td><td>Heat ABSORBED</td><td>Dry ice, some air freshener blocks, frost disappearing on a cold dry day</td></tr>
+    </table>
+
+    <div class="callout warn" style="margin-top:10px;">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>Evaporation vs Boiling — what is the difference?</strong> Both turn liquid to gas — but evaporation happens at the surface only, at ANY temperature below boiling point, and slowly. Boiling happens throughout the entire liquid, only at the boiling point, and rapidly. You can evaporate water at room temperature — wet clothes prove this — but you cannot boil water at room temperature.</div>
+    </div>
+  </div>
+
+  <!-- Heating/Cooling Curves -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title">📈 Heating &amp; Cooling Curves — Reading the Graph</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct"><strong>This is a favourite exam topic.</strong> A heating curve is a graph showing how the temperature of a substance changes as you continuously heat it. The shape of the curve is the same for all pure substances — what changes is the specific temperatures (melting and boiling points).</div></div>
+
+    <div class="nf-box" style="margin-top:14px;">
+      <div class="nf-label">📊 What a Heating Curve for Water Looks Like (Description)</div>
+      <div class="nf-content">
+        <p><strong>Section A — Rising line (Solid heating up):</strong> Temperature increases as the ice warms up. All particles are solid, vibrating faster and faster.</p>
+        <p style="margin-top:6px;"><strong>Section B — Flat line at 0°C (Melting — SOLID to LIQUID):</strong> Temperature stays FLAT even though you keep adding heat. This is because all the energy is being used to BREAK THE BONDS between particles (so they can move freely as a liquid) — not to increase temperature. This is called <em>latent heat of fusion</em>. <strong>The flat line always happens at the melting point.</strong></p>
+        <p style="margin-top:6px;"><strong>Section C — Rising line (Liquid heating up):</strong> Temperature increases again. The particles (now liquid) are moving faster and faster.</p>
+        <p style="margin-top:6px;"><strong>Section D — Flat line at 100°C (Boiling — LIQUID to GAS):</strong> Temperature stays FLAT again. All energy is used to overcome the remaining forces between liquid particles so they can escape as gas. This is <em>latent heat of vaporisation</em>. <strong>This flat line happens at the boiling point.</strong></p>
+        <p style="margin-top:6px;"><strong>Section E — Rising line (Gas heating up):</strong> Temperature increases again as the steam (gas) gets hotter.</p>
+      </div>
+    </div>
+
+    <div class="callout key" style="margin-top:10px;">
+      <div class="ci">🔑</div>
+      <div class="ct"><strong>The most important exam point about heating curves:</strong> The flat lines on a heating curve show a CHANGE OF STATE happening. During a change of state, the temperature does NOT change — even though you are continuously adding heat. This is because all the energy goes into changing the state, not raising the temperature. If you see a flat line on a heating curve, a change of state is occurring at that temperature.</div>
+    </div>
+
+    <div class="callout tip" style="margin-top:10px;">
+      <div class="ci">💡</div>
+      <div class="ct"><strong>Cooling curve — exactly the reverse:</strong> If you graph the temperature as a substance cools down, you get the mirror image — two flat lines where the substance gives OUT latent heat as it changes from gas to liquid (condensation) and from liquid to solid (freezing). The flat lines still happen at the same temperatures — 100°C and 0°C for water.</div>
+    </div>
+  </div>
+
+  <!-- The Particle Model -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title">⚛️ The Particle Model — What It Tells Us and Its Limitations</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">The <strong>particle model of matter</strong> is a scientific model — a simplified way of explaining how matter behaves. Like all models, it is useful but not perfect. Understanding both what it explains well and where it falls short is a sign of strong scientific thinking.</div></div>
+
+    <div class="compare" style="margin-top:14px;">
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#6EE7B7;">✅ What the Particle Model Explains Well</div>
+        <div class="cmp-row">Why solids keep their shape (particles locked in position)</div>
+        <div class="cmp-row">Why liquids flow and take the shape of a container (particles move freely but stay close)</div>
+        <div class="cmp-row">Why gases spread out to fill space (particles move fast and far apart)</div>
+        <div class="cmp-row">Why gases can be compressed but liquids and solids cannot</div>
+        <div class="cmp-row">Why heating increases temperature (particles move faster)</div>
+        <div class="cmp-row">Why changes of state happen at specific temperatures</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#6EE7B7;">⚠️ Limitations of the Model</div>
+        <div class="cmp-row">The model treats all particles as identical small spheres — real atoms have complex shapes and charges</div>
+        <div class="cmp-row">It does not show forces between particles — why do particles attract or repel each other?</div>
+        <div class="cmp-row">It does not explain why some substances dissolve in each other and others do not</div>
+        <div class="cmp-row">Plasma — a fourth state of matter found in stars and lightning — is not explained by the basic model</div>
+        <div class="cmp-row">It does not account for quantum mechanical behaviour of very small particles</div>
+      </div>
+    </div>
+
+    <div class="callout good" style="margin-top:12px;">
+      <div class="ci">✅</div>
+      <div class="ct"><strong>KS3 key idea:</strong> The fact that a model has limitations does not mean it is wrong or useless. A map of your school is a model — it doesn't show every brick, every person, every pipe in the wall, but it is still extremely useful for finding your way around. The particle model is one of the most useful tools in chemistry. We use it because it works well for explaining most of what we observe.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#065F46;">
+    <div class="card-title">🎯 States of Matter — Quiz</div>
+    <div class="quiz-wrap">
+      <div class="quiz-q" id="qs-q"></div>
+      <div class="opts" id="qs-opts"></div>
+      <div class="quiz-fb" id="qs-fb"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-sm" id="qs-next" style="background:#065F46;display:none;" onclick="nextQ('science')">Next →</button>
+        <span class="score-badge" id="qs-score"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HISTORY — Climate & Biomes
+═══════════════════════════════════════════════════════════ -->
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+
+<div id="pg-history" class="page pg-history-a">
+  <div class="hero" style="background:linear-gradient(135deg,#0F1F5C 0%,#1E3A8A 60%,#2563EB 100%);">
+    <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History &amp; Geography · Week 7</div>
+    <div class="hero-title">Climate &amp; Biomes</div>
+    <div class="hero-subtitle">Tropical · Polar · Temperate Zones · Rainforests · Tundra · Savannah · Climate vs Weather</div>
+    <div class="hero-icon">🌍</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Climate Zones</span>
+      <span class="hero-tag">Biomes</span>
+      <span class="hero-tag">Geography</span>
+      <span class="hero-tag">KS3 Level 7</span>
+    </div>
+  </div>
+
+  <!-- Key Vocabulary -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">📚 Key Vocabulary — ESL History &amp; Geography Guide</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct"><strong>Builds on Week 6's physical geography</strong> — you already know the seven continents and major landforms. This week we zoom in on climate and living systems.</div></div>
+    <div class="esl-box">
+      <div class="esl-title">Core Vocabulary</div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">weather</div><div class="esl-def">The day-to-day conditions of the atmosphere in a particular place — temperature, rainfall, wind, and sunshine on a specific day. Weather can change quickly. "It is raining today" is a weather observation.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">climate</div><div class="esl-def">The long-term, average weather patterns of a region over at least 30 years. Climate is predictable and stable. "Pakistan has hot, dry summers and mild winters" is a climate description. A useful saying: <em>Climate is what you expect; weather is what you get.</em></div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">climate zone</div><div class="esl-def">A large region of Earth that has a broadly similar climate. The three main zones are: tropical (near the equator — hot and wet), polar (near the North and South Poles — freezing cold), and temperate (in between — moderate seasons). There are also sub-zones: arid, semi-arid, Mediterranean, monsoon, etc.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">biome</div><div class="esl-def">A large area of Earth characterised by specific climate conditions AND specific plant and animal life that have adapted to those conditions. A biome is both a climate AND an ecosystem. The same biome can appear on different continents — tropical rainforests exist in South America, Africa, and South-East Asia.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">equator</div><div class="esl-def">The imaginary horizontal line (0° latitude) that runs around the exact middle of the Earth, equidistant from both poles. The equator is where the sun's rays hit most directly, making it the hottest part of the Earth. Tropical biomes are found near the equator.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">latitude</div><div class="esl-def">Distance north or south of the equator, measured in degrees (0° to 90°). Latitude is the most important factor in determining climate — areas closer to the equator (low latitude) receive more direct sunlight and are warmer. Areas closer to the poles (high latitude) receive less direct sunlight and are colder.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">precipitation</div><div class="esl-def">All forms of water that fall from the sky — rain, snow, sleet, and hail. Precipitation is a key factor in distinguishing between different biomes. A tropical rainforest can receive over 2,000mm of precipitation per year; a desert receives less than 250mm.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">adaptation</div><div class="esl-def">A physical feature or behaviour that helps a living thing survive in its environment. Each biome's plants and animals have specific adaptations that suit that climate. Polar bears have thick fur; cacti have thick, water-storing stems. Adaptation links directly to this week's Science lesson on particles — even life adapts to matter and energy.</div></div>
+      <div class="esl-row"><div class="esl-word" style="color:#93C5FD;">vegetation</div><div class="esl-def">The plants that grow naturally in a particular area. Vegetation is one of the defining characteristics of a biome — it both reflects the climate and shapes the habitat for animals.</div></div>
+    </div>
+  </div>
+
+  <!-- Climate vs Weather -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">☀️🌧️ Climate vs Weather — Why the Difference Matters</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct"><strong>This is the first and most important distinction in climate geography.</strong> Students consistently mix these two up. If you remember only one thing from this introduction, make it this: <strong>Weather is short-term. Climate is long-term.</strong></div></div>
+
+    <div class="compare" style="margin-top:14px;">
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#93C5FD;">🌩️ WEATHER — Short Term</div>
+        <div class="cmp-row">Changes from day to day — sometimes from hour to hour</div>
+        <div class="cmp-row">"It is cloudy and 18°C in Rawalpindi today"</div>
+        <div class="cmp-row">Measured with thermometers, rain gauges, anemometers (wind speed)</div>
+        <div class="cmp-row">Difficult to predict more than about 10 days ahead</div>
+        <div class="cmp-row">A single unusual week does not change the climate description of a place</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-head" style="color:#93C5FD;">🌡️ CLIMATE — Long Term</div>
+        <div class="cmp-row">The average weather patterns over at least 30 years</div>
+        <div class="cmp-row">"Pakistan has a monsoon season every year from July to September"</div>
+        <div class="cmp-row">Measured by averaging decades of weather data</div>
+        <div class="cmp-row">Reliable enough to design buildings, plan farming, and classify biomes</div>
+        <div class="cmp-row">Climate change refers to long-term shifts in these patterns — not just one hot summer</div>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin-top:12px;">
+      <div class="ci">⚠️</div>
+      <div class="ct"><strong>Common misunderstanding:</strong> People sometimes say "it was cold last winter — what happened to global warming?" This confuses weather (one cold winter) with climate (the long-term pattern over decades). A single cold year does not disprove a long-term warming trend, just as a single hot day in winter does not prove anything about climate. You need at least 30 years of data to identify a climate trend.</div>
+    </div>
+  </div>
+
+  <!-- Climate Zones -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">🌐 The Three Major Climate Zones — and Their Sub-Zones</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">Latitude is the single most important factor determining climate zone. Moving from the equator toward the poles, you move from tropical → temperate → polar. But altitude, distance from the sea, and ocean currents also modify climate within each zone.</div></div>
+
+    <table class="data-table" style="margin-top:12px;">
+      <tr><th>Zone</th><th>Location (Latitude)</th><th>Temperature</th><th>Rainfall</th><th>Examples</th></tr>
+      <tr><td><strong>Tropical</strong></td><td>0°–23.5° (near equator)</td><td>Hot year-round (25–35°C); very little seasonal variation</td><td>High — often heavy rainfall or distinct wet/dry seasons</td><td>Amazon, Congo, South-East Asia</td></tr>
+      <tr><td><strong>Arid / Desert</strong></td><td>15°–35° N/S</td><td>Very hot days, cold nights (desert); extremes common</td><td>Very low — under 250mm per year; defining feature of a desert</td><td>Sahara, Arabian Desert, Australian Outback</td></tr>
+      <tr><td><strong>Mediterranean</strong></td><td>30°–45° N/S</td><td>Hot dry summers; mild, wetter winters</td><td>Seasonal — summer drought, winter rain</td><td>Southern Europe, California, South Africa</td></tr>
+      <tr><td><strong>Temperate</strong></td><td>45°–65° N/S</td><td>Four distinct seasons; mild compared to tropics or poles</td><td>Moderate and fairly evenly distributed through the year</td><td>UK, Germany, most of China, northern USA</td></tr>
+      <tr><td><strong>Sub-Arctic / Boreal</strong></td><td>50°–70° N</td><td>Long, very cold winters; short, cool summers</td><td>Moderate — mostly as snow in winter</td><td>Canada, Russia, Scandinavia</td></tr>
+      <tr><td><strong>Polar / Tundra</strong></td><td>66.5°–90° (near poles)</td><td>Extremely cold year-round; temperatures often below −20°C in winter</td><td>Very low — technically a desert but frozen; precipitation mostly snow</td><td>Arctic, Antarctic, northern Greenland</td></tr>
+    </table>
+
+    <div class="callout key" style="margin-top:12px;">
+      <div class="ci">🔑</div>
+      <div class="ct"><strong>The key thing connecting climate zone to biome:</strong> The climate zone determines what plants can grow. The plants determine what animals can survive. Together, the plants and animals form the BIOME. Climate zone → vegetation → biome. This chain is fundamental.</div>
+    </div>
+  </div>
+
+  <!-- Six Major Biomes -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">🌍 The Major Biomes — Deep Dives</div>
+    <div class="callout info"><div class="ci">📍</div><div class="ct">A biome is defined by its climate AND its characteristic plants and animals. The same biome can exist on multiple continents — tropical rainforests appear in South America, central Africa, and South-East Asia because they share the same climate conditions. Click each biome to explore.</div></div>
+
+    <div id="biome-panel" class="biome-detail" style="margin-bottom:10px;--accent:#1E3A8A;">
+      <div style="font-size:0.85rem;color:var(--muted);">👆 Select a biome below to see full details</div>
+    </div>
+    <div class="biome-grid">
+      <div class="biome-tile" onclick="showBiome('rainforest')">
+        <div class="biome-icon">🌧️</div>
+        <div class="biome-name" style="color:#93C5FD;">Tropical Rainforest</div>
+        <div class="biome-temp">25–30°C · 2000mm+ rain/yr</div>
+        <div class="biome-def">Dense, layered forests near the equator</div>
+      </div>
+      <div class="biome-tile" onclick="showBiome('savannah')">
+        <div class="biome-icon">🦁</div>
+        <div class="biome-name" style="color:#93C5FD;">Savannah / Tropical Grassland</div>
+        <div class="biome-temp">20–30°C · distinct wet/dry seasons</div>
+        <div class="biome-def">Grassy plains with scattered trees</div>
+      </div>
+      <div class="biome-tile" onclick="showBiome('desert')">
+        <div class="biome-icon">🏜️</div>
+        <div class="biome-name" style="color:#93C5FD;">Hot Desert</div>
+        <div class="biome-temp">Extreme: up to 50°C day, −5°C night</div>
+        <div class="biome-def">Very low rainfall; sparse, adapted life</div>
+      </div>
+      <div class="biome-tile" onclick="showBiome('temperate')">
+        <div class="biome-icon">🍂</div>
+        <div class="biome-name" style="color:#93C5FD;">Temperate Forest</div>
+        <div class="biome-temp">5–20°C · four seasons · ~800mm rain</div>
+        <div class="biome-def">Deciduous trees that lose leaves in autumn</div>
+      </div>
+      <div class="biome-tile" onclick="showBiome('taiga')">
+        <div class="biome-icon">🌲</div>
+        <div class="biome-name" style="color:#93C5FD;">Taiga / Boreal Forest</div>
+        <div class="biome-temp">−20 to 10°C · harsh winters</div>
+        <div class="biome-def">Vast coniferous forests across northern latitudes</div>
+      </div>
+      <div class="biome-tile" onclick="showBiome('tundra')">
+        <div class="biome-icon">🧊</div>
+        <div class="biome-name" style="color:#93C5FD;">Tundra / Polar</div>
+        <div class="biome-temp">−30 to 5°C · near poles</div>
+        <div class="biome-def">Treeless frozen plains; permafrost below ground</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Factors Affecting Climate -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">🌡️ What Affects the Climate of a Place? — Beyond Latitude</div>
+    <div class="callout tip"><div class="ci">💡</div><div class="ct">Latitude is the MOST important factor, but it is not the ONLY one. Two places at the same latitude can have very different climates. Here are the other key factors — and understanding them helps explain many geographical puzzles.</div></div>
+
+    <div class="steps" style="margin-top:14px;">
+      <div class="step" style="--accent:#1E3A8A;">
+        <div class="step-n" style="background:#1E3A8A;">1</div>
+        <div>
+          <div class="step-title">Latitude — Distance from the Equator</div>
+          <div class="step-desc">The most powerful factor. Near the equator, the sun's rays hit Earth at a steep angle — concentrated, intense, and warm. Near the poles, the same rays hit at a shallow angle, spread over a larger area — less concentrated and much colder. This is why the equator is hot and the poles are freezing, regardless of season.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#1E3A8A;">
+        <div class="step-n" style="background:#1E3A8A;">2</div>
+        <div>
+          <div class="step-title">Altitude — Height Above Sea Level</div>
+          <div class="step-desc">The higher up you go, the colder it gets. Air pressure decreases with altitude, and air holds less heat. Temperature drops approximately 6.5°C for every 1,000 metres of elevation. This is why mountains are cold even at the equator — the peak of Mount Kilimanjaro in Tanzania (near the equator) has permanent snow and ice despite being in Africa. It is the same principle that creates the cold "biomes" seen on mountain tops in tropical countries.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#1E3A8A;">
+        <div class="step-n" style="background:#1E3A8A;">3</div>
+        <div>
+          <div class="step-title">Distance from the Sea — Maritime vs Continental</div>
+          <div class="step-desc">The sea warms up and cools down very slowly. Areas near the coast (<em>maritime climates</em>) have mild, wet weather year-round — cooler summers and warmer winters than inland areas. Areas far from the sea (<em>continental climates</em>) have extreme temperature ranges — very hot summers and very cold winters. Compare London (mild and wet) with Moscow (same latitude, but far colder winters and hotter summers). The UK's island position gives it a typical maritime climate.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#1E3A8A;">
+        <div class="step-n" style="background:#1E3A8A;">4</div>
+        <div>
+          <div class="step-title">Ocean Currents — Rivers of Heat in the Sea</div>
+          <div class="step-desc">Ocean currents are like giant rivers flowing through the ocean. Warm currents carry heat from the tropics toward the poles — making coastal areas warmer than they would otherwise be. The Gulf Stream carries warm water from the Gulf of Mexico across the Atlantic to Western Europe. This is why the UK, at the same latitude as parts of Canada that are buried in snow, has a relatively mild climate. Cold currents have the reverse effect.</div>
+        </div>
+      </div>
+      <div class="step" style="--accent:#1E3A8A;">
+        <div class="step-n" style="background:#1E3A8A;">5</div>
+        <div>
+          <div class="step-title">Prevailing Winds — Which Direction Does the Wind Come From?</div>
+          <div class="step-desc">Winds that regularly blow from the same direction carry moisture or dryness from wherever they have been. Winds that have blown over large oceans carry moisture — bringing rain to coasts. Winds that have blown over large deserts or cold land masses carry dry, extreme air. This is why one side of a mountain range can be wet and green while the other side is dry — a phenomenon called the rain shadow effect: mountains force air up, causing rain on one side, and dry air descends on the other.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Biome Links to Science -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">🔗 Connecting Biomes to Science — Adaptations and Food Webs</div>
+    <div class="callout good"><div class="ci">✅</div><div class="ct"><strong>Cross-subject link:</strong> Each biome is home to a specific food web (Week 6 Science). The organisms in that food web have evolved adaptations to survive the specific climate conditions. Understanding this connection shows how living systems and physical geography are inseparable.</div></div>
+
+    <table class="data-table" style="margin-top:12px;">
+      <tr><th>Biome</th><th>Climate Challenge</th><th>Plant Adaptation</th><th>Animal Adaptation</th></tr>
+      <tr><td><strong>Tropical Rainforest</strong></td><td>Competition for sunlight under dense canopy</td><td>Giant leaves to capture maximum light; tall straight trunks to reach canopy</td><td>Bright colours for finding mates; prehensile tails and claws for climbing</td></tr>
+      <tr><td><strong>Hot Desert</strong></td><td>Extreme heat; almost no water</td><td>Cacti: thick waxy skin to prevent water loss; deep or wide roots; water stored in stem</td><td>Nocturnal behaviour (active at night); concentrated urine to save water; reflective or pale coloured skin</td></tr>
+      <tr><td><strong>Tundra</strong></td><td>Freezing temperatures; very short growing season (6–8 weeks)</td><td>Low-growing, ground-hugging plants to avoid wind; antifreeze-like chemicals in cells</td><td>Thick fur or blubber; white colouring for camouflage in snow; seasonal migration away from the coldest months</td></tr>
+      <tr><td><strong>Temperate Forest</strong></td><td>Seasonal changes including cold, dark winters</td><td>Deciduous trees drop leaves in autumn to reduce water loss and survive winter cold</td><td>Hibernation in winter; migration; seed caching (storing food for winter)</td></tr>
+      <tr><td><strong>Savannah</strong></td><td>Long dry season when food is scarce</td><td>Deep roots to reach groundwater; fire-resistant bark; grasses that regrow rapidly after fire</td><td>Long migrations to follow seasonal rain; herding behaviour for protection from predators</td></tr>
+    </table>
+
+    <div class="callout tip" style="margin-top:12px;">
+      <div class="ci">💡</div>
+      <div class="ct"><strong>The big geographical idea:</strong> Biomes are not fixed forever. They shift slowly as climate changes. Over the last 100 years, human activity has accelerated climate change, which is causing biomes to shift — tundra is shrinking, deserts are expanding, rainforests are being deforested. This is one of the most important issues in 21st-century geography, and it connects to next week's History lesson on human impact on the environment.</div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="card" style="--accent:#1E3A8A;">
+    <div class="card-title">🎯 Climate &amp; Biomes — Quiz</div>
+    <div class="quiz-wrap">
+      <div class="quiz-q" id="qh-q"></div>
+      <div class="opts" id="qh-opts"></div>
+      <div class="quiz-fb" id="qh-fb"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-sm" id="qh-next" style="background:#1E3A8A;display:none;" onclick="nextQ('history')">Next →</button>
+        <span class="score-badge" id="qh-score"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Accordion
+function toggleAcc(el){
+  el.classList.toggle('open');
+}
+
+// Biome Explorer
+const biomes={
+  rainforest:{title:'🌧️ Tropical Rainforest',body:'<strong>Climate:</strong> Hot (25–30°C) and wet year-round. No real "winter." Receives 2,000–4,000mm of rain per year — that is 4 metres of rain! The high heat causes rapid evaporation, which forms clouds, which fall as rain — a self-watering cycle.<br><br><strong>Location:</strong> Within 10° of the equator. Amazon Basin (South America), Congo Basin (Africa), South-East Asia (Borneo, Sumatra, Malaysia).<br><br><strong>Vegetation structure:</strong> Four layers — emergent trees poke above the canopy (30m+), the canopy (20–30m), understorey (5–20m), and the dark forest floor. 80% of the world\'s land species live in rainforests despite covering only 6% of land.<br><br><strong>Animals:</strong> Jaguars, toucans, poison dart frogs, tree sloths, anacondas, countless insect and amphibian species.<br><br><strong>Threat:</strong> Deforestation — about 15 billion trees are cut down per year globally, with tropical rainforests losing the most. This destroys habitats, contributes to climate change (trees store carbon), and reduces biodiversity.'},
+  savannah:{title:'🦁 Savannah / Tropical Grassland',body:'<strong>Climate:</strong> Warm to hot year-round (20–30°C) but with a distinct WET season and DRY season. Rainfall is seasonal — in the wet season, grasses grow rapidly; in the dry season, everything dries out. Annual rainfall: 500–1,500mm, mostly in the wet season.<br><br><strong>Location:</strong> Between tropical rainforests and deserts, roughly 5°–15° from the equator. Sub-Saharan Africa (Serengeti, Maasai Mara), parts of Brazil (Cerrado), northern Australia.<br><br><strong>Vegetation:</strong> Mostly grasses with scattered, drought-resistant trees (acacia, baobab). Trees have deep roots and fire-resistant bark — savannah fires are common and natural, and many plants have adapted to regenerate quickly after fire.<br><br><strong>Animals:</strong> Africa\'s "Big Five" (lion, elephant, rhinoceros, leopard, buffalo), zebras, wildebeest, cheetahs, giraffes, hyenas. The Serengeti has the largest animal migration on Earth — 1.5 million wildebeest following the seasonal rains.<br><br><strong>KS3 link to food webs:</strong> The savannah has one of the most dramatic and visible food webs on Earth — grass producers support vast herbivore populations (wildebeest, zebra), which in turn support carnivores (lions, cheetahs, leopards) and scavengers (hyenas, vultures).'},
+  desert:{title:'🏜️ Hot Desert',body:'<strong>Climate:</strong> Defined by rainfall — less than 250mm per year. NOT defined by temperature (Antarctica is a cold desert). Hot deserts have extreme temperature ranges: daytime temperatures can exceed 50°C; night temperatures can drop below 0°C. Why? Dry air and clear skies cannot hold heat, so it escapes rapidly after sunset.<br><br><strong>Location:</strong> Roughly 15°–35° N and S of the equator (where high-pressure systems cause dry, sinking air). Sahara (North Africa — world\'s largest hot desert at 9.2 million km²), Arabian Desert, Atacama (South America — driest desert on Earth), Australian Outback.<br><br><strong>Vegetation:</strong> Sparse. Cacti (Americas), succulents (Africa), tough grasses. Adaptations include: waxy coatings to prevent water loss; deep or wide spreading roots; storing water in stems; seeds that wait decades for rain before germinating.<br><br><strong>Animals:</strong> Camels (store fat, not water — but their fat storage allows them to go long periods without food; their wide feet work like snowshoes on sand), fennec foxes, desert snakes, scorpions, roadrunners. Most desert animals are nocturnal — active at night when temperatures drop.<br><br><strong>Link to Week 6 Geography:</strong> The Sahara was explored last week — a desert by climate (not by appearance). The Atacama Desert in Chile receives almost zero rain — some weather stations there have never recorded measurable rainfall.'},
+  temperate:{title:'🍂 Temperate Deciduous Forest',body:'<strong>Climate:</strong> Four distinct seasons — warm summers (15–25°C), cold winters (near or below 0°C), mild springs and autumns. Moderate, year-round rainfall of 600–1,500mm. The "temperate" part means "moderate" — between the extremes of tropical and polar.<br><br><strong>Location:</strong> 45°–65° north and south of the equator. Western and Central Europe (UK, France, Germany), eastern USA, parts of China and Japan, New Zealand.<br><br><strong>Vegetation:</strong> Dominated by DECIDUOUS trees — trees that lose their leaves in autumn. This is the key adaptation: leaves use water and are costly to maintain in winter when water may be frozen and sunlight is limited, so the tree saves energy by shedding them. Oak, beech, maple, ash, birch, and elm are typical trees.<br><br><strong>Animals:</strong> Foxes, deer, badgers, owls, squirrels, hedgehogs, countless bird species. Many animals hibernate in winter (hedgehogs, dormice) or migrate to warmer areas.<br><br><strong>Human impact:</strong> Temperate forests have been most heavily affected by humans — most have been cleared for farming and cities over centuries. The UK, for example, was once almost entirely covered in temperate forest; less than 13% is forested today.'},
+  taiga:{title:'🌲 Taiga / Boreal Forest',body:'<strong>Climate:</strong> The largest land biome on Earth by area. Very cold winters (often −20 to −40°C), short cool summers (rarely above 10°C), low precipitation mostly as snow. Located in the northern hemisphere only — between the temperate zone and the tundra.<br><br><strong>Location:</strong> Covers most of Canada, Russia (Siberia), Scandinavia, and parts of Alaska. About 17 million km² — larger than the Amazon rainforest.<br><br><strong>Vegetation:</strong> Dominated by CONIFEROUS (evergreen) trees — spruce, pine, fir, and larch. These trees keep their needles (instead of broad leaves) through the winter. Why? Needles have a smaller surface area, a waxy coating, and antifreeze chemicals — all adaptations to survive extreme cold. Conifers can photosynthesise immediately when temperatures rise in spring, without wasting time growing new leaves.<br><br><strong>Animals:</strong> Wolves, bears (brown and black), moose, elk, lynx, wolverines, many migratory birds (breeding in summer). Populations tend to be low — the harsh conditions and limited productivity mean the biome cannot support many large animals per square kilometre.<br><br><strong>Role:</strong> The taiga stores enormous quantities of carbon in its trees and its soil (which is frozen much of the year). As global temperatures rise, permafrost beneath the taiga is thawing, releasing trapped carbon and methane — potentially accelerating climate change in a dangerous feedback loop.'},
+  tundra:{title:'🧊 Tundra / Polar Biome',body:'<strong>Climate:</strong> One of the coldest, harshest environments on Earth. Long, extremely cold winters (−20 to −40°C), short, cool summers (3–12°C). Very low precipitation — technically a cold desert. Daylight varies dramatically: 24 hours of light in summer (midnight sun), 24 hours of darkness in winter in polar regions.<br><br><strong>Permafrost:</strong> The defining feature of tundra is <strong>permafrost</strong> — a layer of permanently frozen soil below the surface. Even in summer, when the top few centimetres of soil thaw, the frozen layer beneath prevents water from draining. This creates boggy, waterlogged surfaces in summer. The permafrost also prevents deep-rooted trees from growing — which is why tundra is treeless.<br><br><strong>Location:</strong> Arctic tundra surrounds the North Pole — northern Canada, Alaska, Russia (above the taiga). Alpine tundra occurs at high altitudes worldwide (above the tree line).<br><br><strong>Vegetation:</strong> Low-growing: mosses, lichens, grasses, and small woody shrubs that hug the ground to avoid wind. The growing season is only 6–10 weeks long. Plants must grow, flower, and seed very quickly before winter returns.<br><br><strong>Animals:</strong> Arctic foxes, polar bears, wolves, caribou/reindeer, lemmings, snowy owls, musk oxen. Polar bears have hollow transparent hair shafts that funnel UV light to their black skin for warmth — a remarkable adaptation. Most large animals have thick blubber layers and dense fur.<br><br><strong>Critical climate link:</strong> The Arctic is warming at 2–4 times the global average rate. This is melting sea ice (threatening polar bears), thawing permafrost (releasing carbon), and altering the jet stream (affecting weather in temperate zones). The tundra is one of the most climate-sensitive biomes on Earth.'}
+};
+
+function showBiome(id){
+  const b=biomes[id];
+  if(!b)return;
+  const p=document.getElementById('biome-panel');
+  p.innerHTML='<div style="font-family:\'Playfair Display\',serif;font-size:1.1rem;font-weight:700;color:var(--bright);margin-bottom:12px;">'+b.title+'</div><div style="font-size:0.87rem;color:#B0B0C8;line-height:1.75;">'+b.body+'</div>';
+  p.style.borderColor='#2563EB';
+  document.querySelectorAll('.biome-tile').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// Quiz Engine
+const quizData={
+  bible:[
+    {q:'What does God say to Moses at the burning bush when Moses asks who is sending him?',opts:['Send someone more qualified than me','I AM WHO I AM — the same God of Abraham, Isaac and Jacob','You are a great speaker and that is why I chose you','Go back to Egypt and use your own strength'],ans:1,exp:'God gives Moses His eternal name "I AM WHO I AM" — and identifies Himself as the same God who made promises to Abraham, Isaac, and Jacob. This connects the Exodus to the earlier covenant God made with Abraham.'},
+    {q:'Why did Moses give FIVE excuses at the burning bush before agreeing to go?',opts:['He was testing God to see if God was really there','He genuinely felt unqualified, afraid, and reluctant — he did not want the job','He was being dishonest and actually wanted to go','He was waiting for God to bribe him'],ans:1,exp:'Moses had genuine feelings of inadequacy, fear, and reluctance. He had fled Egypt as a fugitive 40 years earlier. His five excuses reflect real human emotions — not dishonesty. God answered each one patiently.'},
+    {q:'What is the purpose of the ten plagues? Why ten — and why those specific plagues?',opts:['They were random disasters that just happened to occur','Each plague targeted something Egypt worshipped or relied on — demonstrating that God is more powerful than Egypt\'s gods','They were punishments for minor rule violations','God ran out of ideas after three plagues'],ans:1,exp:'The plagues were not random. Each one targeted an aspect of Egyptian religion or economy — the Nile (worshipped as the god Hapi), frogs (goddess Heqet), livestock (the god Apis), darkness (the sun god Ra). This was a theological confrontation between the God of Israel and Egypt\'s entire religious system.'},
+    {q:'What was the Passover, and why was it called "Passover"?',opts:['A celebration of the Nile flooding every year','The name of the special meal the Israelites ate as God "passed over" their homes — protected by the blood of a lamb on the doorposts — sparing their firstborn sons','A Roman festival borrowed by Israel','The name of the journey through the Red Sea'],ans:1,exp:'The Passover was both the final plague (death of Egypt\'s firstborn) and the special meal of lamb, bitter herbs, and unleavened bread that the Israelites ate that night. God "passed over" the homes marked with lamb\'s blood, protecting those inside from the plague.'},
+    {q:'What was the Israelites\' reaction when they found themselves trapped between the Egyptian army and the Red Sea?',opts:['They all prayed calmly and trusted God immediately','They panicked, accused Moses of bringing them to die, and said they would rather have stayed as slaves in Egypt','They immediately fought back against the Egyptian army','They were overjoyed and sang songs'],ans:1,exp:'Exodus 14:10-12 shows the Israelites were terrified and accused Moses of bringing them out to die. They even said it would have been better to stay as slaves. This is the context in which Moses speaks Exodus 14:14: "The Lord will fight for you; you need only to be still."'},
+    {q:'What does Exodus 14:14 mean — "The Lord will fight for you; you need only to be still"?',opts:['God is telling Israel to sleep','God is promising to act on their behalf — they do not need to fight; they need to trust Him and stop panicking at the most impossible-looking moment in the story','God will only help if they build weapons first','God cannot see the Egyptian army'],ans:1,exp:'Standing between the Egyptian army and the Red Sea — with nowhere to go — the Israelites were told to be still and trust. God\'s promise was that HE would fight. And He did — through the parting of the sea. The verse is most powerful precisely because it is spoken at the most hopeless moment.'},
+    {q:'What is the key lesson from Moses\' calling about the nature of courage and qualification?',opts:['Only very confident people should take on big challenges','God calls the equipped, not the other way around','Moses\' story teaches that you need to argue with God before He listens','God only uses people who never feel afraid'],ans:1,exp:'Moses had five excuses, 40 years of running away, and no obvious qualifications. Yet God used him for the most important rescue mission in the Old Testament. The lesson: God does not call the equipped — He equips the called. The difference was not Moses\' ability; it was God\'s presence: "I will be with you" (Exodus 3:12).'},
+  ],
+  english:[
+    {q:'What is the difference between "purpose" and "audience" in a non-fiction text?',opts:['They mean the same thing','Purpose is WHY the text was written; audience is WHO it was written for','Audience is why the text was written; purpose is who it was for','Both refer to the writer, not the reader'],ans:1,exp:'Purpose = the reason/goal of the text (to inform, persuade, entertain, explain). Audience = the intended readers. These are the two most important questions to ask about any non-fiction text before analysing its features.'},
+    {q:'A text says: "Studies show that 87% of people agree this product works." What question should a critical reader ask?',opts:['This must be true because it has a number in it','Which studies? Who conducted them? How many people were surveyed? Were the results independently verified?','Numbers in a text are always reliable facts','The 87% proves this is not biased'],ans:1,exp:'Statistics can be selectively chosen, poorly conducted, or presented without context. A critical reader always asks: which study? Who funded it? How many people? What was the question asked? A statistic without a verifiable source is a warning sign, not proof.'},
+    {q:'What is the difference between a FACT and an OPINION?',opts:['Facts are long; opinions are short','A fact can be checked and proven true or false; an opinion expresses a personal view that cannot be proven either way','Opinions from experts are the same as facts','All statements in newspapers are facts'],ans:1,exp:'A fact is verifiable — it is either true or false and can be checked against evidence. An opinion expresses a personal view or judgement — even an expert\'s statement can be an opinion if it is a judgement rather than a measurable, verifiable claim.'},
+    {q:'In a news article, what structure does the first paragraph usually follow?',opts:['It introduces the writer\'s personal opinion on the topic','It uses the inverted pyramid — answering WHO, WHAT, WHERE, WHEN, WHY, HOW with the most important information first','It tells a fictional story to hook the reader','It is always the least important part of the article'],ans:1,exp:'News articles typically use the inverted pyramid: the most important information (who, what, where, when, why, how) comes first. This allows readers to get the key facts even if they stop reading after the first paragraph.'},
+    {q:'A text uses the phrase: "Surely we cannot stand by while innocent children suffer?" What technique is this, and what effect does it create?',opts:['A statistic — giving data to support the argument','A rhetorical question — making the reader feel the "obvious" answer supports the writer\'s view, without presenting a counter-argument','An anecdote — a personal story to engage the reader','Direct address — talking to a specific named individual'],ans:1,exp:'This is a rhetorical question. The word "surely" implies the answer is obvious — making any disagreement seem unreasonable. It draws the reader emotionally toward the writer\'s position. Always identify both the technique AND its effect on the reader for full marks.'},
+    {q:'How do you identify the AUDIENCE of a text if it is not stated?',opts:['You cannot — the audience is always stated in the text','Look at clues: vocabulary level, formal/informal tone, what is assumed without explanation, publication type, and use of "you"/"one"','Assume the audience is always children','The headline always tells you who the audience is'],ans:1,exp:'You infer the audience from textual clues: simple/complex vocabulary, formal/informal tone, what the writer does NOT explain (showing what the reader is expected to already know), and where the text was published. This is called inferring — drawing a conclusion from evidence.'},
+    {q:'What is the difference between EVAPORATION and BOILING? (Cross-subject link to Science)',opts:['They are exactly the same process','Evaporation happens slowly at the surface at any temperature below boiling point; boiling happens rapidly throughout the whole liquid only at the boiling point','Evaporation is faster than boiling','Boiling can happen at room temperature'],ans:1,exp:'This cross-subject question connects English reading (reading non-fiction about science) with the Science lesson. Evaporation = slow, at surface, any temperature below boiling point. Boiling = rapid, throughout liquid, only at exact boiling point. Understanding this distinction is key to reading science non-fiction accurately.'},
+  ],
+  maths:[
+    {q:'Simplify the ratio 15:25.',opts:['15:25 is already simplified','3:5 — divide both by 5 (the HCF of 15 and 25)','5:3','1:5'],ans:1,exp:'HCF of 15 and 25 is 5. 15 ÷ 5 = 3. 25 ÷ 5 = 5. So 15:25 = 3:5. Check: are 3 and 5 both divisible by a common number? No (only 1 divides both). Simplified.'},
+    {q:'Share £90 in the ratio 2:7. How much does the larger share receive?',opts:['£20','£70 — 7 parts of 9 total parts of £90, with each part = £10','£63','£45'],ans:1,exp:'Total parts = 2 + 7 = 9. Value of 1 part = £90 ÷ 9 = £10. Larger share = 7 × £10 = £70. Smaller share = 2 × £10 = £20. Check: £20 + £70 = £90 ✓'},
+    {q:'5 identical pens cost £3.50. Using the unitary method, how much do 8 pens cost?',opts:['£5.00','£5.60 — found by calculating the cost of 1 pen (£0.70) then multiplying by 8','£6.00','£2.80'],ans:1,exp:'Unitary method: cost of 1 pen = £3.50 ÷ 5 = £0.70. Cost of 8 pens = £0.70 × 8 = £5.60.'},
+    {q:'Zara and Tom share 72 stickers in the ratio 1:3. How many stickers does Tom receive?',opts:['18','54 — Tom has 3 parts out of 4 total; 1 part = 18 stickers; Tom gets 3 × 18','36','24'],ans:1,exp:'Total parts = 1 + 3 = 4. One part = 72 ÷ 4 = 18. Tom (3 parts) = 3 × 18 = 54. Zara (1 part) = 18. Check: 18 + 54 = 72 ✓'},
+    {q:'A recipe for 6 people uses 450g of rice. How much rice is needed for 10 people?',opts:['650g','750g — found by finding the amount for 1 person (75g) then multiplying by 10','900g','600g'],ans:1,exp:'Rice for 1 person = 450 ÷ 6 = 75g. Rice for 10 people = 75 × 10 = 750g. This is the unitary method applied to a cooking problem.'},
+    {q:'What is the ratio of boys to girls in a class of 30 where 18 are boys, simplified to its simplest form?',opts:['18:12','3:2 — simplify 18:12 by dividing both by 6 (the HCF)','9:6','1:2'],ans:1,exp:'Boys = 18, Girls = 30 − 18 = 12. Ratio = 18:12. HCF of 18 and 12 = 6. 18 ÷ 6 = 3. 12 ÷ 6 = 2. Simplified ratio = 3:2.'},
+    {q:'In INVERSE proportion, 4 workers finish a job in 12 days. How many days would 6 workers take?',opts:['18 days','8 days — because 4 × 12 = 48 total worker-days, and 48 ÷ 6 = 8','6 days','3 days'],ans:1,exp:'This is inverse proportion — more workers = fewer days. Total worker-days = 4 × 12 = 48. With 6 workers: 48 ÷ 6 = 8 days. More workers means less time, so the days decreased (not increased).'},
+  ],
+  science:[
+    {q:'What is the key difference between how particles are arranged in a SOLID and a LIQUID?',opts:['Solid particles are larger than liquid particles','In a solid, particles are in fixed, regular positions and only vibrate. In a liquid, particles are still close but can flow and slide past each other','Solid particles move faster than liquid particles','Liquids have fewer particles than solids'],ans:1,exp:'In a solid, particles are locked in fixed positions in a regular arrangement and only vibrate on the spot. In a liquid, particles are still close together but are no longer in fixed positions — they can flow and slide past each other, which is why liquids take the shape of their container.'},
+    {q:'Why can GASES be compressed but SOLIDS and LIQUIDS cannot?',opts:['Gas particles are smaller','Gas particles are far apart with lots of empty space between them, which can be squeezed. Solid and liquid particles are already very close together with no space to compress','Gases are lighter','Compression only works at high temperatures'],ans:1,exp:'Compression requires empty space between particles. Gas particles are widely spaced with lots of empty space — this is why we can compress air in a bicycle tyre. Solid and liquid particles are already packed closely together, so there is very little space to compress.'},
+    {q:'During melting and boiling on a heating curve, the temperature stays FLAT even though heat is still being added. Why?',opts:['The thermometer breaks at these temperatures','All the energy being added is used to break bonds between particles (causing the change of state) rather than raising the temperature — this energy is called latent heat','Heat stops working at the melting and boiling points','This is a mistake in the graph'],ans:1,exp:'During a change of state, all the energy supplied is used to overcome the forces holding particles together (breaking bonds in melting; fully separating particles in boiling). No energy is left over to increase the kinetic energy of particles — so temperature stays constant. This energy is called latent heat.'},
+    {q:'What is the difference between EVAPORATION and BOILING?',opts:['They are the same process','Evaporation is slow, happens only at the surface, and can occur at any temperature. Boiling is rapid, happens throughout the liquid, and only at the boiling point','Boiling is slower than evaporation','Evaporation only happens when you heat something'],ans:1,exp:'Evaporation = slow, surface only, any temperature below boiling point (wet clothes dry without boiling). Boiling = rapid, throughout liquid, only at the specific boiling point (100°C for water at sea level).'},
+    {q:'What happens to the particles of water when it freezes into ice?',opts:['They disappear','They slow down, lose energy, and lock into fixed positions in a regular crystalline arrangement — the same particles, just arranged differently','They become a different chemical substance','They speed up when frozen'],ans:1,exp:'Freezing is a PHYSICAL change, not a chemical one. The water molecules (H₂O) are unchanged — they slow down as heat is removed, lose energy, and arrange themselves into the rigid, crystalline structure of ice. The substance is the same; only the arrangement and movement of particles has changed.'},
+    {q:'What is SUBLIMATION?',opts:['When a solid melts into a liquid','When a solid turns DIRECTLY into a gas without going through the liquid stage','When a gas turns into a solid','When a liquid evaporates slowly'],ans:1,exp:'Sublimation is the direct solid → gas transition, skipping the liquid phase entirely. Dry ice (solid CO₂) sublimates — it goes from solid to gas, which is why it produces "smoke" without leaving a liquid puddle. Sublimation is the reverse of deposition (gas → solid).'},
+    {q:'Name a LIMITATION of the particle model of matter.',opts:['It explains everything perfectly','It does not explain chemical changes','The model treats particles as identical spheres and cannot show forces between particles, the behaviour of plasma (the fourth state of matter), or quantum mechanical effects','It is too complicated for most scientists to understand'],ans:2,exp:'The particle model simplifies particles as identical spheres in contact or near contact, but real atoms have complex shapes, charges, and quantum behaviour. The model also cannot explain plasma (the fourth state of matter found in stars and lightning). All scientific models have limitations — this is part of what it means to think scientifically.'},
+  ],
+  history:[
+    {q:'What is the difference between WEATHER and CLIMATE?',opts:['Weather is long-term; climate is day-to-day','Weather is the day-to-day atmospheric conditions; climate is the long-term average weather patterns over at least 30 years in a place','They are the same thing with different names','Climate only applies to tropical countries'],ans:1,exp:'"Climate is what you expect; weather is what you get." Weather changes from day to day — sun today, rain tomorrow. Climate is the stable, long-term average — the UK\'s climate is mild and wet because of data taken over decades, not because of one single day.'},
+    {q:'Why is the area near the equator hotter than near the poles?',opts:['The equator is closer to the Sun','Near the equator, the Sun\'s rays hit Earth at a steep angle — more concentrated and intense. Near the poles, the same rays hit at a shallow angle, spread over a larger area — much less concentrated','The poles are at higher altitude','Wind patterns make the poles cold'],ans:1,exp:'The angle at which sunlight hits Earth\'s surface is the key. At the equator (0° latitude), the Sun is nearly overhead — rays hit in a concentrated area, delivering intense heat. At the poles, the Sun is always low on the horizon — rays spread over a huge area and deliver much less energy per square metre.'},
+    {q:'What is the defining feature of a DESERT as a climate type?',opts:['A desert is always very hot','A desert is any region that receives very low rainfall (under 250mm per year) — regardless of temperature','A desert has no living things at all','A desert is always sandy'],ans:1,exp:'A desert is defined by RAINFALL, not temperature. Both the scorching Sahara and the frozen Antarctic are classified as deserts because they both receive very low precipitation (under 250mm per year). Antarctica is technically the world\'s largest desert overall.'},
+    {q:'Why do DECIDUOUS trees in temperate forests lose their leaves in autumn?',opts:['Losing leaves makes them grow taller','It is an adaptation to survive winter — leaves require water and energy to maintain, and in winter water may be frozen and sunlight is limited, so the tree conserves resources by shedding them','The wind blows the leaves off','They are not adapted — it is a mistake in their biology'],ans:1,exp:'Deciduous trees have adapted to the temperate climate\'s cold, dark winters by shedding their leaves. Maintaining broad leaves through winter would cost more water and energy than it would gain through reduced photosynthesis. In spring, they regrow leaves to maximise summer sunlight. This is a brilliant adaptation to a seasonal climate.'},
+    {q:'What is PERMAFROST, and why is it important to the tundra biome?',opts:['Permafrost is permanently frozen air','Permafrost is a layer of permanently frozen soil beneath the surface — it prevents water from draining, keeps the ground waterlogged in summer, and prevents deep-rooted trees from growing, which is why tundra is treeless','Permafrost is a type of glacier','Permafrost only exists in Antarctica'],ans:1,exp:'Permafrost is a layer of soil (sometimes hundreds of metres deep) that stays permanently frozen year-round. In summer, only the top few centimetres thaw. This frozen layer blocks drainage — creating the boggy tundra surface. It also prevents tree roots from penetrating deep enough to anchor large trees, which is why the tundra has no trees.'},
+    {q:'What is a BIOME?',opts:['A region with only animals, no plants','A large area of Earth characterised by a specific climate AND specific plant and animal communities that have adapted to those conditions','A biome is just another word for a country','A biome is any place near the equator'],ans:1,exp:'A biome is defined by BOTH its climate AND its characteristic living organisms. The same biome type (e.g. tropical rainforest) can appear on different continents as long as the climate conditions are the same. Biomes connect climate geography to biology — the organisms in a biome have adapted specifically to its conditions.'},
+    {q:'How does the GULF STREAM affect the climate of Western Europe?',opts:['It brings cold water from the poles, making Europe very cold','It carries warm water from the Gulf of Mexico across the Atlantic, making Western Europe significantly warmer than it would otherwise be at its latitude','The Gulf Stream has no effect on land climates','It causes storms in Western Europe every year'],ans:1,exp:'The Gulf Stream is a warm ocean current flowing from the Gulf of Mexico northeast across the Atlantic Ocean. It releases heat into the air above it, warming the westerly winds that blow across Western Europe. Without it, the UK and Ireland would have climates much more like Canada (which is at a similar latitude) — with far colder, snowier winters.'},
+  ],
+};
+
+const qState={};
+['bible','english','maths','science','history'].forEach(s=>{
+  qState[s]={idx:0,score:0,done:false};
+  renderQ(s);
+});
+
+function renderQ(s){
+  const st=qState[s];
+  const data=quizData[s];
+  if(st.idx>=data.length){
+    const wrap=document.getElementById('q'+s[0]+'-q')||document.querySelector('#pg-'+s+' .quiz-q');
+    if(wrap)wrap.textContent='Quiz Complete! Score: '+st.score+'/'+data.length;
+    const opts=document.getElementById('q'+s[0]+'-opts');
+    if(opts)opts.innerHTML='';
+    const fb=document.getElementById('q'+s[0]+'-fb');
+    if(fb){fb.style.display='none';}
+    const nb=document.getElementById('q'+s[0]+'-next');
+    if(nb)nb.style.display='none';
+    const sc=document.getElementById('q'+s[0]+'-score');
+    if(sc)sc.textContent='Final score: '+st.score+'/'+data.length;
+    return;
+  }
+  const q=data[st.idx];
+  const qEl=document.getElementById('q'+s[0]+'-q');
+  if(qEl)qEl.textContent='Q'+(st.idx+1)+': '+q.q;
+  const optsEl=document.getElementById('q'+s[0]+'-opts');
+  if(optsEl){
+    optsEl.innerHTML='';
+    q.opts.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='opt';
+      b.textContent=o;
+      b.onclick=()=>answer(s,i);
+      optsEl.appendChild(b);
+    });
+  }
+  const fb=document.getElementById('q'+s[0]+'-fb');
+  if(fb)fb.style.display='none';
+  const nb=document.getElementById('q'+s[0]+'-next');
+  if(nb)nb.style.display='none';
+  const sc=document.getElementById('q'+s[0]+'-score');
+  if(sc)sc.textContent='Question '+(st.idx+1)+' of '+data.length+' · Score: '+st.score;
+}
+
+function answer(s,i){
+  const st=qState[s];
+  const q=quizData[s][st.idx];
+  const opts=document.querySelectorAll('#pg-'+s+' .opts .opt');
+  opts.forEach(o=>o.disabled=true);
+  opts[i].classList.add(i===q.ans?'correct':'wrong');
+  if(i!==q.ans)opts[q.ans].classList.add('correct');
+  if(i===q.ans)st.score++;
+  const fb=document.getElementById('q'+s[0]+'-fb');
+  if(fb){
+    fb.className='quiz-fb '+(i===q.ans?'ok':'bad');
+    fb.textContent=(i===q.ans?'✓ Correct! ':'✗ Not quite. ')+q.exp;
+    fb.style.display='block';
+  }
+  const nb=document.getElementById('q'+s[0]+'-next');
+  if(nb)nb.style.display='inline-flex';
+  const sc=document.getElementById('q'+s[0]+'-score');
+  if(sc)sc.textContent='Score: '+st.score+'/'+(st.idx+1);
+}
+
+function nextQ(s){
+  qState[s].idx++;
+  renderQ(s);
+}
+</script>
+</body>
+</html>
