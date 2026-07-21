@@ -3,247 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Review — HOS International</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<title>Student Submissions — HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FAFBFF; --card:#FFFFFF; --text:#1E1B4B; --muted:#6B7280;
-  --accent:#0891B2; --accent-l:#CFFAFE;
-  --good:#059669; --good-l:#D1FAE5;
-  --warn:#F59E0B; --warn-l:#FFFBEB;
-  --radius:18px; --radius-sm:12px;
-  --shadow:0 4px 24px rgba(0,0,0,0.06);
+  --cream:#FAF7F2;--cream-dark:#F0EBE1;--cream-border:#DDD0BC;
+  --maroon:#7A1C1C;--maroon-light:#9B2626;--maroon-mist:rgba(122,28,28,0.07);
+  --gold:#C49A3C;--ink:#2C1A0E;--ink-soft:#8B6B55;--white:#FFFFFF;
+  --success:#2D6A4F;--success-bg:#D8F3DC;--shadow:0 2px 12px rgba(122,28,28,0.10);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:24px 16px 60px;}
-.wrap{max-width:880px;margin:0 auto;}
-.hero{background:linear-gradient(135deg,#1E1B4B,#0891B2);color:#fff;border-radius:var(--radius);padding:26px 28px;margin-bottom:20px;}
-.hero h1{font-family:'Fredoka One',cursive;font-size:1.7rem;margin-bottom:4px;}
-.hero p{opacity:.9;font-weight:600;font-size:.92rem;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+.nav{background:var(--maroon);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 16px rgba(92,20,20,0.25)}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-mark{width:38px;height:38px;border-radius:9px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.05rem;color:#5C1414}
+.nav-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--cream)}
+.nav-title span{color:rgba(250,247,242,0.55);font-weight:400;font-size:0.72rem;display:block;margin-top:-2px}
+.back-btn{padding:7px 16px;border-radius:8px;background:rgba(250,247,242,0.12);border:1px solid rgba(250,247,242,0.25);color:var(--cream);font-size:0.8rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s}
+.back-btn:hover{background:rgba(250,247,242,0.22)}
+.page{max-width:1000px;margin:0 auto;padding:28px 24px 60px}
+.page-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--maroon);margin-bottom:6px}
+.page-sub{color:var(--ink-soft);font-size:0.85rem;margin-bottom:24px}
 
-.controls{background:var(--card);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-.controls label{font-weight:800;font-size:.85rem;}
-select,input[type=text]{padding:9px 14px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;outline:none;min-width:200px;}
-select:focus,input:focus{border-color:var(--accent);}
-.btn{padding:10px 20px;border-radius:50px;border:none;background:var(--accent);color:#fff;font-weight:800;font-size:.88rem;cursor:pointer;font-family:'Nunito',sans-serif;}
-.btn:hover{filter:brightness(1.1);}
-.btn.save{background:var(--good);}
-#status{font-weight:700;font-size:.85rem;color:var(--muted);width:100%;}
+/* FILTERS */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
+.filters select,.filters input{padding:8px 12px;border:1.5px solid var(--cream-border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--ink);background:var(--cream);outline:none}
+.filters select:focus,.filters input:focus{border-color:var(--maroon)}
+.filters label{font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.05em}
+.stats-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.stat-card{background:var(--white);border:1.5px solid var(--cream-border);border-radius:12px;padding:14px 20px;box-shadow:var(--shadow);text-align:center;min-width:120px}
+.stat-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--maroon)}
+.stat-lbl{font-size:0.7rem;color:var(--ink-soft);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px}
 
-.card{background:var(--card);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:var(--shadow);}
-.card-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:10px;border-bottom:3px solid #F3F4F6;padding-bottom:10px;}
-.student-name{font-family:'Fredoka One',cursive;font-size:1.25rem;}
-.submitted-at{font-size:.78rem;color:var(--muted);font-weight:700;}
-.scores{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
-.score-chip{background:var(--accent-l);color:#164E63;font-weight:800;font-size:.72rem;padding:4px 10px;border-radius:50px;}
-
-.group-title{font-family:'Fredoka One',cursive;font-size:1rem;margin:18px 0 8px;color:var(--accent);}
-.qa{background:#F8FAFF;border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
-.qa .q{font-weight:800;font-size:.86rem;margin-bottom:6px;}
-.qa .a{background:#fff;border:2px solid #E5E7EB;border-radius:10px;padding:8px 12px;font-weight:700;font-size:.88rem;margin-bottom:8px;white-space:pre-wrap;min-height:20px;}
-.qa .a:empty::before{content:'(no answer written)';color:#9CA3AF;font-weight:600;font-style:italic;}
-.qa textarea{width:100%;border:2px solid #E5E7EB;border-radius:10px;padding:8px 12px;font-family:'Nunito',sans-serif;font-weight:600;font-size:.85rem;resize:vertical;min-height:44px;outline:none;}
-.qa textarea:focus{border-color:var(--good);}
-.qa .fb-label{font-size:.72rem;font-weight:800;color:var(--good);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-
-.notes-block{margin-top:16px;}
-.notes-block label{display:block;font-weight:800;font-size:.85rem;margin-bottom:6px;}
-.notes-block textarea{width:100%;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:10px 14px;font-family:'Nunito',sans-serif;font-weight:600;font-size:.9rem;resize:vertical;min-height:60px;outline:none;}
-.notes-block textarea:focus{border-color:var(--accent);}
-
-.foot-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:10px;}
-.graded-toggle{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.85rem;}
-.save-status{font-size:.8rem;font-weight:700;color:var(--good);}
-
-.empty{background:var(--card);border-radius:var(--radius);padding:30px;text-align:center;color:var(--muted);font-weight:700;box-shadow:var(--shadow);}
+/* SUBMISSION CARDS */
+.submission-card{background:var(--white);border:1.5px solid var(--cream-border);border-radius:14px;padding:20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.sub-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.sub-student{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:var(--maroon)}
+.sub-worksheet{font-size:0.82rem;font-weight:700;color:var(--ink-soft);background:var(--cream-dark);padding:3px 10px;border-radius:99px}
+.sub-date{font-size:0.75rem;color:var(--ink-soft);margin-left:auto}
+.sub-empty{color:var(--ink-soft);font-size:0.82rem;font-style:italic}
+.answers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px}
+.answer-item{background:var(--cream);border-radius:9px;padding:10px 13px}
+.answer-key{font-size:0.68rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+.answer-val{font-size:0.83rem;color:var(--ink);word-break:break-word}
+.feedback-section{border-top:1px solid var(--cream-border);padding-top:12px;margin-top:4px;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.feedback-section textarea{flex:1;min-width:200px;padding:8px 12px;border:1.5px solid var(--cream-border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--ink);background:var(--cream);resize:vertical;min-height:60px;outline:none}
+.feedback-section textarea:focus{border-color:var(--maroon)}
+.save-fb-btn{padding:8px 18px;border-radius:8px;border:none;background:var(--maroon);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.18s;white-space:nowrap}
+.save-fb-btn:hover{background:var(--maroon-light)}
+.fb-saved{font-size:0.75rem;color:var(--success);font-weight:700;display:none;padding:4px 0}
+.existing-feedback{background:var(--success-bg);border-radius:8px;padding:8px 12px;font-size:0.82rem;color:var(--success);font-weight:600;margin-bottom:8px}
+.no-data{text-align:center;padding:60px 20px;color:var(--ink-soft)}
+.no-data-icon{font-size:3rem;margin-bottom:12px}
+.no-data-text{font-size:1rem;font-weight:700;color:var(--ink-soft)}
+.loading{text-align:center;padding:40px;color:var(--ink-soft);font-size:0.9rem}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hero">
-    <h1>📚 Teacher Review Portal</h1>
-    <p>See what each student wrote, leave corrections, and they'll see your notes next time they open the worksheet.</p>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-mark">H</div>
+    <div class="nav-title">Student Submissions <span>HOS International</span></div>
+  </div>
+  <a href="index.html" class="back-btn">← Back to Portal</a>
+</nav>
+
+<div class="page">
+  <div class="page-title">📋 Student Submissions</div>
+  <div class="page-sub">All worksheet answers saved by students. Add feedback and it saves instantly.</div>
+
+  <div class="filters">
+    <div>
+      <label>Student</label>
+      <select id="filter-student" onchange="applyFilters()">
+        <option value="">All Students</option>
+        <option value="abrish">Abrish</option>
+        <option value="jessica">Jessica</option>
+      </select>
+    </div>
+    <div>
+      <label>Week</label>
+      <select id="filter-week" onchange="applyFilters()">
+        <option value="">All Weeks</option>
+      </select>
+    </div>
+    <div>
+      <label>Search</label>
+      <input type="text" id="filter-search" placeholder="Search worksheet ID…" oninput="applyFilters()">
+    </div>
   </div>
 
-  <div class="controls">
-    <label for="ws-select">Worksheet:</label>
-    <select id="ws-select">
-      <option value="KS2_L3_Week3_Interactive">KS2 Level 3 · Week 3 · Interactive Lessons (writing)</option>
-      <option value="KS2_L3_Week3_Day1">KS2 Level 3 · Week 3 · Day 1</option>
-      <option value="KS2_L3_Week3_Day2">KS2 Level 3 · Week 3 · Day 2</option>
-      <option value="KS2_L3_Week3_Day3">KS2 Level 3 · Week 3 · Day 3</option>
-      <option value="KS3_L6_Week3_Day1">KS3 Level 6 · Week 3 · Day 1 Worksheets</option>
-      <option value="KS3_L6_Week3_Day2">KS3 Level 6 · Week 3 · Day 2 Worksheets</option>
-      <option value="KS3_L6_Week3_Day3">KS3 Level 6 · Week 3 · Day 3 Worksheets</option>
-      <option value="__custom">Other (type ID below)</option>
-    </select>
-    <input type="text" id="ws-custom" placeholder="custom worksheet ID" style="display:none;">
-    <button class="btn" id="load-btn">🔍 Load submissions</button>
-    <span id="status"></span>
-  </div>
-
-  <div id="results"></div>
+  <div class="stats-row" id="stats-row"></div>
+  <div id="submissions-container"><div class="loading">Loading submissions…</div></div>
 </div>
 
 <script>
-const SUPABASE_URL = 'https://ldftwnsixhgpfldhlkyq.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
+const SB_URL = 'https://ldftwnsixhgpfldhlkyq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnR3bnNpeGhncGZsZGhsa3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNDM4NjMsImV4cCI6MjA5NjkxOTg2M30.EhShFmJgcsbrLqoZwA0nYfHRcCAzlS7mTkv4xHGAk_k';
+const SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates,return=minimal' };
 
-const SUBJECT_NAMES = {
-  eng: '📖 English', maths: '🔢 Maths', sci: '🌱 Science',
-  hum: '🌍 Humanities', bib: '✝️ Bible'
-};
+let allSubmissions = [];
 
-const wsSelect = document.getElementById('ws-select');
-const wsCustom = document.getElementById('ws-custom');
-wsSelect.onchange = () => {
-  wsCustom.style.display = wsSelect.value === '__custom' ? 'inline-block' : 'none';
-};
+async function loadAll() {
+  try {
+    const res = await fetch(
+      `${SB_URL}/rest/v1/worksheet_submissions?select=id,student_name,worksheet_id,answers,feedback,teacher_notes,submitted_at&order=id.desc&limit=500`,
+      { headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY } }
+    );
+    allSubmissions = await res.json();
+    if (!Array.isArray(allSubmissions)) { allSubmissions = []; }
+    buildWeekFilter();
+    applyFilters();
+  } catch(e) {
+    document.getElementById('submissions-container').innerHTML =
+      '<div class="no-data"><div class="no-data-icon">⚠️</div><div class="no-data-text">Could not load submissions. Check your connection.</div></div>';
+  }
+}
 
-document.getElementById('load-btn').onclick = loadSubmissions;
+function buildWeekFilter() {
+  const weeks = new Set();
+  allSubmissions.forEach(s => {
+    const m = s.worksheet_id.match(/Week(\d+)/i);
+    if (m) weeks.add(parseInt(m[1]));
+  });
+  const sel = document.getElementById('filter-week');
+  [...weeks].sort((a,b)=>a-b).forEach(w => {
+    const opt = document.createElement('option');
+    opt.value = w; opt.textContent = 'Week ' + w;
+    sel.appendChild(opt);
+  });
+}
 
-async function loadSubmissions() {
-  const status = document.getElementById('status');
-  const results = document.getElementById('results');
-  const worksheetId = wsSelect.value === '__custom' ? wsCustom.value.trim() : wsSelect.value;
-  if (!worksheetId) { status.textContent = '⚠️ Enter a worksheet ID'; return; }
+function applyFilters() {
+  const student = document.getElementById('filter-student').value;
+  const week    = document.getElementById('filter-week').value;
+  const search  = document.getElementById('filter-search').value.toLowerCase();
 
-  status.textContent = 'Loading…';
-  results.innerHTML = '';
+  let filtered = allSubmissions.filter(s => {
+    if (student && s.student_name !== student) return false;
+    if (week && !s.worksheet_id.includes('Week'+week) && !s.worksheet_id.includes('Week0'+week)) return false;
+    if (search && !s.worksheet_id.toLowerCase().includes(search)) return false;
+    return true;
+  });
 
-  const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?worksheet_id=eq.${encodeURIComponent(worksheetId)}&select=*&order=student_name`;
-  const res = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY } });
-  if (!res.ok) { status.textContent = '❌ Could not load submissions'; return; }
-  const rows = await res.json();
-  status.textContent = `${rows.length} submission${rows.length === 1 ? '' : 's'} found`;
+  renderStats(filtered);
+  renderSubmissions(filtered);
+}
 
-  if (rows.length === 0) {
-    results.innerHTML = '<div class="empty">No one has submitted this worksheet yet.</div>';
+function renderStats(data) {
+  const students = new Set(data.map(s=>s.student_name)).size;
+  const withAnswers = data.filter(s => s.answers && Object.keys(s.answers).length > 0).length;
+  const withFeedback = data.filter(s => s.feedback && Object.keys(s.feedback).length > 0).length;
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-val">${data.length}</div><div class="stat-lbl">Submissions</div></div>
+    <div class="stat-card"><div class="stat-val">${students}</div><div class="stat-lbl">Students</div></div>
+    <div class="stat-card"><div class="stat-val">${withAnswers}</div><div class="stat-lbl">With Answers</div></div>
+    <div class="stat-card"><div class="stat-val">${data.length - withFeedback}</div><div class="stat-lbl">Need Feedback</div></div>
+  `;
+}
+
+function renderSubmissions(data) {
+  const container = document.getElementById('submissions-container');
+  if (!data.length) {
+    container.innerHTML = '<div class="no-data"><div class="no-data-icon">📂</div><div class="no-data-text">No submissions found</div></div>';
     return;
   }
 
-  rows.forEach(row => results.appendChild(renderCard(row, worksheetId)));
+  container.innerHTML = data.map(s => {
+    const answers = s.answers || {};
+    const keys = Object.keys(answers);
+    const hasAnswers = keys.length > 0;
+    const existingFeedback = s.teacher_notes || '';
+    const date = s.submitted_at ? new Date(s.submitted_at).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+    const avatar = s.student_name === 'jessica' ? '✨' : s.student_name === 'abrish' ? '🌟' : '👤';
+
+    const answersHTML = hasAnswers
+      ? `<div class="answers-grid">
+          ${keys.slice(0,20).map(k => `
+            <div class="answer-item">
+              <div class="answer-key">${k.replace(/_/g,' ')}</div>
+              <div class="answer-val">${String(answers[k]).substring(0,200) || '<em>empty</em>'}</div>
+            </div>`).join('')}
+          ${keys.length > 20 ? `<div class="answer-item"><div class="answer-key">and ${keys.length-20} more answers…</div></div>` : ''}
+        </div>`
+      : '<p class="sub-empty">No answers saved yet for this worksheet.</p>';
+
+    const feedbackHTML = existingFeedback
+      ? `<div class="existing-feedback">✓ Previous feedback: ${existingFeedback}</div>` : '';
+
+    return `<div class="submission-card" id="card-${s.id}">
+      <div class="sub-header">
+        <span style="font-size:1.4rem">${avatar}</span>
+        <span class="sub-student">${s.student_name.charAt(0).toUpperCase()+s.student_name.slice(1)}</span>
+        <span class="sub-worksheet">${s.worksheet_id}</span>
+        <span class="sub-date">${date}</span>
+      </div>
+      ${answersHTML}
+      <div class="feedback-section">
+        <div style="flex:1">
+          ${feedbackHTML}
+          <textarea id="fb-${s.id}" placeholder="Write feedback for this student…">${existingFeedback}</textarea>
+          <div class="fb-saved" id="fb-saved-${s.id}">✓ Feedback saved!</div>
+        </div>
+        <button class="save-fb-btn" onclick="saveFeedback(${s.id}, '${s.worksheet_id}', '${s.student_name}')">Save Feedback</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function renderCard(row, worksheetId) {
-  const card = document.createElement('div');
-  card.className = 'card';
-
-  const feedback = row.feedback || {};
-  const answers = row.answers || {};
-
-  // Header
-  const head = document.createElement('div');
-  head.className = 'card-head';
-  head.innerHTML = `
-    <div>
-      <div class="student-name">${escapeHtml(row.student_name)}</div>
-      <div class="submitted-at">Submitted ${row.submitted_at ? new Date(row.submitted_at).toLocaleString() : '—'}</div>
-    </div>
-  `;
-  card.appendChild(head);
-
-  // Scores
-  if (row.scores && Object.keys(row.scores).length) {
-    const scoresEl = document.createElement('div');
-    scoresEl.className = 'scores';
-    Object.entries(row.scores).forEach(([k, v]) => {
-      const chip = document.createElement('span');
-      chip.className = 'score-chip';
-      chip.textContent = `${k.replace(/-/g, ' ')}: ${v}`;
-      scoresEl.appendChild(chip);
+async function saveFeedback(id, worksheetId, studentName) {
+  const text = document.getElementById('fb-'+id).value.trim();
+  try {
+    await fetch(`${SB_URL}/rest/v1/worksheet_submissions`, {
+      method: 'POST',
+      headers: SB_HEADERS,
+      body: JSON.stringify({
+        id, worksheet_id: worksheetId, student_name: studentName,
+        teacher_notes: text, feedback: {text, saved_at: new Date().toISOString()}
+      })
     });
-    card.appendChild(scoresEl);
+    const el = document.getElementById('fb-saved-'+id);
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 2500);
+    // Update local cache
+    const row = allSubmissions.find(s=>s.id===id);
+    if (row) { row.teacher_notes = text; }
+  } catch(e) {
+    alert('Could not save feedback. Check your connection.');
   }
-
-  // Answers — grouped by subject/lesson for the dynamic worksheet, flat otherwise
-  const isDynamic = Object.keys(answers).some(k => k.includes('__'));
-  if (isDynamic) {
-    const groups = {};
-    Object.entries(answers).forEach(([key, val]) => {
-      const [groupKey, fieldKey] = key.split('__');
-      groups[groupKey] = groups[groupKey] || [];
-      groups[groupKey].push({ key, fieldKey, ...val });
-    });
-    Object.keys(groups).sort().forEach(groupKey => {
-      const [subj, lesson] = groupKey.split('_');
-      const title = document.createElement('div');
-      title.className = 'group-title';
-      title.textContent = `${SUBJECT_NAMES[subj] || subj} — Lesson ${lesson}`;
-      card.appendChild(title);
-      groups[groupKey].forEach(item => card.appendChild(renderQA(item.key, item.label, item.value, feedback[item.key])));
-    });
-  } else {
-    Object.entries(answers).forEach(([key, val]) => {
-      card.appendChild(renderQA(key, val.label, val.value, feedback[key]));
-    });
-  }
-
-  // Overall notes + graded toggle
-  const notesBlock = document.createElement('div');
-  notesBlock.className = 'notes-block';
-  notesBlock.innerHTML = `
-    <label>📝 Overall note to ${escapeHtml(row.student_name)} (shown at the top of their worksheet):</label>
-    <textarea class="overall-notes">${escapeHtml(row.teacher_notes || '')}</textarea>
-  `;
-  card.appendChild(notesBlock);
-
-  const footRow = document.createElement('div');
-  footRow.className = 'foot-row';
-  footRow.innerHTML = `
-    <label class="graded-toggle">
-      <input type="checkbox" class="graded-cb" ${row.graded ? 'checked' : ''}> Marked as graded
-    </label>
-    <div>
-      <span class="save-status"></span>
-      <button class="btn save">💾 Save feedback</button>
-    </div>
-  `;
-  card.appendChild(footRow);
-
-  footRow.querySelector('.save').onclick = async () => {
-    const saveStatus = footRow.querySelector('.save-status');
-    saveStatus.textContent = 'Saving…';
-    const newFeedback = {};
-    card.querySelectorAll('.qa').forEach(qaEl => {
-      const key = qaEl.dataset.key;
-      const val = qaEl.querySelector('textarea').value.trim();
-      if (val) newFeedback[key] = val;
-    });
-    const overallNotes = notesBlock.querySelector('textarea').value.trim();
-    const graded = footRow.querySelector('.graded-cb').checked;
-
-    const url = `${SUPABASE_URL}/rest/v1/worksheet_submissions?student_name=eq.${encodeURIComponent(row.student_name)}&worksheet_id=eq.${encodeURIComponent(worksheetId)}`;
-    const res = await fetch(url, {
-      method: 'PATCH',
-      headers: {
-        apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': 'application/json', Prefer: 'return=representation'
-      },
-      body: JSON.stringify({ feedback: newFeedback, teacher_notes: overallNotes, graded })
-    });
-    saveStatus.textContent = res.ok ? '✅ Saved' : '❌ Failed to save';
-  };
-
-  return card;
 }
 
-function renderQA(key, label, value, feedbackText) {
-  const qa = document.createElement('div');
-  qa.className = 'qa';
-  qa.dataset.key = key;
-  qa.innerHTML = `
-    <div class="q">${escapeHtml(label || key)}</div>
-    <div class="a">${escapeHtml(value || '')}</div>
-    <div class="fb-label">Your correction / feedback for this answer</div>
-    <textarea placeholder="e.g. Great answer! / Try to add more detail here...">${escapeHtml(feedbackText || '')}</textarea>
-  `;
-  return qa;
-}
-
-function escapeHtml(str) {
-  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+loadAll();
 </script>
 </body>
 </html>
