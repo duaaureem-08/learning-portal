@@ -402,8 +402,9 @@ function lockPortal() {
 }
 
 // ── Card renderers ────────────────────────────────────────────
-function flatResCard(r, student) {
-  const href = (r.file.endsWith('.html') && student) ? r.file+'?student='+student : r.file;
+function flatResCard(r, student, teacherMode) {
+  let href = (r.file.endsWith('.html') && student) ? r.file+'?student='+student : r.file;
+  if (teacherMode && r.file.endsWith('.html') && student) href += '&teacher=1';
   return `<div class="subj-card">
 <div class="subj-top">
   <div class="subj-icon" style="background:${r.bg}">${r.icon}</div>
@@ -449,11 +450,11 @@ function toggleWeek(hd) {
   body.classList.toggle('open',!open);
 }
 
-function patchWeek(weekId, resources, student) {
+function patchWeek(weekId, resources, student, teacherMode) {
   const section = document.getElementById(weekId);
   if (!section||!resources.length) return;
   section.querySelector('.subjects-grid').innerHTML =
-    resources.map(r => flatResCard(r, student)).join('');
+    resources.map(r => flatResCard(r, student, teacherMode)).join('');
   const st = section.querySelector('.week-status');
   st.className = 'week-status s-complete'; st.textContent = 'Complete';
 }
@@ -548,7 +549,7 @@ function teacherViewStudent(id) {
   if (!s) return;
   const body = document.getElementById('panel-body');
   body.innerHTML = buildStudentBody(s.id);
-  runAutoDiscovery(s.id, body);
+  runAutoDiscovery(s.id, body, true);
   document.getElementById('portal').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
@@ -587,19 +588,19 @@ async function discover(candidates) {
   return checks.filter(c => c.ok);
 }
 
-async function runAutoDiscovery(studentId, container) {
+async function runAutoDiscovery(studentId, container, teacherMode) {
   const isAbrish = studentId === 'abrish';
   const weeks = isAbrish ? KS2_WEEKS : KS3_WEEKS;
   await Promise.all(weeks.map(async w => {
     const cands = isAbrish ? abrishCandidates(w.w) : ks3Candidates(w.w);
     const found = await discover(cands);
-    if (found.length) patchWeek(`week-${studentId}-${w.w}`, found, studentId);
+    if (found.length) patchWeek(`week-${studentId}-${w.w}`, found, studentId, teacherMode);
   }));
   // teacher view also needs KS3 patched
   if (studentId === 'teacher') {
     await Promise.all(KS3_WEEKS.map(async w => {
       const found = await discover(ks3Candidates(w.w));
-      if (found.length) patchWeek(`week-teacher-${w.w}`, found, 'jessica');
+      if (found.length) patchWeek(`week-teacher-${w.w}`, found, 'jessica', true);
     }));
   }
 }
