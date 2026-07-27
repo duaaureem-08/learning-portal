@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 — Day 4 Mixed Revision · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#EDE9FE;color:#5B21B6;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #7C3AED;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:500px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.revision-banner{border-radius:var(--radius-sm);padding:14px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;flex-wrap:wrap;}
+.week-tag{display:inline-block;padding:3px 10px;border-radius:99px;font-size:0.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-right:6px;}
+.w5{background:#FEF3C7;color:#92400E;border:1.5px solid #D97706;}
+.w8{background:#EDE9FE;color:#5B21B6;border:1.5px solid #7C3AED;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.55;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;line-height:1.5;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.open-box{width:100%;min-height:90px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.progress-wrap{background:#E5E7EB;border-radius:99px;height:12px;margin:8px 0 4px;}
+.progress-bar{height:12px;border-radius:99px;background:var(--accent,#888);transition:width 0.8s ease;}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px 16px;font-weight:700;font-size:0.9rem;}
+.match-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.match-item select:focus{outline:none;border-color:var(--accent,#888);}
+.connect-box{background:linear-gradient(135deg,#F8FAFF,#EFF6FF);border:2px solid #DBEAFE;border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;}
+.connect-title{font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.match-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">🔁 Day 4 — Mixed Revision</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🪨</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🏛️</span> Social Studies</button>
+</div>
+
+<!-- BIBLE -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">📖 Bible · Weeks 5 &amp; 8</div>
+    <div class="hero-title">Noah's Ark +<br>The Ten Commandments</div>
+    <div class="hero-sub">Mixed revision of both stories · God's covenant · God's rules · God's love</div>
+    <div class="hero-emoji">📜</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--bible-l),#DDD6FE);color:var(--bible-d);border:2px solid var(--bible);">
+    🔁 <strong>MIXED REVISION</strong> — This worksheet covers <span class="week-tag w5">Week 5</span> Noah's Ark AND <span class="week-tag w8">Week 8</span> The Ten Commandments. Each question is labelled!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Mixed Vocabulary <span class="marks">8 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Match each word to its definition. Words come from BOTH weeks!</p>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions A–H:</strong><br>
+        A — A special unbreakable promise God makes. <span class="week-tag w5">W5</span><br>
+        B — A very large boat God told Noah to build. <span class="week-tag w5">W5</span><br>
+        C — Living in a way that pleases God; doing what is right. <span class="week-tag w5">W5</span><br>
+        D — Trusting in God even when you cannot see the outcome. <span class="week-tag w5">W5</span><br>
+        E — A rule or law that God gives to His people. <span class="week-tag w8">W8</span><br>
+        F — The mountain where God gave Moses the Ten Commandments. <span class="week-tag w8">W8</span><br>
+        G — To honour, love and praise God with your whole heart. <span class="week-tag w8">W8</span><br>
+        H — Two flat pieces of stone on which God wrote His laws. <span class="week-tag w8">W8</span>
+      </div>
+    </div>
+    <div id="bible-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkMixVocab('bible')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Covenant. Ark. Righteous. Faith. Commandment. Mount Sinai. Worship. Stone tablets.')">🔊 Hear all words</button>
+    </div>
+    <div id="bible-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;">Questions from Week 5 AND Week 8. Each is labelled.</p>
+    <div id="bible-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextMixQ('bible')">Next Question ➡️</button>
+      <span id="bible-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="bible-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="bible-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Compare &amp; Connect <span class="marks">10 marks</span></div>
+    <div class="connect-box">
+      <div class="connect-title">🔗 Cross-Week Connection</div>
+      <p style="font-size:0.88rem;font-weight:600;line-height:1.6;">Both Noah's covenant AND the Ten Commandments show God making promises and rules to guide His people with LOVE. Compare the two.</p>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Complete the comparison table:</p>
+      <table class="fill-table">
+        <tr><th></th><th>🌈 Noah's Covenant (Week 5)</th><th>📜 Ten Commandments (Week 8)</th></tr>
+        <tr><td><strong>What did God give/promise?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td></tr>
+        <tr><td><strong>Where did this happen?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td></tr>
+        <tr><td><strong>What sign/object represents it?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td></tr>
+        <tr><td><strong>How does it show God's love?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td><td><input class="fill-in" style="width:100%;" placeholder="Type here…"></td></tr>
+      </table>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Both the rainbow and the Ten Commandments are signs from God. How are they similar AND different? Write 4–5 sentences.</p>
+      <textarea class="open-box" placeholder="The rainbow and the commandments are similar because…&#10;They are different because…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: If you had to explain to a younger child why God gives rules and promises, what would you say? Write your explanation using ideas from BOTH stories.</p>
+      <textarea class="open-box" style="min-height:110px;" placeholder="I would explain that…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — Mixed True or False (Both Weeks) <span class="marks">6 marks</span></div>
+    <div id="bible-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkMixTF('bible')">Check ✅</button></div>
+    <div id="bible-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ENGLISH -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">✏️ English · Weeks 5 &amp; 8</div>
+    <div class="hero-title">Adjectives +<br>Conjunctions</div>
+    <div class="hero-sub">Adjectives &amp; descriptive writing (W5) + Conjunctions &amp; compound sentences (W8)</div>
+    <div class="hero-emoji">🔗</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--english-l),#FBD0E7);color:var(--english-d);border:2px solid var(--english);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="week-tag w5">Week 5</span> Adjectives &amp; Descriptive Writing + <span class="week-tag w8">Week 8</span> Conjunctions &amp; Compound Sentences. Both topics together!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Mixed Vocabulary <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions A–H:</strong><br>
+        A — A word that describes a noun. Example: bright, cold, tiny. <span class="week-tag w5">W5</span><br>
+        B — A person, place, animal or thing. <span class="week-tag w5">W5</span><br>
+        C — An adjective comparing TWO things. Example: taller. <span class="week-tag w5">W5</span><br>
+        D — An adjective comparing THREE or more things. Example: tallest. <span class="week-tag w5">W5</span><br>
+        E — A joining word that connects two sentences or clauses. <span class="week-tag w8">W8</span><br>
+        F — Two simple sentences joined together with a conjunction. <span class="week-tag w8">W8</span><br>
+        G — The conjunction that gives a reason — answers WHY. <span class="week-tag w8">W8</span><br>
+        H — The conjunction that shows a contrast or surprise. <span class="week-tag w8">W8</span>
+      </div>
+    </div>
+    <div id="eng-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkMixVocab('eng')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Adjective. Noun. Comparative adjective. Superlative adjective. Conjunction. Compound sentence. Because. But.')">🔊 Hear all terms</button>
+    </div>
+    <div id="eng-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="eng-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--english);" onclick="nextMixQ('eng')">Next ➡️</button>
+      <span id="eng-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="eng-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="eng-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Write It All Together <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Rewrite each weak sentence using the skill shown:</p>
+      <table class="fill-table">
+        <tr><th>Original sentence</th><th>Skill to use</th><th>Your improved version</th></tr>
+        <tr><td>"The storm came. We went inside."</td><td><span class="week-tag w8">W8</span> Join using "so"</td><td><input class="fill-in" style="width:100%;" placeholder="The storm came so…"></td></tr>
+        <tr><td>"The dog barked."</td><td><span class="week-tag w5">W5</span> Add TWO adjectives</td><td><input class="fill-in" style="width:100%;" placeholder="The ___, ___ dog barked."></td></tr>
+        <tr><td>"I wanted to play outside. It was raining."</td><td><span class="week-tag w8">W8</span> Join using "but"</td><td><input class="fill-in" style="width:100%;" placeholder="I wanted to play outside but…"></td></tr>
+        <tr><td>"The mountain is tall."</td><td><span class="week-tag w5">W5</span> Rewrite using a COMPARATIVE adjective</td><td><input class="fill-in" style="width:100%;" placeholder="The mountain is ___ than…"></td></tr>
+      </table>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Write ONE sentence using BOTH an adjective AND a conjunction about a journey:</p>
+      <table class="fill-table">
+        <tr><th>Conjunction <span class="week-tag w8">W8</span></th><th>Your sentence (with adjective) <span class="week-tag w5">W5</span></th></tr>
+        <tr><td><strong>and</strong></td><td><input class="fill-in" style="width:100%;" placeholder="The ___ journey was…"></td></tr>
+        <tr><td><strong>because</strong></td><td><input class="fill-in" style="width:100%;" placeholder="I felt ___ because…"></td></tr>
+        <tr><td><strong>when</strong></td><td><input class="fill-in" style="width:100%;" placeholder="The ___ sky appeared when…"></td></tr>
+      </table>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Write a short paragraph (5–6 sentences) describing a busy market. You MUST include: at least FOUR adjectives, AND at least THREE different conjunctions. Underline your adjectives and circle your conjunctions.</p>
+      <textarea class="open-box" style="min-height:130px;" placeholder="My paragraph about a busy market…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — Mixed True or False <span class="marks">6 marks</span></div>
+    <div id="eng-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkMixTF('eng')">Check ✅</button></div>
+    <div id="eng-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- MATHS -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">🔢 Maths · Weeks 5 &amp; 8</div>
+    <div class="hero-title">Subtraction +<br>Fractions</div>
+    <div class="hero-sub">Column subtraction with borrowing (W5) + Comparing &amp; ordering fractions (W8)</div>
+    <div class="hero-emoji">🍕</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--maths-l),#FDE8C8);color:var(--maths-d);border:2px solid var(--maths);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="week-tag w5">Week 5</span> Column Subtraction (borrowing) + <span class="week-tag w8">Week 8</span> Fractions (comparing &amp; ordering). Both topics together!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Mixed Vocabulary <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions A–H:</strong><br>
+        A — The answer you get when you subtract one number from another. <span class="week-tag w5">W5</span><br>
+        B — Taking 10 from the next column when the top digit is too small. <span class="week-tag w5">W5</span><br>
+        C — The large starting number you subtract from. <span class="week-tag w5">W5</span><br>
+        D — Checking your answer using the opposite operation. <span class="week-tag w5">W5</span><br>
+        E — The number ON TOP of a fraction. <span class="week-tag w8">W8</span><br>
+        F — The number ON BOTTOM of a fraction. <span class="week-tag w8">W8</span><br>
+        G — Fractions that look different but have the same value. <span class="week-tag w8">W8</span><br>
+        H — Making a fraction smaller using the same value. <span class="week-tag w8">W8</span>
+      </div>
+    </div>
+    <div id="maths-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMixVocab('maths')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Difference. Borrowing. Minuend. Inverse operation. Numerator. Denominator. Equivalent fractions. Simplify.')">🔊 Hear all terms</button>
+    </div>
+    <div id="maths-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🎯 Part B — Mixed Calculations <span class="marks">16 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Mixed subtraction and fraction questions:</p>
+    <div id="maths-mix-sums"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMixSums()">Check All ✅</button>
+    </div>
+    <div id="maths-mix-sums-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Mixed quiz — subtraction and fraction questions:</p>
+    <div id="maths-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMixQ('maths')">Next ➡️</button>
+      <span id="maths-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="maths-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="maths-mix-prog-label">0 of 8 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Word Problems (Mixed Topics) <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. <span class="week-tag w5">W5</span> A bakery has 742 loaves of bread. It sells 368 loaves. How many loaves are left? Show your column subtraction working.</p>
+      <textarea class="open-box" placeholder="Working:&#10;&#10;Answer:"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="week-tag w8">W8</span> Hana ate 2/6 of a pizza. Omar ate 1/3 of the same pizza. Who ate more? Show your working using equivalent fractions.</p>
+      <textarea class="open-box" placeholder="Working (equivalent fractions):&#10;&#10;Answer:"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">5. <span class="week-tag w5">W5</span><span class="week-tag w8">W8</span> MIXED: A class has 600 sweets. They give away 245. (a) How many are left? (b) If 1/5 of the remaining sweets are given to the teacher, how many sweets does the teacher get?</p>
+      <textarea class="open-box" placeholder="a) Sweets left (subtraction):&#10;&#10;b) Sweets to teacher (fraction):"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">6. Find the missing numbers — subtraction AND fractions:</p>
+      <table class="fill-table">
+        <tr><th>Problem</th><th>W?</th><th>Answer</th></tr>
+        <tr><td>___ − 241 = 332</td><td><span class="week-tag w5">W5</span></td><td><input type="text" class="fill-in" data-ans="573" placeholder="?" style="width:80px;"></td></tr>
+        <tr><td>1/2 = ___/6</td><td><span class="week-tag w8">W8</span></td><td><input type="text" class="fill-in" data-ans="3" placeholder="?" style="width:80px;"></td></tr>
+        <tr><td>834 − ___ = 358</td><td><span class="week-tag w5">W5</span></td><td><input type="text" class="fill-in" data-ans="476" placeholder="?" style="width:80px;"></td></tr>
+        <tr><td>2/3 = 6/___</td><td><span class="week-tag w8">W8</span></td><td><input type="text" class="fill-in" data-ans="9" placeholder="?" style="width:80px;"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMixMissing()">Check ✅</button></div>
+      <div id="maths-mix-missing-result" class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — Mixed True or False <span class="marks">6 marks</span></div>
+    <div id="maths-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkMixTF('maths')">Check ✅</button></div>
+    <div id="maths-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SCIENCE -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">🪨 Science · Weeks 5 &amp; 8</div>
+    <div class="hero-title">Plant Life Cycle +<br>Fossils &amp; Soil</div>
+    <div class="hero-sub">Life cycle &amp; habitats (W5) + Fossils &amp; soil (W8)</div>
+    <div class="hero-emoji">🦋</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--science-l),#BBFBDF);color:var(--science-d);border:2px solid var(--science);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="week-tag w5">Week 5</span> Plant Life Cycle &amp; Habitats + <span class="week-tag w8">Week 8</span> Fossils &amp; Soil. Earth science meets life science!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Mixed Vocabulary <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions A–H:</strong><br>
+        A — When a seed begins to grow — root down, shoot up. <span class="week-tag w5">W5</span><br>
+        B — When insects carry pollen between flowers to make seeds. <span class="week-tag w5">W5</span><br>
+        C — The natural home where a plant or animal lives. <span class="week-tag w5">W5</span><br>
+        D — A feature that helps a living thing survive in its habitat. <span class="week-tag w5">W5</span><br>
+        E — The remains of a dead plant or animal preserved in rock. <span class="week-tag w8">W8</span><br>
+        F — Rock made from layers of sediment pressed together. <span class="week-tag w8">W8</span><br>
+        G — Rotted plants and animals in soil that make it rich. <span class="week-tag w8">W8</span><br>
+        H — A plant or animal that has completely died out. <span class="week-tag w8">W8</span>
+      </div>
+    </div>
+    <div id="sci-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkMixVocab('sci')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Germination. Pollination. Habitat. Adaptation. Fossil. Sedimentary rock. Humus. Extinct.')">🔊 Hear all terms</button>
+    </div>
+    <div id="sci-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="sci-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--science);" onclick="nextMixQ('sci')">Next ➡️</button>
+      <span id="sci-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="sci-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="sci-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Connect the Science <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. <span class="week-tag w5">W5</span><span class="week-tag w8">W8</span> Plants need healthy soil to grow well. Explain how the FOUR parts of soil (rock, humus, water, air) support each stage of a plant's life cycle.</p>
+      <textarea class="open-box" placeholder="Soil supports germination by…&#10;Soil supports growth by…"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="week-tag w8">W8</span> A fossil of an ancient plant is found in rock. What can scientists learn about that plant's HABITAT (Week 5 idea) from studying the fossil?</p>
+      <textarea class="open-box" placeholder="Scientists can learn about the habitat because…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: <span class="week-tag w5">W5</span><span class="week-tag w8">W8</span> Explain the connection between living plants today and ancient plant fossils. Use what you know about plant life cycles AND fossils to write at least 5 sentences.</p>
+      <textarea class="open-box" style="min-height:130px;" placeholder="Living plants and plant fossils are connected because…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — Mixed True or False <span class="marks">6 marks</span></div>
+    <div id="sci-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkMixTF('sci')">Check ✅</button></div>
+    <div id="sci-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">🏛️ Social Studies · Weeks 5 &amp; 8</div>
+    <div class="hero-title">Communities +<br>The Romans</div>
+    <div class="hero-sub">Communities &amp; settlements (W5) + The Romans in Britain (W8)</div>
+    <div class="hero-emoji">🏛️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--social-l),#BFDBFE);color:var(--social-d);border:2px solid var(--social);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="week-tag w5">Week 5</span> Communities &amp; Settlements + <span class="week-tag w8">Week 8</span> The Romans in Britain. How ancient settlements shape communities today!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Mixed Vocabulary <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions A–H:</strong><br>
+        A — A group of people who live, work and share things in one place. <span class="week-tag w5">W5</span><br>
+        B — A countryside area with few people and farms. <span class="week-tag w5">W5</span><br>
+        C — A large busy city area with many people and buildings. <span class="week-tag w5">W5</span><br>
+        D — Roads, schools, hospitals and services a community needs. <span class="week-tag w5">W5</span><br>
+        E — People from Rome who built one of the greatest empires in history. <span class="week-tag w8">W8</span><br>
+        F — A very large area ruled by one powerful Emperor. <span class="week-tag w8">W8</span><br>
+        G — When an army enters another country by force. <span class="week-tag w8">W8</span><br>
+        H — The lasting effect something leaves behind, still seen today. <span class="week-tag w8">W8</span>
+      </div>
+    </div>
+    <div id="soc-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkMixVocab('soc')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Community. Rural. Urban. Infrastructure. Romans. Empire. Invasion. Legacy.')">🔊 Hear all terms</button>
+    </div>
+    <div id="soc-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="soc-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--social);" onclick="nextMixQ('soc')">Next ➡️</button>
+      <span id="soc-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="soc-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="soc-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Apply Your Geography &amp; History <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. <span class="week-tag w8">W8</span> Many Roman settlements (like London) grew into big URBAN cities today. Using your Week 5 knowledge, explain what makes a settlement "urban" and why Roman towns often became urban centres.</p>
+      <textarea class="open-box" placeholder="An urban settlement is… Roman towns became urban because…"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="week-tag w5">W5</span><span class="week-tag w8">W8</span> The Romans built infrastructure like roads and water systems. Explain why infrastructure was just as important 2,000 years ago as it is in a modern community today.</p>
+      <textarea class="open-box" placeholder="Infrastructure was important to the Romans because… It is important today because…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: <span class="week-tag w5">W5</span><span class="week-tag w8">W8</span> Imagine you are a Roman town planner building a NEW settlement in Britain in 50 AD. Using what you know about communities (rural/urban/suburban, services) AND Roman achievements (roads, baths, walls), write a planning description for your new Roman town.</p>
+      <textarea class="open-box" style="min-height:150px;" placeholder="My Roman town plan:&#10;&#10;Type of settlement:&#10;&#10;Key buildings and infrastructure:&#10;&#10;Why I chose this location:"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — Mixed True or False <span class="marks">6 marks</span></div>
+    <div id="soc-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkMixTF('soc')">Check ✅</button></div>
+    <div id="soc-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.rate=0.85;u.lang='en-GB';
+  window.speechSynthesis.speak(u);
+}
+
+const mixVocabData={
+  bible:{terms:['Covenant','Ark','Righteous','Faith','Commandment','Mount Sinai','Worship','Stone tablets'],answers:['A','B','C','D','E','F','G','H']},
+  eng:{terms:['Adjective','Noun','Comparative adjective','Superlative adjective','Conjunction','Compound sentence','Because','But'],answers:['A','B','C','D','E','F','G','H']},
+  maths:{terms:['Difference','Borrowing','Minuend','Inverse operation','Numerator','Denominator','Equivalent fractions','Simplify'],answers:['A','B','C','D','E','F','G','H']},
+  sci:{terms:['Germination','Pollination','Habitat','Adaptation','Fossil','Sedimentary rock','Humus','Extinct'],answers:['A','B','C','D','E','F','G','H']},
+  soc:{terms:['Community','Rural','Urban','Infrastructure','Romans','Empire','Invasion','Legacy'],answers:['A','B','C','D','E','F','G','H']},
+};
+
+function buildMixVocab(key){
+  const d=mixVocabData[key];const area=document.getElementById(key+'-mix-vocab');if(!area)return;
+  const letters=['A','B','C','D','E','F','G','H'];
+  let h='<div class="match-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">';
+  d.terms.forEach((t,i)=>{h+=`<div class="match-item">${t} <button class="audio-btn" onclick="speak('${t}')">🔊</button><select id="mvoc-${key}-${i}"><option value="">— select —</option>${letters.map(l=>`<option value="${l}">${l}</option>`).join('')}</select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildMixVocab);
+
+function checkMixVocab(key){
+  const d=mixVocabData[key];let score=0;
+  d.terms.forEach((_,i)=>{const sel=document.getElementById('mvoc-'+key+'-'+i);if(!sel)return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-mv-result');res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! All ${score}/${d.terms.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct.`;}
+}
+
+const mixQuizData={
+  bible:[
+    {q:'🌈 W5: What was the name of God\'s promise that He would never flood the whole earth again?',opts:['A blessing','A covenant','A commandment','A sacrifice'],ans:1,exp:'A COVENANT is a special unbreakable promise — God made one with Noah.'},
+    {q:'🌈 W5: What sign did God put in the sky as a symbol of His covenant?',opts:['A star','A rainbow','A cloud','A dove'],ans:1,exp:'God placed a rainbow in the sky as a sign of His covenant.'},
+    {q:'🌈 W5: Why did God choose Noah to be saved?',opts:['He was rich','He was righteous','He was the strongest','He had the most animals'],ans:1,exp:'Noah found favour with God because he was righteous.'},
+    {q:'🌈 W5: How long did it rain during the flood?',opts:['7 days','40 days and 40 nights','100 days','1 year'],ans:1,exp:'It rained for forty days and forty nights.'},
+    {q:'📜 W8: Where did God give Moses the Ten Commandments?',opts:['The Garden of Eden','Mount Sinai','The Red Sea','Jerusalem'],ans:1,exp:'God gave Moses the commandments on Mount Sinai.'},
+    {q:'📜 W8: What were the commandments written on?',opts:['Paper','Two stone tablets','Cloth','Wood'],ans:1,exp:'The commandments were written on two flat stone tablets.'},
+    {q:'📜 W8: How many commandments did God give Moses?',opts:['Five','Ten','Twenty','Three'],ans:1,exp:'God gave Moses TEN commandments.'},
+    {q:'📜 W8: Which commandments are about loving God?',opts:['1–4','5–10','All ten','None'],ans:0,exp:'Commandments 1–4 focus on our relationship with God.'},
+    {q:'🔗 BOTH WEEKS: What do the rainbow (W5) and the Ten Commandments (W8) have in common?',opts:['They are both animals','They are both signs of God\'s promise and care','They both happened in Egypt','They have nothing in common'],ans:1,exp:'Both are visible signs that show God\'s promises and His loving care for His people.'},
+    {q:'🔗 BOTH WEEKS: Which idea connects Noah\'s story and the Ten Commandments?',opts:['God gives rules and promises out of love, not punishment','Both stories happened on the same day','Neither story is about obedience','God never speaks directly to people'],ans:0,exp:'Both stories show God giving guidance out of love and care for His people.'},
+    {q:'🌈 W5: What does the word "righteous" mean?',opts:['Very rich','Living in a way that pleases God','Very tall','Very fast'],ans:1,exp:'Righteous means living in a way that pleases God.'},
+    {q:'📜 W8: What does "worship" mean?',opts:['To ignore God','To honour and praise God with your whole heart','To build a boat','To write laws'],ans:1,exp:'Worship means to honour, love and praise God.'},
+  ],
+  eng:[
+    {q:'🎨 W5: Which word is the adjective? "The tall, ancient tree fell."',opts:['tree','fell','tall','the'],ans:2,exp:'"Tall" describes the noun "tree" — it is an adjective.'},
+    {q:'🎨 W5: Which is a SUPERLATIVE adjective?',opts:['She is happy.','She is happier.','She is the happiest.','She feels happy.'],ans:2,exp:'"The happiest" compares 3+ things — a superlative.'},
+    {q:'🎨 W5: How do you make "beautiful" into a comparative?',opts:['beautifuller','more beautiful','beautifulest','most beautiful'],ans:1,exp:'Long adjectives use "more" for comparatives.'},
+    {q:'🔗 W8: Which word is a conjunction?',opts:['quickly','because','jumped','blue'],ans:1,exp:'"Because" joins two ideas and gives a reason.'},
+    {q:'🔗 W8: Which conjunction shows a CONTRAST?',opts:['and','but','so','when'],ans:1,exp:'"But" shows a contrast or surprise.'},
+    {q:'🔗 W8: "I was tired ___ I kept reading." Best conjunction?',opts:['so','but','because','and'],ans:1,exp:'"But" shows the contrast — being tired yet continuing.'},
+    {q:'🔗 W8: Which sentence is a compound sentence?',opts:['The big dog.','I like tea but I prefer coffee.','Running fast.','Blue sky.'],ans:1,exp:'Two simple sentences joined by "but" make a compound sentence.'},
+    {q:'🎨 W5: Which sentence uses a comparative adjective correctly?',opts:['She is the most tallest.','She is taller than her brother.','She is tall than him.','She is most tall.'],ans:1,exp:'"Taller than" is the correct comparative form.'},
+    {q:'🔗 BOTH WEEKS: Which sentence uses BOTH an adjective (W5) and a conjunction (W8) correctly?',opts:['"The running fast dog."','"The fierce storm came but we stayed calm."','"where is the dog"','"she ran quickest"'],ans:1,exp:'"Fierce" is an adjective; "but" is a conjunction. Both used correctly!'},
+    {q:'🔗 BOTH WEEKS: Which sentence has the MOST problems?',opts:['"The tall, old tree fell."','"she likes red and blue and green and yellow and purple"','"How amazing this is!"','"I was happy because it was sunny."'],ans:1,exp:'Repeating "and" too many times makes the sentence boring and unclear.'},
+    {q:'🎨 W5: "The most enormous elephant" — what type of adjective is "most enormous"?',opts:['Comparative','Normal','Superlative','Adverb'],ans:2,exp:'"Most enormous" is a SUPERLATIVE adjective.'},
+    {q:'🔗 W8: Which conjunction connects two things happening at the SAME TIME?',opts:['so','because','when','but'],ans:2,exp:'"When" connects events happening together.'},
+  ],
+  maths:[
+    {q:'➖ W5: When using column subtraction, which column do you start with?',opts:['Hundreds','Tens','Ones','Doesn\'t matter'],ans:2,exp:'Always start from the ONES column.'},
+    {q:'➖ W5: What is 742 − 368?',opts:['384','374','394','364'],ans:1,exp:'742 − 368 = 374.'},
+    {q:'➖ W5: When do you need to BORROW in subtraction?',opts:['When answer is 0','When top digit is smaller than bottom','When numbers are equal','Never'],ans:1,exp:'Borrow when the top digit is smaller than the bottom digit.'},
+    {q:'🍕 W8: Which fraction is bigger: 3/8 or 5/8?',opts:['3/8','5/8','Equal','Cannot tell'],ans:1,exp:'Same denominator — bigger numerator (5) wins.'},
+    {q:'🍕 W8: Which fraction is equivalent to 1/2?',opts:['2/3','3/4','4/8','1/4'],ans:2,exp:'4/8 simplifies to 1/2.'},
+    {q:'🍕 W8: Which fraction is bigger: 1/3 or 1/6?',opts:['1/3','1/6','Equal','Cannot tell'],ans:0,exp:'Same numerator — smaller denominator (3) makes bigger pieces.'},
+    {q:'🔗 BOTH WEEKS: Which pair shows the INVERSE relationship?',opts:['742 − 368 = 374 and 374 + 368 = 742','1/2 and 2/4 are inverses','600 − 200 and 1/2 are inverses','None of these'],ans:0,exp:'Addition and subtraction are inverse (opposite) operations.'},
+    {q:'🔗 BOTH WEEKS: A student has 600 stickers. She gives away 347, then divides the rest into thirds, keeping 1/3. How would you solve this?',opts:['Only subtract','Subtract first, then find 1/3 of the remainder','Only use fractions','Add then subtract'],ans:1,exp:'First subtract (W5 skill) to find what is left, then apply the fraction (W8 skill) to that remainder.'},
+  ],
+  sci:[
+    {q:'🌱 W5: What is GERMINATION?',opts:['When a flower attracts bees','When a seed begins to grow','When leaves make food','When seeds travel by wind'],ans:1,exp:'Germination is when a seed begins to grow.'},
+    {q:'🌱 W5: What is a HABITAT?',opts:['A type of plant','The natural home of a plant or animal','The food a plant makes','A type of rock'],ans:1,exp:'A habitat is the natural environment where a living thing lives.'},
+    {q:'🌱 W5: A cactus stores water in its stem. This is an example of:',opts:['Pollination','Germination','Adaptation','Photosynthesis'],ans:2,exp:'An adaptation helps a living thing survive in its habitat.'},
+    {q:'🪨 W8: What is a fossil?',opts:['A type of soil','Remains of a plant or animal preserved in rock','A living creature','A type of seed'],ans:1,exp:'A fossil is the preserved remains of a dead plant or animal.'},
+    {q:'🪨 W8: In which rock are fossils found?',opts:['Igneous rock','Sedimentary rock','Metamorphic rock','All equally'],ans:1,exp:'Fossils form in sedimentary rock made from layers of sediment.'},
+    {q:'🪨 W8: What is humus?',opts:['A type of rock','Rotted plants and animals in soil','A kind of fossil','Pure water'],ans:1,exp:'Humus is rotted organic matter that enriches soil.'},
+    {q:'🪨 W8: Which soil type is best for growing plants?',opts:['Sandy','Clay','Loam','None'],ans:2,exp:'Loam soil holds water AND drains well — ideal for plants.'},
+    {q:'🌱 W5: What does a plant need to carry out photosynthesis?',opts:['Sunlight, water, carbon dioxide','Only soil','Only water','Only sunlight'],ans:0,exp:'Photosynthesis needs sunlight, water and carbon dioxide.'},
+    {q:'🔗 BOTH WEEKS: How does soil (W8) support a plant\'s life cycle (W5)?',opts:['Soil has nothing to do with plants','Soil provides water and nutrients needed for germination and growth','Soil only matters for fossils','Soil stops germination'],ans:1,exp:'Soil provides the water, nutrients and anchorage a plant needs throughout its life cycle.'},
+    {q:'🔗 BOTH WEEKS: A fossil of a fern is found in rock. What does this tell scientists about the ancient HABITAT (W5)?',opts:['Nothing at all','It tells them what plants and conditions existed there long ago','It only tells them the rock\'s colour','It proves the area was always a desert'],ans:1,exp:'Fossils tell scientists what plants/animals and conditions (habitat) existed in that area millions of years ago.'},
+    {q:'🌱 W5: What is pollination?',opts:['When a seed grows','When insects carry pollen between flowers','When seeds disperse','When leaves fall'],ans:1,exp:'Pollination is when insects or wind carry pollen between flowers.'},
+    {q:'🪨 W8: What does "extinct" mean?',opts:['Very common','Completely died out','Found everywhere','Recently born'],ans:1,exp:'Extinct means a species has completely died out.'},
+  ],
+  soc:[
+    {q:'🏘️ W5: What is a RURAL settlement?',opts:['A large city','A countryside area with few people','A type of map symbol','A Roman fort'],ans:1,exp:'Rural means countryside with small population and farms.'},
+    {q:'🏘️ W5: What is an URBAN area?',opts:['A quiet village','A large city with many people and buildings','A farming community','A desert'],ans:1,exp:'Urban means city — large population, many buildings and services.'},
+    {q:'🏘️ W5: What does INFRASTRUCTURE include?',opts:['Only roads','Roads, schools, hospitals and services','Only hospitals','Only schools'],ans:1,exp:'Infrastructure includes everything a community needs to function.'},
+    {q:'🏛️ W8: When did the Romans successfully invade Britain?',opts:['55 BC','43 AD','410 AD','1066 AD'],ans:1,exp:'Emperor Claudius successfully invaded Britain in 43 AD.'},
+    {q:'🏛️ W8: What did the Romans build to connect towns across Britain?',opts:['Bridges only','Straight roads','Canals only','Railways'],ans:1,exp:'The Romans built straight roads connecting towns across Britain.'},
+    {q:'🏛️ W8: Why was Hadrian\'s Wall built?',opts:['To grow crops','To keep out tribes from the north','To store water','To connect rivers'],ans:1,exp:'Hadrian\'s Wall protected Roman Britain from northern tribes.'},
+    {q:'🏛️ W8: When did the Romans leave Britain?',opts:['43 AD','100 AD','410 AD','1500 AD'],ans:2,exp:'The Romans left Britain in 410 AD.'},
+    {q:'🔗 BOTH WEEKS: Many Roman settlements became modern URBAN cities (e.g. London). What does this show about settlements over time?',opts:['Settlements never change','Settlements can grow from small towns into big urban cities','Roman towns disappeared completely','Urban areas were always urban'],ans:1,exp:'Roman towns like Londinium grew over centuries into major urban cities — settlements change and grow.'},
+    {q:'🔗 BOTH WEEKS: Roman roads (W8) are an example of what concept from Week 5?',opts:['Population','Infrastructure','Habitat','Climate'],ans:1,exp:'Roads are a key part of INFRASTRUCTURE — something every community, ancient or modern, needs.'},
+    {q:'🏘️ W5: What does "population" mean?',opts:['The buildings in a town','The number of people living in an area','The weather in a place','The roads in a city'],ans:1,exp:'Population is the number of people living in an area.'},
+    {q:'🏛️ W8: What language did the Romans bring to Britain?',opts:['French','Latin','German','Greek'],ans:1,exp:'The Romans brought Latin — many English words come from it today.'},
+    {q:'🔗 BOTH WEEKS: A Roman settlement had a market, baths, and roads to other towns. Using Week 5 ideas, what TYPE of settlement does this sound like?',opts:['Rural village with no services','Urban settlement with good infrastructure','A desert with no people','A forest habitat'],ans:1,exp:'Markets, baths and connecting roads show good infrastructure — typical of an URBAN settlement.'},
+  ],
+};
+
+const mixIdxs={bible:0,eng:0,maths:0,sci:0,soc:0};
+const mixScores={bible:0,eng:0,maths:0,sci:0,soc:0};
+
+function renderMixQ(key){
+  const qs=mixQuizData[key];const idx=mixIdxs[key];const total=qs.length;
+  const progId=key+'-mix-prog';const labelId=key+'-mix-prog-label';
+  if(idx>=total){
+    document.getElementById(key+'-mix-quiz').innerHTML=`<div style="padding:18px;background:#D1FAE5;border-radius:14px;font-weight:800;font-size:1.05rem;">🎉 Quiz complete! Final score: ${mixScores[key]}/${total}</div>`;
+    const pb=document.getElementById(progId);if(pb)pb.style.width='100%';
+    const pl=document.getElementById(labelId);if(pl)pl.textContent=`${total} of ${total} questions answered`;
+    if(mixScores[key]===total)celebrate();
+    return;
+  }
+  const q=qs[idx];
+  document.getElementById(key+'-mix-quiz').innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${idx+1} of ${total}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerMixQ('${key}',${i})">${o}</button>`).join('')}</div><div id="${key}-mix-fb" class="quiz-feedback"></div></div>`;
+  const scoreEl=document.getElementById(key+'-mix-score');if(scoreEl)scoreEl.textContent=`Score: ${mixScores[key]}/${idx}`;
+  const pb=document.getElementById(progId);if(pb)pb.style.width=`${(idx/total)*100}%`;
+  const pl=document.getElementById(labelId);if(pl)pl.textContent=`${idx} of ${total} questions answered`;
+}
+function answerMixQ(key,i){
+  const qs=mixQuizData[key];const idx=mixIdxs[key];const q=qs[idx];
+  const opts=document.querySelectorAll(`#${key}-mix-quiz .quiz-opt`);opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-mix-fb');fb.style.display='block';
+  if(i===q.ans){mixScores[key]++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.innerHTML=`✅ Correct! ${q.exp}`;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.innerHTML=`❌ The answer is: <strong>${q.opts[q.ans]}</strong>. ${q.exp}`;}
+  const total=qs.length;
+  const scoreEl=document.getElementById(key+'-mix-score');if(scoreEl)scoreEl.textContent=`Score: ${mixScores[key]}/${idx+1}`;
+  const pb=document.getElementById(key+'-mix-prog');if(pb)pb.style.width=`${((idx+1)/total)*100}%`;
+  const pl=document.getElementById(key+'-mix-prog-label');if(pl)pl.textContent=`${idx+1} of ${total} questions answered`;
+}
+function nextMixQ(key){mixIdxs[key]++;renderMixQ(key);}
+['bible','eng','maths','sci','soc'].forEach(k=>renderMixQ(k));
+
+const mixTFData={
+  bible:[
+    {s:'🌈 W5: God\'s covenant with Noah was sealed with a rainbow.',ans:true},
+    {s:'🌈 W5: Noah was chosen because he was wicked and strong.',ans:false},
+    {s:'📜 W8: God gave Moses the Ten Commandments on Mount Sinai.',ans:true},
+    {s:'📜 W8: All ten commandments are about how to treat other people.',ans:false},
+    {s:'🔗 BOTH: Both the rainbow and the commandments show God caring for His people.',ans:true},
+    {s:'🔗 BOTH: God\'s rules and promises are meant to control people, not help them.',ans:false},
+  ],
+  eng:[
+    {s:'🎨 W5: "The most tallest building" is correct English.',ans:false},
+    {s:'🎨 W5: "More beautiful" is the correct comparative form of beautiful.',ans:true},
+    {s:'🔗 W8: A conjunction joins two sentences together.',ans:true},
+    {s:'🔗 W8: "And" is used to show contrast or surprise.',ans:false},
+    {s:'🔗 BOTH: "The fierce storm came but we stayed calm" uses both an adjective and a conjunction.',ans:true},
+    {s:'🔗 BOTH: Descriptive writing should avoid using adjectives and conjunctions.',ans:false},
+  ],
+  maths:[
+    {s:'➖ W5: 742 − 368 = 374.',ans:true},
+    {s:'➖ W5: You always start subtraction from the hundreds column.',ans:false},
+    {s:'🍕 W8: 1/2 and 2/4 are equivalent fractions.',ans:true},
+    {s:'🍕 W8: 4/8 is greater than 1/2.',ans:false},
+    {s:'🔗 BOTH: You can check a subtraction answer by adding, just like you can check fraction equivalence by multiplying.',ans:true},
+    {s:'🔗 BOTH: Borrowing in subtraction and simplifying fractions are the exact same process.',ans:false},
+  ],
+  sci:[
+    {s:'🌱 W5: A habitat is the natural home of a plant or animal.',ans:true},
+    {s:'🌱 W5: Germination is when a flower attracts insects.',ans:false},
+    {s:'🪨 W8: Fossils form in sedimentary rock.',ans:true},
+    {s:'🪨 W8: Humus makes soil pale and dry.',ans:false},
+    {s:'🔗 BOTH: Soil provides nutrients that support a plant\'s life cycle.',ans:true},
+    {s:'🔗 BOTH: Fossils have nothing to do with ancient habitats.',ans:false},
+  ],
+  soc:[
+    {s:'🏘️ W5: A city is an example of an urban settlement.',ans:true},
+    {s:'🏘️ W5: Infrastructure only includes roads and nothing else.',ans:false},
+    {s:'🏛️ W8: The Romans successfully invaded Britain in 43 AD.',ans:true},
+    {s:'🏛️ W8: The Romans ruled Britain forever and never left.',ans:false},
+    {s:'🔗 BOTH: Roman towns like Londinium grew into modern urban cities.',ans:true},
+    {s:'🔗 BOTH: Roman roads are not an example of infrastructure.',ans:false},
+  ],
+};
+
+function buildMixTF(key){
+  const data=mixTFData[key];const area=document.getElementById(key+'-mix-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td><button class="tf-btn" id="mtf-${key}-${i}-T" onclick="selMixTF('${key}',${i},'T')">✅ True</button><button class="tf-btn" id="mtf-${key}-${i}-F" onclick="selMixTF('${key}',${i},'F')">❌ False</button></td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildMixTF);
+function selMixTF(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('mtf-'+key+'-'+i+'-'+v);if(b)b.classList.remove('sel-t','sel-f');});
+  const btn=document.getElementById('mtf-'+key+'-'+i+'-'+val);if(btn)btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkMixTF(key){
+  const data=mixTFData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('mtf-'+key+'-'+i+'-T');const fBtn=document.getElementById('mtf-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');const userF=fBtn?.classList.contains('sel-f');
+    if((item.ans&&userT)||(!item.ans&&userF))score++;
+    if(item.ans){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;});
+  const res=document.getElementById(key+'-mix-tf-result');if(res){res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct! Outstanding revision!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green buttons = correct answers.`;}}
+}
+
+const mixSums=[
+  {q:'573 − 241',ans:'332',type:'➖ W5'},
+  {q:'1/2 = ?/6',ans:'3',type:'🍕 W8'},
+  {q:'834 − 476',ans:'358',type:'➖ W5'},
+  {q:'2/3 = 6/?',ans:'9',type:'🍕 W8'},
+  {q:'600 − 347',ans:'253',type:'➖ W5'},
+  {q:'1/4 = ?/8',ans:'2',type:'🍕 W8'},
+  {q:'742 − 368',ans:'374',type:'➖ W5'},
+  {q:'3/4 = 6/?',ans:'8',type:'🍕 W8'},
+];
+function buildMixSums(){
+  const area=document.getElementById('maths-mix-sums');if(!area)return;
+  area.innerHTML=`<table class="fill-table"><tr><th>Type</th><th>Calculation</th><th>Your Answer</th></tr>
+  ${mixSums.map((s,i)=>`<tr><td>${s.type}</td><td><strong style="font-family:'Fredoka One',cursive;font-size:1.1rem;">${s.q}</strong></td><td><input type="text" class="fill-in" id="ms-${i}" data-ans="${s.ans}" placeholder="=?" style="width:90px;"></td></tr>`).join('')}
+  </table>`;
+}
+buildMixSums();
+function checkMixSums(){
+  let score=0;
+  mixSums.forEach((_,i)=>{const inp=document.getElementById('ms-'+i);if(!inp)return;
+    if(inp.value.trim()===mixSums[i].ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-mix-sums-result');res.style.display='block';
+  if(score===mixSums.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${mixSums.length} correct! Superb!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${mixSums.length} correct.`;}
+}
+function checkMixMissing(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .card:nth-child(4) input[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-mix-missing-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<60;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*25);}
+}
+const s=document.createElement('style');s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week8_Day4');</script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 8 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:140px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.ten-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px;}
+.cmd-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:border-color 0.2s;}
+.cmd-card:hover{border-color:var(--accent,#555);}
+.cmd-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;color:var(--muted);margin-bottom:4px;letter-spacing:0.1em;text-transform:uppercase;}
+.cmd-title{font-weight:700;color:var(--bright);font-size:0.92rem;margin-bottom:6px;}
+.cmd-meaning{font-size:0.83rem;color:#B0B0C8;line-height:1.5;}
+.inf-chain{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;margin:14px 0;}
+.inf-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:0.85rem;flex:1;min-width:120px;}
+.inf-box .label{font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:700;}
+.inf-box .value{color:var(--bright);font-weight:600;line-height:1.4;font-family:'JetBrains Mono',monospace;}
+.inf-arrow{color:var(--muted);font-size:1.2rem;flex-shrink:0;align-self:center;}
+.size-compare{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.size-row{display:flex;align-items:center;gap:10px;}
+.size-label{width:170px;font-size:0.8rem;color:var(--muted);flex-shrink:0;}
+.size-track{flex:1;background:var(--surface2);border-radius:8px;height:24px;overflow:hidden;}
+.size-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding-left:10px;font-size:0.72rem;font-weight:700;color:white;white-space:nowrap;}
+/* Quiz */
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+@media(max-width:600px){.hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}.compare{grid-template-columns:1fr;}.size-label{width:100px;font-size:0.7rem;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 8</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">📜</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 8</div>
+  <div class="hero-title">The Ten<br>Commandments</div>
+  <div class="hero-subtitle">Exodus 20 · God's Law · Loving God and Loving Others · Life Application</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Exodus 20</span><span class="hero-tag">Matthew 22:37-39</span><span class="hero-tag">God's Law</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"Love the Lord your God with all your heart and with all your soul and with all your mind… Love your neighbour as yourself."</div>
+    <div class="verse-ref">Matthew 22:37,39 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Jesus summarises the Ten Commandments in two sentences:</strong> Commandments 1–4 are about loving GOD (your vertical relationship). Commandments 5–10 are about loving PEOPLE (your horizontal relationships). Jesus shows that the heart behind God's law is always love.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">commandment</div><div class="esl-def">A rule or law given by God. The word means a strong instruction — not just advice, but a command. (Hebrew: mitzvah)</div></div>
+    <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A serious, binding agreement between God and people. Like a treaty between a king and his people. The commandments are given inside God's covenant with Israel.</div></div>
+    <div class="esl-row"><div class="esl-word">idolatry</div><div class="esl-def">Worshipping an idol — a statue or image — instead of the real God. Or treating anything as more important than God. (idol = false god)</div></div>
+    <div class="esl-row"><div class="esl-word">sabbath</div><div class="esl-def">The seventh day of the week, set aside as a rest day. God rested on the seventh day of creation (Genesis 2:2) and commands people to do the same.</div></div>
+    <div class="esl-row"><div class="esl-word">honour</div><div class="esl-def">To show great respect and value to someone. Honouring parents means treating them with love, respect, and obedience.</div></div>
+    <div class="esl-row"><div class="esl-word">covet</div><div class="esl-def">To want something that belongs to someone else in an unhealthy, jealous way. Coveting is about desire — even before any action is taken.</div></div>
+    <div class="esl-row"><div class="esl-word">bear false witness</div><div class="esl-def">To tell lies about another person, especially in a legal setting. Means saying untrue things that hurt someone's reputation.</div></div>
+    <div class="esl-row"><div class="esl-word">moral law</div><div class="esl-def">Rules about right and wrong behaviour that come from God's character, not just from a government. The Ten Commandments are an example of moral law.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📍 Where and Why — Exodus 19-20</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">After the Exodus from Egypt (Week 7), Israel camped at Mount Sinai. God called Moses up the mountain and gave him the Ten Commandments — written by God's own hand on two stone tablets (Exodus 31:18). This was three months after leaving Egypt.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">God introduces himself (Exodus 20:2)</div><div class="step-desc">"I am the LORD your God, who brought you out of Egypt, out of the land of slavery." Before giving the law, God reminds Israel of what he has already done — the commandments come AFTER grace, not before it.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">Two tablets — two categories</div><div class="step-desc">Commandments 1–4 concern the relationship with God (the first tablet). Commandments 5–10 concern relationships with other people (the second tablet). Both matter equally — you cannot love God and hate people.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">A guide for all of life</div><div class="step-desc">The commandments cover worship, time, family, life, marriage, property, truth, and desire. Together they describe what a society looks like when people live in right relationship with God and each other.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📜 The Ten Commandments — Each One Explained</div>
+  <div class="ten-grid">
+    <div class="cmd-card"><div class="cmd-num">Commandment 1</div><div class="cmd-title">No other gods before God</div><div class="cmd-meaning">God alone is Lord. No person, object, or idea should take the place of God in our lives. This sets God apart as unique and supreme.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 2</div><div class="cmd-title">No idols or images</div><div class="cmd-meaning">Do not worship images or statues. God cannot be reduced to something humans make with their hands. He is greater than anything visible.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 3</div><div class="cmd-title">Do not misuse God's name</div><div class="cmd-meaning">The name of God is holy — it represents who he is. Using it carelessly, disrespectfully, or as a curse dishonours God's character.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 4</div><div class="cmd-title">Remember the Sabbath</div><div class="cmd-meaning">Rest one day in seven. God built rest into creation. The Sabbath protects people from becoming slaves to work and reminds us that God provides.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 5</div><div class="cmd-title">Honour your father and mother</div><div class="cmd-meaning">The first commandment with a promised blessing (Ephesians 6:2-3). Family is the foundation of society — respecting parents builds stable communities.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 6</div><div class="cmd-title">Do not murder</div><div class="cmd-meaning">Human life has value because people are made in God's image (Genesis 1:27). Unjustly taking a life destroys what God values most.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 7</div><div class="cmd-title">Do not commit adultery</div><div class="cmd-meaning">Marriage is a covenant — a sacred, binding promise. Adultery breaks that promise and causes deep harm to people and families.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 8</div><div class="cmd-title">Do not steal</div><div class="cmd-meaning">What belongs to another person should be respected. Stealing violates both the person's rights and your own integrity as someone made in God's image.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 9</div><div class="cmd-title">Do not give false testimony</div><div class="cmd-meaning">Truth-telling is essential for community trust. Lying about someone destroys their reputation and breaks the social fabric that holds people together.</div></div>
+    <div class="cmd-card"><div class="cmd-num">Commandment 10</div><div class="cmd-title">Do not covet</div><div class="cmd-meaning">The only commandment about thought, not action. God cares about our desires, not just our actions. Contentment — satisfaction with what you have — is the antidote to coveting.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">❤️ Jesus and the Law — Matthew 22:37-40</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The Golden Summary:</strong> When asked "which is the greatest commandment?", Jesus did not pick one of the ten — he summarised all ten in two: Love God with everything, and love your neighbour as yourself. "All the Law and the Prophets hang on these two commandments" (Matthew 22:40).</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">📖 What the Law IS</div>
+      <div class="cmp-row">A gift from God — not a burden</div>
+      <div class="cmp-row">A guide for living in community</div>
+      <div class="cmp-row">A reflection of God's own character</div>
+      <div class="cmp-row">Given AFTER rescue, not before</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">⚠️ What the Law is NOT</div>
+      <div class="cmp-row">Not a way to earn God's love</div>
+      <div class="cmp-row">Not an arbitrary set of rules</div>
+      <div class="cmp-row">Not impossible to understand</div>
+      <div class="cmp-row">Not only for ancient Israel</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🎯 Knowledge Check — Ten Commandments</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">📄</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 8</div>
+  <div class="hero-title">Informative &<br>Expository Writing</div>
+  <div class="hero-subtitle">How to organise ideas clearly · Introduction, body, conclusion · Topic sentences · Linking words</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Essay Structure</span><span class="hero-tag">Topic Sentences</span><span class="hero-tag">Cohesive Devices</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these terms for academic writing</div>
+    <div class="esl-row"><div class="esl-word">expository</div><div class="esl-def">Writing that explains or informs. It gives facts and information clearly, without the writer's personal opinion. From Latin "exponere" — to set out/explain.</div></div>
+    <div class="esl-row"><div class="esl-word">thesis statement</div><div class="esl-def">One or two sentences at the end of the introduction that tell the reader exactly what the essay will explain. The "main point" of the whole piece.</div></div>
+    <div class="esl-row"><div class="esl-word">topic sentence</div><div class="esl-def">The first sentence of a body paragraph. It tells the reader what that ONE paragraph is about — like a mini-thesis for each paragraph.</div></div>
+    <div class="esl-row"><div class="esl-word">supporting detail</div><div class="esl-def">Evidence, facts, or examples that prove or explain the topic sentence. Each topic sentence needs at least 2-3 supporting details.</div></div>
+    <div class="esl-row"><div class="esl-word">cohesive device</div><div class="esl-def">Words and phrases that connect sentences and paragraphs together smoothly. Examples: "furthermore," "however," "in addition," "as a result."</div></div>
+    <div class="esl-row"><div class="esl-word">conclusion</div><div class="esl-def">The final paragraph. It summarises the main points (without copying them word-for-word) and gives a final thought. Never introduce new ideas in a conclusion.</div></div>
+    <div class="esl-row"><div class="esl-word">audience</div><div class="esl-def">The person or group of people who will READ your writing. Good writers always think: who am I writing for? What do they need to know?</div></div>
+    <div class="esl-row"><div class="esl-word">formal register</div><div class="esl-def">Writing in a professional, academic style. No slang, no contractions (don't → do not), full sentences, precise vocabulary.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🏗️ The Three-Part Structure</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Every informative essay has three parts. Think of it like a building: <strong>Introduction = the door</strong> (welcome the reader and show them what's inside). <strong>Body = the rooms</strong> (each paragraph is one room, one idea). <strong>Conclusion = the exit</strong> (remind the reader of what they learned before they leave).</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">Introduction — Hook + Background + Thesis</div><div class="step-desc"><strong>Hook:</strong> Start with something interesting — a question, a surprising fact, or a powerful statement. Draw the reader in. <strong>Background:</strong> Give 2-3 sentences of context — what is this topic about? <strong>Thesis:</strong> State the main point of your essay in 1-2 clear sentences.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">Body Paragraphs — One Idea Per Paragraph</div><div class="step-desc"><strong>Topic sentence</strong> (what this paragraph is about) → <strong>supporting detail 1</strong> → <strong>supporting detail 2</strong> → <strong>supporting detail 3</strong> → <strong>linking sentence</strong> (connects to the next paragraph). For a KS3 essay, 2-4 body paragraphs is standard.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">Conclusion — Summarise + Final Thought</div><div class="step-desc"><strong>Restate</strong> your thesis in new words (do NOT copy it). <strong>Summarise</strong> your 2-4 main points briefly. <strong>Final thought:</strong> Why does this matter? What should the reader think or do now?</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🔗 Cohesive Devices — Connecting Your Writing</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">Without linking words, your sentences feel like a list. With them, your writing flows like a river. Always use a variety — never start every sentence with "Furthermore."</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Purpose</th><th>Examples</th><th>Use it when…</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Adding information</strong></td><td><em>Furthermore, In addition, Moreover, Also</em></td><td>…you are adding another point that supports your argument.</td></tr>
+      <tr><td><strong>Contrasting</strong></td><td><em>However, On the other hand, In contrast, Nevertheless</em></td><td>…you want to show a difference or a counterpoint.</td></tr>
+      <tr><td><strong>Showing cause/effect</strong></td><td><em>As a result, Therefore, Consequently, This means that</em></td><td>…one thing leads to another.</td></tr>
+      <tr><td><strong>Giving examples</strong></td><td><em>For example, For instance, Such as, Including</em></td><td>…you want to support a point with evidence.</td></tr>
+      <tr><td><strong>Concluding</strong></td><td><em>In conclusion, To summarise, Overall, In short</em></td><td>…you are ending a paragraph or the whole essay.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">✍️ Writing a Strong Topic Sentence</div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>The formula:</strong> Topic sentence = SUBJECT + WHAT YOU WILL SAY ABOUT IT. It must be specific enough to guide the paragraph but broad enough to be developed with evidence.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>❌ Weak Topic Sentence</th><th>✅ Strong Topic Sentence</th><th>Why it's better</th></tr></thead>
+    <tbody>
+      <tr><td>"This paragraph is about the Nile."</td><td>"The Nile River made early Egyptian civilisation possible by providing fertile farmland and a reliable water source."</td><td>Specific claim — tells reader exactly what the paragraph will prove.</td></tr>
+      <tr><td>"Pollution is bad."</td><td>"Air pollution from factories has significantly increased rates of respiratory illness in urban populations."</td><td>Has a specific subject AND makes a clear, provable claim.</td></tr>
+      <tr><td>"There are many types of food chains."</td><td>"Food chains in polar habitats are shorter than in rainforests because extreme cold limits producer diversity."</td><td>Connects two ideas with reasoning, not just description.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📝 Worked Example — Annotated Expository Paragraph</div>
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;font-size:0.88rem;line-height:1.8;color:#B0B0C8;">
+    <span style="background:rgba(190,18,60,0.25);padding:2px 6px;border-radius:4px;color:#FCA5A5;font-size:0.75rem;font-weight:700;margin-right:6px;">[TOPIC SENTENCE]</span><span style="color:var(--bright);">The Ten Commandments provided ancient Israel with a complete framework for social order.</span> <span style="background:rgba(30,58,138,0.25);padding:2px 6px;border-radius:4px;color:#93C5FD;font-size:0.75rem;font-weight:700;margin-right:6px;">[SUPPORTING DETAIL 1]</span>Commandments six through nine — prohibiting murder, adultery, theft, and false testimony — directly protected individuals from harm by others. <span style="background:rgba(30,58,138,0.25);padding:2px 6px;border-radius:4px;color:#93C5FD;font-size:0.75rem;font-weight:700;margin-right:6px;">[SUPPORTING DETAIL 2]</span>Furthermore, the commandment to honour parents (number five) reinforced family loyalty, which was the basic unit of Israelite society. <span style="background:rgba(6,95,70,0.25);padding:2px 6px;border-radius:4px;color:#6EE7B7;font-size:0.75rem;font-weight:700;margin-right:6px;">[COHESIVE DEVICE]</span><span style="color:#6EE7B7;">As a result</span>, a community following these laws would experience far less conflict than one without shared moral principles. <span style="background:rgba(245,158,11,0.25);padding:2px 6px;border-radius:4px;color:#FCD34D;font-size:0.75rem;font-weight:700;margin-right:6px;">[LINKING SENTENCE]</span>This social dimension of the commandments connects closely to their theological foundation.
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🎯 Expository Writing Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D2200,#7A3D00);">
+  <div class="hero-icon">🔡</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 8</div>
+  <div class="hero-title">Introduction<br>to Algebra</div>
+  <div class="hero-subtitle">What algebra is · Writing expressions · Simplifying by collecting like terms · Substitution</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Expressions</span><span class="hero-tag">Like Terms</span><span class="hero-tag">Substitution</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Algebra uses letters instead of unknown numbers</div>
+    <div class="esl-row"><div class="esl-word">algebra</div><div class="esl-def">A branch of maths that uses letters (called variables) to represent unknown numbers. From Arabic "al-jabr" — meaning "reunion of broken parts."</div></div>
+    <div class="esl-row"><div class="esl-word">variable</div><div class="esl-def">A letter that represents an unknown number. Common variables: x, y, n, a, b. Example: in "x + 3 = 7", x is the variable.</div></div>
+    <div class="esl-row"><div class="esl-word">term</div><div class="esl-def">A single number, variable, or combination (like 3x or 5). Terms are separated by + or − signs.</div></div>
+    <div class="esl-row"><div class="esl-word">expression</div><div class="esl-def">A group of terms combined with + or −. An expression has NO equals sign. Example: 3x + 2y − 5.</div></div>
+    <div class="esl-row"><div class="esl-word">coefficient</div><div class="esl-def">The number IN FRONT of a variable. In 5x, the coefficient is 5. In x, the coefficient is 1 (we just don't write it).</div></div>
+    <div class="esl-row"><div class="esl-word">like terms</div><div class="esl-def">Terms that have the SAME variable (and same power). 3x and 7x are like terms. 3x and 3y are NOT like terms — different variables.</div></div>
+    <div class="esl-row"><div class="esl-word">simplify</div><div class="esl-def">To make an expression shorter by collecting like terms. "3x + 5x" simplifies to "8x".</div></div>
+    <div class="esl-row"><div class="esl-word">substitution</div><div class="esl-def">Replacing a variable with a number to find the value of an expression. If x = 4, then 3x + 2 = 3(4) + 2 = 14.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">💡 Why Algebra? — The Big Idea</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Before algebra, you can only solve problems where you know all the numbers. Algebra lets you work with UNKNOWN numbers. Instead of "I have ___ apples and add 5 more to get 12," you write: x + 5 = 12. Then you solve it.</div>
+  </div>
+  <div class="inf-chain">
+    <div class="inf-box"><div class="label">Arithmetic</div><div class="value">3 + 5 = 8<br>All numbers known</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Algebra</div><div class="value">x + 5 = 8<br>One unknown: find x</div></div>
+    <div class="inf-arrow">→</div>
+    <div class="inf-box"><div class="label">Solution</div><div class="value">x = 3<br>The unknown is found</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">✍️ Writing Algebraic Expressions</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Key writing rules:</strong> In algebra we NEVER use × between a number and a letter — write 5n not 5×n. We write the coefficient first: 3y not y3. When the coefficient is 1, we just write the letter: 1x = x.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Word Problem</th><th>Algebraic Expression</th><th>Explanation</th></tr></thead>
+    <tbody>
+      <tr><td>A number n plus 7</td><td><em>n + 7</em></td><td>Add 7 to the unknown number n.</td></tr>
+      <tr><td>Three times a number x</td><td><em>3x</em></td><td>3 × x — but we write it without the × sign.</td></tr>
+      <tr><td>A number y divided by 4</td><td><em>y/4 or y ÷ 4</em></td><td>y divided by 4. We usually write it as a fraction.</td></tr>
+      <tr><td>5 less than twice a number</td><td><em>2n − 5</em></td><td>Double the number first, then subtract 5.</td></tr>
+      <tr><td>The sum of two different numbers</td><td><em>x + y</em></td><td>Two unknowns — we use two different letters.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📦 Collecting Like Terms</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule:</strong> You can only add or subtract terms that have the SAME variable. Think of it like sorting fruit: you can add apples to apples and oranges to oranges, but you cannot add apples to oranges.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Example 1: Simplify 3x + 5x</span><br>
+    3x + 5x = <span class="hl2">8x</span> <span class="comment">← same variable x, so add the coefficients: 3+5=8</span><br><br>
+    <span class="comment">Example 2: Simplify 7y − 3y</span><br>
+    7y − 3y = <span class="hl2">4y</span> <span class="comment">← same variable y: 7−3=4</span><br><br>
+    <span class="comment">Example 3: Simplify 4a + 3b + 2a − b</span><br>
+    <span class="hl">4a + 2a</span> + <span class="hl3">3b − b</span> = <span class="hl2">6a + 2b</span> <span class="comment">← group a-terms, then b-terms</span><br><br>
+    <span class="comment">Example 4: Simplify 5x + 3 − 2x + 7</span><br>
+    <span class="hl">5x − 2x</span> + <span class="hl3">3 + 7</span> = <span class="hl2">3x + 10</span> <span class="comment">← numbers without variables are like terms too!</span>
+  </div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> 3x + 5 CANNOT be simplified further. x and a plain number are NOT like terms. The answer stays as 3x + 5.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🔢 Substitution — Putting Numbers Back In</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Once you have an expression, you can find its value by SUBSTITUTING a number for the variable. Always use brackets when substituting to avoid errors.</div>
+  </div>
+  <div class="formula">
+    <span class="comment">Find the value of 3x + 5 when x = 4</span><br>
+    3<span class="hl">(4)</span> + 5 = 12 + 5 = <span class="hl2">17</span><br><br>
+    <span class="comment">Find the value of 2a − b when a = 6, b = 3</span><br>
+    2<span class="hl">(6)</span> − <span class="hl3">(3)</span> = 12 − 3 = <span class="hl2">9</span><br><br>
+    <span class="comment">Find the value of x² + 2x when x = 3</span><br>
+    <span class="hl">(3)</span>² + 2<span class="hl">(3)</span> = 9 + 6 = <span class="hl2">15</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🎯 Algebra Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🧪</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 8</div>
+  <div class="hero-title">Mixtures &<br>Separation Techniques</div>
+  <div class="hero-subtitle">What is a mixture · Filtration · Evaporation · Distillation · Chromatography</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Filtration</span><span class="hero-tag">Evaporation</span><span class="hero-tag">Distillation</span><span class="hero-tag">Chromatography</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📚 Key Vocabulary — ESL Science Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these chemistry terms first</div>
+    <div class="esl-row"><div class="esl-word">mixture</div><div class="esl-def">Two or more substances that are mixed together but NOT chemically joined. They keep their own properties. You CAN separate them without a chemical reaction.</div></div>
+    <div class="esl-row"><div class="esl-word">pure substance</div><div class="esl-def">A material made of only ONE type of substance — all the same. Pure water is ONLY water. Salt water is a MIXTURE (water + salt).</div></div>
+    <div class="esl-row"><div class="esl-word">soluble</div><div class="esl-def">Able to dissolve in a liquid (usually water). Salt is soluble in water — it disappears into it. Sand is insoluble — it does not dissolve.</div></div>
+    <div class="esl-row"><div class="esl-word">filtration</div><div class="esl-def">Separating an insoluble solid from a liquid using a filter. The liquid passes through tiny holes; the solid is left behind. Used for: sand from water.</div></div>
+    <div class="esl-row"><div class="esl-word">evaporation</div><div class="esl-def">Heating a solution so the liquid turns to gas (vapour) and escapes, leaving the dissolved solid behind. Used for: getting salt from salt water.</div></div>
+    <div class="esl-row"><div class="esl-word">distillation</div><div class="esl-def">Heating a mixture to boil off one liquid, collecting the vapour, and cooling it back to liquid. Used to: separate liquids or get pure water from salt water.</div></div>
+    <div class="esl-row"><div class="esl-word">chromatography</div><div class="esl-def">Separating coloured substances in a mixture by letting them travel at different speeds through a material (like filter paper). Used for: identifying dyes or inks.</div></div>
+    <div class="esl-row"><div class="esl-word">solvent / solute / solution</div><div class="esl-def">Solute = the solid that dissolves (e.g. salt). Solvent = the liquid it dissolves in (e.g. water). Solution = the mixture made (e.g. salt water).</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🔍 Mixtures vs Pure Substances</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">🧪 Mixture</div>
+      <div class="cmp-row">Two or more substances mixed together</div>
+      <div class="cmp-row">Each substance keeps its own properties</div>
+      <div class="cmp-row">No chemical reaction occurs</div>
+      <div class="cmp-row">Can be separated by physical means</div>
+      <div class="cmp-row">Examples: air, sea water, sand + salt, ink</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.3);">
+      <div class="cmp-head" style="color:#6EE7B7;">💧 Pure Substance</div>
+      <div class="cmp-row">Only one type of particle throughout</div>
+      <div class="cmp-row">Always the same properties (melting/boiling point)</div>
+      <div class="cmp-row">Cannot be separated further by physical means</div>
+      <div class="cmp-row">Has a fixed, known melting/boiling point</div>
+      <div class="cmp-row">Examples: pure water, pure gold, pure salt</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🔬 The Four Separation Techniques</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#065F46;">1</div><div>
+      <div class="step-title">Filtration — separating an insoluble solid from a liquid</div>
+      <div class="step-desc"><strong>Equipment:</strong> filter funnel, filter paper, conical flask, beaker. <strong>How:</strong> Pour the mixture (e.g. muddy water) through filter paper. The tiny holes let the water pass through (this is called the filtrate). The solid (e.g. mud) is too big to pass through and stays in the paper (this is called the residue). <strong>Use when:</strong> the solid does NOT dissolve in the liquid.</div>
+    </div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">2</div><div>
+      <div class="step-title">Evaporation — getting a dissolved solid from a solution</div>
+      <div class="step-desc"><strong>Equipment:</strong> evaporating dish, Bunsen burner / heat source. <strong>How:</strong> Pour salt water into the dish and heat it. The water turns to steam and escapes into the air. The salt is left behind in the dish as white crystals. <strong>Use when:</strong> you want the SOLID, not the liquid. The water is allowed to escape.</div>
+    </div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">3</div><div>
+      <div class="step-title">Distillation — separating a liquid from a solution (collecting the liquid)</div>
+      <div class="step-desc"><strong>Equipment:</strong> flask, condenser (cooling tube), collection beaker. <strong>How:</strong> Heat the salt water — water boils first and turns to steam. The steam travels through a cold tube (condenser) and cools back to liquid — this is collected as pure water. The salt stays behind. <strong>Use when:</strong> you want the LIQUID (pure water) and also when separating two liquids with different boiling points (e.g. alcohol and water).</div>
+    </div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">4</div><div>
+      <div class="step-title">Chromatography — separating mixtures of coloured substances</div>
+      <div class="step-desc"><strong>Equipment:</strong> filter paper / chromatography paper, solvent (often water or alcohol), beaker. <strong>How:</strong> Put a spot of the ink or dye at the bottom of the paper. Place the paper in a little solvent. As the solvent moves up, it carries the different dyes at different speeds — the dyes separate into distinct coloured bands. <strong>Use when:</strong> identifying what dyes or chemicals are in a mixture (e.g. food colouring, crime scene ink).</div>
+    </div></div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 Key idea:</strong> Every separation technique uses a PHYSICAL property — particle size, boiling point, or how well a substance dissolves — not a chemical reaction. The substances are not changed, just sorted.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📊 Choosing the Right Technique</div>
+  <table class="data-table">
+    <thead><tr><th>Mixture Type</th><th>Best Technique</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Sand + water (sand does NOT dissolve)</td><td><strong>Filtration</strong></td><td>Sand is insoluble — too large to pass through filter paper.</td></tr>
+      <tr><td>Salt + water (want the salt)</td><td><strong>Evaporation</strong></td><td>Water is removed by heating — salt crystals remain.</td></tr>
+      <tr><td>Salt + water (want pure water)</td><td><strong>Distillation</strong></td><td>Water is boiled, collected as vapour, cooled — pure water collected.</td></tr>
+      <tr><td>Ink made of several dyes mixed</td><td><strong>Chromatography</strong></td><td>Dyes travel at different speeds — separates into bands.</td></tr>
+      <tr><td>Sand + salt + water</td><td><strong>Filtration, then evaporation</strong></td><td>Filter out sand first, then evaporate water to get salt.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🎯 Mixtures & Separation Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ HISTORY ═══════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-icon">🏙️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Week 8</div>
+  <div class="hero-title">Population &<br>Settlement</div>
+  <div class="hero-subtitle">Why people settle where they do · Rural vs urban · Push and pull factors · Migration basics</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Settlement</span><span class="hero-tag">Push & Pull</span><span class="hero-tag">Rural vs Urban</span><span class="hero-tag">Migration</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">📚 Key Vocabulary — ESL Geography Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 6 (physical geography) and Week 7 (climate and biomes)</div>
+    <div class="esl-row"><div class="esl-word">settlement</div><div class="esl-def">A place where people live permanently. Can be a tiny hamlet of a few houses or a huge city of millions. Settlements grow where conditions are favourable.</div></div>
+    <div class="esl-row"><div class="esl-word">population density</div><div class="esl-def">How many people live in a given area. High density = many people per km². Low density = few people spread over a large area. Often shown on a map using colour shading.</div></div>
+    <div class="esl-row"><div class="esl-word">rural</div><div class="esl-def">Relating to the countryside — areas of farmland, forests, or villages, away from cities. Most people work in farming or land-based activities.</div></div>
+    <div class="esl-row"><div class="esl-word">urban</div><div class="esl-def">Relating to cities and towns. High population density, many jobs in services and industry, more infrastructure (roads, shops, hospitals).</div></div>
+    <div class="esl-row"><div class="esl-word">urbanisation</div><div class="esl-def">The process of more and more people moving FROM the countryside INTO cities. A global trend, especially in developing countries.</div></div>
+    <div class="esl-row"><div class="esl-word">migration</div><div class="esl-def">The movement of people from one place to another to live. Internal migration = within one country. International migration = between countries.</div></div>
+    <div class="esl-row"><div class="esl-word">push factors</div><div class="esl-def">Reasons that PUSH people AWAY from where they currently live. Examples: poverty, conflict, drought, lack of jobs.</div></div>
+    <div class="esl-row"><div class="esl-word">pull factors</div><div class="esl-def">Reasons that PULL people TOWARDS a new place. Examples: better jobs, safety, better schools, family already there.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🗺️ Why People Settle Where They Do</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">People throughout history have settled where their <strong>physical environment</strong> gave them the best chance of survival. The same factors that guided ancient settlements still shape modern cities today.</div>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><div class="vc-word">💧 Water Supply</div><div class="vc-def">Every settlement needs fresh water. Rivers, lakes, and springs were the first reason people stopped moving. All the earliest cities were built near water.</div></div>
+    <div class="vocab-card"><div class="vc-word">🌾 Fertile Land</div><div class="vc-def">Flat, fertile land allows farming. River valleys like the Nile and Tigris-Euphrates had rich soil from flooding — this is why civilisations began there.</div></div>
+    <div class="vocab-card"><div class="vc-word">🏔️ Natural Defence</div><div class="vc-def">Hills, cliffs, rivers, and coastlines could protect settlements from attack. Medieval cities were often built on high ground or surrounded by water.</div></div>
+    <div class="vocab-card"><div class="vc-word">🌡️ Mild Climate</div><div class="vc-def">Moderate temperatures, regular rainfall, and no extreme weather make an area easier to live in. Extreme environments (deserts, polar regions) have very low population density.</div></div>
+    <div class="vocab-card"><div class="vc-word">🚢 Transport Routes</div><div class="vc-def">Ports, river crossings, and road junctions attracted settlements. Trade brought wealth. Coastal cities like London and New York grew because of their harbours.</div></div>
+    <div class="vocab-card"><div class="vc-word">⛏️ Natural Resources</div><div class="vc-def">Coal mines, forests, fishing waters — places with useful resources attracted workers and grew into towns. The Industrial Revolution created new cities near coalfields.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🌆 Rural vs Urban — What's the Difference?</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.5);">
+      <div class="cmp-head" style="color:#93C5FD;">🌾 Rural (Countryside)</div>
+      <div class="cmp-row">Low population density — few people per km²</div>
+      <div class="cmp-row">Main jobs: farming, forestry, fishing</div>
+      <div class="cmp-row">Few services (shops, hospitals may be far away)</div>
+      <div class="cmp-row">Quieter, more natural environment</div>
+      <div class="cmp-row">Examples: villages, small hamlets, farmland</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.4);">
+      <div class="cmp-head" style="color:#93C5FD;">🏙️ Urban (City/Town)</div>
+      <div class="cmp-row">High population density — many people per km²</div>
+      <div class="cmp-row">Main jobs: services, industry, finance, tech</div>
+      <div class="cmp-row">Many services easily accessible</div>
+      <div class="cmp-row">Busy, built environment</div>
+      <div class="cmp-row">Examples: cities, large towns, suburbs</div>
+    </div>
+  </div>
+  <div class="callout good" style="margin-top:12px;">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Today, more than half of ALL people on Earth live in urban areas — this is a very recent change. In 1800, only about 3% of people lived in cities. <strong>Urbanisation</strong> is one of the biggest geographical changes in human history.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">➡️ Migration — Push and Pull Factors</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.4);">
+      <div class="cmp-head" style="color:#FCA5A5;">⬅️ Push Factors (reasons to LEAVE)</div>
+      <div class="cmp-row">War, conflict, persecution</div>
+      <div class="cmp-row">Poverty and lack of jobs</div>
+      <div class="cmp-row">Drought, famine, natural disasters</div>
+      <div class="cmp-row">Lack of education or healthcare</div>
+      <div class="cmp-row">Political instability</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">➡️ Pull Factors (reasons to GO)</div>
+      <div class="cmp-row">Better job opportunities and wages</div>
+      <div class="cmp-row">Safety and political freedom</div>
+      <div class="cmp-row">Better schools and universities</div>
+      <div class="cmp-row">Joining family members already there</div>
+      <div class="cmp-row">A milder or more comfortable climate</div>
+    </div>
+  </div>
+  <div class="callout tip" style="margin-top:12px;">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>ESL Tip:</strong> Refugees are forced to leave by push factors (especially violence or persecution). Economic migrants choose to leave, attracted mainly by pull factors (better wages). Both are forms of migration, but for different reasons.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">📈 World Population — Key Facts</div>
+  <div class="size-compare">
+    <div class="size-row"><div class="size-label">Year 1 AD (~300 million)</div><div class="size-track"><div class="size-fill" style="width:3%;background:#2563EB;">300m</div></div></div>
+    <div class="size-row"><div class="size-label">1800 (~1 billion)</div><div class="size-track"><div class="size-fill" style="width:12%;background:#2563EB;">1 billion</div></div></div>
+    <div class="size-row"><div class="size-label">1927 (~2 billion)</div><div class="size-track"><div class="size-fill" style="width:25%;background:#3B82F6;">2 billion</div></div></div>
+    <div class="size-row"><div class="size-label">1974 (~4 billion)</div><div class="size-track"><div class="size-fill" style="width:50%;background:#60A5FA;">4 billion</div></div></div>
+    <div class="size-row"><div class="size-label">Today (~8.1 billion)</div><div class="size-track"><div class="size-fill" style="width:100%;background:#93C5FD;color:#1E3A8A;">8.1 billion</div></div></div>
+  </div>
+  <div class="callout warn" style="margin-top:8px;">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>KS3 key idea:</strong> It took all of human history to reach 1 billion people (around 1800). It took only about 127 more years to reach 2 billion. Population growth has been accelerating — driven by better food production, medicine, and sanitation.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🎯 Population & Settlement Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const quizData={
+  bible:[
+    {q:'According to Matthew 22:37-39, what are the TWO greatest commandments Jesus gives?',opts:['Do not murder and do not steal','Love God with everything, and love your neighbour as yourself','Honour your parents and keep the Sabbath','Do not covet and do not lie'],ans:1,exp:'Jesus summarised all ten commandments in two. Love God completely (Commandments 1-4) and love others as you love yourself (Commandments 5-10). Everything else "hangs" on these two.'},
+    {q:'Which commandment is the ONLY one that deals with thoughts and desires, not actions?',opts:['Commandment 6 — do not murder','Commandment 8 — do not steal','Commandment 9 — do not lie','Commandment 10 — do not covet'],ans:3,exp:'Coveting is about wanting what belongs to others in an unhealthy way — it is a sin of the mind and heart, before any action takes place. This shows God cares about our inner life, not just our outward behaviour.'},
+    {q:'What word describes the type of agreement God made with Israel that the commandments were part of?',opts:['A contract','A covenant','A promise','A deal'],ans:1,exp:'A covenant is a serious, binding agreement between God and his people — deeper than a normal contract. The Ten Commandments were given inside God\'s covenant with Israel at Mount Sinai.'},
+    {q:'The commandments were given AFTER God rescued Israel from Egypt, not before. Why does this matter?',opts:['It does not matter — the order is not important','It shows that grace comes before law — God saved Israel first, then gave guidance on how to live','It means the commandments are optional since Israel had already been saved','It proves the commandments were easy to follow'],ans:1,exp:'The order is crucial — God introduced himself as "the LORD your God, who brought you OUT OF EGYPT" BEFORE giving any commands. Salvation came first. The law was then given as a guide for living as God\'s rescued people, not as a way to earn rescue.'},
+    {q:'Commandments 1-4 are primarily about which relationship?',opts:['Relationship with family members','Relationship with neighbours','Relationship with God','Relationship with the government'],ans:2,exp:'The first four commandments cover: no other gods, no idols, honour God\'s name, remember the Sabbath. All four govern the vertical relationship between humans and God — the foundation on which the rest of the law rests.'},
+    {q:'What does the word "covet" mean?',opts:['To steal something from someone','To want what belongs to someone else in an unhealthy, jealous way — even before any action','To lie about someone in court','To worship an idol'],ans:1,exp:'"Covet" means to desire what belongs to another person in a way that is unhealthy and ungrateful. The commandment shows that God cares about the state of our hearts, not just the outward actions we take.'},
+    {q:'Which commandment is described as "the first commandment with a promise"?',opts:['Commandment 3 — honour God\'s name','Commandment 4 — keep the Sabbath','Commandment 5 — honour parents','Commandment 6 — do not murder'],ans:2,exp:'Ephesians 6:2-3 calls the commandment to honour parents "the first commandment with a promise" — the promise being a long and good life. It is the bridge commandment between the God-focused commands (1-4) and the people-focused commands (6-10).'},
+  ],
+  english:[
+    {q:'What is the correct order for the parts of an expository essay?',opts:['Body → Introduction → Conclusion','Introduction → Body → Conclusion','Conclusion → Body → Introduction','Body → Conclusion → Introduction'],ans:1,exp:'Every expository essay follows: Introduction (hook + background + thesis) → Body paragraphs (one idea each, with evidence) → Conclusion (summary + final thought). This is the structure that guides the reader logically through your ideas.'},
+    {q:'What is a "topic sentence"?',opts:['The last sentence of an essay','The first sentence of a body paragraph, stating what that paragraph is about','Another word for a thesis statement','A sentence that uses a linking word like "furthermore"'],ans:1,exp:'A topic sentence is the first sentence of a body paragraph. It tells the reader clearly what ONE idea that paragraph will explain. It is like a mini-thesis for each paragraph — specific enough to guide the paragraph but broad enough to need evidence.'},
+    {q:'Which of these is a STRONG topic sentence?',opts:['Rivers are interesting.','This paragraph is about rivers.','The Nile River made early Egyptian civilisation possible by providing fertile farmland and a reliable water source.','Rivers can be long or short.'],ans:2,exp:'A strong topic sentence has a specific SUBJECT and makes a clear, arguable CLAIM. "The Nile River made civilisation possible by providing X and Y" tells the reader exactly what the paragraph will prove, with a specific reason.'},
+    {q:'Which cohesive device would you use to add a contrasting point?',opts:['"Furthermore"','"In addition"','"However"','"For example"'],ans:2,exp:'"However" signals a contrast — it tells the reader that the next point goes against or qualifies what was just said. "Furthermore" and "In addition" ADD more of the same; "For example" introduces evidence.'},
+    {q:'What should a conclusion NEVER do?',opts:['Restate the main thesis in new words','Summarise the key points briefly','Introduce a brand new idea that was not mentioned in the body','Give a final thought about the topic'],ans:2,exp:'The conclusion should summarise and close — it is NOT the place to introduce new information. Adding a new idea in the conclusion confuses the reader because there is no evidence or explanation to support it.'},
+    {q:'What is "formal register"?',opts:['Writing short text messages','Writing in a professional, academic style — no slang, no contractions, full sentences','Writing creatively with feelings','Writing a diary entry'],ans:1,exp:'Formal register is the appropriate style for academic, professional, or informative writing. It avoids contractions (write "do not" not "don\'t"), avoids slang, uses precise vocabulary, and writes in complete sentences.'},
+  ],
+  maths:[
+    {q:'What is the coefficient in the term 7y?',opts:['y','7','7y','0'],ans:1,exp:'The coefficient is the NUMBER in front of the variable. In 7y, the coefficient is 7 and the variable is y. If a variable has no visible number (like just "x"), the coefficient is 1.'},
+    {q:'Simplify 5x + 3x.',opts:['8x²','8x','15x','5x + 3x (cannot simplify)'],ans:1,exp:'5x and 3x are LIKE TERMS — same variable x. Add the coefficients: 5 + 3 = 8. Answer: 8x. You do NOT multiply the x together (that would give x²).'},
+    {q:'Simplify 6a + 4b − 2a + b.',opts:['4a + 5b','8a + 5b','4a + 3b','4a − 5b'],ans:0,exp:'Group like terms: (6a − 2a) + (4b + b) = 4a + 5b. Always group the a-terms together first, then the b-terms. Remember: 4b + b = 4b + 1b = 5b.'},
+    {q:'If x = 5, what is the value of 3x − 4?',opts:['11','19','1','15'],ans:0,exp:'Substitute x = 5: 3(5) − 4 = 15 − 4 = 11. Always use brackets when substituting to show the multiplication clearly.'},
+    {q:'Which of these can be simplified further?',opts:['3x + 5 (x and number are not like terms)','4a + 2b (different variables)','7y − 3 (y and number are not like terms)','8n + 2n (same variable n)'],ans:3,exp:'8n and 2n are LIKE TERMS — both have the variable n. They can be simplified: 8n + 2n = 10n. The other options mix variables with plain numbers or use different variables — none of those can be simplified further.'},
+    {q:'Which expression represents "5 less than twice a number n"?',opts:['5 − 2n','2n − 5','2n + 5','5 + 2n'],ans:1,exp:'"Twice a number n" = 2n. "5 less than" means subtract 5 FROM that result. So: 2n − 5. The order matters — "5 less than 2n" is NOT the same as "2n less than 5."'},
+  ],
+  science:[
+    {q:'What is the KEY difference between a mixture and a pure substance?',opts:['A mixture is always a liquid; a pure substance is always a solid','A mixture contains two or more substances that can be separated by physical means; a pure substance contains only one type of substance','A mixture is more expensive than a pure substance','A mixture cannot be used in experiments'],ans:1,exp:'A mixture contains two or more substances mixed together WITHOUT a chemical reaction — so they can be physically separated. A pure substance contains only ONE type of particle throughout, with fixed properties like a specific melting point.'},
+    {q:'Which technique would you use to separate sand from water?',opts:['Evaporation','Distillation','Filtration','Chromatography'],ans:2,exp:'Filtration is used when a solid does NOT dissolve in the liquid (insoluble solid). Sand does not dissolve in water — it is too large to pass through filter paper. The water (filtrate) passes through; sand (residue) stays behind.'},
+    {q:'What is left behind in the evaporating dish after salt water is evaporated?',opts:['Nothing — everything evaporates','Pure salt crystals','Pure water','A mixture of steam and salt'],ans:1,exp:'When salt water is heated in an evaporating dish, the WATER turns to steam and escapes into the air. The SALT cannot evaporate — it remains as white crystals in the dish. This technique is used when you want to collect the dissolved solid.'},
+    {q:'How is distillation DIFFERENT from evaporation?',opts:['They are exactly the same process','Distillation collects the steam and cools it back to a liquid, while evaporation lets the steam escape','Distillation uses a filter paper; evaporation uses a beaker','Distillation only works for sand; evaporation only works for salt'],ans:1,exp:'In evaporation, the water vapour escapes and you collect the solid left behind. In distillation, the vapour is deliberately collected, passed through a condenser (cool tube), and cooled back to a pure liquid — this is how you get pure water from salt water.'},
+    {q:'In chromatography, what causes the different dyes to separate?',opts:['They have different colours','They travel at different SPEEDS through the paper, carried by the solvent','They have different masses','They dissolve differently in the solid material'],ans:1,exp:'Different substances in a mixture are attracted to the paper and the solvent to different degrees — some are carried further by the solvent (fast movers), some barely move. This means each substance travels a different distance, producing separate coloured bands.'},
+    {q:'You have a mixture of sand, salt, and water. What is the correct order of techniques to separate all three?',opts:['Distillation first, then filtration','Filtration first (remove sand), then evaporation (get salt from water)','Evaporation first, then chromatography','Chromatography first, then distillation'],ans:1,exp:'Step 1 — Filtration: pours the mixture through filter paper. Sand (insoluble) stays behind; salt water passes through. Step 2 — Evaporation: heat the salt water; water escapes as steam; salt crystals remain. You now have separated all three components.'},
+  ],
+  history:[
+    {q:'What is "population density"?',opts:['The total number of people in the world','How many people live in a given area — people per km²','The speed at which a population grows','How old the average person in a country is'],ans:1,exp:'Population density measures how crowded an area is: people per km². A high density (e.g. Tokyo) means many people per km². A low density (e.g. the Sahara Desert) means very few people in a large area. It shows WHERE people have chosen to settle.'},
+    {q:'Which of these is a PUSH factor that might cause someone to migrate?',opts:['Better job opportunities in the new country','Good schools in the destination city','War and conflict in their home country','Joining family members already in the new place'],ans:2,exp:'Push factors push people AWAY from where they live — war, poverty, drought, persecution. Pull factors pull people TOWARD a new place — jobs, safety, education, family. War is a push factor — it forces people to leave, even when they do not want to.'},
+    {q:'What does "urbanisation" mean?',opts:['The growth of farming in rural areas','The process of increasing numbers of people moving from the countryside into cities','The building of new roads','A decrease in a country\'s population'],ans:1,exp:'Urbanisation is when more and more people move from rural (countryside) areas to urban (city) areas to live. It is one of the biggest geographical trends of the modern world — more than half of all humans now live in cities.'},
+    {q:'Why did early civilisations tend to settle near rivers?',opts:['Rivers provided entertainment','Rivers were easy to cross and trade with enemies','Rivers provided fresh water, fertile soil from flooding, and transport routes — all essential for early farming and trade','Rivers were the only places with natural defence'],ans:2,exp:'Rivers provided the three essentials for early settlement: fresh water for drinking and farming, fertile silt (rich soil) deposited by floods, and a natural transport route for trade. This is why the Nile, Tigris-Euphrates, Indus, and Yellow River valleys were all home to the earliest civilisations.'},
+    {q:'Approximately what percentage of the world\'s population lived in cities in 1800?',opts:['About 50%','About 25%','About 3%','About 75%'],ans:2,exp:'In 1800, only about 3% of the world\'s people lived in cities — the vast majority lived in rural areas and worked in farming. By the early 2000s this had risen to over 50%. This dramatic shift is called urbanisation and was driven by the Industrial Revolution and economic development.'},
+  ]
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{quizState[s]={idx:0,score:0};renderQuiz(s);});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';celebrate();return;}
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){quizState[s].score++;opts[i].classList.add('correct');fb.className='quiz-fb ok';fb.style.display='block';fb.innerHTML='✅ Correct! '+q.exp;}
+  else{opts[i].classList.add('wrong');opts[q.ans].classList.add('correct');fb.className='quiz-fb bad';fb.style.display='block';fb.innerHTML='❌ Not quite. '+q.exp;}
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+function celebrate(){const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];for(let i=0;i<70;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti';el.style.left=Math.random()*100+'vw';el.style.background=cols[Math.floor(Math.random()*cols.length)];el.style.animationDuration=(1.8+Math.random()*2.2)+'s';el.style.animationDelay=(Math.random()*0.3)+'s';el.style.width=(7+Math.random()*7)+'px';el.style.height=(9+Math.random()*9)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),5000);},i*25);}}
+</script>
+</body>
+</html>

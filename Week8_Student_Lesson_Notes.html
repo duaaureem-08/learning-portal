@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 8 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--mgray:#CFD8DC;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.frame{border-radius:var(--rsm);padding:11px 14px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;border:2px solid}
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:12px}
+.wbank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+.step{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px;margin-bottom:8px}
+.step-n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-t{font-size:13px;line-height:1.6}
+.example-box{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--rsm);padding:12px 16px;margin-bottom:10px;font-size:14px;line-height:1.8}
+.highlight{background:#FEF3C7;border:2px solid var(--amber);border-radius:var(--rsm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+.num-circle{background:var(--teal);color:#fff;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;flex-shrink:0;margin-right:8px}
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 8 · Student Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover',  label:'🏠 Cover',     col:'#0F6E56'},
+  {id:'eng',    label:'📖 English',   col:'#185FA5'},
+  {id:'maths',  label:'🔢 Maths',     col:'#0F6E56'},
+  {id:'sci',    label:'🪨 Science',   col:'#C2410C'},
+  {id:'hum',    label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',    label:'✝️ Bible',     col:'#B71C1C'},
+];
+
+const PAGES={
+
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#185FA5);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 8 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Conjunctions &amp; Compound Sentences','#1E40AF','#DBEAFE'],
+      ['🔢','Maths','Fractions — Comparing &amp; Ordering','#065F46','#D1FAE5'],
+      ['🪨','Science','Fossils &amp; Soil','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','The Romans in Britain','#3730A3','#E0E7FF'],
+      ['✝️','Bible','The Ten Commandments','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Use this booklet to read, learn and practise. Every page has words in English, Arabic and Urdu! 🌍</div>
+</div>`,
+
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#185FA5,#1E40AF)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 8</div>
+  <div class="banner-title">📖 English — Conjunctions &amp; Compound Sentences</div>
+  <div class="banner-sub">KS2 Level 3 · Elementary ESL</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Conjunction = <strong>حرف ربط (harf rabt)</strong> — Urdu · <strong>حرف عطف</strong> — Arabic<br/>
+A conjunction is a joining word. It connects two sentences into ONE bigger sentence!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WHAT IS A CONJUNCTION?</div>
+<div class="tip"><strong>Easy definition:</strong> A conjunction is a word that JOINS two sentences together. It acts like a bridge between two ideas.</div>
+
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">🔗 Conjunction</div>
+  <div style="font-size:13px;line-height:1.8">A joining word. It connects two clauses or sentences.<br/>Examples: <strong>and, but, so, because, when</strong></div>
+</div>
+<div class="card" style="background:#D1FAE5;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#0F6E56;margin-bottom:8px">📝 Compound Sentence</div>
+  <div style="font-size:13px;line-height:1.8">Two simple sentences joined with a conjunction.<br/>Example: <em>I was tired <strong>but</strong> I kept reading.</em></div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">2</span>WORD BANK — THE 5 KEY CONJUNCTIONS</div>
+${[
+  ['🔗 and','Adds one idea to another. Both things happen.','اور / و','"I like apples and I like oranges."','#185FA5'],
+  ['↔️ but','Shows a difference or surprise.','لیکن / لكن','"I was tired but I kept going."','#185FA5'],
+  ['➡️ so','Shows a result. Because of A, then B.','اس لیے / لذلك','"It was raining so I took an umbrella."','#185FA5'],
+  ['❓ because','Gives a reason. Answers WHY.','کیونکہ / لأن','"I was happy because it was my birthday."','#185FA5'],
+  ['⏰ when','Connects two things that happen at the same time.','جب / عندما','"I smiled when I saw my friend."','#185FA5'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ e.g. ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>SEE HOW IT WORKS</div>
+<div class="tip"><strong>Two simple sentences → ONE compound sentence</strong></div>
+${[
+  ['I was hungry.','I ate my lunch.','and','I was hungry <strong>and</strong> I ate my lunch.'],
+  ['She studied hard.','She passed the test.','so','She studied hard <strong>so</strong> she passed the test.'],
+  ['He wanted to play.','It was raining.','but','He wanted to play <strong>but</strong> it was raining.'],
+  ['They were quiet.','The teacher was speaking.','when','They were quiet <strong>when</strong> the teacher was speaking.'],
+  ['I love science.','It helps me understand the world.','because','I love science <strong>because</strong> it helps me understand the world.'],
+].map(([s1,s2,conj,result])=>`
+<div class="q-box">
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;font-size:13px;margin-bottom:8px">
+    <div style="background:#FEF3C7;border-radius:6px;padding:6px;text-align:center">${s1}</div>
+    <div style="background:#185FA5;color:#fff;border-radius:20px;padding:3px 10px;font-weight:800;font-size:12px">${conj}</div>
+    <div style="background:#FEF3C7;border-radius:6px;padding:6px;text-align:center">${s2}</div>
+  </div>
+  <div style="background:#D1FAE5;border-radius:6px;padding:8px;font-size:13px">✅ ${result}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>WHICH CONJUNCTION TO CHOOSE?</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Conjunction</th><th>Use it when…</th><th>Quick test</th></tr></thead><tbody>
+<tr><td><strong>and</strong></td><td>Adding another idea</td><td>Can you say "also"? Use AND.</td></tr>
+<tr><td><strong>but</strong></td><td>Showing a contrast or surprise</td><td>Is there a difference? Use BUT.</td></tr>
+<tr><td><strong>so</strong></td><td>Showing a result</td><td>Does A cause B? Use SO.</td></tr>
+<tr><td><strong>because</strong></td><td>Giving a reason</td><td>Are you answering WHY? Use BECAUSE.</td></tr>
+<tr><td><strong>when</strong></td><td>Two things at the same time</td><td>Do they happen together? Use WHEN.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>WORD BANK — EXTRA CONJUNCTIONS</div>
+<div class="wbank"><strong>More conjunctions to try:</strong>
+${['although','if','until','while','after','before','or','since'].map(w=>`<span class="wtag">${w}</span>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>PRACTISE — FILL IN THE CONJUNCTION</div>
+<div class="q-box">
+  <div class="q-label">Choose the best conjunction for each sentence</div>
+  <div style="line-height:3;font-size:14px;margin-top:6px">
+    I brushed my teeth <input class="inline" style="width:90px" placeholder="?"/> I went to bed.<br/>
+    She was cold <input class="inline" style="width:90px" placeholder="?"/> she put on her coat.<br/>
+    He could not sleep <input class="inline" style="width:90px" placeholder="?"/> he was too excited.<br/>
+    I like football <input class="inline" style="width:90px" placeholder="?"/> I also like swimming.<br/>
+    We were late <input class="inline" style="width:90px" placeholder="?"/> the bus did not come.
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>WRITE YOUR OWN COMPOUND SENTENCES</div>
+${[
+  ['Use AND','I like _____ and _____'],
+  ['Use BUT','I wanted to _____ but _____'],
+  ['Use BECAUSE','I felt happy because _____'],
+  ['Use SO','It was sunny so _____'],
+  ['Use WHEN','I laughed when _____'],
+].map(([label,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">${i+1}. ${label}</div>
+  <div style="font-size:12px;color:var(--gray);font-style:italic;margin-bottom:4px">Frame: ${frame}</div>
+  <input class="dline" placeholder="Write your compound sentence here..."/>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">8</span>CHECKLIST</div>
+<div class="q-box">
+${[
+  'I know what a conjunction is.',
+  'I can name all 5 key conjunctions (and, but, so, because, when).',
+  'I can join two sentences using a conjunction.',
+  'I know when to use each conjunction.',
+  'I wrote my own compound sentences.',
+].map(item=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px"><span style="width:18px;height:18px;border:2px solid var(--blue);border-radius:4px;flex-shrink:0;display:inline-block"></span>${item}</div>`).join('')}
+</div>
+<div class="remember" style="background:#185FA5">⭐ REMEMBER: and = adding · but = contrast · so = result · because = reason · when = same time!</div>`,
+
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#0F6E56,#065F46)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 8</div>
+  <div class="banner-title">🔢 Maths — Fractions: Comparing &amp; Ordering</div>
+  <div class="banner-sub">Equivalent Fractions · Number Line · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Fraction = <strong>کسر (kasr)</strong> — Urdu &amp; Arabic<br/>
+Numerator = <strong>صورہ (soora)</strong> — Urdu · <strong>البسط</strong> — Arabic (the number ON TOP)<br/>
+Denominator = <strong>مقام (maqam)</strong> — Urdu · <strong>المقام</strong> — Arabic (the number ON BOTTOM)</div>
+
+<div class="sec-head"><span class="sec-num">1</span>QUICK REMINDER — PARTS OF A FRACTION</div>
+<div style="text-align:center;margin:14px 0">
+  <div style="display:inline-block;background:#fff;border:3px solid #0F6E56;border-radius:12px;padding:16px 30px">
+    <div style="font-family:'Courier New',monospace;font-size:36px;font-weight:800;color:#0F6E56;line-height:1">
+      <div style="border-bottom:4px solid #0F6E56;padding-bottom:4px;color:#B71C1C">3</div>
+      <div style="padding-top:4px;color:#185FA5">4</div>
+    </div>
+    <div style="font-size:12px;margin-top:8px;color:var(--gray)">
+      <span style="color:#B71C1C">3 = numerator</span> (how many pieces you have)<br/>
+      <span style="color:#185FA5">4 = denominator</span> (how many pieces total)
+    </div>
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">2</span>WORD BANK</div>
+${[
+  ['🔢 Numerator','The number ON TOP. It shows how many parts you have.','صورہ / البسط','"In 3/4, the numerator is 3."'],
+  ['➗ Denominator','The number ON BOTTOM. It shows the total number of equal parts.','مقام / المقام','"In 3/4, the denominator is 4."'],
+  ['⚖️ Equivalent fractions','Fractions that look different but have the SAME value.','مساوی کسر / كسور مكافئة','"1/2 = 2/4 = 4/8 — all the same!"'],
+  ['📏 Number line','A straight line with numbers in order. Fractions can go on it too.','نمبر لائن / خط الأعداد','"1/4 comes before 1/2 on the number line."'],
+  ['🔄 Simplify','Make a fraction smaller using the same numbers.','سادہ بنانا / تبسيط','"2/4 simplified = 1/2."'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card">
+  <div class="v-word" style="color:#0F6E56">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>COMPARING FRACTIONS — SAME DENOMINATOR</div>
+<div class="tip"><strong>Easy rule:</strong> When the BOTTOM number (denominator) is the SAME, just look at the TOP number. Bigger top = bigger fraction!</div>
+<div class="example-box">
+  <strong>Which is bigger: 3/8 or 5/8?</strong><br/>
+  Both have 8 pieces total. But 5/8 has MORE pieces than 3/8.<br/>
+  ✅ <strong>5/8 &gt; 3/8</strong>
+</div>
+<div class="q-box">
+  <div class="q-label">Circle the bigger fraction:</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px;text-align:center;font-size:15px;font-weight:800">
+    <div>2/5 &nbsp; OR &nbsp; 4/5</div>
+    <div>1/6 &nbsp; OR &nbsp; 5/6</div>
+    <div>7/10 &nbsp; OR &nbsp; 3/10</div>
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>COMPARING FRACTIONS — SAME NUMERATOR</div>
+<div class="tip"><strong>Rule:</strong> When the TOP number (numerator) is the SAME, look at the BOTTOM. Bigger bottom = SMALLER pieces = smaller fraction!</div>
+<div class="example-box">
+  <strong>Which is bigger: 1/3 or 1/6?</strong><br/>
+  Imagine one pizza cut into 3 pieces vs one pizza cut into 6 pieces.<br/>
+  3 bigger pieces or 6 smaller pieces? <strong>1/3 is bigger!</strong><br/>
+  ✅ <strong>1/3 &gt; 1/6</strong>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>EQUIVALENT FRACTIONS</div>
+<div class="tip"><strong>Equivalent</strong> means EQUAL VALUE. The fraction looks different but has the same amount!</div>
+<div style="text-align:center;margin:12px 0">
+  <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-family:Nunito,sans-serif;font-size:18px;font-weight:800">
+    <div style="background:#D1FAE5;border:2px solid #0F6E56;border-radius:8px;padding:10px 18px;color:#0F6E56">½</div>
+    <div style="align-self:center;color:var(--gray)">=</div>
+    <div style="background:#D1FAE5;border:2px solid #0F6E56;border-radius:8px;padding:10px 18px;color:#0F6E56">2/4</div>
+    <div style="align-self:center;color:var(--gray)">=</div>
+    <div style="background:#D1FAE5;border:2px solid #0F6E56;border-radius:8px;padding:10px 18px;color:#0F6E56">4/8</div>
+    <div style="align-self:center;color:var(--gray)">=</div>
+    <div style="background:#D1FAE5;border:2px solid #0F6E56;border-radius:8px;padding:10px 18px;color:#0F6E56">3/6</div>
+  </div>
+  <div style="font-size:12px;color:var(--gray);margin-top:8px">All of these equal ONE HALF!</div>
+</div>
+<div class="step"><div class="step-n">×</div><div class="step-t">To find an equivalent fraction: multiply BOTH the top AND bottom by the SAME number.<br/><strong>Example:</strong> 1/2 × 2/2 = 2/4 &nbsp;·&nbsp; 1/2 × 3/3 = 3/6</div></div>
+
+<div class="sec-head"><span class="sec-num">6</span>FRACTIONS ON A NUMBER LINE</div>
+<div class="tip"><strong>A number line</strong> goes from 0 to 1. Fractions fill the space between 0 and 1. Equal parts = equal spaces.</div>
+<div style="background:#fff;border:2px solid var(--amber-mid);border-radius:var(--rsm);padding:16px;margin-bottom:12px">
+  <div style="position:relative;height:40px;margin:0 10px">
+    <div style="position:absolute;top:18px;left:0;right:0;height:3px;background:#0F6E56"></div>
+    ${['0','1/4','1/2','3/4','1'].map((label,i)=>`
+    <div style="position:absolute;top:0;left:${i*25}%;transform:translateX(-50%);text-align:center">
+      <div style="font-size:11px;margin-bottom:2px;font-weight:700;color:#0F6E56">${label}</div>
+      <div style="width:2px;height:20px;background:#0F6E56;margin:0 auto"></div>
+    </div>`).join('')}
+  </div>
+  <div style="font-size:12px;color:var(--gray);text-align:center;margin-top:8px">Number line showing quarters — each jump is 1/4</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>ORDERING FRACTIONS</div>
+<div class="tip"><strong>Ordering:</strong> Put fractions in order from smallest to biggest, or biggest to smallest.</div>
+<div class="q-box">
+  <div class="q-label">Order these fractions from smallest (1st) to largest (4th):</div>
+  <div style="font-size:16px;font-weight:800;text-align:center;padding:12px;color:#0F6E56">3/4 &nbsp;·&nbsp; 1/4 &nbsp;·&nbsp; 2/4 &nbsp;·&nbsp; 4/4</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px">
+    ${[1,2,3,4].map(n=>`<div style="text-align:center"><div style="font-size:11px;color:var(--gray)">Position ${n}</div><input class="inline" style="width:50px;text-align:center;display:block;margin:4px auto"/></div>`).join('')}
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">8</span>PRACTISE QUESTIONS</div>
+${[
+  ['Which is larger? Circle it.','5/8 &nbsp; or &nbsp; 3/8'],
+  ['Which is smaller? Circle it.','1/3 &nbsp; or &nbsp; 1/5'],
+  ['Fill in: 1/2 = ___/4 = ___/8','(Equivalent fractions)'],
+  ['Put in order (smallest first): 3/5, 1/5, 4/5, 2/5','___ , ___ , ___ , ___'],
+].map(([q,task],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}: ${q}</div>
+  <div class="q-text">${task}</div>
+  <input class="dline" style="margin-top:8px" placeholder="My answer..."/>
+</div>`).join('')}
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: Same bottom → bigger top wins! Same top → smaller bottom wins! Equivalent fractions = same value, different look! 🍕</div>`,
+
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#C2410C,#9A3412)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 8</div>
+  <div class="banner-title">🪨 Science — Fossils &amp; Soil</div>
+  <div class="banner-sub">How fossils form · What soil is made of · Why soil matters · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Fossil = <strong>آثار متحجر (asaar mutahajjar)</strong> — Urdu · <strong>أحفور</strong> — Arabic<br/>
+Soil = <strong>مٹی (mitti)</strong> — Urdu · <strong>تربة</strong> — Arabic<br/>
+Rock = <strong>چٹان (chattan)</strong> — Urdu · <strong>صخرة</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK — FOSSILS</div>
+${[
+  ['🦕 Fossil','The shape or remains of a dead plant or animal preserved in rock over millions of years.','آثار متحجر / أحفور','"We found a fossil of a shell in the rock."','#C2410C'],
+  ['🕰️ Preserved','Kept safe and unchanged for a very long time.','محفوظ / محفوظ','"The dinosaur bones were preserved in rock."','#C2410C'],
+  ['🌊 Sediment','Tiny bits of rock, sand and mud that settle at the bottom of water.','تہ نشین / رسوب','"Sediment slowly covered the dead animal."','#C2410C'],
+  ['🪨 Sedimentary rock','Rock made from layers of sediment pressed together over millions of years.','تہ دار چٹان / صخرة رسوبية','"Sandstone is a sedimentary rock where fossils are found."','#C2410C'],
+  ['🦖 Extinct','A type of animal or plant that has completely died out — none left alive.','معدوم / منقرض','"Dinosaurs are extinct."','#C2410C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>HOW DOES A FOSSIL FORM?</div>
+<div class="tip"><strong>Fossils take millions of years to form!</strong> It is a very slow process.</div>
+${[
+  ['1','An animal or plant DIES and falls into water or mud.'],
+  ['2','The soft parts rot away. The hard parts (bones, shells) stay.'],
+  ['3','SEDIMENT (mud, sand) slowly covers the hard parts — layer by layer.'],
+  ['4','Over millions of years, the sediment hardens into ROCK.'],
+  ['5','The bones also slowly turn to rock — this is the FOSSIL.'],
+  ['6','Earth moves and pushes the fossil UP to where we can find it.'],
+].map(([n,text])=>`
+<div class="step">
+  <div class="step-n">${n}</div>
+  <div class="step-t">${text}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>WHAT CAN FOSSILS TELL US?</div>
+<div class="four" style="margin-bottom:14px">
+${[
+  ['🦕','Ancient life','What animals and plants lived millions of years ago.'],
+  ['📏','Size &amp; shape','How big they were and what they looked like.'],
+  ['🌡️','Old environments','What the weather and landscape was like long ago.'],
+  ['⏳','Time','Scientists use fossils to work out the age of rocks.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:#FFEDD5;border-color:#C2410C">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:#C2410C">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>WORD BANK — SOIL</div>
+${[
+  ['🌱 Soil','The top layer of the ground. It is where plants grow.','مٹی / تربة','"Plants grow in soil because it has nutrients."','#3B6D11'],
+  ['🍂 Humus','Rotted plants and animals in the soil. Makes soil rich and dark.','گلی سڑی زمین / دبال','"Humus gives soil its dark colour and nutrients."','#3B6D11'],
+  ['💧 Permeability','How well water drains (passes) through the soil.','پانی سرایت / نفاذية','"Sandy soil has high permeability — water passes through fast."','#3B6D11'],
+  ['🐛 Organisms','Living things in soil — worms, insects, bacteria that break things down.','جاندار / كائنات','"Earthworms are soil organisms that help make soil healthy."','#3B6D11'],
+  ['🪝 Nutrients','The food chemicals in soil that plants absorb through their roots.','غذائی اجزا / مغذيات','"Plants need nutrients like nitrogen to grow."','#3B6D11'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>WHAT IS SOIL MADE OF?</div>
+<div class="highlight">Soil is a MIX of four things:<br/><br/>
+🪨 <strong>Tiny rock pieces</strong> — broken down from larger rocks over time<br/>
+🍂 <strong>Humus</strong> — rotted dead plants and animals<br/>
+💧 <strong>Water</strong> — needed by plant roots<br/>
+🌬️ <strong>Air</strong> — in tiny spaces between the soil bits</div>
+
+<div class="sec-head"><span class="sec-num">6</span>TYPES OF SOIL</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Type</th><th>What it feels like</th><th>Good for?</th></tr></thead><tbody>
+<tr><td><strong>🏖️ Sandy soil</strong></td><td>Gritty, rough, light — water drains fast</td><td>Not the best for plants — nutrients wash away</td></tr>
+<tr><td><strong>🏺 Clay soil</strong></td><td>Heavy, smooth, sticky — holds water well</td><td>Gets waterlogged — hard for roots to breathe</td></tr>
+<tr><td><strong>🌱 Loam soil</strong></td><td>Mix of sand, clay and humus — perfect!</td><td>BEST for growing plants — holds water AND drains well</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">7</span>WHY IS SOIL IMPORTANT?</div>
+<div class="two">
+${[
+  ['🌾','Growing food','Almost all the food we eat comes from plants grown in soil.'],
+  ['🐛','Home for animals','Millions of tiny creatures live in soil and keep it healthy.'],
+  ['💧','Water filter','Soil cleans water as it passes down into underground streams.'],
+  ['🌍','Holds carbon','Healthy soil stores carbon and helps the environment.'],
+].map(([ico,t,d])=>`
+<div style="background:#EAF3DE;border:2px solid #3B6D11;border-radius:var(--rsm);padding:10px">
+  <div style="font-size:20px">${ico}</div>
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#3B6D11">${t}</div>
+  <div style="font-size:12px;margin-top:4px">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">8</span>QUICK QUESTIONS</div>
+${[
+  ['What is a fossil?','A fossil is ...'],
+  ['Name the 4 things that soil is made of.','Soil is made of ...'],
+  ['Which type of soil is best for growing plants? Why?','Loam soil is best because ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}: ${q}</div>
+  <div style="font-size:12px;color:#C2410C;font-style:italic;margin-bottom:4px">Frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:42px"></textarea>
+</div>`).join('')}
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Fossils form in sedimentary rock over millions of years. Soil = rock + humus + water + air. Loam is the BEST soil for plants! 🌱</div>`,
+
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#534AB7,#3730A3)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 8</div>
+  <div class="banner-title">🌍 Humanities — The Romans in Britain</div>
+  <div class="banner-sub">Who the Romans were · Invasion · Roads, towns &amp; Roman life · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Romans = <strong>رومی (Roomi)</strong> — Urdu · <strong>الرومان</strong> — Arabic<br/>
+Empire = <strong>سلطنت (saltanat)</strong> — Urdu · <strong>إمبراطورية</strong> — Arabic<br/>
+Invasion = <strong>حملہ (hamla)</strong> — Urdu · <strong>غزو</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🏛️ Romans','People from the city of Rome in Italy. They built one of the greatest empires in history.','رومی / الرومان','"The Romans ruled over many countries for hundreds of years."','#534AB7'],
+  ['👑 Empire','A very large area ruled by one powerful ruler called an Emperor.','سلطنت / إمبراطورية','"The Roman Empire stretched from Britain to Egypt."','#534AB7'],
+  ['⚔️ Invasion','When an army enters another country by force to take control.','حملہ / غزو','"Julius Caesar led the first Roman invasion of Britain in 55 BC."','#534AB7'],
+  ['🏘️ Settlement','A place where people come to live and build a community.','بستی / مستوطنة','"The Romans built settlements all over Britain."','#534AB7'],
+  ['🏗️ Infrastructure','The roads, buildings and systems that help a place work well.','بنیادی ڈھانچہ / بنية تحتية','"Roman infrastructure like roads still influences Britain today."','#534AB7'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>WHO WERE THE ROMANS?</div>
+<div class="story" style="background:#EEEDFE;border-color:#534AB7">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:#534AB7">🏛️ The Roman Empire</strong><br/><br/>
+The Romans came from the city of <strong>Rome</strong>, in the country we now call Italy. They were very powerful warriors, builders and rulers. Over many centuries, the Roman army conquered (took over) huge areas of land — from Britain in the north to Egypt in the south and Persia in the east.<br/><br/>
+The ruler of the Roman Empire was called the <strong>Emperor</strong>. The Roman Empire was one of the largest and most powerful in the history of the world. At its peak, over 70 million people lived under Roman rule!<br/><br/>
+The Romans were not just fighters. They were also amazing <strong>builders, engineers, writers and thinkers</strong>. Many ideas we use today — like roads, central heating, written laws and calendar months — came from the Romans.
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>THE ROMANS IN BRITAIN</div>
+${[
+  ['55 BC','Julius Caesar first tried to invade Britain but went back to Rome.'],
+  ['43 AD','Emperor Claudius sent a large army. They successfully invaded Britain.'],
+  ['43–410 AD','The Romans ruled Britain for nearly 400 years!'],
+  ['Around 122 AD','Emperor Hadrian built a huge wall (Hadrian\'s Wall) across the north of England to keep out tribes from Scotland.'],
+  ['410 AD','The Romans left Britain to defend Rome from other attacks. Britain was never fully Roman again.'],
+].map(([year,event])=>`
+<div style="display:flex;gap:12px;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <div style="background:#534AB7;color:#fff;border-radius:6px;padding:4px 10px;font-family:Nunito,sans-serif;font-weight:800;font-size:12px;white-space:nowrap;height:fit-content">${year}</div>
+  <div style="font-size:13px;line-height:1.6">${event}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>WHAT DID THE ROMANS BUILD IN BRITAIN?</div>
+<div class="four" style="margin-bottom:14px">
+${[
+  ['🛣️','Roads','Straight roads connected towns. Soldiers could march fast. We still use some today!'],
+  ['🏙️','Towns','Romans built new towns like Londinium (London), Eboracum (York), Aquae Sulis (Bath).'],
+  ['🏛️','Baths','Public bathing houses where people washed, relaxed and met friends.'],
+  ['🧱','Hadrian\'s Wall','A 73-mile stone wall across northern England to protect Roman Britain.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:#EEEDFE;border-color:#534AB7">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:#534AB7">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>ROMAN ROADS — WHY WERE THEY SO IMPORTANT?</div>
+<div class="tip"><strong>Roman roads were STRAIGHT</strong> — the shortest route between two places. Before the Romans, Britain only had muddy tracks!</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Feature</th><th>Why it mattered</th></tr></thead><tbody>
+<tr><td>🛣️ Straight and flat</td><td>Soldiers could march long distances quickly</td></tr>
+<tr><td>🪨 Made of stones</td><td>Strong — did not get muddy in rain</td></tr>
+<tr><td>🌊 Drainage ditches on sides</td><td>Water ran off — roads stayed dry</td></tr>
+<tr><td>🗺️ Connected all towns</td><td>Trade, messages and armies moved fast across Britain</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">6</span>ROMAN LIFE IN BRITAIN</div>
+<div class="two">
+${[
+  ['🍽️ Food','Romans brought new foods to Britain — grapes, olives, herbs and wine.'],
+  ['📚 Latin','Romans brought their language (Latin). Many English words come from Latin today!'],
+  ['⚖️ Laws','Romans had written laws. This idea of laws for everyone is still important today.'],
+  ['🔥 Heating','Rich Romans had underfloor heating (hypocaust) — hot air under the floor!'],
+].map(([t,d])=>`
+<div style="background:#EEEDFE;border:2px solid #534AB7;border-radius:var(--rsm);padding:10px">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#534AB7">${t}</div>
+  <div style="font-size:12px;margin-top:4px">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>THE ROMANS' LEGACY — WHAT DID THEY LEAVE BEHIND?</div>
+<div class="highlight">Even after the Romans left Britain in 410 AD, their influence stayed forever:<br/><br/>
+🏙️ Our <strong>cities</strong> — London, York, Bath all started as Roman towns<br/>
+🛣️ Our <strong>road routes</strong> — many modern roads follow Roman roads<br/>
+📖 Our <strong>language</strong> — thousands of English words come from Latin<br/>
+⚖️ Our <strong>legal system</strong> — laws for everyone, written down and fair<br/>
+📅 Our <strong>calendar</strong> — the months July and August are named after Roman rulers!</div>
+
+<div class="sec-head"><span class="sec-num">8</span>QUICK QUESTIONS</div>
+${[
+  ['When did the Romans successfully invade Britain?','The Romans successfully invaded Britain in ...'],
+  ['Name TWO things the Romans built in Britain.','The Romans built ...'],
+  ['What is ONE thing the Romans left behind that we still use today?','One thing the Romans left behind is ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}: ${q}</div>
+  <div style="font-size:12px;color:#534AB7;font-style:italic;margin-bottom:4px">Frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:42px"></textarea>
+</div>`).join('')}
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: Romans invaded Britain in 43 AD. They built roads, towns and Hadrian's Wall. They left Britain in 410 AD but their legacy is still with us today! 🏛️</div>`,
+
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#B71C1C,#991B1B)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 8</div>
+  <div class="banner-title">✝️ Bible — The Ten Commandments</div>
+  <div class="banner-sub">Exodus 20 · God's rules for life · Why rules are a gift · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Commandment = <strong>حکم (hukm)</strong> — Urdu · <strong>وصية / أمر</strong> — Arabic<br/>
+Law = <strong>قانون (qanoon)</strong> — Urdu &amp; Arabic<br/>
+Moses is also called <strong>موسیٰ (Musa)</strong> in Arabic and Urdu — honoured in Islam too!</div>
+
+<div class="verse-box">
+  <div style="font-size:11px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;letter-spacing:.5px;margin-bottom:6px">🌟 MEMORY VERSE — Psalm 119:105</div>
+  <div class="verse-text">"Your word is a lamp to my feet<br/>and a light to my path."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:8px">— Psalm 119:105</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['📜 Commandment','A rule or law that God gives. Command = an instruction to obey.','حکم / وصية','"God gave Moses ten commandments on Mount Sinai."','#B71C1C'],
+  ['⛰️ Mount Sinai','The mountain where God gave Moses the Ten Commandments.','کوہ سینا / جبل سيناء','"Moses went up Mount Sinai to receive God\'s laws."','#B71C1C'],
+  ['🧱 Stone tablets','Two flat pieces of stone on which God wrote the commandments.','پتھر کی تختیاں / ألواح الحجر','"God wrote the ten commandments on stone tablets."','#B71C1C'],
+  ['🙏 Worship','To honour, love and praise God with your whole heart.','عبادت / عبادة','"We worship God because He made us and loves us."','#B71C1C'],
+  ['🤝 Covenant','A special promise between God and His people. The commandments were part of God\'s covenant.','عہد / عهد','"The Ten Commandments were part of God\'s covenant with Israel."','#B71C1C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY — HOW GOD GAVE THE TEN COMMANDMENTS</div>
+<div class="story" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:var(--red)">📜 Moses and the Ten Commandments — Exodus 19–20</strong><br/><br/>
+<strong>Before the commandments:</strong> God had brought the people of Israel out of slavery in Egypt. They were free! Moses led them through the desert. Now they camped at the foot of Mount Sinai — a tall, rocky mountain.<br/><br/>
+<strong>God calls Moses:</strong> God spoke to Moses and called him up the mountain. There was thunder, lightning and thick cloud on the mountain. The people stayed at the bottom — they were afraid! But Moses went up to meet God.<br/><br/>
+<strong>The Ten Commandments:</strong> On the mountain, God spoke to Moses and gave him His laws — the Ten Commandments. These were written on two flat stones called <strong>stone tablets</strong>. The commandments told the people how to love God and how to love each other.<br/><br/>
+<strong>God's gift:</strong> The commandments were not meant to be a punishment. They were God's GIFT — a guide to help people live well, treat each other kindly, and stay close to God. Rules made from love, not just from power.
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>THE TEN COMMANDMENTS — IN SIMPLE WORDS</div>
+<div class="tip"><strong>Commandments 1–4</strong> are about our relationship with <strong>GOD</strong>. <strong>Commandments 5–10</strong> are about our relationship with other <strong>PEOPLE</strong>.</div>
+<div style="margin-bottom:14px">
+${[
+  ['1','About God','Do not put any other gods before God.','Put GOD first — He is the one true God.'],
+  ['2','About God','Do not make or worship idols.','Do not worship objects or statues.'],
+  ['3','About God','Do not misuse the name of God.','Use God\'s name with respect, not carelessly.'],
+  ['4','About God','Remember the Sabbath and keep it holy.','Rest one day a week — a special day for God.'],
+  ['5','About People','Honour your father and your mother.','Show respect and kindness to your parents.'],
+  ['6','About People','Do not murder.','Every life is precious — protect it.'],
+  ['7','About People','Do not commit adultery.','Be faithful and honest in your family.'],
+  ['8','About People','Do not steal.','Do not take what belongs to someone else.'],
+  ['9','About People','Do not lie.','Always tell the truth about others.'],
+  ['10','About People','Do not covet (want what others have).','Be happy with what you have.'],
+].map(([n,cat,full,simple])=>`
+<div style="display:grid;grid-template-columns:36px 90px 1fr;gap:8px;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:8px 12px;margin-bottom:6px;align-items:start">
+  <div style="background:${cat==='About God'?'#B71C1C':'#185FA5'};color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">${n}</div>
+  <div style="font-size:10px;font-weight:800;color:${cat==='About God'?'#B71C1C':'#185FA5'};padding-top:4px">${cat}</div>
+  <div>
+    <div style="font-size:13px;font-weight:700">${full}</div>
+    <div style="font-size:12px;color:var(--gray);margin-top:2px">👉 ${simple}</div>
+  </div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>WHY ARE RULES A GIFT?</div>
+<div class="tip"><strong>Think about it:</strong> A good parent gives a child rules — not to make them unhappy, but to keep them SAFE and LOVED. God's commandments work the same way!</div>
+<div class="two">
+${[
+  ['😊','Rules protect us','The commandments stop people from hurting each other — everyone is safer.'],
+  ['🤝','Rules build trust','When everyone is honest and kind, the community grows strong.'],
+  ['💛','Rules show love','God gave the commandments because He LOVES people — like a parent who cares.'],
+  ['🕊️','Rules bring peace','When people follow God\'s rules, there is peace and fairness for everyone.'],
+].map(([ico,t,d])=>`
+<div style="background:#FEE2E2;border:2px solid #B71C1C;border-radius:var(--rsm);padding:10px">
+  <div style="font-size:22px">${ico}</div>
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#B71C1C">${t}</div>
+  <div style="font-size:12px;margin-top:4px">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>MEMORY VERSE — LEARN IT!</div>
+<div class="verse-box">
+  <div class="verse-text">"Your word is a lamp to my feet<br/>and a light to my path."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Psalm 119:105</div>
+</div>
+<div class="tip"><strong>What does it mean?</strong> God's word (His rules and promises) is like a torch in the dark — it shows us the RIGHT PATH to walk on. When we follow God's word, we don't get lost!</div>
+<div class="q-box">
+  <div class="q-label">Fill in the missing words:</div>
+  <div style="font-size:15px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+    "Your <input class="inline" style="width:60px" placeholder="?"/> is a lamp to my <input class="inline" style="width:60px" placeholder="?"/><br/>
+    and a <input class="inline" style="width:60px" placeholder="?"/> to my <input class="inline" style="width:60px" placeholder="?"/>."<br/>
+    — <input class="inline" style="width:120px" placeholder="book &amp; verse?"/>
+  </div>
+</div>
+<div class="q-box">
+  <div class="q-label">Write the verse from memory:</div>
+  <textarea class="tarea" style="min-height:55px" placeholder="Your word is a lamp..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>LIFE APPLICATION — RULES IN MY LIFE</div>
+<div class="tip"><strong>God's commandments still apply today.</strong> Let's think about how they connect to our own lives.</div>
+${[
+  ['❤️ Red','One commandment I find easy to keep:'],
+  ['🧡 Orange','One commandment that is sometimes hard for me:'],
+  ['💛 Yellow','A rule in my home or school that is similar to one of the commandments:'],
+  ['💚 Green','How following one commandment could help my friendships:'],
+  ['💙 Blue','What I think God wants us to understand from the commandments:'],
+  ['💜 Purple','My prayer or thought after learning about the Ten Commandments:'],
+].map(([ico,label])=>`
+<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+  <div style="font-size:18px;margin-top:2px">${ico}</div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;font-family:Nunito,sans-serif;color:var(--text)">${label}</div>
+    <input class="dline"/>
+  </div>
+</div>`).join('')}
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: God gave Moses 10 commandments on Mount Sinai. Commands 1–4 = love God. Commands 5–10 = love people. Rules are God's gift of love, not punishment! 📜</div>`,
+
+};
+
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML=''; pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur) el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render()};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week8_Notes');</script>
+</body>
+</html>

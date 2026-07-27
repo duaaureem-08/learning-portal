@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 8 · Day 4 Revision · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(245,158,11,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCD34D;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="overview"].active{background:rgba(245,158,11,0.2);color:#FCD34D;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:520px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:180px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+/* Overview grid */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color 0.2s;cursor:pointer;}
+.ov-card:hover{border-color:var(--ov-color,#555);}
+.ov-icon{font-size:2rem;margin-bottom:10px;}
+.ov-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--bright);margin-bottom:6px;}
+.ov-topic{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+.ov-keys{display:flex;flex-direction:column;gap:4px;}
+.ov-key{font-size:0.78rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start;}
+.ov-key::before{content:'✓';color:var(--ov-color,#6EE7B7);flex-shrink:0;font-weight:700;}
+/* Tracker */
+.tracker{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.tracker-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--bright);margin-bottom:16px;}
+.tracker-row{display:grid;grid-template-columns:180px 1fr 100px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.tracker-row:last-child{border-bottom:none;}
+.tracker-subject{font-size:0.88rem;font-weight:600;color:var(--text);}
+.tracker-bar-wrap{background:var(--surface2);border-radius:99px;height:8px;overflow:hidden;}
+.tracker-bar{height:8px;border-radius:99px;width:0%;transition:width 1s ease;}
+.tracker-score{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:center;width:100%;}
+.tracker-score:focus{outline:none;border-color:#F59E0B;}
+/* MC quiz */
+.mc-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.mc-opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.mc-opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.mc-opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.mc-opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.mc-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:0.87rem;font-weight:600;display:none;}
+.mc-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.mc-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.mc-nav{margin-top:14px;display:flex;align-items:center;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--muted);font-weight:700;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}.tracker-row{grid-template-columns:1fr 1fr;}.tracker-bar-wrap{display:none;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 8</div>
+  <div class="day-badge">⭐ Day 4 · Revision</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="overview" onclick="show('overview')">📋 Overview</button>
+    <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ OVERVIEW PAGE ═══ -->
+<div id="pg-overview" class="page active">
+<div class="hero" style="background:linear-gradient(135deg,#1A1200,#3D2800);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#F59E0B,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">Day 4 · Week 8 · Full Revision</div>
+  <div class="hero-title">Week 8 Revision —<br>All Subjects</div>
+  <div class="hero-subtitle">Mixed quiz · Topic summaries · Final score tracker · Cross-subject connections. Use this page to check what you know before moving on to Week 9.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">📖 Bible: Ten Commandments</span>
+    <span class="hero-tag">✏️ English: Expository Writing</span>
+    <span class="hero-tag">🧮 Maths: Algebra</span>
+    <span class="hero-tag">🔬 Science: Mixtures</span>
+    <span class="hero-tag">🏛️ Geography: Settlement</span>
+  </div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Week 8 Total</label><input type="text" placeholder="   / 200+"></div>
+</div>
+
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--bright);margin-bottom:16px;">Week 8 at a Glance</div>
+<div class="overview-grid">
+  <div class="ov-card" style="--ov-color:#C4B5FD;border-color:rgba(109,40,217,0.3);" onclick="show('bible')">
+    <div class="ov-icon">📖</div>
+    <div class="ov-title" style="color:#C4B5FD;">Bible</div>
+    <div class="ov-topic">The Ten Commandments — Exodus 20 · Matthew 22:37-39</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Grace before law — given AFTER rescue from Egypt</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Two tablets: 1-4 about God, 5-10 about people</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Commandment 10 is the only one about a thought</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Jesus summarises all ten in two: love God, love neighbour</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Connects to Joseph (Wk6) and Exodus (Wk7)</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCA5A5;border-color:rgba(190,18,60,0.3);" onclick="show('english')">
+    <div class="ov-icon">✏️</div>
+    <div class="ov-title" style="color:#FCA5A5;">English</div>
+    <div class="ov-topic">Informative & Expository Writing</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Introduction → Body → Conclusion structure</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Topic sentence = subject + clear claim</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Cohesive devices connect ideas smoothly</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Never introduce new ideas in the conclusion</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Formal register: no slang, no contractions</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCD34D;border-color:rgba(180,83,9,0.3);" onclick="show('maths')">
+    <div class="ov-icon">🧮</div>
+    <div class="ov-title" style="color:#FCD34D;">Maths</div>
+    <div class="ov-topic">Introduction to Algebra</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCD34D;">Variable = letter representing an unknown</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Like terms: same variable can be added/subtracted</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Substitution: replace variable with a number</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">3x + 5 cannot be simplified further</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Used in perimeter, area, and word problems</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#6EE7B7;border-color:rgba(6,95,70,0.3);" onclick="show('science')">
+    <div class="ov-icon">🔬</div>
+    <div class="ov-title" style="color:#6EE7B7;">Science</div>
+    <div class="ov-topic">Mixtures & Separation Techniques</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Mixture vs pure substance</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Filtration: separates insoluble solid from liquid</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Evaporation: get the solid; Distillation: get the liquid</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Chromatography: separates dissolved coloured substances</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">All techniques use physical properties, not reactions</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#93C5FD;border-color:rgba(30,58,138,0.3);" onclick="show('history')">
+    <div class="ov-icon">🏛️</div>
+    <div class="ov-title" style="color:#93C5FD;">History / Geography</div>
+    <div class="ov-topic">Population & Settlement</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#93C5FD;">6 settlement factors: water, fertile land, defence, climate, transport, resources</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Rural = low density, farming. Urban = high density, services</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Push factors force people away; pull factors attract them</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Urbanisation: 3% urban (1800) → 55%+ urban (today)</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">World population: 1bn (1800) → 8bn+ (today)</div>
+    </div>
+  </div>
+</div>
+
+<div class="tracker">
+  <div class="tracker-title">📊 My Week 8 Score Tracker</div>
+  <div class="tracker-row">
+    <div class="tracker-subject">📖 Bible — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#7C3AED;" id="bar-bible"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('bible',this.value,99)" id="sc-bible">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">✏️ English — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#E11D48;" id="bar-english"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('english',this.value,99)" id="sc-english">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🧮 Maths — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#D97706;" id="bar-maths"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('maths',this.value,100)" id="sc-maths">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🔬 Science — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#059669;" id="bar-science"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('science',this.value,100)" id="sc-science">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🏛️ History — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#2563EB;" id="bar-history"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('history',this.value,100)" id="sc-history">
+  </div>
+</div>
+
+<div class="card" style="--accent:#F59E0B;">
+  <div class="slabel" style="background:rgba(245,158,11,0.2);color:#FCD34D;">🌐 Big Ideas That Connect Everything This Week</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:4px;">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Order from complexity</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">The commandments bring moral order to human relationships. Algebra brings mathematical order to unknown quantities. Separation techniques bring physical order to mixed substances. Expository writing brings structural order to ideas. Every subject this week is about finding clarity within complexity.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Unknown things can be found</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Maths: a variable represents an unknown number that substitution reveals. Science: chromatography reveals the unknown components of a mixture. Geography: push/pull factors reveal the hidden reasons behind a person's decision to migrate. Finding what is hidden is a theme across the week.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 What came first matters</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Bible: grace came before law — God rescued Israel before giving commandments. Geography: water supply came before settlement — civilisations grew where water already existed. English: background comes before thesis — context must be set before the argument. Order and sequence shape meaning.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 The whole depends on its parts working together</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Bible: all ten commandments together form one vision of love. Maths: like terms must be grouped correctly for an expression to simplify properly. English: every paragraph must connect to the thesis. Geography: settlement factors (water, land, climate, defence) combine, rather than acting alone, to determine where people live.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ BIBLE REVISION ═══ -->
+<div id="pg-bible" class="page">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">📜</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 8 · Day 4 Revision</div>
+  <div class="hero-title">The Ten Commandments —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Multiple choice · Short recall · Extended question · Self-mark</div>
+  <div class="hero-tags"><span class="hero-tag">Memory verse</span><span class="hero-tag">Key commandments</span><span class="hero-tag">Law & Love</span></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse Check</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse for Week 8 Bible from memory. Then write it in your own words. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Exact verse (Matthew 22:37,39):&#10;&#10;In my own words:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"Love the Lord your God with all your heart and with all your soul and with all your mind… Love your neighbour as yourself." (Matthew 22:37,39, NIV). Own words: Jesus says the most important thing is to love God completely — heart, soul, and mind — and to treat other people exactly as well as you would want to be treated yourself. These two loves summarise all ten commandments.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🎯 Multiple Choice Quiz</div>
+  <div id="bible-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextMC('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Short Recall</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★</div>
+    <div class="q-text">Without notes — write down as much as you can remember about the Ten Commandments in 5 minutes. Include: the order in which they were given (rescue then law), all ten commandments (brief titles are fine), the two-tablet division, and ONE connection to Jesus's teaching. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write everything you remember — order, all ten commandments, structure, Jesus's teaching:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Correct order — grace before law (Exodus 20:2 rescue mentioned before commandments). All ten commandments named even briefly: no other gods, no idols, do not misuse God's name, Sabbath, honour parents, do not murder, do not commit adultery, do not steal, do not give false testimony, do not covet. Two-tablet structure: 1-4 about God, 5-10 about people. Connection to Jesus: Matthew 22:37-39 — love God and love neighbour summarise all ten. Give credit for vocabulary: covenant, commandment, idolatry, sabbath, covet, imago Dei (cross-week).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Final Extended Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★★</div>
+    <div class="q-text">Choose ONE of these essay questions and write a full response (minimum 8 sentences): <span class="marks">15 marks</span><br><br><strong>Option A:</strong> "The most surprising thing about the Ten Commandments is what comes BEFORE Commandment 1." Discuss what Exodus 20:2 reveals and why its placement matters.<br><strong>Option B:</strong> "Commandment 10 (do not covet) is the most important commandment because it addresses the root of all the others." Do you agree?<br><strong>Option C:</strong> "Jesus did not lower the bar of the law — he raised it." Using Matthew 5 and 22, explain and evaluate this claim.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A — Exodus 20:2:</strong> Award marks for: the statement "I am the LORD your God, who brought you out of Egypt" precedes every command. This establishes grace before law — Israel was already rescued before being asked to obey. Distinguishes biblical religion from a transactional system where obedience earns favour. The law is a response to rescue, not a precondition for it. <strong>Option B — Coveting as root:</strong> Award marks for: coveting (desiring what belongs to another) is the internal state that leads to external sins — coveting a neighbour's spouse leads to adultery; coveting their possessions leads to theft; coveting their reputation leads to false testimony. Jesus's Sermon on the Mount supports this — he locates the root of murder in anger, of adultery in lust. Counter-argument: some might argue Commandment 1 (no other gods) is more foundational since misplaced worship underlies misplaced desire. Either position can be well argued if supported with evidence. <strong>Option C — Jesus raising the bar:</strong> Award marks for: "you have heard it said... but I tell you" (Matthew 5) shows Jesus moving from outward act to inward state — a HIGHER standard, not a lower one. Avoiding murder is easier than avoiding ongoing anger; avoiding the act of adultery is easier than avoiding lust. Matthew 22's summary (love God, love neighbour) is also a higher and harder standard than rule-following, because it cannot be faked or technically satisfied — it requires actual transformation of the heart.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Bible Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 28+" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH REVISION ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">📄</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 8 · Day 4 Revision</div>
+  <div class="hero-title">Expository Writing —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Structure test · Topic sentence drill · Error correction · Extended writing</div>
+  <div class="hero-tags"><span class="hero-tag">Structure</span><span class="hero-tag">Cohesive devices</span><span class="hero-tag">Formal register</span></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🎯 Multiple Choice Quiz</div>
+  <div id="english-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextMC('english')">Next →</button>
+    <span class="score-badge" id="english-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📝 Structure & Vocabulary Test</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Define each of these 10 terms precisely AND use each correctly in one sentence of your own. <span class="marks">15 marks</span><br><br>1. expository &nbsp; 2. thesis statement &nbsp; 3. topic sentence &nbsp; 4. supporting detail &nbsp; 5. cohesive device &nbsp; 6. conclusion &nbsp; 7. formal register &nbsp; 8. audience &nbsp; 9. hook &nbsp; 10. linking sentence</div>
+    <textarea class="q-input xwide" placeholder="1. Definition: ___ Sentence:&#10;2. Definition: ___ Sentence:&#10;3. etc..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>expository</strong> — writing that explains/informs clearly, without personal opinion. 2. <strong>thesis statement</strong> — 1-2 sentences stating the essay's main point, at the end of the introduction. 3. <strong>topic sentence</strong> — the first sentence of a body paragraph, stating what that paragraph is about. 4. <strong>supporting detail</strong> — facts/evidence/examples that prove the topic sentence. 5. <strong>cohesive device</strong> — words connecting sentences/paragraphs (e.g. furthermore, however). 6. <strong>conclusion</strong> — final paragraph; summarises and closes; no new ideas. 7. <strong>formal register</strong> — professional academic style; no slang or contractions. 8. <strong>audience</strong> — the person/people who will read the writing. 9. <strong>hook</strong> — an engaging opening sentence that draws the reader in. 10. <strong>linking sentence</strong> — the final sentence of a body paragraph, connecting to the next paragraph's idea.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🌳 Full Essay From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Without notes, write a complete 3-paragraph mini-essay (intro + 1 body + conclusion) on: <em>"Why is clean water access important for human settlement?"</em> Use at least 3 cohesive devices and one piece of evidence from this week's Geography lesson. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Introduction:&#10;&#10;Body paragraph:&#10;&#10;Conclusion:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Introduction with hook + thesis (3). Body paragraph with topic sentence + 2 supporting details from geography lesson (e.g. early civilisations near rivers; water as #1 settlement factor) + cohesive devices (4). Conclusion restating thesis + final thought, no new info (3). <strong>Strong evidence to use:</strong> all ancient civilisations settled near rivers (Nile, Tigris-Euphrates, Indus); water remains the #1 settlement factor today; modern desalination shows water's continued importance.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">English Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 25+" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS REVISION ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">🔡</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 8 · Day 4 Revision</div>
+  <div class="hero-title">Algebra —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Timed drill · Mixed problem set · Common errors · Final exam challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Like terms</span><span class="hero-tag">Substitution</span><span class="hero-tag">Word problems</span></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🎯 Multiple Choice Quiz</div>
+  <div id="maths-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextMC('maths')">Next →</button>
+    <span class="score-badge" id="maths-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Timed Drill — 12 Questions (Target: under 10 minutes)</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★</div>
+    <div class="q-text">Work through as quickly and accurately as you can. Show brief working. <span class="marks">12 marks</span><br><br>1. Simplify 6x+4x &nbsp; 2. Simplify 8y−3y &nbsp; 3. Simplify 5a+3b−2a+b &nbsp; 4. Simplify 9p+2−4p−5 &nbsp; 5. Evaluate 3x+2 when x=7 &nbsp; 6. Evaluate 2a−b when a=6,b=3 &nbsp; 7. Write an expression for "6 less than twice n" &nbsp; 8. Write an expression for the perimeter of a square with side (x+2) &nbsp; 9. Evaluate n² when n=6 &nbsp; 10. Simplify 7x−7x+5 &nbsp; 11. If 3x+4=19, find x &nbsp; 12. Find the area of a rectangle with length (x+3) and width x, when x=5</div>
+    <textarea class="q-input xwide" placeholder="1. ___ 2. ___ 3. ___ 4. ___ 5. ___ 6. ___&#10;7. ___ 8. ___ 9. ___ 10. ___ 11. ___ 12. ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>10x</strong> &nbsp; 2. <strong>5y</strong> &nbsp; 3. <strong>3a+4b</strong> &nbsp; 4. <strong>5p−3</strong> &nbsp; 5. 3(7)+2=<strong>23</strong> &nbsp; 6. 2(6)−3=<strong>9</strong> &nbsp; 7. <strong>2n−6</strong> &nbsp; 8. 4(x+2)=<strong>4x+8</strong> &nbsp; 9. (6)²=<strong>36</strong> &nbsp; 10. <strong>5</strong> (x terms cancel) &nbsp; 11. 3x=15, x=<strong>5</strong> &nbsp; 12. Area=x(x+3); when x=5: 5×8=<strong>40 square units</strong></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Final Challenge Problem</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★★</div>
+    <div class="q-text">A school is designing a rectangular playground. The length is (4x+3) metres and the width is (2x−1) metres. (a) Write a simplified expression for the perimeter. (b) Write an expanded expression for the area. (c) The school decides x = 7. Find the actual length, width, perimeter, and area. (d) Safety fencing costs £12 per metre for the perimeter. What is the total fencing cost? <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Perimeter expression: &#10;(b) Area expression (expanded): &#10;(c) When x=7: Length=___m Width=___m Perimeter=___m Area=___m²&#10;(d) Fencing cost:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Perimeter = 2(4x+3)+2(2x−1) = 8x+6+4x−2 = <strong>12x+4</strong> metres. (b) Area = (4x+3)(2x−1) = 8x²−4x+6x−3 = <strong>8x²+2x−3</strong> m². (c) When x=7: Length = 4(7)+3 = <strong>31m</strong>. Width = 2(7)−1 = <strong>13m</strong>. Perimeter = 12(7)+4 = 84+4 = <strong>88m</strong>. Area = 8(49)+2(7)−3 = 392+14−3 = <strong>403 m²</strong> (or check: 31×13=403 ✓). (d) Fencing cost = 88 × £12 = <strong>£1,056</strong>.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Maths Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE REVISION ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🧪</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 8 · Day 4 Revision</div>
+  <div class="hero-title">Mixtures —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Quiz · Technique matching · Design challenge · Habitat to mixture connections</div>
+  <div class="hero-tags"><span class="hero-tag">All 4 techniques</span><span class="hero-tag">Pure vs mixed</span><span class="hero-tag">Real-world science</span></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🎯 Multiple Choice Quiz</div>
+  <div id="science-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextMC('science')">Next →</button>
+    <span class="score-badge" id="science-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🧪 Technique Matching Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">From memory — match each mixture to the BEST separation technique(s) and explain your reasoning in one sentence each: <span class="marks">10 marks</span><br><br>a) Gravel mixed with water<br>b) Two food dyes mixed in a solution<br>c) Sugar dissolved in water (want the sugar)<br>d) A mixture of water and ethanol (different boiling points)<br>e) Sand, salt, and water all mixed together</div>
+    <textarea class="q-input wide" placeholder="a) Technique + reasoning:&#10;b) Technique + reasoning:&#10;c) Technique + reasoning:&#10;d) Technique + reasoning:&#10;e) Technique(s) + reasoning + order:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Filtration</strong> — gravel is insoluble and too large to pass through filter paper. b) <strong>Chromatography</strong> — the dyes will travel at different speeds, separating into distinct bands. c) <strong>Evaporation</strong> — heating removes the water, leaving dry sugar crystals behind. d) <strong>Distillation</strong> — the liquid with the lower boiling point (ethanol, ~78°C) vaporises first and can be collected separately from water (100°C). e) <strong>Filtration then evaporation</strong> — first filter out the insoluble sand; then evaporate the remaining salt water to collect the salt.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🌍 Cross-Subject Final Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">Connect this week's science to this week's geography: explain in a short paragraph (5-6 sentences) how the science of separation techniques (specifically distillation) has changed where humans can settle, using specific evidence from both subjects. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your connected paragraph here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">For most of human history, settlement required access to a natural fresh water source, which is why every ancient civilisation grew up beside a river. Today, the science of distillation — heating salt water, collecting the vapour, and condensing it back into pure liquid — allows fresh water to be created from the ocean itself. Countries like Saudi Arabia and the UAE, located in extremely arid desert regions with virtually no rainfall, now host some of the fastest-growing cities in the world precisely because desalination technology provides the water that geography alone could not. This represents a genuine shift in the relationship between physical geography and human settlement: water no longer needs to occur naturally where people wish to live, as long as energy and technology are available to produce it. However, this technological solution remains expensive and energy-intensive, meaning that for the majority of the world's population, the ancient rule still holds — settlement still follows water.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Science Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY REVISION ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🌍</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 8 · Day 4 Revision</div>
+  <div class="hero-title">Population & Settlement —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Memory maps · Push/pull recall · Record-breakers · Final geography essay</div>
+  <div class="hero-tags"><span class="hero-tag">Settlement factors</span><span class="hero-tag">Push & pull</span><span class="hero-tag">Urbanisation data</span></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🎯 Multiple Choice Quiz</div>
+  <div id="history-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextMC('history')">Next →</button>
+    <span class="score-badge" id="history-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🗺️ Memory Recall — From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★</div>
+    <div class="q-text">Without notes — fill in every answer from memory: <span class="marks">12 marks</span><br><br><strong>6 Settlement Factors:</strong> 1.___ 2.___ 3.___ 4.___ 5.___ 6.___<br><br><strong>3 Push factors:</strong> 1.___ 2.___ 3.___<br><strong>3 Pull factors:</strong> 1.___ 2.___ 3.___<br><br><strong>Population milestones:</strong><br>1 billion reached: ___ (year)<br>Percentage urban in 1800: ___%<br>Percentage urban today: over ___%</div>
+    <textarea class="q-input wide" placeholder="Write your answers here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Settlement factors:</strong> 1. Water supply 2. Fertile land 3. Natural defence 4. Mild climate 5. Transport routes 6. Natural resources. <strong>Push factors (any 3):</strong> war/conflict, poverty/unemployment, drought/famine, lack of education/healthcare, political persecution. <strong>Pull factors (any 3):</strong> better jobs/wages, safety/freedom, good schools/universities, family connections, milder climate. <strong>Population milestones:</strong> 1 billion reached — <strong>around 1800</strong>. Percentage urban in 1800 — <strong>~3%</strong>. Percentage urban today — over <strong>55%</strong>.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Final Extended Geography Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★★</div>
+    <div class="q-text">Choose ONE question and write a full response (minimum 8 sentences): <span class="marks">12 marks</span><br><br><strong>Option A:</strong> "Push and pull factors always work together — no migration decision is made for only one reason." Explain and evaluate this claim using a specific case study.<br><br><strong>Option B:</strong> "Urbanisation is the single most important demographic change of the last 200 years." Argue for or against, using specific data from this week's lesson.<br><br><strong>Option C:</strong> Using the six settlement factors from this week, explain why a specific real city (choose one you know) developed where it did.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A:</strong> Award for: explanation that push and pull factors typically combine — e.g. a family facing drought (push) AND knowing relatives have better jobs elsewhere (pull) is far more likely to migrate than a family facing only one factor. Most real migration decisions involve a combination, and the relative WEIGHT of push vs pull varies by situation (refugees = push-dominant; economic migrants = often more pull-dominant, though push factors like poverty are usually present too). <strong>Option B:</strong> Award for: data — 3% urban (1800) to 55%+ today represents possibly the largest demographic shift in human history within 200 years; counter-evidence — population growth itself (1bn to 8bn) might be considered equally or more significant since it is the precondition for urbanisation; medical/health advances also enabled both trends. A nuanced answer recognises urbanisation as deeply important but considers it alongside other major demographic shifts. <strong>Option C:</strong> Award for: choice of a real city (e.g. Karachi — port/transport route + water access from Arabian Sea; London — Thames river crossing + trade route + relatively mild climate; Cairo — Nile water + fertile land + defensible desert surroundings) with at least 3 of the six factors explicitly applied with specific reasoning.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">History/Geography Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 24+" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+function updateBar(subject, val, max){
+  const num = parseFloat(val);
+  if(!isNaN(num) && num >= 0){
+    const pct = Math.min((num / max) * 100, 100);
+    document.getElementById('bar-'+subject).style.width = pct + '%';
+  }
+}
+
+const mcData = {
+  bible:[
+    {q:"Which event happened FIRST: God rescuing Israel from Egypt, or God giving the Ten Commandments?",opts:["The commandments were given first, then the rescue happened","God rescued Israel from Egypt FIRST, then gave the commandments at Sinai","They happened at exactly the same moment","The Bible does not specify the order"],ans:1,exp:'Exodus 20:2 begins "I am the LORD your God, who brought you out of Egypt" BEFORE any commandment is given. Grace and rescue come before law — this is one of the most important points in the lesson.'},
+    {q:"Which commandment is uniquely about a thought or desire rather than an action?",opts:["Commandment 6 — do not murder","Commandment 8 — do not steal","Commandment 9 — do not lie","Commandment 10 — do not covet"],ans:3,exp:'Coveting is wanting what belongs to someone else in an unhealthy way — this happens in the mind and heart, before any action takes place. It shows God cares about our inner life, not just our outward behaviour.'},
+    {q:"According to Matthew 22:37-39, what are the two commandments that summarise all ten?",opts:["Do not steal and do not murder","Honour your parents and keep the Sabbath","Love God with everything, and love your neighbour as yourself","Do not covet and do not lie"],ans:2,exp:'Jesus said all the Law and the Prophets "hang on" these two commandments: loving God completely and loving your neighbour as yourself. This is the heart behind all ten commandments.'},
+    {q:"The Ten Commandments were written on how many stone tablets, and what did this division represent?",opts:["One tablet — they were all about the same topic","Two tablets — one for God-focused commands (1-4), one for people-focused commands (5-10)","Ten tablets — one per commandment","Three tablets — for past, present, and future"],ans:1,exp:'Two tablets represented two categories: commandments 1-4 govern the relationship with God (vertical), and commandments 5-10 govern relationships with other people (horizontal). Together they form a complete picture of love.'},
+    {q:"Which commandment is described as 'the first commandment with a promise' in Ephesians 6?",opts:["Commandment 1 — no other gods","Commandment 4 — keep the Sabbath","Commandment 5 — honour your father and mother","Commandment 9 — do not lie"],ans:2,exp:'Ephesians 6:2-3 calls honouring parents "the first commandment with a promise" — the promise of a long, good life. It bridges the God-focused and people-focused commandments.'}
+  ],
+  english:[
+    {q:"What are the three main parts of an expository essay, in the correct order?",opts:["Body, Introduction, Conclusion","Introduction, Body, Conclusion","Conclusion, Introduction, Body","Hook, Thesis, Summary"],ans:1,exp:'Every expository essay follows: Introduction (hook + background + thesis) → Body (one idea per paragraph) → Conclusion (summary + final thought). This structure guides the reader logically.'},
+    {q:"What should a topic sentence do?",opts:["Summarise the whole essay","State what ONE body paragraph will be about, with a specific claim","Give a final thought about the topic","List every cohesive device used"],ans:1,exp:"A topic sentence is the first sentence of a body paragraph — it tells the reader exactly what that one paragraph will explain, with a specific, provable claim."},
+    {q:"Which cohesive device would correctly introduce a contrasting idea?",opts:['"Furthermore"','"For example"','"However"','"In conclusion"'],ans:2,exp:'"However" signals contrast — it shows the next point goes against or qualifies what was just said. "Furthermore" adds more of the same; "For example" gives evidence; "In conclusion" closes the essay.'},
+    {q:"What should a conclusion NEVER include?",opts:["A restatement of the thesis in new words","A brief summary of the main points","A new idea that was never discussed in the body","A meaningful final thought"],ans:2,exp:'The conclusion should summarise and close — never introduce new information, since there has been no chance to explain or support it with evidence.'},
+    {q:"What does 'formal register' mean in writing?",opts:["Writing with lots of exclamation marks","A professional, academic style with no slang or contractions","Writing only short sentences","Using as many big words as possible"],ans:1,exp:'Formal register means professional, academic language — full sentences, no contractions ("do not" not "don\'t"), no slang, precise vocabulary.'}
+  ],
+  maths:[
+    {q:"What is the coefficient in the term 9x?",opts:["x","9","9x","1"],ans:1,exp:'The coefficient is the number directly in front of a variable. In 9x, the coefficient is 9.'},
+    {q:"Simplify: 6a+3a",opts:["9a²","9a","18a","6a+3a (cannot simplify)"],ans:1,exp:'6a and 3a are like terms (same variable). Add the coefficients: 6+3=9. Answer: 9a. You never multiply the variables together when adding like terms.'},
+    {q:"Simplify: 7x+2y−3x+y",opts:["4x+3y","10x+3y","4x+y","4xy+3"],ans:0,exp:'Group like terms: (7x−3x)+(2y+y) = 4x+3y. Group the x-terms together and the y-terms together separately.'},
+    {q:"If x=4, what is the value of 5x−2?",opts:["18","22","20","16"],ans:0,exp:'Substitute x=4: 5(4)−2 = 20−2 = 18. Always use brackets when substituting.'},
+    {q:"Which expression correctly represents '7 more than three times a number n'?",opts:["7−3n","3n+7","3n−7","7n+3"],ans:1,exp:'"Three times a number n" = 3n. "7 more than" means add 7. So: 3n+7. Order matters in algebra — "7 more than 3n" is 3n+7, not 7−3n.'}
+  ],
+  science:[
+    {q:"What is the KEY difference between a mixture and a pure substance?",opts:["A mixture is always colourful; a pure substance is always clear","A mixture contains two or more substances that can be physically separated; a pure substance contains only one type of substance","A mixture cannot be heated; a pure substance can","There is no real difference between them"],ans:1,exp:'A mixture contains two or more substances combined WITHOUT a chemical reaction, so they can be separated by physical means. A pure substance contains only ONE type of particle throughout, with fixed properties.'},
+    {q:"Which technique would separate sand from water?",opts:["Evaporation","Distillation","Filtration","Chromatography"],ans:2,exp:"Sand is insoluble — it does not dissolve in water. Filtration uses filter paper to catch the solid (sand) while the liquid (water) passes through."},
+    {q:"In distillation, what is the purpose of the condenser?",opts:["To heat the mixture so it boils","To cool the vapour so it turns back into a liquid","To filter out solid particles","To add colour to the mixture for identification"],ans:1,exp:'The condenser is a cool tube that the hot vapour passes through. As it cools, the vapour condenses back into liquid form, which is then collected as the pure distilled liquid.'},
+    {q:"In chromatography, what causes different dyes in a mixture to separate into different bands?",opts:["They have different colours which makes them separate automatically","They travel at different speeds through the paper, carried by the solvent","They have different smells","They have different temperatures"],ans:1,exp:'Each substance in the mixture has a different attraction to the solvent versus the paper, causing it to travel a different distance up the paper — this creates separate bands at different heights.'},
+    {q:"You have a mixture of sand, salt, and water. What is the correct order of separation techniques?",opts:["Evaporation first, then filtration","Filtration first (to remove the sand), then evaporation (to recover the salt)","Distillation only","Chromatography first, then filtration"],ans:1,exp:'Filtration removes the insoluble sand first while the liquid carries the dissolved salt through. Then evaporation removes the water from the remaining salt solution, leaving the salt crystals behind.'}
+  ],
+  history:[
+    {q:"Which of these is the MOST important physical factor that has determined where ancient civilisations settled?",opts:["Mountain scenery","Access to fresh water (rivers, springs)","The presence of forests","Cold climate"],ans:1,exp:"Access to fresh water has consistently been the single most important factor in settlement throughout history — every major ancient civilisation (Egypt, Mesopotamia, Indus Valley, China) developed along a major river."},
+    {q:"Which of these is a PULL factor in migration?",opts:["War in the home country","Drought destroying crops","Better job opportunities in the destination","Political persecution"],ans:2,exp:"Pull factors attract people TOWARDS a new place — such as better jobs, safety, or education. War, drought, and persecution are PUSH factors that force people away from where they currently live."},
+    {q:"What does 'urbanisation' mean?",opts:["The building of more farms in the countryside","The process of more and more people moving from rural areas into cities","A decrease in a country's total population","The construction of new roads only"],ans:1,exp:"Urbanisation describes the global trend of populations shifting from rural (countryside) to urban (city) living — one of the most dramatic demographic changes in human history."},
+    {q:"Approximately what percentage of the world's population lived in cities in 1800?",opts:["About 3%","About 30%","About 50%","About 75%"],ans:0,exp:"In 1800, only about 3% of the world's population lived in urban areas. This rose dramatically to over 55% by the early 2000s — driven by the Industrial Revolution and ongoing economic development."},
+    {q:"Why do rural areas typically have LOWER population density than urban areas?",opts:["Rural areas are always colder","Rural land is mainly used for farming, which requires more space per person and fewer jobs concentrate there","People in rural areas are not allowed to live close together","Rural areas have no roads"],ans:1,exp:"Farming requires significant land area per person (fields, pastures), and fewer types of jobs are available in rural areas compared to the dense concentration of services, industry, and housing found in cities."}
+  ]
+};
+
+const mcState = {};
+['bible','english','maths','science','history'].forEach(s=>{
+  mcState[s]={idx:0,score:0};
+  renderMC(s);
+});
+
+function renderMC(s){
+  const st=mcState[s];
+  const qs=mcData[s];
+  const el=document.getElementById(s+'-mc');
+  const sc=document.getElementById(s+'-mc-score');
+  if(st.idx>=qs.length){
+    el.innerHTML=`<div style="padding:18px;background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:1.8rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;">Quiz complete!</div><div style="color:var(--muted);margin-top:6px;">${st.score} / ${qs.length} correct</div></div>`;
+    return;
+  }
+  const q=qs[st.idx];
+  sc.textContent=`${st.score} / ${st.idx} correct`;
+  el.innerHTML=`<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question ${st.idx+1} of ${qs.length}</div>
+  <div style="font-size:0.96rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:14px;">${q.q}</div>
+  <div class="mc-opts">${q.opts.map((o,i)=>`<button class="mc-opt" onclick="answerMC('${s}',${i})">${o}</button>`).join('')}</div>
+  <div id="${s}-mc-fb" class="mc-fb"></div>`;
+}
+
+function answerMC(s,i){
+  const q=mcData[s][mcState[s].idx];
+  const opts=document.querySelectorAll(`#${s}-mc .mc-opt`);
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-mc-fb');
+  if(i===q.ans){
+    mcState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='mc-fb ok';fb.style.display='block';
+    fb.textContent='✅ Correct! '+q.exp;
+  }else{
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='mc-fb bad';fb.style.display='block';
+    fb.textContent='❌ '+q.exp;
+  }
+  document.getElementById(s+'-mc-score').textContent=`${mcState[s].score} / ${mcState[s].idx+1} correct`;
+}
+
+function nextMC(s){
+  mcState[s].idx++;
+  renderMC(s);
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week8_Day4');</script>
+</body>
+</html>

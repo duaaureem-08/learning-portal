@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 — Day 1 Test Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#FEF3C7;color:#92400E;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #D97706;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px 16px;font-weight:700;font-size:0.92rem;}
+.match-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.match-item select:focus{outline:none;border-color:var(--accent,#888);}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{width:160px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.order-item{background:white;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px 16px;font-weight:700;font-size:0.9rem;display:flex;align-items:center;gap:12px;}
+.order-num{width:32px;height:32px;border-radius:50%;background:var(--accent,#888);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.95rem;flex-shrink:0;}
+.order-select{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.88rem;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.selected-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.selected-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-answer{background:#D1FAE5;border-color:#059669;color:#065F46;font-weight:900;}
+.tf-btn.wrong-answer{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.match-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">📄 Day 1 — Test</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🪨</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🏛️</span> Social Studies</button>
+</div>
+
+<!-- BIBLE -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">📖 Bible · Week 8</div>
+    <div class="hero-title">The Ten<br>Commandments</div>
+    <div class="hero-sub">Exodus 20 · God's rules for life · Why rules are a gift · Psalm 119:105</div>
+    <div class="hero-emoji">📜</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Match each word to its correct meaning.</p>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — A rule or instruction that God gives to His people.<br>
+        B — The mountain where God gave Moses the Ten Commandments.<br>
+        C — To honour, love and praise God with your whole heart.<br>
+        D — Two flat pieces of stone on which God wrote the commandments.<br>
+        E — A special promise between God and His people.
+      </div>
+    </div>
+    <div id="bible-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkVocab('bible')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Commandment. Mount Sinai. Worship. Stone tablets. Covenant.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — The Ten Commandments <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Put these events in the correct order (choose 1–5):</p>
+    <div id="bible-order"></div>
+    <div style="margin-top:10px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkOrder('bible')">Check Order ✅</button>
+    </div>
+    <div id="bible-order-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+      <span class="word-tag">commandments</span><span class="word-tag">Sinai</span><span class="word-tag">stone</span><span class="word-tag">Moses</span><span class="word-tag">gift</span><span class="word-tag">ten</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>God called <em>_____</em> up the mountain to receive the laws.</td><td><input class="fill-in" data-ans="Moses" placeholder="type here"></td></tr>
+      <tr><td>God gave His laws on Mount <em>_____</em>.</td><td><input class="fill-in" data-ans="Sinai" placeholder="type here"></td></tr>
+      <tr><td>The laws were written on two flat pieces of <em>_____</em>.</td><td><input class="fill-in" data-ans="stone" placeholder="type here"></td></tr>
+      <tr><td>God gave <em>_____</em> commandments in total.</td><td><input class="fill-in" data-ans="ten" placeholder="type here"></td></tr>
+      <tr><td>The <em>_____</em> tell us how to love God and how to love other people.</td><td><input class="fill-in" data-ans="commandments" placeholder="type here"></td></tr>
+      <tr><td>The commandments were a <em>_____</em> from God — not a punishment.</td><td><input class="fill-in" data-ans="gift" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkFill('bible-fill')">Check ✅</button>
+    </div>
+    <div id="bible-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="bible-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="bible-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTF('bible')">Check Answers ✅</button></div>
+    <div id="bible-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ENGLISH -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">✏️ English · Week 8</div>
+    <div class="hero-title">Conjunctions &amp;<br>Compound Sentences</div>
+    <div class="hero-sub">and · but · so · because · when · Joining sentences · Writing longer sentences</div>
+    <div class="hero-emoji">🔗</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — A joining word that connects two sentences or clauses together.<br>
+        B — A sentence made of two simple sentences joined by a conjunction.<br>
+        C — The joining word that adds one idea to another. Example: <em>I like cats ___ I like dogs.</em><br>
+        D — The joining word that gives a reason — it answers WHY.<br>
+        E — The joining word that shows a contrast or surprise.
+      </div>
+    </div>
+    <div id="eng-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkVocab('eng')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Conjunction. Compound sentence. And. Because. But.')">🔊 Hear terms</button>
+    </div>
+    <div id="eng-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Sentence Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Conjunction quiz — click the correct answer:</p>
+    <div id="eng-quiz"></div>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--english);" onclick="nextEngQ()">Next Question ➡️</button>
+      <span id="eng-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the best conjunction (and / but / so / because / when):</p>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Conjunction</th></tr>
+      <tr><td>I was cold <em>_____</em> I put on my coat.</td><td><input class="fill-in" data-ans="so" placeholder="type here"></td></tr>
+      <tr><td>She was tired <em>_____</em> she kept reading.</td><td><input class="fill-in" data-ans="but" placeholder="type here"></td></tr>
+      <tr><td>I smiled <em>_____</em> I saw my friend.</td><td><input class="fill-in" data-ans="when" placeholder="type here"></td></tr>
+      <tr><td>He is happy <em>_____</em> it is his birthday.</td><td><input class="fill-in" data-ans="because" placeholder="type here"></td></tr>
+      <tr><td>I like apples <em>_____</em> I like oranges.</td><td><input class="fill-in" data-ans="and" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkFill('eng-fill')">Check ✅</button></div>
+    <div id="eng-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="eng-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="eng-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTF('eng')">Check Answers ✅</button></div>
+    <div id="eng-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- MATHS -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🔢 Maths · Week 8</div>
+    <div class="hero-title">Fractions —<br>Comparing &amp; Ordering</div>
+    <div class="hero-sub">Equivalent fractions · Bigger/smaller fractions · Number line · Ordering fractions</div>
+    <div class="hero-emoji">🍕</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — The number ON TOP of a fraction. It shows how many parts you have.<br>
+        B — The number ON BOTTOM of a fraction. It shows the total number of equal parts.<br>
+        C — Fractions that look different but have exactly the same value. Example: 1/2 = 2/4.<br>
+        D — A straight line with numbers in order. Fractions can be placed on it between 0 and 1.<br>
+        E — When you make a fraction simpler by dividing both numbers by the same amount.
+      </div>
+    </div>
+    <div id="maths-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkVocab('maths')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Numerator. Denominator. Equivalent fractions. Number line. Simplify.')">🔊 Hear terms</button>
+    </div>
+    <div id="maths-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Circle the bigger fraction. Type B for bigger in the answer box:</p>
+    <table class="fill-table">
+      <tr><th>Pair</th><th>Which is bigger?</th></tr>
+      <tr><td><strong>3/8 &nbsp; or &nbsp; 5/8</strong></td><td><input class="fill-in" data-ans="5/8" placeholder="type answer"></td></tr>
+      <tr><td><strong>1/3 &nbsp; or &nbsp; 1/6</strong></td><td><input class="fill-in" data-ans="1/3" placeholder="type answer"></td></tr>
+      <tr><td><strong>2/5 &nbsp; or &nbsp; 4/5</strong></td><td><input class="fill-in" data-ans="4/5" placeholder="type answer"></td></tr>
+      <tr><td><strong>1/4 &nbsp; or &nbsp; 1/2</strong></td><td><input class="fill-in" data-ans="1/2" placeholder="type answer"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkFill('maths-compare')">Check ✅</button></div>
+    <div id="maths-compare-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the equivalent fractions:</p>
+    <table class="fill-table">
+      <tr><th>Fraction</th><th>Equivalent</th></tr>
+      <tr><td>1/2 = ___/4</td><td><input class="fill-in" data-ans="2" placeholder="?" style="width:70px;"></td></tr>
+      <tr><td>1/2 = ___/8</td><td><input class="fill-in" data-ans="4" placeholder="?" style="width:70px;"></td></tr>
+      <tr><td>2/4 = ___/8</td><td><input class="fill-in" data-ans="4" placeholder="?" style="width:70px;"></td></tr>
+      <tr><td>1/3 = ___/6</td><td><input class="fill-in" data-ans="2" placeholder="?" style="width:70px;"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkFill('maths-equiv')">Check ✅</button></div>
+    <div id="maths-equiv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="maths-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="maths-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTF('maths')">Check Answers ✅</button></div>
+    <div id="maths-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SCIENCE -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🪨 Science · Week 8</div>
+    <div class="hero-title">Fossils &amp;<br>Soil</div>
+    <div class="hero-sub">How fossils form · Sedimentary rock · What soil is made of · Types of soil</div>
+    <div class="hero-emoji">🦕</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — The shape or remains of a dead plant or animal preserved in rock over millions of years.<br>
+        B — Tiny bits of rock, sand and mud that settle at the bottom of water.<br>
+        C — Rock made from layers of sediment pressed together over millions of years.<br>
+        D — Rotted plants and animals in soil that makes it rich and dark.<br>
+        E — A type of animal or plant that has completely died out — none left alive.
+      </div>
+    </div>
+    <div id="sci-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkVocab('sci')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Fossil. Sediment. Sedimentary rock. Humus. Extinct.')">🔊 Hear terms</button>
+    </div>
+    <div id="sci-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🪨 Part B — Science Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Put the stages of fossil formation in the correct order (1–5):</p>
+    <div id="sci-order"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--science);" onclick="checkOrder('sci')">Check Order ✅</button></div>
+    <div id="sci-order-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. What is soil made of? Fill in the 4 things:</p>
+    <table class="fill-table">
+      <tr><th>Component</th><th>What it does</th></tr>
+      <tr><td><input class="fill-in" data-ans="rock" placeholder="tiny ___ pieces" style="width:140px;"></td><td>The main solid part of soil, broken from large rocks.</td></tr>
+      <tr><td><input class="fill-in" data-ans="humus" placeholder="___" style="width:140px;"></td><td>Rotted plants and animals — gives soil nutrients and dark colour.</td></tr>
+      <tr><td><input class="fill-in" data-ans="water" placeholder="___" style="width:140px;"></td><td>Needed by plant roots to drink.</td></tr>
+      <tr><td><input class="fill-in" data-ans="air" placeholder="___" style="width:140px;"></td><td>Found in tiny spaces — roots need air too!</td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--science);" onclick="checkFill('sci-fill')">Check ✅</button></div>
+    <div id="sci-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="sci-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="sci-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTF('sci')">Check Answers ✅</button></div>
+    <div id="sci-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SOCIAL STUDIES -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🏛️ Social Studies · Week 8</div>
+    <div class="hero-title">The Romans<br>in Britain</div>
+    <div class="hero-sub">Who the Romans were · The invasion · Roads &amp; towns · Roman legacy</div>
+    <div class="hero-emoji">🏛️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — People from the city of Rome in Italy who built one of the greatest empires in history.<br>
+        B — A very large area ruled by one powerful ruler called an Emperor.<br>
+        C — When an army enters another country by force to take control of it.<br>
+        D — A place where people come to live and build a community — often started by the Romans.<br>
+        E — The lasting effect that the Romans left behind, still seen in Britain today.
+      </div>
+    </div>
+    <div id="soc-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkVocab('soc')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Romans. Empire. Invasion. Settlement. Legacy.')">🔊 Hear terms</button>
+    </div>
+    <div id="soc-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🏛️ Part B — History Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Put these events in the correct order (1–5):</p>
+    <div id="soc-order"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--social);" onclick="checkOrder('soc')">Check Order ✅</button></div>
+    <div id="soc-order-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+      <span class="word-tag">roads</span><span class="word-tag">London</span><span class="word-tag">Emperor</span><span class="word-tag">400</span><span class="word-tag">Latin</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>The Roman ruler was called the <em>_____</em>.</td><td><input class="fill-in" data-ans="Emperor" placeholder="type here"></td></tr>
+      <tr><td>The Romans ruled Britain for nearly <em>_____</em> years.</td><td><input class="fill-in" data-ans="400" placeholder="type here"></td></tr>
+      <tr><td>The Romans built straight <em>_____</em> to move armies and trade across Britain.</td><td><input class="fill-in" data-ans="roads" placeholder="type here"></td></tr>
+      <tr><td>The Romans started the city of <em>_____</em> (called Londinium).</td><td><input class="fill-in" data-ans="London" placeholder="type here"></td></tr>
+      <tr><td>The Roman language was called <em>_____</em> — many English words come from it.</td><td><input class="fill-in" data-ans="Latin" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--social);" onclick="checkFill('soc-fill')">Check ✅</button></div>
+    <div id="soc-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="soc-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="soc-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTF('soc')">Check Answers ✅</button></div>
+    <div id="soc-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+  if(!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.rate=0.85;u.lang='en-GB';
+  window.speechSynthesis.speak(u);
+}
+
+// ── VOCAB DATA ────────────────────────────────────────────
+const vocabData={
+  bible:{terms:['Commandment','Mount Sinai','Worship','Stone tablets','Covenant'],answers:['A','B','C','D','E']},
+  eng:{terms:['Conjunction','Compound sentence','And','Because','But'],answers:['A','B','C','D','E']},
+  maths:{terms:['Numerator','Denominator','Equivalent fractions','Number line','Simplify'],answers:['A','B','C','D','E']},
+  sci:{terms:['Fossil','Sediment','Sedimentary rock','Humus','Extinct'],answers:['A','B','C','D','E']},
+  soc:{terms:['Romans','Empire','Invasion','Settlement','Legacy'],answers:['A','B','C','D','E']},
+};
+function buildVocab(key){
+  const d=vocabData[key];const area=document.getElementById(key+'-vocab-area');if(!area)return;
+  let h='<div class="match-grid">';
+  d.terms.forEach((t,i)=>{h+=`<div class="match-item">${t} <button class="audio-btn" onclick="speak('${t}')">🔊</button><select id="vocab-${key}-${i}"><option value="">— select —</option>${['A','B','C','D','E'].map(l=>`<option value="${l}">${l}</option>`).join('')}</select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildVocab);
+function checkVocab(key){
+  const d=vocabData[key];let score=0;
+  d.terms.forEach((_,i)=>{const sel=document.getElementById('vocab-'+key+'-'+i);if(!sel)return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-vocab-result');res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${d.terms.length}!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct. Review and try again!`;}
+}
+
+// ── ORDER DATA ────────────────────────────────────────────
+const orderData={
+  bible:{events:[
+    {text:'God freed the people of Israel from slavery in Egypt.',correct:1},
+    {text:'The people camped at the foot of Mount Sinai.',correct:2},
+    {text:'God called Moses up the mountain — there was thunder and lightning.',correct:3},
+    {text:'God gave Moses the Ten Commandments, written on two stone tablets.',correct:4},
+    {text:'Moses came down the mountain and told the people God\'s laws.',correct:5},
+  ]},
+  sci:{events:[
+    {text:'The sediment slowly hardens into rock over millions of years.',correct:4},
+    {text:'An animal or plant dies and falls into mud or water.',correct:1},
+    {text:'The fossil is pushed up by earth movements where people can find it.',correct:5},
+    {text:'The soft parts rot away — only the hard bones or shells stay.',correct:2},
+    {text:'Layers of sediment (sand and mud) slowly cover the hard parts.',correct:3},
+  ]},
+  soc:{events:[
+    {text:'Julius Caesar first tried to invade Britain but returned to Rome.',correct:1},
+    {text:'Emperor Claudius successfully invaded Britain with a large army.',correct:2},
+    {text:'The Romans built roads, towns and Hadrian\'s Wall across Britain.',correct:3},
+    {text:'The Romans ruled Britain for nearly 400 years.',correct:4},
+    {text:'The Romans left Britain in 410 AD to defend Rome from attacks.',correct:5},
+  ]},
+};
+function buildOrder(key){
+  const d=orderData[key];if(!d)return;const area=document.getElementById(key+'-order');if(!area)return;
+  let h='<div class="order-list">';
+  d.events.forEach((ev,i)=>{h+=`<div class="order-item"><div class="order-num">${i+1}</div><div style="flex:1;font-size:0.9rem;">${ev.text}</div><select class="order-select" id="ord-${key}-${i}"><option value="">—</option>${d.events.map((_,n)=>`<option value="${n+1}">${n+1}</option>`).join('')}</select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible','sci','soc'].forEach(buildOrder);
+function checkOrder(key){
+  const d=orderData[key];let score=0;
+  d.events.forEach((ev,i)=>{const sel=document.getElementById('ord-'+key+'-'+i);if(!sel)return;
+    if(parseInt(sel.value)===ev.correct){score++;sel.style.borderColor='#059669';sel.style.background='#D1FAE5';}
+    else{sel.style.borderColor='#DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-order-result');if(res){res.style.display='block';
+    if(score===d.events.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect order! ${score}/${d.events.length}!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.events.length} in the right place.`;}}
+}
+
+// ── FILL IN THE BLANK ─────────────────────────────────────
+function checkFill(context){
+  let allInputs,resultId;
+  if(context==='bible-fill'){allInputs=document.querySelectorAll('#page-bible .fill-in[data-ans]');resultId='bible-fill-result';}
+  else if(context==='eng-fill'){allInputs=document.querySelectorAll('#page-english .fill-in[data-ans]');resultId='eng-fill-result';}
+  else if(context==='maths-compare'){allInputs=document.querySelectorAll('#page-maths .card:nth-child(3) table:first-of-type .fill-in');resultId='maths-compare-result';}
+  else if(context==='maths-equiv'){allInputs=document.querySelectorAll('#page-maths .card:nth-child(3) table:last-of-type .fill-in');resultId='maths-equiv-result';}
+  else if(context==='sci-fill'){allInputs=document.querySelectorAll('#page-science .fill-in[data-ans]');resultId='sci-fill-result';}
+  else if(context==='soc-fill'){allInputs=document.querySelectorAll('#page-social .fill-in[data-ans]');resultId='soc-fill-result';}
+  if(!allInputs)return;
+  let score=0,total=0;
+  allInputs.forEach(inp=>{if(!inp.dataset.ans)return;total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById(resultId);if(res){res.style.display='block';
+    if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All correct! ${score}/${total}`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}}
+}
+
+// ── TRUE / FALSE DATA ─────────────────────────────────────
+const tfData={
+  bible:[
+    {s:'God gave Moses the Ten Commandments on Mount Everest.',ans:false},
+    {s:'The first four commandments are about our relationship with God.',ans:true},
+    {s:'The commandments were written on two stone tablets.',ans:true},
+    {s:'The commandments were meant to be a punishment for bad behaviour.',ans:false},
+    {s:'The memory verse "Your word is a lamp to my feet" comes from Psalm 119:105.',ans:true},
+  ],
+  eng:[
+    {s:'A conjunction is a joining word that connects two sentences.',ans:true},
+    {s:'"Because" is used to give a reason — it answers WHY.',ans:true},
+    {s:'"And" is used to show a contrast or surprise.',ans:false},
+    {s:'"I was tired but I kept going" is a compound sentence.',ans:true},
+    {s:'You must always put a comma before "and" in a compound sentence.',ans:false},
+  ],
+  maths:[
+    {s:'The numerator is the number on the BOTTOM of a fraction.',ans:false},
+    {s:'1/2 and 2/4 are equivalent fractions — they are the same value.',ans:true},
+    {s:'When fractions have the same denominator, the bigger numerator = bigger fraction.',ans:true},
+    {s:'1/3 is bigger than 1/6 because thirds are bigger pieces than sixths.',ans:true},
+    {s:'On a number line, 3/4 comes before 1/4.',ans:false},
+  ],
+  sci:[
+    {s:'Fossils can form in sedimentary rock.',ans:true},
+    {s:'A fossil can form in just a few days.',ans:false},
+    {s:'Humus is the rotted plants and animals that make soil rich.',ans:true},
+    {s:'Sandy soil is the best type of soil for growing plants.',ans:false},
+    {s:'Soil is made of rock, humus, water and air.',ans:true},
+  ],
+  soc:[
+    {s:'The Romans came from the city of Rome in Italy.',ans:true},
+    {s:'Julius Caesar successfully invaded Britain in 43 AD.',ans:false},
+    {s:'The Romans ruled Britain for nearly 400 years.',ans:true},
+    {s:'Hadrian\'s Wall was built to protect Roman Britain from the north.',ans:true},
+    {s:'The Roman language was called Greek.',ans:false},
+  ],
+};
+function buildTF(key){
+  const data=tfData[key];const area=document.getElementById(key+'-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td><button class="tf-btn" id="tf-${key}-${i}-T" onclick="selectTF('${key}',${i},'T')">✅ True</button><button class="tf-btn" id="tf-${key}-${i}-F" onclick="selectTF('${key}',${i},'F')">❌ False</button></td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTF);
+function selectTF(key,i,val){
+  document.getElementById('tf-'+key+'-'+i+'-T').classList.remove('selected-t');
+  document.getElementById('tf-'+key+'-'+i+'-F').classList.remove('selected-f');
+  document.getElementById('tf-'+key+'-'+i+'-'+val).classList.add(val==='T'?'selected-t':'selected-f');
+}
+function checkTF(key){
+  const data=tfData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tf-'+key+'-'+i+'-T');const fBtn=document.getElementById('tf-'+key+'-'+i+'-F');
+    const userT=tBtn.classList.contains('selected-t');const userF=fBtn.classList.contains('selected-f');
+    if((item.ans&&userT)||(!item.ans&&userF)){score++;(item.ans?tBtn:fBtn).classList.add('correct-answer');}
+    else{if(userT)tBtn.classList.add('wrong-answer');if(userF)fBtn.classList.add('wrong-answer');(item.ans?tBtn:fBtn).classList.add('correct-answer');}
+    tBtn.disabled=true;fBtn.disabled=true;});
+  const res=document.getElementById(key+'-tf-result');res.style.display='block';
+  if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct.`;}
+}
+
+// ── CRITICAL THINKING ─────────────────────────────────────
+const critData={
+  bible:[
+    {q:'3. The commandments are split into two groups. Commandments 1–4 are about our relationship with God. Commandments 5–10 are about our relationship with other people. Why do you think God gave BOTH types of rules? What does this tell us about what God thinks is important?'},
+    {q:'4. "Rules are a gift, not a punishment." Do you agree? Give TWO reasons to explain your answer. Think about what life would be like WITHOUT any rules.',hint:'Think about: what would happen if people could lie, steal and hurt each other with no rules?'},
+    {q:'5. The memory verse says: "Your word is a lamp to my feet and a light to my path." (Psalm 119:105). What do you think this means? How can God\'s word help us make good choices? Write 3–4 sentences.',hint:'A lamp in the dark helps you see the right path so you do not fall. God\'s word does the same.'},
+  ],
+  eng:[
+    {q:'3. Join each pair of sentences using the conjunction shown. Write the new compound sentence below each pair.'},
+    {q:'4. Write your own compound sentence using each conjunction below. Make sure your two clauses make sense together!'},
+    {q:'5. EXTENDED: Write a short paragraph (4–5 sentences) about a time you felt excited. You MUST use at least THREE different conjunctions from this week. Underline each conjunction you use.'},
+  ],
+  maths:[
+    {q:'3. ORDER these fractions from smallest (1) to largest (4): &nbsp; 3/4 &nbsp; 1/4 &nbsp; 2/4 &nbsp; 4/4. Write them in order and explain how you worked it out.',hint:'All have the same denominator (4) so look at the numerator!'},
+    {q:'4. TRUE or FALSE: 2/6 = 1/3. Show your working to prove your answer. Can you show this another way (e.g. draw it, use a number line)?'},
+    {q:'5. REASONING: Fatima says "1/5 is bigger than 1/3 because 5 is bigger than 3." Is Fatima correct? Explain carefully why she is right OR wrong. Use the words numerator and denominator in your answer.'},
+  ],
+  sci:[
+    {q:'3. Explain in your own words how a fossil forms. Use these words in your answer: animal, sediment, rock, millions of years.',hint:'Think step by step: animal dies → sediment covers it → slowly hardens → becomes fossil.'},
+    {q:'4. A scientist finds a fossil of a sea creature on top of a mountain. Explain how this is possible. What does this tell us about how the Earth changes?'},
+    {q:'5. DESIGN A FAIR TEST: You want to find out which type of soil (sandy, clay or loam) drains water the fastest. Fill in: My question / My prediction / What I change / What I measure / What I keep the same.'},
+  ],
+  soc:[
+    {q:'3. List TWO things the Romans built in Britain AND explain why each one was important.',hint:'Think: roads, towns, baths, Hadrian\'s Wall. Why did each matter for the Romans and for Britain?'},
+    {q:'4. The Romans ruled Britain for nearly 400 years. Do you think this was a good thing or a bad thing for the people of Britain? Give BOTH a positive AND a negative point.',hint:'Positive: roads, laws, new foods. Negative: invasion, people lost their independence.'},
+    {q:'5. EXTENDED: The Romans left Britain in 410 AD — over 1,600 years ago. But their influence is still with us today. Give THREE examples of Roman things we still have or use today. Explain each one clearly.'},
+  ],
+};
+function buildCrit(key){
+  const data=critData[key];const area=document.getElementById(key+'-crit');if(!area)return;
+  let h='';
+  data.forEach(item=>{
+    h+=`<div style="margin-bottom:18px;"><p style="font-weight:800;margin-bottom:6px;line-height:1.55;">${item.q}</p>`;
+    if(item.hint) h+=`<div class="callout" style="background:#FEF3C7;padding:10px 14px;"><div class="callout-icon">💡</div><div class="callout-text" style="font-size:0.85rem;">${item.hint}</div></div>`;
+    h+=`<textarea class="open-box" placeholder="Write your answer here…" style="margin-top:8px;"></textarea></div>`;});
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(k=>buildCrit(k));
+
+// ── ENGLISH QUIZ ──────────────────────────────────────────
+const engQs=[
+  {q:'Which word is a conjunction?',opts:['happy','because','quickly','blue'],ans:1},
+  {q:'Which sentence is a COMPOUND sentence?',opts:['The dog ran.','She is tall.','I was cold so I put on my coat.','The big red apple.'],ans:2},
+  {q:'Which conjunction gives a REASON (answers WHY)?',opts:['and','but','so','because'],ans:3},
+  {q:'"I wanted to play ___ it was raining." Which conjunction fits best?',opts:['because','and','but','when'],ans:2},
+  {q:'Which conjunction is used to ADD one idea to another?',opts:['but','because','and','so'],ans:2},
+];
+let engIdx=0,engScore=0;
+function renderEngQ(){
+  const q=engQs[engIdx];
+  if(!q){document.getElementById('eng-quiz').innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Done! Score: ${engScore}/${engQs.length}</div>`;if(engScore===engQs.length)celebrate();return;}
+  document.getElementById('eng-quiz').innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${engIdx+1}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerEngQ(${i})">${o}</button>`).join('')}</div><div id="eng-quiz-fb" class="quiz-feedback"></div></div>`;
+  document.getElementById('eng-score').textContent=`Score: ${engScore}/${engIdx}`;
+}
+function answerEngQ(i){
+  const q=engQs[engIdx];const opts=document.querySelectorAll('#eng-quiz .quiz-opt');opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');const fb=document.getElementById('eng-quiz-fb');fb.style.display='block';
+  if(i===q.ans){engScore++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct!';}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ The answer is: "${q.opts[q.ans]}"`;}
+  document.getElementById('eng-score').textContent=`Score: ${engScore}/${engIdx+1}`;
+}
+function nextEngQ(){engIdx++;renderEngQ();}
+renderEngQ();
+
+// ── CONFETTI ──────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<50;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*30);}
+}
+const style=document.createElement('style');
+style.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(style);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week8_Day1');</script>
+</body>
+</html>

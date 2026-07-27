@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 8 · KS2 Level 3 · Interactive Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --mgray:#CFD8DC;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:12px;--radius-sm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh;font-size:15px}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1;min-width:100px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:20px;border:2px solid transparent;font-size:12px;font-weight:700;cursor:pointer;transition:.13s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab:hover{opacity:.82}
+.tab.active{color:var(--white)!important}
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.print-btn:hover{opacity:.85}
+.subject-tabs{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap}
+.stab{padding:9px 18px;border-radius:22px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab:hover{opacity:.8}
+.stab.active{color:var(--white)}
+.page{display:none;padding:14px 18px 50px}
+.page.active{display:block}
+.ws-header{background:linear-gradient(130deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.4px;display:inline-block;margin-bottom:4px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--teal);margin:2px 0}
+.ws-sub{font-size:12px;color:var(--gray);font-weight:600}
+.name-line{border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none;width:130px}
+.section{margin-bottom:18px}
+.sec-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num{background:var(--teal);color:var(--white);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--radius-sm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6}
+.l1-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.word-bank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--radius-sm);padding:10px 13px;margin-bottom:14px}
+.word-bank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.word-tag{display:inline-block;background:var(--purple);color:var(--white);border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+.circle-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.opt{border:2px solid var(--amber);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);transition:.12s;background:var(--white)}
+.opt:hover{opacity:.8}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+.tbl-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+table.ws-table input[type=text]{width:100%;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;border-bottom:1px dashed var(--teal-mid);padding:2px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.example-box{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:10px;font-family:'Courier New',monospace}
+.highlight-box{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+.remember-box{border-radius:var(--radius-sm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--white);text-align:center;margin-top:12px}
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.6}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:10px 0}
+.info-card{border-radius:var(--radius-sm);padding:12px;text-align:center;border:2px solid}
+.card-icon{font-size:30px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px;line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:2px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.chk.done{background:var(--teal);color:var(--white)}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.verse-ref{font-size:12px;color:var(--gray);margin-top:6px}
+@media(max-width:600px){.two-col,.three-col,.four-col{grid-template-columns:1fr}}
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">📚 HOS · KS2 Level 3 · Week 8</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const SUBJECTS = [
+  {id:'eng',   label:'📖 English',    col:'#185FA5', lt:'#E6F1FB'},
+  {id:'maths', label:'🔢 Maths',      col:'#0F6E56', lt:'#E1F5EE'},
+  {id:'sci',   label:'🪨 Science',    col:'#C2410C', lt:'#FFF0E6'},
+  {id:'hum',   label:'🌍 Humanities', col:'#534AB7', lt:'#EEEDFE'},
+  {id:'bib',   label:'✝️ Bible',      col:'#B71C1C', lt:'#FFEBEE'},
+];
+
+const WS = {
+
+eng:[
+  { num:1, badge:'Conjunctions & Compound Sentences', title:'What is a Conjunction?',
+    secs:[
+      {t:'Learn the key words',          c:'eng_cj_vocab'},
+      {t:'Spot the conjunction',         c:'eng_cj_spot'},
+      {t:'Which conjunction fits?',      c:'eng_cj_choose'},
+    ]},
+  { num:2, badge:'Conjunctions & Compound Sentences', title:'Joining Sentences',
+    secs:[
+      {t:'Two sentences become one',     c:'eng_cj_join'},
+      {t:'Practise joining',             c:'eng_cj_join_practice'},
+      {t:'Fill in the conjunction',      c:'eng_cj_fill'},
+    ]},
+  { num:3, badge:'Conjunctions & Compound Sentences', title:'Writing With Conjunctions',
+    secs:[
+      {t:'Sentence frames',              c:'eng_cj_frames'},
+      {t:'Write your own sentences',     c:'eng_cj_write'},
+      {t:'Check and improve',            c:'eng_cj_edit'},
+    ]},
+],
+
+maths:[
+  { num:1, badge:'Fractions', title:'Comparing Fractions',
+    secs:[
+      {t:'Learn: numerator and denominator', c:'maths_fr_intro'},
+      {t:'Same denominator — compare tops',  c:'maths_fr_samedenom'},
+      {t:'Same numerator — compare bottoms', c:'maths_fr_samenum'},
+    ]},
+  { num:2, badge:'Fractions', title:'Equivalent Fractions',
+    secs:[
+      {t:'What are equivalent fractions?', c:'maths_fr_equiv'},
+      {t:'Find the equivalent fraction',   c:'maths_fr_equiv_practice'},
+      {t:'Fractions on a number line',     c:'maths_fr_numline'},
+    ]},
+  { num:3, badge:'Fractions', title:'Ordering Fractions',
+    secs:[
+      {t:'Order fractions — same denominator', c:'maths_fr_order1'},
+      {t:'Word problems',                      c:'maths_fr_word'},
+      {t:'Mixed fractions challenge',          c:'maths_fr_mixed'},
+    ]},
+],
+
+sci:[
+  { num:1, badge:'Fossils & Soil', title:'How Do Fossils Form?',
+    secs:[
+      {t:'Learn the key words',     c:'sci_fos_vocab'},
+      {t:'The fossil story',        c:'sci_fos_story'},
+      {t:'Put the stages in order', c:'sci_fos_sequence'},
+    ]},
+  { num:2, badge:'Fossils & Soil', title:'What Can Fossils Tell Us?',
+    secs:[
+      {t:'What fossils teach scientists', c:'sci_fos_teach'},
+      {t:'True or False?',                c:'sci_fos_tf'},
+      {t:'Fossil quiz',                   c:'sci_fos_quiz'},
+    ]},
+  { num:3, badge:'Fossils & Soil', title:'All About Soil',
+    secs:[
+      {t:'What is soil made of?',     c:'sci_soil_made'},
+      {t:'Types of soil',             c:'sci_soil_types'},
+      {t:'Why soil is important',     c:'sci_soil_important'},
+    ]},
+],
+
+hum:[
+  { num:1, badge:'The Romans in Britain', title:'Who Were the Romans?',
+    secs:[
+      {t:'Learn the key words',  c:'hum_rom_vocab'},
+      {t:'The Roman Empire',     c:'hum_rom_empire'},
+      {t:'True or False?',       c:'hum_rom_tf'},
+    ]},
+  { num:2, badge:'The Romans in Britain', title:'The Roman Invasion',
+    secs:[
+      {t:'Timeline of the invasion',  c:'hum_rom_timeline'},
+      {t:'Put the events in order',   c:'hum_rom_sequence'},
+      {t:'Comprehension questions',   c:'hum_rom_questions'},
+    ]},
+  { num:3, badge:'The Romans in Britain', title:'Roman Roads, Towns &amp; Legacy',
+    secs:[
+      {t:'What did the Romans build?',     c:'hum_rom_build'},
+      {t:'The Roman legacy today',         c:'hum_rom_legacy'},
+      {t:'My Romans fact file',            c:'hum_rom_factfile'},
+    ]},
+],
+
+bib:[
+  { num:1, badge:'The Ten Commandments', title:'God Gives the Commandments',
+    secs:[
+      {t:'Learn the key words',     c:'bib_tc_vocab'},
+      {t:'Read the story',          c:'bib_tc_story'},
+      {t:'Put the story in order',  c:'bib_tc_sequence'},
+    ]},
+  { num:2, badge:'The Ten Commandments', title:'The Ten Commandments Explained',
+    secs:[
+      {t:'Comprehension questions',                  c:'bib_tc_questions'},
+      {t:'Loving God or loving people?',             c:'bib_tc_categorize'},
+      {t:'The memory verse',                         c:'bib_tc_verse'},
+    ]},
+  { num:3, badge:'The Ten Commandments', title:'Rules Are a Gift — My Life Application',
+    secs:[
+      {t:'Why rules are a gift, not a punishment', c:'bib_tc_gift'},
+      {t:'How can I keep God\'s rules this week?', c:'bib_tc_apply'},
+      {t:'Draw and write',                          c:'bib_tc_draw'},
+    ]},
+],
+};
+
+function vc(word,meaning,l1,eg,color){
+  color = color || 'teal';
+  return `<div class="vocab-card" style="border-left-color:var(--${color})">
+  <div class="vocab-word" style="color:var(--${color})">${word}</div>
+  <div class="vocab-meaning">${meaning}</div>
+  <div class="vocab-l1">🌍 ${l1}</div>
+  <div class="vocab-eg">✏️ e.g. ${eg}</div>
+</div>`;
+}
+
+function C(key){switch(key){
+
+/* ─── ENGLISH ──────────────────────────────────────────── */
+
+case 'eng_cj_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Conjunction = حرف ربط (Urdu) · حرف عطف (Arabic). A conjunction is a JOINING word — it connects two sentences into one!</div>
+${vc('🔗 Conjunction','A word that joins two sentences or ideas together.','حرف ربط / حرف عطف','"And, but, so, because and when are all conjunctions."','blue')}
+${vc('📝 Compound sentence','Two simple sentences joined by a conjunction.','مرکب جملہ / جملة مركبة','"I was tired but I kept reading" is a compound sentence.','blue')}
+${vc('➕ And','Adds one idea to another.','اور / و','"I like apples and I like oranges."','blue')}
+${vc('↔️ But','Shows a difference or surprise.','لیکن / لكن','"I was tired but I kept going."','blue')}
+${vc('❓ Because','Gives a reason — answers WHY.','کیونکہ / لأن','"I was happy because it was my birthday."','blue')}
+<div class="q-block"><div class="q-text">A conjunction is a <input class="inline-ans" style="width:70px" placeholder="?"/> word that connects two <input class="inline-ans" style="width:80px" placeholder="?"/>.</div></div>`;
+
+case 'eng_cj_spot': return `
+<div class="tip-box"><strong>Find the conjunction</strong> in each sentence below. Click the joining word.</div>
+${[
+  ['I','was','hungry','and','I','ate','my','lunch.','and'],
+  ['She','was','cold','but','she','did','not','wear','a','coat.','but'],
+  ['He','studied','hard','so','he','passed','the','test.','so'],
+  ['I','felt','happy','because','it','was','my','birthday.','because'],
+  ['We','laughed','when','the','dog','jumped','in','the','pool.','when'],
+].map((words,i)=>{
+  const ans=words[words.length-1];const sentence=words.slice(0,-1);
+  return `<div class="q-block"><div class="q-num">Sentence ${i+1}</div><div class="circle-opts">${sentence.map(w=>`<div class="opt" onclick="chk(this,'sp${i}','${w}','${ans}')">${w}</div>`).join('')}</div></div>`;
+}).join('')}`;
+
+case 'eng_cj_choose': return `
+<div class="tip-box"><strong>Choose the BEST conjunction</strong> to complete each sentence.</div>
+${[
+  ['I was tired ___ I went to bed.',['and','so','but'],'so'],
+  ['I like football ___ I like swimming.',['and','because','but'],'and'],
+  ['She wanted to play outside ___ it was raining.',['so','but','because'],'but'],
+  ['He smiled ___ he saw his friend.',['when','because','and'],'when'],
+  ['I was scared ___ the room was dark.',['and','because','so'],'because'],
+].map(([q,opts,ans],i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}</div><div class="q-text">${q}</div>
+<div class="circle-opts">${opts.map(o=>`<div class="opt" onclick="chk(this,'ch${i}','${o}','${ans}')">${o}</div>`).join('')}</div></div>`).join('')}`;
+
+case 'eng_cj_join': return `
+<div class="tip-box"><strong>Two simple sentences can become ONE compound sentence</strong> when you add a conjunction!</div>
+${[
+  ['I was hungry.','I ate my lunch.','and'],
+  ['She studied hard.','She passed the test.','so'],
+  ['He wanted to play.','It was raining.','but'],
+].map(([s1,s2,conj])=>`
+<div class="q-block">
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;font-size:13px;margin-bottom:8px">
+    <div style="background:#FEF3C7;border-radius:6px;padding:6px;text-align:center">${s1}</div>
+    <div style="background:#185FA5;color:#fff;border-radius:20px;padding:3px 10px;font-weight:800;font-size:12px">${conj}</div>
+    <div style="background:#FEF3C7;border-radius:6px;padding:6px;text-align:center">${s2}</div>
+  </div>
+  <div class="q-text">Write the new compound sentence:</div>
+  <input class="ans-line" placeholder="Write your compound sentence here..."/>
+</div>`).join('')}`;
+
+case 'eng_cj_join_practice': return `
+<div class="tip-box"><strong>Now you try!</strong> Join each pair using a good conjunction.</div>
+${[
+  ['I brushed my teeth.','I went to bed.'],
+  ['It was sunny.','We went to the park.'],
+  ['She was nervous.','She gave the best speech.'],
+  ['The dog barked loudly.','It saw a cat.'],
+].map(([s1,s2],i)=>`
+<div class="q-block"><div class="q-num">Pair ${i+1}</div>
+<div class="q-text">${s1} ___ ${s2}</div>
+<input class="ans-line" placeholder="Write your joined sentence using and/but/so/because/when..."/>
+</div>`).join('')}`;
+
+case 'eng_cj_fill': return `
+<div class="word-bank"><strong>Conjunction word bank:</strong>
+${['and','but','so','because','when'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<p style="font-size:14px;margin-bottom:10px">Fill in the best conjunction from the word bank.</p>
+${[
+  'I was cold ___ I put on my coat.',
+  'I like dogs ___ I like cats too.',
+  'She wanted to swim ___ the pool was closed.',
+  'He cried ___ he was happy.',
+  'We ran inside ___ it started to rain.',
+].map((q,i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}</div><div class="q-text">${q}</div>
+<input class="ans-line" placeholder="Type the conjunction..."/>
+</div>`).join('')}`;
+
+case 'eng_cj_frames': return `
+<div class="word-bank"><strong>Conjunction word bank:</strong>
+${['and','but','so','because','when'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="tip-box"><strong>Use a sentence frame to practise:</strong></div>
+${[
+  ['#185FA5','#E6F1FB','I like ___ and I also like ___.'],
+  ['#0F6E56','#E1F5EE','I wanted to ___ but ___.'],
+  ['#C2410C','#FFF0E6','I felt happy because ___.'],
+].map(([col,bg,f])=>`<div style="background:${bg};border:2px solid ${col};border-radius:var(--radius-sm);padding:11px 14px;font-family:Nunito,sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;color:${col}">${f}</div>`).join('')}
+<div class="q-block" style="margin-top:8px"><div class="q-text">Choose ONE sentence frame above and complete it:</div>
+<input class="ans-line" placeholder="Write your sentence..."/></div>`;
+
+case 'eng_cj_write': return `
+<div class="tip-box"><strong>Remember:</strong> Use a different conjunction for each sentence. Make sure both halves of your sentence make sense together!</div>
+${[
+  ['and','Write a sentence using AND.'],
+  ['but','Write a sentence using BUT.'],
+  ['because','Write a sentence using BECAUSE.'],
+  ['so','Write a sentence using SO.'],
+  ['when','Write a sentence using WHEN.'],
+].map(([conj,q],i)=>`
+<div class="q-block"><div class="q-num">${i+1}. ${q}</div>
+<textarea class="ans-box" placeholder="Write your sentence here..."></textarea>
+</div>`).join('')}`;
+
+case 'eng_cj_edit': return `
+<div class="tip-box"><strong>Checking and improving:</strong> Read your sentences again. Tick each box when you check it!</div>
+<div class="q-block">
+${[
+  'I used a conjunction to join two sentences.',
+  'Both halves of my sentence make sense together.',
+  'I chose the BEST conjunction for the meaning.',
+  'I used capital letters and full stops.',
+  'I tried using more than one type of conjunction.',
+].map(item=>`<div class="check-row"><div class="chk" onclick="toggleChk(this)"></div><span>${item}</span></div>`).join('')}
+</div>
+<div class="remember-box" style="background:#185FA5">⭐ REMEMBER: and = adding · but = contrast · so = result · because = reason · when = same time!</div>`,
+
+/* ─── MATHS ────────────────────────────────────────────── */
+
+case 'maths_fr_intro': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Fraction = کسر (Urdu/Arabic). The TOP number is the numerator. The BOTTOM number is the denominator.</div>
+${vc('🔢 Numerator','The number ON TOP. How many parts you have.','صورہ / البسط','"In 3/4, the numerator is 3."','teal')}
+${vc('➗ Denominator','The number ON BOTTOM. The total number of equal parts.','مقام / المقام','"In 3/4, the denominator is 4."','teal')}
+<div class="tip-box" style="margin-top:10px"><strong>Easy trick:</strong> Denominator sounds like "down" — it's the number DOWN at the bottom!</div>
+<div class="q-block"><div class="q-text">In the fraction 5/8: the numerator is <input class="inline-ans" style="width:40px" placeholder="?"/> and the denominator is <input class="inline-ans" style="width:40px" placeholder="?"/>.</div></div>`;
+
+case 'maths_fr_samedenom': return `
+<div class="tip-box"><strong>Same denominator?</strong> Just look at the numerator (top number). Bigger top = bigger fraction!</div>
+<div class="example-box">Which is bigger: 3/8 or 5/8?<br/>Both have 8 pieces total — but 5/8 has MORE pieces.<br/>✅ 5/8 &gt; 3/8</div>
+${[
+  ['2/5','4/5','4/5'],
+  ['7/9','3/9','7/9'],
+  ['1/6','5/6','5/6'],
+  ['6/10','2/10','6/10'],
+].map(([a,b,ans],i)=>`
+<div class="q-block"><div class="q-num">Pair ${i+1}: Which is bigger?</div>
+<div class="circle-opts"><div class="opt" onclick="chk(this,'sd${i}','${a}','${ans}')">${a}</div><div class="opt" onclick="chk(this,'sd${i}','${b}','${ans}')">${b}</div></div></div>`).join('')}`;
+
+case 'maths_fr_samenum': return `
+<div class="tip-box"><strong>Same numerator?</strong> Look at the denominator. SMALLER bottom number = BIGGER pieces = bigger fraction!</div>
+<div class="example-box">Which is bigger: 1/3 or 1/6?<br/>Imagine cutting a pizza into 3 pieces vs 6 pieces.<br/>3 bigger pieces win! ✅ 1/3 &gt; 1/6</div>
+${[
+  ['1/4','1/8','1/4'],
+  ['1/3','1/9','1/3'],
+  ['1/2','1/5','1/2'],
+  ['1/6','1/12','1/6'],
+].map(([a,b,ans],i)=>`
+<div class="q-block"><div class="q-num">Pair ${i+1}: Which is bigger?</div>
+<div class="circle-opts"><div class="opt" onclick="chk(this,'sn${i}','${a}','${ans}')">${a}</div><div class="opt" onclick="chk(this,'sn${i}','${b}','${ans}')">${b}</div></div></div>`).join('')}`;
+
+case 'maths_fr_equiv': return `
+<div class="tip-box"><strong>Equivalent fractions</strong> look different but have the SAME VALUE! Multiply top AND bottom by the same number.</div>
+<div class="example-box">1/2 × 2/2 = 2/4<br/>1/2 × 3/3 = 3/6<br/>1/2 × 4/4 = 4/8<br/>All of these EQUAL 1/2!</div>
+<div class="q-block"><div class="q-text">Fill in the missing numbers to make equivalent fractions:<br/><br/>
+1/2 = ___/4 = ___/6 = ___/8<br/><br/>
+<input class="inline-ans" style="width:50px" placeholder="?"/>, <input class="inline-ans" style="width:50px" placeholder="?"/>, <input class="inline-ans" style="width:50px" placeholder="?"/>
+</div></div>`;
+
+case 'maths_fr_equiv_practice': return `
+<div class="tip-box"><strong>Find the missing number</strong> to complete each equivalent fraction.</div>
+<div class="two-col">
+${[
+  ['1/3 = ?/6','2'],
+  ['2/5 = ?/10','4'],
+  ['3/4 = ?/8','6'],
+  ['1/2 = ?/10','5'],
+  ['2/3 = ?/9','6'],
+  ['1/5 = ?/15','3'],
+].map(([q])=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:var(--teal)">${q}</div>
+  <input type="text" style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal);margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>`;
+
+case 'maths_fr_numline': return `
+<div class="tip-box"><strong>Fractions live on a number line</strong> between 0 and 1. Equal parts = equal spaces!</div>
+<div style="background:#fff;border:2px solid var(--amber-mid);border-radius:var(--radius-sm);padding:16px;margin-bottom:12px">
+  <div style="position:relative;height:40px;margin:0 10px">
+    <div style="position:absolute;top:18px;left:0;right:0;height:3px;background:#0F6E56"></div>
+    ${['0','1/4','1/2','3/4','1'].map((label,i)=>`
+    <div style="position:absolute;top:0;left:${i*25}%;transform:translateX(-50%);text-align:center">
+      <div style="font-size:11px;margin-bottom:2px;font-weight:700;color:#0F6E56">${label}</div>
+      <div style="width:2px;height:20px;background:#0F6E56;margin:0 auto"></div>
+    </div>`).join('')}
+  </div>
+</div>
+<div class="q-block"><div class="q-text">Look at the number line above. Which fraction is HALFWAY between 0 and 1? <input class="inline-ans" style="width:60px" placeholder="?"/></div></div>
+<div class="q-block"><div class="q-text">Which fraction comes right BEFORE 1/2 on the number line? <input class="inline-ans" style="width:60px" placeholder="?"/></div></div>`;
+
+case 'maths_fr_order1': return `
+<div class="tip-box"><strong>Ordering fractions with the same denominator</strong> is easy — just order the numerators!</div>
+<div class="q-block"><div class="q-num">Order these fractions from SMALLEST to LARGEST:</div>
+<div style="font-size:18px;font-weight:800;text-align:center;padding:12px;color:#0F6E56">3/5 &nbsp;·&nbsp; 1/5 &nbsp;·&nbsp; 4/5 &nbsp;·&nbsp; 2/5</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px">
+${[1,2,3,4].map(n=>`<div style="text-align:center"><div style="font-size:11px;color:var(--gray)">Position ${n}</div><input class="inline-ans" style="width:50px;text-align:center;display:block;margin:4px auto"/></div>`).join('')}
+</div></div>
+<div class="q-block"><div class="q-num">Now try this set:</div>
+<div style="font-size:18px;font-weight:800;text-align:center;padding:12px;color:#0F6E56">5/8 &nbsp;·&nbsp; 2/8 &nbsp;·&nbsp; 7/8 &nbsp;·&nbsp; 4/8</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px">
+${[1,2,3,4].map(n=>`<div style="text-align:center"><div style="font-size:11px;color:var(--gray)">Position ${n}</div><input class="inline-ans" style="width:50px;text-align:center;display:block;margin:4px auto"/></div>`).join('')}
+</div></div>`;
+
+case 'maths_fr_word': return `
+<div class="step-box"><div class="step-num">1</div><div class="step-text">Read the question carefully. Find the fractions.</div></div>
+<div class="step-box"><div class="step-num">2</div><div class="step-text">If the denominators are different, make them the SAME first using equivalent fractions.</div></div>
+<div class="step-box"><div class="step-num">3</div><div class="step-text">Compare the numerators to find your answer.</div></div>
+${[
+  ['🍕','A pizza is cut into 8 slices. Sara eats 3/8. Ali eats 1/4. Who eats more pizza?','Change 1/4 into eighths first!'],
+  ['🍰','A cake is cut into 6 pieces. Maya eats 1/3 of it. Tom eats 2/6 of it. Who eats more cake?','Change 1/3 into sixths first!'],
+  ['🧃','A jug has juice. Layla drinks 1/2 of it. Zain drinks 2/4 of it. Who drinks more?','Are these fractions equivalent?'],
+].map(([ico,q,hint],i)=>`
+<div class="q-block"><div class="q-num">${ico} Problem ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--gray);font-style:italic;margin:4px 0 6px">Hint: ${hint}</div>
+<input class="ans-line" placeholder="My working and answer..."/>
+</div>`).join('')}`;
+
+case 'maths_fr_mixed': return `
+<div class="tip-box"><strong>Mixed practice:</strong> Use everything you've learned about fractions!</div>
+<div class="three-col">
+${[
+  ['1/2 ___ 1/3','>'],
+  ['2/4 ___ 1/2','='],
+  ['3/8 ___ 5/8','<'],
+  ['1/5 ___ 1/10','>'],
+  ['2/3 ___ 4/6','='],
+  ['7/10 ___ 3/10','>'],
+].map(([q])=>`
+<div class="q-block" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:16px;font-weight:700;color:var(--teal)">${q}</div>
+  <input type="text" style="width:50px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal);margin-top:4px" placeholder="&lt;,&gt;,="/>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:8px"><div class="q-text">🌟 Challenge: Write THREE fractions that are all equivalent to 1/3. <input class="ans-line" placeholder="1/3 = ___ = ___ = ___"/></div></div>`;
+
+/* ─── SCIENCE ────────────────────────────────────────────── */
+
+case 'sci_fos_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Fossil = آثار متحجر (Urdu) · أحفور (Arabic). A fossil is the shape of a dead plant or animal preserved in rock for millions of years!</div>
+${vc('🦕 Fossil','The shape or remains of a dead plant or animal preserved in rock.','آثار متحجر / أحفور','"We found a fossil of a shell in the rock."','orange')}
+${vc('🌊 Sediment','Tiny bits of rock, sand and mud that settle at the bottom of water.','تہ نشین / رسوب','"Sediment slowly covered the dead animal."','orange')}
+${vc('🪨 Sedimentary rock','Rock made from layers of sediment pressed together over millions of years.','تہ دار چٹان / صخرة رسوبية','"Fossils are found in sedimentary rock."','orange')}
+${vc('🦖 Extinct','A type of animal or plant that has completely died out.','معدوم / منقرض','"Dinosaurs are extinct."','orange')}
+<div class="q-block"><div class="q-text">A fossil forms when an animal is covered by <input class="inline-ans" style="width:90px" placeholder="?"/> which turns into <input class="inline-ans" style="width:80px" placeholder="?"/> over millions of years.</div></div>`;
+
+case 'sci_fos_story': return `
+<div class="tip-box"><strong>Read about how a fossil forms.</strong> It is a VERY slow process!</div>
+<div class="story-box">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:var(--teal)">🦕 How a Fossil Forms</strong><br/><br/>
+<strong>First,</strong> an animal or plant dies and falls into mud or water.<br/><br/>
+<strong>Next,</strong> the soft parts (like skin and muscle) rot away. Only the hard parts — bones, shells, teeth — remain.<br/><br/>
+<strong>Then,</strong> layers of sediment — sand, mud, tiny rock pieces — slowly cover the hard parts, year after year.<br/><br/>
+<strong>After that,</strong> over MILLIONS of years, the sediment hardens into rock. The bones also slowly turn to rock, keeping their shape.<br/><br/>
+<strong>Finally,</strong> earth movements push the rock up. Scientists can dig and find the fossil, sometimes high up on mountains!
+</div>
+<div class="q-block"><div class="q-text">How long does it usually take for a fossil to form?</div>
+<input class="ans-line" placeholder="It takes ..."/></div>`;
+
+case 'sci_fos_sequence': return `
+<div class="tip-box"><strong>Sequence</strong> = the correct order. Number the stages 1–5.</div>
+${[
+  ['Earth movements push the fossil up where we can find it.','5'],
+  ['An animal dies and falls into mud or water.','1'],
+  ['The sediment hardens into rock over millions of years.','4'],
+  ['The soft parts rot away — only hard parts remain.','2'],
+  ['Layers of sediment slowly cover the hard parts.','3'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="" placeholder="?" style="width:36px;height:36px;border:2px solid var(--orange);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--orange);background:var(--orange-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'sci_fos_teach': return `
+<div class="tip-box"><strong>Fossils teach us a lot</strong> about life millions of years ago!</div>
+<div class="card-grid">
+${[
+  ['🦕','Ancient life','What animals and plants lived long ago.'],
+  ['📏','Size &amp; shape','How big they were and what they looked like.'],
+  ['🌡️','Old environments','What the climate and landscape was like.'],
+  ['⏳','Time','Scientists use fossils to work out the age of rocks.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--orange)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">Name ONE thing fossils can teach scientists: <input class="ans-line" placeholder="Fossils can teach us ..."/></div></div>`;
+
+case 'sci_fos_tf': return `
+<p style="font-size:14px;margin-bottom:10px">Read each statement. True or False?</p>
+${[
+  ['Fossils can form in just a few days.','False'],
+  ['Fossils are found in sedimentary rock.','True'],
+  ['Extinct means a species has completely died out.','True'],
+  ['Sediment is made of rotted plants only.','False'],
+  ['Fossils can tell scientists about ancient habitats.','True'],
+  ['Fossils only form from animals, never plants.','False'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'ftf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'ftf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_fos_quiz': return `
+<p style="font-size:14px;margin-bottom:10px">Test yourself! Click the correct answer.</p>
+${[
+  ['What is a fossil?','Remains of a plant/animal preserved in rock','A type of soil','A living animal','Remains of a plant/animal preserved in rock'],
+  ['Where are fossils found?','Sedimentary rock','Igneous rock','Metal','Sedimentary rock'],
+  ['How long does a fossil take to form?','Millions of years','A few days','One year','Millions of years'],
+  ['What happens to the soft parts of a dead animal?','They rot away','They turn to rock first','They disappear instantly','They rot away'],
+  ['What does "extinct" mean?','Completely died out','Very common','Newly discovered','Completely died out'],
+  ['What pushes fossils up to where we can find them?','Earth movements','Rain','Wind alone','Earth movements'],
+].map(([q,o1,o2,o3,ans],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div><div class="q-text">${q}</div>
+<div class="circle-opts">${[o1,o2,o3].map(o=>`<div class="opt" onclick="chk(this,'fq${i}','${o}','${ans}')">${o}</div>`).join('')}</div></div>`).join('')}`;
+
+case 'sci_soil_made': return `
+<div class="tip-box"><strong>Soil is a MIX of four things!</strong></div>
+<div class="highlight-box">🪨 <strong>Tiny rock pieces</strong> — broken down from larger rocks<br/>
+🍂 <strong>Humus</strong> — rotted dead plants and animals<br/>
+💧 <strong>Water</strong> — needed by plant roots<br/>
+🌬️ <strong>Air</strong> — in tiny spaces between soil bits</div>
+<div class="q-block"><div class="q-text">List the 4 parts of soil: <input class="ans-line" placeholder="Soil is made of ..."/></div></div>`;
+
+case 'sci_soil_types': return `
+<div class="tip-box"><strong>There are 3 main types of soil</strong> — each feels and behaves differently!</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Type</th><th>Feels like</th><th>Good for plants?</th></tr></thead><tbody>
+<tr><td><strong>🏖️ Sandy</strong></td><td>Gritty, light, drains fast</td><td>Not great — nutrients wash away</td></tr>
+<tr><td><strong>🏺 Clay</strong></td><td>Heavy, sticky, holds water</td><td>Gets waterlogged — hard for roots</td></tr>
+<tr><td><strong>🌱 Loam</strong></td><td>Mix of sand, clay and humus</td><td>BEST — holds water AND drains well</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-text">Which type of soil is BEST for growing plants? <input class="inline-ans" style="width:100px" placeholder="?"/></div></div>`;
+
+case 'sci_soil_important': return `
+<div class="tip-box"><strong>Soil is essential for life on Earth!</strong></div>
+<div class="card-grid">
+${[
+  ['🌾','Growing food','Most of our food comes from plants grown in soil.'],
+  ['🐛','Home for animals','Millions of tiny creatures live in soil.'],
+  ['💧','Water filter','Soil cleans water as it passes through.'],
+  ['🌍','Holds carbon','Healthy soil stores carbon for the environment.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--green-light);border-color:var(--green)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--green)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">Why is soil important? Give ONE reason: <input class="ans-line" placeholder="Soil is important because ..."/></div></div>`;
+
+/* ─── HUMANITIES ────────────────────────────────────────── */
+
+case 'hum_rom_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Romans = رومی (Urdu) · الرومان (Arabic). Empire = سلطنت (Urdu) · إمبراطورية (Arabic).</div>
+${vc('🏛️ Romans','People from Rome, Italy, who built one of the greatest empires in history.','رومی / الرومان','"The Romans ruled many countries."','purple')}
+${vc('👑 Empire','A very large area ruled by one powerful ruler called an Emperor.','سلطنت / إمبراطورية','"The Roman Empire stretched across Europe."','purple')}
+${vc('⚔️ Invasion','When an army enters another country by force.','حملہ / غزو','"The Romans invaded Britain in 43 AD."','purple')}
+${vc('🏗️ Infrastructure','Roads, buildings and systems that help a place work well.','بنیادی ڈھانچہ / بنية تحتية','"Roman roads were great infrastructure."','purple')}
+${vc('🏛️ Legacy','The lasting effect something leaves behind.','ورثہ / إرث','"Roman roads are still part of Britain\'s legacy."','purple')}`;
+
+case 'hum_rom_empire': return `
+<div class="tip-box"><strong>The Romans came from Rome, Italy</strong> and built one of the biggest empires the world has ever seen!</div>
+<div class="card-grid">
+${[
+  ['🗺️','Huge size','The empire stretched from Britain to Egypt and Persia.'],
+  ['👑','One ruler','The Emperor was the powerful ruler of the whole empire.'],
+  ['👥','70 million people','At its peak, over 70 million people lived under Roman rule.'],
+  ['🏗️','Great builders','Romans built roads, baths, and amazing buildings.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--purple-light);border-color:var(--purple)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--purple)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Where did the Romans come from? <input class="ans-line" placeholder="The Romans came from ..."/></div></div>`;
+
+case 'hum_rom_tf': return `
+<p style="font-size:14px;margin-bottom:10px">True or False?</p>
+${[
+  ['The Romans came from the city of Rome in Italy.','True'],
+  ['The Roman Empire only included Britain.','False'],
+  ['Julius Caesar successfully invaded and ruled Britain in 55 BC.','False'],
+  ['The Romans built straight roads across Britain.','True'],
+  ['The Romans left Britain in 410 AD.','True'],
+  ['English has no words that come from Latin.','False'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'rtf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'rtf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'hum_rom_timeline': return `
+<div class="tip-box"><strong>Key dates in Roman Britain.</strong> Read the timeline carefully.</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Date</th><th>Event</th></tr></thead><tbody>
+<tr><td><strong>55 BC</strong></td><td>Julius Caesar first tried to invade Britain but returned to Rome.</td></tr>
+<tr><td><strong>43 AD</strong></td><td>Emperor Claudius successfully invaded Britain with a large army.</td></tr>
+<tr><td><strong>122 AD</strong></td><td>Emperor Hadrian built a huge wall across northern England.</td></tr>
+<tr><td><strong>410 AD</strong></td><td>The Romans left Britain to defend Rome from attacks.</td></tr>
+</tbody></table></div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">When did the Romans successfully invade Britain? <input class="inline-ans" style="width:80px" placeholder="?"/></div></div>`;
+
+case 'hum_rom_sequence': return `
+<div class="tip-box"><strong>Put these events in the correct order.</strong></div>
+${[
+  ['The Romans built roads, towns and Hadrian\'s Wall.','3'],
+  ['Julius Caesar first tried to invade Britain but went home.','1'],
+  ['The Romans left Britain to defend Rome.','4'],
+  ['Emperor Claudius successfully invaded Britain.','2'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="" placeholder="?" style="width:36px;height:36px;border:2px solid var(--purple);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--purple);background:var(--purple-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'hum_rom_questions': return `
+<div class="tip-box"><strong>Remember:</strong> Use full sentences to answer.</div>
+${[
+  ['Who led the first attempt to invade Britain?','The first attempt was led by ...'],
+  ['Which Emperor successfully invaded Britain?','Britain was successfully invaded by ...'],
+  ['Why was Hadrian\'s Wall built?','Hadrian\'s Wall was built to ...'],
+  ['When did the Romans leave Britain?','The Romans left Britain in ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div><div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--purple);font-style:italic;margin:4px 0 6px">Sentence frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'hum_rom_build': return `
+<div class="tip-box"><strong>The Romans were amazing builders!</strong> They left a huge mark on Britain.</div>
+<div class="card-grid">
+${[
+  ['🛣️','Roads','Straight roads connecting towns — some are still used today!'],
+  ['🏙️','Towns','New towns like Londinium (London), Eboracum (York).'],
+  ['🏛️','Baths','Public bathing houses where people washed and relaxed.'],
+  ['🧱','Hadrian\'s Wall','A 73-mile wall to protect Roman Britain.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--purple-light);border-color:var(--purple)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--purple)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Name TWO things the Romans built in Britain: <input class="ans-line" placeholder="The Romans built ..."/></div></div>`;
+
+case 'hum_rom_legacy': return `
+<div class="tip-box"><strong>Roman influence is STILL with us today</strong> — over 1,600 years after they left!</div>
+<div class="highlight-box">🏙️ Our <strong>cities</strong> — London, York, Bath started as Roman towns<br/>
+🛣️ Our <strong>roads</strong> — many modern roads follow Roman routes<br/>
+📖 Our <strong>language</strong> — thousands of English words come from Latin<br/>
+⚖️ Our <strong>laws</strong> — written laws for everyone, a Roman idea<br/>
+📅 Our <strong>calendar</strong> — July and August are named after Roman rulers!</div>
+<div class="q-block"><div class="q-text">Name ONE thing the Romans left behind that we still use today: <input class="ans-line" placeholder="We still use ..."/></div></div>`;
+
+case 'hum_rom_factfile': return `
+<div class="q-block"><div class="q-num">🏛️ My Romans Fact File</div>
+<div style="line-height:2.8;font-size:14px;margin-top:8px">
+The Romans came from the city of: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+The Romans successfully invaded Britain in the year: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+The Roman ruler was called an: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+A wall built to protect Roman Britain was called: <input class="ans-line" placeholder="?"/><br/>
+The Romans left Britain in the year: <input class="inline-ans" style="width:120px" placeholder="?"/><br/>
+One interesting fact I remember: <input class="ans-line" placeholder="..."/>
+</div></div>`;
+
+/* ─── BIBLE ─────────────────────────────────────────────── */
+
+case 'bib_tc_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Moses is called موسیٰ (Musa) in Arabic and Urdu — honoured in Islam too! Commandment = حکم (Urdu) · وصية (Arabic).</div>
+${vc('📜 Commandment','A rule or instruction that God gives His people.','حکم / وصية','"God gave Moses ten commandments on Mount Sinai."')}
+${vc('⛰️ Mount Sinai','The mountain where God gave Moses the Ten Commandments.','کوہ سینا / جبل سيناء','"Moses went up Mount Sinai to receive God\'s laws."')}
+${vc('🧱 Stone tablets','Two flat pieces of stone on which God wrote the commandments.','پتھر کی تختیاں / ألواح الحجر','"God wrote the commandments on stone tablets."')}
+${vc('🙏 Worship','To honour, love and praise God with your whole heart.','عبادت / عبادة','"We worship God because He made us and loves us."')}
+${vc('🤝 Covenant','A special promise between God and His people.','عہد / عهد','"The Ten Commandments were part of God\'s covenant."')}`;
+
+case 'bib_tc_story': return `
+<div class="tip-box"><strong>Bible reference:</strong> Exodus 19–20 · <strong>Key theme:</strong> God gives His people rules to help them live well and love each other.</div>
+<div class="story-box" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:16px;font-family:Nunito,sans-serif;color:var(--red)">📜 Moses and the Ten Commandments</strong><br/><br/>
+<strong>Beginning —</strong> God had freed His people from slavery in Egypt. Moses led them through the desert until they reached Mount Sinai, a tall rocky mountain.<br/><br/>
+<strong>Middle —</strong> God called Moses up the mountain. There was thunder, lightning and thick cloud — the people were afraid and stayed at the bottom. Moses went up to meet God.<br/><br/>
+On the mountain, God gave Moses His laws — the Ten Commandments. They were written on two stone tablets. The first four commandments showed how to love GOD. The last six showed how to love OTHER PEOPLE.<br/><br/>
+<strong>End —</strong> The commandments were not a punishment — they were a GIFT. A guide to help people live well, treat each other kindly, and stay close to God.
+</div>
+<div class="q-block"><div class="q-text">Why do you think God gave the commandments? Write one sentence:</div>
+<input class="ans-line" placeholder="God gave the commandments because ..."/></div>`;
+
+case 'bib_tc_sequence': return `
+<div class="tip-box"><strong>Sequence</strong> = the correct order.</div>
+${[
+  ['God freed His people from slavery in Egypt.','1'],
+  ['The people camped at the foot of Mount Sinai.','2'],
+  ['God called Moses up the mountain.','3'],
+  ['God gave Moses the Ten Commandments on stone tablets.','4'],
+  ['Moses came down and told the people God\'s laws.','5'],
+].map(([ev,num],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" value="" placeholder="?" style="width:36px;height:36px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--red);background:var(--red-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'bib_tc_questions': return `
+<div class="tip-box"><strong>Remember:</strong> Use full sentences. Use the sentence frame: "I think ... because ..."</div>
+${[
+  ['Where did God give Moses the commandments?','God gave Moses the commandments on ...'],
+  ['What were the commandments written on?','The commandments were written on ...'],
+  ['How many commandments did God give?','God gave Moses ...'],
+  ['Were the commandments a punishment or a gift? Why?','I think the commandments were a ... because ...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div><div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0 6px">Sentence frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'bib_tc_categorize': return `
+<div class="tip-box"><strong>Some commandments are about LOVING GOD. Some are about LOVING PEOPLE.</strong> Sort each one!</div>
+${[
+  ['Do not put any other gods before God.','God'],
+  ['Honour your father and your mother.','People'],
+  ['Do not steal.','People'],
+  ['Remember the Sabbath and keep it holy.','God'],
+  ['Do not lie.','People'],
+  ['Do not misuse the name of God.','God'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'cat${i}','God','${ans}')">❤️ About God</div>
+    <div class="opt" onclick="chk(this,'cat${i}','People','${ans}')">🤝 About People</div>
+  </div>
+</div>`).join('')}`;
+
+case 'bib_tc_verse': return `
+<div class="verse-box">
+<div style="font-size:12px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">⭐ MEMORY VERSE — Psalm 119:105</div>
+<div class="verse-text">"Your word is a lamp to my feet<br/>and a light to my path."</div>
+<div class="verse-ref">— Psalm 119:105</div>
+</div>
+<div class="tip-box"><strong>What does this mean?</strong><br/>A lamp helps you see in the dark so you don't trip. God's word (His rules and promises) helps us see the RIGHT path in life!</div>
+<div class="q-block"><div class="q-text">Fill in the missing words:</div>
+<div style="font-size:15px;line-height:2.8;font-family:Nunito,sans-serif;margin-top:8px">
+"Your <input class="inline-ans" style="width:60px" placeholder="?"/> is a lamp to my <input class="inline-ans" style="width:60px" placeholder="?"/><br/>
+and a <input class="inline-ans" style="width:60px" placeholder="?"/> to my <input class="inline-ans" style="width:60px" placeholder="?"/>."<br/>
+— <input class="inline-ans" style="width:120px" placeholder="book and verse?"/>
+</div></div>
+<div class="q-block"><div class="q-text">Write the verse from memory — no peeking!</div>
+<textarea class="ans-box" style="min-height:60px" placeholder="Your word is a lamp..."></textarea></div>`;
+
+case 'bib_tc_gift': return `
+<div class="tip-box"><strong>Why are rules a gift, not a punishment?</strong> Think about a good parent giving rules to keep a child safe.</div>
+<div class="card-grid">
+${[
+  ['😊','Rules protect us','The commandments stop people hurting each other.'],
+  ['🤝','Rules build trust','Honest, kind people make stronger communities.'],
+  ['💛','Rules show love','God gave commandments because He loves people.'],
+  ['🕊️','Rules bring peace','Following God\'s rules brings fairness for everyone.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--red-light);border-color:var(--red)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--red)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Why do you think rules are a gift and not a punishment? <input class="ans-line" placeholder="Rules are a gift because ..."/></div></div>`;
+
+case 'bib_tc_apply': return `
+<div class="tip-box"><strong>God's commandments still matter today!</strong> Let's think about your own life.</div>
+<div class="q-block"><div class="q-text">Choose ONE commandment. How could you keep it this week?</div>
+<textarea class="ans-box" placeholder="I will try to ..."></textarea></div>
+<div class="q-block"><div class="q-text">Think of a rule at home or school that is similar to one of the Ten Commandments. What is it?</div>
+<input class="ans-line" placeholder="One rule at home/school is ..."/></div>
+<div class="q-block"><div class="q-text">How does following good rules make a family or classroom a happier place?</div>
+<textarea class="ans-box" placeholder="Following good rules helps because ..."></textarea></div>`;
+
+case 'bib_tc_draw': return `
+<div class="q-block"><div class="q-text">Draw Mount Sinai with Moses receiving the stone tablets from God.</div>
+<div style="border:2px dashed var(--red);border-radius:8px;height:160px;background:var(--red-light);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:13px;font-style:italic">⛰️ Draw Moses and the stone tablets here!</div></div>
+<div class="q-block"><div class="q-text">Write one sentence about what you learned from the Ten Commandments:</div>
+<input class="ans-line" placeholder="I learned that ..."/></div>
+<div class="remember-box" style="background:#B71C1C">⭐ REMEMBER: God gave Moses 10 commandments on Mount Sinai. They are a gift of love, showing us how to love God and love people! 📜</div>`;
+
+default: return '<p>Content coming soon!</p>';
+}}
+
+let curSubj = 'eng';
+let curLesson = 1;
+
+function chk(el, group, val, ans){
+  const opts = el.parentElement.querySelectorAll('.opt');
+  opts.forEach(o=>o.classList.remove('correct','wrong'));
+  if(val === ans){
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    opts.forEach(o=>{ if(o.textContent.trim() === ans) o.classList.add('correct'); });
+  }
+}
+
+function toggleChk(el){
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+function render(){
+  const subjectTabs = document.getElementById('subjectTabs');
+  const navTabs = document.getElementById('navTabs');
+  const pages = document.getElementById('pages');
+
+  subjectTabs.innerHTML = '';
+  SUBJECTS.forEach(s=>{
+    const el = document.createElement('div');
+    el.className = 'stab' + (s.id === curSubj ? ' active' : '');
+    el.textContent = s.label;
+    el.style.borderColor = s.col;
+    el.style.color = s.id === curSubj ? '#fff' : s.col;
+    if(s.id === curSubj) el.style.background = s.col;
+    el.onclick = () => { curSubj = s.id; curLesson = 1; render(); };
+    subjectTabs.appendChild(el);
+  });
+
+  const subj = SUBJECTS.find(s=>s.id === curSubj);
+  const lessons = WS[curSubj];
+
+  navTabs.innerHTML = '';
+  lessons.forEach(l=>{
+    const el = document.createElement('div');
+    el.className = 'tab' + (l.num === curLesson ? ' active' : '');
+    el.textContent = 'Lesson ' + l.num;
+    el.style.borderColor = subj.col;
+    el.style.color = l.num === curLesson ? '#fff' : subj.col;
+    if(l.num === curLesson) el.style.background = subj.col;
+    el.onclick = () => { curLesson = l.num; render(); };
+    navTabs.appendChild(el);
+  });
+
+  const lesson = lessons.find(l=>l.num === curLesson);
+  pages.innerHTML = `
+  <div class="page active">
+    <div class="ws-header">
+      <div>
+        <div class="ws-badge">${lesson.badge}</div>
+        <div class="ws-title">${lesson.title}</div>
+        <div class="ws-sub">Lesson ${lesson.num} of ${lessons.length} · ${subj.label} · Week 8</div>
+      </div>
+      <div>Name: <input class="name-line"/></div>
+    </div>
+    ${lesson.secs.map((sec,i)=>`
+    <div class="section">
+      <div class="sec-title"><span class="sec-num">${i+1}</span>${sec.t}</div>
+      ${C(sec.c)}
+    </div>`).join('')}
+  </div>`;
+}
+
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week8_Lessons');</script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 8 · Day 2 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 8</div>
+  <div class="day-badge">📅 Day 2</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 2 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">⚖️</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 8 · Day 2</div>
+  <div class="hero-title">The Commandments —<br>Deeper Analysis</div>
+  <div class="hero-subtitle">Law and love · Each command examined · Application to daily life</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and identification. Focus on the two-tablet structure.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Two Tablets, Two Categories</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The Ten Commandments were written on TWO stone tablets. This was not just practical — it showed two categories. Tablet 1 (commands 1-4) = our VERTICAL relationship with God. Tablet 2 (commands 5-10) = our HORIZONTAL relationships with people. Think of a cross: one line going up (God), one line going across (people). Both lines are essential.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Sort the ten commandments into the correct tablet. Then for each tablet, write what theme connects all the commands on it. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="TABLET 1 (Commands 1-4 — about GOD):&#10;List them: &#10;Common theme: &#10;&#10;TABLET 2 (Commands 5-10 — about PEOPLE):&#10;List them: &#10;Common theme: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>TABLET 1:</strong> 1. No other gods. 2. No idols. 3. Do not misuse God's name. 4. Keep the Sabbath. <strong>Theme:</strong> Exclusive worship and reverence for the one true God — protecting the vertical relationship between humans and their Creator. <strong>TABLET 2:</strong> 5. Honour parents. 6. Do not murder. 7. Do not commit adultery. 8. Do not steal. 9. Do not give false testimony. 10. Do not covet. <strong>Theme:</strong> Protection of human dignity, family, property, truth, and inner life — maintaining right relationships within a community.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Which commandment is described as "the first commandment with a promise"? What is the promise and where is it found? Why do you think God attaches a promise to this specific command? <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Which commandment: ___&#10;The promise: &#10;Where it is found: &#10;Why God attaches a promise to this one: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Commandment 5 — <strong>Honour your father and mother</strong>. The promise: "so that you may live long in the land the LORD your God is giving you" (Exodus 20:12). Ephesians 6:2-3 (Paul, writing in the New Testament) calls it "the first commandment with a promise." <strong>Why a promise is attached:</strong> Commandment 5 is the bridge between the two tablets — it connects the God-focused commands (1-4) to the people-focused commands (6-10). Family is the first and most fundamental human community. God attaches a promise because honouring parents is the foundation of social stability — children who respect and care for parents build societies where the elderly are protected, wisdom is passed down, and family loyalty is strong. The promise is both personal (long life) and national (long in the land) — stable families lead to stable nations.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">The Sabbath commandment (4th) says people should rest one day in seven. The lesson says it protects people "from becoming slaves to work." Explain this in your own words. Why might someone NEED a law to make them rest? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Explain 'slaves to work' in simple words:&#10;&#10;Why someone might need a law to make them rest:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"Slaves to work" means that if people never stop working, work becomes the thing that controls their life — they have no freedom from it. Without rest, people can be exploited by employers who demand endless hours, or they might feel they can never stop without something going wrong. <strong>Why a law is needed:</strong> In a competitive world, an individual might feel they cannot afford to take a day off — especially if their employer demands 7 days, or if others around them keep working. A law makes it a universal right and expectation — everyone rests, so no one is at a disadvantage for resting. It also establishes that human beings are more than their productivity — they have dignity regardless of how much they produce. The Sabbath teaches that God provides; people do not have to earn everything by ceaseless effort.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Deeper thinking about individual commands and their application.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Each Command Examined</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">The lesson says Commandment 6 (do not murder) is rooted in the idea that human beings are made in God's image (Genesis 1:27 — "imago Dei" from Week 2). Explain the connection: why does being made in God's image make murder wrong in a way that goes beyond just "it harms someone"? <span class="marks">5 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 2 Bible — imago Dei (the image of God), what it means for human dignity.</div>
+    <textarea class="q-input wide" placeholder="What imago Dei means (from Week 2):&#10;&#10;Why this makes murder more than just 'harming someone':&#10;&#10;What this says about the value of every human life:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Imago Dei means that every human being — regardless of age, nationality, gender, ability, or any other characteristic — bears the image of God. When God made humans in his image (Genesis 1:27), he placed something of his own character into them: the capacity for relationship, creativity, moral reasoning, and love. <strong>Why murder is more than just harm:</strong> To murder someone is not just to harm a biological organism — it is to destroy something that bears God's own image. It is an attack on what God has chosen to reflect himself through. Genesis 9:6 makes this explicit: "Whoever sheds human blood, by humans shall their blood be shed; for in the image of God has God made mankind." The reason given is not social (it disrupts society) or practical (it hurts someone) — it is theological: the victim bore God's image. This gives every human being an inherent dignity that cannot be taken away by any earthly authority, and it makes the protection of human life a fundamentally religious obligation, not merely a social one.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">Commandment 9 says "do not give false testimony against your neighbour." This was originally about lying in court. But how does the spirit of this commandment apply to everyday life today? Give THREE modern examples of situations where this commandment's principle applies. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Original meaning (in legal/court context):&#10;&#10;Modern example 1 (where the same principle applies today):&#10;Modern example 2:&#10;Modern example 3:&#10;&#10;What this shows about what God values regarding truth:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Original meaning:</strong> In ancient Israel, courts relied entirely on witnesses. False testimony could send an innocent person to prison or death. The commandment protected the legal system and people's reputations from being destroyed by lies. <strong>Modern example 1 — Social media:</strong> Spreading false rumours about someone online — sharing a screenshot out of context, posting lies about someone's character — is a form of bearing false witness. It can destroy someone's reputation just as effectively as a courtroom lie. <strong>Modern example 2 — Workplace or school:</strong> Falsely blaming a colleague or classmate for a mistake you made, or reporting something they did not do, is bearing false witness in a different setting. <strong>Modern example 3 — Gossip and exaggeration:</strong> Telling stories about someone that are partly true but exaggerated or misleading — making them look worse than they are — is a softer but real form of false testimony. <strong>What this shows about truth:</strong> God values truth because trust in community depends on it. Lies destroy relationships, harm reputations, and make cooperation impossible. Truth is not just a rule — it is the foundation on which every community rests.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">Jesus deepens several commandments in Matthew 5 (the Sermon on the Mount). He says: "You have heard that it was said, 'Do not murder'... But I tell you that anyone who is angry with a brother or sister will be subject to judgment." What principle is Jesus demonstrating about the relationship between inner life and outward behaviour? How does this connect to Commandment 10 (do not covet)? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What Jesus is showing about inner life and outward behaviour:&#10;&#10;How Commandment 10 already pointed to this same principle:&#10;&#10;What this means for how we understand God's law:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Jesus is demonstrating that the commandments have always been about the heart, not just the hands. Every outward sinful act begins as an inward one: murder begins as unresolved anger; adultery begins as lust; stealing begins as coveting. When Jesus says "you have heard... but I tell you," he is not replacing the commandments — he is explaining what they always meant at the deepest level. <strong>Connection to Commandment 10:</strong> Commandment 10 already pointed to this principle — it is the only commandment explicitly about a desire (coveting), not an action. The Tenth Commandment is prophetic of what Jesus teaches in the Sermon on the Mount: God always cared about the inner life, not just outward conformity. The commandments work from outside in AND from inside out — they call people to outward behaviour (do not steal) and inner character (do not covet). <strong>What this means:</strong> God's law is not a checklist of actions — it is a description of a transformed heart. This is why Paul writes (Romans 2:15) that the law is "written on the heart" — the goal is not to follow rules but to become the kind of person who naturally lives by their principles.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended essay. Write with theological precision and clear structure.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Extended Essay</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">"The Ten Commandments are not ten separate rules — they are one vision of what life looks like when people love God and love their neighbours." Do you agree with this statement? Write a full response (minimum 10 sentences) using at least FIVE specific commandments as evidence. Include a clear conclusion that takes a position. <span class="marks">15 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="Write your full response here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Clear position stated at the beginning or end. At least 5 specific commandments used as evidence (not just listed — explained in terms of love). Understanding of the two-tablet structure (love for God / love for people). Connection to Matthew 22:37-40 (Jesus's summary). Recognition that the commandments form a coherent vision, not a random list. Strong conclusion. <strong>What a strong response argues:</strong> The commandments, far from being arbitrary restrictions, describe what a community looks like when both dimensions of love are practiced. The first four commands describe what honouring God fully looks like — exclusivity (no other gods), proper worship (no idols), reverence in speech (no misuse of name), and rhythm of life (Sabbath rest). The next six describe what honouring people fully looks like — family honour (parents), protection of life (murder), fidelity in covenant (adultery), honesty with property (stealing), honesty with words (false testimony), and honesty with desire (coveting). Together they make a complete picture: a society where God is truly honoured and every person is truly valued. The statement is therefore accurate — the commandments are not ten separate items but one integrated description of love lived out in practice. Jesus confirms this when he says "all the Law and the Prophets hang on these two commandments" — not "many of them" or "most of them," but ALL.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 2 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">✍️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 8 · Day 2</div>
+  <div class="hero-title">Body Paragraphs &<br>Cohesive Writing</div>
+  <div class="hero-subtitle">Building body paragraphs · Error correction · Writing across subjects</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Practice</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Identifying good and weak writing. Cohesive devices practice.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Identifying Good Writing</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> A body paragraph has a very clear job: prove ONE point. If you have two points, you need two paragraphs. Think of each paragraph as a "mini-essay": it has a point (topic sentence), proof (supporting details), and a bridge to the next point (linking sentence). One point. Proven. Connected.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Read these two body paragraphs. Identify which is STRONGER and explain specifically what makes the weaker one poor. Then rewrite one weak element of the weaker paragraph to improve it. <span class="marks">5 marks</span><br><br><strong>Paragraph A:</strong> "Cities are good. Many people live in cities. Cities have shops and hospitals. Furthermore, cities have many jobs. People like cities because they are nice."<br><br><strong>Paragraph B:</strong> "Urbanisation has accelerated dramatically since the Industrial Revolution, fundamentally reshaping where and how people live. In 1800, fewer than 3% of the world's population lived in urban areas; today, more than 55% do. This shift occurred because cities offered employment in factories and services that simply did not exist in rural areas. As a result, millions of people made the rational decision to leave agricultural communities in search of better wages and living standards."</div>
+    <textarea class="q-input wide" placeholder="Which paragraph is stronger? ___&#10;&#10;What makes Paragraph A weak (be specific):&#10;&#10;Rewritten version of one weak sentence from A:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Paragraph B is stronger.</strong> <strong>What makes A weak:</strong> (1) The topic sentence ("Cities are good") is vague — what does "good" mean? It makes no specific claim that can be developed. (2) The supporting details are facts without explanation: "cities have shops and hospitals" — so what? Why does that matter? (3) The word "nice" is informal, vague, and unacademic — it says nothing specific. (4) The cohesive device "Furthermore" is used correctly, but the surrounding sentences are so weak it cannot save the paragraph. (5) There is no linking sentence. <strong>Improved topic sentence for A:</strong> "Cities provide significantly better access to healthcare, employment, and education than rural areas, making them attractive destinations for millions of migrants every year."</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">The following paragraph uses the same cohesive device four times. Rewrite it using FOUR DIFFERENT devices (one per sentence that needs a connector). Keep the same information but vary the language. <span class="marks">4 marks</span><br><br><em>"Filtration is used to separate insoluble solids from liquids. Furthermore, the solid is too large to pass through filter paper. Furthermore, the liquid collects below as the filtrate. Furthermore, filtration is used when the solid does not dissolve. Furthermore, this technique is used in water purification."</em></div>
+    <textarea class="q-input wide" placeholder="Rewrite the paragraph with varied cohesive devices:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Filtration is used to separate insoluble solids from liquids. <strong>Specifically,</strong> the solid particles are too large to pass through the tiny holes in filter paper — they collect as residue in the funnel. <strong>Meanwhile,</strong> the liquid passes through and collects in the flask below as the filtrate. <strong>This technique is therefore most appropriate</strong> when the solid does not dissolve in the liquid — for example, sand in water. <strong>In practice,</strong> filtration is widely used in water purification systems to remove particles and make water safe to drink. (Accept any four different, correctly used cohesive devices.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Building and expanding paragraphs from topic sentences.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Building Body Paragraphs</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Expand each topic sentence into a full paragraph (4-6 sentences). Add supporting details, cohesive devices, and a linking sentence at the end. <span class="marks">10 marks — 5 per paragraph</span><br><br><strong>Topic Sentence A:</strong> "Push factors such as poverty and conflict have driven mass migration throughout human history."<br><br><strong>Topic Sentence B:</strong> "Algebra is not just a classroom exercise — it is a tool used in almost every field of modern work."</div>
+    <textarea class="q-input xwide" placeholder="Paragraph A (expand from the topic sentence):&#10;&#10;&#10;Paragraph B (expand from the topic sentence):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award for each paragraph (5 marks each):</strong> Topic sentence clearly maintained as focus (1). At least 2 specific supporting details — facts, examples, data (2). At least 2 different cohesive devices used correctly (1). A linking sentence that connects to the next idea or transitions out of the paragraph (1). <strong>For Paragraph A:</strong> Strong responses will include examples (Syrian refugee crisis, Irish famine, wartime displacement), specific push factors named and explained, reference to scale (UNHCR data: over 100 million forcibly displaced today). <strong>For Paragraph B:</strong> Strong responses will name real-world uses (engineers design structures using algebra; programmers write code using variables; scientists model experiments algebraically; financial analysts build formulas), explain the principle (unknown = variable), and link to real life the student can relate to.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Write a full conclusion paragraph (4-5 sentences) for an essay titled: <em>"Why is understanding the Ten Commandments still important today?"</em> The essay had these main points: (1) commandments protect human dignity, (2) they formed the basis of many modern laws, (3) Jesus showed their heart is love. Your conclusion must restate the thesis, summarise the points, and give a final thought. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Conclusion paragraph (restate thesis + summarise + final thought):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example conclusion:</strong> The Ten Commandments remain a profoundly relevant framework, not merely as ancient religious law but as a description of what it takes for any human community to flourish. Their insistence on protecting human dignity — from the prohibition on murder to the protection of truth — echoes in the human rights frameworks that govern international law today. Furthermore, Jesus's summary — love God completely, love others as yourself — reveals that the commandments were never merely a list of restrictions but a vision of transformed character. In short, to understand the Ten Commandments is to understand what love looks like when it is organised into social life. That is not a lesson confined to ancient Israel; it is a lesson that every generation must learn for itself. <strong>Award marks for:</strong> thesis restated in new words (not copied), all 3 main points referenced briefly, no new information introduced, meaningful final thought, formal register.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Full multi-subject expository essay. Use knowledge from this week across subjects.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Cross-Subject Expository Essay</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Write a complete 5-paragraph expository essay (introduction + 3 body paragraphs + conclusion) on this title: <span class="marks">15 marks</span><br><br><strong>"This week's subjects — law, language, mathematics, science, and geography — all share one underlying theme: the search for order in a complex world." Do you agree? Use specific evidence from ALL FIVE of this week's subjects to support your answer.</strong><br><br>Planning space: sketch your structure before writing.</div>
+    <textarea class="q-input xwide" style="min-height:300px;" placeholder="PLANNING:&#10;Thesis: &#10;Body 1 topic (which subjects and what connection): &#10;Body 2 topic: &#10;Body 3 topic: &#10;Conclusion approach: &#10;&#10;FULL ESSAY:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Introduction (3): hook + background + clear thesis taking a position. Body paragraph 1 (3): strong topic sentence + 2+ cross-subject connections developed with evidence. Body paragraph 2 (3): different angle + 2+ subject connections. Body paragraph 3 (3): either a third angle or a counterargument addressed. Conclusion (2): thesis in new words + 3 points summarised + meaningful close. Language (1): 4+ cohesive devices, formal register, academic vocabulary. <strong>Strong connections to draw:</strong> Bible/commandments = God imposing moral order on human chaos. Algebra = imposing mathematical order on unknown quantities — converting chaos (unknown) into knowable expressions. Separation techniques = imposing physical order on mixed substances — extracting clarity from complexity. Expository writing = imposing linguistic order on ideas — structure makes meaning. Settlement/geography = humans imposing human order on physical landscape — choosing where to live, building towns, organising space. The underlying theme of "order from complexity" ties them all together. A strong student might also argue a counterpoint: that some subjects reveal irreducible complexity (a food web cannot be reduced to a single chain; a perfect mixture cannot always be fully separated; some communities must migrate regardless of planning) — showing that order is always sought but never complete.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 2 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">🔢</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 8 · Day 2</div>
+  <div class="hero-title">Algebra —<br>Harder Problems</div>
+  <div class="hero-subtitle">Multi-step simplification · Substitution with negatives · Writing and solving expressions</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Harder Problems</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Speed round. Collect like terms and substitute without a calculator.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Speed Round — Core Skills</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Simplify by collecting like terms: <span class="marks">6 marks</span><br>a) 10x − 3x + 2x &nbsp; b) 4a + 5b + 2a − 3b &nbsp; c) 9y + 4 − 5y − 1 &nbsp; d) 3p + 2q + p − 5q + 6 &nbsp; e) 7m − 3n − 7m + n &nbsp; f) 6x + 2y − x + y − 3</div>
+    <textarea class="q-input wide" placeholder="a) &#10;b) &#10;c) &#10;d) &#10;e) &#10;f) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (10−3+2)x = <strong>9x</strong> &nbsp; b) (4+2)a+(5−3)b = <strong>6a+2b</strong> &nbsp; c) (9−5)y+(4−1) = <strong>4y+3</strong> &nbsp; d) (3+1)p+(2−5)q+6 = <strong>4p−3q+6</strong> &nbsp; e) (7−7)m+(−3+1)n = <strong>−2n</strong> (the m terms cancel!) &nbsp; f) (6−1)x+(2+1)y−3 = <strong>5x+3y−3</strong></div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Evaluate each expression. Show substitution with brackets: <span class="marks">6 marks</span><br>a) 4x−7 when x=3 &nbsp; b) 3a+2b when a=5,b=4 &nbsp; c) n²−4 when n=5 &nbsp; d) 2x²+3x when x=2 &nbsp; e) 20−3y when y=6 &nbsp; f) (x+y)² when x=3,y=2</div>
+    <textarea class="q-input wide" placeholder="a) &#10;b) &#10;c) &#10;d) &#10;e) &#10;f) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 4(3)−7=12−7=<strong>5</strong> &nbsp; b) 3(5)+2(4)=15+8=<strong>23</strong> &nbsp; c) (5)²−4=25−4=<strong>21</strong> &nbsp; d) 2(2)²+3(2)=8+6=<strong>14</strong> &nbsp; e) 20−3(6)=20−18=<strong>2</strong> &nbsp; f) (3+2)²=(5)²=<strong>25</strong></div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Perimeters, areas, and real-life algebraic problems.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Algebra in Geometry & Real Life</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Find the perimeter of each shape by writing and simplifying an algebraic expression: <span class="marks">6 marks</span><br><br>a) A rectangle with length (3x+2) and width x<br>b) A triangle with sides (2n+1), (n+3), and (n+2)<br>c) A square with side length (2y−1)<br>d) A pentagon with all sides equal to (a+4)<br>e) A rectangle with length (5p+1) and width (2p−3)<br>f) A triangle with sides 4m, (m+7), and (3m−2)</div>
+    <textarea class="q-input wide" placeholder="a) Perimeter = 2(3x+2)+2(x) = &#10;b) Perimeter = (2n+1)+(n+3)+(n+2) = &#10;c) Perimeter = 4(2y−1) = &#10;d) Perimeter = 5(a+4) = &#10;e) Perimeter = &#10;f) Perimeter = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 2(3x+2)+2x = 6x+4+2x = <strong>8x+4</strong> &nbsp; b) (2n+1)+(n+3)+(n+2) = 4n+6 = <strong>4n+6</strong> &nbsp; c) 4(2y−1) = <strong>8y−4</strong> &nbsp; d) 5(a+4) = <strong>5a+20</strong> &nbsp; e) 2(5p+1)+2(2p−3) = 10p+2+4p−6 = <strong>14p−4</strong> &nbsp; f) 4m+(m+7)+(3m−2) = 8m+5 = <strong>8m+5</strong></div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Solve these word problems by (1) writing an algebraic expression, (2) simplifying it, and (3) evaluating if values are given: <span class="marks">6 marks</span><br><br>a) A shop sells n items at £4 each and m items at £7 each. Write an expression for total revenue. Find revenue when n=15 and m=8.<br>b) A class has x students. Five students are absent. The number present is doubled for a special event. Write a simplified expression for the number at the event.<br>c) A rectangle's length is (3n+2) and width is n. Find the area (area = length × width). Expand and find the area when n=4.<br>d) A delivery driver travels 3k km in the morning and (2k−5) km in the afternoon. Write a simplified expression for total distance. Find total distance when k=12.</div>
+    <textarea class="q-input xwide" placeholder="a) Expression: ___ When n=15,m=8: ___&#10;b) Expression for number present: x−5. After doubling: 2(x−5) = ___&#10;c) Area expression: (3n+2)×n = ___ When n=4: ___&#10;d) Expression: ___ When k=12: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Revenue = <strong>4n+7m</strong>. When n=15,m=8: 4(15)+7(8) = 60+56 = <strong>£116</strong>. b) Present = x−5. Doubled = 2(x−5) = <strong>2x−10</strong>. c) Area = n(3n+2) = <strong>3n²+2n</strong>. When n=4: 3(16)+8 = 48+8 = <strong>56 square units</strong>. d) Total = 3k+(2k−5) = <strong>5k−5</strong>. When k=12: 5(12)−5 = 60−5 = <strong>55 km</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step problems and algebraic reasoning.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Two expressions are equal: 5x+3 = 3x+11. Find the value of x by working backwards. Then verify your answer. Explain each step clearly. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Step 1 (what you do to both sides first):&#10;Step 2:&#10;x = ___&#10;Verification (substituting back into BOTH expressions):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">5x+3 = 3x+11. <strong>Step 1:</strong> subtract 3x from both sides: 5x−3x+3 = 11 → 2x+3 = 11. <strong>Step 2:</strong> subtract 3 from both sides: 2x = 8. <strong>Step 3:</strong> divide both sides by 2: x = <strong>4</strong>. <strong>Verification:</strong> Left side: 5(4)+3 = 23. Right side: 3(4)+11 = 23. ✓ Both sides equal 23, so x=4 is correct.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">Three consecutive numbers (numbers that follow each other: like 5, 6, 7) can be written as n, n+1, and n+2. (a) Write an expression for their sum. (b) Simplify the expression. (c) If the sum equals 39, find the value of n and then find the three numbers. (d) Check by adding the three numbers. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Sum expression: &#10;(b) Simplified: &#10;(c) Set equal to 39 and solve for n: &#10;    n = ___ so the three numbers are: ___&#10;(d) Check: ___ + ___ + ___ = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Sum = n+(n+1)+(n+2). (b) = <strong>3n+3</strong>. (c) 3n+3 = 39 → 3n = 36 → n = <strong>12</strong>. Three numbers: <strong>12, 13, 14</strong>. (d) 12+13+14 = <strong>39 ✓</strong>. <strong>Extension note:</strong> This shows the power of algebra — instead of guessing and checking, you write one expression, set it equal to a value, and solve systematically. Any three consecutive numbers can be found this way if you know their sum.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 2 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🌊</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 8 · Day 2</div>
+  <div class="hero-title">Distillation &<br>Chromatography</div>
+  <div class="hero-subtitle">How distillation works · Chromatography in detail · Real-world applications</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Distillation and chromatography recall. Focus on process and purpose.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Distillation & Chromatography Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Condenser</strong> is the key piece of equipment in distillation. It is a glass tube surrounded by cold water. When steam (hot vapour) travels through the condenser, it cools down and turns back into a liquid. This is called <strong>condensation</strong> — the reverse of evaporation. Cold → liquid. Hot → gas. The condenser converts gas BACK to liquid so we can collect it.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Describe the complete process of simple distillation step by step. Name the key pieces of equipment used at each stage and explain what happens at each step. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Equipment list:&#10;&#10;Step 1 (what you do and what happens):&#10;Step 2 (what piece of equipment is used next and why):&#10;Step 3 (what the condenser does):&#10;Step 4 (what you collect and where):&#10;&#10;What remains in the original flask?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Equipment:</strong> round-bottom flask, heat source (Bunsen burner or hotplate), thermometer, condenser (Liebig condenser), cold water supply, collection beaker/flask. <strong>Step 1:</strong> Pour the salt water (or mixture) into the round-bottom flask. Apply heat — the water is heated to its boiling point (100°C for pure water). <strong>Step 2:</strong> The water turns to steam (water vapour) and rises up the tube. The salt cannot vaporise at this temperature — it stays dissolved in the remaining liquid in the flask. <strong>Step 3:</strong> The steam travels into the condenser — a glass tube surrounded by cold water. The cold water jacket cools the steam, causing it to condense back into liquid (pure water). <strong>Step 4:</strong> The condensed pure water drips out of the end of the condenser into a collection beaker. <strong>Remaining in flask:</strong> The salt (and any remaining concentrated solution) stays in the flask — it could not evaporate at 100°C.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Explain how paper chromatography separates a mixture of dyes. In your answer, explain: what Rf value is, why different dyes travel different distances, and what you can read from the result. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="How paper chromatography works:&#10;&#10;Why different dyes travel different distances:&#10;&#10;What Rf value is and how you calculate it:&#10;&#10;What you can read from the chromatogram:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>How it works:</strong> A spot of the ink or dye mixture is placed at the bottom of chromatography paper (above the solvent line). The paper is placed in a small amount of solvent (water or alcohol). The solvent travels up the paper by capillary action, carrying the dissolved substances with it. <strong>Why different distances:</strong> Each substance has different attractions to the paper (stationary phase) and the solvent (mobile phase). A substance that "prefers" the solvent is carried further up; one that "prefers" sticking to the paper moves less. This means each substance in the mixture travels a characteristic distance. <strong>Rf value:</strong> Rf (Retention Factor) = distance travelled by substance ÷ distance travelled by solvent. Rf values are always between 0 and 1. Each pure substance has a known, fixed Rf value in a given solvent — so you can identify an unknown substance by comparing its Rf to known values. <strong>Reading the chromatogram:</strong> The number of spots shows how many substances were in the mixture. The position of each spot (its Rf) allows identification. If two substances have the same Rf, they may be the same compound.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Applying techniques and evaluating results.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Application & Evaluation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">A forensic scientist is analysing ink from three different pens (A, B, C) found at a crime scene. She runs a chromatography test and gets these results:<br><br>• Solvent travelled 8 cm<br>• Pen A: one spot at 6 cm<br>• Pen B: two spots at 3 cm and 6 cm<br>• Pen C: two spots at 3 cm and 7.2 cm<br><br>(a) Calculate the Rf value for each spot. (b) Which pen or pens share a component dye? (c) The crime scene note was written with an ink that has components at Rf = 0.375 and Rf = 0.9. Which pen was most likely used? Explain your reasoning. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Rf values:&#10;Pen A: spot at 6cm → Rf = 6÷8 = ___&#10;Pen B: spot at 3cm → Rf = ___ ; spot at 6cm → Rf = ___&#10;Pen C: spot at 3cm → Rf = ___ ; spot at 7.2cm → Rf = ___&#10;&#10;(b) Which pens share a component?&#10;&#10;(c) Which pen was used for the crime note? Reasoning:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Pen A: 6÷8 = <strong>0.75</strong>. Pen B: 3÷8 = <strong>0.375</strong>; 6÷8 = <strong>0.75</strong>. Pen C: 3÷8 = <strong>0.375</strong>; 7.2÷8 = <strong>0.9</strong>. (b) Pens B and C both have a component with Rf = 0.375 (the spot at 3 cm). They share this dye. Pens A and B share a component with Rf = 0.75 (the spot at 6 cm). (c) The crime scene note has components at Rf = 0.375 and Rf = 0.9. Pen C has spots at exactly Rf = 0.375 and Rf = 0.9. Therefore <strong>Pen C</strong> is most likely the pen used to write the crime note. Pen B has the 0.375 component but its second component is 0.75, not 0.9 — so it is not a match.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">A student wants to obtain pure water from sea water. She has access to a Bunsen burner, a beaker, an evaporating dish, a thermometer, some glass tubing, and ice. She does NOT have a proper condenser.<br><br>(a) Which technique should she use — evaporation or distillation? (b) How could she set up a basic distillation without a proper condenser, using only the equipment listed? (c) What would be wrong with using evaporation instead? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Technique: ___&#10;(b) Improvised setup:&#10;(c) Problem with using evaporation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) She should use <strong>distillation</strong> — because she wants to collect pure WATER, not the salt. Evaporation would let the water escape and leave the salt behind, giving her nothing to drink. (b) <strong>Improvised distillation:</strong> Heat the sea water in a beaker. Place a piece of glass tubing at an angle so steam rises through it. Surround the tube with ice (or cold water in another container) to cool the steam — the steam will condense and drip out the end of the tube into a collection beaker. The ice acts as an improvised condenser. (c) <strong>Problem with evaporation:</strong> Evaporation lets the water vapour escape into the air — it is NOT collected. You would be left with dry salt crystals and no water at all. If her goal is to collect pure drinking water, evaporation gives her the wrong product. Distillation specifically captures and recondenses the water vapour.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Real-world applications and extended scientific evaluation.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Real-World Science</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">Water purification is one of humanity's most important industrial processes. Drinking water is separated from contaminated or salty water using various techniques. <br><br>(a) Explain how distillation could in theory provide unlimited clean water from sea water.<br>(b) Describe TWO practical limitations of using distillation on an industrial scale for producing drinking water.<br>(c) A different technique — reverse osmosis — forces sea water through a very fine membrane to remove salt particles. Which separation technique studied this week is most SIMILAR in principle to reverse osmosis? Explain the similarity.<br>(d) Why does access to clean water matter geographically? Connect to this week's History/Geography lesson. <span class="marks">11 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-subject link:</strong> History/Geography — settlement factors: water supply as the primary reason people settle where they do.</div>
+    <textarea class="q-input xwide" placeholder="(a) How distillation could provide clean water from sea water:&#10;&#10;(b) Two practical limitations:&#10;1. &#10;2. &#10;&#10;(c) Most similar technique and explanation:&#10;&#10;(d) Geographical connection to settlement:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) The ocean contains virtually unlimited salt water. Distillation could heat sea water, collect the steam (pure water vapour), and condense it back into pure drinking water. The salt and minerals remain behind. In principle, any amount of sea water could be purified this way, providing limitless fresh water in coastal areas. (b) <strong>Limitation 1 — Energy cost:</strong> Heating large quantities of sea water to boiling point requires enormous amounts of energy. On an industrial scale, this is extremely expensive and, if fossil fuels are used, environmentally damaging. <strong>Limitation 2 — Scale and speed:</strong> Distillation is slow — you can only produce as much fresh water as you can boil and condense at any one time. Meeting the water needs of a large city this way would require an enormous number of distillation units. (c) Reverse osmosis is most similar to <strong>filtration</strong>. In filtration, a filter medium (paper) has holes small enough to let water through but too small for solid particles. In reverse osmosis, a very fine membrane has holes too small for salt ions to pass through but large enough for water molecules. Both techniques use the principle of physical separation by particle/ion size — smaller particles pass through; larger ones are blocked. (d) <strong>Geographical connection:</strong> This week's lesson showed that water supply is the number one factor in where people have settled throughout history — all ancient civilisations began near rivers (Nile, Tigris-Euphrates, Indus). Today, regions with reliable fresh water support the highest population densities on Earth. Countries in the Middle East and North Africa face water scarcity despite their oil wealth — and countries like Saudi Arabia use desalination (industrial-scale distillation and reverse osmosis) to supplement limited natural water. The lesson from history is unchanged: where water goes, settlement follows.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 2 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">📊</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 8 · Day 2</div>
+  <div class="hero-title">Urbanisation &<br>World Population</div>
+  <div class="hero-subtitle">Population growth data · Causes of urbanisation · Consequences and challenges</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Population growth facts and causes of urbanisation.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Population Growth & Urbanisation</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Urbanisation</strong> has two parts: "urban" (city) + "-isation" (the process of becoming). Urbanisation = the process of becoming more city-based. It does NOT mean just building more cities — it means a shift in WHERE most people live. When more than 50% of a country's people live in cities, that country is considered "urbanised." Pakistan, for example, is urbanising rapidly — Karachi is one of the fastest-growing cities in the world.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Use the population data from the lesson to answer these questions: <span class="marks">5 marks</span><br><br>a) How long did it take for world population to grow from 1 billion (1800) to 2 billion (1927)?<br>b) How long did it take to grow from 4 billion (1974) to 8 billion (approximately 2022)?<br>c) What does this pattern tell you about the RATE of population growth?<br>d) The lesson says only 3% of people lived in cities in 1800. Today it is over 55%. In your own words, how dramatic is this change?<br>e) Name TWO inventions or developments since 1800 that helped population grow so fast.</div>
+    <textarea class="q-input wide" placeholder="a) Years from 1 billion to 2 billion: ___&#10;b) Years from 4 billion to 8 billion: ___&#10;c) What this pattern shows about the rate of growth:&#10;d) How dramatic the urban shift is:&#10;e) Two developments that helped population grow:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 1927 − 1800 = <strong>127 years</strong>. b) 2022 − 1974 = approximately <strong>48 years</strong>. c) The rate of population growth has been <strong>accelerating</strong> — it is happening faster and faster. It took 127 years to add the second billion but only 48 years to double from 4 to 8 billion. Each new billion people is being added more quickly than the one before. d) In 1800, 97 out of every 100 people lived in the countryside — cities were tiny by modern standards. Today, more than half of all humans live in cities. This is one of the most dramatic shifts in where humans live in all of history — essentially a complete reversal of the rural-urban balance within just 200 years. e) <strong>Improvements in medicine/vaccines</strong> (reduced child deaths, increased life expectancy). <strong>Agricultural improvements</strong> (better crop varieties, fertilisers, irrigation allowed more food to be produced, feeding more people). Also: improved sanitation, clean water systems, antibiotics.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Give FOUR specific reasons why urbanisation has happened so rapidly since the Industrial Revolution (roughly 1760 onwards). For each reason, explain the mechanism — not just what happened, but WHY it led to urban growth. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Reason 1 and WHY it led to urban growth:&#10;Reason 2 and WHY:&#10;Reason 3 and WHY:&#10;Reason 4 and WHY:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Factory jobs (pull factor):</strong> Factories in cities needed large numbers of workers. Machines replaced farm labourers in rural areas (push factor), while urban factory wages were higher than farm wages — so people moved for economic survival and improvement. 2. <strong>Railways and transport:</strong> Trains allowed people to move to cities quickly and cheaply, and allowed food to be transported into cities to feed large urban populations that could not grow their own food. 3. <strong>Better services in cities:</strong> As cities grew, hospitals, schools, and shops concentrated there — creating more pull factors for families wanting access to healthcare and education. 4. <strong>Rural to urban migration cycle:</strong> Once some people moved to cities, they wrote home and encouraged family and friends to follow. Chain migration (following family) became a powerful pull factor in itself. Also: farm mechanisation continued to reduce the number of rural workers needed, pushing more people off the land.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Consequences of urbanisation and comparing regions.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Consequences & Comparison</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Urbanisation has both positive and negative consequences. For each consequence below, state whether it is POSITIVE or NEGATIVE and explain its impact clearly: <span class="marks">6 marks</span><br><br>a) Greater access to hospitals, schools, and shops<br>b) Overcrowding and the growth of slums (informal settlements with poor housing)<br>c) More job opportunities in services and industry<br>d) Higher air pollution from traffic and factories<br>e) Cultural diversity and innovation as people from different backgrounds meet<br>f) Loss of agricultural land as cities expand into farmland</div>
+    <textarea class="q-input wide" placeholder="a) P or N? Impact:&#10;b) P or N? Impact:&#10;c) P or N? Impact:&#10;d) P or N? Impact:&#10;e) P or N? Impact:&#10;f) P or N? Impact:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Positive</strong> — improves health outcomes, education levels, and quality of life. People in rural areas may travel hours to see a doctor; in a city, healthcare is nearby. b) <strong>Negative</strong> — slums lack clean water, sanitation, and safe housing. Millions of urban migrants worldwide live in informal settlements (shanty towns, favelas) with poor living conditions. c) <strong>Positive</strong> — cities create diverse economies less dependent on weather or a single crop. Employment in services (retail, healthcare, education, finance) is more stable than subsistence farming. d) <strong>Negative</strong> — cities concentrate traffic, industry, and energy use. Air pollution causes respiratory illness and contributes to climate change. e) <strong>Positive</strong> — mixing of different cultures, skills, and ideas in cities often drives innovation in arts, science, and business. Many great inventions and cultural movements began in cities. f) <strong>Negative</strong> — urban sprawl reduces the land available for food production, creating tensions between housing needs and food security. This is a growing issue in countries with rapidly expanding cities like Pakistan, India, and Nigeria.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson says urbanisation is a GLOBAL trend, but it is happening at different speeds in different parts of the world. High-income countries (like the UK, USA, Japan) urbanised mostly between 1800-1950. Lower-income countries (like Pakistan, Nigeria, Bangladesh) are urbanising rapidly NOW. <br><br>(a) Why might urbanisation be happening faster in lower-income countries today than it did in the UK in the 1800s?<br>(b) What challenges might a rapidly urbanising lower-income country face that a wealthy country did not face in the same way?<br>(c) Connect to science: how does access to clean water (separation techniques) become even more important in rapidly growing cities? <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Why faster urbanisation in lower-income countries today:&#10;&#10;(b) Challenges for lower-income countries:&#10;&#10;(c) Clean water connection to separation techniques:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Several factors accelerate urbanisation in lower-income countries today compared with Victorian Britain: <strong>communication technology</strong> (mobile phones and social media allow people in rural areas to know immediately about job opportunities in cities); <strong>global markets</strong> (global competition has made small-scale farming less viable, pushing people off rural land faster); <strong>population growth</strong> (higher birth rates in rural areas create more people than the land can support, generating stronger push factors). The speed of transport has also increased. (b) <strong>Challenges:</strong> Lower-income countries urbanising rapidly often lack the pre-existing infrastructure (piped water, sewage systems, electricity grids, roads) that wealthy countries built slowly over 150 years. Cities like Karachi or Lagos grow faster than governments can build housing, schools, or water systems — leading to large informal settlements. Governments also have fewer financial resources to invest in infrastructure at the speed needed. Environmental laws may be weaker, leading to worse pollution. (c) <strong>Clean water connection:</strong> As cities grow rapidly, groundwater sources and rivers can become contaminated by sewage, industrial waste, and agricultural chemicals. The techniques of filtration and distillation are the fundamental scientific processes behind water treatment plants — filtration removes suspended particles and some bacteria; further treatment (using chemicals and sometimes distillation) removes dissolved contaminants. A city of 10 million people needs industrial-scale water purification running constantly. Without the science of separation, urbanisation would quickly become a public health crisis — contaminated water causes cholera, typhoid, and other diseases that historically killed millions in rapidly growing industrial cities.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended synthesis. Bring together geography, science, and history.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Extended Synthesis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">"The movement of people from countryside to city is not just a geographical fact — it is the defining story of the modern world." Write a full extended response (minimum 10 sentences) evaluating this claim. Use evidence from at least THREE of this week's subjects and at least ONE cross-week connection (any previous week). Include a clear conclusion. <span class="marks">12 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connections available:</strong> Week 2 (ancient river civilisations), Week 6 (physical geography and landforms), Week 7 (climate zones and biomes), Week 8 Science (water purification), Week 8 Maths (algebra to model population growth), Week 8 English (expository writing about migration), Week 8 Bible (the commandments and community).</div>
+    <textarea class="q-input xwide" style="min-height:260px;" placeholder="Write your extended evaluation here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Clear position on the claim stated at opening or close (2). Evidence from at least 3 this week's subjects (3). Evidence from at least 1 previous week (1). Accurate factual content — population data, urbanisation rates, causes (2). Discussion of complexity — not just agreeing but examining what it means to call this "the defining story" (1). Counter-argument or nuance acknowledged (1). Formal language and organised structure (1). Meaningful conclusion (1). <strong>Strong responses might argue:</strong> The shift from rural to urban is indeed the defining demographic fact — from 3% to 55% urban in 200 years is unprecedented in human history. Science (water purification, sanitation) made urban life survivable — without filtration and distillation at scale, the sewage-contaminated water of early industrial cities killed thousands (cholera epidemics in Victorian London). Algebra and mathematics made urban planning possible — engineers designed water systems, bridges, and grid layouts using mathematics. The Bible's commandments (justice, truth, honouring persons) are tested most acutely in the anonymous, crowded conditions of a city where people live in proximity to strangers rather than community members. Physical geography (Week 6) shows that urbanisation has concentrated on coastlines, river plains, and temperate zones — even modern cities follow ancient settlement logic. However, the counter-argument: for billions of people, urbanisation has brought misery — slums, pollution, separation from community and land. The claim may idealise what has often been a story of displacement, exploitation, and inequality alongside genuine opportunity. The best conclusion holds both truths.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week8_Day2');</script>
+</body>
+</html>
