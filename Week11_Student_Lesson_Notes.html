@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 11 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --pink:#BE185D;--pink-light:#FCE7F3;
+  --cyan:#0E7490;--cyan-light:#CFFAFE;
+  --gray:#5F5E5A;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+.nav{background:#fff;border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.step{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px;margin-bottom:8px}
+.step-n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-t{font-size:13px;line-height:1.6}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:12px}
+.wbank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 11 · Student Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover', label:'🏠 Cover',       col:'#0F6E56'},
+  {id:'eng',   label:'✏️ English',    col:'#BE185D'},
+  {id:'maths', label:'🔢 Maths',      col:'#0F6E56'},
+  {id:'sci',   label:'🧲 Science',    col:'#C2410C'},
+  {id:'hum',   label:'🌍 Humanities', col:'#0E7490'},
+  {id:'bib',   label:'✝️ Bible',      col:'#B71C1C'},
+];
+
+const PAGES={
+
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#BE185D);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 11 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['✏️','English','Adverbs & Time Connectives','#9D174D','#FCE7F3'],
+      ['🔢','Maths','Time — Telling the Time & Duration','#065F46','#D1FAE5'],
+      ['🧲','Science','Forces — Magnets','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','Climate Zones & World Environments','#164E63','#CFFAFE'],
+      ['✝️','Bible','Ruth — Loyalty and Kindness','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+</div>`,
+
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#9D174D,#BE185D)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 11</div>
+  <div class="banner-title">✏️ English — Adverbs &amp; Time Connectives</div>
+  <div class="banner-sub">First · Next · Then · After that · Finally · Adverbs of manner</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Time connective = <strong>وقت کا ربط</strong> — Urdu · <strong>رابط زمني</strong> — Arabic<br/>
+Sequence = <strong>ترتیب</strong> — Urdu · <strong>تسلسل</strong> — Arabic<br/>
+Adverb of manner = <strong>طریقے کا ظرف</strong> — Urdu · <strong>ظرف الأسلوب</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['⏰ Time connective','A word or phrase showing WHEN something happens or the ORDER of events.','وقت کا ربط / رابط زمني','"First, wash your hands."','#BE185D'],
+  ['📋 Sequence','The ORDER in which things happen — first to last.','ترتیب / تسلسل','"Follow the sequence of steps."','#BE185D'],
+  ['🏃 Adverb of manner','Describes HOW an action is done. Usually ends in -ly.','طریقے کا ظرف / ظرف الأسلوب','"She carefully mixed the batter."','#BE185D'],
+  ['🔗 Connective','Any word that joins ideas, sentences or clauses together.','ربط / رابط','"I went out because it was sunny."','#BE185D'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE 5 KEY TIME CONNECTIVES</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Time connective</th><th>When to use it</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>First / To begin with</strong></td><td>The very first step</td><td><em>First,</em> boil the water.</td></tr>
+<tr><td><strong>Next / Then</strong></td><td>The following step</td><td><em>Next,</em> add the pasta.</td></tr>
+<tr><td><strong>After that</strong></td><td>The step after that</td><td><em>After that,</em> stir well.</td></tr>
+<tr><td><strong>Meanwhile</strong></td><td>Two things at the same time</td><td><em>Meanwhile,</em> heat the sauce.</td></tr>
+<tr><td><strong>Finally / Lastly</strong></td><td>The very last step</td><td><em>Finally,</em> serve and enjoy.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>ADVERBS OF MANNER</div>
+<div class="tip"><strong>Adverbs of manner</strong> describe HOW an action is done. Most are made by adding <strong>-ly</strong> to an adjective.</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Adjective</th><th>Adverb of manner</th><th>Example</th></tr></thead><tbody>
+<tr><td>careful</td><td><strong>carefully</strong></td><td>She carefully carried the glass.</td></tr>
+<tr><td>quick</td><td><strong>quickly</strong></td><td>He quickly packed his bag.</td></tr>
+<tr><td>quiet</td><td><strong>quietly</strong></td><td>They quietly entered the hall.</td></tr>
+<tr><td>gentle</td><td><strong>gently</strong></td><td>She gently placed the egg down.</td></tr>
+<tr><td>brave</td><td><strong>bravely</strong></td><td>He bravely stepped forward.</td></tr>
+<tr><td>slow</td><td><strong>slowly</strong></td><td>The tortoise slowly moved on.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>MODEL HOW-TO GUIDE</div>
+<div style="background:#FCE7F3;border:2px solid #BE185D;border-radius:var(--rsm);padding:14px 18px;font-size:14px;line-height:2.4;font-family:'Nunito',sans-serif">
+  <strong>How to make a sandwich:</strong><br/>
+  <strong>First,</strong> <em>carefully</em> lay two slices of bread on the plate.<br/>
+  <strong>Next,</strong> <em>generously</em> spread butter on each slice.<br/>
+  <strong>Then,</strong> <em>neatly</em> place your filling on one slice.<br/>
+  <strong>After that,</strong> <em>gently</em> press both slices together.<br/>
+  <strong>Finally,</strong> <em>carefully</em> cut the sandwich in half and serve.
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>PRACTICE — FILL IN THE GAPS</div>
+<div class="wbank"><strong>Word bank:</strong>
+${['First','Next','Then','After that','Finally','carefully','gently','quickly','quietly','bravely'].map(w=>`<span class="wtag">${w}</span>`).join('')}
+</div>
+${[
+  '___, turn on the oven and let it heat up.',
+  '___, ___ mix the flour and butter together.',
+  '___, pour in the milk and stir well.',
+  '___, place the mixture in a baking tin.',
+  '___, bake for 30 minutes and enjoy!',
+].map((s,i)=>`<div class="q-box"><div class="q-label">Sentence ${i+1}</div><div class="q-text">${s}</div><input class="dline" placeholder="Write the full sentence with correct words…"/></div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>WRITE YOUR OWN HOW-TO GUIDE</div>
+<div class="q-box">
+  <div class="q-label">Title: How to ___</div>
+  <input class="dline" placeholder="How to…"/>
+  ${['First,','Next,','Then,','After that,','Finally,'].map((tc,i)=>`
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+    <strong style="font-family:'Nunito',sans-serif;font-size:13px;color:#BE185D;min-width:90px">${tc}</strong>
+    <input class="dline" style="margin-top:0;flex:1" placeholder="…"/>
+  </div>`).join('')}
+</div>
+
+<div class="remember" style="background:#BE185D">⭐ REMEMBER: First · Next · Then · After that · Finally = TIME CONNECTIVES. Add -ly adverbs (carefully, gently…) for HOW. Together they make excellent how-to guides! ✏️</div>`,
+
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#065F46,#0F6E56)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 11</div>
+  <div class="banner-title">🔢 Maths — Time: Telling the Time &amp; Duration</div>
+  <div class="banner-sub">Analogue &amp; digital clocks · AM &amp; PM · 24-hour clock · Duration</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Time = <strong>وقت (waqt)</strong> — Urdu · <strong>الوقت</strong> — Arabic<br/>
+Hour = <strong>گھنٹہ (ghanta)</strong> — Urdu · <strong>ساعة</strong> — Arabic<br/>
+Minute = <strong>منٹ</strong> — Urdu · <strong>دقيقة</strong> — Arabic<br/>
+60 minutes = 1 hour &nbsp;·&nbsp; 24 hours = 1 day</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🕐 Analogue clock','Round face with hour hand (short) and minute hand (long).','اینالاگ گھڑی / ساعة تناظرية','"The short hand points to the hour."'],
+  ['🔢 Digital clock','Shows time as numbers, e.g. 07:30.','ڈیجیٹل گھڑی / ساعة رقمية','"The display shows 14:45."'],
+  ['🌅 AM','Midnight to midday (morning).','صبح / صباح','"School starts at 8:00 AM."'],
+  ['🌇 PM','Midday to midnight (afternoon/evening).','شام / مساء','"Dinner is at 7:00 PM."'],
+  ['⏱️ Duration','How long something takes.','مدت / مدة','"The film had a duration of 2 hours."'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card">
+  <div class="v-word" style="color:#0F6E56">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>READING AN ANALOGUE CLOCK</div>
+<div class="tip"><strong>Short hand = hour · Long hand = minutes (each number = 5 minutes)</strong><br/>
+12 = o'clock (0 min) · 3 = quarter past (15 min) · 6 = half past (30 min) · 9 = quarter to (45 min)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Minute hand points to</th><th>Minutes</th><th>We say</th></tr></thead><tbody>
+<tr><td>12</td><td>0 minutes</td><td>O'clock — e.g. "three o'clock"</td></tr>
+<tr><td>3</td><td>15 minutes</td><td>Quarter past — e.g. "quarter past three"</td></tr>
+<tr><td>6</td><td>30 minutes</td><td>Half past — e.g. "half past three"</td></tr>
+<tr><td>9</td><td>45 minutes</td><td>Quarter to — e.g. "quarter to four"</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>THE 24-HOUR CLOCK</div>
+<div class="tip"><strong>AM → 24-hour:</strong> same number, add leading zero (9:00 AM = 09:00)<br/>
+<strong>PM → 24-hour:</strong> add 12 to the hour (3:00 PM → 3+12 = 15:00)<br/>
+<strong>24-hour → PM:</strong> subtract 12 from any hour above 12 (17:00 → 17-12 = 5:00 PM)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>12-hour</th><th>24-hour</th><th>Event</th></tr></thead><tbody>
+<tr><td>12:00 AM (midnight)</td><td>00:00</td><td>Start of new day</td></tr>
+<tr><td>6:00 AM</td><td>06:00</td><td>Morning</td></tr>
+<tr><td>12:00 PM (midday)</td><td>12:00</td><td>Lunch</td></tr>
+<tr><td>3:00 PM</td><td>15:00</td><td>Afternoon</td></tr>
+<tr><td>9:00 PM</td><td>21:00</td><td>Night</td></tr>
+<tr><td>11:59 PM</td><td>23:59</td><td>Just before midnight</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>CALCULATING DURATION</div>
+<div class="tip"><strong>Duration = End time − Start time.</strong> Count the hours first, then the minutes.</div>
+<div style="background:#fff;border:2px solid var(--amber-mid);border-radius:var(--rsm);padding:12px;margin-bottom:12px;font-family:'Courier New',monospace;font-size:14px;color:var(--teal)">
+  Start: 9:00 AM → End: 11:30 AM<br/>
+  Step 1: 9:00 → 11:00 = 2 hours<br/>
+  Step 2: 11:00 → 11:30 = 30 minutes<br/>
+  <strong>Duration = 2 hours 30 minutes ✅</strong>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>PRACTICE — CONVERSIONS</div>
+<div class="q-box"><div class="q-text" style="line-height:2.8">
+  3:00 PM → 24-hour: <input class="inline" style="width:70px" placeholder="?"/><br/>
+  8:30 AM → 24-hour: <input class="inline" style="width:70px" placeholder="?"/><br/>
+  18:00 → 12-hour: <input class="inline" style="width:80px" placeholder="?"/><br/>
+  23:30 → 12-hour: <input class="inline" style="width:80px" placeholder="?"/>
+</div></div>
+
+<div class="sec-head"><span class="sec-num">6</span>WORD PROBLEMS</div>
+${[
+  ['🚌','A bus leaves at 07:45 and arrives 1 hour 20 minutes later. What time does it arrive?','07:45 + 1h 20m'],
+  ['📚','Omar studies from 4:00 PM to 6:30 PM. How long does he study?','6:30 PM − 4:00 PM'],
+  ['🎬','A film starts at 15:30 and lasts 1 hour 45 minutes. When does it finish?','15:30 + 1h 45m'],
+].map(([ico,q,hint],i)=>`
+<div class="q-box"><div class="q-label">${ico} Problem ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:11px;color:var(--gray);font-style:italic">Hint: ${hint}</div>
+<input class="dline" placeholder="Working and answer…"/></div>`).join('')}
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: 60 mins = 1 hour · AM = morning · PM = afternoon/evening · PM to 24h: add 12 · 24h to PM: subtract 12 · Duration = end − start!</div>`,
+
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#9A3412,#C2410C)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 11</div>
+  <div class="banner-title">🧲 Science — Forces: Magnets</div>
+  <div class="banner-sub">Magnetic &amp; non-magnetic · poles · attract &amp; repel · everyday uses</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Magnet = <strong>مقناطیس (maqnatis)</strong> — Urdu · <strong>مغناطيس</strong> — Arabic<br/>
+Attract = <strong>کھینچنا (kheenchna)</strong> — Urdu · <strong>يجذب</strong> — Arabic<br/>
+Repel = <strong>دھکیلنا</strong> — Urdu · <strong>يطرد</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🧲 Magnet','An object producing a force that attracts certain metals.','مقناطیس / مغناطيس','"A horseshoe magnet picks up paperclips."','#C2410C'],
+  ['⬆️ Attract','To pull two objects toward each other.','کھینچنا / جذب','"Opposite poles attract."','#C2410C'],
+  ['⬇️ Repel','To push two objects away from each other.','دھکیلنا / طرد','"Like poles repel."','#C2410C'],
+  ['🔴🔵 Poles','The two ends of a magnet: North (N) and South (S).','قطب / قطب','"The force is strongest at the poles."','#C2410C'],
+  ['✅ Magnetic','A material attracted to a magnet (contains iron/nickel/cobalt).','مقناطیسی / مغناطيسي','"Steel is magnetic."','#C2410C'],
+  ['❌ Non-magnetic','A material NOT attracted to a magnet.','غیر مقناطیسی / غير مغناطيسي','"Wood and plastic are non-magnetic."','#C2410C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>MAGNETIC vs NON-MAGNETIC</div>
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#D1FAE5;border-color:#059669;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#065F46;margin-bottom:8px">✅ Magnetic (contain iron/nickel/cobalt)</div>
+  <div style="font-size:13px;line-height:2">🔩 Iron &nbsp;·&nbsp; 🔨 Steel &nbsp;·&nbsp; 🪙 Nickel &nbsp;·&nbsp; 📎 Paperclip</div>
+</div>
+<div class="card" style="background:#FEE2E2;border-color:#DC2626;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#7F1D1D;margin-bottom:8px">❌ Non-magnetic</div>
+  <div style="font-size:13px;line-height:2">🪵 Wood &nbsp;·&nbsp; 🧴 Plastic &nbsp;·&nbsp; 🔵 Glass &nbsp;·&nbsp; 🌿 Rubber &nbsp;·&nbsp; 🪙 Aluminium, Copper</div>
+</div>
+</div>
+<div class="tip"><strong>⚠️ NOT all metals are magnetic!</strong> Aluminium, copper and gold are NOT magnetic.</div>
+
+<div class="sec-head"><span class="sec-num">3</span>POLES: ATTRACT &amp; REPEL</div>
+<div class="two" style="margin-bottom:12px">
+<div style="background:#D1FAE5;border:2px solid #059669;border-radius:var(--rsm);padding:14px;text-align:center">
+  <div style="font-size:1.8rem;margin-bottom:6px">🔴 → ← 🔵</div>
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#065F46">N + S = ATTRACT ✅</div>
+  <div style="font-size:12px;margin-top:4px">Opposite poles pull together.</div>
+</div>
+<div style="background:#FEE2E2;border:2px solid #DC2626;border-radius:var(--rsm);padding:14px;text-align:center">
+  <div style="font-size:1.8rem;margin-bottom:6px">🔴 ← → 🔴</div>
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#7F1D1D">N + N or S + S = REPEL ❌</div>
+  <div style="font-size:12px;margin-top:4px">Like poles push apart.</div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>EVERYDAY USES OF MAGNETS</div>
+<div class="four">
+${[
+  ['🧲','Fridge magnets','Hold notes on the fridge.'],
+  ['🚪','Cabinet doors','Keep cupboards closed.'],
+  ['🧭','Compass','Magnetic needle points North.'],
+  ['📱','Speakers','Vibrating magnet makes sound.'],
+  ['🚂','Maglev trains','Magnetic levitation — no wheels!'],
+  ['🏥','MRI scanners','Images of inside the body.'],
+  ['♻️','Recycling','Separates iron from other materials.'],
+  ['💳','Bank cards','Magnetic strip stores data.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:var(--orange)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>PRACTICE</div>
+<div class="q-box"><div class="q-label">Write M (magnetic) or NM (non-magnetic):</div>
+<div class="q-text" style="line-height:2.8">
+  Iron nail: <input class="inline" style="width:55px" placeholder="?"/> &nbsp;
+  Copper coin: <input class="inline" style="width:55px" placeholder="?"/> &nbsp;
+  Steel paperclip: <input class="inline" style="width:55px" placeholder="?"/> &nbsp;
+  Glass jar: <input class="inline" style="width:55px" placeholder="?"/><br/>
+  N + S poles: <input class="inline" style="width:100px" placeholder="attract/repel"/> &nbsp;
+  N + N poles: <input class="inline" style="width:100px" placeholder="attract/repel"/>
+</div></div>
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Opposite poles ATTRACT · Like poles REPEL · Magnetic = iron/nickel/cobalt · NOT all metals are magnetic (aluminium, copper, gold are NOT). 🧲</div>`,
+
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#164E63,#0E7490)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 11</div>
+  <div class="banner-title">🌍 Humanities — Climate Zones &amp; World Environments</div>
+  <div class="banner-sub">Tropical · Temperate · Polar · How climate affects life</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Climate = <strong>آب و ہوا (aab-o-hawa)</strong> — Urdu · <strong>مناخ</strong> — Arabic<br/>
+Climate zone = <strong>آب و ہوا کا علاقہ</strong> — Urdu · <strong>منطقة مناخية</strong> — Arabic<br/>
+Equator = <strong>خط استوا (khatt-e-istawa)</strong> — Urdu · <strong>خط الاستواء</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🌡️ Climate','Typical weather conditions in an area over a LONG period (years, not days).','آب و ہوا / مناخ','"Saudi Arabia has a hot, dry climate."','#0E7490'],
+  ['🌦️ Weather','What is happening in the atmosphere RIGHT NOW.','موسم / طقس','"Today\'s weather is rainy."','#0E7490'],
+  ['🗺️ Climate zone','A large area of Earth with a similar type of climate.','آب و ہوا کا علاقہ / منطقة مناخية','"Rainforests grow in the tropical zone."','#0E7490'],
+  ['🌴 Tropical','Near the equator — very hot and wet all year.','گرم علاقہ / استوائي','"Brazil is in the tropical zone."','#0E7490'],
+  ['❄️ Polar','Near the poles — very cold, often frozen.','قطبی / قطبي','"Antarctica is in the polar zone."','#0E7490'],
+  ['🌿 Temperate','Between hot and cold — mild seasons.','معتدل / معتدل','"The UK has a temperate climate."','#0E7490'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE THREE CLIMATE ZONES</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Zone</th><th>Location</th><th>Temperature</th><th>Rainfall</th><th>Examples</th></tr></thead><tbody>
+<tr><td><strong>🌴 Tropical</strong></td><td>Near equator</td><td>Hot all year (25–35°C)</td><td>Very heavy</td><td>Brazil, Nigeria, Indonesia</td></tr>
+<tr><td><strong>🌿 Temperate</strong></td><td>Between tropical &amp; polar</td><td>Mild — 4 seasons</td><td>Moderate</td><td>UK, France, Pakistan, USA</td></tr>
+<tr><td><strong>❄️ Polar</strong></td><td>Near the poles</td><td>Very cold (−40°C)</td><td>Very little (snow)</td><td>Antarctica, Arctic, Norway</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>HOW CLIMATE AFFECTS LIFE</div>
+<div class="three">
+<div class="card" style="background:#FEF3C7;border-color:#D97706">
+  <div class="card-ico">🌴</div>
+  <div class="card-title" style="color:#92400E">Hot Desert</div>
+  <div class="card-desc" style="text-align:left">🏠 Thick walls to stay cool<br/>🐪 Camels for transport<br/>🌵 Cacti store water<br/>🕌 Rest during hottest hours</div>
+</div>
+<div class="card" style="background:var(--teal-light);border-color:var(--teal)">
+  <div class="card-ico">🌿</div>
+  <div class="card-title" style="color:var(--teal)">Temperate</div>
+  <div class="card-desc" style="text-align:left">🌸 Four seasons<br/>🌾 Wheat, potatoes, apples<br/>🏘️ Regular housing<br/>🌦️ Varied clothing</div>
+</div>
+<div class="card" style="background:#DBEAFE;border-color:#185FA5">
+  <div class="card-ico">❄️</div>
+  <div class="card-title" style="color:#1E3A8A">Polar</div>
+  <div class="card-desc" style="text-align:left">🧥 Very thick clothing<br/>🐧 Penguins &amp; polar bears<br/>❄️ Ice and permafrost<br/>🌙 Months without sun</div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>CLIMATE AND CROPS</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Zone</th><th>Crops grown</th></tr></thead><tbody>
+<tr><td>🌴 Tropical</td><td>Bananas, rice, sugar cane, cocoa, coffee, pineapple</td></tr>
+<tr><td>🌿 Temperate</td><td>Wheat, potatoes, apples, vegetables</td></tr>
+<tr><td>🏜️ Hot desert</td><td>Dates, some drought-resistant grains (near oases)</td></tr>
+<tr><td>❄️ Polar</td><td>Almost nothing — permanently frozen soil</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>PRACTICE</div>
+<div class="q-box"><div class="q-text" style="line-height:2.8">
+  Brazil is in the <input class="inline" style="width:100px" placeholder="?"/> zone.<br/>
+  The UK has a <input class="inline" style="width:100px" placeholder="?"/> climate with four <input class="inline" style="width:80px" placeholder="?"/>.<br/>
+  Polar regions are found near the <input class="inline" style="width:80px" placeholder="?"/>.<br/>
+  Bananas grow in <input class="inline" style="width:100px" placeholder="?"/> climates because they need <input class="inline" style="width:80px" placeholder="?"/> and <input class="inline" style="width:80px" placeholder="?"/>.
+</div></div>
+
+<div class="remember" style="background:#0E7490">⭐ REMEMBER: Tropical = hot, near equator · Temperate = mild, 4 seasons · Polar = very cold, near poles. Climate affects what people wear, eat, grow and how they build their homes! 🌍</div>`,
+
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#991B1B,#B71C1C)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 11</div>
+  <div class="banner-title">✝️ Bible — Ruth: Loyalty and Kindness</div>
+  <div class="banner-sub">Book of Ruth · Memory verse: Ruth 1:16 · Loyalty · Kindness</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Loyalty = <strong>وفاداری (wafadaari)</strong> — Urdu · <strong>وفاء</strong> — Arabic<br/>
+Kindness = <strong>مہربانی (meharbani)</strong> — Urdu · <strong>لطف</strong> — Arabic<br/>
+Faithful = <strong>وفادار (wafadaar)</strong> — Urdu · <strong>مخلص</strong> — Arabic</div>
+
+<div class="verse-box">
+  <div style="font-size:11px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">⭐ MEMORY VERSE — Ruth 1:16</div>
+  <div class="verse-text">"Where you go I will go,<br/>and where you stay I will stay.<br/>Your people will be my people<br/>and your God my God."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:8px">— Ruth 1:16</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🤝 Loyalty','Staying true to someone through difficulties — not leaving when things are hard.','وفاداری / وفاء','"Ruth\'s loyalty to Naomi was remarkable."','#B71C1C'],
+  ['💛 Kindness','Treating others with care, generosity and warmth.','مہربانی / لطف','"Boaz showed great kindness to Ruth."','#B71C1C'],
+  ['💔 Widow','A woman whose husband has died.','بیوہ / أرملة','"Naomi was a widow."','#B71C1C'],
+  ['🌾 Gleaning','Collecting leftover grain from a field after the main harvest.','فصل کاٹنا / الاستجاب','"Ruth gleaned in Boaz\'s field."','#B71C1C'],
+  ['🫂 Faithful','Consistently trustworthy and devoted.','وفادار / مخلص','"Ruth was faithful to Naomi."','#B71C1C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY OF RUTH</div>
+<div class="story" style="background:var(--red-light);border-color:#E57373;font-size:13px;line-height:1.9">
+  <strong style="font-family:Nunito,sans-serif;font-size:15px;color:var(--red)">💛 Ruth and Naomi — Book of Ruth</strong><br/><br/>
+  <strong>Background:</strong> Naomi, her husband and two sons moved to Moab because of a famine. Her sons married Moabite women — Orpah and Ruth.<br/><br/>
+  <strong>Tragedy:</strong> Naomi's husband died. Then both sons died. Three widows remained.<br/><br/>
+  <strong>Ruth's choice:</strong> Naomi told both daughters-in-law to return home. Orpah left. Ruth refused and said: <em>"Where you go I will go, and where you stay I will stay. Your people will be my people and your God my God."</em> (Ruth 1:16)<br/><br/>
+  <strong>In Bethlehem:</strong> Ruth gleaned grain in the field of Boaz — a kind relative of Naomi's late husband.<br/><br/>
+  <strong>Boaz's kindness:</strong> Boaz told his workers to leave extra grain for Ruth. He gave her food, water and protection.<br/><br/>
+  <strong>Outcome:</strong> Through God's provision, Ruth and Boaz married. Ruth became the great-grandmother of King David — and is in the family line of Jesus.
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>STORY IN ORDER</div>
+${[
+  ['1','Naomi and her family move from Bethlehem to Moab because of a famine.'],
+  ['2','Naomi\'s husband and both sons die, leaving three widows.'],
+  ['3','Ruth chooses to stay with Naomi and says "Where you go I will go."'],
+  ['4','Ruth and Naomi return to Bethlehem.'],
+  ['5','Ruth gleans grain in Boaz\'s field; Boaz shows her great kindness.'],
+  ['6','Ruth and Boaz marry; Ruth becomes the great-grandmother of King David.'],
+].map(([n,t])=>`
+<div style="display:flex;gap:10px;align-items:center;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <div style="background:var(--red);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:14px;flex-shrink:0">${n}</div>
+  <span style="font-size:13px">${t}</span>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>WHAT MAKES RUTH'S CHOICE SO SPECIAL?</div>
+<div class="four">
+${[
+  ['😢','Sacrifice','Ruth left her homeland and family — a real cost.'],
+  ['🚫','Not required','No law said she had to stay — she chose to.'],
+  ['🌍','Outsider','Ruth was a foreigner who chose a new people and God.'],
+  ['💛','Love','Ruth\'s loyalty came from genuine love for Naomi.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:var(--red-light);border-color:var(--red)">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:var(--red)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['Why did Ruth stay with Naomi when Orpah left?','Ruth stayed because she…'],
+  ['How did Boaz show kindness to Ruth?','Boaz showed kindness by…'],
+  ['What does Ruth 1:16 teach us about loyalty?','This verse teaches us that…'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:12px;color:var(--red);font-style:italic;margin:3px 0">Frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:40px"></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>MEMORY VERSE — LEARN IT!</div>
+<div class="tip"><strong>Steps to learn:</strong> Read it 3× · cover one word · say it · cover more · repeat until you know it fully!</div>
+<div class="q-box">
+  <div class="q-label">Write the verse from memory — no peeking! 😊</div>
+  <textarea class="tarea" style="min-height:70px" placeholder="Where you go…"></textarea>
+</div>
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: "Where you go I will go." — Ruth 1:16. Ruth chose loyalty when it cost her. Boaz chose kindness when nobody required it. True loyalty stays even when it is hard! 💛</div>`,
+
+};
+
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');const pages=document.getElementById('pages');
+  stabs.innerHTML='';pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;el.style.borderColor=s.col;el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur)el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render();};stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week11_Notes');</script>
+</body>
+</html>

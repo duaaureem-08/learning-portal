@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 11 Lesson Notes · KS3 Level 6 · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#6D28D9;--bible-l:#F3EEFD;
+  --english:#BE123C;--english-l:#FDF1F4;
+  --maths:#B45309;--maths-l:#FDF4E9;
+  --science:#065F46;--science-l:#EAF6F1;
+  --history:#1E3A8A;--history-l:#EBF0FB;
+  --ink:#1F2430;--muted:#6B7280;--line:#E3E6EC;--paper:#FFFFFF;--cream:#FBFAF7;
+  --radius:14px;--radius-sm:9px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;}
+.shell{max-width:880px;margin:0 auto;padding:28px 20px 80px;}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:0 20px;display:flex;align-items:center;height:58px;gap:4px;overflow-x:auto;}
+.brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.05rem;color:var(--ink);margin-right:18px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);}
+.tab{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:0.8rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.tab:hover{border-color:#bbb;color:var(--ink);}
+.tab.active{color:#fff;}
+.tab[data-s="bible"].active{background:var(--bible);border-color:var(--bible);}
+.tab[data-s="english"].active{background:var(--english);border-color:var(--english);}
+.tab[data-s="maths"].active{background:var(--maths);border-color:var(--maths);}
+.tab[data-s="science"].active{background:var(--science);border-color:var(--science);}
+.tab[data-s="history"].active{background:var(--history);border-color:var(--history);}
+.print-btn{margin-left:auto;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:0.8rem;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap;}
+.page{display:none;}.page.active{display:block;animation:fade .35s ease both;}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.cover{background:linear-gradient(135deg,#1B2A4A,#2D1266);border-radius:20px;padding:46px 36px;color:#fff;margin-bottom:24px;text-align:center;}
+.cover .brandline{font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;margin-bottom:10px;}
+.cover h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;margin-bottom:8px;}
+.cover .sub{opacity:0.8;font-size:0.95rem;margin-bottom:18px;}
+.cover .fields{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:14px;}
+.cover .field{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:10px;padding:10px 18px;font-size:0.85rem;min-width:160px;text-align:left;}
+.cover .field label{display:block;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;margin-bottom:4px;}
+.cover .field input{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.35);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;width:100%;padding:2px 0;}
+.toc{display:grid;gap:8px;margin-top:6px;}
+.toc-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 16px;}
+.toc-icon{font-size:1.3rem;}.toc-subj{font-weight:700;min-width:120px;}.toc-topic{color:var(--muted);font-size:0.88rem;}
+.banner{border-radius:16px;padding:26px 28px;margin-bottom:18px;color:#fff;}
+.banner h2{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:800;margin-bottom:4px;}
+.banner .sub{font-size:0.88rem;opacity:0.85;}
+.banner .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.banner .tag{background:rgba(255,255,255,0.18);border-radius:99px;padding:3px 11px;font-size:0.7rem;font-weight:700;}
+.sec{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;}
+.sec h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec h3 .bar{display:inline-block;width:4px;height:18px;border-radius:2px;background:var(--accent,#999);}
+.sec p{font-size:0.92rem;color:#3A3F4B;margin-bottom:8px;}
+.vtable{width:100%;border-collapse:collapse;font-size:0.86rem;margin-top:6px;}
+.vtable th{background:var(--accent-l,#F4F4F6);color:var(--accent,#333);text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;padding:8px 10px;border-bottom:2px solid var(--line);}
+.vtable td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:#3A3F4B;}
+.vtable td:first-child{font-weight:700;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:0.82rem;white-space:nowrap;}
+.vtable tr:nth-child(even) td{background:#FBFBFC;}
+.note{border-radius:var(--radius-sm);padding:12px 16px;margin:10px 0;font-size:0.88rem;border:1px solid;}
+.note.info{background:#EFF6FF;border-color:#BFDBFE;color:#1E3A8A;}
+.note.tip{background:#F3EEFD;border-color:#DDD6FE;color:#5B21B6;}
+.note.warn{background:#FFFBEB;border-color:#FDE68A;color:#92400E;}
+.note.good{background:#ECFDF5;border-color:#A7F3D0;color:#065F46;}
+.note strong{color:inherit;}
+.fill{margin:14px 0;}.fill-q{font-size:0.9rem;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.fill textarea{width:100%;border:1.5px dashed #CBD0D8;border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--ink);background:#FCFCFD;resize:vertical;min-height:54px;}
+.fill textarea:focus{outline:none;border-color:var(--accent,#999);background:#fff;}
+.reflect{background:var(--accent-l,#F4F4F6);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;}
+.verse{background:linear-gradient(135deg,#F3EEFD,#EDE6FB);border:1px solid #DDD6FE;border-radius:var(--radius);padding:22px 26px;text-align:center;margin-bottom:14px;}
+.verse .vtext{font-family:'Playfair Display',serif;font-size:1.15rem;color:#3F2A78;line-height:1.5;margin-bottom:6px;}
+.verse .vref{font-size:0.78rem;color:#7C3AED;font-weight:700;letter-spacing:0.06em;}
+.cmpgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.cmpcol{border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;background:var(--cream);}
+.cmpcol h4{font-size:0.85rem;font-weight:700;margin-bottom:8px;color:var(--ink);}
+.cmpcol ul{padding-left:18px;font-size:0.84rem;color:#3A3F4B;}
+.cmpcol li{margin-bottom:5px;}
+.snum{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.snum .n{width:26px;height:26px;border-radius:50%;background:var(--accent,#999);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;flex-shrink:0;}
+.snum .t{font-size:0.88rem;color:#3A3F4B;}.snum .t strong{color:var(--ink);}
+.formula-box{font-family:'JetBrains Mono',monospace;background:#F4F4F6;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:0.88rem;color:var(--ink);margin:10px 0;line-height:1.8;}
+.ph-scale{display:flex;border-radius:10px;overflow:hidden;height:36px;margin:12px 0;}
+.ph-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:700;color:white;}
+@media print{.topbar,.print-btn{display:none;}.page{display:block !important;}.sec,.banner,.cover{break-inside:avoid;}.page-break{break-before:page;}body{background:#fff;}}
+@media(max-width:640px){.cmpgrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <button class="tab active" data-s="cover" onclick="show('cover')">📔 Cover</button>
+  <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+  <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+  <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+  <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+  <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+</nav>
+<div class="shell">
+
+<!-- COVER -->
+<div id="pg-cover" class="page active">
+  <div class="cover">
+    <div class="brandline">HOS International · Discover · Learn · Succeed</div>
+    <h1>Week 11 — Lesson Notes</h1>
+    <div class="sub">KS3 · Level 6 · All 5 Subjects · Your Personal Study Guide</div>
+    <div class="fields">
+      <div class="field"><label>My Name</label><input type="text" placeholder="Write your name"></div>
+      <div class="field"><label>Class / Level</label><input type="text" value="KS3 · Level 6"></div>
+      <div class="field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+    </div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar" style="background:#1B2A4A;"></span>Contents — Week 11 Topics</h3>
+    <div class="toc">
+      <div class="toc-row"><div class="toc-icon">📖</div><div class="toc-subj">Bible Studies</div><div class="toc-topic">The Prophets — Speaking God's Truth (1 Kings 18-19, Isaiah 6 · Isaiah 6:8)</div></div>
+      <div class="toc-row"><div class="toc-icon">✏️</div><div class="toc-subj">English</div><div class="toc-topic">Pronoun Use &amp; Agreement — Antecedents, Vague Reference</div></div>
+      <div class="toc-row"><div class="toc-icon">🧮</div><div class="toc-subj">Maths</div><div class="toc-topic">Negative Numbers — Ordering, Adding &amp; Subtracting, Real-Life Contexts</div></div>
+      <div class="toc-row"><div class="toc-icon">🔬</div><div class="toc-subj">Science</div><div class="toc-topic">Acids &amp; Alkalis — pH Scale, Indicators, Neutralisation</div></div>
+      <div class="toc-row"><div class="toc-icon">🏛️</div><div class="toc-subj">Humanities</div><div class="toc-topic">Trade, Exploration &amp; Early Globalisation — Silk Road, Age of Exploration</div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar" style="background:#D4A017;"></span>How to Use This Booklet</h3>
+    <p>Each subject has: key vocabulary with simple meanings, diagrams and examples to help you understand, important notes to remember, and questions to answer in the boxes. Type your answers directly — your work stays on the page. Use <strong>Print / Save PDF</strong> for a paper copy.</p>
+  </div>
+</div>
+
+<!-- BIBLE -->
+<div id="pg-bible" class="page">
+<style>.pg-b{--accent:#6D28D9;--accent-l:#F3EEFD;}</style>
+<div class="pg-b">
+  <div class="banner" style="background:linear-gradient(135deg,#4C1D95,#6D28D9);">
+    <h2>📖 The Prophets — Speaking God's Truth</h2>
+    <div class="sub">1 Kings 18-19, Isaiah 6 · Elijah and Isaiah · Repentance and Hope</div>
+    <div class="tags"><span class="tag">Isaiah 6:8</span><span class="tag">1 Kings 18-19</span><span class="tag">Elijah &amp; Isaiah</span><span class="tag">KS3 Level 6</span></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Memory Verse</h3>
+    <div class="verse">
+      <div class="vtext">"Then I heard the voice of the Lord saying, 'Whom shall I send? And who will go for us?' And I said, 'Here am I. Send me!'"</div>
+      <div class="vref">Isaiah 6:8 — NIV</div>
+    </div>
+    <div class="note tip"><strong>What this means:</strong> This is Isaiah's response right after seeing God's holiness and being cleansed of his sin — immediate and willing, not reluctant.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Key Vocabulary</h3>
+    <table class="vtable">
+      <thead><tr><th>Word</th><th>What It Means</th><th>Example / Note</th></tr></thead>
+      <tbody>
+        <tr><td>prophet</td><td>A person chosen by God to deliver his message.</td><td>Calls people back to faithfulness, warns, announces hope.</td></tr>
+        <tr><td>idolatry</td><td>Worshipping a false god instead of the true God.</td><td>Elijah confronted worship of Baal.</td></tr>
+        <tr><td>repentance</td><td>Genuinely turning from wrongdoing back to God.</td><td>A central prophetic message.</td></tr>
+        <tr><td>vision</td><td>A powerful, symbolic experience revealing something from God.</td><td>Isaiah's vision of God in the temple.</td></tr>
+        <tr><td>holiness</td><td>Being set apart, pure, completely different from ordinary/sinful things.</td><td>"Holy, holy, holy" — Isaiah 6:3.</td></tr>
+        <tr><td>exile</td><td>Being forced to leave one's home country.</td><td>Isaiah's prophecies address coming exile.</td></tr>
+        <tr><td>Messiah</td><td>A promised future rescuer/king.</td><td>Isaiah gives clear Old Testament descriptions of the Messiah.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Why Did God Send Prophets?</h3>
+    <table class="vtable">
+      <thead><tr><th>Purpose</th><th>Explanation</th></tr></thead>
+      <tbody>
+        <tr><td>Call people back to God</td><td>Confronted idolatry and injustice, called for repentance.</td></tr>
+        <tr><td>Warn of consequences</td><td>Warned that continued disobedience would bring real consequences.</td></tr>
+        <tr><td>Offer hope</td><td>Included restoration and hope — judgment was never the final word.</td></tr>
+        <tr><td>Speak God's message directly</td><td>"This is what the LORD says" — not their own opinion.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Elijah and the Prophets of Baal — 1 Kings 18</h3>
+    <div class="snum"><div class="n" style="background:#6D28D9;">1</div><div class="t"><strong>The challenge:</strong> "How long will you waver between two opinions?" (18:21)</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">2</div><div class="t"><strong>The contest:</strong> Baal's prophets cry out for hours — nothing. Elijah prays briefly — fire falls instantly.</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">3</div><div class="t"><strong>Response:</strong> "The LORD — he is God!" (18:39)</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Elijah's Despair and God's Gentle Whisper — 1 Kings 19</h3>
+    <p>Immediately after victory, Elijah flees in fear and despair (19:4). God's response: rest and food first, then "a gentle whisper" (19:12) — not more spectacle.</p>
+    <div class="note good"><strong>Key idea:</strong> Even faithful, powerful people can experience real burnout — God's response models compassion, not just demands.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Isaiah's Vision and Calling — Isaiah 6</h3>
+    <div class="snum"><div class="n" style="background:#6D28D9;">1</div><div class="t">Isaiah sees God's holiness — "Holy, holy, holy" (6:3).</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">2</div><div class="t">Isaiah recognises his unworthiness — "Woe to me!" (6:5).</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">3</div><div class="t">Isaiah is cleansed — sin "atoned for" (6:7).</div></div>
+    <div class="snum"><div class="n" style="background:#6D28D9;">4</div><div class="t">Isaiah volunteers — "Here am I. Send me!" (6:8).</div></div>
+    <div class="note good"><strong>Key idea:</strong> Willingness to be sent comes AFTER encounter and cleansing, not before.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Write the memory verse and explain what Isaiah's response shows about willingness to serve.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Describe the contest on Mount Carmel and its outcome.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. What happened to Elijah right after his victory, and how did God respond?</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. Describe the order of events in Isaiah's vision (see, recognise, cleansed, volunteer).</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Compare Elijah and Isaiah — how did each prophet confront wrong, and what did each experience personally?</div><textarea placeholder="Write your answer here..."></textarea></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>My Reflection</h3>
+    <div class="reflect">
+      <div class="fill"><div class="fill-q">Two things I learned this week about prophets and God's truth:</div><textarea placeholder="1. ...&#10;2. ..."></textarea></div>
+      <div class="fill"><div class="fill-q">One thing I want to understand better about hearing God's "gentle whisper":</div><textarea placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ENGLISH -->
+<div id="pg-english" class="page">
+<style>.pg-e{--accent:#BE123C;--accent-l:#FDF1F4;}</style>
+<div class="pg-e">
+  <div class="banner" style="background:linear-gradient(135deg,#881337,#BE123C);">
+    <h2>✏️ Pronoun Use &amp; Agreement</h2>
+    <div class="sub">Pronoun-Antecedent Agreement · Avoiding Vague Pronoun Reference</div>
+    <div class="tags"><span class="tag">Pronouns</span><span class="tag">Antecedents</span><span class="tag">KS3 Level 6</span></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Key Vocabulary</h3>
+    <table class="vtable">
+      <thead><tr><th>Word</th><th>What It Means</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>pronoun</td><td>A word that replaces a noun to avoid repeating it.</td><td>he, she, it, they, this, those.</td></tr>
+        <tr><td>antecedent</td><td>The noun a pronoun refers back to.</td><td>"Sara lost her keys" — Sara is the antecedent.</td></tr>
+        <tr><td>agreement</td><td>A pronoun must match its antecedent in number/gender.</td><td>"The dog wagged its tail."</td></tr>
+        <tr><td>vague reference</td><td>When a pronoun's antecedent is unclear.</td><td>"When Sara spoke to Amy, she seemed upset" — who?</td></tr>
+        <tr><td>indefinite pronoun</td><td>Doesn't refer to one specific thing.</td><td>everyone, someone, each — mostly singular.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Pronoun-Antecedent Agreement</h3>
+    <p><strong>Golden rule:</strong> A pronoun must match its antecedent in NUMBER and GENDER. Singular antecedent → singular pronoun. Plural antecedent → plural pronoun.</p>
+    <table class="vtable">
+      <thead><tr><th>❌ Incorrect</th><th>✅ Correct</th></tr></thead>
+      <tbody>
+        <tr><td>"Neither of the boys brought their homework."</td><td>"Neither of the boys brought his homework." ("Neither" is singular.)</td></tr>
+        <tr><td>Inconsistent team agreement</td><td>"The team celebrated its win" (UK formal) — be consistent.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Vague Pronoun Reference</h3>
+    <table class="vtable">
+      <thead><tr><th>❌ Vague</th><th>✅ Clear</th></tr></thead>
+      <tbody>
+        <tr><td>"When Sara spoke to Amy, she seemed upset."</td><td>"When Sara spoke to Amy, Amy seemed upset."</td></tr>
+        <tr><td>"I love reading and writing, which is my favourite subject."</td><td>"I love reading and writing; English is my favourite subject."</td></tr>
+        <tr><td>"They say it's going to rain."</td><td>"The weather forecaster says it's going to rain."</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Finding the Antecedent — Method</h3>
+    <div class="snum"><div class="n" style="background:#BE123C;">1</div><div class="t">Identify the pronoun.</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">2</div><div class="t">Look BACKWARD for the noun it refers to.</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">3</div><div class="t">Check for more than one possible match (= vague reference problem).</div></div>
+    <div class="snum"><div class="n" style="background:#BE123C;">4</div><div class="t">Check agreement (number/gender).</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Define pronoun, antecedent, and agreement in your own words.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Identify and fix the vague reference: "Elijah told the king that he was wrong."</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. Write one sentence with a pronoun-antecedent agreement error, then correct it.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. Explain why "each," "everyone," and "neither" are usually treated as singular.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Write a short paragraph (3-4 sentences) about David or Isaiah, checking carefully for pronoun clarity.</div><textarea placeholder="Write your paragraph here..."></textarea></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>My Reflection</h3>
+    <div class="reflect">
+      <div class="fill"><div class="fill-q">Two things I learned this week about pronouns:</div><textarea placeholder="1. ...&#10;2. ..."></textarea></div>
+      <div class="fill"><div class="fill-q">One mistake I want to watch for in my own writing:</div><textarea placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MATHS -->
+<div id="pg-maths" class="page">
+<style>.pg-m{--accent:#B45309;--accent-l:#FDF4E9;}</style>
+<div class="pg-m">
+  <div class="banner" style="background:linear-gradient(135deg,#78350F,#B45309);">
+    <h2>🧮 Negative Numbers</h2>
+    <div class="sub">Ordering · Adding &amp; Subtracting · Real-Life Contexts</div>
+    <div class="tags"><span class="tag">Negative Numbers</span><span class="tag">Number Line</span><span class="tag">KS3 Level 6</span></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Key Vocabulary</h3>
+    <table class="vtable">
+      <thead><tr><th>Word</th><th>What It Means</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>positive number</td><td>A number greater than zero.</td><td>5 means +5.</td></tr>
+        <tr><td>negative number</td><td>A number less than zero.</td><td>−5</td></tr>
+        <tr><td>integer</td><td>A whole number, positive, negative, or zero.</td><td>−3, 0, 7</td></tr>
+        <tr><td>number line</td><td>Shows numbers in order; negatives left of zero.</td><td></td></tr>
+        <tr><td>absolute value</td><td>Distance a number is from zero, always positive.</td><td>|−7| = 7</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Ordering Negative Numbers</h3>
+    <p><strong>Golden rule:</strong> Numbers get LARGER moving RIGHT on the number line. −2 is GREATER than −5 (further right).</p>
+    <div class="note warn"><strong>Common mistake:</strong> −8 is NOT bigger than −3 — the opposite is true: −3 > −8 (closer to zero).</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Adding and Subtracting Negatives</h3>
+    <div class="formula-box">
+      Adding a negative = subtracting: 5+(−3) = 5−3 = 2<br>
+      Subtracting a negative = adding: 5−(−3) = 5+3 = 8<br>
+      Negative + positive: −4+6 = 2<br>
+      Negative − more: −4−3 = −7
+    </div>
+    <div class="note good"><strong>Memory trick:</strong> "Two minuses make a plus" — rewrite double signs first.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Multiplying/Dividing with Negatives</h3>
+    <table class="vtable">
+      <thead><tr><th>Signs</th><th>Result</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Positive × Positive</td><td>Positive</td><td>3×4=12</td></tr>
+        <tr><td>Positive × Negative</td><td>Negative</td><td>3×(−4)=−12</td></tr>
+        <tr><td>Negative × Negative</td><td>Positive</td><td>(−3)×(−4)=12</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Real-Life Contexts</h3>
+    <div class="snum"><div class="n" style="background:#B45309;">1</div><div class="t"><strong>Temperature:</strong> −5°C means 5 degrees below freezing.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">2</div><div class="t"><strong>Bank balances:</strong> −£20 means you owe £20.</div></div>
+    <div class="snum"><div class="n" style="background:#B45309;">3</div><div class="t"><strong>Elevation:</strong> −400m means 400m below sea level.</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Order from smallest to largest: −7, 2, −3, 0, −10, 5.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Calculate: 8 + (−5)</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. Calculate: 3 − (−9)</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. A hiker starts at −120m elevation and climbs 200m. What is their new elevation?</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Calculate: (−6) × (−2)</div><textarea placeholder="Write your answer here..."></textarea></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>My Reflection</h3>
+    <div class="reflect">
+      <div class="fill"><div class="fill-q">Two things I learned this week about negative numbers:</div><textarea placeholder="1. ...&#10;2. ..."></textarea></div>
+      <div class="fill"><div class="fill-q">A real-life situation where I could use negative numbers:</div><textarea placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCIENCE -->
+<div id="pg-science" class="page">
+<style>.pg-s{--accent:#065F46;--accent-l:#EAF6F1;}</style>
+<div class="pg-s">
+  <div class="banner" style="background:linear-gradient(135deg,#022C22,#065F46);">
+    <h2>🔬 Acids &amp; Alkalis</h2>
+    <div class="sub">The pH Scale · Indicators · Neutralisation · Everyday Examples</div>
+    <div class="tags"><span class="tag">pH Scale</span><span class="tag">Neutralisation</span><span class="tag">KS3 Level 6</span></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Key Vocabulary</h3>
+    <table class="vtable">
+      <thead><tr><th>Word</th><th>What It Means</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>acid</td><td>Substance with pH less than 7.</td><td>Lemon juice, vinegar.</td></tr>
+        <tr><td>alkali</td><td>Soluble base, pH greater than 7.</td><td>Soap, baking soda.</td></tr>
+        <tr><td>base</td><td>Any substance that can neutralise an acid.</td><td>All alkalis are bases.</td></tr>
+        <tr><td>pH scale</td><td>Scale 0-14; 7=neutral.</td><td></td></tr>
+        <tr><td>indicator</td><td>Changes colour depending on acid/alkali.</td><td>Litmus, universal indicator.</td></tr>
+        <tr><td>neutralisation</td><td>Reaction between acid+base cancelling properties.</td><td>Produces salt + water.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>The pH Scale</h3>
+    <div class="ph-scale">
+      <div class="ph-seg" style="background:#B91C1C;">0-2</div>
+      <div class="ph-seg" style="background:#DC2626;">3-4</div>
+      <div class="ph-seg" style="background:#F97316;">5-6</div>
+      <div class="ph-seg" style="background:#22C55E;">7</div>
+      <div class="ph-seg" style="background:#3B82F6;">8-9</div>
+      <div class="ph-seg" style="background:#6366F1;">10-11</div>
+      <div class="ph-seg" style="background:#7C3AED;">12-14</div>
+    </div>
+    <table class="vtable">
+      <thead><tr><th>pH</th><th>Category</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>0-2</td><td>Strong acid</td><td>Battery acid, stomach acid</td></tr>
+        <tr><td>3-4</td><td>Weak-medium acid</td><td>Lemon juice, vinegar</td></tr>
+        <tr><td>7</td><td>Neutral</td><td>Pure water</td></tr>
+        <tr><td>10-11</td><td>Medium alkali</td><td>Soap, ammonia</td></tr>
+        <tr><td>12-14</td><td>Strong alkali</td><td>Bleach, oven cleaner</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Indicators</h3>
+    <table class="vtable">
+      <thead><tr><th>Indicator</th><th>In Acid</th><th>In Alkali</th></tr></thead>
+      <tbody>
+        <tr><td>Litmus paper</td><td>Red</td><td>Blue</td></tr>
+        <tr><td>Universal indicator</td><td>Red/orange/yellow</td><td>Blue/purple</td></tr>
+        <tr><td>Red cabbage juice</td><td>Pink/red</td><td>Green/yellow</td></tr>
+      </tbody>
+    </table>
+    <div class="note good"><strong>Key idea:</strong> Universal indicator shows a whole RANGE (0-14), not just acid/alkali like litmus.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Neutralisation</h3>
+    <div class="formula-box">ACID + BASE → SALT + WATER<br>HCl + NaOH → NaCl + H₂O</div>
+    <div class="note info"><strong>Real example:</strong> Farmers add lime to acidic soil. Toothpaste neutralises mouth acids.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. Define acid, alkali, and neutral, with one example each.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. What colour does litmus paper turn in an acid? In an alkali?</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. Write the general word equation for neutralisation.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. Why is universal indicator more useful than litmus paper?</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Give one everyday example each of an acid and an alkali, and explain their use.</div><textarea placeholder="Write your answer here..."></textarea></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>My Reflection</h3>
+    <div class="reflect">
+      <div class="fill"><div class="fill-q">Two things I learned this week about acids and alkalis:</div><textarea placeholder="1. ...&#10;2. ..."></textarea></div>
+      <div class="fill"><div class="fill-q">One connection I noticed to last week's Science lesson on chemical changes:</div><textarea placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- HISTORY -->
+<div id="pg-history" class="page">
+<style>.pg-h{--accent:#1E3A8A;--accent-l:#EBF0FB;}</style>
+<div class="pg-h">
+  <div class="banner" style="background:linear-gradient(135deg,#0F2060,#1E3A8A);">
+    <h2>🏛️ Trade, Exploration &amp; Early Globalisation</h2>
+    <div class="sub">The Silk Road · The Age of Exploration · Impact on Indigenous Peoples</div>
+    <div class="tags"><span class="tag">Silk Road</span><span class="tag">Age of Exploration</span><span class="tag">KS3 Level 6</span></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Key Vocabulary</h3>
+    <table class="vtable">
+      <thead><tr><th>Word</th><th>What It Means</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Silk Road</td><td>Ancient trade routes connecting China, Middle East, Europe.</td><td>Active for 1,500+ years.</td></tr>
+        <tr><td>globalisation</td><td>World regions increasingly connected via trade/travel/ideas.</td><td></td></tr>
+        <tr><td>Age of Exploration</td><td>Period (15th-17th century) of European sea exploration.</td><td></td></tr>
+        <tr><td>colonisation</td><td>A country establishing control over another territory.</td><td></td></tr>
+        <tr><td>indigenous peoples</td><td>Original inhabitants of a region before colonisation.</td><td></td></tr>
+        <tr><td>Columbian Exchange</td><td>Transfer of plants, animals, diseases, culture across Atlantic.</td><td>After Columbus's voyages.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>The Silk Road</h3>
+    <table class="vtable">
+      <thead><tr><th>What Moved</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Silk (China)</td><td>Highly prized; production kept secret for centuries.</td></tr>
+        <tr><td>Spices, tea, porcelain</td><td>Valuable goods travelling east to west.</td></tr>
+        <tr><td>Ideas/religions</td><td>Buddhism, Islam spread via trade contact.</td></tr>
+        <tr><td>Technology</td><td>Papermaking, gunpowder spread westward.</td></tr>
+        <tr><td>Disease</td><td>Contributed to Black Death spread (14th century).</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>The Age of Exploration</h3>
+    <p>By the 1400s overland routes became harder/costlier — especially after Constantinople fell to the Ottomans (1453) — pushing Europeans to seek sea routes.</p>
+    <table class="vtable">
+      <thead><tr><th>Explorer</th><th>Achievement</th><th>Date</th></tr></thead>
+      <tbody>
+        <tr><td>Columbus</td><td>Sailed west; reached the Americas</td><td>1492</td></tr>
+        <tr><td>Vasco da Gama</td><td>Sea route to India around Africa</td><td>1498</td></tr>
+        <tr><td>Magellan's expedition</td><td>First circumnavigation of the globe</td><td>1519-1522</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Impact on Indigenous Peoples</h3>
+    <table class="vtable">
+      <thead><tr><th>Impact</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Disease</td><td>Smallpox etc. killed 80-90% of some populations within decades.</td></tr>
+        <tr><td>Colonisation/land loss</td><td>Violent conquest, forced displacement.</td></tr>
+        <tr><td>Forced labour/slavery</td><td>Indigenous forced labour; trans-Atlantic slave trade.</td></tr>
+        <tr><td>Loss of culture</td><td>Languages/religions suppressed or destroyed.</td></tr>
+      </tbody>
+    </table>
+    <div class="note good"><strong>Key idea:</strong> The "Age of Exploration" meant very different things depending on whose perspective is centred.</div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>Practice Questions</h3>
+    <div class="fill"><div class="fill-q">1. What was the Silk Road, and name three things it carried besides silk.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">2. Why did Europeans seek new sea routes in the Age of Exploration?</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">3. Describe the Columbian Exchange with examples in both directions.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">4. Explain the devastating impact of disease on indigenous populations.</div><textarea placeholder="Write your answer here..."></textarea></div>
+    <div class="fill"><div class="fill-q">5. Why might the same historical events be viewed very differently by different groups?</div><textarea placeholder="Write your answer here..."></textarea></div>
+  </div>
+  <div class="sec">
+    <h3><span class="bar"></span>My Reflection</h3>
+    <div class="reflect">
+      <div class="fill"><div class="fill-q">Two things I learned this week about trade and exploration:</div><textarea placeholder="1. ...&#10;2. ..."></textarea></div>
+      <div class="fill"><div class="fill-q">One connection I noticed to last week's lesson on the Crusades:</div><textarea placeholder="Write here..."></textarea></div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const pg=document.getElementById('pg-'+s);
+  const tb=document.querySelector('[data-s="'+s+'"]');
+  if(pg)pg.classList.add('active');
+  if(tb)tb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week11_Notes');</script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 11 · Day 2 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 11</div>
+  <div class="day-badge">📅 Day 2</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 2 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">📯</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 11 · Day 2</div>
+  <div class="hero-title">The Prophets —<br>Deeper Analysis</div>
+  <div class="hero-subtitle">Judgment and hope · The cost of prophetic ministry · Isaiah's Messiah</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and comprehension of judgment and hope.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Recall: Judgment and Hope</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Prophets often deliver TWO kinds of message together: warning of judgment (consequences for continued wrongdoing) AND promises of future hope/restoration. These are not contradictions — a good prophet holds both truths at once, similar to how a wise parent can warn of consequences while still expressing hope and love for their child's future.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Explain why prophetic messages of judgment and prophetic messages of hope are NOT contradictory, even though they might seem to be at first. Use the lesson's explanation of the purpose of prophets as your basis. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why judgment messages exist (the purpose):&#10;&#10;Why hope messages exist alongside judgment:&#10;&#10;Why these are not contradictory:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Prophetic messages of judgment exist to warn people honestly about the real, serious consequences of continued disobedience and idolatry — this warning function is a genuine act of care, since ignoring real danger would not be kind, even if a warning is uncomfortable to hear. However, this lesson notes that prophets frequently included messages of hope and restoration ALONGSIDE their warnings, because judgment was never intended to be the FINAL word — the underlying purpose of prophetic warning was always to bring about genuine repentance and restored relationship with God, not simply punishment for its own sake. These two elements are not contradictory because they serve the SAME ultimate purpose: judgment names the real cost of continuing in wrongdoing, while hope names the genuine possibility of restoration if the warning is heeded. A prophet delivering both messages together is not being inconsistent — they are presenting a complete and honest picture: here is what will happen if nothing changes, AND here is what remains possible if genuine repentance occurs. This mirrors how a caring person might warn a friend honestly about a harmful pattern of behaviour while also expressing continued hope and belief in that friend's capacity to change.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">The lesson notes that "Isaiah's prophecies include some of the clearest Old Testament descriptions of a coming Messiah." Why might a message of coming judgment (including eventual exile) be accompanied by a promise of a future Messiah? What might this combination be designed to achieve for people facing difficult circumstances? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why judgment/exile and Messiah promise might appear together:&#10;&#10;What this combination might achieve for people facing hardship:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Pairing warnings of coming judgment (including exile) with promises of a future Messiah likely serves to prevent total despair even in the face of very real, serious warned consequences. If a prophet only delivered warnings of judgment without any accompanying hope, the message might understandably lead people to complete hopelessness, since there would be no vision of anything beyond the coming difficulty. By including a promise of eventual restoration through a coming Messiah figure, the prophetic message provides people facing (or anticipating) real hardship with a horizon of hope beyond their immediate circumstances — the judgment is real and its consequences must be faced honestly, but it is not depicted as the permanent, final state of things. This combination is likely designed to sustain faith and endurance through difficult circumstances by keeping a future hope genuinely alive, without minimising or denying the real seriousness of the coming judgment — encouraging people neither to deny the difficulty ahead nor to lose all hope because of it.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Deeper thinking about the personal cost of prophetic ministry.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 The Cost of Prophetic Ministry</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">Elijah's despair (1 Kings 19) comes specifically after confronting powerful people (King Ahab, Queen Jezebel) with an unwelcome truth. Explain why speaking uncomfortable truth to people in POWER might carry a particular emotional and personal cost, distinct from other kinds of difficult conversations. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What made Elijah's confrontation particularly risky/costly:&#10;&#10;Why confronting power specifically carries a distinct emotional cost:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Elijah's confrontation involved directly challenging the most powerful people in the nation — the king and queen — who had the ability to imprison, exile, or kill him for opposing their favoured religious practices, and Jezebel does indeed respond with a direct death threat (19:2) immediately after the Mount Carmel events. This differs from many other difficult conversations because the power imbalance means the person speaking truth has comparatively little protection or recourse if the powerful person responds with retaliation — Elijah cannot simply walk away from royal anger the way one might from a disagreement with an equal or someone with less power over their safety and future. Confronting power specifically carries this distinct cost because the CONSEQUENCES of speaking truth are genuinely uncertain and potentially severe, requiring the person to accept real vulnerability and risk to their own safety and wellbeing as the price of honesty — this helps explain why, even after a spectacular public vindication of his message, Elijah still experiences profound fear and exhaustion once he actually faces the direct personal threat from those he has confronted.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">In Isaiah 6:9-10, God tells Isaiah that many people will NOT listen to or understand his message, even though he is being sent to speak. Why might God send a prophet on a mission that is, at least partly, expected to be met with resistance and misunderstanding? What does this suggest about how "success" should be measured in prophetic ministry? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What God tells Isaiah to expect:&#10;&#10;Why God might send someone on a mission expected to face resistance:&#10;&#10;How this reframes what 'success' means for a prophet:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">In Isaiah 6:9-10, God explicitly warns Isaiah that his message will, for many, fall on ears that will not truly hear and eyes that will not truly perceive — essentially forewarning Isaiah that widespread rejection and misunderstanding of his message is a realistic, even expected, outcome of his ministry. This is significant because it means Isaiah's calling to be a prophet does NOT come with any promise or expectation of widespread acceptance, popularity, or visible transformation in his audience — he is being sent knowing in advance that much of his effort may appear, by ordinary standards, to "fail" to produce the response it seeks. This suggests that God's measure of "success" for a prophet is fundamentally different from a simple measure of audience response or visible results — faithfulness in delivering the message accurately and courageously is presented as the actual measure of success, regardless of whether the message is received, understood, or acted upon by its intended audience. This reframes prophetic (and by extension, any faithful) ministry as being about FAITHFUL OBEDIENCE to a calling, not about guaranteed or even likely positive outcomes — a significant and sometimes difficult distinction for anyone seeking to measure their own efforts by results alone.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended essay. Write with theological precision and clear structure.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Extended Essay</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">"Being called by God to speak truth does not protect a person from fear, exhaustion, or rejection — it simply means facing these things with God's ongoing presence and care." Write a full response (minimum 10 sentences) evaluating this claim, using at least FOUR specific pieces of evidence from Elijah's and Isaiah's stories. Include a clear conclusion. <span class="marks">15 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="Write your full response here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Clear position stated. At least 4 specific pieces of evidence (Elijah's despair after Carmel, God's practical care with food/rest, the gentle whisper, Isaiah's own recognition of unworthiness, God's warning of expected rejection in 6:9-10). Understanding of ongoing divine presence/care as distinct from the absence of difficulty. Meaningful conclusion. <strong>What a strong response argues:</strong> Elijah's calling to confront Baal's prophets did not exempt him from very real fear and despair immediately afterward — being God's prophet did not create a kind of emotional immunity. Yet God's response to this despair (sending an angel with food and rest before any spiritual correction, then speaking gently rather than delivering more spectacle) demonstrates ongoing, practical care precisely IN the midst of Elijah's struggle, not instead of it. Similarly, Isaiah's calling comes with an explicit warning that much of his prophetic effort will meet with genuine resistance and misunderstanding (6:9-10) — God does not promise Isaiah smooth or successful ministry, only the calling itself and, implicitly, God's ongoing presence throughout it regardless of the response he receives. Together, these accounts suggest that being called by God functions not as protection from difficulty but as ongoing companionship and care WITHIN difficulty — the prophets still fear, still despair, still face rejection, but they do not face these things without God's continued involvement and support, evidenced concretely through practical provision (Elijah) and forewarning combined with calling (Isaiah).</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 2 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">✍️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 11 · Day 2</div>
+  <div class="hero-title">Pronouns —<br>Advanced Practice</div>
+  <div class="hero-subtitle">Indefinite pronouns · Complex sentences · Editing longer texts</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Practice</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Indefinite pronoun agreement rules.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Indefinite Pronouns</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Most indefinite pronouns ending in "-one," "-body," or "-thing" (everyone, somebody, nothing) are treated as SINGULAR, even though they might FEEL like they refer to many people. "Everyone" means "every single one" — logically singular, even though it describes a whole group.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">For each indefinite pronoun, state whether it is SINGULAR or PLURAL, and write one example sentence showing correct pronoun agreement: <span class="marks">10 marks</span><br><br>a) everyone &nbsp; b) nobody &nbsp; c) several &nbsp; d) each &nbsp; e) both</div>
+    <textarea class="q-input xwide" placeholder="a) Singular/Plural: ___ Example sentence: &#10;b) Singular/Plural: ___ Example sentence: &#10;c) Singular/Plural: ___ Example sentence: &#10;d) Singular/Plural: ___ Example sentence: &#10;e) Singular/Plural: ___ Example sentence: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>everyone — singular.</strong> "Everyone brought his or her own Bible to class." (or accepted informal: "their own Bible"). b) <strong>nobody — singular.</strong> "Nobody wanted to admit his mistake." c) <strong>several — plural.</strong> "Several of the prophets delivered their messages boldly." d) <strong>each — singular.</strong> "Each prophet had his own unique calling." e) <strong>both — plural.</strong> "Both Elijah and Isaiah faced their own personal struggles."</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Applying pronoun rules in complex, multi-clause sentences.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Complex Sentence Practice</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Each sentence below has EITHER a vague reference problem OR an agreement error (or both). Identify the specific problem(s) and rewrite the sentence correctly: <span class="marks">10 marks</span><br><br>a) "When the prophet confronted the king, and the crowd gathered to watch, he grew nervous."<br>b) "Each of the students must bring their own book, pencil, and eraser to the exam." (analyse for formal writing)<br>c) "Isaiah saw the angels surrounding the throne, and they filled him with awe."<br>d) "The team of prophets delivered their message, but it was ignored."<br>e) "Neither the king nor his advisors admitted their mistake."</div>
+    <textarea class="q-input xwide" placeholder="a) Problem: ___ Rewritten: &#10;b) Problem: ___ Rewritten: &#10;c) Problem: ___ Rewritten: &#10;d) Problem: ___ Rewritten: &#10;e) Problem: ___ Rewritten: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Problem:</strong> "he" is vague — could refer to the prophet, the king, or a member of the crowd. <strong>Rewritten:</strong> "When the prophet confronted the king, and the crowd gathered to watch, the king grew nervous." b) <strong>Problem (formal writing):</strong> "each" is singular but "their" is often used informally as gender-neutral plural-form singular — widely accepted, but strict formal style might prefer "his or her own book." Generally acceptable in modern usage. c) <strong>Problem:</strong> "they" is reasonably clear (refers to "the angels") but could be seen as slightly ambiguous with "the throne" nearby — generally acceptable but could be clarified: "Isaiah saw the angels surrounding the throne, and the angels filled him with awe." d) <strong>Problem:</strong> "team" is singular collective noun but paired with "their" (plural) then "it" (singular) — inconsistent. <strong>Rewritten (consistent):</strong> "The team of prophets delivered its message, but the message was ignored." e) <strong>Problem:</strong> "neither...nor" with two different subjects (king, advisors) — technically singular is often preferred for "neither...nor," especially when the nearer subject is singular. <strong>Rewritten:</strong> "Neither the king nor his advisors admitted their mistake" is generally acceptable since "advisors" (plural) is the nearer noun to the verb; alternatively could specify: "The king did not admit his mistake, and neither did his advisors admit theirs."</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Write THREE complex sentences (each with at least two clauses) about this week's Bible or History content, deliberately using pronouns correctly with clear antecedents throughout. Then swap perspectives: rewrite each sentence to introduce a DELIBERATE vague reference error, and explain what makes it problematic. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Sentence 1 (correct): &#10;Sentence 1 (made vague) + why problematic: &#10;&#10;Sentence 2 (correct): &#10;Sentence 2 (made vague) + why problematic: &#10;&#10;Sentence 3 (correct): &#10;Sentence 3 (made vague) + why problematic: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Each pair of sentences correctly demonstrating clear vs vague pronoun use (3 marks per pair — 1 for the correct version, 1 for the deliberately vague version, 1 for the explanation of why it's problematic). <strong>Example:</strong> Correct: "When the Silk Road traders reached new regions, the traders exchanged goods and ideas with local populations." Made vague: "When the Silk Road traders reached new regions, they exchanged goods and ideas with local populations, and they were often surprised by what they encountered." (Here, "they" appears three times, potentially confusing which "they" refers to traders vs local populations in the final clause — an example of pronoun overload creating ambiguity even without changing antecedents entirely.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended editing of a full passage.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Full Passage Editing</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Read this passage carefully. It contains SEVERAL pronoun errors (vague references and/or agreement problems). Identify EVERY error, explain each one, and rewrite the ENTIRE passage correctly: <span class="marks">15 marks</span><br><br><em>"When Elijah met King Ahab, he was furious about the drought. The prophets of Baal gathered with the people, and they built an altar, hoping their god would answer. Each of the prophets cried out to their god, but nothing happened. When Elijah prepared his altar, and the people watched closely, he prayed calmly. Fire fell instantly, and it amazed everyone. The people fell to their knees, and they declared that the LORD was God. Neither Ahab nor his officials could deny what they had witnessed, and it changed the course of the nation's history."</em></td></tr></table></div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="ERRORS IDENTIFIED (list each with explanation):&#10;1. &#10;2. &#10;3. &#10;(continue as needed)&#10;&#10;FULLY CORRECTED PASSAGE:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Errors to identify:</strong> 1. "When Elijah met King Ahab, he was furious" — vague, could be Elijah or Ahab. 2. "Each of the prophets cried out to their god" — "each" is singular but "their" is plural in strict formal style (though widely accepted informally) — could specify "his god" for strict formal consistency, or "the prophets... their god" restructured as plural throughout. 3. "Fire fell instantly, and it amazed everyone" — "it" is reasonably clear (the fire falling) but borderline vague amid multiple nearby nouns. 4. "The people fell to their knees, and they declared" — reasonably clear but style could be tightened. 5. "Neither Ahab nor his officials could deny what they had witnessed, and it changed the course..." — "it" at the end is vague: does "it" refer to the fire, the witnessing, or the whole event? <strong>Award marks for:</strong> identifying at least 3-4 genuine problems (6), clear explanations of why each is problematic (4), a fully rewritten passage with clear, unambiguous pronoun use throughout (5). <strong>Example corrected opening:</strong> "When Elijah met King Ahab, Ahab was furious about the drought..." continuing with similarly clarified pronoun references throughout, replacing ambiguous "it," "he," and "they" with specific nouns wherever more than one antecedent could reasonably apply.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 2 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">🔢</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 11 · Day 2</div>
+  <div class="hero-title">Negative Numbers —<br>Harder Problems</div>
+  <div class="hero-subtitle">Multi-step calculations · Multiplication/division · Combined operations</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Harder Problems</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Speed round. Multiplication and division with negatives.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Speed Round — Multiplication & Division</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Calculate each, paying careful attention to signs: <span class="marks">8 marks</span><br>a) (−4) × 6 &nbsp; b) 7 × (−3) &nbsp; c) (−5) × (−8) &nbsp; d) (−36) ÷ 4 &nbsp; e) 45 ÷ (−9) &nbsp; f) (−24) ÷ (−6) &nbsp; g) (−7) × (−7) &nbsp; h) (−100) ÷ 10</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) f) g) h) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (−4)×6=<strong>−24</strong> &nbsp; b) 7×(−3)=<strong>−21</strong> &nbsp; c) (−5)×(−8)=<strong>40</strong> &nbsp; d) (−36)÷4=<strong>−9</strong> &nbsp; e) 45÷(−9)=<strong>−5</strong> &nbsp; f) (−24)÷(−6)=<strong>4</strong> &nbsp; g) (−7)×(−7)=<strong>49</strong> &nbsp; h) (−100)÷10=<strong>−10</strong></div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Combined operations and multi-step calculations.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Combined Operations</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Calculate each, following the correct order of operations: <span class="marks">10 marks</span><br>a) 3 + (−4) × 2 &nbsp; b) (−6 + 2) × 5 &nbsp; c) −10 + (−3) × (−2) &nbsp; d) (8 − (−2)) ÷ 5 &nbsp; e) −2 × (−3) + (−4)</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (−4)×2=−8, so 3+(−8)=<strong>−5</strong>. b) (−6+2)=−4, ×5=<strong>−20</strong>. c) (−3)×(−2)=6, so −10+6=<strong>−4</strong>. d) (8−(−2))=8+2=10, ÷5=<strong>2</strong>. e) (−2)×(−3)=6, so 6+(−4)=<strong>2</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">The temperature in a city changes over 4 days: Day 1: −3°C. Day 2: temperature drops by 5 degrees. Day 3: temperature rises by 9 degrees. Day 4: temperature drops by 4 degrees. Find the temperature at the end of each day. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Day 1: &#10;Day 2: &#10;Day 3: &#10;Day 4: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Day 1: <strong>−3°C</strong>. Day 2: −3−5=<strong>−8°C</strong>. Day 3: −8+9=<strong>1°C</strong>. Day 4: 1−4=<strong>−3°C</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step word problems and reasoning.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">A hiking group starts a trek at an elevation of 250m. Over the trip: they descend 180m into a valley, then climb 340m up a ridge, then descend 90m to make camp. (a) Find the elevation at each stage. (b) Find the total change in elevation from start to finish. (c) If the trip is reversed exactly (retracing the same path back), what will the total elevation change be for the return trip? Explain your reasoning. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Start: ___ After descent 1: ___ After climb: ___ After descent 2 (camp): ___&#10;(b) Total change start to finish: &#10;(c) Return trip total change + reasoning:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Start: <strong>250m</strong>. After descending 180m: 250−180=<strong>70m</strong>. After climbing 340m: 70+340=<strong>410m</strong>. After descending 90m (camp): 410−90=<strong>320m</strong>. (b) Total change = final − start = 320−250=<strong>+70m</strong> (net gain of 70m). (c) On the return trip (retracing exactly), every movement reverses in direction: the 90m descent becomes a 90m climb, the 340m climb becomes a 340m descent, and the 180m descent becomes a 180m climb — the return trip's total change will be <strong>−70m</strong> (the exact opposite/negative of the outward trip), because reversing a journey exactly means undoing each individual elevation change, so the total net change must also be undone, becoming −(+70) = −70m, bringing the hikers back to their exact starting elevation of 250m.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 2 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">⚗️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 11 · Day 2</div>
+  <div class="hero-title">Neutralisation &<br>Real-World Chemistry</div>
+  <div class="hero-subtitle">Neutralisation reactions in depth · Everyday chemistry applications</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Neutralisation equations and everyday chemistry recall.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Neutralisation Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> A "salt" in chemistry does NOT just mean table salt! ANY compound formed from the reaction of an acid with a base is called a "salt" in the chemical sense. Sodium chloride (table salt) is just ONE example of many possible salts formed through neutralisation.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Write the general word equation for neutralisation. Then complete THREE specific examples, naming the salt produced in each case: <span class="marks">8 marks</span><br><br>a) Hydrochloric acid + Sodium hydroxide → ___ + Water<br>b) Sulfuric acid + Potassium hydroxide → ___ + Water<br>c) Nitric acid + Calcium hydroxide → ___ + Water</div>
+    <textarea class="q-input wide" placeholder="General word equation: &#10;&#10;a) Salt produced: &#10;b) Salt produced: &#10;c) Salt produced: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>General word equation:</strong> ACID + BASE → SALT + WATER. a) Hydrochloric acid + Sodium hydroxide → <strong>Sodium chloride</strong> + Water. b) Sulfuric acid + Potassium hydroxide → <strong>Potassium sulfate</strong> + Water. c) Nitric acid + Calcium hydroxide → <strong>Calcium nitrate</strong> + Water. (Note: the salt's name typically combines the metal from the base with the acid's associated ion — e.g. hydrochloric acid produces "chloride" salts, sulfuric acid produces "sulfate" salts, nitric acid produces "nitrate" salts.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Applying neutralisation to real-world scenarios.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Real-World Applications</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">A person suffering from indigestion (excess stomach acid) takes an antacid tablet, which contains a mild alkali (often calcium carbonate or magnesium hydroxide). <br><br>(a) Explain, using the concept of neutralisation, why an antacid tablet relieves the discomfort of excess stomach acid.<br>(b) Predict what would happen if someone took FAR TOO MANY antacid tablets, in terms of the overall pH of their stomach contents.<br>(c) Explain why finding the RIGHT BALANCE (not too much, not too little) matters in this context, connecting to the idea that both extreme acidity and extreme alkalinity can cause problems. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Why the antacid relieves discomfort:&#10;&#10;(b) What happens with too many tablets:&#10;&#10;(c) Why finding the right balance matters:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Stomach acid (hydrochloric acid) is normally useful for digestion, but excess acid causes the burning discomfort associated with indigestion or heartburn. An antacid tablet contains a mild alkali/base which reacts with and neutralises some of this excess acid through a standard neutralisation reaction (ACID + BASE → SALT + WATER), reducing the acidity level in the stomach and relieving the uncomfortable burning sensation. (b) If someone took far too many antacid tablets, they could potentially over-neutralise their stomach acid, pushing the stomach's contents from appropriately acidic toward a more NEUTRAL or even slightly ALKALINE state. This would actually be counterproductive and potentially harmful, since stomach acid serves an important digestive function (breaking down food, killing harmful bacteria) — completely neutralising or over-alkalising the stomach could impair digestion and reduce this protective antibacterial function. (c) This example illustrates that biological and chemical systems often require a specific, appropriate pH BALANCE rather than simply "more alkaline is always better" or "acid is always bad." The goal of taking an antacid is not to eliminate all stomach acidity, but to reduce EXCESS acidity back toward a healthy, functional level — demonstrating that both too much acidity (causing discomfort) and too much alkalinity (potentially impairing digestion) can create problems, reinforcing the broader scientific principle that pH balance, not simply moving as far as possible toward one extreme, is often what a healthy system requires.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Farmers test their soil's pH before planting crops. A farmer discovers their soil has a pH of 4.5 (quite acidic) but most of their intended crop grows best at pH 6.5-7. <br><br>(a) Recommend what type of substance the farmer should add to the soil, and explain why.<br>(b) Explain why simply adding "as much as possible" of this substance would NOT be a good strategy. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Recommendation + why:&#10;&#10;(b) Why 'as much as possible' would not be good:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) The farmer should add an <strong>alkaline substance, such as lime (calcium hydroxide or calcium carbonate)</strong>, to the soil. Since the soil is currently too acidic (pH 4.5) for the crop's needs (pH 6.5-7), adding an alkali will neutralise some of the excess acidity, raising the soil's pH toward the desired, more neutral range through the same acid-base neutralisation principle used elsewhere. (b) Adding "as much as possible" would risk OVER-CORRECTING the soil's pH — pushing it too far past neutral into an alkaline range that would be equally unsuitable (or even more damaging) for the crop, since most plants have a fairly specific, narrow pH range in which they grow best. Too much lime could raise the pH well beyond 7, creating a new problem of excessive alkalinity that could harm the crop just as much as the original excess acidity did — demonstrating again that precise, measured, TARGETED neutralisation toward a specific pH goal is what is actually needed, not maximum alteration in one direction.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific evaluation connecting multiple contexts.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Extended Evaluation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">"Neutralisation reactions demonstrate that chemistry is often about restoring BALANCE, not simply eliminating one substance entirely." Evaluate this statement using AT LEAST THREE different real-world neutralisation examples (from this lesson or your own knowledge), and connect the idea of chemical balance to at least ONE other science topic studied this term (Week 9 elements/compounds, or Week 10 physical/chemical changes). Write at least 8 sentences. <span class="marks">10 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connections available:</strong> Week 9 Science — elements and compounds. Week 10 Science — physical and chemical changes.</div>
+    <textarea class="q-input xwide" style="min-height:220px;" placeholder="Write your evaluation here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This statement is well supported by evidence across multiple real-world neutralisation examples. In each case examined this week — antacid tablets relieving excess stomach acid, farmers adding lime to overly acidic soil, and toothpaste neutralising mouth acids produced by bacteria — the GOAL is never to completely eliminate acidity or push the system to an extreme opposite state, but rather to restore an appropriate, functional BALANCE suited to the specific biological or agricultural context. Excessive correction in any of these cases — over-neutralising stomach acid, over-liming soil, or theoretically making toothpaste too strongly alkaline — would create new problems just as serious as the original excess acidity, demonstrating that the underlying goal is genuinely about balance rather than the elimination or maximisation of any single property. This principle connects meaningfully to Week 9's study of elements and compounds: just as sodium (dangerously reactive) and chlorine (toxic) combine in a specific, BALANCED ratio to form safe, stable sodium chloride, neutralisation reactions similarly combine an acid and a base in appropriate proportions to produce a stable, balanced salt and water — in both cases, the specific RATIO and BALANCE of reacting substances, not simply combining "more" of either ingredient, determines whether a safe, useful, stable result is achieved. This reinforces a recurring theme in chemistry: many important chemical processes and outcomes depend on achieving an appropriate balance or ratio between reacting substances, rather than simply maximising or eliminating any single component, whether in the context of elements combining into compounds or acids and bases neutralising each other into salts.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 2 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">🌎</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 11 · Day 2</div>
+  <div class="hero-title">The Age of Exploration —<br>Consequences & Perspectives</div>
+  <div class="hero-subtitle">The Columbian Exchange in depth · Impact on indigenous peoples · Multiple perspectives</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Columbian Exchange details recall.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 The Columbian Exchange</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The Columbian Exchange gets its name from Christopher Columbus, whose 1492 voyage began sustained contact between the Americas and the rest of the world. It was NOT a single event — it describes centuries of ongoing exchange of plants, animals, diseases, and culture that followed.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">List THREE things that moved from the Americas to the rest of the world, and THREE things that moved from the rest of the world to the Americas, as part of the Columbian Exchange. For each, briefly note its significance. <span class="marks">12 marks</span></div>
+    <textarea class="q-input xwide" placeholder="FROM AMERICAS TO REST OF WORLD:&#10;1. &#10;2. &#10;3. &#10;&#10;FROM REST OF WORLD TO AMERICAS:&#10;1. &#10;2. &#10;3. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>FROM AMERICAS TO REST OF WORLD:</strong> 1. Potatoes — became a hugely important staple food crop in Europe, significantly changing diets and supporting population growth. 2. Maize (corn) — spread widely across Africa, Asia, and Europe, becoming a major global food source. 3. Chocolate (cacao) — introduced an entirely new food/drink product to the rest of the world, eventually becoming globally popular. <strong>FROM REST OF WORLD TO AMERICAS:</strong> 1. Horses — transformed transportation, warfare, and hunting practices for many indigenous groups in the Americas. 2. Wheat and sugar cane — introduced major new crops, with sugar cane in particular driving the development of plantation agriculture and the associated slave trade. 3. Diseases (smallpox, measles) — devastated indigenous populations who had no prior immunity, causing catastrophic population losses.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Evaluating impact and multiple historical perspectives.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Impact & Perspectives</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Explain in detail why European diseases had such a CATASTROPHIC impact on indigenous populations in the Americas, while Europeans themselves were less severely affected by these same diseases. Use the concept of immunity in your answer. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why Europeans had more resistance/immunity to these diseases:&#10;&#10;Why indigenous populations had no such immunity:&#10;&#10;Why this led to such catastrophic population losses:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">European populations had developed significant immunity to diseases like smallpox and measles over many centuries of exposure — these diseases had circulated through densely populated European towns and cities for generations, meaning that surviving populations had built up genetic and immune resistance, and many people had already been exposed and developed antibodies during childhood, making these diseases (while still dangerous) generally less uniformly fatal to the European population as a whole. Indigenous peoples in the Americas, by contrast, had been geographically isolated from these specific diseases for thousands of years prior to European contact, meaning their populations had NO prior exposure and therefore no built-up immunity or genetic resistance whatsoever. When these diseases were introduced through European contact, indigenous populations faced them as entirely NEW pathogens their immune systems had never encountered, causing dramatically higher rates of severe illness and death compared to the somewhat more resistant European populations. This lack of prior immunity is the primary scientific reason estimates suggest such catastrophic population losses (often cited as 80-90% or more in some regions within just decades) — a demographic catastrophe of a scale rarely seen elsewhere in recorded history, driven not by any inherent biological weakness but purely by the total absence of prior immunological exposure to genuinely new diseases.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">The lesson notes that the same events are often celebrated as an "Age of Exploration" from a European perspective but represent something very different from an indigenous perspective. Write TWO paragraphs: one describing these events primarily from a EUROPEAN perspective (emphasising discovery, trade, and achievement), and one describing the SAME events from an INDIGENOUS perspective (emphasising loss, disease, and colonisation). <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="EUROPEAN PERSPECTIVE PARAGRAPH:&#10;&#10;&#10;INDIGENOUS PERSPECTIVE PARAGRAPH:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Genuine, historically grounded European perspective paragraph emphasising exploration, new trade routes, wealth, discovery, and technological/navigational achievement (5). Genuine, historically grounded indigenous perspective paragraph emphasising devastating disease, loss of land and autonomy, forced labour, and cultural destruction (5). <strong>Example European perspective:</strong> "The Age of Exploration represented an extraordinary era of achievement and discovery for European nations. Bold navigators like Columbus, da Gama, and Magellan expanded the known world, opening vital new trade routes to valuable Asian spices and, unexpectedly, entire continents previously unknown to Europeans. This period brought immense wealth, new food crops that transformed European diets and supported population growth, and expanded geographical and scientific knowledge that laid foundations for future scientific and economic development." <strong>Example indigenous perspective:</strong> "For the indigenous peoples of the Americas, the arrival of European explorers marked the beginning of catastrophic loss. Diseases previously unknown to their communities spread rapidly, killing the vast majority of the population within just a few generations, devastating entire civilisations before military conquest even fully began. Ancestral lands were seized through violence, broken agreements, and forced displacement. Traditional ways of life, languages, and belief systems were suppressed or destroyed as colonisation expanded, and many indigenous peoples were forced into exploitative labour systems that caused further suffering across generations."</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analysis of historical perspective and interpretation.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Extended Analysis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">"A historical event does not have one single, objective 'meaning' — its significance depends heavily on whose experience is being centred in the account." Evaluate this claim using the Age of Exploration as your primary example, but also briefly consider whether this same principle applies to at least one other historical topic studied this term. Write at least 8 sentences. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your extended evaluation here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This claim is strongly supported by the evidence surrounding the Age of Exploration, which this week's lesson demonstrates can be legitimately and accurately described in two dramatically different ways depending on perspective — as an era of bold discovery, valuable trade expansion, and scientific achievement from a European viewpoint, or as a catastrophic period of disease, land theft, forced labour, and cultural destruction from an indigenous viewpoint. Crucially, BOTH descriptions can be historically accurate and evidence-based simultaneously; the "meaning" of the events shifts not because the facts themselves are in dispute, but because different groups experienced fundamentally different CONSEQUENCES from the same underlying events, and historical narratives have traditionally centred the perspective of the group that produced most written records (in this case, European explorers and colonisers) while indigenous experiences were often recorded far less directly or were deliberately suppressed. This principle plausibly applies to other topics studied this term as well — the Crusades (Week 10) can similarly be described as a story of religious devotion and eventual beneficial cultural exchange from a European Christian perspective, or as a story of invasion, violence, and disruption from the perspective of Muslim and Jewish communities who experienced the Crusader campaigns directly in the Holy Land. In both cases, examining ONLY one perspective risks presenting an incomplete or even misleading picture of the full historical reality, since the same events produced genuinely different — sometimes directly opposing — experiences and consequences for different groups involved. This suggests that responsible historical study requires deliberately seeking out and considering multiple perspectives, particularly those of groups who may not have had equal power to record and preserve their own account of events, rather than assuming any single narrative captures the full historical truth.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week11_Day2');</script>
+</body>
+</html>

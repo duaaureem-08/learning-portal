@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 11 · Day 1 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(109,40,217,0.2);border:1px solid rgba(109,40,217,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#C4B5FD;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 11</div>
+  <div class="day-badge">📅 Day 1</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 1 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">🔥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 11 · Day 1</div>
+  <div class="hero-title">The Prophets —<br>Foundation Questions</div>
+  <div class="hero-subtitle">Vocabulary · Recall · Understanding Elijah and Isaiah</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and basic recall. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Vocabulary & Memory Verse</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Notice the ORDER of events in Isaiah 6: Isaiah SEES God's holiness first, THEN recognises his own sin, THEN is cleansed, and only THEN volunteers to be sent. Each step depends on the one before it — genuine willingness to serve tends to follow genuine encounter with God, not the reverse.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse from Isaiah 6:8 in full. Then explain why Isaiah's response ("Here am I. Send me!") comes AFTER, not before, his vision and cleansing. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Memory verse:&#10;&#10;Why the order (vision → cleansing → volunteering) matters:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"Then I heard the voice of the Lord saying, 'Whom shall I send? And who will go for us?' And I said, 'Here am I. Send me!'" (Isaiah 6:8, NIV). <strong>Why the order matters:</strong> Isaiah's willingness does not come from ambition or personal confidence — it comes directly after seeing God's overwhelming holiness (6:1-3), recognising his own unworthiness ("Woe to me!... I am a man of unclean lips," 6:5), and being cleansed by the angel (6:7). Only after this genuine encounter and cleansing does he respond immediately and willingly. This sequence suggests that real readiness to serve God flows out of an honest encounter with who God is and an honest recognition of one's own need — not from self-generated confidence alone.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Match each vocabulary word to its correct definition: <em>prophet · idolatry · vision · holiness · exile</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="prophet = &#10;idolatry = &#10;vision = &#10;holiness = &#10;exile = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>prophet</strong> = a person chosen by God to deliver his message to people, often calling them back to faithfulness or warning of consequences. <strong>idolatry</strong> = worshipping a false god instead of, or alongside, the true God. <strong>vision</strong> = a powerful, often symbolic experience in which God reveals something to a person. <strong>holiness</strong> = being set apart, pure, and completely different from ordinary or sinful things. <strong>exile</strong> = being forced to leave one's home country, often as a punishment or consequence.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">List the four main events/stages of this week's story in order: the Mount Carmel contest, Elijah's despair, Isaiah's vision of God's holiness, Isaiah's cleansing and calling. For each, write one sentence describing what happened. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. &#10;2. &#10;3. &#10;4. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>The Mount Carmel contest:</strong> Elijah challenges 450 prophets of Baal to a public test — whichever god answers by fire is the true God; Elijah's God answers instantly while Baal's prophets receive no response. 2. <strong>Elijah's despair:</strong> Immediately after this victory, Elijah flees Jezebel's death threat and falls into deep despair, even asking to die, before God restores him with rest, food, and a gentle whisper. 3. <strong>Isaiah's vision:</strong> Isaiah sees an overwhelming vision of God's holiness in the temple, with angels crying "Holy, holy, holy," and recognises his own sinfulness in response. 4. <strong>Isaiah's cleansing and calling:</strong> An angel cleanses Isaiah's sin with a burning coal, and Isaiah immediately and willingly volunteers to be sent when God asks "Whom shall I send?"</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Understanding and explanation. Think carefully before writing.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Understanding & Explanation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">The lesson notes that God speaks to Elijah in "a gentle whisper" AFTER wind, an earthquake, and fire — none of which contained God's voice. Explain what this teaches about how God communicates, especially in contrast to the dramatic fire at Mount Carmel just one chapter earlier. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What happened at Carmel (dramatic):&#10;&#10;What happened at Horeb with the wind/earthquake/fire/whisper:&#10;&#10;What this contrast teaches about how God communicates:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">At Mount Carmel (1 Kings 18), God communicated through an unmistakably dramatic public display — fire falling instantly from heaven in front of the entire nation, settling a very public dispute. Yet in 1 Kings 19, when Elijah is alone, exhausted, and in genuine despair, God deliberately does NOT speak through the wind, earthquake, or fire that pass by — the text specifically states God was not IN any of these — but instead speaks through a "gentle whisper." This contrast teaches that God's communication is not limited to one method or style; the same God who acts through spectacular public displays for a public purpose (convincing a whole nation) also communicates through quiet, gentle, personal means for a different purpose (comforting and restoring an exhausted individual). This suggests that dramatic, visible signs are not necessarily "more real" or "more valid" forms of divine communication than quiet, personal ones — the appropriate FORM of communication depends on the situation and the person's genuine need in that moment, not a fixed rule about how God must always act.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">Explain why it might seem SURPRISING that Elijah falls into despair immediately after such a dramatic spiritual victory at Mount Carmel. What does this suggest about the relationship between visible spiritual "success" and a person's ongoing emotional/spiritual wellbeing? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why this might seem surprising:&#10;&#10;What this suggests about the relationship between spiritual 'success' and wellbeing:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">It seems surprising because Elijah had just witnessed and participated in one of the most dramatic, unambiguous demonstrations of God's power in the entire Old Testament — fire falling from heaven, an entire nation turning back to God, false prophets defeated. A natural assumption might be that such a clear spiritual "win" would leave Elijah feeling confident, energised, and secure. Instead, he flees in genuine fear from a single threat (Jezebel) and experiences complete despair, even asking to die. This suggests that visible spiritual success and a person's ongoing emotional or spiritual wellbeing are NOT the same thing and do not automatically follow from one another — a person can experience genuine, significant spiritual victory and still be physically exhausted, emotionally depleted, and vulnerable to fear and despair immediately afterward. This is an important and realistic pattern: intense spiritual or public highs are often followed by periods of vulnerability, and this does not represent failure or spiritual weakness — it reflects the genuine human cost of significant effort and exposure, deserving of care (as God provides) rather than criticism.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">Isaiah's first reaction to seeing God's holiness was not excitement but genuine distress: "Woe to me!... I am a man of unclean lips" (6:5). Why might a clear vision of God's holiness lead someone to see their OWN condition more clearly? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Isaiah's reaction:&#10;&#10;Why seeing God's holiness clearly might reveal a person's own condition:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Seeing something perfectly pure, holy, and complete tends to reveal by CONTRAST what is impure or incomplete nearby — much like a bright light makes visible dust and marks that would otherwise go unnoticed in dim conditions. Isaiah's overwhelming vision of God's complete holiness ("Holy, holy, holy") makes his own imperfection ("unclean lips") suddenly and painfully obvious in a way it may not have been before, precisely because he now has a true standard for comparison. This suggests that genuine self-awareness of one's own shortcomings often comes not from self-criticism in isolation, but from an honest encounter with something genuinely greater or purer — the vision of holiness does not CREATE Isaiah's uncleanness, but it reveals it clearly for the first time.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking. Write in full sentences.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Analysis & Application</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">Compare Elijah's and Isaiah's callings to that of Moses (Week 7) and Joshua (Week 9). What is SIMILAR about how each person responds to being called by God, and what is DIFFERENT about the specific circumstances of their calling? Write at least 5 sentences. <span class="marks">6 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 7 Bible — Moses called at the burning bush. Week 9 Bible — Joshua commissioned after Moses' death.</div>
+    <textarea class="q-input wide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Across Moses, Joshua, Elijah, and Isaiah, a similar underlying pattern appears: each person's calling comes directly from a genuine encounter with God — Moses at the burning bush, Joshua through God's direct repeated commission, Elijah through both dramatic (Carmel) and quiet (the whisper) experiences, and Isaiah through his overwhelming vision of God's holiness in the temple. In each case, calling is not self-generated or a matter of personal ambition; it is initiated by God and confirmed through direct encounter. However, the specific circumstances differ significantly. Moses initially responds with reluctance and self-doubt about his ability to speak (Exodus 4:10), requiring God's persistent reassurance before he accepts. Joshua's calling comes with repeated commands to "be strong and courageous," suggesting he too needed considerable encouragement to take on Moses' role. By contrast, Isaiah's response is notably immediate and willing — "Here am I. Send me!" — with no recorded hesitation, though this comes only after his own dramatic recognition of unworthiness and cleansing. Elijah's story is distinctive because it shows a call that continues even through a period of genuine despair and near-collapse, with God renewing his commission (19:15-18) after providing rest and comfort rather than abandoning him for his fear. Together, these four callings show that while God's initiative and genuine encounter are constants, the emotional and circumstantial JOURNEY toward accepting a calling varies significantly between individuals — reluctance, immediate willingness, and renewed commitment after despair are all presented as legitimate parts of a person's response to being called by God.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">Evaluate: "The prophets' stories show that speaking God's truth publicly and experiencing personal struggle privately are not contradictions — they happen together." Use specific evidence from BOTH Elijah's and Isaiah's stories to support or challenge this claim. Write at least 6 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Do you agree? Evidence and reasoning:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This claim is well supported by the evidence in both prophets' stories. Elijah's public confrontation of Baal's prophets and his dramatic demonstration of God's power at Mount Carmel represent about as bold and public a stand as any prophet takes in the Old Testament — yet this same chapter is immediately followed by Elijah fleeing in genuine fear and falling into private despair severe enough that he asks to die (19:4). Rather than treating these as separate, contradictory Elijahs — one bold and public, one fearful and private — the narrative presents them as the SAME person experiencing both realities in immediate succession, suggesting that public courage does not eliminate private vulnerability. Isaiah's story shows a related but distinct pattern: his SPEAKING of God's truth publicly (his entire prophetic ministry that follows chapter 6) is preceded by an intensely private, personal encounter involving genuine distress about his own unworthiness ("Woe to me!") before any cleansing or calling occurs. This shows that Isaiah's public prophetic voice was built upon, not separate from, a private reckoning with his own inadequacy. Together, both stories challenge any assumption that authentic public boldness requires the ABSENCE of private struggle, or that genuine private struggle disqualifies someone from significant public calling — instead, they model these as coexisting, even necessarily connected, realities within the same person's life and ministry.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 1 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">🔗</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 11 · Day 1</div>
+  <div class="hero-title">Pronouns —<br>Foundations</div>
+  <div class="hero-subtitle">Identifying antecedents · Basic agreement rules</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and identification. Use your lesson notes.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Vocabulary & Identification</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> To find an antecedent, ask "WHAT NOUN does this pronoun stand in for?" Look at the words immediately BEFORE the pronoun in the sentence or paragraph. If you cannot find exactly one clear match, the sentence may have a vague reference problem.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Define each term and give one example: <em>pronoun · antecedent · agreement · vague reference</em> <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="pronoun: definition + example&#10;antecedent: definition + example&#10;agreement: definition + example&#10;vague reference: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>pronoun:</strong> a word that replaces a noun to avoid repeating it. Example: "he," "she," "it," "they." <strong>antecedent:</strong> the noun a pronoun refers back to. Example: in "Isaiah saw his vision," "Isaiah" is the antecedent of "his." <strong>agreement:</strong> a pronoun must match its antecedent in number and gender. Example: "the prophet spoke his message" (singular, matching "prophet"). <strong>vague reference:</strong> when a pronoun's antecedent is unclear because more than one noun could fit. Example: "When Elijah spoke to the king, he was angry" — who was angry?</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Identify the antecedent for the underlined pronoun in each sentence: <span class="marks">6 marks</span><br><br>a) "Isaiah saw a vision, and <u>it</u> changed his life."<br>b) "The prophets gathered on the mountain, and <u>they</u> waited for a sign."<br>c) "Elijah prayed, and <u>his</u> prayer was answered instantly."<br>d) "The people watched the fire fall, and <u>they</u> fell to their knees."<br>e) "God spoke to Isaiah, and <u>he</u> responded willingly."<br>f) "The king ignored the warning, and <u>it</u> led to serious consequences."</div>
+    <textarea class="q-input wide" placeholder="a) Antecedent of 'it': &#10;b) Antecedent of 'they': &#10;c) Antecedent of 'his': &#10;d) Antecedent of 'they': &#10;e) Antecedent of 'he': &#10;f) Antecedent of 'it': "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>"a vision"</strong> — the vision changed Isaiah's life. b) <strong>"the prophets"</strong> — the prophets waited. c) <strong>"Elijah"</strong> — Elijah's prayer. d) <strong>"the people"</strong> — the people fell to their knees. e) <strong>"Isaiah"</strong> (though this could be ambiguous with "God" — a good example of near-vague reference; context makes Isaiah the more likely antecedent since he is the one who responds). f) <strong>"the warning"</strong> — ignoring the warning led to consequences (though "it" could also loosely refer to the whole situation of ignoring — a slightly advanced nuance).</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">For each sentence, state whether the pronoun agreement is CORRECT or INCORRECT, and if incorrect, provide the fix: <span class="marks">6 marks</span><br><br>a) "Each prophet delivered their own message." (formal writing)<br>b) "The dog wagged its tail happily."<br>c) "Neither of the boys brought their book."<br>d) "Everyone should bring their own lunch." (informal, widely accepted)<br>e) "The committee announced its decision." (UK formal)<br>f) "Sarah lost her keys yesterday."</div>
+    <textarea class="q-input wide" placeholder="a) Correct/Incorrect + fix if needed:&#10;b) Correct/Incorrect + fix if needed:&#10;c) Correct/Incorrect + fix if needed:&#10;d) Correct/Incorrect + fix if needed:&#10;e) Correct/Incorrect + fix if needed:&#10;f) Correct/Incorrect + fix if needed:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Debatable/Incorrect in strict formal writing</strong> — "each" is singular; strict formal usage would prefer "his or her own message," though "their" is now widely accepted as gender-neutral singular. b) <strong>Correct</strong> — "its" matches the singular "the dog." c) <strong>Incorrect</strong> — "neither" is singular; fix: "Neither of the boys brought his book." d) <strong>Widely accepted informally</strong> — "everyone" is grammatically singular, but "their" as a gender-neutral pronoun is now broadly accepted in most contexts. e) <strong>Correct</strong> (UK formal) — "committee" treated as a singular collective noun. f) <strong>Correct</strong> — "her" matches singular, female "Sarah."</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Fixing vague reference and applying rules in context.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Fixing Vague Reference</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Each sentence below has a vague pronoun reference problem. Identify WHY it is vague, then rewrite it clearly: <span class="marks">10 marks</span><br><br>a) "When Elijah spoke to Ahab, he felt afraid."<br>b) "I enjoy reading history and writing essays, which is my strongest subject."<br>c) "They say prophets always predicted the future."<br>d) "The prophet told the king that his kingdom would fall."<br>e) "Isaiah saw the angels and the throne, and it amazed him."</div>
+    <textarea class="q-input xwide" placeholder="a) Why vague: ___ Rewritten: &#10;b) Why vague: ___ Rewritten: &#10;c) Why vague: ___ Rewritten: &#10;d) Why vague: ___ Rewritten: &#10;e) Why vague: ___ Rewritten: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Why vague:</strong> "he" could refer to either Elijah or Ahab. <strong>Rewritten:</strong> "When Elijah spoke to Ahab, Ahab felt afraid." b) <strong>Why vague:</strong> "which" has no single clear antecedent — "reading" and "writing" are two different things, not one "subject." <strong>Rewritten:</strong> "I enjoy reading history and writing essays; English is my strongest subject." c) <strong>Why vague:</strong> "they" refers to no specific, named person or group. <strong>Rewritten:</strong> "Historians say prophets always predicted the future." d) <strong>Why vague:</strong> "his" could refer to either the prophet or the king. <strong>Rewritten:</strong> "The prophet told the king that the king's kingdom would fall." e) <strong>Why vague:</strong> "it" could refer to the angels, the throne, or the whole vision. <strong>Rewritten:</strong> "Isaiah saw the angels and the throne, and the whole vision amazed him."</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Write THREE original sentences about this week's Bible story (Elijah or Isaiah), each containing a DELIBERATE vague pronoun reference. Then rewrite each sentence to fix the problem. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Sentence 1 (vague): ___ Fixed: &#10;Sentence 2 (vague): ___ Fixed: &#10;Sentence 3 (vague): ___ Fixed: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example:</strong> Sentence 1 (vague): "When Elijah confronted the prophets of Baal, they were defeated." (Who is "they" — Elijah's side or Baal's prophets? Actually reasonably clear here, but could be made ambiguous: "When the prophets of Baal confronted Elijah, they lost.") Fixed: "When the prophets of Baal confronted Elijah, the prophets of Baal lost." Sentence 2 (vague): "God spoke to Isaiah, and he was cleansed." Fixed: "God's angel cleansed Isaiah with a burning coal." Sentence 3 (vague): "The people saw Elijah and the prophets of Baal, and they cried out in fear." Fixed: "The people saw Elijah and the prophets of Baal, and the people cried out in fear." (Accept any correctly constructed vague/fixed sentence pairs demonstrating understanding.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended writing with careful pronoun control.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Extended Writing & Editing</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">Write a paragraph (6-8 sentences) retelling the story of Elijah and the prophets of Baal (1 Kings 18), using AT LEAST FIVE pronouns. After writing, go back through your own paragraph and CHECK each pronoun: circle or label each one, name its antecedent, and confirm there is no vague reference or agreement error anywhere. <span class="marks">14 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:260px;" placeholder="PARAGRAPH:&#10;&#10;&#10;PRONOUN CHECK (list each pronoun used and its antecedent):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Accurate retelling of the story with correct key details (4). At least 5 pronouns used naturally within the paragraph (4). Every pronoun has a single, clear, identifiable antecedent — no vague reference (4). Correct agreement throughout (2). <strong>Example paragraph:</strong> "Elijah challenged the prophets of Baal to a public contest on Mount Carmel. He told them to prepare an altar, and they did so eagerly, believing their god would answer. The prophets of Baal cried out for hours, but their god remained silent. Elijah then prepared his own altar and prayed a short prayer to the LORD. Fire fell from heaven instantly, consuming Elijah's offering completely. When the people witnessed this, they fell to their knees, declaring that the LORD was the true God." (Each pronoun — he, them, they, their, his, they — has one clear antecedent traceable in the text.)</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 1 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">➖</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 11 · Day 1</div>
+  <div class="hero-title">Negative Numbers —<br>Foundations</div>
+  <div class="hero-subtitle">Ordering negative numbers · Basic addition and subtraction</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and ordering. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Vocabulary & Ordering</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Picture a number line as a road: zero is your house. Positive numbers are steps to the RIGHT (bigger the further you go); negative numbers are steps to the LEFT (smaller/more negative the further you go). −10 is much further left (much smaller) than −2.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Define each term and give one example: <em>positive number · negative number · integer · absolute value</em> <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="positive number: definition + example&#10;negative number: definition + example&#10;integer: definition + example&#10;absolute value: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>positive number:</strong> a number greater than zero. Example: 8. <strong>negative number:</strong> a number less than zero, written with a minus sign. Example: −8. <strong>integer:</strong> a whole number that can be positive, negative, or zero. Example: −4, 0, 12. <strong>absolute value:</strong> the distance a number is from zero, always positive. Example: the absolute value of −9 is 9.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Order each set of numbers from SMALLEST to LARGEST: <span class="marks">8 marks</span><br><br>a) −4, 6, −9, 0, 3<br>b) −12, −3, −18, −1, −7<br>c) 5, −5, 10, −10, 0<br>d) −2, −2.5, −1, −3, 0</div>
+    <textarea class="q-input wide" placeholder="a) &#10;b) &#10;c) &#10;d) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>−9, −4, 0, 3, 6</strong> &nbsp; b) <strong>−18, −12, −7, −3, −1</strong> &nbsp; c) <strong>−10, −5, 0, 5, 10</strong> &nbsp; d) <strong>−3, −2.5, −2, −1, 0</strong></div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">For each pair, write whether the FIRST number is GREATER THAN (>), LESS THAN (<), or EQUAL TO (=) the second: <span class="marks">6 marks</span><br><br>a) −3 ___ −8 &nbsp; b) −15 ___ −2 &nbsp; c) 0 ___ −1 &nbsp; d) −6 ___ 6 &nbsp; e) −4 ___ −4 &nbsp; f) −20 ___ −19</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) f) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) −3 <strong>&gt;</strong> −8 (closer to zero) &nbsp; b) −15 <strong>&lt;</strong> −2 &nbsp; c) 0 <strong>&gt;</strong> −1 &nbsp; d) −6 <strong>&lt;</strong> 6 &nbsp; e) −4 <strong>=</strong> −4 &nbsp; f) −20 <strong>&lt;</strong> −19</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Adding and subtracting with negative numbers.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Addition & Subtraction</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Calculate each. Show your working using the "two minuses make a plus" rule where relevant. <span class="marks">12 marks</span><br><br>a) 7 + (−3) &nbsp; b) 4 − (−6) &nbsp; c) −5 + 9 &nbsp; d) −8 − 4 &nbsp; e) −3 + (−7) &nbsp; f) 10 − (−2) &nbsp; g) −6 − (−6) &nbsp; h) −15 + 15 &nbsp; i) 2 − 9 &nbsp; j) −4 + (−4) &nbsp; k) −20 + 8 &nbsp; l) 6 − (−1)</div>
+    <textarea class="q-input xwide" placeholder="a) b) c) d) e) f)&#10;g) h) i) j) k) l)"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) 7+(−3)=7−3=<strong>4</strong> &nbsp; b) 4−(−6)=4+6=<strong>10</strong> &nbsp; c) −5+9=<strong>4</strong> &nbsp; d) −8−4=<strong>−12</strong> &nbsp; e) −3+(−7)=−3−7=<strong>−10</strong> &nbsp; f) 10−(−2)=10+2=<strong>12</strong> &nbsp; g) −6−(−6)=−6+6=<strong>0</strong> &nbsp; h) −15+15=<strong>0</strong> &nbsp; i) 2−9=<strong>−7</strong> &nbsp; j) −4+(−4)=−4−4=<strong>−8</strong> &nbsp; k) −20+8=<strong>−12</strong> &nbsp; l) 6−(−1)=6+1=<strong>7</strong></div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Real-life word problems with negative numbers.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Real-Life Word Problems</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Solve each real-life problem, showing your working: <span class="marks">10 marks</span><br><br>a) The temperature at midnight was −7°C. By 9am it had risen by 12 degrees. What was the temperature at 9am?<br>b) A diver is at −18m (18m below sea level). She descends a further 9m. What is her new depth?<br>c) A bank account has a balance of −£45 (overdrawn). A deposit of £60 is made. What is the new balance?<br>d) The temperature dropped from 5°C to −8°C overnight. By how many degrees did it drop?<br>e) A submarine at −120m rises to −45m. By how many metres did it rise?</div>
+    <textarea class="q-input xwide" placeholder="a) &#10;b) &#10;c) &#10;d) &#10;e) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) −7+12=<strong>5°C</strong>. b) −18−9=<strong>−27m</strong> (27m below sea level). c) −45+60=<strong>£15</strong> (in credit). d) Drop = 5−(−8)=5+8=<strong>13 degrees</strong>. e) Rise = −45−(−120)=−45+120=<strong>75 metres</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A student says: "−15 is a bigger number than −2, because 15 is bigger than 2." Explain clearly why this reasoning is WRONG, using the number line to support your explanation. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why the student's reasoning is wrong:&#10;&#10;Correct explanation using the number line:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The student's reasoning confuses the SIZE of the number ignoring its sign (sometimes called its "absolute value") with its actual VALUE on the number line. While it's true that 15 is a bigger number than 2 when both are positive, the negative signs completely change the comparison. On a number line, numbers increase in value as you move RIGHT and decrease as you move LEFT. −2 is positioned much closer to zero (further right) than −15, which is much further to the left. Since −2 is further right than −15, −2 is actually the GREATER (bigger) number: −2 > −15. The correct way to think about it: with negative numbers, the number that is "smaller" in absolute size (ignoring the sign) is actually the LARGER value — this is the opposite pattern from positive numbers, which is exactly why it causes confusion. A useful way to check: imagine temperature — would you rather have −2°C or −15°C? −2°C is warmer (closer to freezing, a "higher" temperature), confirming that −2 is indeed the greater value.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 1 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🧫</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 11 · Day 1</div>
+  <div class="hero-title">Acids & Alkalis —<br>Foundations</div>
+  <div class="hero-subtitle">The pH scale · Identifying acids and alkalis · Indicators</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and pH scale basics. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Vocabulary & pH Basics</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Remember the pH scale like a number line for chemistry: 0 (most acidic) — 7 (neutral, exactly in the middle) — 14 (most alkaline). The FURTHER a number is from 7 in either direction, the STRONGER the acid or alkali.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Define each term and give one example: <em>acid · alkali · base · pH scale · indicator · neutralisation</em> <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="acid: definition + example&#10;alkali: definition + example&#10;base: definition + example&#10;pH scale: definition&#10;indicator: definition + example&#10;neutralisation: definition"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>acid:</strong> a substance with a pH less than 7. Example: lemon juice. <strong>alkali:</strong> a soluble base with a pH greater than 7. Example: soap. <strong>base:</strong> any substance that can neutralise an acid — all alkalis are bases. Example: baking soda. <strong>pH scale:</strong> a scale from 0 to 14 measuring how acidic or alkaline a substance is; 7 is neutral. <strong>indicator:</strong> a substance that changes colour depending on whether it is in an acid or alkali. Example: litmus paper. <strong>neutralisation:</strong> a chemical reaction between an acid and a base that cancels out their acidic/alkaline properties, producing a salt and water.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Sort these substances into ACID, NEUTRAL, or ALKALI: <em>lemon juice · pure water · soap · vinegar · baking soda · bleach · stomach acid · sea water</em> <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="ACID: &#10;&#10;NEUTRAL: &#10;&#10;ALKALI: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>ACID:</strong> lemon juice, vinegar, stomach acid — all have pH less than 7. <strong>NEUTRAL:</strong> pure water — exactly pH 7. <strong>ALKALI:</strong> soap, baking soda, bleach, sea water — all have pH greater than 7.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">State what colour litmus paper turns in: (a) an acid, (b) an alkali. Then state what colour range universal indicator shows for a strong acid, a neutral substance, and a strong alkali. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Litmus in acid: &#10;(b) Litmus in alkali: &#10;Universal indicator — strong acid colour: &#10;Universal indicator — neutral colour: &#10;Universal indicator — strong alkali colour: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Litmus in acid turns <strong>RED</strong>. (b) Litmus in alkali turns <strong>BLUE</strong>. Universal indicator — strong acid: <strong>red</strong> (pH 0-2). Neutral: <strong>green</strong> (pH 7). Strong alkali: <strong>purple/dark violet</strong> (pH 12-14).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Explaining neutralisation and comparing indicators.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Neutralisation & Indicators</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">Explain what happens during a neutralisation reaction, including the general word equation. Then give TWO real-world examples where neutralisation is used deliberately, and explain the purpose in each case. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="What happens during neutralisation + word equation:&#10;&#10;Real-world example 1 + purpose:&#10;&#10;Real-world example 2 + purpose:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Neutralisation is a chemical reaction in which an acid reacts with a base (or alkali), cancelling out each other's acidic and alkaline properties. The general word equation is: <strong>ACID + BASE → SALT + WATER</strong>. <strong>Real-world example 1 — farming:</strong> Farmers add alkaline lime to soil that has become too acidic (often from acid rain or certain fertilisers), neutralising the excess acidity and creating better conditions for crops to grow, since most plants grow best in soil close to neutral pH. <strong>Real-world example 2 — toothpaste:</strong> Toothpaste is often formulated to be mildly alkaline, which helps neutralise the acids produced by bacteria in the mouth after eating — this protects tooth enamel from being damaged by these acids, helping to prevent tooth decay.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">Explain why universal indicator is generally considered MORE useful than litmus paper for scientific investigation, even though litmus paper is simpler and cheaper. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="What litmus paper can tell you:&#10;&#10;What universal indicator can tell you that litmus cannot:&#10;&#10;Why this extra information matters for scientific investigation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Litmus paper can only tell you WHICH SIDE of neutral a substance falls on — it turns red for any acid (whether very weak like rainwater or extremely strong like battery acid) and blue for any alkali (whether mild like baking soda or extremely strong like drain cleaner), giving no information about HOW acidic or alkaline the substance actually is. Universal indicator, by contrast, shows a distinct colour corresponding to each approximate point on the full 0-14 pH scale, allowing a scientist to estimate not just whether something is acidic or alkaline but roughly HOW STRONG that acidity or alkalinity is. This additional information matters significantly for scientific investigation because many important decisions and comparisons depend on the DEGREE of acidity, not just its presence — for example, distinguishing between mildly acidic rainwater (pH 5-6, generally not concerning) and dangerously acidic industrial waste (pH 1-2, requiring urgent treatment) requires more precise information than litmus alone can provide.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific reasoning about acids, alkalis, and safety.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Scientific Reasoning & Safety</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">A student claims: "Alkalis are always safer to handle than acids, because acids are dangerous and alkalis are the opposite of acids." <br><br>(a) Evaluate whether this claim is scientifically accurate, using specific examples.<br>(b) Explain why understanding the FULL pH scale (0-14), not just "acid vs alkali," is important for assessing chemical safety.<br>(c) A spill of a strong alkali occurs in a lab. Would neutralising it with a strong acid be a safe, sensible response? Explain your reasoning. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Is the claim accurate? Examples:&#10;&#10;(b) Why understanding the full pH scale matters for safety:&#10;&#10;(c) Would neutralising a strong alkali spill with a strong acid be safe? Reasoning:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) The claim is <strong>NOT scientifically accurate</strong>. Being "the opposite" of an acid on the pH scale does not make an alkali automatically safer — strong alkalis such as oven cleaner, drain cleaner, or concentrated ammonia (pH 12-14) can be just as corrosive and dangerous to skin, eyes, and other materials as strong acids like battery acid (pH 0-2). In fact, some strong alkalis are considered MORE dangerous in certain contexts because they can cause deep, less immediately painful tissue damage that isn't noticed as quickly as an acid burn, potentially leading to more severe injury before it's addressed. (b) Understanding the full pH scale matters because DANGER correlates with DISTANCE from neutral (pH 7) in EITHER direction, not simply with being "an acid" versus "an alkali." A substance at pH 6 (mildly acidic, like black coffee) poses essentially no safety risk, while a substance at pH 1 (strongly acidic) is highly dangerous — the same principle applies on the alkaline side. Treating "acid = dangerous, alkali = safe" as a blanket rule would lead to serious underestimation of alkaline hazards. (c) Attempting to neutralise a strong alkali spill by adding a strong acid directly would be <strong>unsafe and inadvisable</strong> without proper training and controlled conditions. Mixing strong acids and strong alkalis together can produce a highly exothermic (heat-releasing) reaction, potentially causing dangerous splashing, boiling, or the release of harmful fumes — the reaction itself can become a new hazard. Proper laboratory protocol for chemical spills typically involves using specifically designed, less reactive neutralising agents (not simply "the opposite" chemical) applied carefully according to safety guidelines, or professional spill-response procedures, rather than an untrained, direct acid-alkali mixing response.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 1 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">🧭</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 11 · Day 1</div>
+  <div class="hero-title">Trade & Exploration —<br>Foundations</div>
+  <div class="hero-subtitle">The Silk Road · Causes of the Age of Exploration · Key vocabulary</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and the Silk Road. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Vocabulary & The Silk Road</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The Silk Road was NOT a single paved road — it was a NETWORK of many different overland and sea routes used by many different traders and travellers over more than 1,500 years. Think of it more like a whole system of connected pathways, similar to how many different roads together make up a country's transport network today.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Define each term and give one example or detail: <em>Silk Road · globalisation · Age of Exploration · colonisation · indigenous peoples · Columbian Exchange</em> <span class="marks">6 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Silk Road: &#10;globalisation: &#10;Age of Exploration: &#10;colonisation: &#10;indigenous peoples: &#10;Columbian Exchange: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Silk Road:</strong> a network of ancient trade routes connecting China to Europe and the Middle East, active for over 1,500 years, carrying goods and ideas. <strong>globalisation:</strong> the process by which the world's regions become increasingly connected through trade, travel, and the exchange of ideas. <strong>Age of Exploration:</strong> a period (roughly 15th-17th century) when European explorers sailed to previously unknown (to them) parts of the world. <strong>colonisation:</strong> when a country establishes control over another territory and its people. <strong>indigenous peoples:</strong> the original inhabitants of a region, present before colonisation or settlement by outside groups. <strong>Columbian Exchange:</strong> the widespread transfer of plants, animals, diseases, and culture between the Americas and the rest of the world following Columbus's voyages.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">List FIVE different things that moved along the Silk Road (not just silk!) and briefly explain each one's significance. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Silk (from China):</strong> highly prized in Europe and the Middle East; China guarded silk production techniques as a closely-kept secret for centuries. 2. <strong>Spices, tea, porcelain:</strong> valuable goods travelling east to west, often changing hands many times between different traders. 3. <strong>Ideas and religions:</strong> Buddhism and Islam spread significantly through Silk Road contact and trade networks. 4. <strong>Technology:</strong> papermaking and gunpowder, both Chinese inventions, spread westward via Silk Road contact — profoundly impacting warfare and communication in Europe and the Middle East. 5. <strong>Disease:</strong> the same routes that carried goods also carried diseases, likely contributing to the spread of the Black Death across Europe and Asia in the 14th century.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Explaining causes and key explorers of the Age of Exploration.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Causes & Key Explorers</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Explain WHY European nations sought new sea routes to Asia during the Age of Exploration, specifically connecting this to the fall of Constantinople in 1453. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="What happened to traditional overland trade routes:&#10;&#10;How the fall of Constantinople (1453) connects to this:&#10;&#10;Why this motivated Europeans to seek NEW sea routes:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">By the 1400s, traditional overland trade routes connecting Europe to Asia (including sections of the Silk Road) had become significantly more difficult and expensive to use, largely due to increased tolls, political instability, and control by various regional powers along the route. The fall of Constantinople to the Ottoman Empire in 1453 was a particularly significant turning point — Constantinople had served as a crucial trading link between Europe and Asia, and Ottoman control over this key crossing point made traditional overland trade to Asia even more costly and difficult for European merchants, who now faced higher tolls and less reliable access. This disruption directly motivated European nations, particularly Portugal and Spain, to invest heavily in finding alternative SEA routes to Asia's valuable spice trade — routes that would bypass the Ottoman-controlled overland pathways entirely, giving these nations direct, more affordable access to the lucrative Asian trade in spices, silk, and other goods.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">Complete the table with the correct achievement and approximate date for each explorer: <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Christopher Columbus: Achievement = ___ Date = ___&#10;Vasco da Gama: Achievement = ___ Date = ___&#10;Ferdinand Magellan's expedition: Achievement = ___ Date = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Christopher Columbus:</strong> Sailed west seeking a route to Asia; instead reached the Americas (unknown to Europeans at the time). Date: <strong>1492</strong>. <strong>Vasco da Gama:</strong> Found a sea route from Europe to India, sailing around Africa. Date: <strong>1498</strong>. <strong>Ferdinand Magellan's expedition:</strong> The first to circumnavigate (sail completely around) the globe. Date: <strong>1519-1522</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking and cross-week connections.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Analysis & Extended History</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">Connect this week's lesson on the Silk Road to Week 10's study of the Crusades and cultural exchange. Both involve significant contact and exchange between distant civilisations, but through very different MECHANISMS. Compare and contrast how cultural/economic exchange happened via the Silk Road versus via the Crusades. Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 10 History — the Crusades and cultural exchange with the Islamic world.</div>
+    <textarea class="q-input xwide" placeholder="Write your comparison here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Both the Silk Road and the Crusades resulted in significant cultural, economic, and intellectual exchange between distant civilisations, yet the underlying MECHANISM of that contact differed substantially. The Silk Road was fundamentally built on ONGOING, VOLUNTARY, PRIMARILY ECONOMIC exchange — merchants and traders travelling for mutual commercial benefit over many centuries, with cultural and intellectual exchange occurring as a natural byproduct of sustained peaceful (though not always entirely peaceful) trading relationships across a vast, largely continuous network of routes. The Crusades, by contrast, were fundamentally MILITARY and RELIGIOUS in origin — contact between Europe and the Islamic world was initiated through conflict, invasion, and religious warfare rather than voluntary trade, with cultural exchange emerging as a largely UNINTENDED consequence of this sustained, often violent contact rather than as the original purpose of the interaction. Despite these very different mechanisms, both ultimately produced comparable RESULTS: significant transfer of knowledge, goods, and ideas between civilisations that would otherwise have remained largely separate. This suggests that extended CONTACT between civilisations — whether through peaceful economic cooperation (Silk Road) or violent conflict (Crusades) — tends to produce meaningful cultural exchange as a consequence, regardless of whether that exchange was the original intention of the contact. The Silk Road's exchange was arguably more sustained and continuous across many centuries, while the Crusades' exchange, though shorter in overall duration, occurred through more concentrated and intense periods of direct contact.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week11_Day1');</script>
+</body>
+</html>

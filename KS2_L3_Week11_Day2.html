@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 11 — Day 2 Challenge · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#BE185D;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#0E7490;--social-l:#CFFAFE;--social-d:#164E63;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:#059669;}
+.day-badge{background:#FEE2E2;color:#7F1D1D;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #DC2626;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.challenge-banner{background:linear-gradient(135deg,#7F1D1D,#DC2626);color:white;border-radius:var(--radius-sm);padding:12px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.6;}
+.open-box{width:100%;min-height:90px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.analysis-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.analysis-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.analysis-table td{padding:10px 14px;border:1px solid #E5E7EB;font-size:0.88rem;vertical-align:top;}
+.analysis-table tr:nth-child(even) td{background:#F8FAFF;}
+.analysis-table textarea{width:100%;min-height:65px;padding:8px;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:0.88rem;resize:vertical;}
+.analysis-table textarea:focus{outline:2px solid var(--accent,#888);border-radius:6px;}
+.vocab-challenge-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;}
+.vcc{background:#F8FAFF;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px;}
+.vcc label{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);display:block;margin-bottom:4px;}
+.vcc textarea{width:100%;min-height:60px;padding:6px;border-radius:6px;border:1.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.85rem;resize:none;}
+.step-list{display:flex;flex-direction:column;gap:10px;}
+.step-item{display:flex;gap:12px;background:#F8FAFF;border-radius:var(--radius-sm);padding:14px;border:2px solid #E5E7EB;}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--accent,#888);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9rem;flex-shrink:0;}
+.step-q{font-weight:800;font-size:0.92rem;margin-bottom:8px;line-height:1.5;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:top;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.correction-box{width:100%;margin-top:4px;padding:6px 8px;border-radius:6px;border:1.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.82rem;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.passage-box{background:linear-gradient(135deg,#F8FAFF,#EFF6FF);border-radius:var(--radius-sm);padding:18px 22px;border-left:4px solid var(--accent,#888);margin:14px 0;font-size:0.95rem;line-height:1.8;font-style:italic;}
+.quiz-feedback{margin-top:10px;padding:12px 16px;border-radius:10px;font-weight:700;display:none;font-size:0.9rem;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.vocab-challenge-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">⚠️ Day 2 — Challenge</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>✝️</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🧲</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🌍</span> Humanities</button>
+</div>
+
+<!-- ══════════ BIBLE ══════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">⚠️ Challenge Worksheet — Day 2</div>
+    <div class="hero-week">✝️ Bible · Week 11</div>
+    <div class="hero-title">Ruth — Loyalty<br>and Kindness</div>
+    <div class="hero-sub">Deep analysis · character study · making connections · Ruth 1:16</div>
+    <div class="hero-emoji">💛</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE — Same topics, harder questions. Read carefully. Write in full sentences. Use evidence from the story.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary in Sentences <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Do NOT just define the word. Write a complete sentence that <strong>shows</strong> you understand its meaning in the story of Ruth.</p>
+    <div class="vocab-challenge-grid">
+      <div class="vcc"><label>Loyalty</label><textarea placeholder="Write a sentence using this word in the context of Ruth's story…"></textarea></div>
+      <div class="vcc"><label>Kindness</label><textarea placeholder="Write a sentence about Boaz's kindness…"></textarea></div>
+      <div class="vcc"><label>Gleaning</label><textarea placeholder="Write a sentence about what Ruth did in the field…"></textarea></div>
+      <div class="vcc"><label>Faithful</label><textarea placeholder="Write a sentence showing what faithful means through Ruth's actions…"></textarea></div>
+      <div class="vcc"><label>Covenant</label><textarea placeholder="Explain Ruth's commitment using this word…"></textarea></div>
+    </div>
+    <button class="audio-btn" style="margin-top:10px;" onclick="speak('Loyalty. Kindness. Gleaning. Faithful. Covenant.')">🔊 Hear all words</button>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — Passage Analysis <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:8px;">Read this passage from Ruth 1:16–17. Then answer ALL four questions below:</p>
+    <div class="passage-box">
+      "But Ruth replied, 'Don't urge me to leave you or to turn back from you. Where you go I will go, and where you stay I will stay. Your people will be my people and your God my God. Where you die I will die, and there I will be buried. May the Lord deal with me, be it ever so severely, if even death separates you and me.'"
+      <br><br>— Ruth 1:16–17
+    </div>
+    <table class="analysis-table">
+      <tr><th style="width:38%">Question</th><th>Your answer — use evidence from the passage</th></tr>
+      <tr><td>a) What does "Don't urge me to leave you" tell us about what Naomi had been asking Ruth to do? Why do you think Naomi kept asking?</td>
+          <td><textarea placeholder="Naomi had been asking Ruth to…&#10;She kept asking because…"></textarea></td></tr>
+      <tr><td>b) Ruth says "Where you die I will die, and there I will be buried." What does this show about the depth of her commitment? Why is this more than just a kind gesture?</td>
+          <td><textarea placeholder="This shows that Ruth's commitment was…"></textarea></td></tr>
+      <tr><td>c) "Your people will be my people and your God my God." Ruth was a Moabite, not an Israelite. What makes this line so remarkable? What was she giving up?</td>
+          <td><textarea placeholder="This is remarkable because Ruth was giving up…"></textarea></td></tr>
+      <tr><td>d) "May the Lord deal with me, be it ever so severely, if even death separates you and me." Ruth uses a strong oath here. What does this tell us about her character — is she making a casual promise or a deep commitment?</td>
+          <td><textarea placeholder="This tells us that Ruth's character is…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Boaz was described as a man of "standing" and "worth" (Ruth 2:1). Yet he treated Ruth — a poor foreign widow — with great kindness. What does this tell us about Boaz's character? How does his behaviour contrast with how foreigners were often treated in the ancient world? Write 4–5 sentences.</div>
+          <textarea class="open-box" placeholder="Boaz's character is shown by…&#10;This contrasts with…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">Compare Orpah and Ruth. Both were in the same situation. Orpah chose to return home; Ruth chose to stay. Neither choice was wrong — but they had very different outcomes. What does this comparison teach us about the choices we make? Write 3–4 sentences using the words "loyalty," "consequence" and "faith."</div>
+          <textarea class="open-box" placeholder="Orpah chose to… while Ruth chose to…&#10;This teaches us that loyalty…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED: Ruth became the great-grandmother of King David, and is listed in the family line of Jesus (Matthew 1:5). Why do you think God chose to include a Moabite woman — a foreigner and a widow — in this most important family line? What does this tell us about God's character and values? Write at least 5 sentences using evidence from the story.</div>
+          <textarea class="open-box" style="min-height:130px;" placeholder="God's choice to include Ruth shows that He values…&#10;This is significant because…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:10px;">Click TRUE or FALSE. If FALSE, write the correct statement below.</p>
+    <div id="bible-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTFCh('bible')">Check ✅</button></div>
+    <div id="bible-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ ENGLISH ══════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">⚠️ Challenge Worksheet — Day 2</div>
+    <div class="hero-week">✏️ English · Week 11</div>
+    <div class="hero-title">Adverbs &amp; Time<br>Connectives</div>
+    <div class="hero-sub">Writer's effect · analysing how-to texts · creating your own · extended writing</div>
+    <div class="hero-emoji">⏰</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE — Same topics, harder questions. Analyse, evaluate and write with precision.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary: Examples and Explanations <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;">For each term: write your own example sentence AND explain WHY it is that type.</p>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Your example sentence</th><th>Why it is this type</th></tr>
+      <tr><td><strong>Time connective</strong></td><td><textarea placeholder="Write a sentence starting with a time connective…"></textarea></td><td><textarea placeholder="It is a time connective because…"></textarea></td></tr>
+      <tr><td><strong>Adverb of manner</strong></td><td><textarea placeholder="Write a sentence with an adverb of manner…"></textarea></td><td><textarea placeholder="The adverb is ___ because it tells us HOW…"></textarea></td></tr>
+      <tr><td><strong>Sequence</strong></td><td><textarea placeholder="List 3 events in sequence…"></textarea></td><td><textarea placeholder="This shows sequence because…"></textarea></td></tr>
+      <tr><td><strong>Meanwhile</strong></td><td><textarea placeholder="Write a sentence using Meanwhile to show two things happening at once…"></textarea></td><td><textarea placeholder="Meanwhile is different from then/next because…"></textarea></td></tr>
+      <tr><td><strong>Imperative verb</strong> <button class="audio-btn" onclick="speak('An imperative verb is a command verb — it tells someone to do something. For example: Mix, Stir, Add, Pour.')">🔊</button></td><td><textarea placeholder="Write a how-to step using an imperative verb…"></textarea></td><td><textarea placeholder="In how-to guides, imperative verbs are important because…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Text Analysis <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:8px;">Read this how-to guide carefully. Then answer ALL four questions:</p>
+    <div class="passage-box">
+      <strong>How to plant a seed 🌱</strong><br><br>
+      <strong>First,</strong> carefully choose a small pot and fill it gently with moist soil — do not pack it too tightly.<br>
+      <strong>Next,</strong> slowly push your finger about one centimetre into the soil to make a small hole.<br>
+      <strong>Then,</strong> gently drop one seed into the hole and softly cover it with a little soil.<br>
+      <strong>After that,</strong> quietly place the pot on a sunny windowsill where it will receive plenty of light.<br>
+      <strong>Finally,</strong> carefully water the soil — just a little! — and wait patiently for your seedling to appear.
+    </div>
+    <table class="analysis-table">
+      <tr><th style="width:38%">Question</th><th>Your answer</th></tr>
+      <tr><td>a) Find FIVE different time connectives in the text. List them in order and explain what each one adds to the reader's understanding.</td>
+          <td><textarea placeholder="1. First — this tells the reader that…&#10;2. Next —…&#10;3. Then —…&#10;4. After that —…&#10;5. Finally —…"></textarea></td></tr>
+      <tr><td>b) Count how many adverbs of manner are used. List them. Then choose TWO and explain WHY the writer used that specific word — what effect does it have?</td>
+          <td><textarea placeholder="Adverbs found: carefully, gently, slowly, softly, quietly, patiently, little…&#10;&#10;'Gently' was chosen because…&#10;'Patiently' was chosen because…"></textarea></td></tr>
+      <tr><td>c) The writer uses "do not pack it too tightly" and "just a little!" Why are these warnings important in a how-to guide? What would happen without them?</td>
+          <td><textarea placeholder="These warnings are important because…&#10;Without them, the reader might…"></textarea></td></tr>
+      <tr><td>d) This guide uses both time connectives AND adverbs of manner together. Find one example where both appear in the same sentence. Explain the effect of combining them.</td>
+          <td><textarea placeholder="Example: 'First, carefully choose…'&#10;&#10;The effect of combining them is…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Extended Writing <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Write your own HOW-TO GUIDE (6–8 steps) about a topic you know well. You MUST include: all 5 time connectives (First, Next, Then, After that, Finally), at least 6 adverbs of manner, at least 2 imperative verbs, and at least 1 warning or tip. Underline all adverbs of manner.</div>
+          <div style="font-size:0.88rem;color:var(--muted);margin-bottom:8px;">My topic: <input type="text" style="border:none;border-bottom:2px solid var(--english);background:transparent;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;outline:none;width:250px;" placeholder="How to ___"></div>
+          <textarea class="open-box" style="min-height:200px;" placeholder="First, carefully…&#10;Next, gently…&#10;Then,…&#10;After that,…&#10;Finally,…&#10;&#10;💡 Tip:…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A classmate wrote: "First put the bread in the toaster. Then press the button. Then wait. Then take it out. Then eat it." What are THREE problems with this writing? Rewrite it using proper time connectives AND adverbs of manner to make it much better.</div>
+          <textarea class="open-box" placeholder="Three problems:&#10;1.&#10;2.&#10;3.&#10;&#10;Improved version:&#10;First, carefully place…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED: Explain why time connectives AND adverbs of manner are BOTH important in how-to writing. What would a guide be like without time connectives? What would it be like without adverbs of manner? Give examples for EACH. Write at least 5 sentences.</div>
+          <textarea class="open-box" style="min-height:130px;" placeholder="Without time connectives, a how-to guide would…&#10;For example: instead of 'First… Then… Finally…' the reader would…&#10;&#10;Without adverbs of manner, the reader would not know…&#10;For example: 'pour the water' gives less information than…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="eng-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTFCh('eng')">Check ✅</button></div>
+    <div id="eng-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ MATHS ══════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">⚠️ Challenge Worksheet — Day 2</div>
+    <div class="hero-week">🔢 Maths · Week 11</div>
+    <div class="hero-title">Time — Telling the<br>Time &amp; Duration</div>
+    <div class="hero-sub">Multi-step problems · timetables · reasoning · missing times</div>
+    <div class="hero-emoji">🕐</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE — Show ALL working. Use 24-hour clock unless told otherwise. Explain your reasoning.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary: Explain with Examples <span class="marks">5 marks</span></div>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Definition in your own words</th><th>Numerical example</th></tr>
+      <tr><td><strong>Duration</strong></td><td><textarea style="min-height:50px;" placeholder="Duration means…"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. A film starts at 14:00 and ends at…"></textarea></td></tr>
+      <tr><td><strong>AM</strong></td><td><textarea style="min-height:50px;" placeholder="AM means…"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. 7:30 AM is…"></textarea></td></tr>
+      <tr><td><strong>24-hour clock</strong></td><td><textarea style="min-height:50px;" placeholder="The 24-hour clock is…"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. 3:00 PM = ? in 24-hour clock because…"></textarea></td></tr>
+      <tr><td><strong>Analogue clock</strong></td><td><textarea style="min-height:50px;" placeholder="An analogue clock is…"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. When the short hand is at 4 and the long hand is at 6…"></textarea></td></tr>
+      <tr><td><strong>Quarter to</strong></td><td><textarea style="min-height:50px;" placeholder="Quarter to means…"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. Quarter to 8 = ? in digital time"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Calculations &amp; Timetable <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Multi-step time problems — show ALL working:</p>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">a</div>
+        <div class="step-content">
+          <div class="step-q">Layla leaves home at 07:20. She walks for 15 minutes to the bus stop. She waits 8 minutes for the bus. The bus journey takes 32 minutes. She then walks 5 minutes to school. What time does she arrive at school? Give your answer in both 12-hour and 24-hour formats.</div>
+          <textarea class="open-box" placeholder="07:20 + 15 mins = ?&#10;+ 8 mins = ?&#10;+ 32 mins = ?&#10;+ 5 mins = ?&#10;&#10;12-hour:&#10;24-hour:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">b</div>
+        <div class="step-content">
+          <div class="step-q">A TV programme starts at 19:45 and ends at 21:20. (a) How long is the programme? (b) If the programme is split into 3 equal parts with no breaks, how long is each part? Give your answer in minutes.</div>
+          <textarea class="open-box" placeholder="a) Duration: 19:45 to 21:20 = ? hours ? minutes&#10;&#10;b) Total minutes ÷ 3 ="></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">c</div>
+        <div class="step-content">
+          <div class="step-q">A baker starts work at 04:30. She works for 3 hours 45 minutes, then takes a 20-minute break, then works for another 2 hours 15 minutes. What time does she finish? Show all steps.</div>
+          <textarea class="open-box" placeholder="Start: 04:30&#10;+ 3h 45m = ?&#10;+ 20 mins = ?&#10;+ 2h 15m = ?&#10;Finish time:"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Read the timetable and answer the questions:</p>
+    <table class="fill-table" style="margin-bottom:12px;">
+      <tr><th>Train</th><th>Departure</th><th>Arrival</th><th>Duration</th></tr>
+      <tr><td>Express A</td><td>06:15</td><td>08:45</td><td><input class="fill-in" data-ans="2h 30m" placeholder="?" style="width:90px;"></td></tr>
+      <tr><td>Express B</td><td>09:30</td><td>11:05</td><td><input class="fill-in" data-ans="1h 35m" placeholder="?" style="width:90px;"></td></tr>
+      <tr><td>Express C</td><td>13:50</td><td><input class="fill-in" data-ans="16:20" placeholder="?" style="width:90px;"></td><td>2h 30m</td></tr>
+      <tr><td>Express D</td><td><input class="fill-in" data-ans="18:00" placeholder="?" style="width:90px;"></td><td>20:15</td><td>2h 15m</td></tr>
+    </table>
+    <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkTimetable()">Check Timetable ✅</button>
+      <button class="audio-btn" onclick="speak('To find duration, subtract departure from arrival. To find arrival, add duration to departure. To find departure, subtract duration from arrival.')">🔊 Strategy</button>
+    </div>
+    <div id="timetable-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Reasoning &amp; Problem Solving <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">A student says: "09:45 + 1 hour 30 minutes = 11:15." Without calculating, explain why this CANNOT be right. Then work out the correct answer. Explain your reasoning clearly.</div>
+          <textarea class="open-box" placeholder="This cannot be right because…&#10;&#10;Correct working:&#10;09:45 + 1h = ?&#10;? + 30 mins = ?&#10;&#10;Correct answer:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">MISSING TIMES: Find the missing start or end time. Show all working.</div>
+          <table class="fill-table" style="margin-top:8px;">
+            <tr><th>Start time</th><th>Duration</th><th>End time</th></tr>
+            <tr><td><input class="fill-in" data-ans="10:15" placeholder="?" style="width:90px;"></td><td>2h 30m</td><td>12:45</td></tr>
+            <tr><td>14:20</td><td>1h 50m</td><td><input class="fill-in" data-ans="16:10" placeholder="?" style="width:90px;"></td></tr>
+            <tr><td><input class="fill-in" data-ans="07:40" placeholder="?" style="width:90px;"></td><td>3h 15m</td><td>10:55</td></tr>
+            <tr><td>22:30</td><td>1h 45m</td><td><input class="fill-in" data-ans="00:15" placeholder="?" style="width:90px;"></td></tr>
+          </table>
+          <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMissing()">Check ✅</button></div>
+          <div id="missing-result" class="quiz-feedback"></div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">REASONING: Omar wants to watch 3 films back-to-back. Film 1: 1h 45m. Film 2: 2h 10m. Film 3: 1h 55m. He wants to finish before 23:00. What is the LATEST time he can start? Show all working.</div>
+          <textarea class="open-box" placeholder="Total film time: 1h 45m + 2h 10m + 1h 55m = ?&#10;&#10;Latest finish = 23:00&#10;Latest start = 23:00 − total duration = ?&#10;&#10;Answer:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="maths-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTFCh('maths')">Check ✅</button></div>
+    <div id="maths-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ SCIENCE ══════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">⚠️ Challenge Worksheet — Day 2</div>
+    <div class="hero-week">🧲 Science · Week 11</div>
+    <div class="hero-title">Forces —<br>Magnets</div>
+    <div class="hero-sub">Deep analysis · fair test design · application · explaining magnetic force</div>
+    <div class="hero-emoji">🧲</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE — Use scientific vocabulary. Write in full sentences. Show full reasoning.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary: Explain with Analogies <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;">For each term: explain what it means AND use an analogy (comparison) to help explain it. Example: "Attract is like a hug — two things pull towards each other."</p>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>What it means</th><th>"It is like ___ because ___"</th></tr>
+      <tr><td><strong>Attract</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Repel</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Magnetic pole</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Magnetic force</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Non-magnetic</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🧲 Part B — Investigation Results <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. A student tested which materials a magnet attracted. Study the results table and answer all questions:</p>
+    <table class="fill-table" style="margin-bottom:14px;">
+      <tr><th>Material tested</th><th>Attracted? (Y/N)</th><th>Magnetic or Non-magnetic?</th></tr>
+      <tr><td>Iron nail</td><td>Y</td><td><input class="fill-in" data-ans="magnetic" placeholder="?" style="width:130px;"></td></tr>
+      <tr><td>Aluminium can</td><td>N</td><td><input class="fill-in" data-ans="non-magnetic" placeholder="?" style="width:130px;"></td></tr>
+      <tr><td>Steel spoon</td><td>Y</td><td><input class="fill-in" data-ans="magnetic" placeholder="?" style="width:130px;"></td></tr>
+      <tr><td>Copper wire</td><td>N</td><td><input class="fill-in" data-ans="non-magnetic" placeholder="?" style="width:130px;"></td></tr>
+      <tr><td>Nickel coin</td><td>Y</td><td><input class="fill-in" data-ans="magnetic" placeholder="?" style="width:130px;"></td></tr>
+      <tr><td>Plastic ruler</td><td>N</td><td><input class="fill-in" data-ans="non-magnetic" placeholder="?" style="width:130px;"></td></tr>
+    </table>
+    <div style="margin-top:8px;"><button class="btn" style="background:var(--science);" onclick="checkSciTable()">Check Table ✅</button></div>
+    <div id="sci-table-result" class="quiz-feedback"></div>
+
+    <div style="margin-top:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">2. What conclusion can you draw from these results? What do all the attracted materials have in common? What do all the non-attracted materials have in common?</p>
+      <textarea class="open-box" placeholder="All the attracted (magnetic) materials contain…&#10;&#10;All the non-attracted (non-magnetic) materials include…&#10;&#10;Therefore, I can conclude that…"></textarea>
+    </div>
+
+    <div style="margin-top:14px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. A student says "If it's a metal, it must be magnetic." Using the results table, explain why this statement is INCORRECT. Give TWO specific examples from the table as evidence.</p>
+      <textarea class="open-box" placeholder="This statement is incorrect because…&#10;Evidence 1: Aluminium…&#10;Evidence 2: Copper…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Design a Fair Test <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">Design a FAIR TEST to investigate: "Does the strength of a magnet affect how many paperclips it can pick up?" Complete the full plan below:</div>
+          <table class="analysis-table" style="margin-top:8px;">
+            <tr><th style="width:35%">Section</th><th>Your answer</th></tr>
+            <tr><td>My question</td><td><textarea style="min-height:40px;" placeholder="Does the ___ of a magnet affect how many ___?"></textarea></td></tr>
+            <tr><td>My prediction (I think… because…)</td><td><textarea style="min-height:40px;" placeholder="I think that a stronger magnet will…because…"></textarea></td></tr>
+            <tr><td>What I will CHANGE (independent variable)</td><td><textarea style="min-height:40px;" placeholder="I will change the strength of the magnet by…"></textarea></td></tr>
+            <tr><td>What I will MEASURE (dependent variable)</td><td><textarea style="min-height:40px;" placeholder="I will measure/count how many…"></textarea></td></tr>
+            <tr><td>What I will keep the SAME — 1</td><td><textarea style="min-height:35px;" placeholder="…"></textarea></td></tr>
+            <tr><td>What I will keep the SAME — 2</td><td><textarea style="min-height:35px;" placeholder="…"></textarea></td></tr>
+            <tr><td>What I will keep the SAME — 3</td><td><textarea style="min-height:35px;" placeholder="…"></textarea></td></tr>
+            <tr><td>Equipment I will need</td><td><textarea style="min-height:40px;" placeholder="magnets of different strengths, paperclips, ruler, table to record results…"></textarea></td></tr>
+            <tr><td>How I will record results</td><td><textarea style="min-height:40px;" placeholder="I will use a table with columns for: magnet strength, number of paperclips picked up…"></textarea></td></tr>
+            <tr><td>My conclusion will say</td><td><textarea style="min-height:40px;" placeholder="I found out that…"></textarea></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED: Explain how a COMPASS uses magnetism to work. Why does the needle always point North? What does this tell us about the Earth itself? Write at least 4 sentences using the words "magnetic field," "poles," "North" and "align."</div>
+          <textarea class="open-box" style="min-height:120px;" placeholder="A compass works because… The needle always points North because the Earth has…&#10;The Earth's magnetic poles…&#10;The word 'align' is important here because the needle…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="sci-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTFCh('sci')">Check ✅</button></div>
+    <div id="sci-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ HUMANITIES ══════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">⚠️ Challenge Worksheet — Day 2</div>
+    <div class="hero-week">🌍 Humanities · Week 11</div>
+    <div class="hero-title">Climate Zones &amp;<br>World Environments</div>
+    <div class="hero-sub">Analysis · comparison · case studies · how climate shapes human life</div>
+    <div class="hero-emoji">🌍</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE — Use geographical vocabulary. Write in full sentences. Provide evidence for your opinions.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary in Context <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;">For each term, write a sentence using it correctly AND explain what would happen WITHOUT it or its opposite.</p>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Sentence using the term</th><th>"Without this / if this changed…"</th></tr>
+      <tr><td><strong>Climate zone</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;" placeholder="If climate zones did not exist…"></textarea></td></tr>
+      <tr><td><strong>Tropical</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;" placeholder="If a tropical region became colder…"></textarea></td></tr>
+      <tr><td><strong>Adaptation</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;" placeholder="Without adaptation to climate, people would…"></textarea></td></tr>
+      <tr><td><strong>Temperate</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;" placeholder="If a temperate region became a desert…"></textarea></td></tr>
+      <tr><td><strong>Permafrost</strong> <button class="audio-btn" onclick="speak('Permafrost is permanently frozen ground found in polar regions. The soil never fully thaws, which makes it impossible for most crops to grow.')">🔊</button></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;" placeholder="If permafrost melted permanently…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🌍 Part B — Compare Climate Zones <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Complete this detailed comparison table:</p>
+    <table class="analysis-table">
+      <tr><th></th><th>🌴 Tropical</th><th>🌿 Temperate</th><th>❄️ Polar</th></tr>
+      <tr><td><strong>Temperature range</strong></td><td><textarea style="min-height:50px;" placeholder="e.g. 25–35°C all year"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. mild; varies by season"></textarea></td><td><textarea style="min-height:50px;" placeholder="e.g. −40°C to just above 0°C"></textarea></td></tr>
+      <tr><td><strong>Rainfall pattern</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Typical crops grown</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Type of clothing worn</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Type of housing</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Example country</strong></td><td><textarea style="min-height:40px;"></textarea></td><td><textarea style="min-height:40px;"></textarea></td><td><textarea style="min-height:40px;"></textarea></td></tr>
+    </table>
+
+    <div style="margin-top:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">2. Pakistan has MULTIPLE climate zones within one country. Name TWO different climate regions in Pakistan and describe the climate of each:</p>
+      <textarea class="open-box" placeholder="Region 1 (e.g. Sindh / Balochistan): The climate here is…&#10;&#10;Region 2 (e.g. Gilgit-Baltistan / Murree): The climate here is…&#10;&#10;This shows that Pakistan is…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">The Inuit people of the Arctic have lived in one of the harshest polar climates on Earth for thousands of years. Give THREE specific ways they adapted — one about food, one about shelter, and one about clothing. Then explain: what would happen to their way of life if the polar ice melted permanently?</div>
+          <textarea class="open-box" placeholder="Food adaptation: The Inuit eat…because in the polar zone…&#10;&#10;Shelter adaptation: They traditionally build…because…&#10;&#10;Clothing adaptation: They wear…because…&#10;&#10;If the ice melted:…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">"Climate is more important than any other factor in shaping the way people live." Do you AGREE or DISAGREE? Use evidence from at least TWO different climate zones to support your argument. Write 4–5 sentences.</div>
+          <textarea class="open-box" placeholder="I agree/disagree because climate affects…&#10;For example, in tropical regions…&#10;In contrast, in polar regions…&#10;However, other factors such as…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED: Imagine you are a geographer writing a report about climate change. Scientists say that some temperate regions are becoming hotter and drier. What changes might this bring to: (a) the crops farmers can grow, (b) the way houses are built, (c) the daily life of people living there? Write at least 5 sentences using geographical vocabulary.</div>
+          <textarea class="open-box" style="min-height:140px;" placeholder="If temperate regions become hotter and drier…&#10;a) Crops: Farmers may no longer be able to grow…Instead they might…&#10;b) Housing: Buildings may need to be adapted by…&#10;c) Daily life: People may need to change…&#10;&#10;Overall, climate change means that…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="soc-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTFCh('soc')">Check ✅</button></div>
+    <div id="soc-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+/* ── TF CHALLENGE DATA ── */
+const tfChData={
+  bible:[
+    {s:'Ruth returned to her own family in Moab after Naomi urged her to leave.',ans:false,c:'Ruth REFUSED to leave Naomi and stayed with her.'},
+    {s:'Boaz was a wealthy relative of Naomi\'s late husband.',ans:true},
+    {s:'Ruth 1:16 was spoken by Naomi to Ruth.',ans:false,c:'Ruth 1:16 was spoken by RUTH to Naomi — Ruth made this commitment.'},
+    {s:'Ruth gleaned grain in the fields, which was a common way for poor people to find food.',ans:true},
+    {s:'Ruth\'s story ends with her remaining a widow with no family of her own.',ans:false,c:'Ruth married Boaz and became the great-grandmother of King David.'},
+  ],
+  eng:[
+    {s:'"Finally" can be used at the beginning of any step in a how-to guide.',ans:false,c:'"Finally" is used ONLY for the very last step.'},
+    {s:'Adverbs of manner always come immediately after the verb they describe.',ans:false,c:'Adverbs of manner can appear in different positions in a sentence.'},
+    {s:'"Gently stir the mixture" — "gently" is an adverb of manner.',ans:true},
+    {s:'"Meanwhile" and "then" mean exactly the same thing.',ans:false,c:'"Meanwhile" means two things are happening AT THE SAME TIME. "Then" means one thing happens AFTER another.'},
+    {s:'A how-to guide uses time connectives so the reader can follow the steps in the correct order.',ans:true},
+  ],
+  maths:[
+    {s:'09:45 + 1 hour 30 minutes = 11:15.',ans:false,c:'09:45 + 1 hour = 10:45. 10:45 + 30 mins = 11:15. Actually this IS correct — the statement is TRUE.'},
+    {s:'To find the duration of a journey, you subtract the departure time from the arrival time.',ans:true},
+    {s:'A film starts at 14:30 and lasts 2 hours 15 minutes. It finishes at 16:55.',ans:false,c:'14:30 + 2h = 16:30. 16:30 + 15m = 16:45. The correct finish time is 16:45.'},
+    {s:'23:30 + 1 hour = 00:30 the next day.',ans:true},
+    {s:'You always subtract 12 to convert from AM to 24-hour clock.',ans:false,c:'You subtract 12 to convert from PM to 24-hour. AM stays the same (just add a leading zero if needed).'},
+  ],
+  sci:[
+    {s:'A magnet will attract any shiny or metallic-looking material.',ans:false,c:'Only materials containing iron, nickel or cobalt are attracted. Many metals (aluminium, copper, gold) are NOT magnetic.'},
+    {s:'The force of a magnet is strongest at its poles.',ans:true},
+    {s:'If you cut a bar magnet in half, you will get one North piece and one South piece.',ans:false,c:'Each half becomes a complete magnet with its own North AND South pole.'},
+    {s:'Steel is magnetic because it contains iron.',ans:true},
+    {s:'A compass works because its needle is made of a non-magnetic material.',ans:false,c:'A compass needle IS magnetic — it aligns with Earth\'s magnetic field to point North.'},
+  ],
+  soc:[
+    {s:'Climate refers to what is happening in the weather right now today.',ans:false,c:'Climate is the LONG-TERM typical weather pattern. What happens today is called weather.'},
+    {s:'Permafrost is permanently frozen ground found in polar regions.',ans:true},
+    {s:'Bananas can grow in polar climates as long as there is enough water.',ans:false,c:'Bananas need HEAT (tropical warmth) not just water. They cannot survive the extreme cold of polar regions.'},
+    {s:'The tropical climate zone is found near the equator.',ans:true},
+    {s:'All countries in the world have the same climate zone.',ans:false,c:'The world has three main climate zones: tropical, temperate and polar. Countries differ widely.'},
+  ],
+};
+
+function buildTFCh(key){
+  const data=tfChData[key];const area=document.getElementById(key+'-tf-ch');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>T / F &amp; Correction</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td>
+    <button class="tf-btn" id="tfc-${key}-${i}-T" onclick="selTFCh('${key}',${i},'T')">✅ True</button>
+    <button class="tf-btn" id="tfc-${key}-${i}-F" onclick="selTFCh('${key}',${i},'F')">❌ False</button>
+    <br><input class="correction-box" placeholder="If FALSE — write the correction here…"/>
+  </td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTFCh);
+
+function selTFCh(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('tfc-'+key+'-'+i+'-'+v);if(b)b.classList.remove('sel-t','sel-f');});
+  const btn=document.getElementById('tfc-'+key+'-'+i+'-'+val);if(btn)btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkTFCh(key){
+  const data=tfChData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tfc-'+key+'-'+i+'-T');const fBtn=document.getElementById('tfc-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');const userF=fBtn?.classList.contains('sel-f');
+    const correct=item.ans;
+    if((correct&&userT)||(!correct&&userF))score++;
+    if(correct){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;});
+  const res=document.getElementById(key+'-tf-ch-result');if(res){res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct answer. Check the corrections!`;}}
+}
+
+/* ── MATHS CHECKS ── */
+function checkTimetable(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('timetable-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+function checkMissing(){
+  const answers=['10:15','16:10','07:40','00:15'];
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .card:nth-child(4) .fill-in[data-ans]').forEach((inp,i)=>{
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('missing-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+
+/* ── SCI TABLE CHECK ── */
+function checkSciTable(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-science .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('sci-table-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#BE185D','#D97706','#059669','#0E7490','#F59E0B'];
+  for(let i=0;i<60;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*25);}
+}
+const st=document.createElement('style');st.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(st);
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week11_Day2');</script>
+</body>
+</html>

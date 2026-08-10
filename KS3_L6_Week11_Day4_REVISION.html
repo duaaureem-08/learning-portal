@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 11 · Day 4 Revision · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(245,158,11,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCD34D;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="overview"].active{background:rgba(245,158,11,0.2);color:#FCD34D;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:520px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:180px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color 0.2s;cursor:pointer;}
+.ov-card:hover{border-color:var(--ov-color,#555);}
+.ov-icon{font-size:2rem;margin-bottom:10px;}
+.ov-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--bright);margin-bottom:6px;}
+.ov-topic{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+.ov-keys{display:flex;flex-direction:column;gap:4px;}
+.ov-key{font-size:0.78rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start;}
+.ov-key::before{content:'✓';color:var(--ov-color,#6EE7B7);flex-shrink:0;font-weight:700;}
+.tracker{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.tracker-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--bright);margin-bottom:16px;}
+.tracker-row{display:grid;grid-template-columns:180px 1fr 100px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.tracker-row:last-child{border-bottom:none;}
+.tracker-subject{font-size:0.88rem;font-weight:600;color:var(--text);}
+.tracker-bar-wrap{background:var(--surface2);border-radius:99px;height:8px;overflow:hidden;}
+.tracker-bar{height:8px;border-radius:99px;width:0%;transition:width 1s ease;}
+.tracker-score{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:center;width:100%;}
+.tracker-score:focus{outline:none;border-color:#F59E0B;}
+.mc-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.mc-opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.mc-opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.mc-opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.mc-opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.mc-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:0.87rem;font-weight:600;display:none;}
+.mc-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.mc-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.mc-nav{margin-top:14px;display:flex;align-items:center;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--muted);font-weight:700;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}.tracker-row{grid-template-columns:1fr 1fr;}.tracker-bar-wrap{display:none;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 11</div>
+  <div class="day-badge">⭐ Day 4 · Revision</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="overview" onclick="show('overview')">📋 Overview</button>
+    <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ OVERVIEW PAGE ═══ -->
+<div id="pg-overview" class="page active">
+<div class="hero" style="background:linear-gradient(135deg,#1A1200,#3D2800);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#F59E0B,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">Day 4 · Week 11 · Full Revision</div>
+  <div class="hero-title">Week 11 Revision —<br>All Subjects</div>
+  <div class="hero-subtitle">Mixed quiz · Topic summaries · Final score tracker · Cross-subject connections. Use this page to check what you know before moving on to Week 12.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">📖 Bible: The Prophets</span>
+    <span class="hero-tag">✏️ English: Pronouns</span>
+    <span class="hero-tag">🧮 Maths: Negative Numbers</span>
+    <span class="hero-tag">🔬 Science: Acids & Alkalis</span>
+    <span class="hero-tag">🏛️ Geography: Trade & Exploration</span>
+  </div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Week 11 Total</label><input type="text" placeholder="   / 200+"></div>
+</div>
+
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--bright);margin-bottom:16px;">Week 11 at a Glance</div>
+<div class="overview-grid">
+  <div class="ov-card" style="--ov-color:#C4B5FD;border-color:rgba(109,40,217,0.3);" onclick="show('bible')">
+    <div class="ov-icon">📖</div>
+    <div class="ov-title" style="color:#C4B5FD;">Bible</div>
+    <div class="ov-topic">The Prophets — Elijah & Isaiah (1 Kings 18-19, Isaiah 6 · Isaiah 6:8)</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Prophets call, warn, and offer hope</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Elijah: fire falls at Carmel, then despair</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">God speaks in "a gentle whisper" (19:12)</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Isaiah: vision → unworthiness → cleansing → "Send me!"</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Connects to Moses (Wk7), Joshua (Wk9), David (Wk10)</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCA5A5;border-color:rgba(190,18,60,0.3);" onclick="show('english')">
+    <div class="ov-icon">✏️</div>
+    <div class="ov-title" style="color:#FCA5A5;">English</div>
+    <div class="ov-topic">Pronoun Use & Agreement</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Pronoun replaces a noun; antecedent = the noun</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Agreement: match number and gender</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Vague reference: unclear antecedent</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Indefinite pronouns (each, everyone) mostly singular</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Fix by naming the specific noun directly</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCD34D;border-color:rgba(180,83,9,0.3);" onclick="show('maths')">
+    <div class="ov-icon">🧮</div>
+    <div class="ov-title" style="color:#FCD34D;">Maths</div>
+    <div class="ov-topic">Negative Numbers</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCD34D;">Larger moving right on the number line</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">−3 > −8 (closer to zero is greater)</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Adding negative = subtracting; subtracting negative = adding</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Same signs give positive; different signs give negative</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Real-life: temperature, bank balance, elevation</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#6EE7B7;border-color:rgba(6,95,70,0.3);" onclick="show('science')">
+    <div class="ov-icon">🔬</div>
+    <div class="ov-title" style="color:#6EE7B7;">Science</div>
+    <div class="ov-topic">Acids & Alkalis</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#6EE7B7;">pH scale 0-14; 7 = neutral</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Litmus: red in acid, blue in alkali</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Universal indicator shows the full range</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Neutralisation: ACID + BASE → SALT + WATER</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Both strong acids AND alkalis can be corrosive</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#93C5FD;border-color:rgba(30,58,138,0.3);" onclick="show('history')">
+    <div class="ov-icon">🏛️</div>
+    <div class="ov-title" style="color:#93C5FD;">History / Geography</div>
+    <div class="ov-topic">Trade, Exploration & Early Globalisation</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#93C5FD;">Silk Road: goods, ideas, disease, 1,500+ years</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Columbus 1492, da Gama 1498, Magellan 1519-22</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Columbian Exchange: crops, animals, disease</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Devastating impact on indigenous peoples</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Same events, very different perspectives</div>
+    </div>
+  </div>
+</div>
+
+<div class="tracker">
+  <div class="tracker-title">📊 My Week 11 Score Tracker</div>
+  <div class="tracker-row">
+    <div class="tracker-subject">📖 Bible — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#7C3AED;" id="bar-bible"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('bible',this.value,99)" id="sc-bible">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">✏️ English — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#E11D48;" id="bar-english"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('english',this.value,99)" id="sc-english">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🧮 Maths — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#D97706;" id="bar-maths"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('maths',this.value,100)" id="sc-maths">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🔬 Science — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#059669;" id="bar-science"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('science',this.value,100)" id="sc-science">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🏛️ History — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#2563EB;" id="bar-history"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('history',this.value,100)" id="sc-history">
+  </div>
+</div>
+
+<div class="card" style="--accent:#F59E0B;">
+  <div class="slabel" style="background:rgba(245,158,11,0.2);color:#FCD34D;">🌐 Big Ideas That Connect Everything This Week</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:4px;">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Direction and position determine meaning</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">−3 is greater than −8 because of its POSITION on the number line, not its absolute size. A substance's pH position relative to 7 determines whether it's acid or alkali. Position, not surface size, determines true value or meaning.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Clarity requires naming things precisely</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">A vague pronoun leaves meaning unclear; the fix is naming the specific noun. Neutralisation requires precise, balanced amounts, not vague "more." Precision in language and chemistry both prevent confusion and harm.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 The same event, different perspectives</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">The Age of Exploration means achievement to Europeans, devastation to indigenous peoples. A pronoun's meaning depends on which antecedent the reader assumes. Meaning is often perspective-dependent.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Warning and hope can coexist</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Prophets combined judgment with hope, never treating warning as the final word. A neutralisation reaction combines opposing acid/base properties into something stable and useful. Opposing forces can combine constructively.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ BIBLE REVISION ═══ -->
+<div id="pg-bible" class="page">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🔥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 11 · Day 4 Revision</div>
+  <div class="hero-title">The Prophets —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Multiple choice · Short recall · Extended question · Self-mark</div>
+  <div class="hero-tags"><span class="hero-tag">Memory verse</span><span class="hero-tag">Key events</span><span class="hero-tag">Judgment & Hope</span></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse Check</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse for Week 11 Bible from memory. Then write it in your own words. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Exact verse (Isaiah 6:8):&#10;&#10;In my own words:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"Then I heard the voice of the Lord saying, 'Whom shall I send? And who will go for us?' And I said, 'Here am I. Send me!'" (Isaiah 6:8, NIV). Own words: After seeing God's holiness and being cleansed, Isaiah immediately and willingly offers himself to carry God's message, without hesitation or reluctance.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🎯 Multiple Choice Quiz</div>
+  <div id="bible-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextMC('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Short Recall</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★</div>
+    <div class="q-text">Without notes — write down as much as you can remember about the prophets Elijah and Isaiah in 5 minutes. Include: key events in order, why God sends prophets, and ONE connection to an earlier Bible week. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write everything you remember — events, themes, vocabulary, connections:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Key events in order: Elijah confronts prophets of Baal on Mount Carmel → fire falls, people declare "The LORD is God" → Elijah flees Jezebel's threat, falls into despair → God provides rest, food, then a gentle whisper → Isaiah sees vision of God's holiness → recognises his own unworthiness ("Woe to me!") → is cleansed by burning coal → volunteers "Here am I. Send me!" Purpose of prophets: call people back to God, warn of consequences, offer hope. Connection: to Moses (Wk7 — burning bush calling), Joshua (Wk9 — commissioned with encouragement), or David (Wk10 — heart matters more than appearance). Give credit for vocabulary: idolatry, repentance, holiness, vision, covenant.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Final Extended Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★★</div>
+    <div class="q-text">Choose ONE of these essay questions and write a full response (minimum 8 sentences): <span class="marks">15 marks</span><br><br><strong>Option A:</strong> "Elijah's despair immediately after his greatest victory teaches us more about faith than the victory itself." Discuss using specific evidence.<br><strong>Option B:</strong> "Isaiah's cleansing had to come BEFORE his calling, not after." Explain why this order matters and what it teaches about readiness to serve.<br><strong>Option C:</strong> "A prophet's success should be measured by faithfulness, not by how the message is received." Evaluate this claim using Isaiah 6:9-10.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A — Elijah's despair:</strong> Award marks for: contrast between the dramatic public victory and the immediate private crisis; God's response of practical care (food, rest) before correction; the gentle whisper vs the dramatic fire; discussion of what this teaches about faith including human vulnerability and God's ongoing care. <strong>Option B — Isaiah's order:</strong> Award marks for: the sequence (vision → unworthiness → cleansing → calling); explanation of why genuine readiness follows genuine encounter and cleansing rather than self-generated confidence; connection to the idea that willingness to serve is not the same as being independently qualified. <strong>Option C — Faithfulness vs reception:</strong> Award marks for: explanation of Isaiah 6:9-10's forewarning of resistance; Isaiah's willing response despite this; discussion of what this means for measuring "success" in faithful service generally, not just prophetic ministry.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Bible Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 28+" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH REVISION ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🔗</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 11 · Day 4 Revision</div>
+  <div class="hero-title">Pronouns —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Vocabulary drill · Vague reference fixing · Extended editing</div>
+  <div class="hero-tags"><span class="hero-tag">Antecedents</span><span class="hero-tag">Agreement</span><span class="hero-tag">Vague reference</span></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🎯 Multiple Choice Quiz</div>
+  <div id="english-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextMC('english')">Next →</button>
+    <span class="score-badge" id="english-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📝 Vocabulary & Fix-It Test</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Define these 5 terms precisely. Then fix each of the 5 vague/incorrect sentences below. <span class="marks">15 marks</span><br><br><strong>Terms:</strong> pronoun, antecedent, agreement, vague reference, indefinite pronoun<br><br><strong>Sentences to fix:</strong><br>1. "When Isaiah met the angel, he was amazed."<br>2. "Each of the prophets delivered their message." (state formal alternative)<br>3. "They say the Silk Road carried many goods." (fix the vague "they")<br>4. "The team of explorers reached their destination, and it was significant."<br>5. "Neither Elijah nor the prophets of Baal could ignore what they witnessed."</div>
+    <textarea class="q-input xwide" placeholder="Definitions:&#10;1. 2. 3. 4. 5.&#10;&#10;Fixed sentences:&#10;1. 2. 3. 4. 5."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Definitions:</strong> pronoun — a word that replaces a noun. antecedent — the noun a pronoun refers to. agreement — pronoun matches antecedent in number/gender. vague reference — unclear antecedent. indefinite pronoun — doesn't refer to one specific thing, usually singular (everyone, each). <strong>Fixed sentences:</strong> 1. "When Isaiah met the angel, Isaiah was amazed." 2. Formal: "Each of the prophets delivered his message." 3. "Historians say the Silk Road carried many goods." 4. "The team of explorers reached its destination, and the achievement was significant." 5. Generally acceptable as written since "prophets" (plural, nearer noun) matches "they."</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">English Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 25+" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS REVISION ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">➖</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 11 · Day 4 Revision</div>
+  <div class="hero-title">Negative Numbers —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Timed drill · Mixed problem set · Common errors · Final exam challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Ordering</span><span class="hero-tag">Operations</span><span class="hero-tag">Real-life</span></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🎯 Multiple Choice Quiz</div>
+  <div id="maths-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextMC('maths')">Next →</button>
+    <span class="score-badge" id="maths-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Timed Drill — 12 Questions (Target: under 10 minutes)</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★</div>
+    <div class="q-text">Work through as quickly and accurately as you can. <span class="marks">12 marks</span><br><br>1. Order: −5, 3, −9, 0, 2 (smallest to largest) &nbsp; 2. 6 + (−9) &nbsp; 3. −4 − (−7) &nbsp; 4. (−8) × 3 &nbsp; 5. (−45) ÷ (−9) &nbsp; 6. Is −11 greater or less than −4? &nbsp; 7. A hiker at −60m climbs 95m. New elevation? &nbsp; 8. (−9) × (−9) &nbsp; 9. 12 − 20 &nbsp; 10. −3 + (−3) + (−3) &nbsp; 11. Temperature rises from −8°C to 5°C. Rise? &nbsp; 12. (−100) ÷ 25</div>
+    <textarea class="q-input xwide" placeholder="1. ___ 2. ___ 3. ___ 4. ___ 5. ___ 6. ___&#10;7. ___ 8. ___ 9. ___ 10. ___ 11. ___ 12. ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>−9, −5, 0, 2, 3</strong> &nbsp; 2. 6+(−9)=<strong>−3</strong> &nbsp; 3. −4−(−7)=−4+7=<strong>3</strong> &nbsp; 4. (−8)×3=<strong>−24</strong> &nbsp; 5. (−45)÷(−9)=<strong>5</strong> &nbsp; 6. <strong>−4 is greater</strong> (closer to zero) &nbsp; 7. −60+95=<strong>35m</strong> &nbsp; 8. (−9)×(−9)=<strong>81</strong> &nbsp; 9. 12−20=<strong>−8</strong> &nbsp; 10. −3+(−3)+(−3)=<strong>−9</strong> &nbsp; 11. 5−(−8)=5+8=<strong>13 degrees</strong> &nbsp; 12. (−100)÷25=<strong>−4</strong></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Final Challenge Problem</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★★</div>
+    <div class="q-text">A deep-sea diver descends from the surface (0m) in stages: descends 45m, descends a further 60m, then rises 25m, then descends a further 15m. (a) Find her depth after each stage. (b) Find her final depth. (c) How many metres would she need to rise to return exactly to the surface? <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) After stage 1: ___ Stage 2: ___ Stage 3: ___ Stage 4: ___&#10;(b) Final depth: &#10;(c) Metres to rise to reach surface:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Start: 0m. Stage 1 (descend 45m): <strong>−45m</strong>. Stage 2 (descend further 60m): −45−60=<strong>−105m</strong>. Stage 3 (rise 25m): −105+25=<strong>−80m</strong>. Stage 4 (descend further 15m): −80−15=<strong>−95m</strong>. (b) Final depth: <strong>−95m</strong> (95m below surface). (c) To return to the surface (0m) from −95m, she needs to rise <strong>95 metres</strong>.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Maths Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE REVISION ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🧫</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 11 · Day 4 Revision</div>
+  <div class="hero-title">Acids & Alkalis —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Quiz · pH classification challenge · Real-world connections · Final challenge</div>
+  <div class="hero-tags"><span class="hero-tag">pH scale</span><span class="hero-tag">Indicators</span><span class="hero-tag">Neutralisation</span></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🎯 Multiple Choice Quiz</div>
+  <div id="science-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextMC('science')">Next →</button>
+    <span class="score-badge" id="science-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🧪 pH Classification Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">From memory — classify each and give one reason: <span class="marks">10 marks</span><br><br>a) Orange juice<br>b) Drain cleaner<br>c) Pure distilled water<br>d) Milk of magnesia (antacid)<br>e) Battery acid</div>
+    <textarea class="q-input wide" placeholder="a) Acid/alkali/neutral + reason:&#10;b) Acid/alkali/neutral + reason:&#10;c) Acid/alkali/neutral + reason:&#10;d) Acid/alkali/neutral + reason:&#10;e) Acid/alkali/neutral + reason:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Acid</strong> — citrus fruits contain citric acid, giving orange juice a pH below 7 and a sour taste. b) <strong>Strong alkali</strong> — drain cleaners are highly alkaline (pH 12-14) to break down organic clogs, and are highly corrosive. c) <strong>Neutral</strong> — pure water has pH exactly 7. d) <strong>Alkali</strong> — designed to neutralise excess stomach acid, so it must itself be alkaline. e) <strong>Strong acid</strong> — battery acid is one of the strongest, most corrosive acids (pH 0-1).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🌍 Cross-Subject Final Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">Connect this week's Science to this week's Maths: the pH scale runs from 0-14 with 7 as the "zero point" of acidity/alkalinity, somewhat similar to how the number line has 0 as its central reference point for positive/negative numbers. Explain ONE way this comparison helps understanding, and ONE way the comparison breaks down (is not a perfect match). <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your connected paragraph here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">The comparison helps because both scales have a central REFERENCE POINT (0 on the number line, 7 on the pH scale) from which values extend in two different directions with different meanings — moving one direction on the number line means increasingly negative values, while moving one direction on the pH scale (below 7) means increasingly acidic; moving the other direction means increasingly positive (number line) or increasingly alkaline (pH). Both comparisons help learners understand that a "distance" from the central point, and the DIRECTION of that distance, both matter for understanding the value's true meaning. However, the comparison breaks down in at least one important way: the number line is genuinely infinite in both directions (numbers can be arbitrarily large positive or negative), while the pH scale is BOUNDED — it only runs from 0 to 14, with no values below 0 or above 14 in standard practical use, because these represent the practical limits of hydrogen ion concentration measurable in ordinary aqueous solutions. This means the number line and pH scale, while sharing a useful "central point" structure, are not mathematically identical systems — the pH scale is a bounded, specific measurement scale, not an open-ended numerical continuum like the number line.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Science Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY REVISION ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🧭</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 11 · Day 4 Revision</div>
+  <div class="hero-title">Trade & Exploration —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Memory recall · Timeline mastery · Perspective challenge · Final essay</div>
+  <div class="hero-tags"><span class="hero-tag">Silk Road</span><span class="hero-tag">Explorers</span><span class="hero-tag">Perspectives</span></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🎯 Multiple Choice Quiz</div>
+  <div id="history-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextMC('history')">Next →</button>
+    <span class="score-badge" id="history-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🗺️ Memory Recall — From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★</div>
+    <div class="q-text">Without notes — fill in every answer from memory: <span class="marks">12 marks</span><br><br><strong>5 things the Silk Road carried:</strong> 1.___ 2.___ 3.___ 4.___ 5.___<br><br><strong>Key explorers and dates:</strong> Columbus ___, Vasco da Gama ___, Magellan's expedition ___<br><br><strong>4 impacts on indigenous peoples:</strong> 1.___ 2.___ 3.___ 4.___</div>
+    <textarea class="q-input wide" placeholder="Write your answers here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Silk Road carried:</strong> 1. Silk 2. Spices/tea/porcelain 3. Ideas/religions 4. Technology (paper, gunpowder) 5. Disease. <strong>Explorers:</strong> Columbus — 1492. Vasco da Gama — 1498. Magellan's expedition — 1519-1522. <strong>Impacts on indigenous peoples:</strong> 1. Devastating disease (80-90% losses in some regions) 2. Colonisation/loss of land 3. Forced labour/slavery 4. Loss of culture.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Final Extended History Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★★</div>
+    <div class="q-text">Choose ONE question and write a full response (minimum 8 sentences): <span class="marks">12 marks</span><br><br><strong>Option A:</strong> "The Silk Road and the Age of Exploration both prove that globalisation is not a modern invention." Evaluate this claim.<br><br><strong>Option B:</strong> "Historical events must be understood from multiple perspectives to be understood accurately." Discuss using the Age of Exploration.<br><br><strong>Option C:</strong> Connect this week's History to Week 10's Crusades — compare how cultural exchange happened via peaceful trade versus via conflict.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A:</strong> Award for: evidence the Silk Road (from 130 BCE) and Age of Exploration (15th-17th century) both show extensive global connectivity centuries or millennia before the term "globalisation" existed; specific examples of goods/ideas/disease crossing continents in both eras. <strong>Option B:</strong> Award for: contrasting European "achievement" narrative with indigenous "devastation" narrative; explanation of why both are historically valid and necessary for a complete picture. <strong>Option C:</strong> Award for: Silk Road/Exploration as primarily economic/voluntary contact vs Crusades as primarily religious/military contact; both nonetheless producing significant cultural exchange as a consequence.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">History/Geography Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 24+" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+function updateBar(subject, val, max){
+  const num = parseFloat(val);
+  if(!isNaN(num) && num >= 0){
+    const pct = Math.min((num / max) * 100, 100);
+    document.getElementById('bar-'+subject).style.width = pct + '%';
+  }
+}
+
+const mcData = {
+  bible:[
+    {q:"What did Elijah do to prove the LORD, not Baal, was the true God (1 Kings 18)?",opts:["He argued using scripture alone","He challenged the prophets of Baal to a contest — whichever god answered by fire was true, and the LORD answered instantly","He asked the king to decide","He performed no test at all"],ans:1,exp:"Elijah's short prayer was answered instantly with fire from heaven, while Baal's 450 prophets received no response after hours of crying out — leading the people to declare 'The LORD — he is God!'"},
+    {q:"What happened to Elijah immediately after his victory at Mount Carmel?",opts:["He was crowned king","He fled in fear from Jezebel's death threat and fell into deep despair","He retired from prophetic ministry","Nothing significant happened"],ans:1,exp:"Despite the dramatic public victory, Elijah flees Jezebel's threat and experiences genuine despair, even asking to die (1 Kings 19:4) — showing spiritual victory doesn't prevent real human struggle."},
+    {q:"How did God speak to Elijah after the wind, earthquake, and fire (1 Kings 19)?",opts:["God did not speak at all","In a gentle whisper","Through another dramatic miracle","Through a written message only"],ans:1,exp:"God spoke in 'a gentle whisper' (19:12) — showing dramatic displays are not the only or primary way God communicates."},
+    {q:"What was Isaiah's immediate reaction to seeing his vision of God's holiness (Isaiah 6)?",opts:["He felt proud and confident","He cried 'Woe to me!' recognising his own unworthiness","He fell asleep","He argued with God"],ans:1,exp:"Confronted with God's overwhelming holiness, Isaiah recognises his own sinfulness — 'Woe to me!... I am a man of unclean lips' (6:5)."},
+    {q:"What is the general PURPOSE of a biblical prophet, according to the lesson?",opts:["To predict the future for entertainment","To call people back to God, warn of consequences, and offer hope for the future","To replace kings as rulers","To collect taxes"],ans:1,exp:"Prophets were sent to confront wrongdoing, call Israel back to covenant faithfulness, warn of real consequences, and offer genuine hope for restoration."}
+  ],
+  english:[
+    {q:"What is a 'pronoun'?",opts:["A type of punctuation","A word that replaces a noun to avoid repeating it","A word used only in questions","A synonym for 'noun'"],ans:1,exp:"A pronoun is a word (he, she, it, they, etc.) that replaces a noun to avoid repetition."},
+    {q:"What is an 'antecedent'?",opts:["A punctuation mark","The noun a pronoun refers back to","A type of sentence","A grammatical error"],ans:1,exp:"The antecedent is the noun a pronoun stands in for. In 'Isaiah saw his vision,' 'Isaiah' is the antecedent of 'his.'"},
+    {q:"Why is 'When Elijah spoke to the king, he was angry' considered a VAGUE pronoun reference?",opts:["It uses too many words","'He' could refer to either Elijah or the king — the reader cannot tell which","It has no pronoun at all","It is grammatically perfect"],ans:1,exp:"The pronoun 'he' has two possible antecedents (Elijah or the king), making the sentence genuinely ambiguous about who was angry."},
+    {q:"Are most indefinite pronouns like 'everyone,' 'each,' and 'nobody' singular or plural?",opts:["Always plural","Usually singular","Neither singular nor plural","It depends on the weather"],ans:1,exp:"Indefinite pronouns ending in '-one,' '-body,' and words like 'each' are grammatically singular, even though they may seem to describe a group."},
+    {q:"How would you fix the vague sentence: 'I love reading and writing, which is my favourite subject'?",opts:["Leave it as it is","Rewrite it to name the specific subject clearly, e.g. 'I love reading and writing; English is my favourite subject.'","Remove all pronouns","Add more vague pronouns"],ans:1,exp:"'Which' has no single clear antecedent since 'reading and writing' are two things, not one 'subject' — naming the subject directly fixes the ambiguity."}
+  ],
+  maths:[
+    {q:"Which statement is TRUE about negative numbers?",opts:["−9 is greater than −2","−2 is greater than −9","−9 and −2 are equal","Negative numbers cannot be compared"],ans:1,exp:"−2 is greater than −9 because −2 is closer to zero (further right on the number line)."},
+    {q:"Calculate: 7 − (−5)",opts:["2","12","−2","−12"],ans:1,exp:"Subtracting a negative is the same as adding: 7−(−5)=7+5=12."},
+    {q:"Calculate: (−4) × (−6)",opts:["−24","24","−10","10"],ans:1,exp:"Negative × Negative = Positive: (−4)×(−6)=24."},
+    {q:"A submarine at −150m rises 60m. What is its new depth?",opts:["−90m","−210m","90m","210m"],ans:0,exp:"−150+60=−90m. The submarine is now 90m below sea level."},
+    {q:"Calculate: −8 + (−3)",opts:["5","−5","11","−11"],ans:3,exp:"Adding two negatives: −8+(−3)=−8−3=−11."}
+  ],
+  science:[
+    {q:"What pH value is exactly NEUTRAL?",opts:["0","7","14","10"],ans:1,exp:"pH 7 is exactly neutral. Pure water has a pH of 7."},
+    {q:"What colour does litmus paper turn in an ALKALI?",opts:["Red","Green","Blue","Yellow"],ans:2,exp:"Litmus paper turns BLUE in an alkali and RED in an acid."},
+    {q:"What is the general word equation for neutralisation?",opts:["Acid + Metal → Salt + Hydrogen","Acid + Base → Salt + Water","Base + Base → Salt + Water","Acid + Acid → Gas + Water"],ans:1,exp:"Neutralisation: ACID + BASE → SALT + WATER."},
+    {q:"Why is universal indicator often more useful than litmus paper?",opts:["It's cheaper","It shows a range of colours across the full 0-14 pH scale, giving more detailed information","Litmus doesn't work at all","It only works on solids"],ans:1,exp:"Universal indicator shows approximately WHERE on the 0-14 scale a substance falls, while litmus only shows acid (red) or alkali (blue)."},
+    {q:"Which statement about acids and alkalis is TRUE?",opts:["Alkalis are always completely safe","Both strong acids AND strong alkalis can be corrosive and dangerous","Only acids can be dangerous","Alkalis cannot react with acids"],ans:1,exp:"Strong alkalis (like drain cleaner) can be just as corrosive as strong acids — being 'the opposite' of an acid doesn't make an alkali automatically safe."}
+  ],
+  history:[
+    {q:"What was the Silk Road?",opts:["A single road built by Rome","A network of ancient trade routes connecting China, the Middle East, and Europe over 1,500+ years","A modern highway","A route used only for military purposes"],ans:1,exp:"The Silk Road was a network of trade routes carrying silk, spices, ideas, technology, and even disease between distant civilisations for over 1,500 years."},
+    {q:"What motivated Europeans to seek new sea routes to Asia during the Age of Exploration?",opts:["Pure curiosity only","Overland trade routes became harder/costlier, especially after Constantinople fell to the Ottomans in 1453","No motivation existed","They were forced by other nations"],ans:1,exp:"The fall of Constantinople (1453) disrupted overland trade, motivating Europeans to seek alternative sea routes to Asia's valuable spice trade."},
+    {q:"What is the 'Columbian Exchange'?",opts:["A trade agreement between two countries only","The widespread transfer of plants, animals, diseases, and culture between the Americas and the rest of the world following Columbus's voyages","A type of currency","A peace treaty"],ans:1,exp:"The Columbian Exchange describes the massive transfer of crops, animals, and diseases between the Americas and the rest of the world after 1492."},
+    {q:"What was one of the most devastating consequences of European contact for indigenous peoples?",opts:["Improved conditions for everyone","European diseases killed enormous numbers of indigenous people with no prior immunity, with some regions losing 80-90% of their population","Complete independence was gained","No significant consequences occurred"],ans:1,exp:"European diseases devastated indigenous populations lacking prior immunity, causing catastrophic population losses in some regions."},
+    {q:"Why does the lesson suggest history 'looks different depending on whose perspective is centred'?",opts:["Facts change by country","The same events (exploration/trade) meant achievement for Europeans but devastation for indigenous peoples, showing history can carry different meanings for different groups","History has no factual basis","Only one perspective is ever correct"],ans:1,exp:"The Age of Exploration is celebrated as discovery in European accounts but represented catastrophic loss for indigenous peoples — the same events, different meanings."}
+  ]
+};
+
+const mcState = {};
+['bible','english','maths','science','history'].forEach(s=>{
+  mcState[s]={idx:0,score:0};
+  renderMC(s);
+});
+
+function renderMC(s){
+  const st=mcState[s];
+  const qs=mcData[s];
+  const el=document.getElementById(s+'-mc');
+  const sc=document.getElementById(s+'-mc-score');
+  if(st.idx>=qs.length){
+    el.innerHTML=`<div style="padding:18px;background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:1.8rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;">Quiz complete!</div><div style="color:var(--muted);margin-top:6px;">${st.score} / ${qs.length} correct</div></div>`;
+    return;
+  }
+  const q=qs[st.idx];
+  sc.textContent=`${st.score} / ${st.idx} correct`;
+  el.innerHTML=`<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question ${st.idx+1} of ${qs.length}</div>
+  <div style="font-size:0.96rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:14px;">${q.q}</div>
+  <div class="mc-opts">${q.opts.map((o,i)=>`<button class="mc-opt" onclick="answerMC('${s}',${i})">${o}</button>`).join('')}</div>
+  <div id="${s}-mc-fb" class="mc-fb"></div>`;
+}
+
+function answerMC(s,i){
+  const q=mcData[s][mcState[s].idx];
+  const opts=document.querySelectorAll(`#${s}-mc .mc-opt`);
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-mc-fb');
+  if(i===q.ans){
+    mcState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='mc-fb ok';fb.style.display='block';
+    fb.textContent='✅ Correct! '+q.exp;
+  }else{
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='mc-fb bad';fb.style.display='block';
+    fb.textContent='❌ '+q.exp;
+  }
+  document.getElementById(s+'-mc-score').textContent=`${mcState[s].score} / ${mcState[s].idx+1} correct`;
+}
+
+function nextMC(s){
+  mcState[s].idx++;
+  renderMC(s);
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week11_Day4');</script>
+</body>
+</html>

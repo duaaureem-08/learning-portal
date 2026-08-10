@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 11 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:140px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.numline{position:relative;height:70px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin:16px 0;overflow:hidden;}
+.numline-track{position:absolute;top:34px;left:20px;right:20px;height:2px;background:var(--border);}
+.numline-mark{position:absolute;top:24px;width:2px;height:22px;background:var(--muted);}
+.numline-label{position:absolute;top:48px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);transform:translateX(-50%);}
+.pron-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px;}
+.pron-tile{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;text-align:center;}
+.pron-tile .p{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent-light,#C4B5FD);font-size:1rem;}
+.pron-tile .d{font-size:0.75rem;color:var(--muted);margin-top:4px;}
+.ph-scale{display:flex;border-radius:10px;overflow:hidden;height:44px;margin:14px 0;}
+.ph-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;color:white;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+@media(max-width:600px){.hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}.compare{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 11</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">🔥</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 11</div>
+  <div class="hero-title">The Prophets —<br>Speaking God's Truth</div>
+  <div class="hero-subtitle">1 Kings 18-19, Isaiah 6 · Why God Sent Prophets · Elijah and Isaiah · Repentance and Hope</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Isaiah 6:8</span><span class="hero-tag">1 Kings 18-19</span><span class="hero-tag">Elijah & Isaiah</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"Then I heard the voice of the Lord saying, 'Whom shall I send? And who will go for us?' And I said, 'Here am I. Send me!'"</div>
+    <div class="verse-ref">Isaiah 6:8 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word:</strong> This is Isaiah's response immediately AFTER seeing a vision of God's holiness and being cleansed of his own sin (Isaiah 6:1-7). "Here am I. Send me!" is not a hesitant or reluctant answer — it is immediate and willing, coming directly out of an encounter with God rather than a sense of personal ambition or duty alone.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">prophet</div><div class="esl-def">A person chosen by God to deliver his message to people — often calling them back to faithfulness, warning of consequences, or announcing hope for the future.</div></div>
+    <div class="esl-row"><div class="esl-word">idolatry</div><div class="esl-def">Worshipping a false god (an idol) instead of, or alongside, the true God. Elijah confronted Israel's widespread idolatry involving the god Baal.</div></div>
+    <div class="esl-row"><div class="esl-word">repentance</div><div class="esl-def">Genuinely turning away from wrongdoing and turning back to God — a central message of nearly every prophet.</div></div>
+    <div class="esl-row"><div class="esl-word">vision</div><div class="esl-def">A powerful, often symbolic experience in which God reveals something to a person, sometimes while awake, sometimes like a dream. Isaiah received a vision of God in the temple (Isaiah 6).</div></div>
+    <div class="esl-row"><div class="esl-word">holiness / holy</div><div class="esl-def">Being set apart, pure, and completely different from ordinary or sinful things. The angels in Isaiah's vision cry "Holy, holy, holy" about God.</div></div>
+    <div class="esl-row"><div class="esl-word">exile</div><div class="esl-def">Being forced to leave one's home country, often as a punishment or consequence. Isaiah's prophecies address a nation eventually facing exile.</div></div>
+    <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A serious, binding agreement between God and his people. Prophets often called Israel back to the covenant obligations they had broken.</div></div>
+    <div class="esl-row"><div class="esl-word">Messiah</div><div class="esl-def">A promised future rescuer/king. Isaiah's prophecies include some of the clearest Old Testament descriptions of a coming Messiah.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📯 Why Did God Send Prophets?</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">After David (Week 10), Israel's kings grew increasingly unfaithful — many led the nation into idolatry and injustice. Rather than abandoning his people, God repeatedly sent prophets to speak his truth directly into these situations.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Purpose of a Prophet</th><th>Explanation</th></tr></thead>
+    <tbody>
+      <tr><td>Call people back to God</td><td>Prophets confronted idolatry and injustice, calling Israel to repentance and covenant faithfulness.</td></tr>
+      <tr><td>Warn of consequences</td><td>Prophets often warned that continued disobedience would bring real, painful consequences (such as exile).</td></tr>
+      <tr><td>Offer hope for the future</td><td>Even in warning, prophets frequently included messages of restoration and hope — God's judgment was never the final word.</td></tr>
+      <tr><td>Speak God's message directly</td><td>Prophets claimed to speak not their own opinions but words directly from God — often introduced with "This is what the LORD says."</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">⚡ Elijah and the Prophets of Baal — 1 Kings 18</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">King Ahab and Queen Jezebel had led Israel deep into worship of Baal, a Canaanite storm-and-fertility god. Elijah confronts this directly with a dramatic public test on Mount Carmel.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">The challenge — "How long will you waver?"</div><div class="step-desc">Elijah confronts Israel: "How long will you waver between two opinions? If the LORD is God, follow him; but if Baal is God, follow him" (18:21). Israel says nothing — showing their confused, divided loyalty.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">The contest — fire from heaven</div><div class="step-desc">450 prophets of Baal and Elijah alone each prepare an altar. Whichever God answers by fire is the true God. Baal's prophets cry out for hours — nothing happens. Elijah prays a short prayer — fire falls instantly, consuming the offering, the wood, and even the stones.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">The people's response</div><div class="step-desc">Seeing this, the people fall on their faces and declare "The LORD — he is God! The LORD — he is God!" (18:39) — a dramatic public turning point.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🌬️ Elijah's Despair and God's Gentle Whisper — 1 Kings 19</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Surprising turn:</strong> Immediately after this dramatic public victory, Elijah flees in fear from Jezebel's death threat and falls into deep despair, asking God to let him die (19:4). Even a prophet who has just witnessed fire fall from heaven can experience genuine exhaustion, fear, and hopelessness.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>What Happens</th><th>What It Shows</th></tr></thead>
+    <tbody>
+      <tr><td>God sends an angel with food and rest (19:5-8)</td><td>God's first response to Elijah's despair is practical care — physical rest and food — not correction or a lecture.</td></tr>
+      <tr><td>God is not in the wind, earthquake, or fire (19:11-12)</td><td>Dramatic, powerful displays (like the fire on Carmel) are not the only or even the primary way God speaks.</td></tr>
+      <tr><td>God speaks in a "gentle whisper" (19:12)</td><td>God meets Elijah's genuine exhaustion with quiet, gentle communication rather than more spectacle.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Even the most faithful, spiritually powerful people can experience genuine burnout and despair — and God's response models compassionate care alongside truth, not simply more demands.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">👁️ Isaiah's Vision and Calling — Isaiah 6</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#6D28D9;"></div><div class="tl-date">Step 1</div><div class="tl-title">Isaiah sees God's holiness</div><div class="tl-desc">Isaiah has an overwhelming vision of God on his throne, with angels crying "Holy, holy, holy is the LORD Almighty" (6:3).</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#8B5CF6;"></div><div class="tl-date">Step 2</div><div class="tl-title">Isaiah recognises his own unworthiness</div><div class="tl-desc">Confronted with God's holiness, Isaiah cries "Woe to me!... I am a man of unclean lips" (6:5) — seeing God clearly reveals his own need.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#A78BFA;"></div><div class="tl-date">Step 3</div><div class="tl-title">Isaiah is cleansed</div><div class="tl-desc">An angel touches Isaiah's mouth with a burning coal, declaring his sin "atoned for" (6:7) — cleansing comes BEFORE the calling.</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#C4B5FD;"></div><div class="tl-date">Step 4</div><div class="tl-title">Isaiah volunteers</div><div class="tl-desc">Hearing God ask "Whom shall I send?", Isaiah responds immediately and willingly: "Here am I. Send me!" (6:8).</div></div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> The order matters — Isaiah's willingness to be sent comes AFTER encountering God's holiness and being cleansed, not before. Genuine willingness to serve often follows genuine encounter, not the other way around.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">⚖️ Elijah and Isaiah — Comparing Two Prophets</div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Elijah</th><th>Isaiah</th></tr></thead>
+    <tbody>
+      <tr><td>How he confronted wrong</td><td>Dramatic public contest (fire from heaven at Carmel)</td><td>A private, overwhelming vision of God's holiness</td></tr>
+      <tr><td>Emotional experience shown</td><td>Genuine despair and exhaustion after victory (ch. 19)</td><td>Genuine unworthiness and need for cleansing (ch. 6)</td></tr>
+      <tr><td>God's response</td><td>Gentle whisper, practical care, renewed calling</td><td>Cleansing, then a direct calling and question</td></tr>
+      <tr><td>Core message</td><td>Turn from idolatry back to the one true God</td><td>Repentance, judgment, and future hope (including a coming Messiah)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <div class="ci">🔗</div>
+    <div class="ct"><strong>The pattern across both:</strong> Both prophets experience a real, personal encounter with God BEFORE and ALONGSIDE their public ministry — prophetic courage was never separate from genuine, sometimes difficult, personal relationship with God.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🎯 Knowledge Check — The Prophets</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">🔗</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 11</div>
+  <div class="hero-title">Pronoun Use<br>& Agreement</div>
+  <div class="hero-subtitle">Pronoun-antecedent agreement · Avoiding vague pronoun reference</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Pronouns</span><span class="hero-tag">Antecedents</span><span class="hero-tag">Clarity in Writing</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these terms for accurate, clear writing</div>
+    <div class="esl-row"><div class="esl-word">pronoun</div><div class="esl-def">A word that REPLACES a noun to avoid repeating it. Examples: he, she, it, they, this, those.</div></div>
+    <div class="esl-row"><div class="esl-word">antecedent</div><div class="esl-def">The noun that a pronoun refers back to. In "Sara lost her keys," "Sara" is the antecedent of "her."</div></div>
+    <div class="esl-row"><div class="esl-word">agreement</div><div class="esl-def">A pronoun must MATCH its antecedent in number (singular/plural) and gender. "The dog wagged ITS tail" (not "their").</div></div>
+    <div class="esl-row"><div class="esl-word">singular</div><div class="esl-def">Referring to ONE person or thing. Pronouns: he, she, it.</div></div>
+    <div class="esl-row"><div class="esl-word">plural</div><div class="esl-def">Referring to MORE THAN ONE person or thing. Pronoun: they.</div></div>
+    <div class="esl-row"><div class="esl-word">vague reference</div><div class="esl-def">When a pronoun's antecedent is unclear or ambiguous — the reader cannot tell exactly what/who it refers to.</div></div>
+    <div class="esl-row"><div class="esl-word">indefinite pronoun</div><div class="esl-def">A pronoun that doesn't refer to one specific person/thing. Examples: everyone, someone, each, nobody — most are treated as SINGULAR.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🔗 Pronoun-Antecedent Agreement — The Golden Rule</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule:</strong> A pronoun must agree with its antecedent in NUMBER (singular or plural) and, where relevant, GENDER. If the antecedent is singular, the pronoun must be singular. If plural, the pronoun must be plural.</div>
+  </div>
+  <div class="pron-grid">
+    <div class="pron-tile"><div class="p">he / him / his</div><div class="d">singular, male</div></div>
+    <div class="pron-tile"><div class="p">she / her / hers</div><div class="d">singular, female</div></div>
+    <div class="pron-tile"><div class="p">it / its</div><div class="d">singular, object/animal/idea</div></div>
+    <div class="pron-tile"><div class="p">they / them / their</div><div class="d">plural (or singular gender-neutral)</div></div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>❌ Incorrect</th><th>✅ Correct</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>"Each student must bring their own book" — sometimes debated</td><td>"Each student must bring his or her own book" (formal) OR "Each student must bring their own book" (accepted informally/gender-neutral)</td><td>"Each" is technically singular; formal writing traditionally prefers "his or her," though "their" as gender-neutral singular is now widely accepted.</td></tr>
+      <tr><td>"The team celebrated their win."</td><td>"The team celebrated its win." (UK formal) / "The team celebrated their win." (common in US and informal UK)</td><td>Collective nouns like "team" can be treated as singular (UK formal) or plural (common usage) — consistency matters most.</td></tr>
+      <tr><td>"Neither of the boys brought their homework."</td><td>"Neither of the boys brought his homework."</td><td>"Neither" is singular — treats each boy individually, not as a group.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">⚠️ Vague Pronoun Reference — The Hidden Trap</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">A "vague reference" happens when a reader CANNOT be sure exactly what a pronoun refers to — often because there are two or more possible antecedents, or no clear antecedent at all.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>❌ Vague</th><th>✅ Clear</th><th>Why the fix works</th></tr></thead>
+    <tbody>
+      <tr><td>"When Sara spoke to Amy, she seemed upset."</td><td>"When Sara spoke to Amy, Amy seemed upset." (or "Sara seemed upset," depending on meaning)</td><td>"She" could mean EITHER Sara or Amy — the reader cannot tell which. Naming the person directly removes the ambiguity.</td></tr>
+      <tr><td>"I love reading and writing, which is my favourite subject."</td><td>"I love reading and writing; English is my favourite subject."</td><td>"Which" has no clear single antecedent — "reading and writing" together aren't one "subject." Naming it directly fixes the vagueness.</td></tr>
+      <tr><td>"They say it's going to rain."</td><td>"The weather forecaster says it's going to rain."</td><td>"They" refers to no specific, named person — this is a common but imprecise habit in informal speech.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🔍 Finding the Antecedent — A Step-by-Step Method</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">Identify the pronoun</div><div class="step-desc">Find the pronoun in question (he, she, it, they, this, etc.).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">Look BACKWARD in the sentence/paragraph</div><div class="step-desc">Search the text immediately before the pronoun for the noun it most likely refers to.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">Check for MORE THAN ONE possible match</div><div class="step-desc">If more than one noun could fit, the sentence has a vague reference problem and needs rewriting.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">4</div><div><div class="step-title">Check agreement</div><div class="step-desc">Confirm the pronoun matches the antecedent in number and gender.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📝 Worked Example — Fixing a Vague Sentence</div>
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;font-size:0.88rem;line-height:1.8;color:#B0B0C8;">
+    <span style="background:rgba(190,18,60,0.25);padding:2px 6px;border-radius:4px;color:#FCA5A5;font-size:0.75rem;font-weight:700;margin-right:6px;">[ORIGINAL — VAGUE]</span><span style="color:var(--bright);">"Elijah told the king that he was wrong."</span> <span style="color:var(--muted);">(Who is "he" — Elijah or the king? Genuinely unclear!)</span><br><br>
+    <span style="background:rgba(6,95,70,0.25);padding:2px 6px;border-radius:4px;color:#6EE7B7;font-size:0.75rem;font-weight:700;margin-right:6px;">[FIXED — CLEAR]</span><span style="color:var(--bright);">"Elijah told the king that the king was wrong."</span> <span style="color:var(--muted);">OR</span> <span style="color:var(--bright);">"Elijah told the king, 'You are wrong.'"</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🎯 Pronouns Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D2200,#7A3D00);">
+  <div class="hero-icon">➖</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 11</div>
+  <div class="hero-title">Negative<br>Numbers</div>
+  <div class="hero-subtitle">Ordering negative numbers · Adding and subtracting · Real-life contexts</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Negative Numbers</span><span class="hero-tag">Number Line</span><span class="hero-tag">Real-Life Contexts</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 10 — coordinates already used negative numbers!</div>
+    <div class="esl-row"><div class="esl-word">positive number</div><div class="esl-def">A number greater than zero. Usually written without a sign: 5 means +5.</div></div>
+    <div class="esl-row"><div class="esl-word">negative number</div><div class="esl-def">A number LESS than zero, written with a minus sign. Example: −5.</div></div>
+    <div class="esl-row"><div class="esl-word">integer</div><div class="esl-def">A whole number that can be positive, negative, or zero (no fractions or decimals). Example: −3, 0, 7.</div></div>
+    <div class="esl-row"><div class="esl-word">number line</div><div class="esl-def">A line showing numbers in order, with negative numbers to the left of zero and positive numbers to the right.</div></div>
+    <div class="esl-row"><div class="esl-word">absolute value</div><div class="esl-def">The DISTANCE a number is from zero, always positive. The absolute value of −7 is 7.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📏 Ordering Negative Numbers on a Number Line</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule:</strong> On a number line, numbers get LARGER as you move RIGHT and SMALLER as you move LEFT — even with negative numbers. −2 is GREATER than −5, because −2 is further to the right.</div>
+  </div>
+  <div class="numline">
+    <div class="numline-track"></div>
+    <div class="numline-mark" style="left:8%;"></div><div class="numline-label" style="left:8%;">−5</div>
+    <div class="numline-mark" style="left:24%;"></div><div class="numline-label" style="left:24%;">−3</div>
+    <div class="numline-mark" style="left:40%;"></div><div class="numline-label" style="left:40%;">−1</div>
+    <div class="numline-mark" style="left:50%;background:#FCD34D;"></div><div class="numline-label" style="left:50%;color:#FCD34D;">0</div>
+    <div class="numline-mark" style="left:60%;"></div><div class="numline-label" style="left:60%;">1</div>
+    <div class="numline-mark" style="left:76%;"></div><div class="numline-label" style="left:76%;">3</div>
+    <div class="numline-mark" style="left:92%;"></div><div class="numline-label" style="left:92%;">5</div>
+  </div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> Students often think −8 is "bigger" than −3 because 8 is bigger than 3. But with negatives, the OPPOSITE is true: −3 > −8, because −3 is closer to zero (further right on the number line).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">➕➖ Adding and Subtracting Negative Numbers</div>
+  <div class="formula">
+    <span class="comment">Rule 1: Adding a negative = subtracting</span><br>
+    5 + (−3) = 5 <span class="hl">−</span> 3 = <span class="hl2">2</span><br><br>
+    <span class="comment">Rule 2: Subtracting a negative = adding</span><br>
+    5 − (−3) = 5 <span class="hl">+</span> 3 = <span class="hl2">8</span><br><br>
+    <span class="comment">Rule 3: Starting negative, adding positive — move RIGHT on the number line</span><br>
+    −4 + 6 = <span class="hl2">2</span><br><br>
+    <span class="comment">Rule 4: Starting negative, subtracting more — move further LEFT (more negative)</span><br>
+    −4 − 3 = <span class="hl2">−7</span>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 memory trick:</strong> "Two minuses make a plus" — subtracting a negative number is the SAME as adding a positive number. Always rewrite double signs first: "− (−3)" becomes "+3" before calculating.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">✖️ Multiplying and Dividing with Negatives (Preview)</div>
+  <table class="data-table">
+    <thead><tr><th>Signs Involved</th><th>Result Sign</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Positive × Positive</td><td>Positive</td><td>3 × 4 = 12</td></tr>
+      <tr><td>Positive × Negative</td><td>Negative</td><td>3 × (−4) = −12</td></tr>
+      <tr><td>Negative × Negative</td><td>Positive</td><td>(−3) × (−4) = 12</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>ESL tip:</strong> "Same signs give positive; different signs give negative" — this rule applies to BOTH multiplication and division of negative numbers.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🌍 Negative Numbers in Real Life</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Temperature</div><div class="step-desc">−5°C means 5 degrees BELOW freezing (0°C). A rise from −5°C to 3°C is a change of 8 degrees.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Bank balances</div><div class="step-desc">A balance of −£20 means you OWE £20 (overdrawn). Depositing £30 brings the balance to +£10.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Elevation / sea level</div><div class="step-desc">−400m means 400 metres BELOW sea level (like the Dead Sea). Mount Everest is roughly +8,849m.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🎯 Negative Numbers Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🧫</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 11</div>
+  <div class="hero-title">Acids &<br>Alkalis</div>
+  <div class="hero-subtitle">The pH scale · Indicators · Neutralisation · Everyday examples</div>
+  <div class="hero-tags">
+    <span class="hero-tag">pH Scale</span><span class="hero-tag">Indicators</span><span class="hero-tag">Neutralisation</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📚 Key Vocabulary — ESL Science Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 10 — chemical changes and reactions</div>
+    <div class="esl-row"><div class="esl-word">acid</div><div class="esl-def">A substance with a pH less than 7 — sour-tasting, can react with metals. Examples: lemon juice, vinegar, stomach acid.</div></div>
+    <div class="esl-row"><div class="esl-word">alkali</div><div class="esl-def">A soluble base — a substance with a pH greater than 7, often feels soapy/slippery. Examples: soap, baking soda, oven cleaner.</div></div>
+    <div class="esl-row"><div class="esl-word">base</div><div class="esl-def">A broader category than alkali — any substance that can neutralise an acid. All alkalis are bases; not all bases are alkalis (some don't dissolve in water).</div></div>
+    <div class="esl-row"><div class="esl-word">pH scale</div><div class="esl-def">A scale from 0 to 14 measuring how acidic or alkaline a substance is. 7 = neutral. Below 7 = acidic. Above 7 = alkaline.</div></div>
+    <div class="esl-row"><div class="esl-word">indicator</div><div class="esl-def">A substance that changes colour depending on whether it is in an acid or alkali — used to test pH. Example: litmus paper, universal indicator.</div></div>
+    <div class="esl-row"><div class="esl-word">neutralisation</div><div class="esl-def">A chemical reaction between an acid and a base/alkali that cancels out their acidic/alkaline properties, typically producing a salt and water.</div></div>
+    <div class="esl-row"><div class="esl-word">corrosive</div><div class="esl-def">Able to damage or destroy materials (like metal or skin) through chemical reaction. Strong acids and strong alkalis can both be corrosive.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📊 The pH Scale — From 0 to 14</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule:</strong> The pH scale runs from 0 (most acidic) to 14 (most alkaline), with 7 exactly in the middle being NEUTRAL (neither acidic nor alkaline) — pure water has a pH of 7.</div>
+  </div>
+  <div class="ph-scale">
+    <div class="ph-seg" style="background:#B91C1C;">0-2</div>
+    <div class="ph-seg" style="background:#DC2626;">3-4</div>
+    <div class="ph-seg" style="background:#F97316;">5-6</div>
+    <div class="ph-seg" style="background:#22C55E;">7</div>
+    <div class="ph-seg" style="background:#3B82F6;">8-9</div>
+    <div class="ph-seg" style="background:#6366F1;">10-11</div>
+    <div class="ph-seg" style="background:#7C3AED;">12-14</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>pH Range</th><th>Category</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>0-2</td><td>Strong acid</td><td>Battery acid, stomach acid</td></tr>
+      <tr><td>3-4</td><td>Weak-medium acid</td><td>Lemon juice, vinegar</td></tr>
+      <tr><td>5-6</td><td>Weak acid</td><td>Rainwater, black coffee</td></tr>
+      <tr><td>7</td><td>Neutral</td><td>Pure water</td></tr>
+      <tr><td>8-9</td><td>Weak alkali</td><td>Baking soda, sea water</td></tr>
+      <tr><td>10-11</td><td>Medium alkali</td><td>Soap, ammonia</td></tr>
+      <tr><td>12-14</td><td>Strong alkali</td><td>Bleach, oven cleaner, drain cleaner</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🌈 Indicators — Testing pH with Colour</div>
+  <table class="data-table">
+    <thead><tr><th>Indicator</th><th>In Acid</th><th>In Neutral</th><th>In Alkali</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Litmus paper</strong></td><td>Turns RED</td><td>Stays purple (no reliable neutral colour)</td><td>Turns BLUE</td></tr>
+      <tr><td><strong>Universal indicator</strong></td><td>Red/orange/yellow</td><td>Green</td><td>Blue/purple</td></tr>
+      <tr><td><strong>Red cabbage juice</strong> (natural indicator)</td><td>Turns pink/red</td><td>Stays purple</td><td>Turns green/yellow</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Universal indicator is more useful than litmus because it shows a RANGE of colours corresponding to the full pH scale (0-14), not just "acid or alkali" — litmus only tells you which SIDE of neutral a substance is on.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">⚗️ Neutralisation — Acid + Base = Salt + Water</div>
+  <div class="formula">
+    <span class="comment">General word equation:</span><br>
+    <span class="hl">ACID</span> + <span class="hl2">BASE</span> → <span class="hl3">SALT</span> + WATER<br><br>
+    <span class="comment">Specific example:</span><br>
+    Hydrochloric acid + Sodium hydroxide → Sodium chloride + Water<br>
+    (HCl) + (NaOH) → (NaCl) + (H₂O)
+  </div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>Real-world example:</strong> Farmers add alkaline lime to acidic soil to neutralise it, making the soil better for growing crops. Toothpaste is often slightly alkaline to neutralise acids produced by bacteria in the mouth, protecting tooth enamel.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🏠 Everyday Acids and Alkalis</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">🍋 Common Acids</div>
+      <div class="cmp-row">Lemon juice, vinegar (cooking)</div>
+      <div class="cmp-row">Stomach acid (digestion)</div>
+      <div class="cmp-row">Fizzy drinks (carbonic acid)</div>
+      <div class="cmp-row">Battery acid (very strong, dangerous)</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.3);">
+      <div class="cmp-head" style="color:#6EE7B7;">🧼 Common Alkalis</div>
+      <div class="cmp-row">Soap, shampoo (cleaning)</div>
+      <div class="cmp-row">Baking soda (cooking, cleaning)</div>
+      <div class="cmp-row">Toothpaste (mildly alkaline)</div>
+      <div class="cmp-row">Bleach, oven cleaner (very strong, dangerous)</div>
+    </div>
+  </div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Safety note:</strong> Both strong acids AND strong alkalis can be extremely corrosive and dangerous — alkalis are not automatically "safer" just because they are the opposite of acids. Always handle chemicals carefully and follow lab safety rules.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🎯 Acids & Alkalis Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ HISTORY ═══════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-icon">🧭</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Week 11</div>
+  <div class="hero-title">Trade, Exploration &<br>Early Globalisation</div>
+  <div class="hero-subtitle">The Silk Road · The Age of Exploration · Impact on Indigenous Peoples</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Silk Road</span><span class="hero-tag">Age of Exploration</span><span class="hero-tag">Indigenous Peoples</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">📚 Key Vocabulary — ESL History Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 10 — the Crusades and cultural exchange</div>
+    <div class="esl-row"><div class="esl-word">Silk Road</div><div class="esl-def">A network of ancient trade routes connecting China to Europe and the Middle East, active for over 1,500 years, used for goods AND ideas.</div></div>
+    <div class="esl-row"><div class="esl-word">globalisation</div><div class="esl-def">The process by which the world's regions become increasingly connected through trade, travel, and the exchange of ideas.</div></div>
+    <div class="esl-row"><div class="esl-word">Age of Exploration</div><div class="esl-def">A period (roughly 15th-17th century) when European explorers sailed to previously unknown (to them) parts of the world, seeking trade routes and new territory.</div></div>
+    <div class="esl-row"><div class="esl-word">colonisation</div><div class="esl-def">When a country establishes control over another territory and its people, often for economic or political gain.</div></div>
+    <div class="esl-row"><div class="esl-word">indigenous peoples</div><div class="esl-def">The original inhabitants of a region, present before colonisation or settlement by outside groups.</div></div>
+    <div class="esl-row"><div class="esl-word">circumnavigate</div><div class="esl-def">To travel all the way around something, especially the Earth, by sea.</div></div>
+    <div class="esl-row"><div class="esl-word">Columbian Exchange</div><div class="esl-def">The widespread transfer of plants, animals, diseases, and culture between the Americas and the rest of the world following Columbus's voyages.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🐫 The Silk Road — Ancient Global Trade</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Active from around 130 BCE to the 1450s CE, the Silk Road was not one single road but a network of overland and sea routes connecting East Asia, Central Asia, the Middle East, and Europe.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>What Moved Along the Silk Road</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Silk (from China)</td><td>Highly prized in Europe and the Middle East — China guarded silk production techniques as a closely-kept secret for centuries.</td></tr>
+      <tr><td>Spices, tea, porcelain</td><td>Valuable goods travelling east to west, often changing hands many times between different traders and regions.</td></tr>
+      <tr><td>Ideas and religions</td><td>Buddhism, Islam, and other belief systems spread significantly through Silk Road contact and trade networks.</td></tr>
+      <tr><td>Technology</td><td>Papermaking and gunpowder — both Chinese inventions — spread westward via Silk Road contact.</td></tr>
+      <tr><td>Disease</td><td>The same routes that carried goods also carried diseases, including likely contributing to the spread of the Black Death (14th century).</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> The Silk Road is one of history's earliest and clearest examples of globalisation — showing that extensive, long-distance cultural and economic connection between distant civilisations existed centuries before the term "globalisation" was invented.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">⛵ The Age of Exploration — Causes and Key Figures</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">By the 1400s, overland trade routes to Asia (including parts of the Silk Road) had become more difficult and expensive to use, partly due to the fall of Constantinople to the Ottoman Empire in 1453. European nations sought new SEA routes to Asia's valuable spice trade.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Explorer</th><th>Achievement</th><th>Approx. Date</th></tr></thead>
+    <tbody>
+      <tr><td>Christopher Columbus</td><td>Sailed west seeking a route to Asia; instead reached the Americas (unknown to Europeans)</td><td>1492</td></tr>
+      <tr><td>Vasco da Gama</td><td>Found a sea route from Europe to India, around Africa</td><td>1498</td></tr>
+      <tr><td>Ferdinand Magellan's expedition</td><td>First to circumnavigate (sail completely around) the globe</td><td>1519-1522</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🌎 The Columbian Exchange</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.4);">
+      <div class="cmp-head" style="color:#93C5FD;">🌽 From Americas to Europe/Rest of World</div>
+      <div class="cmp-row">Potatoes, maize (corn), tomatoes</div>
+      <div class="cmp-row">Chocolate (cacao), tobacco</div>
+      <div class="cmp-row">These foods dramatically changed diets across Europe, Africa, and Asia</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.3);">
+      <div class="cmp-head" style="color:#93C5FD;">🐴 From Europe/Rest of World to Americas</div>
+      <div class="cmp-row">Horses, cattle, wheat, sugar cane</div>
+      <div class="cmp-row">New diseases (smallpox, measles) — devastating to indigenous populations with no prior immunity</div>
+      <div class="cmp-row">Guns and new technology</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">⚖️ Balanced View — Impact on Indigenous Peoples</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">The Age of Exploration led to significant, often devastating, consequences for indigenous peoples in the Americas and elsewhere, alongside the new trade and knowledge exchange for Europeans.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Impact</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Disease</td><td>European diseases (smallpox, measles) killed enormous numbers of indigenous people, who had no immunity — estimates suggest population losses of over 80-90% in some regions within decades.</td></tr>
+      <tr><td>Colonisation and loss of land</td><td>European powers claimed and settled indigenous territories, often through violent conquest, forced displacement, and broken agreements.</td></tr>
+      <tr><td>Forced labour and slavery</td><td>Indigenous peoples were frequently forced into labour systems; the trans-Atlantic slave trade also developed to supply labour to European colonies.</td></tr>
+      <tr><td>Loss of culture</td><td>Indigenous languages, religions, and traditions were frequently suppressed or destroyed through colonisation.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> The same events celebrated in Europe as an "Age of Exploration" and expansion of global trade had a profoundly different and often catastrophic meaning for the indigenous peoples who experienced colonisation — history often looks very different depending on whose perspective is centred.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🎯 Trade & Exploration Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const quizData={
+  bible:[
+    {q:'What did Isaiah say in response to God asking "Whom shall I send?" (Isaiah 6:8)?',opts:['"I am not worthy to go"','"Here am I. Send me!"','He said nothing at all','He asked God to send someone else'],ans:1,exp:'Isaiah responds immediately and willingly: "Here am I. Send me!" This comes right after his vision of God\'s holiness and his own cleansing (Isaiah 6:1-7).'},
+    {q:'On Mount Carmel (1 Kings 18), how did Elijah demonstrate that the LORD, not Baal, was the true God?',opts:['He argued with the prophets of Baal using logic alone','He prayed and fire fell from heaven, consuming his offering, while Baal\'s prophets\' prayers went unanswered','He performed a magic trick','He simply declared it without any test'],ans:1,exp:'In a dramatic public contest, Baal\'s 450 prophets cried out for hours with no response, while Elijah\'s short prayer was answered instantly with fire from heaven — leading the people to declare "The LORD — he is God!"'},
+    {q:'What happened to Elijah immediately AFTER his dramatic victory on Mount Carmel?',opts:['He was made king of Israel','He fled in fear from Jezebel and fell into deep despair, even asking to die','He retired from being a prophet','Nothing significant happened next'],ans:1,exp:'Despite just witnessing fire fall from heaven, Elijah flees Jezebel\'s death threat and experiences genuine despair (1 Kings 19:4) — showing that even powerful spiritual experiences don\'t prevent real human struggle.'},
+    {q:'How did God speak to Elijah in 1 Kings 19, after the wind, earthquake, and fire?',opts:['God did not speak to Elijah at all','In a gentle whisper','Through another dramatic miracle','Through a messenger angel only'],ans:1,exp:'1 Kings 19:12 describes God speaking in a "gentle whisper" — showing that dramatic displays like the fire at Carmel are not the only or primary way God communicates.'},
+    {q:'What happened to Isaiah immediately after seeing his vision of God\'s holiness (Isaiah 6:1-5)?',opts:['He felt proud and confident','He cried out "Woe to me!" recognising his own unworthiness and sin','He fell asleep','He immediately began preaching without any response'],ans:1,exp:'Confronted with God\'s overwhelming holiness, Isaiah recognises his own sinfulness: "Woe to me!... I am a man of unclean lips" (6:5) — seeing God clearly reveals his own need for cleansing.'},
+    {q:'What is the general PURPOSE of a prophet in the Old Testament, according to the lesson?',opts:['To predict the future for entertainment','To call people back to God, warn of consequences, and offer hope for the future','To replace the king as the ruler of Israel','To collect taxes from the people'],ans:1,exp:'Prophets were sent to confront wrongdoing, call Israel back to covenant faithfulness, warn of real consequences for continued disobedience, and offer genuine hope for restoration — never simply prediction for its own sake.'},
+  ],
+  english:[
+    {q:'What is an "antecedent"?',opts:['A type of punctuation mark','The noun that a pronoun refers back to','A pronoun used only in formal writing','A word that always comes at the start of a sentence'],ans:1,exp:'The antecedent is the noun a pronoun replaces or refers back to. In "Sara lost her keys," "Sara" is the antecedent of "her."'},
+    {q:'What does it mean for a pronoun to "agree" with its antecedent?',opts:['The pronoun must be spelled correctly','The pronoun must match the antecedent in number (singular/plural) and gender','The pronoun must always come immediately after the antecedent','There is no such rule in English'],ans:1,exp:'Agreement means the pronoun must match its antecedent — a singular antecedent needs a singular pronoun (he/she/it); a plural antecedent needs a plural pronoun (they).'},
+    {q:'What is a "vague pronoun reference"?',opts:['Using too many pronouns in one sentence','When a reader cannot be sure exactly what or who a pronoun refers to, often because more than one noun could fit','Using a pronoun instead of a name','A pronoun that is spelled incorrectly'],ans:1,exp:'A vague reference occurs when the antecedent is unclear or ambiguous — for example, "When Sara spoke to Amy, she seemed upset" doesn\'t make clear whether "she" means Sara or Amy.'},
+    {q:'Which sentence has a VAGUE pronoun reference problem?',opts:['"Elijah told the king that he was wrong."','"Elijah told the king that the king was wrong."','"The dog wagged its tail."','"They (the students) submitted their essays."'],ans:0,exp:'"Elijah told the king that he was wrong" is ambiguous — "he" could refer to either Elijah or the king. The reader cannot tell which one is meant without more context.'},
+    {q:'How would you correct this sentence: "I love painting and drawing, which is my favourite hobby"?',opts:['Leave it as it is — it is already correct','Rewrite it to name the specific hobby clearly, since "which" has no single clear antecedent, e.g. "I love painting and drawing; art is my favourite hobby."','Remove all pronouns from the sentence','Add more pronouns for clarity'],ans:1,exp:'"Which" in the original sentence has no single clear antecedent — "painting and drawing" together are not one "hobby." Naming the specific idea directly (e.g. "art") fixes the vagueness.'},
+  ],
+  maths:[
+    {q:'On a number line, which of these is TRUE?',opts:['−8 is greater than −3','−3 is greater than −8','−8 and −3 are equal','Negative numbers cannot be compared'],ans:1,exp:'−3 is greater than −8 because −3 is closer to zero (further right on the number line). With negative numbers, smaller "size" numbers (closer to 0) are actually greater in value.'},
+    {q:'Calculate: 6 + (−4)',opts:['10','2','−10','−2'],ans:1,exp:'Adding a negative number is the same as subtracting: 6 + (−4) = 6 − 4 = 2.'},
+    {q:'Calculate: 5 − (−7)',opts:['−2','2','12','−12'],ans:2,exp:'Subtracting a negative number is the same as adding: 5 − (−7) = 5 + 7 = 12. "Two minuses make a plus."'},
+    {q:'A submarine is at −250m (250m below sea level). It rises by 180m. What is its new depth?',opts:['−70m','−430m','70m','430m'],ans:0,exp:'−250 + 180 = −70. The submarine is now 70m below sea level, having risen but not yet reaching the surface.'},
+    {q:'The temperature was −6°C in the morning and rose to 4°C by midday. By how many degrees did the temperature rise?',opts:['2 degrees','−2 degrees','10 degrees','−10 degrees'],ans:2,exp:'Change = final − initial = 4 − (−6) = 4 + 6 = 10 degrees rise.'},
+    {q:'Calculate: (−3) × (−5)',opts:['−15','15','−8','8'],ans:1,exp:'Negative × Negative = Positive ("same signs give positive"). (−3) × (−5) = 15.'},
+  ],
+  science:[
+    {q:'What pH value is considered exactly NEUTRAL?',opts:['0','7','14','It depends on the substance'],ans:1,exp:'pH 7 is exactly neutral — neither acidic nor alkaline. Pure water has a pH of 7. Below 7 is acidic; above 7 is alkaline.'},
+    {q:'What colour does litmus paper turn in an ACID?',opts:['Blue','Green','Red','Purple'],ans:2,exp:'Litmus paper turns RED in an acid and BLUE in an alkali — a simple way to test whether a substance is acidic or alkaline.'},
+    {q:'What is the general word equation for a neutralisation reaction?',opts:['Acid + Metal → Salt + Hydrogen','Acid + Base → Salt + Water','Base + Base → Salt + Water','Acid + Acid → Salt + Water'],ans:1,exp:'Neutralisation occurs when an acid reacts with a base (or alkali), typically producing a salt and water: ACID + BASE → SALT + WATER.'},
+    {q:'Why is universal indicator often more useful than litmus paper for testing pH?',opts:['Universal indicator is cheaper','Universal indicator shows a whole range of colours corresponding to the full pH scale (0-14), not just whether something is acid or alkali','Litmus paper doesn\'t work at all','Universal indicator only works on liquids'],ans:1,exp:'Litmus only tells you if a substance is acidic or alkaline (red or blue). Universal indicator gives a range of colours showing approximately WHERE on the 0-14 pH scale a substance falls, giving much more detailed information.'},
+    {q:'Which statement about acids and alkalis is TRUE?',opts:['All alkalis are completely safe to touch','Both strong acids AND strong alkalis can be corrosive and dangerous','Acids are always more dangerous than alkalis','Alkalis cannot react with acids'],ans:1,exp:'Strong alkalis (like oven cleaner or bleach) can be just as corrosive and dangerous as strong acids — being "the opposite" of an acid does not make an alkali automatically safe.'},
+  ],
+  history:[
+    {q:'What was the Silk Road?',opts:['A single paved road built by the Roman Empire','A network of ancient trade routes connecting China to Europe and the Middle East, used for over 1,500 years','A modern highway in China','A route used only for military purposes'],ans:1,exp:'The Silk Road was a network (not a single road) of trade routes connecting East Asia, Central Asia, the Middle East, and Europe, active from around 130 BCE to the 1450s CE, carrying goods, ideas, religions, and even disease.'},
+    {q:'What motivated European nations to seek new SEA routes to Asia during the Age of Exploration?',opts:['They wanted to explore for entertainment only','Overland trade routes had become more difficult and expensive, especially after Constantinople fell to the Ottoman Empire in 1453','They had no interest in trade at all','They were forced to by other countries'],ans:1,exp:'The fall of Constantinople in 1453 disrupted traditional overland trade routes to Asia, motivating European nations to seek alternative SEA routes to access valuable Asian goods, especially spices.'},
+    {q:'What is the "Columbian Exchange"?',opts:['A trade agreement between only two countries','The widespread transfer of plants, animals, diseases, and culture between the Americas and the rest of the world following Columbus\'s voyages','A type of currency used in the 1400s','A peace treaty ending European wars'],ans:1,exp:'The Columbian Exchange describes the massive transfer of crops (potatoes, maize), animals (horses, cattle), and unfortunately diseases between the Americas and the rest of the world, beginning after Columbus\'s voyages in 1492.'},
+    {q:'What was one of the most devastating consequences of European contact for indigenous peoples in the Americas?',opts:['Improved living conditions for everyone','European diseases like smallpox killed enormous numbers of indigenous people who had no prior immunity, with some regions losing over 80-90% of their population','Indigenous peoples gained complete independence','There were no significant negative consequences'],ans:1,exp:'European diseases devastated indigenous populations who had no immunity, with estimates suggesting population losses of over 80-90% in some regions within just decades — one of history\'s most severe demographic catastrophes.'},
+    {q:'Why does the lesson suggest that history "looks very different depending on whose perspective is centred"?',opts:['Historical facts change depending on the country studying them','The same events (European exploration and trade expansion) had a very different, often devastating meaning for indigenous peoples who experienced colonisation, disease, and loss of land, compared to how they are often celebrated in European accounts','History has no factual basis at all','Only one perspective on history is ever correct'],ans:1,exp:'The "Age of Exploration," often celebrated in European historical accounts for its trade and discovery, meant colonisation, disease, and profound loss for indigenous peoples — demonstrating that the same historical events can carry very different meanings depending on which group\'s experience is being centred.'},
+  ]
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{quizState[s]={idx:0,score:0};renderQuiz(s);});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';celebrate();return;}
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){quizState[s].score++;opts[i].classList.add('correct');fb.className='quiz-fb ok';fb.style.display='block';fb.innerHTML='✅ Correct! '+q.exp;}
+  else{opts[i].classList.add('wrong');opts[q.ans].classList.add('correct');fb.className='quiz-fb bad';fb.style.display='block';fb.innerHTML='❌ Not quite. '+q.exp;}
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+function celebrate(){const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];for(let i=0;i<70;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti';el.style.left=Math.random()*100+'vw';el.style.background=cols[Math.floor(Math.random()*cols.length)];el.style.animationDuration=(1.8+Math.random()*2.2)+'s';el.style.animationDelay=(Math.random()*0.3)+'s';el.style.width=(7+Math.random()*7)+'px';el.style.height=(9+Math.random()*9)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),5000);},i*25);}}
+</script>
+</body>
+</html>

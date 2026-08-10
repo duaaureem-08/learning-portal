@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 11 — Day 1 Test · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#BE185D;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#0E7490;--social-l:#CFFAFE;--social-d:#164E63;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:#059669;}
+.day-badge{background:#FEF3C7;color:#92400E;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #D97706;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px;font-weight:700;font-size:0.92rem;}
+.match-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.verse-box{background:#FFF8E1;border:3px solid #F59E0B;border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px;}
+.verse-text{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#0F6E56;line-height:1.8;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.match-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">📄 Day 1 — Test</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>✝️</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🧲</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🌍</span> Humanities</button>
+</div>
+
+<!-- ══════════ BIBLE ══════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">📄 Test Worksheet — Day 1</div>
+    <div class="hero-week">✝️ Bible · Week 11</div>
+    <div class="hero-title">Ruth — Loyalty<br>and Kindness</div>
+    <div class="hero-sub">Book of Ruth · loyalty · kindness · gleaning · Memory verse: Ruth 1:16</div>
+    <div class="hero-emoji">💛</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">📖</div>
+      <div class="callout-text"><strong>Definitions A–E:</strong><br>
+        A — Staying true to someone through difficulties — not leaving when things are hard.<br>
+        B — Treating others with care, generosity and warmth.<br>
+        C — A woman whose husband has died.<br>
+        D — Collecting leftover grain from a field after the main harvest.<br>
+        E — Consistently trustworthy and devoted — always there for someone.
+      </div>
+    </div>
+    <div id="bible-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkVocab('bible')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Loyalty. Kindness. Widow. Gleaning. Faithful.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — The Story of Ruth <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Put these story events in the correct order (1–6):</p>
+    <div id="ruth-order"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--bible);" onclick="checkOrder('ruth')">Check Order ✅</button></div>
+    <div id="ruth-order-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:8px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+      <span class="word-tag">Naomi</span><span class="word-tag">famine</span><span class="word-tag">Boaz</span><span class="word-tag">gleaned</span><span class="word-tag">loyal</span><span class="word-tag">Moab</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing word</th></tr>
+      <tr><td>Ruth's mother-in-law was called _____.</td><td><input class="fill-in" data-ans="naomi" placeholder="type here"></td></tr>
+      <tr><td>Naomi and her family moved to _____ because of a famine.</td><td><input class="fill-in" data-ans="moab" placeholder="type here"></td></tr>
+      <tr><td>Naomi left Bethlehem because there was a _____.</td><td><input class="fill-in" data-ans="famine" placeholder="type here"></td></tr>
+      <tr><td>Ruth _____ grain in the fields to find food for herself and Naomi.</td><td><input class="fill-in" data-ans="gleaned" placeholder="type here"></td></tr>
+      <tr><td>The kind man who let Ruth work in his fields was called _____.</td><td><input class="fill-in" data-ans="boaz" placeholder="type here"></td></tr>
+      <tr><td>Ruth showed she was _____ by staying with Naomi when she could have left.</td><td><input class="fill-in" data-ans="loyal" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkFillPage('bible')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Naomi. Moab. Famine. Gleaned. Boaz. Loyal.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="verse-box">
+      <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:6px;">⭐ MEMORY VERSE — Ruth 1:16</div>
+      <div class="verse-text">"Where you go I will go, and where you stay I will stay.<br>Your people will be my people and your God my God."</div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Why was Ruth's choice to stay with Naomi so remarkable? What did she risk by staying? Write 3–4 sentences.</p>
+      <textarea class="open-box" placeholder="Ruth's choice was remarkable because…"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. How did Boaz show kindness to Ruth? Give TWO specific examples from the story.</p>
+      <textarea class="open-box" placeholder="First, Boaz showed kindness by…&#10;Second, he also…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: What does Ruth 1:16 teach us about loyalty? Think about what Ruth gave up AND what she gained. Use the words "loyalty," "faith" and "kindness" in your answer. Write at least 4 sentences.</p>
+      <textarea class="open-box" style="min-height:110px;" placeholder="Ruth 1:16 teaches us that loyalty means…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="bible-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTF('bible')">Check ✅</button></div>
+    <div id="bible-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ ENGLISH ══════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">📄 Test Worksheet — Day 1</div>
+    <div class="hero-week">✏️ English · Week 11</div>
+    <div class="hero-title">Adverbs &amp; Time<br>Connectives</div>
+    <div class="hero-sub">First · Next · Then · After that · Finally · Adverbs of manner (-ly)</div>
+    <div class="hero-emoji">⏰</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">✏️</div>
+      <div class="callout-text"><strong>Definitions A–E:</strong><br>
+        A — A word or phrase that shows WHEN something happens or the ORDER of events.<br>
+        B — The order in which things happen — first to last.<br>
+        C — A word that describes HOW an action is done. Usually ends in -ly.<br>
+        D — Any word that joins ideas, sentences or clauses together.<br>
+        E — The time connective that introduces the very LAST step or event.
+      </div>
+    </div>
+    <div id="eng-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkVocab('eng')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Time connective. Sequence. Adverb of manner. Connective. Finally.')">🔊 Hear terms</button>
+    </div>
+    <div id="eng-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Language Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Fill in the correct time connective from the word bank:</p>
+    <div class="word-bank" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+      <span class="word-tag">First</span><span class="word-tag">Next</span><span class="word-tag">Then</span><span class="word-tag">After that</span><span class="word-tag">Finally</span><span class="word-tag">Meanwhile</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Time connective</th></tr>
+      <tr><td>_____, boil the water in a pot.</td><td><input class="fill-in" data-ans="first" placeholder="type here"></td></tr>
+      <tr><td>_____, add the pasta carefully.</td><td><input class="fill-in" data-ans="next" placeholder="type here"></td></tr>
+      <tr><td>_____, the sauce was bubbling on the stove.</td><td><input class="fill-in" data-ans="meanwhile" placeholder="type here"></td></tr>
+      <tr><td>_____, drain the pasta and place on a plate.</td><td><input class="fill-in" data-ans="after that" placeholder="type here"></td></tr>
+      <tr><td>_____, serve and enjoy your meal!</td><td><input class="fill-in" data-ans="finally" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--english);" onclick="checkFillPage('eng')">Check ✅</button></div>
+    <div id="eng-fill-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Turn each adjective into an adverb of manner:</p>
+    <table class="fill-table">
+      <tr><th>Adjective</th><th>Adverb of manner</th></tr>
+      <tr><td>careful</td><td><input class="fill-in" data-ans="carefully" placeholder="?"></td></tr>
+      <tr><td>quick</td><td><input class="fill-in" data-ans="quickly" placeholder="?"></td></tr>
+      <tr><td>quiet</td><td><input class="fill-in" data-ans="quietly" placeholder="?"></td></tr>
+      <tr><td>gentle</td><td><input class="fill-in" data-ans="gently" placeholder="?"></td></tr>
+      <tr><td>brave</td><td><input class="fill-in" data-ans="bravely" placeholder="?"></td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--english);" onclick="checkAdvFill()">Check Adverbs ✅</button></div>
+    <div id="eng-adv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Writing <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Put these steps for making toast in the correct order. Write 1–5 next to each step:</p>
+      <div id="toast-order"></div>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkOrder('toast')">Check Order ✅</button></div>
+      <div id="toast-order-result" class="quiz-feedback"></div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Rewrite this sentence using a time connective AND an adverb of manner to make it better:</p>
+      <div class="callout" style="background:var(--english-l);"><div class="callout-icon">✏️</div><div class="callout-text"><strong>Original:</strong> "She put the bread in the toaster."</div></div>
+      <textarea class="open-box" style="min-height:50px;" placeholder="_____, she _____ put the bread in the toaster."></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. WRITE YOUR OWN: Write a how-to guide for HOW TO GET READY FOR SCHOOL in 5 steps. Use a different time connective for each step AND at least ONE adverb of manner per step.</p>
+      <table class="fill-table">
+        <tr><th>Time connective</th><th>Your step (include an adverb of manner!)</th></tr>
+        ${['First,','Next,','Then,','After that,','Finally,'].map(tc=>`<tr><td><strong>${tc}</strong></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td></tr>`).join('')}
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="eng-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTF('eng')">Check ✅</button></div>
+    <div id="eng-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ MATHS ══════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">📄 Test Worksheet — Day 1</div>
+    <div class="hero-week">🔢 Maths · Week 11</div>
+    <div class="hero-title">Time — Telling the<br>Time &amp; Duration</div>
+    <div class="hero-sub">Analogue &amp; digital clocks · AM &amp; PM · 24-hour clock · duration problems</div>
+    <div class="hero-emoji">🕐</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🕐</div>
+      <div class="callout-text"><strong>Definitions A–E:</strong><br>
+        A — A clock with a round face, hour hand and minute hand.<br>
+        B — A clock that shows the time as numbers (e.g. 07:30).<br>
+        C — The hours from midnight to midday — morning time.<br>
+        D — The hours from midday to midnight — afternoon and evening.<br>
+        E — How long something takes — the time from start to finish.
+      </div>
+    </div>
+    <div id="maths-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkVocab('maths')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Analogue clock. Digital clock. AM. PM. Duration.')">🔊 Hear terms</button>
+    </div>
+    <div id="maths-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Time Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Convert between 12-hour and 24-hour clock:</p>
+    <table class="fill-table">
+      <tr><th>12-hour</th><th>24-hour</th></tr>
+      <tr><td>3:00 PM</td><td><input class="fill-in" data-ans="15:00" placeholder="?:??" style="width:90px;"></td></tr>
+      <tr><td>9:30 AM</td><td><input class="fill-in" data-ans="09:30" placeholder="?:??" style="width:90px;"></td></tr>
+      <tr><td>11:00 PM</td><td><input class="fill-in" data-ans="23:00" placeholder="?:??" style="width:90px;"></td></tr>
+      <tr><td><input class="fill-in" data-ans="4:45 PM" placeholder="?:?? ?M" style="width:110px;"></td><td>16:45</td></tr>
+      <tr><td><input class="fill-in" data-ans="8:20 AM" placeholder="?:?? ?M" style="width:110px;"></td><td>08:20</td></tr>
+      <tr><td><input class="fill-in" data-ans="9:00 PM" placeholder="?:?? ?M" style="width:110px;"></td><td>21:00</td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--maths);" onclick="checkTimeConv()">Check All ✅</button></div>
+    <div id="maths-conv-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Time quiz — click the correct answer:</p>
+    <div id="maths-quiz"></div>
+    <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMathsQ()">Next ➡️</button>
+      <span id="maths-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Duration Problems <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. A bus leaves at 07:45 and arrives 1 hour 20 minutes later. What time does it arrive? Give your answer in both 12-hour and 24-hour formats. Show your working.</p>
+      <textarea class="open-box" placeholder="Working:&#10;&#10;12-hour answer:&#10;24-hour answer:"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Omar studies from 4:00 PM to 6:30 PM. How long does he study? Give your answer in hours and minutes.</p>
+      <textarea class="open-box" placeholder="Working:&#10;&#10;Answer:"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">5. A film starts at 15:30 and lasts 1 hour 45 minutes. What time does it finish? Give your answer in both 24-hour and 12-hour formats.</p>
+      <textarea class="open-box" placeholder="Working:&#10;&#10;24-hour:&#10;12-hour:"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">6. AM or PM? Write the correct label for each:</p>
+      <table class="fill-table">
+        <tr><th>Event</th><th>AM or PM?</th></tr>
+        <tr><td>Breakfast at 7:30</td><td><input class="fill-in" data-ans="AM" placeholder="?" style="width:70px;"></td></tr>
+        <tr><td>Lunch at 12:30</td><td><input class="fill-in" data-ans="PM" placeholder="?" style="width:70px;"></td></tr>
+        <tr><td>Going to sleep at 10:00 at night</td><td><input class="fill-in" data-ans="PM" placeholder="?" style="width:70px;"></td></tr>
+        <tr><td>Sunrise at 6:00</td><td><input class="fill-in" data-ans="AM" placeholder="?" style="width:70px;"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkAMPM()">Check ✅</button></div>
+      <div id="ampm-result" class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="maths-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTF('maths')">Check ✅</button></div>
+    <div id="maths-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ SCIENCE ══════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">📄 Test Worksheet — Day 1</div>
+    <div class="hero-week">🧲 Science · Week 11</div>
+    <div class="hero-title">Forces —<br>Magnets</div>
+    <div class="hero-sub">Magnetic &amp; non-magnetic · poles · attract &amp; repel · everyday uses</div>
+    <div class="hero-emoji">🧲</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🧲</div>
+      <div class="callout-text"><strong>Definitions A–E:</strong><br>
+        A — An object that produces a force which can attract certain metals.<br>
+        B — To pull two objects toward each other.<br>
+        C — To push two objects away from each other.<br>
+        D — The two ends of a magnet: North (N) and South (S).<br>
+        E — A material that is NOT attracted to a magnet.
+      </div>
+    </div>
+    <div id="sci-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkVocab('sci')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Magnet. Attract. Repel. Poles. Non-magnetic.')">🔊 Hear terms</button>
+    </div>
+    <div id="sci-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🧲 Part B — Magnets Knowledge <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Magnetic (M) or Non-magnetic (NM)? Fill in the table:</p>
+    <table class="fill-table">
+      <tr><th>Material</th><th>M or NM?</th><th>Material</th><th>M or NM?</th></tr>
+      <tr><td>Iron nail</td><td><input class="fill-in" data-ans="M" style="width:60px;" placeholder="?"></td>
+          <td>Rubber eraser</td><td><input class="fill-in" data-ans="NM" style="width:60px;" placeholder="?"></td></tr>
+      <tr><td>Steel paperclip</td><td><input class="fill-in" data-ans="M" style="width:60px;" placeholder="?"></td>
+          <td>Aluminium foil</td><td><input class="fill-in" data-ans="NM" style="width:60px;" placeholder="?"></td></tr>
+      <tr><td>Copper coin</td><td><input class="fill-in" data-ans="NM" style="width:60px;" placeholder="?"></td>
+          <td>Steel spoon</td><td><input class="fill-in" data-ans="M" style="width:60px;" placeholder="?"></td></tr>
+      <tr><td>Glass marble</td><td><input class="fill-in" data-ans="NM" style="width:60px;" placeholder="?"></td>
+          <td>Nickel coin</td><td><input class="fill-in" data-ans="M" style="width:60px;" placeholder="?"></td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--science);" onclick="checkSciFill()">Check ✅</button></div>
+    <div id="sci-fill-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Attract or Repel? Fill in the table:</p>
+    <table class="fill-table">
+      <tr><th>Poles</th><th>Attract or Repel?</th></tr>
+      <tr><td>North + South</td><td><input class="fill-in" data-ans="attract" placeholder="type here" style="width:100px;"></td></tr>
+      <tr><td>North + North</td><td><input class="fill-in" data-ans="repel" placeholder="type here" style="width:100px;"></td></tr>
+      <tr><td>South + South</td><td><input class="fill-in" data-ans="repel" placeholder="type here" style="width:100px;"></td></tr>
+      <tr><td>South + North</td><td><input class="fill-in" data-ans="attract" placeholder="type here" style="width:100px;"></td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--science);" onclick="checkPoles()">Check ✅</button></div>
+    <div id="poles-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. A student says "all metals are magnetic." Is this correct? Explain your answer and give TWO examples to support it.</p>
+      <textarea class="open-box" placeholder="This is not correct because…&#10;Example 1:&#10;Example 2:"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Name THREE everyday objects that use magnets and explain what the magnet does in each one.</p>
+      <textarea class="open-box" placeholder="1. ___ — the magnet…&#10;2. ___ — the magnet…&#10;3. ___ — the magnet…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Explain the rule about magnetic poles. What happens when opposite poles meet? What happens when like poles meet? Why do you think this might be useful in real life? Write at least 4 sentences.</p>
+      <textarea class="open-box" style="min-height:110px;" placeholder="The rule about magnetic poles is…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="sci-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTF('sci')">Check ✅</button></div>
+    <div id="sci-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════ HUMANITIES ══════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">📄 Test Worksheet — Day 1</div>
+    <div class="hero-week">🌍 Humanities · Week 11</div>
+    <div class="hero-title">Climate Zones &amp;<br>World Environments</div>
+    <div class="hero-sub">Tropical · Temperate · Polar · How climate affects life, food and shelter</div>
+    <div class="hero-emoji">🌍</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-text"><strong>Definitions A–E:</strong><br>
+        A — Typical weather conditions in an area over a long period of time.<br>
+        B — A large area of Earth with a similar type of climate throughout.<br>
+        C — The climate zone near the equator — very hot and often very wet all year.<br>
+        D — The climate zone between hot and cold — mild seasons, four seasons a year.<br>
+        E — The climate zone near the poles — extremely cold and often frozen.
+      </div>
+    </div>
+    <div id="soc-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkVocab('soc')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Climate. Climate zone. Tropical. Temperate. Polar.')">🔊 Hear terms</button>
+    </div>
+    <div id="soc-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🌍 Part B — Climate Knowledge <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Which climate zone? Write T (Tropical), Te (Temperate) or P (Polar):</p>
+    <table class="fill-table">
+      <tr><th>Fact</th><th>T, Te or P?</th></tr>
+      <tr><td>Brazil — hot and wet all year, near the equator</td><td><input class="fill-in" data-ans="T" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>Antarctica — extremely cold, mostly ice and snow</td><td><input class="fill-in" data-ans="P" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>UK — mild summers, cool winters, four seasons</td><td><input class="fill-in" data-ans="Te" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>Nigeria — tropical rainforest, very hot, heavy rain</td><td><input class="fill-in" data-ans="T" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>Norway — near the Arctic, very cold winters</td><td><input class="fill-in" data-ans="P" placeholder="?" style="width:60px;"></td></tr>
+      <tr><td>Pakistan (Punjab) — hot summers, mild winters, four seasons</td><td><input class="fill-in" data-ans="Te" placeholder="?" style="width:60px;"></td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--social);" onclick="checkSocFill()">Check ✅</button></div>
+    <div id="soc-fill-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Climate quiz — click the correct answer:</p>
+    <div id="soc-quiz"></div>
+    <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="nextSocQ()">Next ➡️</button>
+      <span id="soc-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Explain the difference between CLIMATE and WEATHER. Give one example of each.</p>
+      <textarea class="open-box" placeholder="Climate is… For example…&#10;Weather is… For example…"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. How do people who live in HOT DESERT areas adapt to their climate? Give TWO examples — one about housing and one about food or water.</p>
+      <textarea class="open-box" placeholder="Housing adaptation:&#10;&#10;Food or water adaptation:"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Why can bananas grow in tropical climates but NOT in polar climates? Use the words "temperature," "rainfall" and "growing conditions" in your answer. Write at least 4 sentences.</p>
+      <textarea class="open-box" style="min-height:110px;" placeholder="Bananas need…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="soc-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTF('soc')">Check ✅</button></div>
+    <div id="soc-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+/* ── VOCAB ── */
+const vocabData={
+  bible:{terms:['Loyalty','Kindness','Widow','Gleaning','Faithful'],answers:['A','B','C','D','E']},
+  eng:  {terms:['Time connective','Sequence','Adverb of manner','Connective','Finally'],answers:['A','B','C','D','E']},
+  maths:{terms:['Analogue clock','Digital clock','AM','PM','Duration'],answers:['A','B','C','D','E']},
+  sci:  {terms:['Magnet','Attract','Repel','Poles','Non-magnetic material'],answers:['A','B','C','D','E']},
+  soc:  {terms:['Climate','Climate zone','Tropical','Temperate','Polar'],answers:['A','B','C','D','E']},
+};
+function buildVocab(key){
+  const d=vocabData[key];const area=document.getElementById(key+'-vocab-area');if(!area)return;
+  let h='<div class="match-grid">';
+  d.terms.forEach((t,i)=>{h+=`<div class="match-item">${t}<button class="audio-btn" onclick="speak('${t}')">🔊</button><select id="vocab-${key}-${i}"><option value="">— select —</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildVocab);
+function checkVocab(key){
+  const d=vocabData[key];let score=0;
+  d.terms.forEach((_,i)=>{const sel=document.getElementById('vocab-'+key+'-'+i);if(!sel)return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-vocab-result');res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${d.terms.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct.`;}
+}
+
+/* ── ORDER DATA ── */
+const orderData={
+  ruth:{events:[
+    {text:'Naomi and her family move from Bethlehem to Moab because of a famine.',correct:1},
+    {text:'Naomi\'s husband and both sons die, leaving three widows.',correct:2},
+    {text:'Ruth chooses to stay with Naomi and says "Where you go I will go."',correct:3},
+    {text:'Ruth and Naomi return to Bethlehem together.',correct:4},
+    {text:'Ruth gleans grain in Boaz\'s field; Boaz shows her great kindness.',correct:5},
+    {text:'Ruth and Boaz marry; Ruth becomes the great-grandmother of King David.',correct:6},
+  ]},
+  toast:{events:[
+    {text:'Put the bread into the toaster.',correct:2},
+    {text:'Get a slice of bread from the bag.',correct:1},
+    {text:'Wait for the toast to pop up.',correct:3},
+    {text:'Carefully spread butter on the toast.',correct:4},
+    {text:'Finally, eat and enjoy!',correct:5},
+  ]},
+};
+function buildOrder(key){
+  const d=orderData[key];if(!d)return;
+  const area=document.getElementById(key+'-order');if(!area)return;
+  let h='<div style="display:flex;flex-direction:column;gap:8px;">';
+  d.events.forEach((ev,i)=>{h+=`<div style="display:flex;align-items:center;gap:10px;background:#F8FAFF;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:11px 14px;font-size:0.9rem;">
+    <div style="font-weight:900;font-size:0.95rem;min-width:24px;">${i+1}.</div>
+    <div style="flex:1">${ev.text}</div>
+    <select id="ord-${key}-${i}" style="padding:6px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.88rem;">
+      <option value="">—</option>${d.events.map((_,n)=>`<option value="${n+1}">${n+1}</option>`).join('')}
+    </select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+buildOrder('ruth');buildOrder('toast');
+function checkOrder(key){
+  const d=orderData[key];let score=0;
+  d.events.forEach((ev,i)=>{const sel=document.getElementById('ord-'+key+'-'+i);if(!sel)return;
+    if(parseInt(sel.value)===ev.correct){score++;sel.style.borderColor='#059669';sel.style.background='#D1FAE5';}
+    else{sel.style.borderColor='#DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-order-result');if(res){res.style.display='block';
+    if(score===d.events.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect order! ${score}/${d.events.length}!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.events.length} in the right place.`;}}
+}
+
+/* ── FILL CHECKS ── */
+function checkFillPage(key){
+  const pageId=key==='bible'?'page-bible':key==='eng'?'page-english':'page-'+key;
+  let score=0,total=0;
+  document.querySelectorAll(`#${pageId} .fill-in[data-ans]`).forEach(inp=>{
+    if(!inp.closest('.fill-table'))return;
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById(key+'-fill-result');if(res){res.style.display='block';
+    if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}}
+}
+function checkAdvFill(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-english .fill-table:nth-of-type(2) .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('eng-adv-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} adverbs correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. Remember to add -ly!`;}
+}
+function checkTimeConv(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .fill-in[data-ans]').forEach(inp=>{
+    if(!inp.closest('.fill-table'))return;
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-conv-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. PM→24h: add 12. 24h→PM: subtract 12.`;}
+}
+function checkSciFill(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-science .fill-table:first-of-type .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toUpperCase()===inp.dataset.ans.toUpperCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('sci-fill-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+function checkPoles(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-science .fill-table:nth-of-type(2) .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('poles-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. Opposite = attract, Like = repel.`;}
+}
+function checkSocFill(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-social .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('soc-fill-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+function checkAMPM(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .fill-table:nth-of-type(2) .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toUpperCase()===inp.dataset.ans.toUpperCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('ampm-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+
+/* ── MATHS QUIZ ── */
+const mathsQs=[
+  {q:'How many minutes are there in one hour?',opts:['30','60','100','24'],ans:1,exp:'There are 60 minutes in 1 hour.'},
+  {q:'What is 3:00 PM in 24-hour clock?',opts:['03:00','13:00','15:00','30:00'],ans:2,exp:'3:00 PM → 3 + 12 = 15:00.'},
+  {q:'What does "quarter past 7" mean?',opts:['6:45','7:15','7:25','7:30'],ans:1,exp:'Quarter past 7 = 7:15 (15 minutes past 7).'},
+  {q:'School starts at 08:30 and ends at 14:00. How long is the school day?',opts:['5 hours','5 hours 30 minutes','6 hours','6 hours 30 minutes'],ans:1,exp:'08:30 to 14:00: 08:30→14:00 = 5 hours 30 minutes.'},
+  {q:'What is 21:00 in 12-hour format?',opts:['9:00 AM','11:00 PM','9:00 PM','12:00 PM'],ans:2,exp:'21:00 → 21 - 12 = 9:00 PM.'},
+];
+let mathsIdx=0,mathsScore=0;
+function renderMathsQ(){
+  const q=mathsQs[mathsIdx];
+  if(!q){document.getElementById('maths-quiz').innerHTML=`<div style="padding:14px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Done! Score: ${mathsScore}/${mathsQs.length}</div>`;if(mathsScore===mathsQs.length)celebrate();return;}
+  document.getElementById('maths-quiz').innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${mathsIdx+1}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerMathsQ(${i})">${o}</button>`).join('')}</div><div id="maths-quiz-fb" class="quiz-feedback"></div></div>`;
+  document.getElementById('maths-score').textContent=`Score: ${mathsScore}/${mathsIdx}`;
+}
+function answerMathsQ(i){
+  const q=mathsQs[mathsIdx];const opts=document.querySelectorAll('#maths-quiz .quiz-opt');opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');const fb=document.getElementById('maths-quiz-fb');fb.style.display='block';
+  if(i===q.ans){mathsScore++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent=`✅ Correct! ${q.exp}`;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ The answer is: ${q.opts[q.ans]}. ${q.exp}`;}
+  document.getElementById('maths-score').textContent=`Score: ${mathsScore}/${mathsIdx+1}`;
+}
+function nextMathsQ(){mathsIdx++;renderMathsQ();}
+renderMathsQ();
+
+/* ── SOC QUIZ ── */
+const socQs=[
+  {q:'Which climate zone is closest to the equator?',opts:['Polar','Temperate','Tropical','Desert'],ans:2,exp:'The tropical zone is closest to the equator — the hottest area.'},
+  {q:'What is the difference between climate and weather?',opts:['There is no difference','Climate is long-term; weather is day-to-day','Weather is long-term; climate changes daily','They are the same thing'],ans:1,exp:'Climate = long-term patterns over many years. Weather = what is happening today.'},
+  {q:'Which of these countries is in a POLAR climate zone?',opts:['Brazil','France','Antarctica','Pakistan'],ans:2,exp:'Antarctica is at the South Pole — an extreme polar climate.'},
+  {q:'Which crop grows in TROPICAL climates?',opts:['Wheat','Potatoes','Bananas','Apples'],ans:2,exp:'Bananas need heat and lots of water all year — tropical conditions.'},
+  {q:'The UK has which type of climate?',opts:['Tropical','Polar','Temperate','Desert'],ans:2,exp:'The UK has a temperate climate — mild temperatures and four seasons.'},
+];
+let socIdx=0,socScore=0;
+function renderSocQ(){
+  const q=socQs[socIdx];
+  if(!q){document.getElementById('soc-quiz').innerHTML=`<div style="padding:14px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Done! Score: ${socScore}/${socQs.length}</div>`;if(socScore===socQs.length)celebrate();return;}
+  document.getElementById('soc-quiz').innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${socIdx+1}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerSocQ(${i})">${o}</button>`).join('')}</div><div id="soc-quiz-fb" class="quiz-feedback"></div></div>`;
+  document.getElementById('soc-score').textContent=`Score: ${socScore}/${socIdx}`;
+}
+function answerSocQ(i){
+  const q=socQs[socIdx];const opts=document.querySelectorAll('#soc-quiz .quiz-opt');opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');const fb=document.getElementById('soc-quiz-fb');fb.style.display='block';
+  if(i===q.ans){socScore++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent=`✅ Correct! ${q.exp}`;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ The answer is: ${q.opts[q.ans]}. ${q.exp}`;}
+  document.getElementById('soc-score').textContent=`Score: ${socScore}/${socIdx+1}`;
+}
+function nextSocQ(){socIdx++;renderSocQ();}
+renderSocQ();
+
+/* ── TF DATA ── */
+const tfData={
+  bible:[
+    {s:'Ruth was Naomi\'s daughter.',ans:false},
+    {s:'Naomi left Bethlehem because of a famine.',ans:true},
+    {s:'Both Ruth and Orpah chose to stay with Naomi.',ans:false},
+    {s:'Boaz intentionally left extra grain for Ruth to collect.',ans:true},
+    {s:'Ruth 1:16 says "Where you go I will go, and where you stay I will stay."',ans:true},
+  ],
+  eng:[
+    {s:'Time connectives show the order in which events happen.',ans:true},
+    {s:'"Gently" is an adjective.',ans:false},
+    {s:'"Finally" is used to introduce the very last step.',ans:true},
+    {s:'Adverbs of manner always end in the letters -ly.',ans:false},
+    {s:'"Meanwhile" shows two things happening at the same time.',ans:true},
+  ],
+  maths:[
+    {s:'There are 60 minutes in one hour.',ans:true},
+    {s:'AM stands for the hours from midday to midnight.',ans:false},
+    {s:'3:00 PM in 24-hour clock is 15:00.',ans:true},
+    {s:'Quarter past means 30 minutes past the hour.',ans:false},
+    {s:'To convert PM to 24-hour, you add 12 to the hour.',ans:true},
+  ],
+  sci:[
+    {s:'All metals are magnetic.',ans:false},
+    {s:'Opposite magnetic poles attract each other.',ans:true},
+    {s:'Aluminium is a magnetic material.',ans:false},
+    {s:'Like poles (N+N) repel each other.',ans:true},
+    {s:'The magnetic force is strongest in the middle of a magnet.',ans:false},
+  ],
+  soc:[
+    {s:'The tropical climate zone is found near the poles.',ans:false},
+    {s:'The UK has a temperate climate with four seasons.',ans:true},
+    {s:'Climate and weather are exactly the same thing.',ans:false},
+    {s:'Bananas grow best in tropical climates.',ans:true},
+    {s:'Polar regions receive very heavy rainfall all year.',ans:false},
+  ],
+};
+function buildTF(key){
+  const data=tfData[key];const area=document.getElementById(key+'-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td><button class="tf-btn" id="tf-${key}-${i}-T" onclick="selTF('${key}',${i},'T')">✅ True</button><button class="tf-btn" id="tf-${key}-${i}-F" onclick="selTF('${key}',${i},'F')">❌ False</button></td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTF);
+function selTF(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('tf-'+key+'-'+i+'-'+v);if(b)b.classList.remove('sel-t','sel-f');});
+  const btn=document.getElementById('tf-'+key+'-'+i+'-'+val);if(btn)btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkTF(key){
+  const data=tfData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tf-'+key+'-'+i+'-T');const fBtn=document.getElementById('tf-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');const userF=fBtn?.classList.contains('sel-f');
+    if((item.ans&&userT)||(!item.ans&&userF))score++;
+    if(item.ans){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;});
+  const res=document.getElementById(key+'-tf-result');res.style.display='block';
+  if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct answer.`;}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#BE185D','#D97706','#059669','#0E7490','#F59E0B'];
+  for(let i=0;i<60;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*25);}
+}
+const st=document.createElement('style');st.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(st);
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week11_Day1');</script>
+</body>
+</html>
