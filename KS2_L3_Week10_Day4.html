@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 — Day 4 Mixed Revision · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#BE185D;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:#059669;}
+.day-badge{background:#EDE9FE;color:#5B21B6;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #7C3AED;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.1rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:500px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.w9{background:#FEF3C7;color:#92400E;border:1.5px solid #D97706;padding:3px 10px;border-radius:99px;font-size:0.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;display:inline-block;margin-right:4px;}
+.w10{background:#EDE9FE;color:#5B21B6;border:1.5px solid #7C3AED;padding:3px 10px;border-radius:99px;font-size:0.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;display:inline-block;margin-right:4px;}
+.revision-banner{border-radius:var(--radius-sm);padding:14px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;flex-wrap:wrap;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.6;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;line-height:1.5;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.open-box{width:100%;min-height:90px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.progress-wrap{background:#E5E7EB;border-radius:99px;height:12px;margin:8px 0 4px;}
+.progress-bar{height:12px;border-radius:99px;background:var(--accent,#888);transition:width 0.8s ease;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.connect-box{background:linear-gradient(135deg,#F8FAFF,#EFF6FF);border:2px solid #DBEAFE;border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;}
+.connect-title{font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px;font-weight:700;font-size:0.9rem;}
+.match-item select{width:100%;margin-top:6px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.poem-box{background:#FFF0F6;border:2px solid #BE185D;border-radius:var(--radius-sm);padding:18px;font-family:'Nunito',sans-serif;font-size:15px;line-height:2.2;margin:10px 0;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.match-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">🔁 Day 4 — Mixed Revision</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🪞</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🌍</span> Humanities</button>
+</div>
+
+<!-- ══════════════════════════════ BIBLE ══════════════════════════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">📖 Bible · Weeks 9 &amp; 10</div>
+    <div class="hero-title">Rahab + Gideon</div>
+    <div class="hero-sub">Courage to do right (W9) + Brave when you feel small (W10) — both show God working through unlikely people</div>
+    <div class="hero-emoji">🦁</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--bible-l),#DDD6FE);color:var(--bible-d);border:2px solid var(--bible);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="w9">Week 9</span> Rahab's Courage (Joshua 2) + <span class="w10">Week 10</span> Gideon — Brave When You Feel Small (Judges 6–7). Both show God using unlikely people!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Mixed Vocabulary (8 words) <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">📖</div>
+      <div class="callout-text">
+        <strong>Definitions A–H:</strong><br>
+        A — Being brave enough to do the right thing, even when it is dangerous or scary. <span class="w9">W9</span><br>
+        B — A person sent secretly to gather information about an enemy. <span class="w9">W9</span><br>
+        C — A promise made to keep someone safe from harm. <span class="w9">W9</span><br>
+        D — Believing in and trusting in God, even when you cannot see Him. <span class="w9">W9</span><br>
+        E — Feeling like you are not good enough, strong enough or important enough. <span class="w10">W10</span><br>
+        F — A very strong and capable fighter — what God called Gideon. <span class="w10">W10</span><br>
+        G — God choosing someone who seems weak or ordinary on purpose. <span class="w10">W10</span><br>
+        H — God being present with us, helping and guiding even when we cannot see Him. <span class="w10">W10</span>
+      </div>
+    </div>
+    <div id="bible-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkMixVocab('bible')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Courage. Spy. Protection. Faith. Feeling small. Mighty warrior. Unlikely. God\'s presence.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="bible-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextMixQ('bible')">Next Question ➡️</button>
+      <span id="bible-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="bible-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="bible-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Compare &amp; Connect <span class="marks">10 marks</span></div>
+    <div class="connect-box">
+      <div class="connect-title">🔗 Cross-Week Connection</div>
+      <p style="font-size:0.88rem;font-weight:600;line-height:1.6;">Both Rahab and Gideon were UNLIKELY choices. Rahab was a woman from Jericho — not an Israelite. Gideon was the weakest in his family. Yet God used both of them for key moments in Israel's history. Neither story is about human strength — both are about God's power working through willing, faithful people.</p>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Compare the TWO stories:</p>
+      <table class="fill-table">
+        <tr><th></th><th><span class="w9">W9</span> Rahab (Joshua 2)</th><th><span class="w10">W10</span> Gideon (Judges 6–7)</th></tr>
+        <tr><td><strong>Who were they?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td></tr>
+        <tr><td><strong>Why were they "unlikely"?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td></tr>
+        <tr><td><strong>What courageous thing did they do?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td></tr>
+        <tr><td><strong>What was God's promise to them?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td></tr>
+        <tr><td><strong>What was the outcome?</strong></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td><input class="fill-in" style="width:100%;" placeholder="…"></td></tr>
+      </table>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Both stories have memory verses. <span class="w9">W9</span>: Joshua 2:11 says God "is God in heaven above and on the earth below." <span class="w10">W10</span>: Judges 6:12 says "The Lord is with you, mighty warrior." What do BOTH verses have in common? What do they both say about God? Write 3–4 sentences.</p>
+      <textarea class="open-box" placeholder="Both verses show that God…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Think about what makes a person "unlikely" in the eyes of the world. Using BOTH Rahab (W9) and Gideon (W10), explain why God's choices are so surprising — and what this teaches us about God's values. Write at least 5 sentences using evidence from both stories.</p>
+      <textarea class="open-box" style="min-height:130px;" placeholder="The world sees unlikely people as… But God chose Rahab because… Similarly, God chose Gideon because… This teaches us that God values…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — Mixed True or False (Both Weeks) <span class="marks">6 marks</span></div>
+    <div id="bible-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkMixTF('bible')">Check ✅</button></div>
+    <div id="bible-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ ENGLISH ══════════════════════════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">✏️ English · Weeks 9 &amp; 10</div>
+    <div class="hero-title">Descriptive Writing + Poetry</div>
+    <div class="hero-sub">Settings &amp; senses (W9) + Rhyme, rhythm &amp; repetition (W10) — combine both to write vivid, musical writing!</div>
+    <div class="hero-emoji">🎵</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--english-l),#FBD0E7);color:var(--english-d);border:2px solid var(--english);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="w9">Week 9</span> Descriptive Writing (adjectives, adverbs, senses, settings) + <span class="w10">Week 10</span> Poetry (rhyme, rhythm, repetition). The BEST poems use BOTH!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Mixed Vocabulary (8 words) <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">✏️</div>
+      <div class="callout-text">
+        <strong>Definitions A–H:</strong><br>
+        A — The place and time where a story happens. <span class="w9">W9</span><br>
+        B — A word that describes a noun (e.g. dark, ancient, glittering). <span class="w9">W9</span><br>
+        C — A word that describes how a verb happens (e.g. softly, swiftly). <span class="w9">W9</span><br>
+        D — Sight, sound, smell, touch and taste — use them to bring writing to life. <span class="w9">W9</span><br>
+        E — When two words end with the same sound (e.g. moon/tune, bright/night). <span class="w10">W10</span><br>
+        F — The beat or pattern of sounds when you read a poem aloud. <span class="w10">W10</span><br>
+        G — When a word, phrase or line is repeated on purpose for effect. <span class="w10">W10</span><br>
+        H — The pattern of rhymes at the ends of lines, labelled A, B, C… <span class="w10">W10</span>
+      </div>
+    </div>
+    <div id="eng-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkMixVocab('eng')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Setting. Adjective. Adverb. Senses. Rhyme. Rhythm. Repetition. Rhyme scheme.')">🔊 Hear terms</button>
+    </div>
+    <div id="eng-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="eng-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--english);" onclick="nextMixQ('eng')">Next ➡️</button>
+      <span id="eng-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="eng-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="eng-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Write Using BOTH Skills <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Read this poem and identify: <span class="w10">W10</span> rhyme scheme, <span class="w10">W10</span> repetition, <span class="w9">W9</span> adjectives used:</p>
+      <div class="poem-box" style="text-align:left;line-height:2.5;font-size:14px;">
+        The ancient forest, dark and deep, <input class="fill-in" data-ans="A" style="width:40px;" placeholder="?"><br>
+        Where twisted branches softly creep, <input class="fill-in" data-ans="A" style="width:40px;" placeholder="?"><br>
+        Where silver moonlight falls below, <input class="fill-in" data-ans="B" style="width:40px;" placeholder="?"><br>
+        And mossy pathways faintly glow. <input class="fill-in" data-ans="B" style="width:40px;" placeholder="?"><br><br>
+        <em>Hush, hush, hush</em> — the night wind cries, <input class="fill-in" data-ans="C" style="width:40px;" placeholder="?"><br>
+        Beneath the cold and starless skies. <input class="fill-in" data-ans="C" style="width:40px;" placeholder="?">
+      </div>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkEngScheme()">Check Rhyme Labels ✅</button></div>
+      <div id="eng-scheme-result" class="quiz-feedback"></div>
+      <div style="margin-top:12px;line-height:2.4;font-size:0.9rem;">
+        <strong>Repetition in the poem:</strong> <input class="fill-in" style="width:220px;" placeholder="Write the repeated phrase…"><br>
+        <strong>Three adjectives from the poem:</strong> <input class="fill-in" style="width:320px;" placeholder="Write three adjectives…">
+      </div>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="w9">W9</span> + <span class="w10">W10</span> COMBINED TASK: Write a DESCRIPTIVE POEM about a setting of your choice. It must include ALL of: at least TWO adjectives, at least ONE adverb, a reference to a sense (sight, sound or smell), an ABAB rhyme scheme, and ONE repeated phrase.</p>
+      <table class="fill-table">
+        <tr><th>Line</th><th>Your poem</th><th>A/B</th></tr>
+        ${[1,2,3,4,5,6,7,8].map((n,i)=>`<tr><td>${n}</td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td>${['A','B','A','B','A','B','A','B'][i]}</td></tr>`).join('')}
+      </table>
+      <div style="margin-top:10px;font-size:0.9rem;font-weight:700;">My repeated phrase: <input class="fill-in" style="width:250px;" placeholder="…"></div>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Explain how using BOTH descriptive writing skills (W9) AND poetry techniques (W10) together makes writing MORE powerful. Give examples from the poem above OR your own poem. Write at least 4 sentences.</p>
+      <textarea class="open-box" style="min-height:110px;" placeholder="Using adjectives and adverbs from W9 alongside rhyme and rhythm from W10 makes writing more powerful because…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — Mixed True or False (Both Weeks) <span class="marks">6 marks</span></div>
+    <div id="eng-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkMixTF('eng')">Check ✅</button></div>
+    <div id="eng-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ MATHS ══════════════════════════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">🔢 Maths · Weeks 9 &amp; 10</div>
+    <div class="hero-title">Length &amp; Perimeter + Mass &amp; Volume</div>
+    <div class="hero-sub">Perimeter &amp; length (W9) + Mass &amp; volume (W10) — all measurement, all connected!</div>
+    <div class="hero-emoji">📐</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--maths-l),#FDE8C8);color:var(--maths-d);border:2px solid var(--maths);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="w9">Week 9</span> Length &amp; Perimeter (cm/m, shapes) + <span class="w10">Week 10</span> Mass &amp; Volume (g/kg, ml/l). All about measuring!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Mixed Vocabulary (8 words) <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🔢</div>
+      <div class="callout-text">
+        <strong>Definitions A–H:</strong><br>
+        A — The total distance all the way around the outside of a shape. <span class="w9">W9</span><br>
+        B — How long something is — measured in cm or m. <span class="w9">W9</span><br>
+        C — A small unit of length. 100 of these = 1 metre. <span class="w9">W9</span><br>
+        D — A bigger unit of length. Equal to 100 centimetres. <span class="w9">W9</span><br>
+        E — How heavy an object is — measured in grams or kilograms. <span class="w10">W10</span><br>
+        F — A small unit of mass. 1000 of these = 1 kilogram. <span class="w10">W10</span><br>
+        G — How much liquid a container holds — measured in ml or litres. <span class="w10">W10</span><br>
+        H — A small unit of volume. 1000 of these = 1 litre. <span class="w10">W10</span>
+      </div>
+    </div>
+    <div id="maths-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkMixVocab('maths')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Perimeter. Length. Centimetre. Metre. Mass. Gram. Volume. Millilitre.')">🔊 Hear terms</button>
+    </div>
+    <div id="maths-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🎯 Part B — Mixed Calculations <span class="marks">16 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. All measurement — mixed W9 and W10:</p>
+    <div id="maths-mix-sums"></div>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--maths);" onclick="checkMixSums()">Check All ✅</button></div>
+    <div id="maths-mix-sums-result" class="quiz-feedback"></div>
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Mixed quiz:</p>
+    <div id="maths-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="nextMixQ('maths')">Next ➡️</button>
+      <span id="maths-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="maths-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="maths-mix-prog-label">0 of 8 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Word Problems (Mixed Topics) <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. <span class="w9">W9</span> A rectangular field is 35 m long and 20 m wide. (a) What is the perimeter? (b) A farmer puts fence posts every 5 m around the perimeter. How many posts does he need?</p>
+      <textarea class="open-box" placeholder="a) Perimeter:&#10;b) Number of posts:"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="w10">W10</span> A recipe uses 750 g of flour, 500 g of sugar and 250 g of butter. (a) Total mass in grams? (b) Total in kg? (c) If the recipe is tripled, how much flour is needed in kg?</p>
+      <textarea class="open-box" placeholder="a) Total grams:&#10;b) Total kg:&#10;c) Tripled flour:"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">5. <span class="w9">W9</span> + <span class="w10">W10</span> COMBINED: A garden is a rectangle 8 m × 5 m. (a) What is the perimeter? (b) Each metre of fencing costs £2. What is the total cost? (c) A watering can holds 2.5 litres. If you need 1 ml of water per cm² of garden area, how many litres do you need?</p>
+      <textarea class="open-box" placeholder="a) Perimeter:&#10;b) Fencing cost:&#10;c) Water needed (area = length × width = 800 cm × 500 cm = ? cm²):"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">6. Find the missing values — mixed W9 and W10:</p>
+      <table class="fill-table">
+        <tr><th>Problem</th><th><span class="w9">W9</span>/<span class="w10">W10</span></th><th>Answer</th></tr>
+        <tr><td>Square, perimeter = 36 cm. Side = ___</td><td><span class="w9">W9</span></td><td><input type="text" class="fill-in" data-ans="9" placeholder="?" style="width:80px;"></td></tr>
+        <tr><td>2.5 kg = ___ g</td><td><span class="w10">W10</span></td><td><input type="text" class="fill-in" data-ans="2500" placeholder="?" style="width:80px;"></td></tr>
+        <tr><td>Rectangle: perimeter = 30 cm, length = 9 cm. Width = ___</td><td><span class="w9">W9</span></td><td><input type="text" class="fill-in" data-ans="6" placeholder="?" style="width:80px;"></td></tr>
+        <tr><td>1500 ml = ___ l</td><td><span class="w10">W10</span></td><td><input type="text" class="fill-in" data-ans="1.5" placeholder="?" style="width:80px;"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMixMissing()">Check ✅</button></div>
+      <div id="maths-mix-missing-result" class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — Mixed True or False (Both Weeks) <span class="marks">6 marks</span></div>
+    <div id="maths-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkMixTF('maths')">Check ✅</button></div>
+    <div id="maths-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SCIENCE ══════════════════════════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">🔬 Science · Weeks 9 &amp; 10</div>
+    <div class="hero-title">Light Sources + Reflection</div>
+    <div class="hero-sub">Light sources &amp; shadows (W9) + Reflection &amp; mirrors (W10) — both topics about LIGHT!</div>
+    <div class="hero-emoji">💡</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--science-l),#BBFBDF);color:var(--science-d);border:2px solid var(--science);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="w9">Week 9</span> Light: Sources &amp; Shadows + <span class="w10">Week 10</span> Light: Reflection. Together they explain almost everything about how light behaves!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Mixed Vocabulary (8 words) <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">
+        <strong>Definitions A–H:</strong><br>
+        A — Anything that produces its own light. <span class="w9">W9</span><br>
+        B — A dark shape formed when an opaque object blocks light. <span class="w9">W9</span><br>
+        C — A material that blocks ALL light. <span class="w9">W9</span><br>
+        D — A material that lets some light through but scatters it. <span class="w9">W9</span><br>
+        E — When light bounces back off a surface. <span class="w10">W10</span><br>
+        F — A very smooth, shiny surface that reflects light clearly. <span class="w10">W10</span><br>
+        G — A smooth surface that reflects light in one clear direction. <span class="w10">W10</span><br>
+        H — The rule that light bounces at the same angle it arrives. <span class="w10">W10</span>
+      </div>
+    </div>
+    <div id="sci-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkMixVocab('sci')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Light source. Shadow. Opaque. Translucent. Reflection. Mirror. Shiny surface. Angle of reflection.')">🔊 Hear terms</button>
+    </div>
+    <div id="sci-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="sci-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--science);" onclick="nextMixQ('sci')">Next ➡️</button>
+      <span id="sci-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="sci-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="sci-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Connect the Science <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. <span class="w9">W9</span> Explain why shadows are longer in the morning and evening and shorter at midday. Use the word "angle" in your answer.</p>
+      <textarea class="open-box" placeholder="Shadows are longer in the morning because…"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="w10">W10</span> Explain the 5-step chain that lets us SEE objects. Use these words: light source, hits, reflects, eyes, brain.</p>
+      <textarea class="open-box" placeholder="Step 1: A light source…&#10;Step 2: The light hits…&#10;Step 3: The object reflects…&#10;Step 4: The reflected light enters…&#10;Step 5: The brain…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. <span class="w9">W9</span> + <span class="w10">W10</span> CONNECT: Shadows (W9) form when opaque objects BLOCK light. Reflections (W10) form when smooth surfaces BOUNCE light. A student asks: "If I hold a mirror up to sunlight, will it make a shadow on the other side?" Use BOTH weeks' knowledge to answer fully. What happens to the light — does it get blocked, reflected, or both?</p>
+      <textarea class="open-box" style="min-height:130px;" placeholder="When light hits a mirror… The mirror is opaque (W9), so… It also reflects light (W10), meaning… So on the other side of the mirror…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — Mixed True or False (Both Weeks) <span class="marks">6 marks</span></div>
+    <div id="sci-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkMixTF('sci')">Check ✅</button></div>
+    <div id="sci-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ HUMANITIES ══════════════════════════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">🔁 Mixed Revision — Day 4</div>
+    <div class="hero-week">🌍 Humanities · Weeks 9 &amp; 10</div>
+    <div class="hero-title">Rules &amp; Rights + Government</div>
+    <div class="hero-sub">Rules, rights &amp; responsibilities (W9) + Local &amp; national government (W10) — government IS how societies manage rights!</div>
+    <div class="hero-emoji">🏛️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 40"></div>
+  </div>
+  <div class="revision-banner" style="background:linear-gradient(135deg,var(--social-l),#BFDBFE);color:var(--social-d);border:2px solid var(--social);">
+    🔁 <strong>MIXED REVISION</strong> — <span class="w9">Week 9</span> Rules, Rights &amp; Responsibilities + <span class="w10">Week 10</span> Local &amp; National Government. Government exists to protect rights and enforce rules for everyone!
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Mixed Vocabulary (8 words) <span class="marks">8 marks</span></div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-text">
+        <strong>Definitions A–H:</strong><br>
+        A — An instruction that tells people how to behave in a place or community. <span class="w9">W9</span><br>
+        B — Something every person should have or be allowed to do. <span class="w9">W9</span><br>
+        C — A duty or job that every person is expected to fulfil. <span class="w9">W9</span><br>
+        D — Treating every person equally and justly, regardless of who they are. <span class="w9">W9</span><br>
+        E — A group of people chosen to make rules and decisions for a country or area. <span class="w10">W10</span><br>
+        F — A system where citizens vote to choose their leaders and make decisions. <span class="w10">W10</span><br>
+        G — Money people and businesses pay to the government to fund public services. <span class="w10">W10</span><br>
+        H — A process where citizens vote to choose their leaders. <span class="w10">W10</span>
+      </div>
+    </div>
+    <div id="soc-mix-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkMixVocab('soc')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Rule. Right. Responsibility. Fair. Government. Democracy. Tax. Election.')">🔊 Hear terms</button>
+    </div>
+    <div id="soc-mv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🎯 Part B — Big Mixed Quiz <span class="marks">16 marks</span></div>
+    <div id="soc-mix-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--social);" onclick="nextMixQ('soc')">Next ➡️</button>
+      <span id="soc-mix-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="soc-mix-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="soc-mix-prog-label">0 of 12 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Connect Both Topics <span class="marks">10 marks</span></div>
+    <div class="connect-box">
+      <div class="connect-title">🔗 Cross-Week Connection</div>
+      <p style="font-size:0.88rem;font-weight:600;line-height:1.6;">Week 9 taught us that every person has RIGHTS (like education and safety) and RESPONSIBILITIES (like following rules). Week 10 teaches us that GOVERNMENT is the system that protects those rights and creates those rules for everyone. Government without rights is unfair. Rights without government to protect them are just words.</p>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Complete the connection table:</p>
+      <table class="fill-table">
+        <tr><th>W9 Concept</th><th>How W10 Government relates to it</th></tr>
+        <tr><td><strong>Right to education</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Government…"></td></tr>
+        <tr><td><strong>Right to safety</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Government…"></td></tr>
+        <tr><td><strong>Responsibility to follow rules</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Government creates laws that…"></td></tr>
+        <tr><td><strong>Fairness</strong></td><td><input class="fill-in" style="width:100%;" placeholder="Democracy ensures fairness by…"></td></tr>
+      </table>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. <span class="w9">W9</span> + <span class="w10">W10</span>: Every child has the RIGHT to education (W9). The government FUNDS schools using taxes (W10). Use BOTH weeks' knowledge to explain the full chain: from a child's right → to the government's role → to what actually happens in a classroom.</p>
+      <textarea class="open-box" placeholder="Every child has the right to education (W9). This right is protected by… (W10). The government collects taxes to… Schools are then able to… This means that in a classroom…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: "A government that does not protect the rights of its citizens is not doing its job." Do you agree? Use ideas from BOTH Week 9 (rights, responsibilities, fairness) AND Week 10 (what government does, democracy, taxes) to support your argument. Write at least 5 sentences.</p>
+      <textarea class="open-box" style="min-height:130px;" placeholder="I agree/disagree because… From W9 we know that rights include… From W10 we know that government must… Therefore…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — Mixed True or False (Both Weeks) <span class="marks">6 marks</span></div>
+    <div id="soc-mix-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkMixTF('soc')">Check ✅</button></div>
+    <div id="soc-mix-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+/* ── VOCAB ────────────────────────────────────────────────── */
+const mixVocabData={
+  bible:{terms:['Courage','Spy','Protection','Faith','Feeling small','Mighty warrior','Unlikely','God\'s presence'],answers:['A','B','C','D','E','F','G','H']},
+  eng:  {terms:['Setting','Adjective','Adverb','Senses','Rhyme','Rhythm','Repetition','Rhyme scheme'],answers:['A','B','C','D','E','F','G','H']},
+  maths:{terms:['Perimeter','Length','Centimetre (cm)','Metre (m)','Mass','Gram (g)','Volume','Millilitre (ml)'],answers:['A','B','C','D','E','F','G','H']},
+  sci:  {terms:['Light source','Shadow','Opaque','Translucent','Reflection','Mirror','Shiny surface','Angle of reflection'],answers:['A','B','C','D','E','F','G','H']},
+  soc:  {terms:['Rule','Right','Responsibility','Fair','Government','Democracy','Tax','Election'],answers:['A','B','C','D','E','F','G','H']},
+};
+const letters=['A','B','C','D','E','F','G','H'];
+function buildMixVocab(key){
+  const d=mixVocabData[key];const area=document.getElementById(key+'-mix-vocab');if(!area)return;
+  let h='<div class="match-grid">';
+  d.terms.forEach((t,i)=>{h+=`<div class="match-item">${t}<button class="audio-btn" onclick="speak('${t}')">🔊</button><select id="mvoc-${key}-${i}"><option value="">—</option>${letters.map(l=>`<option value="${l}">${l}</option>`).join('')}</select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildMixVocab);
+function checkMixVocab(key){
+  const d=mixVocabData[key];let score=0;
+  d.terms.forEach((_,i)=>{const sel=document.getElementById('mvoc-'+key+'-'+i);if(!sel)return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-mv-result');res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! All ${score}/${d.terms.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct.`;}
+}
+
+/* ── QUIZ DATA ────────────────────────────────────────────── */
+const mixQuizData={
+  bible:[
+    {q:'🦁 W9: Why did Rahab hide the Israelite spies?',opts:['For money','She believed in their God and wanted to protect them','She was forced to','She was their friend'],ans:1,exp:'Rahab had heard about God\'s mighty acts and chose to help the spies because of her faith in the God of Israel.'},
+    {q:'🦁 W9: What sign did Rahab hang in her window?',opts:['A white flag','A red cord','A blue cloth','A torch'],ans:1,exp:'The spies told Rahab to hang a red cord in her window as the sign of protection for her family.'},
+    {q:'🦁 W9: What does the memory verse Joshua 2:11 say about God?',opts:['God is only in heaven','God is God in heaven above AND on the earth below','God is very far away','God only helps Israel'],ans:1,exp:'Rahab said: "...the Lord your God is God in heaven above and on the earth below."'},
+    {q:'🦁 W9: What does Rahab\'s story show about who can trust in God?',opts:['Only Israelites can trust God','Only men can trust God','Anyone, from any background, can trust and be saved by God','Only people who are born into faith'],ans:2,exp:'Rahab was from Jericho, not Israel — yet her faith saved her and her family. God\'s grace is for everyone.'},
+    {q:'🦁 W10: Why did Gideon feel he could not lead Israel?',opts:['He was too young','He was afraid of heights','His clan was the weakest and he was the least in his family','He had never left his town'],ans:2,exp:'Gideon said "My clan is the weakest in Manasseh and I am the least in my family."'},
+    {q:'🦁 W10: What did God say to convince Gideon to go?',opts:['"You are the strongest."','"You have the biggest army."','"I will be with you."','"The people have chosen you."'],ans:2,exp:'"I will be with you" — God\'s greatest promise. His presence was the guarantee, not human strength.'},
+    {q:'🦁 W10: Why did God reduce the army from 32,000 to 300?',opts:['To save food','So no one could claim human strength won the battle','Because the rest were too slow','300 was the maximum allowed by law'],ans:1,exp:'God reduced the army specifically so the victory would glorify GOD, not human power.'},
+    {q:'🦁 W10: What did Gideon\'s men use in battle?',opts:['Swords and horses','Arrows and shields','Trumpets, torches inside clay jars','Catapults and fire'],ans:2,exp:'Gideon\'s 300 men used trumpets and torches hidden inside clay jars — a surprise night attack that confused the Midianites.'},
+    {q:'🔗 BOTH: What do Rahab (W9) and Gideon (W10) have most in common?',opts:['Both were generals','Both were considered "unlikely" but God used them for key purposes','Both were from Israel','Both fought in the same battle'],ans:1,exp:'Both were unlikely heroes — Rahab an outsider, Gideon the weakest in his family. God chose both purposefully.'},
+    {q:'🔗 BOTH: God\'s promises in Joshua 2:11 (W9) and Judges 6:12 (W10) both show what about God?',opts:['God only helps powerful people','God is present and active in the lives of those who trust Him','God only appears on mountains','God only speaks to kings'],ans:1,exp:'Both verses show God is present ("God in heaven and earth" / "The Lord is with you") — active and real in everyday lives.'},
+    {q:'🦁 W9: What did Rahab say she had heard about the God of Israel?',opts:['That He was a small god','That He had done mighty things, including parting the Red Sea','That He only helped sometimes','That He lived in the desert'],ans:1,exp:'Rahab had heard about all God\'s mighty acts — parting the sea, defeating kings — and believed.'},
+    {q:'🦁 W10: What is the memory verse for Week 10 Bible?',opts:['Joshua 2:11','Psalm 119:105','Judges 6:12','Exodus 20:1'],ans:2,exp:'"The Lord is with you, mighty warrior." — Judges 6:12. God says this to Gideon even before he has done anything brave.'},
+  ],
+  eng:[
+    {q:'✏️ W9: Which word is an adjective?',opts:['quickly','crumbling','she','ran'],ans:1,exp:'"Crumbling" describes a noun — it is an adjective.'},
+    {q:'✏️ W9: Which word is an adverb?',opts:['dark','ancient','gently','castle'],ans:2,exp:'"Gently" describes HOW something happens — it is an adverb. Most adverbs end in -ly.'},
+    {q:'✏️ W9: Which sense does "the air smelled of pine and wet earth" appeal to?',opts:['Sight','Sound','Smell','Touch'],ans:2,exp:'Smell! The sentence is describing a scent — a great descriptive technique.'},
+    {q:'✏️ W9: "The ancient, shadowy castle loomed darkly." How many adjectives are there?',opts:['One','Two','Three','Four'],ans:1,exp:'"Ancient" and "shadowy" are the two adjectives describing "castle." "Darkly" is an adverb.'},
+    {q:'🎵 W10: What is a rhyme scheme?',opts:['The topic of a poem','The pattern of rhymes at the ends of lines','The number of stanzas','The mood of a poem'],ans:1,exp:'A rhyme scheme labels the pattern of rhymes using letters: A for first sound, B for second, etc.'},
+    {q:'🎵 W10: In an ABAB scheme, which lines rhyme?',opts:['Lines 1&2 and 3&4','Lines 1&3 and 2&4','All four lines','Only the last two'],ans:1,exp:'ABAB: lines 1&3 share one rhyme (A), lines 2&4 share another (B).'},
+    {q:'🎵 W10: "Rain, rain, go away" uses which poetic technique?',opts:['Rhyme scheme','Repetition','Rhythm','Alliteration'],ans:1,exp:'"Rain, rain" is repetition — repeating a word on purpose for emphasis and musical effect.'},
+    {q:'🎵 W10: What is rhythm in a poem?',opts:['The topic the poem is about','The number of rhyming words','The beat you feel when reading aloud','The poem\'s title'],ans:2,exp:'Rhythm is the beat — like music. Clap along as you read to feel it!'},
+    {q:'🔗 BOTH W9+W10: "The ancient, dark forest lay SILENTLY below." Which word is both an adverb (W9) AND adds rhythm to the line (W10)?',opts:['ancient','dark','silently','forest'],ans:2,exp:'"Silently" is an adverb (W9) — AND its four syllables affect the rhythm of the line (W10).'},
+    {q:'🔗 BOTH W9+W10: A poet describes a storm using strong adjectives AND an ABAB rhyme scheme. Which TWO skills is she combining?',opts:['Only W9 skills','Only W10 skills','W9 descriptive writing AND W10 poetry techniques','Neither — these are different subjects'],ans:2,exp:'Using powerful adjectives (W9: descriptive writing) together with ABAB rhyme (W10: poetry) makes writing vivid AND musical.'},
+    {q:'✏️ W9: Which technique makes writing more vivid: "The dog ran." OR "The enormous, shaggy dog galloped desperately."?',opts:['The dog ran.','The enormous, shaggy dog galloped desperately.','Both are equally vivid','Neither is vivid'],ans:1,exp:'The second sentence uses powerful adjectives ("enormous, shaggy") and an adverb ("desperately") — far more vivid!'},
+    {q:'🎵 W10: Which of these is a rhyming pair?',opts:['moon / sun','bright / night','tree / sea / blue','rain / shine'],ans:2,exp:'"Bright" and "night" both end in the -ight sound — a perfect rhyme!'},
+  ],
+  maths:[
+    {q:'📏 W9: Perimeter of a square with side 7 cm?',opts:['14 cm','21 cm','28 cm','49 cm'],ans:2,exp:'4 × 7 = 28 cm.'},
+    {q:'📏 W9: Perimeter of rectangle 11 cm × 5 cm?',opts:['16 cm','32 cm','55 cm','22 cm'],ans:1,exp:'2 × (11 + 5) = 2 × 16 = 32 cm.'},
+    {q:'📏 W9: 300 cm = how many metres?',opts:['0.3 m','30 m','3 m','3000 m'],ans:2,exp:'300 ÷ 100 = 3 m.'},
+    {q:'📏 W9: A square has perimeter 36 cm. What is the side length?',opts:['6 cm','9 cm','12 cm','4 cm'],ans:1,exp:'36 ÷ 4 = 9 cm.'},
+    {q:'⚖️ W10: 4 kg = how many grams?',opts:['400 g','40 g','4000 g','40000 g'],ans:2,exp:'4 × 1000 = 4000 g.'},
+    {q:'⚖️ W10: 2500 ml = how many litres?',opts:['0.25 l','25 l','250 l','2.5 l'],ans:3,exp:'2500 ÷ 1000 = 2.5 l.'},
+    {q:'⚖️ W10: Which is heavier: 3.5 kg or 3200 g?',opts:['3.5 kg','3200 g','Equal','Cannot tell'],ans:0,exp:'3.5 kg = 3500 g. 3500 > 3200, so 3.5 kg is heavier.'},
+    {q:'🔗 BOTH W9+W10: A square field has perimeter 200 m. A gardener uses 0.5 kg of seed per metre of perimeter. How much seed in total?',opts:['100 kg','50 kg','200 kg','500 kg'],ans:0,exp:'200 m × 0.5 kg = 100 kg. (W9 perimeter + W10 mass calculation combined!)'},
+  ],
+  sci:[
+    {q:'💡 W9: What is a light source?',opts:['A shadow','A dark room','Anything that makes its own light','A reflection'],ans:2,exp:'A light source is anything that PRODUCES its own light.'},
+    {q:'💡 W9: Is the moon a light source?',opts:['Yes — it makes light at night','No — it reflects light from the sun','Yes — but only in winter','No — the moon has no light'],ans:1,exp:'The moon reflects sunlight — it does not make its own light.'},
+    {q:'💡 W9: What causes a shadow?',opts:['Bright colours','Cold temperatures','An opaque object blocking light','Wind'],ans:2,exp:'Shadows form when an opaque object blocks light from a source — the dark area is where light cannot reach.'},
+    {q:'💡 W9: Shadows are SHORTEST at what time of day?',opts:['Morning','Evening','Midday','Midnight'],ans:2,exp:'At midday the sun is highest in the sky — light comes almost straight down, making shadows very short.'},
+    {q:'🪞 W10: What is reflection?',opts:['Light disappearing','Light passing through glass','Light bouncing back off a surface','Light making a shadow'],ans:2,exp:'Reflection is when light bounces back off a surface — like a ball bouncing off a wall.'},
+    {q:'🪞 W10: What is the rule about the angle of reflection?',opts:['Always 90°','Always smaller than incoming','Equal to the incoming angle','Always larger than incoming'],ans:2,exp:'Angle of incidence = angle of reflection. Always! Light bounces at the same angle it arrives.'},
+    {q:'🪞 W10: Why can you see your face in a mirror but NOT in rough wood?',opts:['Mirrors are bigger','Mirrors are transparent','Mirrors reflect in one clear direction; wood scatters light','Wood is darker'],ans:2,exp:'Smooth mirrors reflect all light in one direction → clear image. Rough wood scatters light in many directions → no image.'},
+    {q:'🪞 W10: A periscope uses how many mirrors?',opts:['One','Two','Three','Four'],ans:1,exp:'A periscope uses TWO mirrors, each at 45°, to redirect light so you can see over or around obstacles.'},
+    {q:'🔗 BOTH W9+W10: A mirror creates a shadow on the WALL BEHIND it. Which W9 concept explains this?',opts:['The moon','Opaque objects blocking light','Translucent materials','Light sources'],ans:1,exp:'A mirror is opaque — it blocks light. The shadow on the wall behind is because the mirror blocked the light (W9 concept)!'},
+    {q:'🔗 BOTH W9+W10: Light hits a shiny mirror and bounces off at the same angle. Which W10 rule does this follow?',opts:['The shadow rule','Angle of reflection = angle of incidence','Translucency','The periscope principle'],ans:1,exp:'The angle of reflection always equals the angle of incidence — the law of reflection (W10).'},
+    {q:'💡 W9: Which material is TRANSLUCENT?',opts:['Clear glass','Wood','Frosted glass','Metal'],ans:2,exp:'Frosted glass lets SOME light through but scatters it — you can see blurry shapes but not clearly.'},
+    {q:'🪞 W10: We can see objects because…',opts:['We make our own light','Objects make their own light','Objects reflect light into our eyes','Shadows help us see'],ans:2,exp:'Light from a source hits objects → objects reflect some light → reflected light enters our eyes → we see!'},
+  ],
+  soc:[
+    {q:'📋 W9: Why do we have rules?',opts:['To punish people','To keep everyone safe and treat people fairly','For no reason','Only to help teachers'],ans:1,exp:'Rules protect everyone and create fairness — without them, communities would be chaotic and unsafe.'},
+    {q:'📋 W9: What is a "right"?',opts:['A punishment','A type of rule','Something every person should have or be allowed to do','A duty'],ans:2,exp:'A right is something every person deserves — like education, safety, healthcare and play.'},
+    {q:'📋 W9: Rights and responsibilities…',opts:['Are completely separate','Always go together — every right has a matching responsibility','Only apply to adults','Only apply in school'],ans:1,exp:'Rights and responsibilities always go hand-in-hand. You cannot have one without the other.'},
+    {q:'📋 W9: What is a basic right of every child?',opts:['The right to ignore all rules','The right to education','The right to be the class leader','The right never to follow rules'],ans:1,exp:'Every child has the right to education — this is one of the core rights recognised worldwide.'},
+    {q:'🌍 W10: What does government do?',opts:['Goes shopping','Makes laws and decisions for a country or area','Only collects rubbish','Only teaches in schools'],ans:1,exp:'Government makes rules, laws and decisions and funds the services every community depends on.'},
+    {q:'🌍 W10: What is "local government" responsible for?',opts:['Running the national army','Making laws for the whole country','Local roads, parks, rubbish and local services','Setting the national tax rate'],ans:2,exp:'Local government handles local issues — roads in your town, rubbish collection, local parks and libraries.'},
+    {q:'🌍 W10: What are taxes used for?',opts:['To make politicians rich','To fund schools, hospitals, roads and public services','Only for elections','To print money'],ans:1,exp:'Taxes fund everything the public needs — schools, hospitals, roads, police, fire services and more.'},
+    {q:'🌍 W10: In a democracy, how are leaders chosen?',opts:['They are born into power','They are the richest person','Citizens vote to choose them','They are chosen by other leaders'],ans:2,exp:'In a democracy, every eligible citizen has an equal vote — the candidate with the most votes wins.'},
+    {q:'🔗 BOTH W9+W10: Every child has the RIGHT to education (W9). Which W10 concept shows HOW government makes this possible?',opts:['Elections','Democracy','Collecting taxes to fund schools','Secret ballots'],ans:2,exp:'Government collects TAXES (W10) to fund schools — this is how the right to education (W9) becomes a reality.'},
+    {q:'🔗 BOTH W9+W10: Rules (W9) and laws (W10) are both instructions people must follow. What is the main difference?',opts:['There is no difference','Laws are made by governments and apply to everyone in a country; rules can be local or informal','Rules are more important','Laws only apply to adults'],ans:1,exp:'Laws are formal rules created by governments and apply to everyone. Rules can be informal (e.g. classroom rules).'},
+    {q:'📋 W9: What would a classroom be like WITHOUT any rules?',opts:['Perfectly fine','More fun','Chaotic, unsafe and unfair for everyone','Better organised'],ans:2,exp:'Without rules, a classroom would become disorganised, potentially unsafe, and deeply unfair.'},
+    {q:'🌍 W10: Which is a job of NATIONAL government?',opts:['Fixing potholes in your street','Collecting rubbish from homes','Running the national army','Maintaining your town\'s park'],ans:2,exp:'National government handles the whole country — including national defence (the army).'},
+  ],
+};
+
+const mixIdxs={bible:0,eng:0,maths:0,sci:0,soc:0};
+const mixScores={bible:0,eng:0,maths:0,sci:0,soc:0};
+
+function renderMixQ(key){
+  const qs=mixQuizData[key];const idx=mixIdxs[key];const total=qs.length;
+  if(idx>=total){
+    document.getElementById(key+'-mix-quiz').innerHTML=`<div style="padding:18px;background:#D1FAE5;border-radius:14px;font-weight:800;font-size:1.05rem;">🎉 Quiz complete! Final score: ${mixScores[key]}/${total}</div>`;
+    const pb=document.getElementById(key+'-mix-prog');if(pb)pb.style.width='100%';
+    const pl=document.getElementById(key+'-mix-prog-label');if(pl)pl.textContent=`${total} of ${total} questions answered`;
+    if(mixScores[key]===total)celebrate();return;
+  }
+  const q=qs[idx];
+  document.getElementById(key+'-mix-quiz').innerHTML=`<div class="quiz-box">
+    <div class="quiz-q">Q${idx+1} of ${total}: ${q.q}</div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerMixQ('${key}',${i})">${o}</button>`).join('')}</div>
+    <div id="${key}-mix-fb" class="quiz-feedback"></div>
+  </div>`;
+  const se=document.getElementById(key+'-mix-score');if(se)se.textContent=`Score: ${mixScores[key]}/${idx}`;
+  const pb=document.getElementById(key+'-mix-prog');if(pb)pb.style.width=`${(idx/total)*100}%`;
+  const pl=document.getElementById(key+'-mix-prog-label');if(pl)pl.textContent=`${idx} of ${total} questions answered`;
+}
+function answerMixQ(key,i){
+  const qs=mixQuizData[key];const idx=mixIdxs[key];const q=qs[idx];
+  const opts=document.querySelectorAll(`#${key}-mix-quiz .quiz-opt`);opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-mix-fb');fb.style.display='block';
+  if(i===q.ans){mixScores[key]++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.innerHTML=`✅ Correct! ${q.exp}`;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.innerHTML=`❌ The answer is: <strong>${q.opts[q.ans]}</strong>. ${q.exp}`;}
+  const total=qs.length;
+  const se=document.getElementById(key+'-mix-score');if(se)se.textContent=`Score: ${mixScores[key]}/${idx+1}`;
+  const pb=document.getElementById(key+'-mix-prog');if(pb)pb.style.width=`${((idx+1)/total)*100}%`;
+  const pl=document.getElementById(key+'-mix-prog-label');if(pl)pl.textContent=`${idx+1} of ${total} questions answered`;
+}
+function nextMixQ(key){mixIdxs[key]++;renderMixQ(key);}
+['bible','eng','maths','sci','soc'].forEach(k=>renderMixQ(k));
+
+/* ── TF DATA ──────────────────────────────────────────────── */
+const mixTFData={
+  bible:[
+    {s:'W9: Rahab was an Israelite who already believed in God before the spies came.',ans:false},
+    {s:'W9: Rahab helped the spies escape using a rope through her window.',ans:true},
+    {s:'W10: Gideon felt confident and strong when God called him.',ans:false},
+    {s:'W10: God reduced the army to 300 so that only God would get the credit for the victory.',ans:true},
+    {s:'BOTH: Both Rahab and Gideon were "unlikely" people whom God chose for a key purpose.',ans:true},
+    {s:'BOTH: Both stories show that God only uses people who are already powerful and well-known.',ans:false},
+  ],
+  eng:[
+    {s:'W9: Adjectives describe verbs and end in -ly.',ans:false},
+    {s:'W9: Using the five senses in writing helps the reader imagine the setting more vividly.',ans:true},
+    {s:'W10: In an AABB rhyme scheme, lines 1 and 3 rhyme with each other.',ans:false},
+    {s:'W10: Repetition in poetry creates emphasis and a musical, memorable effect.',ans:true},
+    {s:'BOTH: A descriptive poem can use adjectives (W9) AND rhyme (W10) at the same time.',ans:true},
+    {s:'BOTH: Adverbs describe nouns, while adjectives describe verbs.',ans:false},
+  ],
+  maths:[
+    {s:'W9: 100 cm = 1 m.',ans:true},
+    {s:'W9: The perimeter of a rectangle 10 cm × 4 cm is 14 cm.',ans:false},
+    {s:'W10: 1 kg = 1000 g.',ans:true},
+    {s:'W10: 500 g is the same as 0.5 litres.',ans:false},
+    {s:'BOTH: Both perimeter (W9) and mass (W10) involve converting between larger and smaller units.',ans:true},
+    {s:'BOTH: To convert metres to centimetres, you divide by 100.',ans:false},
+  ],
+  sci:[
+    {s:'W9: The moon is a natural light source.',ans:false},
+    {s:'W9: Shadows form when an opaque object blocks light.',ans:true},
+    {s:'W10: The angle of reflected light is always larger than the incoming angle.',ans:false},
+    {s:'W10: We can see objects because they reflect light into our eyes.',ans:true},
+    {s:'BOTH: Shadows (W9) and reflections (W10) are both caused by the same thing: light bouncing off surfaces.',ans:false},
+    {s:'BOTH: A mirror is opaque (W9) and also reflects light (W10) — both are true at the same time.',ans:true},
+  ],
+  soc:[
+    {s:'W9: Rights and responsibilities are completely separate and unrelated.',ans:false},
+    {s:'W9: Every child has the right to education.',ans:true},
+    {s:'W10: Local government makes laws for the whole country.',ans:false},
+    {s:'W10: Taxes are collected to fund public services like schools and hospitals.',ans:true},
+    {s:'BOTH: Government (W10) exists partly to protect the rights (W9) of its citizens.',ans:true},
+    {s:'BOTH: Rules (W9) and government laws (W10) are exactly the same thing.',ans:false},
+  ],
+};
+
+function buildMixTF(key){
+  const data=mixTFData[key];const area=document.getElementById(key+'-mix-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td>
+    <button class="tf-btn" id="mtf-${key}-${i}-T" onclick="selMixTF('${key}',${i},'T')">✅ True</button>
+    <button class="tf-btn" id="mtf-${key}-${i}-F" onclick="selMixTF('${key}',${i},'F')">❌ False</button>
+  </td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildMixTF);
+function selMixTF(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('mtf-'+key+'-'+i+'-'+v);if(b)b.classList.remove('sel-t','sel-f');});
+  const btn=document.getElementById('mtf-'+key+'-'+i+'-'+val);if(btn)btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkMixTF(key){
+  const data=mixTFData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('mtf-'+key+'-'+i+'-T');const fBtn=document.getElementById('mtf-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');const userF=fBtn?.classList.contains('sel-f');
+    if((item.ans&&userT)||(!item.ans&&userF))score++;
+    if(item.ans){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;});
+  const res=document.getElementById(key+'-mix-tf-result');if(res){res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct.`;}}
+}
+
+/* ── MATHS SUMS ───────────────────────────────────────────── */
+const mixSums=[
+  {q:'Square, side = 8 cm → Perimeter = ___',ans:'32',tag:'W9 📏'},
+  {q:'3 kg = ___ g',ans:'3000',tag:'W10 ⚖️'},
+  {q:'Rectangle 9cm × 4cm → Perimeter = ___',ans:'26',tag:'W9 📏'},
+  {q:'4500 ml = ___ l',ans:'4.5',tag:'W10 💧'},
+  {q:'250 cm = ___ m',ans:'2.5',tag:'W9 📏'},
+  {q:'0.75 kg = ___ g',ans:'750',tag:'W10 ⚖️'},
+  {q:'Rectangle: P = 40 cm, length = 12 cm. Width = ___',ans:'8',tag:'W9 📏'},
+  {q:'2 l = ___ ml',ans:'2000',tag:'W10 💧'},
+];
+function buildMixSums(){
+  const area=document.getElementById('maths-mix-sums');if(!area)return;
+  area.innerHTML=`<table class="fill-table"><tr><th>Type</th><th>Question</th><th>Answer</th></tr>
+  ${mixSums.map((s,i)=>`<tr><td><strong>${s.tag}</strong></td><td style="font-family:'Courier New',monospace;font-size:1rem;font-weight:700;">${s.q}</td><td><input type="text" class="fill-in" id="ms-${i}" data-ans="${s.ans}" placeholder="?" style="width:90px;"></td></tr>`).join('')}
+  </table>`;
+}
+buildMixSums();
+function checkMixSums(){
+  let score=0;
+  mixSums.forEach((_,i)=>{const inp=document.getElementById('ms-'+i);if(!inp)return;
+    if(inp.value.trim()===mixSums[i].ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-mix-sums-result');res.style.display='block';
+  if(score===mixSums.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${mixSums.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${mixSums.length} correct.`;}
+}
+function checkMixMissing(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .card:nth-child(4) input[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-mix-missing-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+
+/* ── ENGLISH SCHEME CHECK ─────────────────────────────────── */
+function checkEngScheme(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-english .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toUpperCase()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('eng-scheme-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct! Stanza 1: AABB, Stanza 2: CC.`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. Look: lines 1&2 end in -deep/-creep (A), lines 3&4 end in -below/-glow (B), lines 5&6 end in -cries/-skies (C).`;}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#BE185D','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<60;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*25);}
+}
+const st=document.createElement('style');st.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(st);
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week10_Day4');</script>
+</body>
+</html>

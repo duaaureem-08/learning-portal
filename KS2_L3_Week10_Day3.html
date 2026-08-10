@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 — Day 3 Review · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#BE185D;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:#059669;}
+.day-badge{background:#D1FAE5;color:#065F46;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #059669;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.review-banner{background:linear-gradient(135deg,#065F46,#059669);color:white;border-radius:var(--radius-sm);padding:12px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.progress-wrap{background:#E5E7EB;border-radius:99px;height:12px;margin:8px 0 4px;}
+.progress-bar{height:12px;border-radius:99px;background:var(--accent,#888);transition:width 0.8s ease;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:14px;}
+.vocab-item{border-radius:var(--radius-sm);padding:14px 16px;}
+.vocab-word{font-weight:900;font-size:1rem;margin-bottom:4px;}
+.vocab-def{font-size:0.85rem;color:#374151;line-height:1.45;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+.match-pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.match-pair-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px;}
+.match-pair-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;}
+.poem-box{background:#FFF0F6;border:2px solid #BE185D;border-radius:var(--radius-sm);padding:18px;font-family:'Nunito',sans-serif;font-size:15px;line-height:2.2;margin:10px 0;}
+.verse-box{background:#FFF8E1;border:3px solid #F59E0B;border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px;}
+.verse-text{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#0F6E56;line-height:1.8;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.match-pair-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">✅ Day 3 — Review &amp; Mixed</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>🪞</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>🌍</span> Humanities</button>
+</div>
+
+<!-- ══════════ BIBLE ══════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">✅ Review &amp; Mixed — Day 3</div>
+    <div class="hero-week">📖 Bible · Week 10</div>
+    <div class="hero-title">Gideon — Full Review</div>
+    <div class="hero-sub">Vocabulary · story · quiz · reflection · memory verse</div>
+    <div class="hero-emoji">🦁</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="review-banner">✅ REVIEW DAY — Mix of all Week 10 Bible skills. Try without your notes first!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary Recap <span class="marks">5 marks</span></div>
+    <div class="match-pair-grid" id="bible-rev-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkRevVocab('bible')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Courage. Feeling small. Mighty warrior. God\'s presence. Unlikely.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-rv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">🦁 Part B — Story Quiz <span class="marks">10 marks</span></div>
+    <div id="bible-rev-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextRevQ('bible')">Next Question ➡️</button>
+      <span id="bible-rev-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="bible-progress" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="bible-prog-label">0 of 8 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Reflection <span class="marks">10 marks</span></div>
+    <div class="verse-box">
+      <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:6px;">⭐ MEMORY VERSE — Judges 6:12</div>
+      <div class="verse-text">"The Lord is with you, mighty warrior."</div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. In your own words, explain why God chose GIDEON — who felt weak and small — rather than a powerful warrior. What does this tell us about how God works?</p>
+      <textarea class="open-box" placeholder="God chose Gideon because…"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. God said "I will be with you." This is the same promise in Isaiah 41:10, Jeremiah 29:11 and Hebrews 13:5. Why do you think God repeats this promise so many times in the Bible?</p>
+      <textarea class="open-box" placeholder="God repeats this promise because…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. CONNECT: Think of someone in today's world (real or fictional) who faced a challenge when they felt "too small." How is their story similar to Gideon's? Write 3–4 sentences.</p>
+      <textarea class="open-box" placeholder="This person faced… Like Gideon…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — Mixed True or False <span class="marks">5 marks</span></div>
+    <div id="bible-rev-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkRevTF('bible')">Check ✅</button></div>
+    <div id="bible-rev-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:#F59E0B;">
+    <div class="part-header" style="background:#D97706;">⭐ Week 10 Bible — Key Ideas</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:var(--bible-l);"><div class="vocab-word" style="color:var(--bible-d);">😔 Feeling Small</div><div class="vocab-def">Gideon said "I am the least." God chose him anyway.</div></div>
+      <div class="vocab-item" style="background:#DCFCE7;"><div class="vocab-word" style="color:#166534;">💪 Mighty Warrior</div><div class="vocab-def">What God called Gideon — not what Gideon felt like.</div></div>
+      <div class="vocab-item" style="background:#FEF3C7;"><div class="vocab-word" style="color:#92400E;">⚖️ 300 Men</div><div class="vocab-def">Reduced army — so only GOD gets the credit.</div></div>
+      <div class="vocab-item" style="background:#FCE7F3;"><div class="vocab-word" style="color:#9D174D;">✋ I Am With You</div><div class="vocab-def">God's greatest gift — His presence. Judges 6:12.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ENGLISH ══════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">✅ Review &amp; Mixed — Day 3</div>
+    <div class="hero-week">✏️ English · Week 10</div>
+    <div class="hero-title">Poetry — Full Review</div>
+    <div class="hero-sub">Rhyme schemes · rhythm · repetition · reading and writing</div>
+    <div class="hero-emoji">🎵</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="review-banner">✅ REVIEW DAY — All Week 10 English poetry skills. Quiz, writing and analysis!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary Recap <span class="marks">5 marks</span></div>
+    <div class="match-pair-grid" id="eng-rev-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkRevVocab('eng')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Poem. Rhyme. Rhythm. Repetition. Rhyme scheme.')">🔊 Hear terms</button>
+    </div>
+    <div id="eng-rv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Mixed Skills Quiz <span class="marks">10 marks</span></div>
+    <div id="eng-rev-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextRevQ('eng')">Next Question ➡️</button>
+      <span id="eng-rev-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="eng-progress" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="eng-prog-label">0 of 8 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Writing Review <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Read this poem and label the rhyme scheme (write A or B next to each line):</p>
+      <div class="poem-box" style="text-align:left;line-height:2.8;font-size:14px;">
+        The stars come out at close of day, <input class="fill-in" data-ans="A" style="width:40px;" placeholder="?"><br/>
+        They shine like diamonds, bright and clear, <input class="fill-in" data-ans="B" style="width:40px;" placeholder="?"><br/>
+        They guide the traveller on his way, <input class="fill-in" data-ans="A" style="width:40px;" placeholder="?"><br/>
+        And fill the lonely heart with cheer. <input class="fill-in" data-ans="B" style="width:40px;" placeholder="?">
+      </div>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkEngScheme()">Check Scheme ✅</button></div>
+      <div id="eng-scheme-result" class="quiz-feedback"></div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Fill in the missing rhyming words to complete this poem. Choose from the word bank:</p>
+      <div class="word-bank" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+        <span class="word-tag">trees</span><span class="word-tag">breeze</span><span class="word-tag">glow</span><span class="word-tag">below</span><span class="word-tag">play</span><span class="word-tag">day</span>
+      </div>
+      <table class="fill-table">
+        <tr><th>Poem line</th><th>Missing word</th></tr>
+        <tr><td>The children laugh and run and ___</td><td><input class="fill-in" data-ans="play" placeholder="word from bank"></td></tr>
+        <tr><td>All through the warm and sunny ___</td><td><input class="fill-in" data-ans="day" placeholder="word from bank"></td></tr>
+        <tr><td>The wind blows soft through all the ___</td><td><input class="fill-in" data-ans="trees" placeholder="word from bank"></td></tr>
+        <tr><td>And carries them a gentle ___</td><td><input class="fill-in" data-ans="breeze" placeholder="word from bank"></td></tr>
+        <tr><td>The lanterns cast a golden ___</td><td><input class="fill-in" data-ans="glow" placeholder="word from bank"></td></tr>
+        <tr><td>On the quiet streets and paths ___</td><td><input class="fill-in" data-ans="below" placeholder="word from bank"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkEngFill()">Check ✅</button></div>
+      <div id="eng-fill-result" class="quiz-feedback"></div>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Write your own 8-line poem (2 stanzas) with a clear ABAB rhyme scheme AND at least ONE example of repetition. Topic: choose your own. Underline your repeated phrase.</p>
+      <table class="fill-table">
+        <tr><th>Line</th><th>Your poem</th><th>A/B</th></tr>
+        ${[1,2,3,4,5,6,7,8].map((n,i)=>`<tr><td>${n}</td><td><input class="fill-in" style="width:100%;" placeholder="…"></td><td>${['A','B','A','B','A','B','A','B'][i]}</td></tr>`).join('')}
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — Mixed True or False <span class="marks">5 marks</span></div>
+    <div id="eng-rev-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkRevTF('eng')">Check ✅</button></div>
+    <div id="eng-rev-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:#F59E0B;">
+    <div class="part-header" style="background:#D97706;">⭐ Week 10 English — Key Ideas</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:var(--english-l);"><div class="vocab-word" style="color:var(--english-d);">🎵 Rhyme</div><div class="vocab-def">Same ending sounds. ABAB or AABB patterns.</div></div>
+      <div class="vocab-item" style="background:#FEF3C7;"><div class="vocab-word" style="color:#92400E;">🥁 Rhythm</div><div class="vocab-def">The beat — clap to feel it!</div></div>
+      <div class="vocab-item" style="background:#DCFCE7;"><div class="vocab-word" style="color:#166534;">🔁 Repetition</div><div class="vocab-def">Repeated phrase for emphasis or mood.</div></div>
+      <div class="vocab-item" style="background:#DBEAFE;"><div class="vocab-word" style="color:#1E3A8A;">📐 Pattern</div><div class="vocab-def">The arrangement of rhyme and rhythm across lines.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MATHS ══════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">✅ Review &amp; Mixed — Day 3</div>
+    <div class="hero-week">🔢 Maths · Week 10</div>
+    <div class="hero-title">Mass &amp; Volume — Full Review</div>
+    <div class="hero-sub">Conversions · comparisons · reading scales · word problems</div>
+    <div class="hero-emoji">⚖️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="review-banner">✅ REVIEW DAY — All Week 10 Maths skills. Show working where asked!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary Recap <span class="marks">5 marks</span></div>
+    <div class="match-pair-grid" id="maths-rev-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkRevVocab('maths')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Mass. Gram. Kilogram. Volume. Millilitre.')">🔊 Hear terms</button>
+    </div>
+    <div id="maths-rv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Mixed Calculations <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Convert ALL of these units:</p>
+    <table class="fill-table">
+      <tr><th>Question</th><th>Answer</th><th>Question</th><th>Answer</th></tr>
+      <tr><td>4 kg = ___ g</td><td><input class="fill-in" data-ans="4000" style="width:90px;" placeholder="?"></td>
+          <td>6000 ml = ___ l</td><td><input class="fill-in" data-ans="6" style="width:90px;" placeholder="?"></td></tr>
+      <tr><td>2500 g = ___ kg</td><td><input class="fill-in" data-ans="2.5" style="width:90px;" placeholder="?"></td>
+          <td>3.5 l = ___ ml</td><td><input class="fill-in" data-ans="3500" style="width:90px;" placeholder="?"></td></tr>
+      <tr><td>0.75 kg = ___ g</td><td><input class="fill-in" data-ans="750" style="width:90px;" placeholder="?"></td>
+          <td>250 ml = ___ l</td><td><input class="fill-in" data-ans="0.25" style="width:90px;" placeholder="?"></td></tr>
+    </table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--maths);" onclick="checkMathsConv()">Check All ✅</button></div>
+    <div id="maths-conv-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Mixed quiz:</p>
+    <div id="maths-rev-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--maths);" onclick="nextRevQ('maths')">Next ➡️</button>
+      <span id="maths-rev-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="maths-progress" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="maths-prog-label">0 of 6 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Word Problems Review <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. A bag of rice weighs 2 kg. A bag of lentils weighs 850 g. A bag of sugar weighs 1.5 kg. What is the TOTAL mass of all three? Give your answer in grams AND kilograms.</p>
+      <textarea class="open-box" placeholder="Working:&#10;&#10;Total in g:&#10;Total in kg:"></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Find the MISSING values:</p>
+      <table class="fill-table">
+        <tr><th>Problem</th><th>Answer</th></tr>
+        <tr><td>Total = 3 kg. One item = 1750 g. Other item = ___ g</td><td><input type="text" class="fill-in" data-ans="1250" placeholder="?" style="width:90px;"></td></tr>
+        <tr><td>Total volume = 2 l. Used = 850 ml. Left = ___ ml</td><td><input type="text" class="fill-in" data-ans="1150" placeholder="?" style="width:90px;"></td></tr>
+        <tr><td>4 equal bottles total 3 l. Each bottle = ___ ml</td><td><input type="text" class="fill-in" data-ans="750" placeholder="?" style="width:90px;"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMathsMissing()">Check ✅</button></div>
+      <div id="maths-missing-result" class="quiz-feedback"></div>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. REASONING: Without calculating, explain how you know that 1.8 kg + 450 g must give an answer LESS than 2.5 kg. Use the words "convert," "grams" and "kilograms."</p>
+      <textarea class="open-box" placeholder="I know it is less than 2.5 kg because…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — Mixed True or False <span class="marks">5 marks</span></div>
+    <div id="maths-rev-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkRevTF('maths')">Check ✅</button></div>
+    <div id="maths-rev-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:#F59E0B;">
+    <div class="part-header" style="background:#D97706;">⭐ Week 10 Maths — Key Rules</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:var(--maths-l);"><div class="vocab-word" style="color:var(--maths-d);">⚖️ 1 kg = 1000 g</div><div class="vocab-def">×1000 to go bigger→smaller unit.</div></div>
+      <div class="vocab-item" style="background:#DBEAFE;"><div class="vocab-word" style="color:#1E3A8A);">💧 1 l = 1000 ml</div><div class="vocab-def">÷1000 to go smaller→bigger unit.</div></div>
+      <div class="vocab-item" style="background:#D1FAE5;"><div class="vocab-word" style="color:#065F46;">🧠 Compare</div><div class="vocab-def">Convert to same unit BEFORE comparing.</div></div>
+      <div class="vocab-item" style="background:#FCE7F3;"><div class="vocab-word" style="color:#9D174D;">❓ Mass ≠ Volume</div><div class="vocab-def">Grams measure heaviness. ml measures liquid — different things!</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCIENCE ══════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">✅ Review &amp; Mixed — Day 3</div>
+    <div class="hero-week">🪞 Science · Week 10</div>
+    <div class="hero-title">Light Reflection — Full Review</div>
+    <div class="hero-sub">Vocabulary · mirrors · why we see · shiny vs dull · safety</div>
+    <div class="hero-emoji">🪞</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="review-banner">✅ REVIEW DAY — All Week 10 Science in one place.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary Recap <span class="marks">5 marks</span></div>
+    <div class="match-pair-grid" id="sci-rev-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkRevVocab('sci')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Reflection. Mirror. Shiny surface. Dull surface. Angle of reflection.')">🔊 Hear terms</button>
+    </div>
+    <div id="sci-rv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🪞 Part B — Mixed Science Quiz <span class="marks">10 marks</span></div>
+    <div id="sci-rev-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--science);" onclick="nextRevQ('sci')">Next ➡️</button>
+      <span id="sci-rev-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="sci-progress" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="sci-prog-label">0 of 8 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Application <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Sort each into SHINY or DULL. Type S or D:</p>
+      <table class="fill-table">
+        <tr><th>Material</th><th>S or D?</th><th>Material</th><th>S or D?</th></tr>
+        <tr><td>A bathroom mirror</td><td><input class="fill-in" data-ans="S" style="width:55px;" placeholder="?"></td>
+            <td>A piece of paper</td><td><input class="fill-in" data-ans="D" style="width:55px;" placeholder="?"></td></tr>
+        <tr><td>Still pond water</td><td><input class="fill-in" data-ans="S" style="width:55px;" placeholder="?"></td>
+            <td>A rough brick wall</td><td><input class="fill-in" data-ans="D" style="width:55px;" placeholder="?"></td></tr>
+        <tr><td>A polished silver spoon</td><td><input class="fill-in" data-ans="S" style="width:55px;" placeholder="?"></td>
+            <td>A wooden table</td><td><input class="fill-in" data-ans="D" style="width:55px;" placeholder="?"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--science);" onclick="checkSciFill()">Check ✅</button></div>
+      <div id="sci-fill-result" class="quiz-feedback"></div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Explain in 3–4 sentences why we can see objects. Use the words: light source, reflect, enter, eyes, brain.</p>
+      <textarea class="open-box" placeholder="We can see objects because…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: Explain how a periscope works and name TWO real-life uses of periscopes or similar reflection technology.</p>
+      <textarea class="open-box" style="min-height:110px;" placeholder="A periscope works by…&#10;&#10;Use 1:&#10;Use 2:"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — Mixed True or False <span class="marks">5 marks</span></div>
+    <div id="sci-rev-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkRevTF('sci')">Check ✅</button></div>
+    <div id="sci-rev-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:#F59E0B;">
+    <div class="part-header" style="background:#D97706;">⭐ Week 10 Science — Key Ideas</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:var(--science-l);"><div class="vocab-word" style="color:var(--science-d);">🪞 Reflection</div><div class="vocab-def">Light bounces off smooth surfaces.</div></div>
+      <div class="vocab-item" style="background:#FEF3C7;"><div class="vocab-word" style="color:#92400E;">📐 Angle Rule</div><div class="vocab-def">Angle in = angle out. Always!</div></div>
+      <div class="vocab-item" style="background:#DBEAFE;"><div class="vocab-word" style="color:#1E3A8A;">✨ Shiny</div><div class="vocab-def">Clear reflection. One direction.</div></div>
+      <div class="vocab-item" style="background:#EDE9FE;"><div class="vocab-word" style="color:#5B21B6;">🔲 Dull</div><div class="vocab-def">Scattered light. No clear image.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HUMANITIES ══════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">✅ Review &amp; Mixed — Day 3</div>
+    <div class="hero-week">🌍 Humanities · Week 10</div>
+    <div class="hero-title">Government — Full Review</div>
+    <div class="hero-sub">Local vs national · democracy · voting · taxes · decision-making</div>
+    <div class="hero-emoji">🏛️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="review-banner">✅ REVIEW DAY — All Week 10 Humanities skills in one place.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary Recap <span class="marks">5 marks</span></div>
+    <div class="match-pair-grid" id="soc-rev-vocab"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkRevVocab('soc')">Check ✅</button>
+      <button class="audio-btn" onclick="speak('Government. Democracy. Local government. National government. Tax.')">🔊 Hear terms</button>
+    </div>
+    <div id="soc-rv-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🌍 Part B — Mixed Civics Quiz <span class="marks">10 marks</span></div>
+    <div id="soc-rev-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--social);" onclick="nextRevQ('soc')">Next ➡️</button>
+      <span id="soc-rev-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="soc-progress" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="soc-prog-label">0 of 8 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Application <span class="marks">10 marks</span></div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">3. Write L (local) or N (national) for each issue:</p>
+      <table class="fill-table">
+        <tr><th>Issue</th><th>L or N?</th></tr>
+        <tr><td>Building a new national motorway</td><td><input class="fill-in" data-ans="N" placeholder="L or N" style="width:70px;"></td></tr>
+        <tr><td>Emptying the bins in your neighbourhood</td><td><input class="fill-in" data-ans="L" placeholder="L or N" style="width:70px;"></td></tr>
+        <tr><td>Sending the army to protect the country</td><td><input class="fill-in" data-ans="N" placeholder="L or N" style="width:70px;"></td></tr>
+        <tr><td>Opening a new library in your town</td><td><input class="fill-in" data-ans="L" placeholder="L or N" style="width:70px;"></td></tr>
+        <tr><td>Setting the national speed limit</td><td><input class="fill-in" data-ans="N" placeholder="L or N" style="width:70px;"></td></tr>
+      </table>
+      <div style="margin-top:10px;"><button class="btn" style="background:var(--social);" onclick="checkSocFill()">Check ✅</button></div>
+      <div id="soc-fill-result" class="quiz-feedback"></div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-weight:800;margin-bottom:8px;">4. Explain the steps of an ELECTION in the correct order. Write 4–5 sentences.</p>
+      <textarea class="open-box" placeholder="First, citizens… Then… After that… Finally…"></textarea>
+    </div>
+    <div>
+      <p style="font-weight:800;margin-bottom:8px;">5. EXTENDED: "Without government, communities cannot function." Do you agree? Give TWO reasons FOR this statement and ONE counter-argument. Write at least 4 sentences.</p>
+      <textarea class="open-box" style="min-height:120px;" placeholder="I agree because… Also… However, one could argue…"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — Mixed True or False <span class="marks">5 marks</span></div>
+    <div id="soc-rev-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkRevTF('soc')">Check ✅</button></div>
+    <div id="soc-rev-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card" style="border-left-color:#F59E0B;">
+    <div class="part-header" style="background:#D97706;">⭐ Week 10 Humanities — Key Ideas</div>
+    <div class="vocab-grid">
+      <div class="vocab-item" style="background:var(--social-l);"><div class="vocab-word" style="color:var(--social-d);">🏘️ Local</div><div class="vocab-def">Town/city council. Local roads, parks, rubbish.</div></div>
+      <div class="vocab-item" style="background:#FEF3C7;"><div class="vocab-word" style="color:#92400E;">🌍 National</div><div class="vocab-def">Whole country. Laws, army, healthcare.</div></div>
+      <div class="vocab-item" style="background:#D1FAE5;"><div class="vocab-word" style="color:#065F46;">🗳️ Democracy</div><div class="vocab-def">People vote to choose leaders.</div></div>
+      <div class="vocab-item" style="background:#EDE9FE;"><div class="vocab-word" style="color:#5B21B6;">💰 Tax</div><div class="vocab-def">Money collected to fund public services.</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=0.85;u.lang='en-GB';window.speechSynthesis.speak(u);}
+
+/* ── VOCAB DATA ─────────────────────────────────────────── */
+const revVocabData={
+  bible:{
+    terms:['Courage','Feeling small','Mighty warrior','God\'s presence','Unlikely'],
+    defs:['A — Being brave enough to do the right thing, even when you feel afraid.','B — Feeling like you are not good enough, strong enough or important enough.','C — A strong and capable fighter — what GOD called Gideon even though he doubted himself.','D — God being with us, helping and guiding even when we cannot see Him.','E — Not expected to succeed — someone who surprises everyone.']
+  },
+  eng:{
+    terms:['Poem','Rhyme','Rhythm','Repetition','Rhyme scheme'],
+    defs:['A — A piece of writing arranged in lines, often with rhyme and rhythm.','B — When two words end with the same sound. Example: cat/hat.','C — The beat or pattern of sounds when you read a poem aloud.','D — When a word, phrase or line is repeated on purpose for effect.','E — The pattern of rhymes at the ends of lines — labelled A, B, C…']
+  },
+  maths:{
+    terms:['Mass','Gram (g)','Kilogram (kg)','Volume','Millilitre (ml)'],
+    defs:['A — How heavy an object is — measured in grams or kilograms.','B — A small unit of mass. 1000 grams = 1 kilogram.','C — A bigger unit of mass. Equal to 1000 grams.','D — How much liquid a container holds — measured in ml or litres.','E — A small unit of volume. 1000 ml = 1 litre.']
+  },
+  sci:{
+    terms:['Reflection','Mirror','Shiny surface','Dull surface','Angle of reflection'],
+    defs:['A — When light bounces back off a surface, like a ball bouncing off a wall.','B — A very smooth, shiny surface that reflects light clearly.','C — A smooth surface that reflects light in one clear direction.','D — A rough surface that scatters light in many different directions.','E — The rule that light bounces off a mirror at the same angle it arrives.']
+  },
+  soc:{
+    terms:['Government','Democracy','Local government','National government','Tax'],
+    defs:['A — A group of people chosen to make rules and decisions for a country or area.','B — A system where people vote to choose their leaders and make decisions.','C — The government of a city, town or district — handles local issues.','D — The government of the whole country — handles national laws and decisions.','E — Money people and businesses pay to the government to fund public services.']
+  }
+};
+
+function buildRevVocab(key){
+  const d=revVocabData[key];const area=document.getElementById(key+'-rev-vocab');if(!area)return;
+  let h='';
+  d.defs.forEach((def,i)=>{h+=`<div class="match-pair-item" style="border-color:var(--accent,#ccc)">
+    <div style="font-size:0.85rem;font-weight:600;color:#374151;line-height:1.5">${def}</div>
+    <select id="rvoc-${key}-${i}" style="margin-top:8px;width:100%;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;">
+      <option value="">— choose word —</option>
+      ${d.terms.map((t,j)=>`<option value="${j}">${t}</option>`).join('')}
+    </select></div>`;});
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildRevVocab);
+
+function checkRevVocab(key){
+  const d=revVocabData[key];let score=0;
+  d.defs.forEach((_,i)=>{const sel=document.getElementById('rvoc-'+key+'-'+i);if(!sel)return;
+    if(parseInt(sel.value)===i){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-rv-result');res.style.display='block';
+  if(score===d.defs.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${d.defs.length}!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.defs.length} correct.`;}
+}
+
+/* ── QUIZ DATA ──────────────────────────────────────────── */
+const revQuizData={
+  bible:[
+    {q:'What was Gideon doing when the angel appeared to him?',opts:['Sleeping','Praying in a temple','Secretly threshing wheat in a winepress','Fighting the Midianites'],ans:2,exp:'Gideon was hiding wheat from the Midianites in a winepress.'},
+    {q:'What did the angel call Gideon?',opts:['Holy prophet','Mighty warrior','Great king','Faithful servant'],ans:1,exp:'"The Lord is with you, mighty warrior." — Judges 6:12'},
+    {q:'Why did Gideon feel he could not lead Israel?',opts:['He was too old','He was too rich','His clan was the weakest and he was the least in his family','He had never fought before'],ans:2,exp:'Gideon said "my clan is the weakest in Manasseh, and I am the least in my family."'},
+    {q:'What did God say to convince Gideon?',opts:['"You are the strongest."','"You have a large army."','"I will be with you."','"You are the most talented."'],ans:2,exp:'God said "I will be with you" — His presence was the promise, not human strength.'},
+    {q:'Why did God reduce the army to 300 men?',opts:['So it would be easier to feed them','So no one could boast that human strength won the battle','Because 300 was the maximum allowed','To confuse the enemy'],ans:1,exp:'God reduced the army so everyone would know it was GOD who gave the victory, not human power.'},
+    {q:'What did Gideon\'s 300 men use in the battle?',opts:['Swords and shields','Bows and arrows','Trumpets, torches and clay jars','Horses and chariots'],ans:2,exp:'Gideon\'s men used trumpets, torches hidden in clay jars — a surprising night attack that confused the Midianites.'},
+    {q:'The memory verse is from which book?',opts:['Genesis','Psalms','Judges','Joshua'],ans:2,exp:'The memory verse "The Lord is with you, mighty warrior" is from Judges 6:12.'},
+    {q:'What does Gideon\'s story teach us about who God chooses?',opts:['God only chooses the rich and famous','God only chooses professional soldiers','God often chooses people who feel weak and unlikely','God only chooses people who ask to be chosen'],ans:2,exp:'God chooses "unlikely" people — like Gideon — so that His power is shown, not human ability.'},
+  ],
+  eng:[
+    {q:'What is a rhyme scheme?',opts:['The number of lines in a poem','The topic of a poem','The pattern of rhymes at the ends of lines','The rhythm of a poem'],ans:2,exp:'A rhyme scheme is the pattern of rhymes at the ends of lines, labelled A, B, C…'},
+    {q:'In an ABAB rhyme scheme, which lines rhyme?',opts:['Lines 1&2 rhyme, 3&4 rhyme','Lines 1&3 rhyme, 2&4 rhyme','All four lines rhyme','Only the last line rhymes'],ans:1,exp:'ABAB: lines 1&3 share rhyme A, lines 2&4 share rhyme B.'},
+    {q:'Which word rhymes with "night"?',opts:['dark','moon','bright','cloud'],ans:2,exp:'"Bright" ends in -ight, the same sound as "night."'},
+    {q:'What effect does REPETITION create in a poem?',opts:['Makes it shorter','Creates emphasis and a musical feel','Makes it harder to read','Removes the rhythm'],ans:1,exp:'Repetition emphasises important ideas and creates a musical, memorable effect.'},
+    {q:'What is RHYTHM in a poem?',opts:['The topic the poem is about','The number of stanzas','The beat or pattern of sounds felt when reading aloud','The number of rhymes'],ans:2,exp:'Rhythm is the beat — clap as you read to feel it!'},
+    {q:'Which rhyme scheme has ALL four lines rhyming together?',opts:['ABAB','AABB','AAAA','ABCB'],ans:2,exp:'AAAA means every line rhymes with every other line.'},
+    {q:'In an AABB poem, the first two lines rhyme with each other.',opts:['True','False'],ans:0,exp:'AABB: lines 1&2 rhyme (AA), lines 3&4 rhyme (BB).'},
+    {q:'Which technique is used in: "Rain, rain, rain!" at the start of a poem?',opts:['Rhyme scheme','Rhythm','Alliteration','Repetition'],ans:3,exp:'Repeating "rain" three times is REPETITION — used on purpose for emphasis and musical effect.'},
+  ],
+  maths:[
+    {q:'1 kg equals how many grams?',opts:['10 g','100 g','1000 g','500 g'],ans:2,exp:'1 kg = 1000 g. Always multiply by 1000 to convert kg → g.'},
+    {q:'Which is heavier: 1.5 kg or 1200 g?',opts:['1.5 kg','1200 g','They are equal','Cannot tell'],ans:0,exp:'1.5 kg = 1500 g. 1500 g > 1200 g, so 1.5 kg is heavier.'},
+    {q:'3500 ml is equal to how many litres?',opts:['3.5 l','35 l','350 l','0.35 l'],ans:0,exp:'3500 ÷ 1000 = 3.5 litres.'},
+    {q:'Which unit is best for measuring a dose of medicine (about 5 units)?',opts:['kg','g','l','ml'],ans:3,exp:'Medicine is measured in millilitres (ml) — a very small unit of volume.'},
+    {q:'A bag of rice weighs 2 kg and a bag of sugar weighs 750 g. What is the total mass in grams?',opts:['2750 g','27500 g','275 g','2075 g'],ans:0,exp:'2 kg = 2000 g. 2000 + 750 = 2750 g.'},
+    {q:'Aisha says 500 g = 0.5 litres. Is she correct?',opts:['Yes, they are the same','No — grams measure mass, litres measure volume','Yes, if you convert carefully','No — grams are always bigger than litres'],ans:1,exp:'Grams measure MASS (heaviness). Litres measure VOLUME (liquid). They are completely different!'},
+  ],
+  sci:[
+    {q:'What is reflection?',opts:['Light disappearing into an object','Light bouncing back off a surface','Light passing through glass','Light making a shadow'],ans:1,exp:'Reflection is when light bounces back off a surface — like a ball bouncing off a wall.'},
+    {q:'What is the rule about the angle of reflection?',opts:['It is always 90°','It is always smaller than the incoming angle','It equals the angle of incoming light','It is always bigger than the incoming angle'],ans:2,exp:'The angle of reflection always EQUALS the angle of incoming light. Angle in = angle out.'},
+    {q:'Why can you see your face clearly in a mirror but NOT in a rough wall?',opts:['Mirrors are bigger','Mirrors reflect light in one clear direction; rough walls scatter it','Walls are made of stone','Mirrors are transparent'],ans:1,exp:'Shiny mirrors reflect light in one direction → clear image. Rough walls scatter light in many directions → no clear image.'},
+    {q:'We can see objects because…',opts:['Objects make their own light','Objects reflect light into our eyes','Our eyes create light','Shadows help us see'],ans:1,exp:'Objects reflect light from a light source into our eyes — our brain processes it and we see!'},
+    {q:'A periscope uses how many mirrors?',opts:['One','Two','Three','Four'],ans:1,exp:'A periscope uses TWO mirrors, each at 45°, to redirect light so you can see around or over obstacles.'},
+    {q:'Which is a SHINY surface?',opts:['A wooden plank','A brick wall','A still pond surface','A piece of paper'],ans:2,exp:'Still pond water is smooth and shiny — it reflects light clearly.'},
+    {q:'Why is it dangerous to use a mirror to reflect sunlight at someone?',opts:['It makes no light','Reflected sunlight can be very bright and damage eyes','Mirrors always break sunlight into colours','There is no danger'],ans:1,exp:'Reflected sunlight can be as bright as looking at the sun directly — very dangerous for eyes.'},
+    {q:'Reflected light from snow can cause what condition?',opts:['Frostbite','Snow blindness','Night vision','Colour blindness'],ans:1,exp:'Snow reflects nearly all sunlight. Without eye protection, this reflected UV light can cause temporary or permanent "snow blindness."'},
+  ],
+  soc:[
+    {q:'What does government do?',opts:['Goes shopping for citizens','Makes laws and decisions for a country or area','Only collects rubbish','Only teaches in schools'],ans:1,exp:'Government makes rules, laws and decisions and funds the services every community needs.'},
+    {q:'What is a democracy?',opts:['A system where one person decides everything','A system where people vote to choose their leaders','A system with no laws','A system where only the wealthy can lead'],ans:1,exp:'In a democracy, all eligible citizens have an equal vote to choose their leaders.'},
+    {q:'Which is a responsibility of LOCAL government?',opts:['Running the national army','Setting nationwide tax rates','Collecting rubbish and fixing local roads','Making laws for the whole country'],ans:2,exp:'Local government handles local issues — roads, rubbish, parks and local services.'},
+    {q:'What are taxes used for?',opts:['To make politicians rich','To fund schools, hospitals, roads and public services','To pay for elections only','To print money'],ans:1,exp:'Taxes fund everything the public uses — schools, hospitals, roads, police, fire services and more.'},
+    {q:'Why is a secret ballot important?',opts:['It makes counting votes faster','It stops people from knowing who is winning','It protects voters from being pressured or punished for their vote','It is not important'],ans:2,exp:'Secret ballots protect voters — nobody can pressure you or punish you if they don\'t know how you voted.'},
+    {q:'In an election, who wins?',opts:['The candidate who speaks first','The oldest candidate','The candidate with the most votes','The candidate chosen by the government'],ans:2,exp:'The candidate with the most votes wins — this is the core principle of a democratic election.'},
+    {q:'Which level of government handles the national army?',opts:['Local government','Town council','National government','School council'],ans:2,exp:'National government is responsible for the whole country — including national defence (the army).'},
+    {q:'A new hospital for the whole country is decided by which level?',opts:['Local government','School council','National government','Town mayor only'],ans:2,exp:'Healthcare at national level is a national government responsibility.'},
+  ],
+};
+
+const revIdxs={bible:0,eng:0,maths:0,sci:0,soc:0};
+const revScores={bible:0,eng:0,maths:0,sci:0,soc:0};
+
+function renderRevQ(key){
+  const qs=revQuizData[key];const idx=revIdxs[key];const total=qs.length;
+  if(idx>=total){
+    document.getElementById(key+'-rev-quiz').innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Quiz complete! Score: ${revScores[key]}/${total}</div>`;
+    document.getElementById(key+'-progress').style.width='100%';
+    document.getElementById(key+'-prog-label').textContent=`${total} of ${total} answered`;
+    if(revScores[key]===total)celebrate();return;
+  }
+  const q=qs[idx];
+  document.getElementById(key+'-rev-quiz').innerHTML=`<div class="quiz-box">
+    <div class="quiz-q">Q${idx+1} of ${total}: ${q.q}</div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerRevQ('${key}',${i})">${o}</button>`).join('')}</div>
+    <div id="${key}-rev-fb" class="quiz-feedback"></div>
+  </div>`;
+  document.getElementById(key+'-rev-score').textContent=`Score: ${revScores[key]}/${idx}`;
+  document.getElementById(key+'-progress').style.width=`${(idx/total)*100}%`;
+  document.getElementById(key+'-prog-label').textContent=`${idx} of ${total} answered`;
+}
+function answerRevQ(key,i){
+  const qs=revQuizData[key];const idx=revIdxs[key];const q=qs[idx];
+  const opts=document.querySelectorAll(`#${key}-rev-quiz .quiz-opt`);opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-rev-fb');fb.style.display='block';
+  if(i===q.ans){revScores[key]++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.innerHTML=`✅ Correct! ${q.exp}`;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.innerHTML=`❌ The answer is: <strong>${q.opts[q.ans]}</strong>. ${q.exp}`;}
+  document.getElementById(key+'-rev-score').textContent=`Score: ${revScores[key]}/${idx+1}`;
+  const total=qs.length;
+  document.getElementById(key+'-progress').style.width=`${((idx+1)/total)*100}%`;
+  document.getElementById(key+'-prog-label').textContent=`${idx+1} of ${total} answered`;
+}
+function nextRevQ(key){revIdxs[key]++;renderRevQ(key);}
+['bible','eng','maths','sci','soc'].forEach(k=>renderRevQ(k));
+
+/* ── TF DATA ────────────────────────────────────────────── */
+const revTFData={
+  bible:[
+    {s:'Gideon was already a confident, well-known warrior when God called him.',ans:false},
+    {s:'God called Gideon "mighty warrior" before Gideon did anything brave.',ans:true},
+    {s:'God reduced the army to 300 so human strength would not take the credit.',ans:true},
+    {s:'Gideon\'s men defeated the Midianites using swords and spears.',ans:false},
+    {s:'The memory verse Judges 6:12 says "The Lord is with you, mighty warrior."',ans:true},
+  ],
+  eng:[
+    {s:'ABAB means lines 1 and 2 rhyme with each other.',ans:false},
+    {s:'Rhythm is the beat you feel when you read a poem aloud.',ans:true},
+    {s:'Repetition in poetry always makes the poem boring.',ans:false},
+    {s:'In an AABB rhyme scheme, lines 1 and 2 rhyme together.',ans:true},
+    {s:'All poems must rhyme to be considered a real poem.',ans:false},
+  ],
+  maths:[
+    {s:'1 kilogram = 1000 grams.',ans:true},
+    {s:'To convert litres to millilitres, you divide by 1000.',ans:false},
+    {s:'500 g is the same as 0.5 litres.',ans:false},
+    {s:'1.5 kg is heavier than 1200 g.',ans:true},
+    {s:'A millilitre is a bigger unit than a litre.',ans:false},
+  ],
+  sci:[
+    {s:'The angle of reflection always equals the angle of incoming light.',ans:true},
+    {s:'Dull surfaces reflect light in one clear direction.',ans:false},
+    {s:'We can see objects because they reflect light into our eyes.',ans:true},
+    {s:'A periscope uses two mirrors at 45° to redirect light.',ans:true},
+    {s:'Reflected sunlight from snow and water is always completely safe.',ans:false},
+  ],
+  soc:[
+    {s:'Local government handles issues for the whole country.',ans:false},
+    {s:'In a democracy, citizens vote to choose their leaders.',ans:true},
+    {s:'Taxes are used to fund public services like schools and hospitals.',ans:true},
+    {s:'The candidate with the fewest votes wins an election.',ans:false},
+    {s:'A secret ballot means your vote is private — no one can see how you voted.',ans:true},
+  ],
+};
+
+function buildRevTF(key){
+  const data=revTFData[key];const area=document.getElementById(key+'-rev-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td>
+    <button class="tf-btn" id="rtf-${key}-${i}-T" onclick="selRevTF('${key}',${i},'T')">✅ True</button>
+    <button class="tf-btn" id="rtf-${key}-${i}-F" onclick="selRevTF('${key}',${i},'F')">❌ False</button>
+  </td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildRevTF);
+function selRevTF(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('rtf-'+key+'-'+i+'-'+v);if(b)b.classList.remove('sel-t','sel-f');});
+  const btn=document.getElementById('rtf-'+key+'-'+i+'-'+val);if(btn)btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkRevTF(key){
+  const data=revTFData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('rtf-'+key+'-'+i+'-T');const fBtn=document.getElementById('rtf-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');const userF=fBtn?.classList.contains('sel-f');
+    if((item.ans&&userT)||(!item.ans&&userF))score++;
+    if(item.ans){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;});
+  const res=document.getElementById(key+'-rev-tf-result');if(res){res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${data.length}!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct answer.`;}}
+}
+
+/* ── SUBJECT-SPECIFIC CHECKS ────────────────────────────── */
+function checkEngScheme(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-english .fill-in[data-ans]').forEach(inp=>{
+    if(!['A','B'].includes(inp.dataset.ans))return;
+    total++;
+    if(inp.value.trim().toUpperCase()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('eng-scheme-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct! That's an ABAB rhyme scheme!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. Remember: lines 1&3 rhyme (A), lines 2&4 rhyme (B) for ABAB.`;}
+}
+function checkEngFill(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-english .fill-table .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('eng-fill-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+function checkMathsConv(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-conv-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct. ×1000 or ÷1000!`;}
+}
+function checkMathsMissing(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-maths .card:nth-child(4) input[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('maths-missing-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+function checkSciFill(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-science .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toUpperCase()===inp.dataset.ans.toUpperCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('sci-fill-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+function checkSocFill(){
+  let score=0,total=0;
+  document.querySelectorAll('#page-social .fill-in[data-ans]').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toUpperCase()===inp.dataset.ans.toUpperCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('soc-fill-result');res.style.display='block';
+  if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${total} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#BE185D','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<60;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*25);}
+}
+const st=document.createElement('style');st.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(st);
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week10_Day3');</script>
+</body>
+</html>

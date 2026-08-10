@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 10 · Day 1 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(109,40,217,0.2);border:1px solid rgba(109,40,217,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#C4B5FD;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 10</div>
+  <div class="day-badge">📅 Day 1</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 1 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">👑</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 10 · Day 1</div>
+  <div class="hero-title">David —<br>Foundation Questions</div>
+  <div class="hero-subtitle">Vocabulary · Recall · Understanding the heart God looks for</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and basic recall. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Vocabulary & Memory Verse</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> <strong>Anoint</strong> is a key word this week. Pouring oil on someone's head was a physical sign that God had chosen them for a role — like a king being crowned, but with oil instead of a crown. Samuel anointed David years before David actually became king — the anointing marked God's choice, not an immediate change in position.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse from Psalm 23:1 in full. Then explain why it is significant that DAVID — a former shepherd — is the one describing God this way. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Memory verse:&#10;&#10;Why it matters that David (a former shepherd) wrote this:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"The LORD is my shepherd, I lack nothing." (Psalm 23:1, NIV). <strong>Why it matters that David wrote this:</strong> David had literally spent years as a shepherd, caring for and protecting real sheep — he knew firsthand exactly what a GOOD shepherd does: leading sheep to food and water, protecting them from predators, staying with them through danger. When David then describes GOD as his shepherd, he is drawing on deep personal experience, not just a poetic idea. He knows precisely what it means for a shepherd to care completely for a flock, which makes his trust in God's care feel earned through real understanding rather than an abstract or borrowed image.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Match each vocabulary word to its correct definition: <em>anoint · psalm · repentance · covenant · integrity</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="anoint = &#10;psalm = &#10;repentance = &#10;covenant = &#10;integrity = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>anoint</strong> = to pour oil on someone's head as a sign God has chosen them for a special role, like king or priest. <strong>psalm</strong> = a sacred song or poem, often addressed to God — David wrote roughly half of the 150 psalms. <strong>repentance</strong> = genuinely turning away from wrongdoing and turning back toward God — more than saying sorry, a real change of heart. <strong>covenant</strong> = a serious, binding agreement between God and people. <strong>integrity</strong> = being the same honest, good person whether or not anyone is watching.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">List the four main events/stages of this week's story in order: David anointed by Samuel, David defeats Goliath, David's sin with Bathsheba, Nathan's confrontation and David's repentance. For each, write one sentence describing what happened. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. &#10;2. &#10;3. &#10;4. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>David anointed by Samuel:</strong> God rejects Saul as king; Samuel is sent to Bethlehem, where he anoints the youngest son of Jesse, David, as the future king, because God looks at the heart, not appearance. 2. <strong>David defeats Goliath:</strong> When Israel's army is paralysed with fear of the Philistine champion Goliath, young David — trusting God's past faithfulness — defeats the giant with a sling and stone. 3. <strong>David's sin with Bathsheba:</strong> Years later, King David takes another man's wife, Bathsheba, and arranges for her husband Uriah's death in battle to hide his wrongdoing. 4. <strong>Nathan's confrontation and repentance:</strong> The prophet Nathan confronts David with a story exposing his sin; David responds with genuine confession — "I have sinned against the LORD" — rather than denial or excuses.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Understanding and explanation. Think carefully before writing.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Understanding & Explanation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">1 Samuel 16:7 says "People look at the outward appearance, but the LORD looks at the heart." Explain what this verse means using specific details from HOW David was chosen, compared to his brothers. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What Samuel initially expected:&#10;&#10;How David was actually chosen, and what this shows about "looking at the heart":"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">When Samuel arrives at Jesse's house to anoint the next king, he sees Eliab — David's oldest brother — and immediately assumes, based on his impressive height and appearance, that this must be God's chosen king. God corrects Samuel directly: he does not judge by outward appearance the way humans naturally do. Samuel then examines each of Jesse's older sons in turn, and God rejects each one, until finally David — the youngest, considered so unlikely a candidate that he wasn't even initially brought in from the fields where he was tending sheep — is revealed as God's actual choice. This demonstrates the verse concretely: the very brothers who LOOKED most like a king (tall, mature, present at the important moment) were rejected, while the overlooked younger brother, faithfully doing an unglamorous job, was God's actual choice — proving that God evaluates character, faithfulness, and heart rather than outward, visible qualifications.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">Before fighting Goliath, David explains his confidence by referring to his past experiences fighting a lion and a bear (1 Samuel 17:34-37). Explain the connection David draws between his PAST and his confidence about the FUTURE. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What David says about the lion and bear:&#10;&#10;How this connects to his confidence facing Goliath:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">David tells King Saul that while shepherding his father's sheep, a lion and later a bear each attacked the flock — and David, rather than fleeing, struck each predator down and rescued the sheep from its mouth. He explicitly frames this not as his OWN strength, but as evidence of God's rescue: "The LORD who rescued me from the paw of the lion and the paw of the bear will rescue me from the hand of this Philistine" (17:37). The connection is crucial: David's confidence facing Goliath is not blind or baseless bravado — it is built on a pattern of remembered, specific past experiences where God had already proven faithful in dangerous situations. This shows that biblical courage is often not about ignoring risk, but about actively remembering and trusting a track record of God's past faithfulness as the basis for facing a new, larger challenge.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">David refused King Saul's armour before fighting Goliath, choosing instead his sling and stones. Why might this detail matter beyond simple practicality? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="What happened with Saul's armour:&#10;&#10;Why this detail might matter beyond just practicality:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">David tried on Saul's armour but found it heavy and unfamiliar — he had "not tested" it, so he removed it and went with what he actually knew: a sling and stones, tools he had genuine skill and experience using. Beyond simple practicality, this detail suggests something important about facing challenges authentically: David did not try to imitate someone else's method of fighting (the king's conventional armour and weapons) but relied on his own tested, genuine skill, developed through his actual life experience as a shepherd. This can be read as a broader principle — that facing a significant challenge often requires using your OWN genuine strengths and preparation, rather than borrowing an approach that looks more impressive or conventional but does not actually fit who you are or what you have practised.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking. Write in full sentences.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Analysis & Application</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">David is called "a man after God's own heart" (1 Samuel 13:14) despite committing serious sin later in his life (the affair with Bathsheba and the killing of Uriah). Explain how BOTH of these things can be true at once. What does this suggest about how the Bible evaluates a person's character? Write at least 5 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The phrase "a man after God's own heart" does not describe moral perfection — David's serious sin with Bathsheba and Uriah proves he was capable of terrible wrongdoing, including adultery and effectively arranging a murder. What the phrase describes instead is the ORIENTATION and RESPONSIVENESS of David's heart toward God over the course of his whole life, especially when confronted with failure. When the prophet Nathan exposes David's sin, David does not deny it, blame someone else, silence Nathan, or minimise what he did — he responds with genuine, immediate confession: "I have sinned against the LORD" (2 Samuel 12:13), and Psalm 51, written from this exact moment, shows the depth of his sincere repentance. This suggests the Bible evaluates character not primarily by whether someone ever fails morally (everyone does, in the Bible's view), but by HOW a person responds when their failure is exposed — whether with denial, excuse, and hardness, or with honesty, humility, and genuine turning back toward God. David's story, therefore, offers a more realistic and perhaps more hopeful model of character than one requiring flawlessness: what matters most is the direction a heart turns after failure, not the absence of failure itself.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">Compare David's story to Joshua's (Week 9). Both are described using strong, positive language ("strong and courageous" for Joshua; "a man after God's own heart" for David) — but their stories highlight DIFFERENT aspects of faithfulness. Explain the key difference in what each story emphasises about a life of faith. <span class="marks">6 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 9 Bible — Joshua's courage and obedience in conquering the Promised Land.</div>
+    <textarea class="q-input wide" placeholder="What Joshua's story emphasises:&#10;&#10;What David's story emphasises:&#10;&#10;The key difference between the two:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joshua's story primarily emphasises COURAGEOUS OBEDIENCE — following God's specific, sometimes strange instructions exactly, taking bold action to receive an already-given promise, and functioning with consistent faithfulness across a sustained military campaign. There is little in Joshua's narrative about him personally failing morally; the emphasis is on faithful, obedient ACTION under pressure. David's story, by contrast, emphasises something different: the capacity for a heart to remain genuinely oriented toward God even AFTER serious moral failure — his significance is not primarily his unbroken record of good decisions (which Joshua's story more closely resembles), but his capacity for honest repentance and restoration after a devastating personal failure. The key difference is this: Joshua's story models faithfulness largely through sustained right action, while David's story models faithfulness through what happens when right action fails — showing that a "heart after God" is revealed not only in getting things right, but crucially in how one responds to getting things badly wrong. Together, the two stories present a fuller picture of biblical faithfulness: both consistent obedience (Joshua) and genuine repentance after failure (David) are honoured as expressions of a heart oriented toward God.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 1 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">📝</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 10 · Day 1</div>
+  <div class="hero-title">Poetry —<br>Devices & Foundations</div>
+  <div class="hero-subtitle">Rhyme, rhythm, and sound devices · Identifying poetic techniques</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and identification. Use your lesson notes.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Vocabulary & Identification</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Rhyme schemes are labelled with letters. The FIRST rhyming sound you meet in a poem gets the letter "A." The next new/different rhyming sound gets "B," and so on. If a later line rhymes with an earlier "A" line, it gets labelled "A" again, not a new letter.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Define each term and give one example: <em>rhyme · rhythm · alliteration · onomatopoeia · stanza</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="rhyme: definition + example&#10;rhythm: definition + example&#10;alliteration: definition + example&#10;onomatopoeia: definition + example&#10;stanza: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>rhyme:</strong> words ending with the same or similar sounds. Example: "cat" and "hat." <strong>rhythm:</strong> the pattern of beats or stressed/unstressed syllables in a line of poetry. Example: the regular "da-DUM" pattern in "Twinkle, twinkle, little star." <strong>alliteration:</strong> repeating the same beginning consonant sound in nearby words. Example: "Peter Piper picked a peck." <strong>onomatopoeia:</strong> a word that sounds like the noise it describes. Example: "buzz," "sizzle," "crash." <strong>stanza:</strong> a group of lines in a poem, similar to a paragraph in prose.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Identify the rhyme scheme (AABB, ABAB, or ABCB) for each short verse below: <span class="marks">6 marks</span><br><br>a) "The sun is bright, / The sky is blue, / The grass is green, / The morning dew."<br>b) "The cat sat on the mat, / It wore a little hat, / The dog began to bark, / And ran off in the park."<br>c) "Roses are red, / Violets are blue, / Sugar is sweet, / And so are you."</div>
+    <textarea class="q-input wide" placeholder="a) Rhyme scheme: ___ Explain which lines rhyme:&#10;b) Rhyme scheme: ___ Explain which lines rhyme:&#10;c) Rhyme scheme: ___ Explain which lines rhyme:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>ABCB</strong> — "blue" and "dew" rhyme (lines 2 and 4); "bright" and "green" do not rhyme with anything (lines 1 and 3 are unrhymed, labelled A and C). b) <strong>AABB</strong> — "mat" and "hat" rhyme (lines 1-2, both "A"); "bark" and "park" rhyme (lines 3-4, both "B") — rhyming couplets. c) <strong>ABCB</strong> — "blue" and "you" rhyme (lines 2 and 4); "red" and "sweet" do not rhyme with each other.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Underline the alliteration in each phrase and identify the repeated sound: <span class="marks">6 marks</span><br><br>a) "Sally sells seashells by the seashore."<br>b) "The big brown bear bumbled through the bushes."<br>c) "Whispering winds wove through the willow trees."</div>
+    <textarea class="q-input wide" placeholder="a) Underlined words + repeated sound: &#10;b) Underlined words + repeated sound: &#10;c) Underlined words + repeated sound: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) "<u>S</u>ally <u>s</u>ells <u>s</u>eashells by the <u>s</u>eashore" — repeated <strong>"s"</strong> sound. b) "The big <u>b</u>rown <u>b</u>ear <u>b</u>umbled through the <u>b</u>ushes" — repeated <strong>"b"</strong> sound. c) "<u>W</u>hispering <u>w</u>inds <u>w</u>ove through the <u>w</u>illow trees" — repeated <strong>"w"</strong> sound.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Applying devices in writing and analysing effect.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Application & Analysis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Write ONE original sentence for each device, based on the theme of "a storm at sea": (a) a sentence using alliteration, (b) a sentence using at least two onomatopoeia words, (c) a sentence using a simile, (d) a sentence using a metaphor. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="a) Alliteration sentence: &#10;b) Onomatopoeia sentence: &#10;c) Simile sentence: &#10;d) Metaphor sentence: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example answers (accept any correct original examples):</strong> a) Alliteration: "The wild waves whipped and whirled around the wooden boat." b) Onomatopoeia: "The thunder crashed and the sails hissed against the howling wind." c) Simile: "The waves rose like mountains before crashing down." d) Metaphor: "The sea was a raging beast, devouring everything in its path." Award marks for correct device usage and thematic relevance, not for the exact wording.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Read Psalm 23:1-3 (NIV): <em>"The LORD is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul."</em> Identify and explain TWO poetic devices used in this passage. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Device 1: ___ Where it appears + effect: &#10;Device 2: ___ Where it appears + effect: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Device 1 — Metaphor:</strong> "The LORD is my shepherd" is a direct metaphor — God is not described as LIKE a shepherd, but stated to simply BE one, creating a total, complete comparison that suggests full trust and care. <strong>Device 2 — Imagery:</strong> "green pastures," "quiet waters" create vivid, peaceful visual and sensory images that let the reader picture and feel the calm, provided-for state being described — this imagery reinforces the poem's central theme of trust and provision without needing to state the emotion directly.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended creative writing using multiple poetic devices.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Creative Writing & Analysis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">Write an original poem (at least 8 lines) on the theme of "courage" (inspired by David facing Goliath). Your poem must include: at least one clear example of alliteration, at least one example of onomatopoeia, at least one simile OR metaphor, and a consistent rhyme scheme of your choice (state which scheme you used). After writing, label where each device appears. <span class="marks">14 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="Rhyme scheme used: ___&#10;&#10;POEM:&#10;&#10;&#10;DEVICE LABELS (list where each device appears):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Minimum 8 lines with a clear, consistent theme of courage (2). Alliteration used correctly and identified (3). Onomatopoeia used correctly and identified (3). Simile or metaphor used correctly and identified (3). Consistent rhyme scheme maintained and correctly named (3). <strong>Example opening (AABB):</strong> "The giant stood tall, a mountain of might, / His armour gleamed sharp in the fading light. / But David stood firm, his heart brave as steel, / No fear in his eyes, no doubt he could feel..." (alliteration: "mountain of might"; simile: "brave as steel"). Accept any original poem meeting the technical requirements.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 1 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">📐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 10 · Day 1</div>
+  <div class="hero-title">Coordinates —<br>Foundations</div>
+  <div class="hero-subtitle">Plotting points · The four quadrants · Reading coordinates</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and basic coordinate identification. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Vocabulary & Plotting Basics</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Remember the rule "along the corridor, up the stairs" — the FIRST number in a coordinate (x) tells you how far to move LEFT/RIGHT; the SECOND number (y) tells you how far to move UP/DOWN. Always x first, then y!</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Define each term and give one example: <em>coordinate · x-axis · y-axis · origin · quadrant</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="coordinate: definition + example&#10;x-axis: definition&#10;y-axis: definition&#10;origin: definition + coordinates&#10;quadrant: definition"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>coordinate:</strong> a pair of numbers (x, y) that describes the exact position of a point on a grid. Example: (3, 5). <strong>x-axis:</strong> the horizontal number line on a grid, running left to right. <strong>y-axis:</strong> the vertical number line on a grid, running up and down. <strong>origin:</strong> the point where the x-axis and y-axis cross — coordinates (0, 0). <strong>quadrant:</strong> one of the four sections the axes divide the plane into, numbered 1-4 anticlockwise from the top-right.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">For each coordinate, state the direction and distance to move for BOTH the x and y parts: <span class="marks">8 marks</span><br><br>a) (5, 3) &nbsp; b) (−4, 2) &nbsp; c) (3, −6) &nbsp; d) (−2, −5)</div>
+    <textarea class="q-input wide" placeholder="a) x: ___ y: ___&#10;b) x: ___ y: ___&#10;c) x: ___ y: ___&#10;d) x: ___ y: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (5,3): x = <strong>5 right</strong>, y = <strong>3 up</strong>. b) (−4,2): x = <strong>4 left</strong>, y = <strong>2 up</strong>. c) (3,−6): x = <strong>3 right</strong>, y = <strong>6 down</strong>. d) (−2,−5): x = <strong>2 left</strong>, y = <strong>5 down</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">State which quadrant (1, 2, 3, or 4) each point lies in, or state if it lies ON an axis: <span class="marks">8 marks</span><br><br>a) (4, 5) &nbsp; b) (−3, 6) &nbsp; c) (−2, −7) &nbsp; d) (8, −1) &nbsp; e) (0, 4) &nbsp; f) (−5, 0) &nbsp; g) (6, 6) &nbsp; h) (−1, −1)</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) f) g) h) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (4,5): <strong>Quadrant 1</strong> (+,+). b) (−3,6): <strong>Quadrant 2</strong> (−,+). c) (−2,−7): <strong>Quadrant 3</strong> (−,−). d) (8,−1): <strong>Quadrant 4</strong> (+,−). e) (0,4): <strong>on the y-axis</strong> (x=0). f) (−5,0): <strong>on the x-axis</strong> (y=0). g) (6,6): <strong>Quadrant 1</strong> (+,+). h) (−1,−1): <strong>Quadrant 3</strong> (−,−).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Reflections and shape properties on the coordinate plane.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Reflections & Shapes</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Reflect each point over the X-AXIS. Give the new coordinates. <span class="marks">6 marks</span><br><br>a) (2, 5) &nbsp; b) (−4, 3) &nbsp; c) (6, −2) &nbsp; d) (−3, −7) &nbsp; e) (0, 8) &nbsp; f) (5, 0)</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) f) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Reflecting over the x-axis flips the sign of y only. a) (2,5)→<strong>(2,−5)</strong> &nbsp; b) (−4,3)→<strong>(−4,−3)</strong> &nbsp; c) (6,−2)→<strong>(6,2)</strong> &nbsp; d) (−3,−7)→<strong>(−3,7)</strong> &nbsp; e) (0,8)→<strong>(0,−8)</strong> &nbsp; f) (5,0)→<strong>(5,0)</strong> (unchanged — it's already on the x-axis!)</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">Reflect each point over the Y-AXIS. Give the new coordinates. <span class="marks">6 marks</span><br><br>a) (3, 4) &nbsp; b) (−2, 6) &nbsp; c) (5, −3) &nbsp; d) (−6, −1) &nbsp; e) (7, 0) &nbsp; f) (0, −5)</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) f) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Reflecting over the y-axis flips the sign of x only. a) (3,4)→<strong>(−3,4)</strong> &nbsp; b) (−2,6)→<strong>(2,6)</strong> &nbsp; c) (5,−3)→<strong>(−5,−3)</strong> &nbsp; d) (−6,−1)→<strong>(6,−1)</strong> &nbsp; e) (7,0)→<strong>(−7,0)</strong> &nbsp; f) (0,−5)→<strong>(0,−5)</strong> (unchanged — already on the y-axis!)</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A rectangle has three known corners: A(1, 2), B(5, 2), C(5, 6). Find the coordinates of the fourth corner, D, that would complete the rectangle. Explain your reasoning. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Coordinates of D: &#10;&#10;Reasoning:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">D = <strong>(1, 6)</strong>. <strong>Reasoning:</strong> In a rectangle, opposite sides are equal and parallel. A(1,2) and B(5,2) share the same y-coordinate (2) — they form the bottom side. B(5,2) and C(5,6) share the same x-coordinate (5) — they form the right side. To complete the rectangle, D must share its x-coordinate with A (x=1) and its y-coordinate with C (y=6), giving D(1,6).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step coordinate geometry problems.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step Problems</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">7</div>
+    <div class="q-text">A triangle has vertices at A(2, 3), B(6, 3), and C(4, 7). (a) Reflect all three points over the x-axis to find the new triangle A'B'C'. (b) Reflect the ORIGINAL triangle over the y-axis to find A''B''C''. (c) Which quadrant(s) does the reflected triangle A''B''C'' lie in? <span class="marks">9 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) A' = ___ B' = ___ C' = ___&#10;(b) A'' = ___ B'' = ___ C'' = ___&#10;(c) Quadrant(s) for A''B''C'':"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Reflecting over x-axis (flip y sign): A'(2,<strong>−3</strong>), B'(6,<strong>−3</strong>), C'(4,<strong>−7</strong>). (b) Reflecting original over y-axis (flip x sign): A''(<strong>−2</strong>,3), B''(<strong>−6</strong>,3), C''(<strong>−4</strong>,7). (c) All three points of A''B''C'' have negative x and positive y — they lie in <strong>Quadrant 2</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">8</div>
+    <div class="q-text">A point starts at (3, 4). It is reflected over the x-axis, then the RESULT is reflected over the y-axis. (a) Find the coordinates after each step. (b) Compare the final result to reflecting the ORIGINAL point through the origin directly (flipping both signs at once). What do you notice? Explain why this happens. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) After reflecting over x-axis: ___&#10;    After then reflecting over y-axis: ___&#10;(b) Direct reflection through origin: ___&#10;What do you notice? Why does this happen?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Start: (3,4). Reflect over x-axis: (3,<strong>−4</strong>). Then reflect that result over y-axis: (<strong>−3</strong>,−4). Final: <strong>(−3, −4)</strong>. (b) Direct reflection through the origin (flip both signs of the original at once): (3,4) → <strong>(−3,−4)</strong>. <strong>What you notice:</strong> Both methods give exactly the SAME final answer: (−3,−4). <strong>Why:</strong> Reflecting over the x-axis flips only the y-sign; reflecting the result over the y-axis then flips only the x-sign. Doing both one after another has the same overall effect as flipping BOTH signs at once (a reflection through the origin) — because each reflection is independent and doesn't affect the other coordinate. This shows that two reflections done in sequence over perpendicular axes are equivalent to a single 180° rotation about the origin.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 1 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🧪</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 10 · Day 1</div>
+  <div class="hero-title">Physical & Chemical Changes —<br>Foundations</div>
+  <div class="hero-subtitle">Identifying change types · Signs of a chemical reaction</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and identification. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Vocabulary & Basic Identification</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Ask yourself: "Is this STILL the same substance, just in a different shape/form?" If YES — it's a physical change. "Has something completely NEW been created that wasn't there before?" If YES — it's a chemical change. This one question solves most examples.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Define each term and give one example: <em>physical change · chemical change · reversible · irreversible · precipitate</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="physical change: definition + example&#10;chemical change: definition + example&#10;reversible: definition + example&#10;irreversible: definition + example&#10;precipitate: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>physical change:</strong> a change in form or appearance only — no new substance created. Example: tearing paper. <strong>chemical change:</strong> a change that creates a completely new substance with different properties. Example: burning wood. <strong>reversible:</strong> able to be changed back to the original substance or state. Example: melting and re-freezing water. <strong>irreversible:</strong> not able to be changed back. Example: baking a cake. <strong>precipitate:</strong> a solid that forms and separates out of a liquid during a chemical reaction. Example: a cloudy solid appearing when two clear solutions are mixed.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Sort these into PHYSICAL CHANGE or CHEMICAL CHANGE: <em>boiling water · burning candle wax · squashing a can · digesting food · freezing juice · toasting bread · dissolving sugar in tea · a nail rusting</em> <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="PHYSICAL CHANGES: &#10;&#10;CHEMICAL CHANGES: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>PHYSICAL CHANGES:</strong> boiling water (still H₂O, just changed state), squashing a can (still the same metal, just a different shape), freezing juice (still juice, just solid), dissolving sugar in tea (sugar still exists, just spread through the liquid — reversible by evaporation). <strong>CHEMICAL CHANGES:</strong> burning candle wax (produces soot, carbon dioxide, water vapour — new substances), digesting food (chemical breakdown into different molecules), toasting bread (browning reaction creates new compounds — cannot be "untoasted"), a nail rusting (iron + oxygen forms iron oxide, a new substance).</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">List all FIVE signs that a chemical reaction has likely occurred, with a brief explanation of each. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Colour change</strong> — an unexpected shift in colour, e.g. iron rusting turning orange-brown. 2. <strong>Gas produced (bubbles/fizzing)</strong> — bubbles forming, especially without heating, often signal a gas being released. 3. <strong>Temperature change</strong> — getting noticeably hotter or colder without any external heating/cooling. 4. <strong>Precipitate forms</strong> — a solid suddenly appearing in a previously clear liquid. 5. <strong>Light or smell produced</strong> — a flame, glow, or new/different smell appearing.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Explaining reasoning and comparing reversibility.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Reasoning & Reversibility</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">Explain in detail why dissolving salt in water is a PHYSICAL change, while burning a piece of wood is a CHEMICAL change. Refer to whether a new substance is formed and whether the change can be reversed. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Dissolving salt — why it's physical (new substance? reversible?):&#10;&#10;Burning wood — why it's chemical (new substance? reversible?):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Dissolving salt:</strong> When salt dissolves in water, the salt particles simply spread out and mix evenly among the water molecules — no new chemical substance is created. The salt is still chemically salt (sodium chloride); it hasn't reacted with the water to form something new. This is confirmed by the fact that the change is REVERSIBLE: if you evaporate the water (Week 8's separation technique), the salt crystals reappear exactly as they were before, unchanged. <strong>Burning wood:</strong> When wood burns, it reacts chemically with oxygen in the air, breaking down its chemical structure completely and producing entirely new substances: ash, smoke, carbon dioxide gas, and water vapour. These products have completely different properties from the original wood — you cannot recover wood from ash. This change is IRREVERSIBLE, confirming that a genuine chemical reaction, not just a physical rearrangement, has taken place.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">A student claims: "All reactions that produce bubbles must be chemical changes." Evaluate this claim. Give ONE example that proves it is not always true, and explain the difference. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Is the claim correct? ___&#10;&#10;Counter-example proving the claim is not always true:&#10;&#10;Explanation of the difference:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The claim is <strong>not correct</strong>. While bubbles/gas production is often a sign of a chemical reaction, it is not ALWAYS the case. <strong>Counter-example:</strong> Boiling water produces bubbles as the liquid water turns into water vapour (steam) — but this is a PHYSICAL change, not chemical. The substance remains H₂O throughout; only its state changes from liquid to gas, and it can be reversed by cooling the steam back into liquid water (condensation, as studied in Week 8's distillation). <strong>The key difference:</strong> In boiling, the bubbles are simply the SAME substance changing state (physical change). In a genuine chemical reaction (like mixing vinegar and baking soda, which produces carbon dioxide gas), the bubbles represent a completely NEW substance being formed that did not exist in either original ingredient — this is the chemical change. The presence of bubbles alone is not enough evidence; you must consider whether a new substance has actually formed.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific reasoning and evaluation.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Scientific Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">Baking a cake involves both physical AND chemical changes happening together.<br><br>(a) Identify ONE physical change that happens during cake-making (before or during baking).<br>(b) Identify ONE chemical change that happens during baking.<br>(c) Explain why the OVERALL process of "baking a cake" is generally classified as irreversible, even though it includes some physical (reversible) steps.<br>(d) Connect to exothermic/endothermic: is the OVEN heating the cake batter an exothermic or endothermic process from the batter's perspective? Explain. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Physical change example:&#10;&#10;(b) Chemical change example:&#10;&#10;(c) Why baking overall is irreversible:&#10;&#10;(d) Exothermic or endothermic from the batter's perspective? Explanation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Physical change example:</strong> Mixing the raw ingredients (flour, sugar, eggs, butter) together — combining them physically without any new substance being formed yet; you could theoretically separate them back out at this stage. (b) <strong>Chemical change example:</strong> The proteins in the eggs and flour undergo structural changes when heated (denaturation), and baking powder/soda releases carbon dioxide gas through a chemical reaction, causing the cake to rise — these are genuine new chemical transformations. (c) <strong>Why irreversible overall:</strong> Even though mixing the initial ingredients is a physical, reversible step, once heat triggers the chemical reactions (protein denaturation, Maillard browning reactions, gas release from baking soda), the mixture is permanently transformed into a new substance (cake) with entirely different properties — texture, structure, and chemical composition — that cannot be separated back into the original raw ingredients. The chemical changes that occur during baking make the ENTIRE process irreversible, even though it began with reversible physical steps. (d) From the batter's perspective, being heated in the oven is an <strong>endothermic process</strong> — the batter is ABSORBING heat energy from its surroundings (the oven), which is why it needs continuous external heating to complete the chemical reactions required for baking; if you removed the heat source, the reactions would not proceed to completion.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 1 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">🕌</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 10 · Day 1</div>
+  <div class="hero-title">The Crusades —<br>Foundations</div>
+  <div class="hero-subtitle">Causes of the Crusades · Key vocabulary · Timeline basics</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and causes. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Vocabulary & Causes</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> "Crusade" comes from the Latin word "crux" meaning cross — Crusaders wore the symbol of a cross to show their religious purpose. Remember from Week 9: the medieval Church had enormous political power, which is exactly why a Pope's call to arms in 1095 could mobilise thousands of knights across Europe.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Define each term and give one example or detail: <em>Crusade · Holy Land · pilgrimage · cultural exchange · Islamic Golden Age</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Crusade: &#10;Holy Land: &#10;pilgrimage: &#10;cultural exchange: &#10;Islamic Golden Age: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Crusade:</strong> a series of religious wars (1095-1291) in which European Christians tried to capture and hold the "Holy Land" from Muslim control. <strong>Holy Land:</strong> the region around Jerusalem, considered sacred by Christians, Muslims, and Jews alike. <strong>pilgrimage:</strong> a journey to a sacred place for religious reasons. <strong>cultural exchange:</strong> the sharing of ideas, knowledge, goods, and customs between different peoples or civilisations who come into contact. <strong>Islamic Golden Age:</strong> a period (roughly 8th-14th century) when Islamic civilisation led the world in science, medicine, mathematics, and philosophy.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">List FOUR causes of the Crusades and briefly explain each one. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. &#10;2. &#10;3. &#10;4. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Religious motivation:</strong> Recapturing Jerusalem — sacred to Christianity as the site of Jesus' death and resurrection — was framed as a holy duty. 2. <strong>Church encouragement:</strong> The Pope promised forgiveness of sins ("indulgences") to those who fought, a powerful spiritual incentive in medieval Christian belief. 3. <strong>Protecting pilgrims:</strong> European Christians travelling to the Holy Land as pilgrims reported difficulty and danger under Muslim control, giving a practical justification. 4. <strong>Political and economic motives:</strong> Some knights and nobles sought land, wealth, and glory, or a productive outlet for feudal warrior energy that might otherwise cause conflict within Europe itself.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Timeline understanding and analysing motivation.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Timeline & Motivation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Complete the Crusades timeline using dates and outcomes from the lesson: <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="First Crusade: Date = ___ Outcome = ___&#10;Second Crusade: Date = ___ Outcome = ___&#10;Third Crusade: Date = ___ Outcome = ___ (Who were the key figures?)&#10;Later Crusades: what happened to Crusader states by 1291?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>First Crusade:</strong> 1096-1099. Crusaders successfully captured Jerusalem, establishing Crusader states. <strong>Second Crusade:</strong> 1147-1149. Largely unsuccessful; failed to achieve its goals. <strong>Third Crusade:</strong> 1189-1192. Famous conflict between Richard the Lionheart (England) and Sultan Saladin; Jerusalem remained under Muslim control, though a truce allowed Christian pilgrim access. <strong>Later Crusades:</strong> Throughout the 1200s, Crusader efforts became gradually less successful, and Crusader states in the Holy Land were eventually lost entirely by 1291.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson lists both RELIGIOUS and POLITICAL/ECONOMIC motives for the Crusades. Explain why it might be difficult to separate these two types of motivation cleanly in the minds of medieval participants. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Explain the religious motive:&#10;&#10;Explain the political/economic motive:&#10;&#10;Why these might be difficult to separate cleanly:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The religious motive centred on the belief that recapturing Jerusalem was a sacred duty, reinforced by the Pope's promise of forgiveness of sins for those who took part — a spiritually powerful incentive in an intensely religious medieval worldview. The political/economic motive involved the practical opportunities the Crusades offered: land, wealth, titles, and glory for knights and nobles, particularly younger sons who might not inherit land at home under feudal inheritance customs. These motives are difficult to separate cleanly because medieval people did not necessarily experience "religious" and "worldly" motivations as separate categories the way a modern secular perspective might assume — a knight could genuinely believe he was fulfilling a sacred religious duty WHILE also being significantly motivated by the prospect of land and status, without feeling any contradiction between the two. Historical motivation is rarely a single, pure cause; individuals likely experienced a genuine blend of sincere religious conviction and self-interested opportunity simultaneously, making it historically inaccurate to force a strict separation between "true believers" and "opportunists."</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking and cross-week connections.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Analysis & Extended History</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">Connect this week's lesson to Week 9's study of the medieval Church's power. Explain SPECIFICALLY how the Church's dual religious-and-political authority (studied last week) made something like the Crusades possible — could a purely religious institution with no political/economic power have launched a continent-wide military campaign? Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 9 History — the medieval Church's combination of spiritual and political/economic power.</div>
+    <textarea class="q-input xwide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Week 9 established that the medieval Church held a unique combination of spiritual authority (control over salvation, sacraments, and religious teaching) AND substantial political and economic power (vast land ownership, tithes, the ability to crown or excommunicate monarchs). The Crusades demonstrate exactly how this dual power functioned in practice: Pope Urban II's call in 1095 was not merely a religious suggestion that individuals could freely ignore — it carried genuine political weight because the Church's institutional influence over kings, nobles, and entire communities meant the call could mobilise resources, knights, and financing across many separate feudal kingdoms simultaneously, something no single secular king could have achieved given the fragmented, localised nature of feudal political authority (also studied in Week 9). Furthermore, the SPIRITUAL dimension of the Church's authority — specifically, the promise of forgiveness of sins for participants — provided a uniquely powerful motivational tool that a purely political authority could never offer; no king's command alone could promise eternal spiritual reward in the way Church authority could. A purely religious institution with no political or economic power could likely inspire individual devotion but would lack the practical capacity to coordinate, finance, and mobilise a continent-spanning military campaign involving thousands of knights, ships, and supplies across multiple kingdoms. Conversely, a purely political institution without religious authority could command armies but could not have generated the same intensity of voluntary participation motivated by genuine spiritual conviction. The Crusades, therefore, stand as a clear historical demonstration of exactly the kind of unique, dual-source power the medieval Church possessed — a power that neither purely religious nor purely political institutions could replicate alone.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week10_Day1');</script>
+</body>
+</html>

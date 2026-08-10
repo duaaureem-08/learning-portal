@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 10 · Day 2 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 10</div>
+  <div class="day-badge">📅 Day 2</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 2 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">📜</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 10 · Day 2</div>
+  <div class="hero-title">David —<br>Deeper Analysis</div>
+  <div class="hero-subtitle">Psalms in depth · Sin, consequence, and grace · Worship examined</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and comprehension. The range of the Psalms.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Recall: The Range of the Psalms</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> "Lament" is an important word for understanding some psalms. A lament is an honest expression of sadness, grief, or complaint — sometimes even complaint directed AT God. Psalm 13 ("How long, LORD? Will you forget me forever?") is a lament — David is not pretending to feel fine; he is being completely honest about his pain.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">The lesson gives four different psalms (23, 51, 34, 13), each expressing a different emotion or purpose. For each, name the psalm, state the emotion/purpose, and explain in your own words why that psalm might be helpful to someone experiencing that same emotion today. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Psalm 23 — Trust:&#10;Why helpful today:&#10;&#10;Psalm 51 — Repentance:&#10;Why helpful today:&#10;&#10;Psalm 34 — Praise:&#10;Why helpful today:&#10;&#10;Psalm 13 — Lament:&#10;Why helpful today:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Psalm 23 — Trust:</strong> "The LORD is my shepherd, I lack nothing." This could help someone feeling anxious about the future or uncertain about their needs being met — the psalm offers a model of resting confidently in God's care rather than being consumed by worry. <strong>Psalm 51 — Repentance:</strong> Written after David's sin with Bathsheba, asking God to "create in me a pure heart." This could help someone who has done something they deeply regret and doesn't know how to move forward — it models honest confession rather than either denial or hopeless self-condemnation. <strong>Psalm 34 — Praise:</strong> Written during a time of real danger and fear, yet still declaring "I will extol the LORD at all times." This could help someone facing difficult circumstances who wonders whether gratitude is still possible — it shows that praise and difficulty are not mutually exclusive. <strong>Psalm 13 — Lament:</strong> "How long, LORD? Will you forget me forever?" This could help someone who feels distant from God or abandoned in suffering — it gives permission to bring genuine doubt and frustration honestly to God rather than hiding those feelings.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Why is it significant that the SAME person (David) wrote psalms of confident trust (Psalm 23) AND honest doubt (Psalm 13)? What does this suggest about the relationship between faith and difficult emotions? <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why it's significant that the same person wrote both types:&#10;&#10;What this suggests about faith and difficult emotions:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">It is significant because it shows that having genuine faith and experiencing genuine doubt, fear, or frustration are not contradictions within the same person's life — David is not TWO different people, one faithful and one doubting; he is ONE person who moves through a full range of authentic emotional and spiritual experience across his life and across different psalms. This suggests that faith is not the absence of difficult emotions but includes the capacity to bring those difficult emotions honestly into relationship with God, rather than suppressing them to maintain an appearance of constant, unwavering confidence. The Psalms collectively model a kind of faith that has room for the full range of human experience — trust AND doubt, praise AND lament — without treating the difficult emotions as spiritual failures that must be hidden.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Deeper thinking about sin, consequence, and grace.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Sin, Consequence & Grace</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">The lesson notes that David faced real, painful consequences for his sin, yet he was not rejected by God the way Saul was (Week 9/earlier lessons on Saul's rejection). Explain the DIFFERENCE between "facing consequences" and "being rejected." How can both be true for David at once? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What 'facing consequences' means for David:&#10;&#10;What 'being rejected' would have meant (as it did for Saul):&#10;&#10;How both consequences AND restoration can coexist:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Facing consequences</strong> for David meant that the actual, real-world effects of his sin were not magically erased — 2 Samuel 12 describes ongoing difficulty and grief in David's family following his sin, consequences that continued to unfold even after his repentance. This shows that repentance does not function as an "undo button" that erases the practical effects of wrongdoing. <strong>Being rejected</strong> — as ultimately happened to Saul, who lost God's favour as king due to his persistent disobedience — meant a fundamental breach in the relationship itself, with the kingdom being taken away from his lineage. <strong>How both can be true for David:</strong> David's STATUS before God (his fundamental relationship, his role as king, God's covenant promise regarding his descendants) was preserved specifically BECAUSE of his genuine repentance — even though the CONSEQUENCES of his specific actions still had to be lived through. This distinction matters theologically: forgiveness restores relationship and status, but does not necessarily eliminate every real-world consequence of past actions — the two operate somewhat independently, and David's story models genuine restoration alongside honest reckoning with consequence.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">Psalm 51 (written after David's sin) asks God to "create in me a pure heart." Why might David ask God to CREATE a new heart, rather than simply asking for forgiveness for specific actions? What does this suggest about David's understanding of his own problem? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What David specifically asks for in Psalm 51:&#10;&#10;Why 'create' rather than just 'forgive':&#10;&#10;What this suggests about David's understanding of the deeper problem:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Psalm 51:10 specifically asks: "Create in me a pure heart, O God, and renew a steadfast spirit within me." The word "create" (the same Hebrew word used for God's original creation in Genesis 1) suggests David is asking for something far more fundamental than simply having a list of specific wrongful actions forgiven or wiped clean. Asking God to CREATE something new implies David understands his problem as going deeper than the individual sinful actions themselves (the adultery, the arranged killing) — he recognises that these actions came from something wrong at the level of his HEART or character, not merely isolated bad decisions. This suggests David's understanding of his own problem is that surface-level behaviour change or simple forgiveness of specific acts would be insufficient; what he actually needs is genuine internal transformation — a new orientation of heart and spirit — because the sinful actions were symptoms of a deeper spiritual condition that required more than pardon; it required renewal.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">Compare Nathan's approach to confronting David (telling a STORY about a rich man and a poor man's lamb, rather than directly accusing David) with a more direct confrontation. Why might Nathan's indirect approach have been more effective? <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Nathan's story approach:&#10;&#10;Why this indirect method might have been more effective than direct accusation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Nathan tells David a story about a rich man with vast flocks who steals a poor man's only, beloved lamb to feed a visitor — David, hearing this as an apparently unrelated legal case, becomes genuinely outraged and declares the rich man deserves to die and must repay fourfold. Only THEN does Nathan reveal: "You are that man!" This indirect approach was likely more effective than direct accusation for several reasons: by allowing David to first judge the situation as an outside observer, Nathan bypassed the defensive reactions (denial, justification, anger at the accuser) that a direct accusation often triggers in a powerful person, especially a king who could simply dismiss or punish a direct challenger. David's own moral judgment condemned the wrongdoing BEFORE he realised it applied to himself, making it far harder for him to then excuse his own behaviour once the connection was revealed — he had already, in his own words, declared the appropriate consequence. This method exposed David's conscience through his own reasoning rather than through external accusation, which is often a more powerful and harder-to-dismiss form of confrontation.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended essay. Write with theological precision and clear structure.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Extended Essay</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">"The Psalms exist because David refused to hide his full self — including his failures — from God." Write a full response (minimum 10 sentences) evaluating this claim, using at least FOUR specific psalms or events from this week's lesson as evidence. Include a clear conclusion. <span class="marks">15 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="Write your full response here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Clear position stated. At least 4 specific psalms/events used as evidence (Psalm 23 trust, Psalm 51 repentance, Psalm 34 praise amid danger, Psalm 13 lament, Nathan's confrontation, David's confession). Understanding of the range of emotion in the Psalms. Connection to the "heart after God" theme. Meaningful conclusion. <strong>What a strong response argues:</strong> Across the range of psalms studied — confident trust (23), honest repentance after serious failure (51), praise even amid real danger (34), and raw complaint questioning God's apparent absence (13) — a consistent pattern emerges: David does not edit or hide the difficult parts of his experience before bringing them to God. This is most dramatically visible in the connection between his sin with Bathsheba and Psalm 51 — rather than writing only psalms of triumph and confidence, David's most vulnerable failure becomes the DIRECT source material for one of his most theologically significant psalms, asking for a completely new heart rather than superficial forgiveness. Similarly, Psalm 13's willingness to ask God directly "will you forget me forever?" shows a refusal to perform false confidence when genuine doubt is present. The claim is well supported: the SURVIVAL and inclusion of such emotionally raw, sometimes theologically uncomfortable material (a king publicly recorded confessing serious sin; genuine complaint against God) suggests these psalms exist precisely because David treated his relationship with God as a space where hiding his true self — whether sin, doubt, or fear — was neither necessary nor desirable. This offers a model of faith centred on honesty rather than performance.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 2 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">🖋️</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 10 · Day 2</div>
+  <div class="hero-title">Poetry —<br>Analysis & Structure</div>
+  <div class="hero-subtitle">Analysing form and meaning · Writing structured poems</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Practice</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Analysing how form connects to meaning.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Form and Meaning</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Good poetry analysis doesn't just NAME a device ("this is a metaphor") — it explains the EFFECT: why did the poet choose this device HERE, and what does it add to the meaning or feeling of the poem? Always ask "why this device, in this place?"</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Read this short poem: <em>"The storm crashed and roared through the night, / Lightning flashed with blinding light, / Waves like mountains rose and fell, / A raging, restless, watery hell."</em> Identify FOUR different poetic devices used, and for each, explain the EFFECT it creates (not just naming it). <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Device 1: ___ Where + effect:&#10;Device 2: ___ Where + effect:&#10;Device 3: ___ Where + effect:&#10;Device 4: ___ Where + effect:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Device 1 — Onomatopoeia:</strong> "crashed" and "roared" sound like the actual noises of a violent storm, making the reader almost hear the storm rather than just picture it. <strong>Device 2 — Simile:</strong> "Waves like mountains" directly compares the enormous scale of the waves to something the reader can easily visualise, emphasising their overwhelming size and power. <strong>Device 3 — Alliteration:</strong> "raging, restless" repeats the "r" sound, creating a harsh, rolling rhythm that mimics the chaotic, relentless energy of the storm itself. <strong>Device 4 — Rhyme (AABB):</strong> "night/light" and "fell/hell" create a driving, insistent rhythm through the rhyming couplets, which propels the reader forward through the poem at a pace that mirrors the storm's own relentless energy.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Compare the effect of describing something with a SIMILE versus a METAPHOR. Using the phrase "the sea" as your subject, write BOTH a simile version and a metaphor version describing anger or fury, then explain which feels more powerful and why. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Simile version: &#10;Metaphor version: &#10;Which feels more powerful and why:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Simile version:</strong> "The sea was as furious as an enraged beast, thrashing against the rocks." <strong>Metaphor version:</strong> "The sea was a furious beast, thrashing against the rocks." <strong>Which is more powerful and why:</strong> The metaphor version typically feels more powerful and immediate because it removes the comparing word ("as"/"like") that keeps the two things (sea and beast) held slightly apart as separate entities being compared. The metaphor collapses that distance entirely — stating the sea simply IS a beast — which creates a more total, urgent, and vivid image. The simile invites the reader to hold two separate images in mind and compare them; the metaphor fuses them into one, often producing a stronger emotional and sensory effect, though both can be effective depending on the specific context and desired tone.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Writing poems with specific structural requirements.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Structured Poetry Writing</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Write a poem of exactly 2 stanzas (4 lines each) on the theme of "a shepherd caring for sheep" (inspired by David). Stanza 1 must use an ABAB rhyme scheme. Stanza 2 must use an AABB rhyme scheme. Include at least one metaphor and one example of alliteration anywhere in the poem. Label your rhyme scheme and devices after writing. <span class="marks">12 marks</span></div>
+    <textarea class="q-input xwide" placeholder="STANZA 1 (ABAB):&#10;&#10;&#10;STANZA 2 (AABB):&#10;&#10;&#10;Labels — where is the metaphor? Where is the alliteration?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Stanza 1 correctly follows ABAB rhyme scheme (3). Stanza 2 correctly follows AABB rhyme scheme (3). Clear metaphor used and correctly labelled (3). Clear alliteration used and correctly labelled (3). <strong>Example:</strong> Stanza 1 (ABAB): "The shepherd walks the hills at dawn, / His flock beside him, calm and near, / Green pastures stretch across the lawn, / No danger now, no cause for fear." Stanza 2 (AABB): "He is their guide through day and night, / He guards them well with all his might, / The sheep trust in his gentle hand, / Safe forever in his land." (Metaphor: could describe the shepherd as "a living shield"; alliteration: "guards... gentle" or similar.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended comparative analysis of Psalm 23.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Comparative Poetry Analysis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Read the full text of Psalm 23 (find it in your Bible or ask your teacher for a copy). Write a full analytical response (minimum 8 sentences) identifying AT LEAST FOUR different poetic devices used across the whole psalm (metaphor, imagery, repetition, parallelism, etc.), explaining the effect of EACH, and concluding with an evaluation of why this particular psalm has remained so widely loved and quoted across many centuries. <span class="marks">15 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:260px;" placeholder="Device 1 + effect:&#10;Device 2 + effect:&#10;Device 3 + effect:&#10;Device 4 + effect:&#10;&#10;Concluding evaluation — why has Psalm 23 remained so widely loved?"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> At least 4 devices correctly identified with specific textual evidence (8 — 2 per device). Clear explanation of the EFFECT each device creates, not just naming it (4). Thoughtful, well-reasoned concluding evaluation (3). <strong>Devices to look for:</strong> Extended metaphor (the shepherd/sheep relationship sustained throughout, not just one line). Imagery ("green pastures," "quiet waters," "darkest valley" — vivid sensory pictures). Parallelism (a common feature of Hebrew poetry — ideas repeated in different words, e.g. "he restores my soul... he guides me"). Shift in address (the psalm shifts from talking ABOUT God in third person — "he" — to talking directly TO God — "you are with me" — creating a sense of increasing intimacy as the danger described increases). Repetition of key themes (provision, guidance, protection, presence) reinforcing trust throughout. <strong>Strong conclusions</strong> might note the psalm's universal, relatable imagery; its emotional honesty about danger ("even though I walk through the darkest valley") combined with confidence; its shortness and memorability; and its ability to speak to both times of security and times of fear.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 2 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">🔢</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 10 · Day 2</div>
+  <div class="hero-title">Coordinates —<br>Harder Problems</div>
+  <div class="hero-subtitle">Distances between points · Midpoints · Shapes and transformations</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Harder Problems</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Speed round. Reflections and quadrant identification.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Speed Round — Mixed Reflections</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">For each point, give BOTH the x-axis reflection AND the y-axis reflection: <span class="marks">8 marks</span><br>a) (4, 6) &nbsp; b) (−3, 5) &nbsp; c) (7, −2) &nbsp; d) (−1, −8)</div>
+    <textarea class="q-input wide" placeholder="a) x-axis reflection: ___ y-axis reflection: ___&#10;b) x-axis reflection: ___ y-axis reflection: ___&#10;c) x-axis reflection: ___ y-axis reflection: ___&#10;d) x-axis reflection: ___ y-axis reflection: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (4,6): x-axis→<strong>(4,−6)</strong>, y-axis→<strong>(−4,6)</strong>. b) (−3,5): x-axis→<strong>(−3,−5)</strong>, y-axis→<strong>(3,5)</strong>. c) (7,−2): x-axis→<strong>(7,2)</strong>, y-axis→<strong>(−7,−2)</strong>. d) (−1,−8): x-axis→<strong>(−1,8)</strong>, y-axis→<strong>(1,−8)</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Midpoints and distances on horizontal/vertical lines.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Midpoints & Distances</div>
+  <div class="callout-style">
+    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:12px 16px;"><strong style="color:var(--bright);">Key idea:</strong> The MIDPOINT between two points is the point exactly halfway between them. For points on the SAME horizontal or vertical line, you can find distance by simple subtraction, and the midpoint by averaging the coordinates: midpoint x = (x₁+x₂)÷2, midpoint y = (y₁+y₂)÷2.</p>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Find the midpoint between each pair of points: <span class="marks">6 marks</span><br>a) (2, 3) and (8, 3) &nbsp; b) (4, 1) and (4, 9) &nbsp; c) (−2, 5) and (6, 5) &nbsp; d) (0, −4) and (0, 10)</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) (2,3) and (8,3): midpoint x=(2+8)÷2=5, y stays 3 (same line). Midpoint = <strong>(5, 3)</strong>. b) (4,1) and (4,9): x stays 4, midpoint y=(1+9)÷2=5. Midpoint = <strong>(4, 5)</strong>. c) (−2,5) and (6,5): midpoint x=(−2+6)÷2=2, y stays 5. Midpoint = <strong>(2, 5)</strong>. d) (0,−4) and (0,10): x stays 0, midpoint y=(−4+10)÷2=3. Midpoint = <strong>(0, 3)</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Find the distance between each pair of points (they lie on the same horizontal or vertical line): <span class="marks">6 marks</span><br>a) (3, 4) and (9, 4) &nbsp; b) (5, 2) and (5, 11) &nbsp; c) (−4, 6) and (7, 6)</div>
+    <textarea class="q-input wide" placeholder="a) b) c) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Same y (4), horizontal line. Distance = 9−3 = <strong>6 units</strong>. b) Same x (5), vertical line. Distance = 11−2 = <strong>9 units</strong>. c) Same y (6), horizontal line. Distance = 7−(−4) = 7+4 = <strong>11 units</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">A square has three known corners: A(2, 2), B(2, 8), C(8, 8). (a) Find the fourth corner, D. (b) Find the length of one side. (c) Find the midpoint of the diagonal from A to C. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) D = &#10;(b) Side length = &#10;(c) Midpoint of AC = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) A(2,2), B(2,8) share x=2 (left side). B(2,8), C(8,8) share y=8 (top side). D must complete the square: D = <strong>(8, 2)</strong> (sharing x with C and y with A). (b) Side length: A to B distance = 8−2 = <strong>6 units</strong> (each side is 6 units in a square). (c) Midpoint of A(2,2) and C(8,8): x=(2+8)÷2=5, y=(2+8)÷2=5. Midpoint = <strong>(5, 5)</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step transformations and reasoning.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step Transformations</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">A shape has vertices P(1, 2), Q(5, 2), R(5, 6), S(1, 6) — a square. (a) Find the midpoint of each side (4 midpoints). (b) If you reflected the entire square over the x-axis, what would the new coordinates of P, Q, R, S be? (c) After this reflection, would the shape still be a square? Explain your reasoning using the concept of distance preservation in reflections. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Midpoint of PQ: ___ QR: ___ RS: ___ SP: ___&#10;(b) P'=___ Q'=___ R'=___ S'=___&#10;(c) Still a square? Explanation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Midpoint PQ (P(1,2),Q(5,2)): <strong>(3, 2)</strong>. Midpoint QR (Q(5,2),R(5,6)): <strong>(5, 4)</strong>. Midpoint RS (R(5,6),S(1,6)): <strong>(3, 6)</strong>. Midpoint SP (S(1,6),P(1,2)): <strong>(1, 4)</strong>. (b) Reflecting over x-axis flips y-sign only: P'(1,<strong>−2</strong>), Q'(5,<strong>−2</strong>), R'(5,<strong>−6</strong>), S'(1,<strong>−6</strong>). (c) <strong>Yes, it is still a square.</strong> Reflections are "distance-preserving" transformations — they preserve the exact distances between all points and all angles, simply flipping the shape's position/orientation like a mirror image. Since a square is defined by having four equal sides and four right angles, and reflection changes neither the side lengths nor the angles (only the position), the reflected shape P'Q'R'S' must also be a square, congruent to the original — just appearing as a mirror image on the opposite side of the x-axis.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 2 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🔥</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 10 · Day 2</div>
+  <div class="hero-title">Chemical Reactions —<br>Energy & Evidence</div>
+  <div class="hero-subtitle">Exothermic and endothermic in depth · Evaluating evidence of reaction</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Exothermic/endothermic recall and everyday examples.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Exothermic & Endothermic Recall</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Memory trick: "EXO" sounds like "EXIT" — heat EXITS (leaves) the reaction, going OUT into the surroundings, making things warmer. "ENDO" — heat goes IN (like "entering"), being absorbed FROM the surroundings, making things colder.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">For each example, state whether it is EXOTHERMIC or ENDOTHERMIC, and explain your reasoning using the direction heat energy moves: <span class="marks">10 marks</span><br><br>a) A bonfire burning wood<br>b) An instant cold pack used for a sports injury (chemicals mix and the pack gets cold)<br>c) A firework exploding<br>d) Photosynthesis in a plant (absorbs light energy to build sugar)<br>e) A hand warmer packet (chemicals react and the packet gets hot)</div>
+    <textarea class="q-input xwide" placeholder="a) Exo or endo? Reasoning:&#10;b) Exo or endo? Reasoning:&#10;c) Exo or endo? Reasoning:&#10;d) Exo or endo? Reasoning:&#10;e) Exo or endo? Reasoning:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Exothermic</strong> — burning wood releases heat energy outward into the surroundings, which is why you feel warmth from a bonfire. b) <strong>Endothermic</strong> — the chemical reaction inside the cold pack absorbs heat energy FROM its surroundings (including your skin), which is why it feels cold to the touch. c) <strong>Exothermic</strong> — an exploding firework releases enormous amounts of heat and light energy outward very rapidly. d) <strong>Endothermic</strong> — photosynthesis specifically absorbs light energy from the sun to power the chemical reaction that builds glucose; this is a classic endothermic process (connects to Week 6 Science!). e) <strong>Exothermic</strong> — the chemical reaction inside a hand warmer releases heat energy outward, warming your hands.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Evaluating evidence and designing simple tests.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Evaluating Evidence</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">A student mixes two clear liquids together in a test tube. They observe: the mixture turns cloudy white, a small amount of gas bubbles form, and the test tube becomes noticeably warm to the touch within seconds. <br><br>(a) Identify which THREE of the five "signs of a chemical reaction" from the lesson are present in this observation.<br>(b) Based on the temperature observation, is this reaction exothermic or endothermic?<br>(c) Explain why a scientist would be confident this is a genuine chemical change, not just a physical mixing. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Three signs present:&#10;1. &#10;2. &#10;3. &#10;&#10;(b) Exothermic or endothermic?&#10;&#10;(c) Why confident this is a chemical change:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Three signs present: 1. <strong>Colour change</strong> — the mixture turning from clear to cloudy white indicates something new has formed. 2. <strong>Gas produced</strong> — bubbles forming signals a new gaseous substance being released. 3. <strong>Precipitate forms</strong> — the "cloudy white" appearance specifically suggests a solid precipitate has formed within the liquid, which is directly a sign of a new insoluble substance being created. 4. (Also acceptable: <strong>Temperature change</strong> — the tube becoming warm without external heating.) (b) Since the test tube becomes warmer without any external heat source, this is an <strong>exothermic</strong> reaction — heat energy is being released outward into the surroundings (including the glass and the student's hand). (c) A scientist would be confident this is a genuine chemical change because MULTIPLE independent signs of reaction are present simultaneously (colour change, gas production, precipitate formation, and a temperature change) — a physical change (like simply mixing two liquids together without any reaction) would not typically produce a NEW solid (precipitate), release gas, or generate heat without external cause. The combination of several signs together, especially the appearance of an entirely new solid substance (the precipitate) that did not exist in either original clear liquid, is strong evidence that a chemical reaction — not just physical mixing — has taken place.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Design a simple test to determine whether an unknown change is physical or chemical. Describe THREE specific observations you would make, and explain what result for each observation would indicate a CHEMICAL change versus a PHYSICAL change. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Observation 1: ___ Chemical result: ___ Physical result: ___&#10;Observation 2: ___ Chemical result: ___ Physical result: ___&#10;Observation 3: ___ Chemical result: ___ Physical result: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Observation 1 — Attempt to reverse the change:</strong> Try to return the substance to its original state (e.g. cooling if heated, or attempting to separate mixed components). Chemical result: cannot be reversed by simple physical means. Physical result: CAN be reversed (e.g. re-freezing melted ice). <strong>Observation 2 — Check for a new substance's properties:</strong> Compare properties (colour, texture, smell, solubility) of the result to the original substance(s). Chemical result: properties are noticeably DIFFERENT — a genuinely new substance with new properties. Physical result: properties remain essentially the SAME, just in a different form/shape/state. <strong>Observation 3 — Monitor for energy change without external cause:</strong> Measure temperature before and during the change, without applying external heat or cooling. Chemical result: temperature changes noticeably (either up or down) due to the reaction itself. Physical result: temperature typically stays the same unless deliberately heated/cooled externally (though phase changes like melting can absorb/release latent heat without a temperature CHANGE, which is a more advanced nuance).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific evaluation connecting to real-world chemistry.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Extended Evaluation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">"Every chemical reaction involves an energy change, but not every energy change involves a chemical reaction." Evaluate this statement using specific examples. In your answer: give an example of a chemical reaction WITH an energy change; give an example of a PHYSICAL change that also involves an energy change (challenging students to think beyond the simple "only chemical changes involve energy" assumption); and explain how a scientist can tell the difference in ambiguous cases. Write at least 8 sentences. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write your evaluation here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This statement is scientifically accurate and highlights an important nuance often missed by students who assume energy changes ALWAYS signal a chemical reaction. It is true that every chemical reaction involves an energy change — bonds are broken and formed during a chemical reaction, and this bond rearrangement always either releases energy (exothermic, e.g. combustion releasing heat as wood burns) or absorbs energy (endothermic, e.g. photosynthesis absorbing light energy). However, PHYSICAL changes can also involve significant energy changes without any new substance being formed. For example, melting ice requires energy input (it must absorb "latent heat" to overcome the forces holding water molecules in a rigid solid structure) even though the substance remains chemically identical (H₂O) throughout, and no new substance is created — the ice simply changes state from solid to liquid. Similarly, when water vapour condenses back into liquid water, it releases energy as heat, even though this is purely a physical state change. This means temperature change ALONE cannot reliably distinguish a chemical change from a physical one — a scientist must look at the FULL PICTURE of evidence rather than any single sign in isolation. The key distinguishing test is whether a genuinely NEW substance with different chemical properties has been formed: if the material can be returned to its exact original chemical form through simple physical means (like cooling, evaporation, or reversing pressure), the change — even if it involved significant energy transfer — is physical. If the resulting substance has permanently different chemical properties and cannot be reverted to the original substance, the change is chemical, regardless of how large or small the accompanying energy change was. Energy change is therefore a USEFUL clue but never sufficient evidence alone to classify a change as chemical.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 2 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">🌍</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 10 · Day 2</div>
+  <div class="hero-title">Cultural Exchange —<br>Knowledge & Legacy</div>
+  <div class="hero-subtitle">The Islamic Golden Age in depth · Specific contributions to Europe</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Islamic Golden Age achievements recall.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Islamic Golden Age Achievements</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> "Preserved" is a key word this week. It means Islamic scholars did not just DISCOVER new knowledge — they also SAVED ancient Greek and Roman texts that had been lost or destroyed in Western Europe, translating them into Arabic and keeping them safe for centuries, before they eventually flowed back into Europe.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">For each area of knowledge, describe SPECIFICALLY what Europe gained from contact with the Islamic world, using detail from the lesson: <em>mathematics · medicine · preserved classical knowledge · trade goods · navigation</em> <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="mathematics: &#10;medicine: &#10;preserved classical knowledge: &#10;trade goods: &#10;navigation: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>mathematics:</strong> Algebra (the word itself is Arabic, from "al-jabr") was extensively developed by Islamic mathematicians, along with the Hindu-Arabic numeral system (the digits 0-9 we still use today), which replaced the far clumsier Roman numeral system that made complex calculation extremely difficult. <strong>medicine:</strong> Advanced medical knowledge including hospitals, surgical techniques, and pharmacology — Islamic medicine was significantly more advanced than what medieval Europe had developed independently at the time. <strong>preserved classical knowledge:</strong> Islamic scholars translated and carefully preserved ancient Greek and Roman philosophical and scientific texts that had been largely lost in Western Europe after Rome's collapse — this classical knowledge (including works by Aristotle) flowed back into Europe through this contact. <strong>trade goods:</strong> Spices, silk, sugar, and various new agricultural products became available in Europe through expanded trade connections opened by Crusader-era contact. <strong>navigation:</strong> Improved navigational tools, notably the astrolabe (used to determine position using the stars), spread into wider European use.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Analysing significance and long-term impact.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Significance & Long-Term Impact</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Explain WHY the transfer of the Hindu-Arabic numeral system (0-9) to Europe was so significant, compared to continuing to use Roman numerals. Consider practical, everyday reasons why this mattered beyond just mathematics classrooms. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="What was difficult about Roman numerals:&#10;&#10;Why the Hindu-Arabic system was a major improvement:&#10;&#10;Practical, everyday significance beyond mathematics:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Roman numerals (I, V, X, L, C, D, M) have no concept of "place value" or a symbol for zero, making even relatively simple arithmetic — like addition, subtraction, multiplication, or division — extremely cumbersome and difficult to perform directly using the numeral system itself; complex calculations often required separate tools like an abacus. The Hindu-Arabic system, by contrast, uses place value (where a digit's position determines its value, e.g. the "3" in "300" means something different from the "3" in "30") and crucially includes the symbol zero, allowing calculations to be performed directly through written arithmetic in a way that is vastly more efficient and accessible. The practical, everyday significance extends far beyond mathematics classrooms: this numeral system made commercial record-keeping, accounting, banking, taxation, and trade calculations dramatically easier and more reliable across medieval and Renaissance Europe, directly supporting the growth of more complex economic and commercial systems. Historians consider the adoption of this numeral system one of the most practically significant intellectual imports of the medieval period, because it changed something used in daily life by merchants, tax collectors, and ordinary people — not just specialist mathematicians.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">The lesson notes that Islamic scholars preserved ancient Greek and Roman texts "lost in Western Europe after Rome's fall" (connecting to Week 4's study of Rome's collapse). Explain HOW this knowledge could have been "lost" in Europe but preserved elsewhere — what does this suggest about how fragile the survival of historical knowledge can be? <span class="marks">6 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 4 History — the fall of Rome and the instability that followed.</div>
+    <textarea class="q-input wide" placeholder="How the knowledge was 'lost' in Western Europe:&#10;&#10;How/why it was preserved elsewhere (Islamic world):&#10;&#10;What this suggests about the fragility of historical knowledge survival:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">After Rome's collapse, Western Europe entered a period of significant political instability, reduced centralised education, and disrupted institutions — the organised libraries, schools, and scholarly networks that had preserved and copied ancient texts under the Roman Empire largely broke down, meaning fewer people had access to, could read, or bothered to copy and preserve these written works, and many texts were simply lost, destroyed, or forgotten over the following centuries. Meanwhile, the Islamic world, experiencing its own period of political stability, wealth, and strong intellectual institutions (libraries, translation centres, universities) during the Islamic Golden Age, actively sought out, translated, and preserved these same Greek and Roman texts — recognising their scientific and philosophical value — keeping them safe and in active scholarly use for centuries even while they were unavailable in the very region (Western Europe) where they had originally been produced. This demonstrates that the survival of historical and intellectual knowledge is genuinely fragile and entirely dependent on ACTIVE institutional effort — stable governments, libraries, education systems, and dedicated scholars — to copy, translate, and pass knowledge forward; knowledge does not automatically survive just because it once existed, and a civilisation's collapse can mean the genuine, permanent loss of accumulated understanding unless another civilisation actively works to preserve it, as the Islamic world did for Western Europe in this case.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analysis of the Renaissance connection.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Extended Analysis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The lesson mentions this knowledge transfer "helped enable the later Renaissance" — a major period of European cultural, artistic, and scientific rebirth that most historians date to beginning roughly in the 14th-15th centuries. Using specific evidence from this week's lesson, construct an argument explaining HOW the medieval cultural exchange with the Islamic world could have been a NECESSARY PRECONDITION for the Renaissance to occur when and how it did. Write at least 7 sentences and address a possible counter-argument. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Your argument connecting cultural exchange to the Renaissance:&#10;&#10;Possible counter-argument and response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The Renaissance is often characterised by a renewed European interest in classical Greek and Roman learning, philosophy, art, and scientific inquiry — but this raises an important historical question: how could Europe experience a "rebirth" of classical knowledge that had been largely lost after Rome's collapse centuries earlier, unless that knowledge had somehow survived and become accessible again? The evidence from this week's lesson provides a direct answer: Islamic scholars had preserved, translated, and expanded upon these very Greek and Roman texts throughout the Islamic Golden Age, and increased contact between Europe and the Islamic world during and after the Crusades created channels — through trade routes, translated manuscripts, and direct scholarly contact, particularly in regions like Spain and Sicily where Islamic and Christian cultures intersected — through which this preserved classical knowledge could flow back into Western Europe. Without this preservation and transfer, the specific classical texts that Renaissance scholars studied, translated, and built upon might simply not have existed in accessible form in Europe at all, making it plausible that medieval cultural exchange was a genuine NECESSARY PRECONDITION — not merely a helpful contributing factor — for the Renaissance to occur specifically as a "REBIRTH" of classical learning, since you cannot rebirth ideas that have been permanently and completely lost. <strong>Counter-argument:</strong> One might argue that European scholars could have independently rediscovered or reconstructed similar mathematical and scientific ideas without Islamic preservation, given enough time — human intellectual development is not always strictly dependent on a single source. <strong>Response:</strong> While independent rediscovery is theoretically possible, historical evidence suggests specific classical texts and their exact original content (rather than just similar concepts developed independently) directly shaped Renaissance thought, and historians widely credit the documented, traceable transmission through Islamic preservation and translation as the actual historical pathway — making it the most historically supported explanation rather than pure speculation about hypothetical independent rediscovery.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week10_Day2');</script>
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 10 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:140px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.grid-plane{display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(9,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:340px;margin:14px auto;aspect-ratio:1;}
+.grid-cell{background:var(--surface2);position:relative;}
+.grid-cell.axis{background:rgba(255,255,255,0.15);}
+.grid-cell.origin{background:#FCD34D;}
+.grid-cell.point{background:#E11D48;}
+.poem-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 24px;font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.9;color:var(--bright);font-style:italic;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+@media(max-width:600px){.hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}.compare{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 10</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">👑</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 10</div>
+  <div class="hero-title">David —<br>A Heart After God</div>
+  <div class="hero-subtitle">1 Samuel 16-17, 2 Samuel 11-12, Psalms · From Shepherd to King · Repentance and Worship</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Psalm 23:1</span><span class="hero-tag">1 Samuel 16-17</span><span class="hero-tag">Repentance</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"The LORD is my shepherd, I lack nothing."</div>
+    <div class="verse-ref">Psalm 23:1 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word:</strong> David — who had literally BEEN a shepherd caring for sheep — describes GOD as his shepherd. "I lack nothing" does not mean David had everything he ever wanted; it means his deepest needs were met by God's care, the same way a well-cared-for sheep lacks nothing under a good shepherd. This verse comes from someone who knew shepherding firsthand.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">anoint / anointed</div><div class="esl-def">To pour oil on someone's head as a sign that God has chosen them for a special role, like king or priest. Samuel anointed David as the future king.</div></div>
+    <div class="esl-row"><div class="esl-word">shepherd</div><div class="esl-def">A person who cares for and protects sheep. David was literally a shepherd before he became king — the job shaped how he later led people.</div></div>
+    <div class="esl-row"><div class="esl-word">psalm</div><div class="esl-def">A sacred song or poem, often addressed to God. David wrote many of the 150 psalms in the book of Psalms — prayers, praises, and honest cries to God.</div></div>
+    <div class="esl-row"><div class="esl-word">repentance</div><div class="esl-def">Genuinely turning away from wrongdoing and turning back toward God — more than just saying sorry, it means a real change of heart and direction.</div></div>
+    <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A serious, binding agreement between God and people. God made a covenant promise with David about his royal descendants.</div></div>
+    <div class="esl-row"><div class="esl-word">Goliath / champion</div><div class="esl-def">A "champion" was a chosen fighter who represented an entire army in single combat. Goliath was the Philistines' champion — a giant warrior.</div></div>
+    <div class="esl-row"><div class="esl-word">worship</div><div class="esl-def">Expressing love, honour, and devotion to God — through songs, prayer, actions, or a whole life lived for God. David is described as a great worshipper.</div></div>
+    <div class="esl-row"><div class="esl-word">integrity</div><div class="esl-def">Being the same honest, good person whether or not anyone is watching. The Bible describes David as someone with "integrity of heart," even though he also made serious mistakes.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🐑 From Shepherd Boy to Anointed King — 1 Samuel 16</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">When God rejects Saul as king, he sends the prophet Samuel to Bethlehem to anoint a replacement — one of Jesse's sons. Samuel expects the tallest, most impressive-looking son to be God's choice.</div>
+  </div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The key verse of this story:</strong> "The LORD does not look at the things people look at. People look at the outward appearance, but the LORD looks at the heart" (1 Samuel 16:7). David — the youngest, overlooked, out tending sheep while his brothers were presented to Samuel — is God's chosen king.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">👀 What People Looked At</div>
+      <div class="cmp-row">Height and physical stature</div>
+      <div class="cmp-row">Birth order (David was the youngest of 8)</div>
+      <div class="cmp-row">Who was already present and prepared</div>
+      <div class="cmp-row">Outward, visible impressiveness</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">❤️ What God Looked At</div>
+      <div class="cmp-row">The condition and character of the heart</div>
+      <div class="cmp-row">Faithfulness in a small, unnoticed job (shepherding)</div>
+      <div class="cmp-row">Trust in God rather than self-reliance</div>
+      <div class="cmp-row">Who God had already chosen, unseen by others</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">⚔️ David and Goliath — 1 Samuel 17</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">A terrifying standoff</div><div class="step-desc">Goliath, a giant Philistine champion, challenges Israel to single combat for 40 days. Israel's army — including David's older brothers — is paralysed with fear.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">David's confidence — rooted in past faithfulness</div><div class="step-desc">David explains he has already killed a lion and a bear while protecting his father's sheep — "the LORD who rescued me... will rescue me" from Goliath (17:37).</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">Refusing borrowed armour</div><div class="step-desc">David rejects King Saul's armour because it doesn't fit him and he hasn't tested it — going instead with what he knows: a sling and five smooth stones.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">4</div><div><div class="step-title">Victory through one stone</div><div class="step-desc">David declares he comes "in the name of the LORD Almighty" (17:45) — not his own strength — and defeats Goliath with a single sling stone.</div></div></div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> David's courage was not blind — it was built on remembering specific past experiences of God's faithfulness (the lion, the bear). Courage often grows from remembering, not forgetting, what has already been overcome.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📜 David the Psalmist — Honest Prayers</div>
+  <div class="callout tip">
+    <div class="ci">💡</div>
+    <div class="ct">David wrote roughly half of the 150 psalms in the Bible. Unlike a polished public speech, psalms are raw and honest — full of joy, fear, anger, doubt, and praise, sometimes all in the same psalm.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Psalm</th><th>What It Expresses</th></tr></thead>
+    <tbody>
+      <tr><td>Psalm 23</td><td>Trust — "The LORD is my shepherd, I lack nothing."</td></tr>
+      <tr><td>Psalm 51</td><td>Repentance — written after David's sin with Bathsheba; a raw confession asking God to "create in me a pure heart."</td></tr>
+      <tr><td>Psalm 34</td><td>Praise — "I will extol the LORD at all times" written during a time of danger and fear.</td></tr>
+      <tr><td>Psalm 13</td><td>Honest lament — "How long, LORD? Will you forget me forever?" — David questioning God openly.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> The Psalms model a kind of prayer that does not hide difficult emotions from God. David brings his full self — doubt and confidence, sin and repentance — into his relationship with God rather than only presenting a "cleaned-up" version.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">💔 David's Great Failure and Repentance — 2 Samuel 11-12</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">David — by now king — commits serious sins: he takes another man's wife, Bathsheba, and then arranges for her husband Uriah to be killed in battle to hide his wrongdoing.</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#6D28D9;"></div><div class="tl-date">Stage 1</div><div class="tl-title">The prophet Nathan confronts David</div><div class="tl-desc">Nathan tells David a story about a rich man stealing a poor man's only lamb. David is outraged — until Nathan says "You are that man!" (2 Samuel 12:7).</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#8B5CF6;"></div><div class="tl-date">Stage 2</div><div class="tl-title">David's genuine repentance</div><div class="tl-desc">Unlike many other kings of the time, David does not deny it, make excuses, or punish Nathan. He confesses: "I have sinned against the LORD" (12:13).</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#A78BFA;"></div><div class="tl-date">Stage 3</div><div class="tl-title">Consequences remain, but the relationship is restored</div><div class="tl-desc">David faces real, painful consequences for his sin — but he is not rejected by God the way Saul was. Psalm 51 is his prayer of repentance from this exact moment.</div></div>
+  </div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The "heart after God" idea:</strong> David is called "a man after God's own heart" (1 Samuel 13:14) — not because he was perfect (he clearly was not), but because of how he responded when confronted with his sin: honestly, without excuses, genuinely turning back to God.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🎯 Knowledge Check — David</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">📝</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 10</div>
+  <div class="hero-title">Poetry —<br>Forms & Devices</div>
+  <div class="hero-subtitle">Rhyme, rhythm, alliteration, onomatopoeia · Reading and writing simple poems</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Rhyme & Rhythm</span><span class="hero-tag">Poetic Devices</span><span class="hero-tag">Writing Poetry</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these terms for reading and writing poetry</div>
+    <div class="esl-row"><div class="esl-word">rhyme</div><div class="esl-def">When words end with the same or similar sounds. "Cat" and "hat" rhyme. Rhyme creates a musical, memorable pattern.</div></div>
+    <div class="esl-row"><div class="esl-word">rhythm</div><div class="esl-def">The pattern of beats or stressed/unstressed syllables in a line of poetry — like a musical pulse running through the words.</div></div>
+    <div class="esl-row"><div class="esl-word">alliteration</div><div class="esl-def">Repeating the SAME beginning consonant sound in nearby words. "Peter Piper picked a peck" — repeated "p" sound.</div></div>
+    <div class="esl-row"><div class="esl-word">onomatopoeia</div><div class="esl-def">A word that sounds like the noise it describes. "Buzz," "crash," "sizzle," "hiss" — the word IS the sound.</div></div>
+    <div class="esl-row"><div class="esl-word">simile</div><div class="esl-def">A comparison using "like" or "as." "Brave as a lion." Two different things compared directly with a linking word.</div></div>
+    <div class="esl-row"><div class="esl-word">metaphor</div><div class="esl-def">A comparison WITHOUT "like" or "as" — saying one thing IS another. "The LORD is my shepherd" (Psalm 23) is a metaphor.</div></div>
+    <div class="esl-row"><div class="esl-word">stanza</div><div class="esl-def">A group of lines in a poem, like a paragraph in prose. Poems are often divided into several stanzas.</div></div>
+    <div class="esl-row"><div class="esl-word">verse / line</div><div class="esl-def">A single line of a poem. Several lines together form a stanza.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🎵 Rhyme — Patterns of Sound</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Rhyme schemes are described using letters — each new rhyme sound gets a new letter. AABB means lines 1&2 rhyme with each other, and lines 3&4 rhyme with each other (a different sound).</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Rhyme Scheme</th><th>Pattern</th><th>Example Structure</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AABB</strong></td><td>Rhyming couplets — pairs of lines</td><td>Line 1 rhymes with Line 2; Line 3 rhymes with Line 4</td></tr>
+      <tr><td><strong>ABAB</strong></td><td>Alternating rhyme</td><td>Line 1 rhymes with Line 3; Line 2 rhymes with Line 4</td></tr>
+      <tr><td><strong>ABCB</strong></td><td>Only lines 2 and 4 rhyme</td><td>Common in ballads and simple songs</td></tr>
+      <tr><td><strong>Free verse</strong></td><td>No fixed rhyme scheme at all</td><td>Many modern poems use free verse deliberately</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>ESL tip:</strong> Rhyme is not required for something to be a poem! Many powerful poems (and much of the Bible's poetry, like the Psalms) do not rhyme at all in the original Hebrew — they use OTHER devices like rhythm and repetition instead.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🥁 Rhythm — The Musical Pulse</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden idea:</strong> Rhythm in poetry comes from the pattern of STRESSED (emphasised) and unstressed syllables. Read a line aloud and clap on the naturally emphasised syllables — that clapping pattern IS the rhythm.</div>
+  </div>
+  <div class="poem-box">
+    "Twin<strong>kle</strong>, twin<strong>kle</strong>, <strong>lit</strong>tle <strong>star</strong>,<br>
+    <strong>How</strong> I <strong>won</strong>der <strong>what</strong> you <strong>are</strong>."
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> This regular "da-DUM-da-DUM" pattern is called a metre. Not all poems have such a strict rhythm — but even free verse poems use rhythm deliberately, often through varying line lengths and pauses, to control the pace at which a reader experiences the poem.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🔤 Sound Devices — Alliteration & Onomatopoeia</div>
+  <table class="data-table">
+    <thead><tr><th>Device</th><th>What It Does</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Alliteration</strong></td><td>Repeats a beginning consonant sound, creating rhythm and emphasis</td><td>"The wild wind whipped and wailed."</td></tr>
+      <tr><td><strong>Onomatopoeia</strong></td><td>A word that imitates the actual sound it describes</td><td>"The kettle hissed and the bacon sizzled."</td></tr>
+      <tr><td><strong>Assonance</strong></td><td>Repeats a VOWEL sound within nearby words (advanced device)</td><td>"The rain in Spain falls mainly on the plain."</td></tr>
+      <tr><td><strong>Repetition</strong></td><td>Repeats a word or phrase for emphasis</td><td>"Be strong and courageous... be strong and courageous" (Joshua 1)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🎭 Simile vs Metaphor — Two Ways to Compare</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.4);">
+      <div class="cmp-head" style="color:#FCA5A5;">Simile — uses "like" or "as"</div>
+      <div class="cmp-row">"He was as brave as a lion."</div>
+      <div class="cmp-row">"Her eyes shone like diamonds."</div>
+      <div class="cmp-row">Directly compares two DIFFERENT things using a linking word</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.3);">
+      <div class="cmp-head" style="color:#FCA5A5;">Metaphor — no linking word</div>
+      <div class="cmp-row">"The LORD is my shepherd." (Psalm 23)</div>
+      <div class="cmp-row">"Time is a thief."</div>
+      <div class="cmp-row">States that one thing simply IS another — a stronger, more direct comparison</div>
+    </div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Metaphors are often considered more powerful than similes because they collapse the distance between two things entirely — Psalm 23 doesn't say God is LIKE a shepherd; it says God IS the shepherd, making the comparison feel total and complete.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📖 Worked Example — Poetic Devices in Psalm 23</div>
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;font-size:0.88rem;line-height:1.8;color:#B0B0C8;">
+    <span style="background:rgba(190,18,60,0.25);padding:2px 6px;border-radius:4px;color:#FCA5A5;font-size:0.75rem;font-weight:700;margin-right:6px;">[METAPHOR]</span><span style="color:var(--bright);">"The LORD is my shepherd"</span> — God is described directly as a shepherd, not "like" one. <span style="background:rgba(30,58,138,0.25);padding:2px 6px;border-radius:4px;color:#93C5FD;font-size:0.75rem;font-weight:700;margin-right:6px;">[IMAGERY]</span>"He makes me lie down in green pastures, he leads me beside quiet waters" — vivid visual and peaceful imagery lets the reader picture the scene. <span style="background:rgba(6,95,70,0.25);padding:2px 6px;border-radius:4px;color:#6EE7B7;font-size:0.75rem;font-weight:700;margin-right:6px;">[REPETITION]</span><span style="color:#6EE7B7;">"Surely goodness and love will follow me"</span> echoes earlier lines about God's constant care, reinforcing the poem's central idea of trust.
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🎯 Poetry Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D2200,#7A3D00);">
+  <div class="hero-icon">📐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 10</div>
+  <div class="hero-title">Coordinates &<br>the Number Plane</div>
+  <div class="hero-subtitle">The four quadrants · Plotting and reading coordinates · Reflections</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Coordinates</span><span class="hero-tag">Four Quadrants</span><span class="hero-tag">Reflections</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">The building blocks of coordinate geometry</div>
+    <div class="esl-row"><div class="esl-word">coordinate</div><div class="esl-def">A pair of numbers (x, y) that describes the exact position of a point on a grid.</div></div>
+    <div class="esl-row"><div class="esl-word">x-axis</div><div class="esl-def">The HORIZONTAL number line on a grid — running left to right.</div></div>
+    <div class="esl-row"><div class="esl-word">y-axis</div><div class="esl-def">The VERTICAL number line on a grid — running up and down.</div></div>
+    <div class="esl-row"><div class="esl-word">origin</div><div class="esl-def">The point where the x-axis and y-axis cross — coordinates (0, 0).</div></div>
+    <div class="esl-row"><div class="esl-word">quadrant</div><div class="esl-def">One of the four sections the axes divide the plane into. Numbered 1 to 4, going anticlockwise from the top-right.</div></div>
+    <div class="esl-row"><div class="esl-word">plot</div><div class="esl-def">To mark a point's exact position on a grid using its coordinates.</div></div>
+    <div class="esl-row"><div class="esl-word">reflection</div><div class="esl-def">Flipping a point or shape over a line (like a mirror image) — the axis acts as the "mirror."</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📍 Plotting a Coordinate — (x, y)</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule — "along the corridor, up the stairs":</strong> Every coordinate is written (x, y). ALWAYS move along the x-axis (horizontal) FIRST, then up/down the y-axis (vertical) SECOND. The order matters — (3, 5) is a completely different point from (5, 3)!</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Coordinate</th><th>How to Plot It</th></tr></thead>
+    <tbody>
+      <tr><td>(4, 2)</td><td>Move 4 right along the x-axis, then 2 up.</td></tr>
+      <tr><td>(−3, 5)</td><td>Move 3 LEFT along the x-axis, then 5 up.</td></tr>
+      <tr><td>(0, 6)</td><td>Don't move left/right — go straight up 6 (stays on the y-axis).</td></tr>
+      <tr><td>(−2, −4)</td><td>Move 2 left, then 4 DOWN.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🗺️ The Four Quadrants</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">The x-axis and y-axis divide the coordinate plane into FOUR regions called quadrants. Each quadrant has a distinct sign pattern for its coordinates.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Quadrant</th><th>x-value</th><th>y-value</th><th>Example Point</th></tr></thead>
+    <tbody>
+      <tr><td>Quadrant 1 (top-right)</td><td>Positive (+)</td><td>Positive (+)</td><td>(3, 4)</td></tr>
+      <tr><td>Quadrant 2 (top-left)</td><td>Negative (−)</td><td>Positive (+)</td><td>(−3, 4)</td></tr>
+      <tr><td>Quadrant 3 (bottom-left)</td><td>Negative (−)</td><td>Negative (−)</td><td>(−3, −4)</td></tr>
+      <tr><td>Quadrant 4 (bottom-right)</td><td>Positive (+)</td><td>Negative (−)</td><td>(3, −4)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> Quadrants are numbered ANTICLOCKWISE starting from the top-right, not clockwise. Many students guess clockwise — always double check!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🪞 Reflections on the Coordinate Plane</div>
+  <div class="formula">
+    <span class="comment">Reflecting a point over the X-AXIS: flip the sign of y, keep x the same</span><br>
+    Point (3, 5) → reflected over x-axis → <span class="hl2">(3, −5)</span><br><br>
+    <span class="comment">Reflecting a point over the Y-AXIS: flip the sign of x, keep y the same</span><br>
+    Point (3, 5) → reflected over y-axis → <span class="hl2">(−3, 5)</span><br><br>
+    <span class="comment">Reflecting over BOTH axes (i.e. through the origin): flip both signs</span><br>
+    Point (3, 5) → reflected through origin → <span class="hl2">(−3, −5)</span>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> A reflection is like a mirror image — the DISTANCE from the axis (mirror line) stays exactly the same on both sides. If a point is 5 units above the x-axis, its reflection is 5 units below it.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🌍 Coordinates in Real Life</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Map references</div><div class="step-desc">Latitude and longitude (studied in Week 5 Geography) work exactly like coordinates — two numbers describing an exact position.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Video game design</div><div class="step-desc">Every character and object's position in a 2D video game is tracked using x,y coordinates on screen.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Graphic design and art</div><div class="step-desc">Digital images are built from pixels, each with its own coordinate position, allowing precise editing.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🎯 Coordinates Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🧪</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 10</div>
+  <div class="hero-title">Physical vs<br>Chemical Changes</div>
+  <div class="hero-subtitle">Signs of a chemical reaction · Reversible vs irreversible changes</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Physical Changes</span><span class="hero-tag">Chemical Reactions</span><span class="hero-tag">Reversibility</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📚 Key Vocabulary — ESL Science Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 9 — elements, compounds, and how they combine</div>
+    <div class="esl-row"><div class="esl-word">physical change</div><div class="esl-def">A change in FORM or APPEARANCE only — no new substance is created. The material can usually be changed back.</div></div>
+    <div class="esl-row"><div class="esl-word">chemical change / reaction</div><div class="esl-def">A change that creates a completely NEW substance with different properties. Usually cannot be easily reversed.</div></div>
+    <div class="esl-row"><div class="esl-word">reversible</div><div class="esl-def">Able to be changed back to the original substance or state. Most physical changes are reversible.</div></div>
+    <div class="esl-row"><div class="esl-word">irreversible</div><div class="esl-def">NOT able to be changed back to the original substance. Most chemical changes are irreversible.</div></div>
+    <div class="esl-row"><div class="esl-word">precipitate</div><div class="esl-def">A solid that forms and separates out of a liquid during a chemical reaction — often a sign a reaction has happened.</div></div>
+    <div class="esl-row"><div class="esl-word">exothermic</div><div class="esl-def">A reaction that RELEASES heat energy to its surroundings — things get warmer. "Exo" = out.</div></div>
+    <div class="esl-row"><div class="esl-word">endothermic</div><div class="esl-def">A reaction that ABSORBS heat energy from its surroundings — things get colder. "Endo" = in.</div></div>
+    <div class="esl-row"><div class="esl-word">combustion</div><div class="esl-def">A chemical reaction where a substance burns rapidly, combining with oxygen and releasing heat and light.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🔍 Physical vs Chemical Changes — The Core Difference</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule:</strong> In a physical change, the SUBSTANCE stays the same — only its shape, size, or state changes. In a chemical change, a completely NEW substance is formed, with new chemical properties.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">🔄 Physical Change</div>
+      <div class="cmp-row">No new substance is formed</div>
+      <div class="cmp-row">Usually reversible</div>
+      <div class="cmp-row">Only appearance, shape, or state changes</div>
+      <div class="cmp-row">Examples: melting ice, tearing paper, dissolving sugar, crushing a can</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.3);">
+      <div class="cmp-head" style="color:#6EE7B7;">⚗️ Chemical Change</div>
+      <div class="cmp-row">A new substance IS formed, with new properties</div>
+      <div class="cmp-row">Usually irreversible</div>
+      <div class="cmp-row">Involves breaking and forming chemical bonds</div>
+      <div class="cmp-row">Examples: burning wood, rusting iron, baking a cake, an egg cooking</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🚩 Five Signs of a Chemical Reaction</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#065F46;">1</div><div><div class="step-title">Colour change</div><div class="step-desc">An unexpected change in colour often signals new substances forming — e.g. iron rusting turns orange-brown.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">2</div><div><div class="step-title">Gas produced (bubbles/fizzing)</div><div class="step-desc">Bubbles forming — especially without heating — often indicate a gas is being released as a new product.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">3</div><div><div class="step-title">Temperature change</div><div class="step-desc">The mixture gets noticeably hotter (exothermic) or colder (endothermic) without external heating or cooling.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">4</div><div><div class="step-title">Precipitate forms</div><div class="step-desc">A solid suddenly appears in a liquid that was previously clear — a new insoluble substance has formed.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#065F46;">5</div><div><div class="step-title">Light or smell produced</div><div class="step-desc">A flame, glow, or new/different smell appearing suggests a chemical reaction is happening (e.g. combustion).</div></div></div>
+  </div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> Bubbles alone don't always mean a chemical reaction! Boiling water produces bubbles too, but that's a PHYSICAL change (state change) — no new substance forms, just liquid water becoming water vapour.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📊 Sorting Examples — Physical or Chemical?</div>
+  <table class="data-table">
+    <thead><tr><th>Example</th><th>Type</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Ice melting into water</td><td><strong>Physical</strong></td><td>Still H₂O — just changed from solid to liquid state. Can be re-frozen.</td></tr>
+      <tr><td>Iron rusting</td><td><strong>Chemical</strong></td><td>Iron + oxygen forms iron oxide (rust) — a new substance with different properties.</td></tr>
+      <tr><td>Cutting a piece of paper</td><td><strong>Physical</strong></td><td>Still paper — just smaller pieces. No new substance formed.</td></tr>
+      <tr><td>Burning a piece of paper</td><td><strong>Chemical</strong></td><td>Paper becomes ash, smoke, and gases — completely new substances. Cannot be reversed.</td></tr>
+      <tr><td>Dissolving salt in water</td><td><strong>Physical</strong></td><td>Salt is still salt (just spread throughout the water) — can be recovered by evaporation (Week 8!).</td></tr>
+      <tr><td>Baking a cake</td><td><strong>Chemical</strong></td><td>Raw ingredients undergo irreversible chemical reactions (e.g. proteins changing structure) to form a cake — you cannot "un-bake" it.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🔥 Exothermic vs Endothermic Reactions</div>
+  <div class="formula">
+    <span class="comment">Exothermic (releases heat — gets WARMER):</span><br>
+    Combustion (burning), most oxidation reactions, adding acid to water<br><br>
+    <span class="comment">Endothermic (absorbs heat — gets COLDER):</span><br>
+    Photosynthesis (absorbs light energy), some dissolving reactions (e.g. certain salts in water), thermal decomposition
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> "Exo" means OUT (exit) — energy goes OUT to the surroundings. "Endo" means IN — energy is taken IN from the surroundings. A cold pack you squeeze to cool an injury uses an endothermic reaction!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🎯 Physical vs Chemical Changes Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ HISTORY ═══════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-icon">🕌</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Week 10</div>
+  <div class="hero-title">The Crusades &<br>Cultural Exchange</div>
+  <div class="hero-subtitle">Causes and effects · What Europe gained from the Islamic world</div>
+  <div class="hero-tags">
+    <span class="hero-tag">The Crusades</span><span class="hero-tag">Cultural Exchange</span><span class="hero-tag">Islamic Golden Age</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">📚 Key Vocabulary — ESL History Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 9 — medieval Europe and the feudal system</div>
+    <div class="esl-row"><div class="esl-word">Crusade</div><div class="esl-def">A series of religious wars (1095-1291) in which European Christians tried to capture and hold the "Holy Land" (Jerusalem and surrounding areas) from Muslim control.</div></div>
+    <div class="esl-row"><div class="esl-word">Holy Land</div><div class="esl-def">The region around Jerusalem, considered sacred by Christians, Muslims, and Jews alike, as central to each religion's history.</div></div>
+    <div class="esl-row"><div class="esl-word">pilgrimage</div><div class="esl-def">A journey to a sacred place for religious reasons. Christian pilgrimage to Jerusalem was a major motivation behind the Crusades.</div></div>
+    <div class="esl-row"><div class="esl-word">cultural exchange</div><div class="esl-def">The sharing of ideas, knowledge, goods, and customs between different peoples or civilisations who come into contact.</div></div>
+    <div class="esl-row"><div class="esl-word">Islamic Golden Age</div><div class="esl-def">A period (roughly 8th-14th century) when Islamic civilisation led the world in science, medicine, mathematics, and philosophy.</div></div>
+    <div class="esl-row"><div class="esl-word">scholar</div><div class="esl-def">A person devoted to learning and academic study. Islamic scholars preserved and expanded on ancient Greek and Roman knowledge.</div></div>
+    <div class="esl-row"><div class="esl-word">algebra</div><div class="esl-def">A branch of mathematics whose name comes from the Arabic word "al-jabr," developed extensively by Islamic mathematicians.</div></div>
+    <div class="esl-row"><div class="esl-word">trade route</div><div class="esl-def">An established path used regularly for the exchange of goods between regions — Crusader contact opened new trade connections between Europe and the Middle East.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">⚔️ What Were the Crusades? — Causes</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">In 1095, Pope Urban II called on European Christians to march to Jerusalem and reclaim the Holy Land from Muslim (Seljuk Turk) control. This launched the First Crusade and began roughly 200 years of intermittent religious warfare.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Cause</th><th>Explanation</th></tr></thead>
+    <tbody>
+      <tr><td>Religious motivation</td><td>Recapturing Jerusalem — sacred to Christianity as the site of Jesus' death and resurrection — was framed as a holy duty.</td></tr>
+      <tr><td>Church encouragement</td><td>The Pope promised forgiveness of sins ("indulgences") to those who fought, a powerful incentive in medieval Christian belief (connects to Week 9's study of Church power).</td></tr>
+      <tr><td>Protecting pilgrims</td><td>European Christians travelling to the Holy Land as pilgrims reported difficulty and danger under Muslim control.</td></tr>
+      <tr><td>Political & economic motives</td><td>Some knights and nobles sought land, wealth, glory, or a productive outlet for feudal warrior energy (connecting to Week 9's knights and chivalry).</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🗺️ Timeline — Key Crusades</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">There were multiple Crusades over roughly 200 years, with mixed and largely unsuccessful long-term outcomes for the Crusaders' goal of holding Jerusalem permanently.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Crusade</th><th>Approx. Date</th><th>Outcome</th></tr></thead>
+    <tbody>
+      <tr><td>First Crusade</td><td>1096-1099</td><td>Crusaders successfully captured Jerusalem, establishing Crusader states.</td></tr>
+      <tr><td>Second Crusade</td><td>1147-1149</td><td>Largely unsuccessful; failed to achieve its goals.</td></tr>
+      <tr><td>Third Crusade</td><td>1189-1192</td><td>Famous conflict between Richard the Lionheart and Sultan Saladin; Jerusalem remained under Muslim control, though a truce allowed Christian pilgrim access.</td></tr>
+      <tr><td>Later Crusades</td><td>1200s</td><td>Gradually less successful; Crusader states in the Holy Land were eventually lost entirely by 1291.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🌟 What Europe Gained — Cultural Exchange</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>The key historical lesson:</strong> Although the Crusades themselves largely failed militarily, extended contact between Europe and the Islamic world triggered one of history's most significant transfers of knowledge, goods, and ideas — arguably more historically significant than the wars themselves.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Area</th><th>What Europe Gained from the Islamic World</th></tr></thead>
+    <tbody>
+      <tr><td>Mathematics</td><td>Algebra (the word itself is Arabic), and the Hindu-Arabic numeral system (0-9) that replaced clumsy Roman numerals across Europe.</td></tr>
+      <tr><td>Medicine</td><td>Advanced medical knowledge — hospitals, surgical techniques, and pharmacology far beyond what medieval Europe had developed independently.</td></tr>
+      <tr><td>Preserved classical knowledge</td><td>Islamic scholars had preserved and translated ancient Greek and Roman texts (philosophy, science) that had been lost in Western Europe after Rome's fall — this knowledge flowed back to Europe.</td></tr>
+      <tr><td>Trade goods</td><td>Spices, silk, sugar, and new agricultural products became available in Europe through expanded trade connections.</td></tr>
+      <tr><td>Architecture & navigation</td><td>New building techniques and improved navigational tools (like the astrolabe) spread into European use.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">⚖️ Balanced View — Costs and Legacy</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.4);">
+      <div class="cmp-head" style="color:#93C5FD;">💔 The Human Cost</div>
+      <div class="cmp-row">Enormous loss of life on all sides over two centuries of conflict</div>
+      <div class="cmp-row">Violence against Muslim, Jewish, and even some Christian communities</div>
+      <div class="cmp-row">Long-lasting tension between Christian Europe and the Islamic world</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.3);">
+      <div class="cmp-head" style="color:#93C5FD;">🌉 The Lasting Exchange</div>
+      <div class="cmp-row">Expanded European trade networks and economic growth</div>
+      <div class="cmp-row">Transfer of scientific and mathematical knowledge that helped enable the later Renaissance</div>
+      <div class="cmp-row">Greater (though still limited) awareness between civilisations</div>
+    </div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Historians often note the irony that the Crusades, launched as religious warfare, ended up accelerating one of history's greatest peaceful exchanges of ideas — showing that historical consequences can be very different from a conflict's original intentions.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🎯 The Crusades Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const quizData={
+  bible:[
+    {q:'What does 1 Samuel 16:7 say God looks at, which is different from what people typically look at?',opts:['God looks at wealth; people look at family background','God looks at the heart; people look at outward appearance','God looks at age; people look at height','God looks at strength; people look at intelligence'],ans:1,exp:'1 Samuel 16:7 says: "People look at the outward appearance, but the LORD looks at the heart." This explains why David — the youngest, overlooked son — was God\'s chosen king, not his more physically impressive brothers.'},
+    {q:'What gave David confidence to fight Goliath, according to 1 Samuel 17?',opts:['King Saul\'s armour and sword','Remembering how God had rescued him from a lion and a bear while shepherding','His brothers\' encouragement','A promise of great riches if he won'],ans:1,exp:'David explains that the LORD who rescued him from the lion and the bear "will rescue me from the hand of this Philistine" (17:37) — his courage was rooted in remembering specific past experiences of God\'s faithfulness.'},
+    {q:'What is the book of Psalms mostly made up of?',opts:['Historical records of Israel\'s kings','Sacred songs and prayers, many written by David, expressing honest emotion to God','Laws and commandments','Stories about Moses'],ans:1,exp:'The Psalms are songs/prayers/poems addressed to God, covering emotions from praise and trust to doubt and lament. David wrote roughly half of the 150 psalms.'},
+    {q:'When the prophet Nathan confronted David about his sin with Bathsheba, how did David respond?',opts:['He denied everything and punished Nathan','He made excuses for his behaviour','He confessed honestly: "I have sinned against the LORD"','He ignored Nathan completely'],ans:2,exp:'2 Samuel 12:13 records David\'s direct, honest confession: "I have sinned against the LORD." Unlike many rulers of the time, David did not deny or make excuses — this genuine repentance is central to why he is called "a man after God\'s own heart."'},
+    {q:'What does it mean that David was "a man after God\'s own heart" (1 Samuel 13:14), given that he also made serious mistakes?',opts:['It means David never sinned or made any mistakes','It refers to how David genuinely and honestly responded when confronted with his sin, not that he was perfect','It means David looked like God','It has nothing to do with David\'s character'],ans:1,exp:'David was far from perfect — his sin with Bathsheba was serious. The phrase describes his HEART\'S RESPONSE when confronted: honest confession and genuine repentance, rather than denial, excuses, or hardness — this is what set him apart, not sinlessness.'},
+    {q:'What does the memory verse "The LORD is my shepherd, I lack nothing" (Psalm 23:1) mean?',opts:['David literally owned nothing at all','David\'s deepest needs are met through God\'s care, just as a well-cared-for sheep lacks nothing under a good shepherd','David never wanted anything in his whole life','It is only about literal sheep'],ans:1,exp:'David, who had literally been a shepherd, uses that experience as a metaphor: just as a sheep under good care lacks nothing essential, David trusts that his deepest needs are met by God\'s care as his shepherd.'},
+  ],
+  english:[
+    {q:'What is "alliteration"?',opts:['A word that sounds like the noise it describes','Repeating the same beginning consonant sound in nearby words','A comparison using "like" or "as"','The pattern of stressed and unstressed syllables'],ans:1,exp:'Alliteration repeats a beginning consonant sound across nearby words, as in "the wild wind whipped and wailed" — creating rhythm and emphasis.'},
+    {q:'What is "onomatopoeia"?',opts:['A type of rhyme scheme','A word that imitates the actual sound it describes, like "buzz" or "sizzle"','A comparison without "like" or "as"','A group of lines in a poem'],ans:1,exp:'Onomatopoeia is a word that sounds like the noise it represents — "hiss," "crash," and "sizzle" are all onomatopoeia because the word itself mimics the sound.'},
+    {q:'What is the key difference between a simile and a metaphor?',opts:['There is no real difference','A simile uses "like" or "as" to compare; a metaphor states directly that one thing IS another, with no linking word','Metaphors are always about animals','Similes are only used in songs'],ans:1,exp:'A simile compares using "like" or "as" ("brave as a lion"). A metaphor states one thing directly IS another with no linking word ("The LORD is my shepherd") — often considered a stronger, more direct comparison.'},
+    {q:'What is a "stanza"?',opts:['A single word in a poem','A group of lines in a poem, similar to a paragraph in prose','The title of a poem','A type of rhyme scheme'],ans:1,exp:'A stanza is a group of lines forming a section of a poem — functioning similarly to how a paragraph organises prose writing.'},
+    {q:'Does a poem need to rhyme to be considered a poem?',opts:['Yes, all poems must rhyme','No — many poems, including much of the Bible\'s Psalms, use free verse or other devices like rhythm and repetition instead of rhyme','Only religious poems don\'t need to rhyme','Rhyme is the only device that matters in poetry'],ans:1,exp:'Rhyme is one poetic device among many, but it is not required. Free verse poems, and much of biblical Hebrew poetry (including the Psalms), do not rely on rhyme — they use rhythm, repetition, imagery, and parallelism instead.'},
+  ],
+  maths:[
+    {q:'In the coordinate (5, 3), which number represents movement along the x-axis?',opts:['3','5','Both equally','Neither'],ans:1,exp:'Coordinates are always written (x, y) — the FIRST number (5) is the x-coordinate, showing horizontal movement. The second number (3) is the y-coordinate, showing vertical movement.'},
+    {q:'Which quadrant does the point (−4, 2) lie in?',opts:['Quadrant 1 (top-right)','Quadrant 2 (top-left)','Quadrant 3 (bottom-left)','Quadrant 4 (bottom-right)'],ans:1,exp:'x is negative (−4) and y is positive (2). Negative x, positive y = Quadrant 2 (top-left).'},
+    {q:'What are the coordinates of the origin?',opts:['(1, 1)','(0, 0)','(−1, −1)','There is no fixed origin'],ans:1,exp:'The origin is the point where the x-axis and y-axis cross — always at coordinates (0, 0).'},
+    {q:'If point A is at (4, 7), what are the coordinates after reflecting it over the X-AXIS?',opts:['(4, −7)','(−4, 7)','(−4, −7)','(7, 4)'],ans:0,exp:'Reflecting over the x-axis flips the sign of the y-coordinate only, keeping x the same: (4, 7) becomes (4, −7).'},
+    {q:'If point B is at (−3, 6), what are the coordinates after reflecting it over the Y-AXIS?',opts:['(−3, −6)','(3, 6)','(3, −6)','(6, −3)'],ans:1,exp:'Reflecting over the y-axis flips the sign of the x-coordinate only, keeping y the same: (−3, 6) becomes (3, 6).'},
+    {q:'A point lies exactly on the y-axis. What must be true about its x-coordinate?',opts:['It must be positive','It must be negative','It must be zero','It could be any number'],ans:2,exp:'Any point on the y-axis has NOT moved left or right at all from the origin — so its x-coordinate must always be 0. Example: (0, 5) is on the y-axis.'},
+  ],
+  science:[
+    {q:'What is the KEY difference between a physical change and a chemical change?',opts:['Physical changes always involve heat; chemical changes never do','A physical change does not form a new substance; a chemical change creates a new substance with different properties','Physical changes are always faster than chemical changes','There is no real difference'],ans:1,exp:'In a physical change, the material stays chemically the same — only its form, shape, or state changes. In a chemical change, a completely new substance forms with new chemical properties.'},
+    {q:'Which of these is a sign that a chemical reaction has likely occurred?',opts:['The substance changed shape only','A precipitate (new solid) suddenly forms in a previously clear liquid','The substance was cut into smaller pieces','The substance was dissolved and later evaporated back to its original form'],ans:1,exp:'A precipitate forming — a new solid appearing in a liquid — is a classic sign that a new substance has been chemically produced, indicating a chemical reaction has taken place.'},
+    {q:'Is melting ice into water a physical or chemical change, and why?',opts:['Chemical — because it creates a new substance','Physical — because it is still H₂O, just changed from solid to liquid state, and can be reversed by freezing','Chemical — because it cannot be reversed','Neither — melting is not a type of change'],ans:1,exp:'Melting ice is a physical change: the substance remains water (H₂O) throughout — only its state changes (solid to liquid) — and it can easily be reversed by freezing it again.'},
+    {q:'What does "exothermic" mean?',opts:['A reaction that absorbs heat, making things colder','A reaction that releases heat to the surroundings, making things warmer','A reaction that produces light only','A reaction that always explodes'],ans:1,exp:'"Exo" means out — an exothermic reaction releases heat energy OUT to its surroundings, causing a noticeable temperature increase.'},
+    {q:'Why is burning paper considered a chemical change rather than a physical one?',opts:['Because the paper gets smaller','Because burning produces ash, smoke, and gases — entirely new substances that cannot be turned back into the original paper','Because burning takes a long time','Because paper is flammable'],ans:1,exp:'Burning paper is a chemical change because it produces entirely new substances (ash, smoke, carbon dioxide, water vapour) with completely different properties from paper — and critically, this process cannot be reversed; you cannot turn ash back into paper.'},
+  ],
+  history:[
+    {q:'What were the Crusades?',opts:['Trade agreements between European kings','A series of religious wars in which European Christians tried to capture the Holy Land from Muslim control','Peaceful pilgrimages with no conflict','A single battle in 1095'],ans:1,exp:'The Crusades were a series of religious wars, beginning in 1095, in which European Christians sought to capture and hold Jerusalem and the surrounding "Holy Land" from Muslim control.'},
+    {q:'Who called for the First Crusade in 1095?',opts:['King Richard the Lionheart','Pope Urban II','Sultan Saladin','Emperor Charlemagne'],ans:1,exp:'Pope Urban II called on European Christians to march to Jerusalem and reclaim the Holy Land, launching the First Crusade — connecting to Week 9\'s study of the medieval Church\'s significant political power.'},
+    {q:'What mathematical contribution did the Islamic world make that transformed European mathematics?',opts:['Roman numerals','Algebra and the Hindu-Arabic numeral system (0-9)','The abacus','Geometry alone'],ans:1,exp:'Algebra (the word itself is Arabic, from "al-jabr") and the Hindu-Arabic numeral system (0-9), which replaced the clumsy Roman numeral system, were major mathematical contributions that transformed European mathematics.'},
+    {q:'Besides mathematics, what OTHER major area of knowledge did Islamic scholars preserve and pass on to medieval Europe?',opts:['Nothing else of significance','Ancient Greek and Roman philosophical and scientific texts that had been lost in Western Europe after Rome\'s fall','Only religious texts','Only military technology'],ans:1,exp:'Islamic scholars preserved and translated ancient Greek and Roman texts on philosophy and science that had been largely lost in Western Europe following Rome\'s collapse — this classical knowledge flowed back into Europe through Crusader-era contact, helping enable the later Renaissance.'},
+    {q:'Which statement best summarises the historical irony historians note about the Crusades?',opts:['The Crusades were entirely successful militarily and achieved all their goals','Although launched as religious warfare and largely unsuccessful militarily in the long term, the Crusades accelerated one of history\'s most significant peaceful transfers of knowledge and trade','The Crusades had no lasting effects of any kind','The Crusades only affected European countries, not the Middle East'],ans:1,exp:'Despite failing to permanently hold the Holy Land (lost entirely by 1291) and causing immense violence, the extended contact between civilisations triggered a major, largely peaceful, and historically significant exchange of mathematics, medicine, trade goods, and preserved classical knowledge.'},
+  ]
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{quizState[s]={idx:0,score:0};renderQuiz(s);});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';celebrate();return;}
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){quizState[s].score++;opts[i].classList.add('correct');fb.className='quiz-fb ok';fb.style.display='block';fb.innerHTML='✅ Correct! '+q.exp;}
+  else{opts[i].classList.add('wrong');opts[q.ans].classList.add('correct');fb.className='quiz-fb bad';fb.style.display='block';fb.innerHTML='❌ Not quite. '+q.exp;}
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+function celebrate(){const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];for(let i=0;i<70;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti';el.style.left=Math.random()*100+'vw';el.style.background=cols[Math.floor(Math.random()*cols.length)];el.style.animationDuration=(1.8+Math.random()*2.2)+'s';el.style.animationDelay=(Math.random()*0.3)+'s';el.style.width=(7+Math.random()*7)+'px';el.style.height=(9+Math.random()*9)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),5000);},i*25);}}
+</script>
+</body>
+</html>

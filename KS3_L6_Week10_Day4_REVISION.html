@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 10 · Day 4 Revision · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(245,158,11,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCD34D;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="overview"].active{background:rgba(245,158,11,0.2);color:#FCD34D;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:520px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:180px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color 0.2s;cursor:pointer;}
+.ov-card:hover{border-color:var(--ov-color,#555);}
+.ov-icon{font-size:2rem;margin-bottom:10px;}
+.ov-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--bright);margin-bottom:6px;}
+.ov-topic{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+.ov-keys{display:flex;flex-direction:column;gap:4px;}
+.ov-key{font-size:0.78rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start;}
+.ov-key::before{content:'✓';color:var(--ov-color,#6EE7B7);flex-shrink:0;font-weight:700;}
+.tracker{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.tracker-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--bright);margin-bottom:16px;}
+.tracker-row{display:grid;grid-template-columns:180px 1fr 100px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.tracker-row:last-child{border-bottom:none;}
+.tracker-subject{font-size:0.88rem;font-weight:600;color:var(--text);}
+.tracker-bar-wrap{background:var(--surface2);border-radius:99px;height:8px;overflow:hidden;}
+.tracker-bar{height:8px;border-radius:99px;width:0%;transition:width 1s ease;}
+.tracker-score{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:center;width:100%;}
+.tracker-score:focus{outline:none;border-color:#F59E0B;}
+.mc-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.mc-opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.mc-opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.mc-opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.mc-opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.mc-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:0.87rem;font-weight:600;display:none;}
+.mc-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.mc-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.mc-nav{margin-top:14px;display:flex;align-items:center;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--muted);font-weight:700;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}.tracker-row{grid-template-columns:1fr 1fr;}.tracker-bar-wrap{display:none;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 10</div>
+  <div class="day-badge">⭐ Day 4 · Revision</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="overview" onclick="show('overview')">📋 Overview</button>
+    <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ OVERVIEW PAGE ═══ -->
+<div id="pg-overview" class="page active">
+<div class="hero" style="background:linear-gradient(135deg,#1A1200,#3D2800);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#F59E0B,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">Day 4 · Week 10 · Full Revision</div>
+  <div class="hero-title">Week 10 Revision —<br>All Subjects</div>
+  <div class="hero-subtitle">Mixed quiz · Topic summaries · Final score tracker · Cross-subject connections. Use this page to check what you know before moving on to Week 11.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">📖 Bible: David</span>
+    <span class="hero-tag">✏️ English: Poetry</span>
+    <span class="hero-tag">🧮 Maths: Coordinates</span>
+    <span class="hero-tag">🔬 Science: Physical/Chemical Changes</span>
+    <span class="hero-tag">🏛️ Geography: The Crusades</span>
+  </div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Week 10 Total</label><input type="text" placeholder="   / 200+"></div>
+</div>
+
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--bright);margin-bottom:16px;">Week 10 at a Glance</div>
+<div class="overview-grid">
+  <div class="ov-card" style="--ov-color:#C4B5FD;border-color:rgba(109,40,217,0.3);" onclick="show('bible')">
+    <div class="ov-icon">📖</div>
+    <div class="ov-title" style="color:#C4B5FD;">Bible</div>
+    <div class="ov-topic">David — A Heart After God (1 Sam 16-17, 2 Sam 11-12 · Psalm 23:1)</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#C4B5FD;">God looks at the heart, not appearance</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Goliath defeated through remembered faithfulness</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">David wrote roughly half of the 150 Psalms</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Nathan's story confronts David's sin</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">"A man after God's own heart" = honest repentance</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCA5A5;border-color:rgba(190,18,60,0.3);" onclick="show('english')">
+    <div class="ov-icon">✏️</div>
+    <div class="ov-title" style="color:#FCA5A5;">English</div>
+    <div class="ov-topic">Poetry — Forms & Devices</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Rhyme schemes: AABB, ABAB, ABCB, free verse</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Rhythm = pattern of stressed/unstressed syllables</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Alliteration = repeated beginning sound</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Onomatopoeia = word sounds like its meaning</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Simile uses like/as; metaphor states directly</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCD34D;border-color:rgba(180,83,9,0.3);" onclick="show('maths')">
+    <div class="ov-icon">🧮</div>
+    <div class="ov-title" style="color:#FCD34D;">Maths</div>
+    <div class="ov-topic">Coordinates & the Number Plane</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCD34D;">Coordinates always (x, y) — x first, y second</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">4 quadrants numbered anticlockwise from top-right</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Reflect over x-axis: flip y-sign</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Reflect over y-axis: flip x-sign</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Origin is always (0, 0)</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#6EE7B7;border-color:rgba(6,95,70,0.3);" onclick="show('science')">
+    <div class="ov-icon">🔬</div>
+    <div class="ov-title" style="color:#6EE7B7;">Science</div>
+    <div class="ov-topic">Physical vs Chemical Changes</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Physical: no new substance, usually reversible</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Chemical: new substance, usually irreversible</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">5 signs: colour, gas, temperature, precipitate, light/smell</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Exothermic releases heat; endothermic absorbs heat</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Bubbles alone don't always mean chemical change</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#93C5FD;border-color:rgba(30,58,138,0.3);" onclick="show('history')">
+    <div class="ov-icon">🏛️</div>
+    <div class="ov-title" style="color:#93C5FD;">History / Geography</div>
+    <div class="ov-topic">The Crusades & Cultural Exchange</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#93C5FD;">Pope Urban II called the First Crusade in 1095</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Religious, Church, pilgrim, and political motives</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Jerusalem lost entirely by 1291</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Europe gained algebra, numerals, medicine, preserved texts</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Knowledge transfer helped enable the Renaissance</div>
+    </div>
+  </div>
+</div>
+
+<div class="tracker">
+  <div class="tracker-title">📊 My Week 10 Score Tracker</div>
+  <div class="tracker-row">
+    <div class="tracker-subject">📖 Bible — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#7C3AED;" id="bar-bible"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('bible',this.value,99)" id="sc-bible">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">✏️ English — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#E11D48;" id="bar-english"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('english',this.value,99)" id="sc-english">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🧮 Maths — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#D97706;" id="bar-maths"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('maths',this.value,100)" id="sc-maths">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🔬 Science — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#059669;" id="bar-science"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('science',this.value,100)" id="sc-science">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🏛️ History — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#2563EB;" id="bar-history"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('history',this.value,100)" id="sc-history">
+  </div>
+</div>
+
+<div class="card" style="--accent:#F59E0B;">
+  <div class="slabel" style="background:rgba(245,158,11,0.2);color:#FCD34D;">🌐 Big Ideas That Connect Everything This Week</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:4px;">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 What's inside matters more than what's outside</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">God looks at David's heart, not his appearance. A compound's true nature (Week 9) isn't visible from its ingredients alone. A metaphor states what something truly IS, beneath surface comparison. Depth matters more than surface across every subject.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Position and precision matter</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Coordinates locate an exact position using precise, ordered pairs. Reflections mirror precisely, preserving distance exactly. Medieval navigators needed geographic precision to move armies across the Mediterranean. Precision underlies success across contexts.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Unintended consequences can outweigh original purpose</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">The Crusades, launched as war, became a channel for peaceful knowledge transfer. David's sin, intended for self-protection, produced Psalm 51's honest repentance. Outcomes often diverge sharply from original intentions.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Change reveals character</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">A chemical change creates something genuinely new and often irreversible. David's repentance genuinely transformed his response to failure. Reflections change a shape's position but preserve its essential properties. How something responds to change reveals its true nature.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ BIBLE REVISION ═══ -->
+<div id="pg-bible" class="page">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">👑</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 10 · Day 4 Revision</div>
+  <div class="hero-title">David —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Multiple choice · Short recall · Extended question · Self-mark</div>
+  <div class="hero-tags"><span class="hero-tag">Memory verse</span><span class="hero-tag">Key events</span><span class="hero-tag">Heart & Repentance</span></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse Check</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse for Week 10 Bible from memory. Then write it in your own words. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Exact verse (Psalm 23:1):&#10;&#10;In my own words:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"The LORD is my shepherd, I lack nothing." (Psalm 23:1, NIV). Own words: God cares for me completely, the way a good shepherd cares for his sheep — leading, protecting, and providing — so my deepest needs are truly met.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🎯 Multiple Choice Quiz</div>
+  <div id="bible-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextMC('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Short Recall</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★</div>
+    <div class="q-text">Without notes — write down as much as you can remember about David's story in 5 minutes. Include: key events in order, why the story matters theologically (the heart, repentance, worship), and ONE connection to an earlier Bible week. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write everything you remember — events, themes, vocabulary, connections:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Key events in order: Samuel anoints David (youngest, overlooked) → David fights and defeats Goliath, trusting past faithfulness → David becomes king → David sins with Bathsheba, arranges Uriah's death → Nathan confronts him with a story → David confesses genuinely → Psalm 51 written. Theological themes: <strong>the heart</strong> (God looks at the heart, not appearance), <strong>repentance</strong> (honest confession vs denial), <strong>worship</strong> (the Psalms as honest prayer, spanning trust, praise, and lament). Connection: to Joshua (Week 9 — courage/obedience vs David's repentance after failure), Abraham (Week 5), or Joseph (Week 6). Give credit for vocabulary: anoint, psalm, covenant, integrity.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Final Extended Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★★</div>
+    <div class="q-text">Choose ONE of these essay questions and write a full response (minimum 8 sentences): <span class="marks">15 marks</span><br><br><strong>Option A:</strong> "God looking at the heart rather than appearance is the single most important lesson from David's early story." Discuss using specific evidence.<br><strong>Option B:</strong> "Nathan's parable about the lamb was more effective than direct accusation would have been." Explain why, and evaluate whether indirect confrontation is always the best approach.<br><strong>Option C:</strong> "The Psalms exist because David treated his relationship with God as a place for honesty, not performance." Evaluate this claim.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A — The heart over appearance:</strong> Award marks for: 1 Samuel 16:7 as the key verse; David as the youngest, overlooked son; Samuel's initial wrong assumption about Eliab; connects to how this same principle (heart-focus) later frames both David's initial selection AND his eventual repentance in Psalm 51's plea for a "pure heart." <strong>Option B — Nathan's parable:</strong> Award marks for: explanation of how the story bypassed David's defensiveness by letting him judge objectively first; David's own outraged verdict before realising it applied to him; discussion of whether indirect methods always work best (counter-argument: sometimes direct confrontation is necessary, especially in urgent situations; indirect methods can also be manipulated or misunderstood). <strong>Option C — Psalms as honesty, not performance:</strong> Award marks for: the range of psalms (trust, repentance, praise, lament) all preserved without editing out difficult content; Psalm 51 emerging directly from David's worst failure; the argument that treating prayer as "performance" would have hidden weakness rather than modeling honest engagement with God.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Bible Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 28+" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH REVISION ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">📝</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 10 · Day 4 Revision</div>
+  <div class="hero-title">Poetry —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Device identification · Rhyme scheme drill · Original writing · Extended analysis</div>
+  <div class="hero-tags"><span class="hero-tag">Devices</span><span class="hero-tag">Rhyme schemes</span><span class="hero-tag">Analysis</span></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🎯 Multiple Choice Quiz</div>
+  <div id="english-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextMC('english')">Next →</button>
+    <span class="score-badge" id="english-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📝 Vocabulary & Device Test</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Define each of these 8 terms precisely AND use each correctly in one sentence of your own. <span class="marks">15 marks</span><br><br>1. rhyme &nbsp; 2. rhythm &nbsp; 3. alliteration &nbsp; 4. onomatopoeia &nbsp; 5. simile &nbsp; 6. metaphor &nbsp; 7. stanza &nbsp; 8. free verse</div>
+    <textarea class="q-input xwide" placeholder="1. Definition: ___ Sentence:&#10;2. Definition: ___ Sentence:&#10;3. etc..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>rhyme</strong> — words ending with the same/similar sounds. 2. <strong>rhythm</strong> — the pattern of stressed/unstressed syllables in a line. 3. <strong>alliteration</strong> — repeating the same beginning consonant sound. 4. <strong>onomatopoeia</strong> — a word that sounds like the noise it describes. 5. <strong>simile</strong> — a comparison using "like" or "as." 6. <strong>metaphor</strong> — a direct comparison stating one thing IS another. 7. <strong>stanza</strong> — a group of lines in a poem, like a paragraph. 8. <strong>free verse</strong> — poetry with no fixed rhyme scheme.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🌳 Full Poem From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Without notes, write an original 4-line poem (AABB or ABAB rhyme scheme, state which) on: <em>"Trust — inspired by Psalm 23."</em> Use at least one metaphor and one example of alliteration. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Rhyme scheme: ___&#10;&#10;POEM:&#10;&#10;Device labels:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Correct, consistent rhyme scheme (3). Metaphor used and identified (3). Alliteration used and identified (3). Thematic relevance to trust/Psalm 23 (1). <strong>Example (AABB):</strong> "The Lord's my guide through fields of green, / A gentle guardian, calm, serene, / He walks with me through darkest days, / My steady shepherd, all my ways." (metaphor: "gentle guardian"; alliteration: "darkest days").</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">English Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 25+" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS REVISION ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">📐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 10 · Day 4 Revision</div>
+  <div class="hero-title">Coordinates —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Timed drill · Mixed problem set · Common errors · Final exam challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Quadrants</span><span class="hero-tag">Reflections</span><span class="hero-tag">Midpoints</span></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🎯 Multiple Choice Quiz</div>
+  <div id="maths-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextMC('maths')">Next →</button>
+    <span class="score-badge" id="maths-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Timed Drill — 12 Questions (Target: under 10 minutes)</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★</div>
+    <div class="q-text">Work through as quickly and accurately as you can. <span class="marks">12 marks</span><br><br>1. Which quadrant is (7, −4) in? &nbsp; 2. Which quadrant is (−3, −6) in? &nbsp; 3. Reflect (5, 9) over the x-axis. &nbsp; 4. Reflect (−6, 2) over the y-axis. &nbsp; 5. Find the midpoint of (4, 6) and (10, 6). &nbsp; 6. Find the distance between (2, 3) and (2, 15). &nbsp; 7. A point has y=0. Where does it lie? &nbsp; 8. Reflect (8, −5) through the origin (flip both signs). &nbsp; 9. What are the coordinates of the origin? &nbsp; 10. Which two numbers make up a coordinate? &nbsp; 11. Find the midpoint of (−2, 3) and (−2, 11). &nbsp; 12. Which quadrant has x positive and y negative?</div>
+    <textarea class="q-input xwide" placeholder="1. ___ 2. ___ 3. ___ 4. ___ 5. ___ 6. ___&#10;7. ___ 8. ___ 9. ___ 10. ___ 11. ___ 12. ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Quadrant 4</strong> &nbsp; 2. <strong>Quadrant 3</strong> &nbsp; 3. (5,9)→<strong>(5,−9)</strong> &nbsp; 4. (−6,2)→<strong>(6,2)</strong> &nbsp; 5. midpoint=<strong>(7, 6)</strong> &nbsp; 6. distance=15−3=<strong>12 units</strong> &nbsp; 7. It lies <strong>on the x-axis</strong> &nbsp; 8. (8,−5)→<strong>(−8, 5)</strong> &nbsp; 9. <strong>(0, 0)</strong> &nbsp; 10. <strong>x and y</strong> (the x-coordinate and y-coordinate) &nbsp; 11. midpoint=<strong>(−2, 7)</strong> &nbsp; 12. <strong>Quadrant 4</strong></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Final Challenge Problem</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★★</div>
+    <div class="q-text">A map designer places a castle at (−5, 8) and a lake at (7, 8). (a) Find the midpoint between them (a bridge location). (b) Find the distance between the castle and lake. (c) A watchtower is the reflection of the castle over the y-axis — find its coordinates. (d) Which quadrant is the watchtower in? <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) Bridge/midpoint: &#10;(b) Distance: &#10;(c) Watchtower coordinates: &#10;(d) Watchtower quadrant:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) Midpoint: x=(−5+7)÷2=1, y stays 8 (same line). Bridge = <strong>(1, 8)</strong>. (b) Distance = 7−(−5) = 7+5 = <strong>12 units</strong>. (c) Reflecting castle (−5,8) over y-axis: flip x-sign only. Watchtower = <strong>(5, 8)</strong>. (d) Watchtower (5,8): x positive, y positive = <strong>Quadrant 1</strong>.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Maths Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE REVISION ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">🧪</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 10 · Day 4 Revision</div>
+  <div class="hero-title">Physical & Chemical Changes —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Quiz · Classification challenge · Real-world connections · Final challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Classification</span><span class="hero-tag">Signs of reaction</span><span class="hero-tag">Energy</span></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🎯 Multiple Choice Quiz</div>
+  <div id="science-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextMC('science')">Next →</button>
+    <span class="score-badge" id="science-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🧪 Classification Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">From memory — classify each as physical or chemical, and give ONE reason each: <span class="marks">10 marks</span><br><br>a) Squeezing a sponge<br>b) A firework exploding<br>c) Ice cream melting<br>d) Milk turning sour<br>e) Chopping vegetables</div>
+    <textarea class="q-input wide" placeholder="a) Physical/chemical + reason:&#10;b) Physical/chemical + reason:&#10;c) Physical/chemical + reason:&#10;d) Physical/chemical + reason:&#10;e) Physical/chemical + reason:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Physical</strong> — the sponge is still the same material, just temporarily compressed; it springs back. b) <strong>Chemical</strong> — rapid combustion produces entirely new substances (gases, light, heat) that did not exist before. c) <strong>Physical</strong> — still the same ice cream ingredients, just changed from solid to liquid state; reversible by refreezing. d) <strong>Chemical</strong> — bacteria chemically convert the milk's sugars into lactic acid, creating a new substance with different taste and properties; irreversible. e) <strong>Physical</strong> — the vegetables are still chemically the same, just cut into smaller pieces.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🌍 Cross-Subject Final Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">Connect this week's science to this week's history: medieval alchemists (early chemists, working around the time of the Crusades and after) attempted many chemical experiments, some inspired by knowledge gained from the Islamic world (chemistry itself has Arabic-influenced roots — "alchemy" comes from Arabic "al-kimiya"). Explain in a short paragraph (5-6 sentences) why understanding the physical/chemical distinction would have been essential for early chemists trying to identify genuinely new substances versus simply changing the form of existing ones. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your connected paragraph here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">Early chemists (alchemists) working in the medieval period needed to distinguish genuine chemical transformation from simple physical rearrangement in order to make any real scientific progress, since claiming to have created a "new substance" that was actually just the same material in a different physical form would be a fundamental error undermining their entire investigation. Without a clear physical/chemical distinction, an alchemist melting a metal into a different shape might mistakenly believe they had created something entirely new, when in fact the substance's fundamental chemical identity remained completely unchanged — a costly and misleading confusion. The word "alchemy" itself, derived from the Arabic "al-kimiya," reflects the deep historical connection between medieval chemistry and knowledge transmitted through Islamic scholarship (exactly the kind of cultural exchange studied this week), which had already developed more sophisticated methods for testing and verifying genuine chemical change. Recognising reliable signs of chemical reaction — colour change, gas production, temperature change, precipitate formation — would have given early chemists genuine, testable evidence to distinguish real transformation from superficial physical change, moving their practice gradually from mystical speculation (attempting to transform lead into gold through wishful thinking) toward the more rigorous, evidence-based approach that eventually became modern chemistry.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Science Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY REVISION ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🕌</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 10 · Day 4 Revision</div>
+  <div class="hero-title">The Crusades —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Memory recall · Cultural exchange drill · Timeline mastery · Final essay</div>
+  <div class="hero-tags"><span class="hero-tag">Causes</span><span class="hero-tag">Timeline</span><span class="hero-tag">Cultural exchange</span></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🎯 Multiple Choice Quiz</div>
+  <div id="history-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextMC('history')">Next →</button>
+    <span class="score-badge" id="history-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🗺️ Memory Recall — From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★</div>
+    <div class="q-text">Without notes — fill in every answer from memory: <span class="marks">12 marks</span><br><br><strong>Who called the First Crusade, and when?</strong> ___<br><br><strong>4 causes of the Crusades:</strong> 1.___ 2.___ 3.___ 4.___<br><br><strong>5 things Europe gained from cultural exchange:</strong> 1.___ 2.___ 3.___ 4.___ 5.___<br><br><strong>Year Crusader states were lost entirely:</strong> ___</div>
+    <textarea class="q-input wide" placeholder="Write your answers here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Who/when:</strong> Pope Urban II, 1095. <strong>4 causes:</strong> 1. Religious motivation 2. Church encouragement (forgiveness of sins) 3. Protecting pilgrims 4. Political/economic motives. <strong>5 gains:</strong> 1. Mathematics (algebra, numerals) 2. Medicine 3. Preserved classical knowledge 4. Trade goods 5. Architecture/navigation (astrolabe). <strong>Year lost entirely:</strong> 1291.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Final Extended History Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★★</div>
+    <div class="q-text">Choose ONE question and write a full response (minimum 8 sentences): <span class="marks">12 marks</span><br><br><strong>Option A:</strong> "The Crusades failed at their original goal but succeeded at something far more historically significant." Evaluate this claim.<br><br><strong>Option B:</strong> "Cultural exchange between civilisations often happens as a byproduct of conflict, not despite it." Discuss using evidence from the Crusades.<br><br><strong>Option C:</strong> Connect this week's lesson to Week 9's study of the medieval Church — explain how the Church's dual power made the Crusades possible.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A:</strong> Award for: evidence the Crusades ultimately failed to permanently hold the Holy Land (lost by 1291) despite 200 years of effort; evidence of the far more lasting legacy of mathematical, medical, and classical knowledge transfer; the historian's "irony" framing from the lesson. <strong>Option B:</strong> Award for: recognising that neither side sought cultural exchange as a goal — it emerged as an unplanned consequence of sustained contact through conflict; comparison to other examples of conflict-driven exchange if known. <strong>Option C:</strong> Award for: explaining the Church's dual spiritual/political power (Week 9); how this uniquely allowed continent-wide mobilisation that neither pure religious nor pure political power alone could achieve.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">History/Geography Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 24+" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+function updateBar(subject, val, max){
+  const num = parseFloat(val);
+  if(!isNaN(num) && num >= 0){
+    const pct = Math.min((num / max) * 100, 100);
+    document.getElementById('bar-'+subject).style.width = pct + '%';
+  }
+}
+
+const mcData = {
+  bible:[
+    {q:"According to 1 Samuel 16:7, what does God look at when choosing David, in contrast to what people look at?",opts:["God looks at wealth; people look at family status","God looks at the heart; people look at outward appearance","God looks at age; people look at strength","God looks at skill; people look at intelligence"],ans:1,exp:'1 Samuel 16:7 says: "People look at the outward appearance, but the LORD looks at the heart." David, the overlooked youngest son, was chosen because of this principle.'},
+    {q:"What gave David confidence to face Goliath, according to 1 Samuel 17?",opts:["King Saul's armour and weapons","Remembering how God had already rescued him from a lion and a bear while shepherding","His brothers' encouragement","A promise of riches if he won"],ans:1,exp:'David explains that the LORD who rescued him from the lion and the bear "will rescue me" from Goliath (17:37) — his courage was built on remembered past faithfulness.'},
+    {q:"How did David respond when the prophet Nathan confronted him about his sin with Bathsheba?",opts:["He denied everything and punished Nathan","He made excuses for his actions","He confessed honestly: 'I have sinned against the LORD'","He ignored Nathan completely"],ans:2,exp:'2 Samuel 12:13 records David\'s direct, honest confession. Unlike many rulers of the time, David did not deny or excuse his sin — this genuine repentance is central to why he is called "a man after God\'s own heart."'},
+    {q:"What did David specifically ask God for in Psalm 51, written after his sin?",opts:["Only forgiveness for his specific actions","To create in him a pure heart and renew a steadfast spirit","Wealth and a bigger kingdom","Revenge against his enemies"],ans:1,exp:'Psalm 51:10 asks God to "create in me a pure heart... and renew a steadfast spirit" — suggesting David understood his problem went deeper than isolated wrongful actions, requiring genuine internal transformation.'},
+    {q:"What does it mean that David was 'a man after God's own heart' (1 Samuel 13:14), despite his serious sin?",opts:["It means David never made any mistakes","It refers to how David genuinely and honestly responded when confronted with his sin, not that he was perfect","It means David looked physically similar to God","It has no real meaning connected to his character"],ans:1,exp:'The phrase describes David\'s HEART\'S RESPONSE when confronted with failure — honest confession and genuine repentance — rather than claiming he was sinless. This is what set him apart, not flawlessness.'}
+  ],
+  english:[
+    {q:"What is 'alliteration'?",opts:["A word that sounds like the noise it describes","Repeating the same beginning consonant sound in nearby words","A comparison using 'like' or 'as'","A group of lines in a poem"],ans:1,exp:'Alliteration repeats a beginning consonant sound across nearby words, as in "the wild wind whipped," creating rhythm and emphasis.'},
+    {q:"What is 'onomatopoeia'?",opts:["A type of rhyme scheme","A word that imitates the actual sound it describes, like 'buzz' or 'hiss'","A comparison without 'like' or 'as'","The pattern of stressed syllables"],ans:1,exp:'Onomatopoeia is a word that sounds like the noise it represents — "hiss," "crash," and "sizzle" all mimic the sound they describe.'},
+    {q:"What is the key difference between a simile and a metaphor?",opts:["There is no real difference","A simile uses 'like' or 'as' to compare; a metaphor states directly that one thing IS another","Metaphors are only about animals","Similes are only used in songs"],ans:1,exp:'A simile compares using "like" or "as" ("brave as a lion"). A metaphor states one thing directly IS another with no linking word ("The LORD is my shepherd") — often a stronger, more direct comparison.'},
+    {q:"In rhyme scheme notation, what does 'AABB' mean?",opts:["No lines rhyme at all","Lines 1 and 2 rhyme together; lines 3 and 4 rhyme together (a different sound)","All four lines rhyme with each other","Only line 4 rhymes"],ans:1,exp:'AABB describes rhyming couplets — the first two lines rhyme (both labelled A), and the next two lines rhyme with each other using a different sound (both labelled B).'},
+    {q:"Does a poem need to rhyme to be considered a poem?",opts:["Yes, all poems must rhyme","No — many poems, including much of the Bible's Psalms, use free verse or devices like rhythm and repetition instead of rhyme","Only religious poems don't need to rhyme","Rhyme is the only device that matters"],ans:1,exp:'Rhyme is one poetic device among many but is not required. Free verse poems and much of biblical Hebrew poetry (including the Psalms) do not rely on rhyme.'}
+  ],
+  maths:[
+    {q:"In the coordinate (6, 2), which number represents movement along the y-axis?",opts:["6","2","Both equally","Neither"],ans:1,exp:'Coordinates are always written (x, y). The SECOND number (2) is the y-coordinate, showing vertical movement.'},
+    {q:"Which quadrant does the point (−5, 3) lie in?",opts:["Quadrant 1 (top-right)","Quadrant 2 (top-left)","Quadrant 3 (bottom-left)","Quadrant 4 (bottom-right)"],ans:1,exp:'x is negative (−5) and y is positive (3). Negative x, positive y = Quadrant 2 (top-left).'},
+    {q:"What are the coordinates of the origin?",opts:["(1, 1)","(0, 0)","(−1, −1)","There is no fixed origin"],ans:1,exp:'The origin is the point where the x-axis and y-axis cross — always at coordinates (0, 0).'},
+    {q:"If point A is at (7, 4), what are the coordinates after reflecting it over the X-AXIS?",opts:["(7, −4)","(−7, 4)","(−7, −4)","(4, 7)"],ans:0,exp:'Reflecting over the x-axis flips the sign of the y-coordinate only, keeping x the same: (7, 4) becomes (7, −4).'},
+    {q:"What is the midpoint of the two points (3, 5) and (9, 5)?",opts:["(6, 5)","(6, 10)","(12, 5)","(3, 7)"],ans:0,exp:'Since both points share y=5, the midpoint keeps y=5. The midpoint x = (3+9)÷2 = 6. Midpoint = (6, 5).'}
+  ],
+  science:[
+    {q:"What is the KEY difference between a physical change and a chemical change?",opts:["Physical changes always involve heat; chemical changes never do","A physical change does not form a new substance; a chemical change creates a new substance with different properties","Physical changes are always faster","There is no real difference"],ans:1,exp:'In a physical change, the material stays chemically the same — only its form, shape, or state changes. In a chemical change, a completely new substance forms with new properties.'},
+    {q:"Which of these is a sign that a chemical reaction has likely occurred?",opts:["The substance changed shape only","A precipitate (new solid) suddenly forms in a previously clear liquid","The substance was cut into smaller pieces","The substance was dissolved and later evaporated back to its original form"],ans:1,exp:'A precipitate forming — a new solid appearing in a liquid — is a classic sign that a new substance has been chemically produced.'},
+    {q:"Is melting ice into water a physical or chemical change, and why?",opts:["Chemical — because it creates a new substance","Physical — because it is still H₂O, just changed from solid to liquid state, and can be reversed by freezing","Chemical — because it cannot be reversed","Neither — melting is not a type of change"],ans:1,exp:'Melting ice is a physical change: the substance remains water (H₂O) throughout — only its state changes — and it can be reversed by freezing.'},
+    {q:"What does 'exothermic' mean?",opts:["A reaction that absorbs heat, making things colder","A reaction that releases heat to the surroundings, making things warmer","A reaction that produces light only","A reaction that always explodes"],ans:1,exp:'"Exo" means out — an exothermic reaction releases heat energy OUT to its surroundings, causing a temperature increase.'},
+    {q:"Why is bubbling NOT always a reliable sign of a chemical reaction?",opts:["Bubbling never happens in chemistry","Boiling water produces bubbles too, but this is a physical change (state change), not a chemical one","Bubbles are always dangerous","Bubbles only occur in chemical reactions"],ans:1,exp:'Boiling water produces bubbles as liquid turns to vapour — a physical change, since the substance remains H₂O throughout and can be reversed by cooling. Bubbles alone are not definitive evidence of a chemical reaction.'}
+  ],
+  history:[
+    {q:"What were the Crusades?",opts:["Trade agreements between European kings","A series of religious wars in which European Christians tried to capture the Holy Land from Muslim control","Peaceful pilgrimages with no conflict","A single battle in 1095"],ans:1,exp:'The Crusades were a series of religious wars, beginning in 1095, in which European Christians sought to capture and hold Jerusalem and the "Holy Land" from Muslim control.'},
+    {q:"Who called for the First Crusade in 1095?",opts:["King Richard the Lionheart","Pope Urban II","Sultan Saladin","Emperor Charlemagne"],ans:1,exp:'Pope Urban II called on European Christians to march to Jerusalem and reclaim the Holy Land, launching the First Crusade.'},
+    {q:"What mathematical contribution did the Islamic world make that transformed European mathematics?",opts:["Roman numerals","Algebra and the Hindu-Arabic numeral system (0-9)","The abacus only","Geometry alone"],ans:1,exp:'Algebra (from Arabic "al-jabr") and the Hindu-Arabic numeral system (0-9), which replaced clumsy Roman numerals, were major mathematical contributions transferred to Europe.'},
+    {q:"What happened to the Crusader states in the Holy Land by 1291?",opts:["They grew stronger and expanded","They were lost entirely to Muslim forces","They became independent from Europe","They merged with the Byzantine Empire"],ans:1,exp:'Despite the initial success of the First Crusade in capturing Jerusalem, later Crusades became gradually less successful, and Crusader states in the Holy Land were lost entirely by 1291.'},
+    {q:"Which statement best summarises the historical irony historians note about the Crusades?",opts:["The Crusades were entirely successful militarily and achieved all their goals","Although largely unsuccessful militarily in the long term, the Crusades accelerated one of history's most significant peaceful transfers of knowledge and trade","The Crusades had no lasting effects of any kind","The Crusades only affected European countries"],ans:1,exp:'Despite failing to permanently hold the Holy Land, the extended contact between civilisations triggered a major, largely peaceful exchange of mathematics, medicine, trade goods, and preserved classical knowledge.'}
+  ]
+};
+
+const mcState = {};
+['bible','english','maths','science','history'].forEach(s=>{
+  mcState[s]={idx:0,score:0};
+  renderMC(s);
+});
+
+function renderMC(s){
+  const st=mcState[s];
+  const qs=mcData[s];
+  const el=document.getElementById(s+'-mc');
+  const sc=document.getElementById(s+'-mc-score');
+  if(st.idx>=qs.length){
+    el.innerHTML=`<div style="padding:18px;background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:1.8rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;">Quiz complete!</div><div style="color:var(--muted);margin-top:6px;">${st.score} / ${qs.length} correct</div></div>`;
+    return;
+  }
+  const q=qs[st.idx];
+  sc.textContent=`${st.score} / ${st.idx} correct`;
+  el.innerHTML=`<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question ${st.idx+1} of ${qs.length}</div>
+  <div style="font-size:0.96rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:14px;">${q.q}</div>
+  <div class="mc-opts">${q.opts.map((o,i)=>`<button class="mc-opt" onclick="answerMC('${s}',${i})">${o}</button>`).join('')}</div>
+  <div id="${s}-mc-fb" class="mc-fb"></div>`;
+}
+
+function answerMC(s,i){
+  const q=mcData[s][mcState[s].idx];
+  const opts=document.querySelectorAll(`#${s}-mc .mc-opt`);
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-mc-fb');
+  if(i===q.ans){
+    mcState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='mc-fb ok';fb.style.display='block';
+    fb.textContent='✅ Correct! '+q.exp;
+  }else{
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='mc-fb bad';fb.style.display='block';
+    fb.textContent='❌ '+q.exp;
+  }
+  document.getElementById(s+'-mc-score').textContent=`${mcState[s].score} / ${mcState[s].idx+1} correct`;
+}
+
+function nextMC(s){
+  mcState[s].idx++;
+  renderMC(s);
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week10_Day4');</script>
+</body>
+</html>

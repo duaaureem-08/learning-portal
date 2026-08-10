@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 10 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --pink:#BE185D;--pink-light:#FCE7F3;
+  --gray:#5F5E5A;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+.nav{background:#fff;border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.step{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px;margin-bottom:8px}
+.step-n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-t{font-size:13px;line-height:1.6}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+.poem-box{background:#FFF0F6;border:2px solid var(--pink);border-radius:var(--radius);padding:18px;font-family:'Nunito',sans-serif;font-size:15px;line-height:2.2;margin:10px 0;text-align:center}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:12px}
+.wbank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 10 · Student Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover', label:'🏠 Cover',      col:'#0F6E56'},
+  {id:'eng',   label:'📖 English',   col:'#BE185D'},
+  {id:'maths', label:'🔢 Maths',     col:'#0F6E56'},
+  {id:'sci',   label:'🪞 Science',   col:'#C2410C'},
+  {id:'hum',   label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',   label:'✝️ Bible',     col:'#B71C1C'},
+];
+
+const PAGES={
+
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#BE185D);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 10 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Poetry — Rhyme, Rhythm & Pattern','#9D174D','#FCE7F3'],
+      ['🔢','Maths','Measurement — Mass & Volume','#065F46','#D1FAE5'],
+      ['🪞','Science','Light — Reflection','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','Local & National Government','#3730A3','#E0E7FF'],
+      ['✝️','Bible','Gideon — Brave When You Feel Small','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Use this booklet to read, learn and practise. Every page has words in English, Arabic and Urdu! 🌍</div>
+</div>`,
+
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#9D174D,#BE185D)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 10</div>
+  <div class="banner-title">📖 English — Poetry: Rhyme, Rhythm &amp; Pattern</div>
+  <div class="banner-sub">Reading and writing rhyming poems · repetition · rhythm · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Poetry = <strong>شاعری (shaa'iri)</strong> — Urdu · <strong>شعر</strong> — Arabic<br/>
+Rhyme = <strong>قافیہ (qafia)</strong> — Urdu · <strong>قافية</strong> — Arabic<br/>
+Rhythm = <strong>لے (lai)</strong> — Urdu · <strong>إيقاع</strong> — Arabic · The BEAT you feel when you read a poem!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['📜 Poem','A piece of writing arranged in lines, often with rhyme and rhythm.','نظم / قصيدة','"I wrote a poem about the sea."','#BE185D'],
+  ['🎵 Rhyme','When two words end with the same sound. Example: cat/hat, moon/tune.','قافیہ / قافية','"Cat rhymes with hat — they both end in -at."','#BE185D'],
+  ['🥁 Rhythm','The beat or pattern of sounds when you read a poem aloud.','لے / إيقاع','"Tap your hand to feel the rhythm of this poem."','#BE185D'],
+  ['🔁 Repetition','When a word, phrase or line is repeated on purpose for effect.','تکرار / تكرار','"Rain, rain, go away — repetition!"','#BE185D'],
+  ['📐 Pattern','The way rhymes, rhythm or lines are arranged in a poem.','نمونہ / نمط','"The poem has a rhyme pattern: ABAB."','#BE185D'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>RHYME SCHEMES</div>
+<div class="tip"><strong>Rhyme scheme = the PATTERN of rhymes at the ends of lines.</strong> We label each new rhyme sound with a letter (A, B, C…)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Scheme</th><th>Pattern</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>AABB</strong></td><td>Lines 1&amp;2 rhyme, lines 3&amp;4 rhyme</td><td>I saw a <strong>cat</strong> / Upon the <strong>mat</strong> / She wore a <strong>hat</strong> / And that was <strong>that</strong></td></tr>
+<tr><td><strong>ABAB</strong></td><td>Lines 1&amp;3 rhyme, lines 2&amp;4 rhyme</td><td>The sun is <strong>bright</strong> (A) / It fills the <strong>day</strong> (B) / With golden <strong>light</strong> (A) / In every <strong>way</strong> (B)</td></tr>
+<tr><td><strong>ABCB</strong></td><td>Only lines 2&amp;4 rhyme</td><td>The wind blows <strong>cold</strong> (A) / The trees all <strong>sway</strong> (B) / The leaves turn <strong>gold</strong> / And drift <strong>away</strong> (B)</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>EXAMPLE POEM — THE WIND</div>
+<div class="poem-box" style="text-align:left;line-height:2.5;font-size:14px">
+  The wind is wild, the wind is free, <span style="font-size:11px;color:#BE185D;font-weight:700">(A)</span><br/>
+  It shakes the branches of the tree, <span style="font-size:11px;color:#BE185D;font-weight:700">(A)</span><br/>
+  It whistles through the chimney tall, <span style="font-size:11px;color:#9D174D;font-weight:700">(B)</span><br/>
+  And rattles every door and hall. <span style="font-size:11px;color:#9D174D;font-weight:700">(B)</span><br/><br/>
+  Oh, <em>blow, blow, blow!</em> <span style="font-size:11px;color:#BE185D;font-weight:700">(repetition)</span><br/>
+  Where the cold winds go, <span style="font-size:11px;color:#BE185D;font-weight:700">(A)</span><br/>
+  Across the hill and down below — <span style="font-size:11px;color:#BE185D;font-weight:700">(A)</span><br/>
+  <em>Blow, blow, blow!</em> <span style="font-size:11px;color:#BE185D;font-weight:700">(repetition)</span>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>RHYTHM — THE BEAT</div>
+<div class="tip"><strong>Clap or tap as you read aloud.</strong> Stressed (loud) syllables are the BEAT. Every poem has its own rhythm — some fast, some slow, some steady.</div>
+<div style="background:#FFF0F6;border:2px solid var(--pink);border-radius:var(--rsm);padding:12px;margin-bottom:10px;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;line-height:2.4;color:#9D174D">
+  <strong>TWIN</strong>-kle, <strong>TWIN</strong>-kle, <strong>LIT</strong>-tle <strong>STAR</strong>, (clap on the CAPITALS!)<br/>
+  <strong>HOW</strong> I <strong>WON</strong>-der <strong>WHAT</strong> you <strong>ARE</strong>!
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>RHYMING WORD PAIRS</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Word 1</th><th>Rhymes with</th><th>Word 1</th><th>Rhymes with</th></tr></thead><tbody>
+<tr><td>moon</td><td>spoon / tune / soon</td><td>rain</td><td>train / plain / pain</td></tr>
+<tr><td>bright</td><td>night / right / light</td><td>tree</td><td>sea / free / me</td></tr>
+<tr><td>song</td><td>long / strong / along</td><td>star</td><td>far / car / jar</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">6</span>HOW TO WRITE A POEM — STEP BY STEP</div>
+${[
+  ['Choose your topic','What is your poem about? Rain? Stars? The sea? Something you love?'],
+  ['Choose a rhyme scheme','Will you use AABB, ABAB or ABCB?'],
+  ['Collect rhyming pairs','Find 2–3 pairs of words that rhyme with things in your topic.'],
+  ['Add repetition','Choose a word or phrase to repeat — it creates mood and music.'],
+  ['Write and check rhythm','Read aloud. Does it have a steady beat? Clap to check.'],
+].map(([t,d],i)=>`
+<div class="step"><div class="step-n">${i+1}</div><div class="step-t"><strong>${t}</strong> — ${d}</div></div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>WRITE YOUR POEM</div>
+<div class="q-box">
+  <div class="q-label">My poem title:</div><input class="dline" placeholder="..."/>
+  <div class="q-label" style="margin-top:8px">Stanza 1:</div>
+  ${[1,2,3,4].map(i=>`<input class="dline" placeholder="Line ${i}..."/>`).join('')}
+  <div class="q-label" style="margin-top:8px">Stanza 2:</div>
+  ${[5,6,7,8].map(i=>`<input class="dline" placeholder="Line ${i}..."/>`).join('')}
+</div>
+
+<div class="remember" style="background:#BE185D">⭐ REMEMBER: Rhyme = same ending sounds · Rhythm = the beat · Repetition = repeating for effect. Great poems use ALL THREE! 🎵</div>`,
+
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#065F46,#0F6E56)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 10</div>
+  <div class="banner-title">🔢 Maths — Measurement: Mass &amp; Volume</div>
+  <div class="banner-sub">Grams &amp; kilograms · Millilitres &amp; litres · Converting units · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Mass/Weight = <strong>وزن (wazan)</strong> — Urdu &amp; Arabic<br/>
+Volume = <strong>گنجائش (gunjaaish)</strong> — Urdu · <strong>حجم</strong> — Arabic<br/>
+1 kg = 1000 g &nbsp;&nbsp;·&nbsp;&nbsp; 1 litre = 1000 ml</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['⚖️ Mass','How heavy an object is — measured in grams (g) or kilograms (kg).','وزن / كتلة','"The bag of rice has a mass of 5 kg."'],
+  ['🧊 Gram (g)','A small unit of mass. 1000 grams = 1 kilogram.','گرام / غرام','"A paperclip weighs about 1 gram."'],
+  ['💪 Kilogram (kg)','A bigger unit of mass. 1 kg = 1000 g.','کلو گرام / كيلوغرام','"A bag of flour is about 1 kilogram."'],
+  ['💧 Volume','How much liquid a container holds — measured in ml or litres.','گنجائش / حجم','"This bottle holds 500 ml of water."'],
+  ['🥛 Millilitre (ml)','A small unit of volume. 1000 ml = 1 litre.','ملی لیٹر / ملليلتر','"A teaspoon holds about 5 ml."'],
+  ['🫙 Litre (l)','A bigger unit of volume. 1 litre = 1000 ml.','لیٹر / لتر','"A large bottle of water is 1 litre."'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card">
+  <div class="v-word" style="color:#0F6E56">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE KEY RULES</div>
+<div class="tip"><strong>1 kg = 1000 g &nbsp;·&nbsp; 1 litre = 1000 ml</strong><br/>
+× 1000 to go from big unit → small unit &nbsp;·&nbsp; ÷ 1000 to go from small unit → big unit</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Conversion</th><th>Rule</th><th>Example</th></tr></thead><tbody>
+<tr><td>kg → g</td><td>× 1000</td><td>3 kg × 1000 = <strong>3000 g</strong></td></tr>
+<tr><td>g → kg</td><td>÷ 1000</td><td>2500 g ÷ 1000 = <strong>2.5 kg</strong></td></tr>
+<tr><td>l → ml</td><td>× 1000</td><td>2 l × 1000 = <strong>2000 ml</strong></td></tr>
+<tr><td>ml → l</td><td>÷ 1000</td><td>750 ml ÷ 1000 = <strong>0.75 l</strong></td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>WHEN TO USE WHICH UNIT</div>
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#D1FAE5;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#065F46;margin-bottom:8px">⚖️ MASS — use g or kg</div>
+  <div style="font-size:13px;line-height:2">
+    <strong>Grams (g):</strong> coins, strawberries, letters<br/>
+    <strong>Kilograms (kg):</strong> people, bags of rice, school bags
+  </div>
+</div>
+<div class="card" style="background:#E1F5EE;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#065F46;margin-bottom:8px">💧 VOLUME — use ml or l</div>
+  <div style="font-size:13px;line-height:2">
+    <strong>Millilitres (ml):</strong> medicine, teaspoon, eye drops<br/>
+    <strong>Litres (l):</strong> water bottles, swimming pools, kettles
+  </div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>READING A MEASURING JUG</div>
+<div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px">
+  <svg viewBox="0 0 120 180" width="100" style="flex-shrink:0">
+    <rect x="25" y="15" width="70" height="140" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2"/>
+    <rect x="26" y="83" width="68" height="71" rx="4" fill="#5DCAA5" opacity="0.55"/>
+    <line x1="25" y1="29" x2="18" y2="29" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="14" y="33" font-size="9" text-anchor="end" fill="#0F6E56">1000</text>
+    <line x1="25" y1="56" x2="18" y2="56" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="14" y="60" font-size="9" text-anchor="end" fill="#0F6E56">800</text>
+    <line x1="25" y1="83" x2="18" y2="83" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="14" y="87" font-size="9" text-anchor="end" fill="#0F6E56">600</text>
+    <line x1="25" y1="110" x2="18" y2="110" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="14" y="114" font-size="9" text-anchor="end" fill="#0F6E56">400</text>
+    <line x1="25" y1="137" x2="18" y2="137" stroke="#0F6E56" stroke-width="1.5"/>
+    <text x="14" y="141" font-size="9" text-anchor="end" fill="#0F6E56">200</text>
+    <line x1="25" y1="83" x2="95" y2="83" stroke="#B71C1C" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </svg>
+  <div style="font-size:13px;line-height:1.8">
+    <strong>The jug contains 600 ml</strong> of water.<br/>
+    The red dashed line = water level.<br/><br/>
+    To find how much MORE is needed to fill it to 1000 ml:<br/>
+    1000 − 600 = <strong>400 ml</strong> more needed.
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>PRACTICE CONVERSIONS</div>
+<div class="q-box">
+  <div class="q-text" style="line-height:2.8">
+    2 kg = <input class="inline" style="width:60px" placeholder="?"/> g &nbsp;|&nbsp;
+    4500 g = <input class="inline" style="width:60px" placeholder="?"/> kg &nbsp;|&nbsp;
+    3 l = <input class="inline" style="width:60px" placeholder="?"/> ml<br/>
+    750 ml = <input class="inline" style="width:60px" placeholder="?"/> l &nbsp;|&nbsp;
+    0.5 kg = <input class="inline" style="width:60px" placeholder="?"/> g &nbsp;|&nbsp;
+    1500 ml = <input class="inline" style="width:60px" placeholder="?"/> l
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>WORD PROBLEM PRACTICE</div>
+${[
+  ['🍎','A bag of apples = 1.5 kg. A bag of oranges = 900 g. What is the total mass in grams?','Total = ___g'],
+  ['💧','A bottle holds 2 litres. Omar pours out 450 ml and his sister 350 ml. How much is left?','Remaining = ___ml'],
+  ['🧂','A recipe needs 250 g of flour. A baker uses 3 kg. How many recipes can she make?','3 kg = ___ g ÷ 250 = ___ recipes'],
+].map(([ico,q,hint],i)=>`
+<div class="q-box">
+  <div class="q-label">${ico} Problem ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--gray);font-style:italic;margin:3px 0">Hint: ${hint}</div>
+  <input class="dline" placeholder="Working and answer..."/>
+</div>`).join('')}
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: 1 kg = 1000 g · 1 litre = 1000 ml · ×1000 to make smaller · ÷1000 to make bigger!</div>`,
+
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#9A3412,#C2410C)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 10</div>
+  <div class="banner-title">🪞 Science — Light: Reflection</div>
+  <div class="banner-sub">How mirrors work · Shiny &amp; dull surfaces · Why we see objects · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Reflection = <strong>عکس (aks)</strong> — Urdu · <strong>انعكاس</strong> — Arabic<br/>
+Mirror = <strong>آئینہ (aaena)</strong> — Urdu · <strong>مرآة</strong> — Arabic<br/>
+Surface = <strong>سطح (satah)</strong> — Urdu &amp; Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🪞 Reflection','When light bounces back off a surface — like a ball bouncing off a wall.','عکس / انعكاس','"Still water and mirrors show reflections."','#C2410C'],
+  ['🪞 Mirror','A very smooth, shiny surface that reflects light clearly.','آئینہ / مرآة','"A mirror reflects so clearly we see our own face."','#C2410C'],
+  ['✨ Shiny surface','A smooth surface that reflects light in ONE direction.','چمکدار / لامع','"Polished metal and still water are shiny."','#C2410C'],
+  ['🔲 Dull surface','A rough surface that scatters light in MANY directions.','بے رونق / مطفئ','"A piece of wood is a dull surface."','#C2410C'],
+  ['📐 Angle of reflection','Light bounces off a mirror at the SAME angle it arrives.','زاویہ انعکاس / زاوية الانعكاس','"Angle in = angle out — always!"','#C2410C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>HOW MIRRORS WORK</div>
+<div class="tip"><strong>The key rule: Angle of incidence = Angle of reflection.</strong><br/>Light arrives at a certain angle → it bounces off at the SAME angle on the other side.</div>
+<div style="text-align:center;margin:12px 0">
+  <svg viewBox="0 0 300 160" width="100%" style="max-width:320px;display:block;margin:0 auto;">
+    <rect x="140" y="10" width="12" height="140" fill="#94A3B8" rx="2"/>
+    <rect x="148" y="10" width="6" height="140" fill="#CBD5E1" rx="2"/>
+    <line x1="20" y1="40" x2="140" y2="80" stroke="#F59E0B" stroke-width="2.5" marker-end="url(#a1)"/>
+    <text x="44" y="34" font-size="11" fill="#F59E0B" font-weight="700">Incoming light</text>
+    <line x1="140" y1="80" x2="20" y2="120" stroke="#C2410C" stroke-width="2.5" marker-end="url(#a2)"/>
+    <text x="25" y="140" font-size="11" fill="#C2410C" font-weight="700">Reflected light</text>
+    <line x1="200" y1="80" x2="100" y2="80" stroke="#0F6E56" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="205" y="83" font-size="10" fill="#0F6E56">Normal</text>
+    <text x="118" y="68" font-size="10" fill="#F59E0B">angle in</text>
+    <text x="118" y="98" font-size="10" fill="#C2410C">angle out</text>
+    <text x="155" y="83" font-size="10" fill="#0F6E56">↔</text>
+    <defs>
+      <marker id="a1" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#F59E0B"/></marker>
+      <marker id="a2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#C2410C"/></marker>
+    </defs>
+  </svg>
+  <div style="font-size:12px;color:var(--gray);margin-top:4px">Angle of incoming light = Angle of reflected light. ALWAYS!</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>WHY CAN WE SEE OBJECTS?</div>
+${[
+  ['1','A LIGHT SOURCE sends out light (sun, lamp, torch).'],
+  ['2','Light hits an OBJECT.'],
+  ['3','The object REFLECTS some light back.'],
+  ['4','Reflected light enters our EYES.'],
+  ['5','Our BRAIN processes the signal — we SEE!'],
+].map(([n,t])=>`<div class="step"><div class="step-n">${n}</div><div class="step-t">${t}</div></div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>SHINY vs DULL SURFACES</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Surface</th><th>Light does…</th><th>Can you see your reflection?</th><th>Examples</th></tr></thead><tbody>
+<tr><td><strong>✨ Shiny</strong></td><td>Reflects in ONE clear direction</td><td>✅ Yes — clearly</td><td>Mirror, still water, polished spoon</td></tr>
+<tr><td><strong>🔲 Dull</strong></td><td>Scatters in MANY directions</td><td>❌ No</td><td>Wood, paper, rough stone</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>EVERYDAY EXAMPLES OF REFLECTION</div>
+<div class="four">
+${[
+  ['🪞','Bathroom mirror','Your face reflected clearly.'],
+  ['🌊','Still water','Reflects the sky and surroundings.'],
+  ['🚗','Car mirrors','Help drivers see behind them.'],
+  ['💿','CDs &amp; DVDs','Smooth and shiny — rainbow reflections!'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:var(--orange-light);border-color:var(--orange)">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:var(--orange)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>SAFETY AND REFLECTION</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>⚠️ Safety rule</th><th>Why</th></tr></thead><tbody>
+<tr><td>Never look directly at the sun — or at its reflection.</td><td>Even reflected sunlight from water or snow can damage your eyes.</td></tr>
+<tr><td>Wear sunglasses near water or snow.</td><td>These surfaces reflect UV rays strongly.</td></tr>
+<tr><td>Never focus sunlight with a mirror or magnifying glass.</td><td>Focused reflected light can cause fires and serious burns.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">7</span>DRAW AND LABEL A PERISCOPE</div>
+<div class="q-box">
+  <div class="q-label">A periscope uses TWO mirrors at 45° to let you see around corners. Draw it here and label the two mirrors and the path of light:</div>
+  <div style="border:2px dashed var(--orange);border-radius:8px;height:150px;background:var(--orange-light);display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:13px;font-style:italic;margin:10px 0">🪞 Draw your periscope here!</div>
+</div>
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Reflection = light bouncing off smooth surface · Shiny = clear reflection · Dull = scattered light · Angle in = angle out · We see because objects reflect light into our eyes! 🪞</div>`,
+
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#3730A3,#534AB7)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 10</div>
+  <div class="banner-title">🌍 Humanities — Local &amp; National Government</div>
+  <div class="banner-sub">What governments do · Who makes decisions · Voting · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Government = <strong>حکومت (hukumat)</strong> — Urdu · <strong>حكومة</strong> — Arabic<br/>
+Democracy = <strong>جمہوریت (jumhooriyat)</strong> — Urdu · <strong>ديمقراطية</strong> — Arabic<br/>
+Vote = <strong>ووٹ (vote)</strong> — Urdu · <strong>تصويت</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🏛️ Government','A group of people chosen to make rules and decisions for a country or area.','حکومت / حكومة','"The government decided to build a new hospital."','#534AB7'],
+  ['🗳️ Democracy','A system where people VOTE to choose their leaders.','جمہوریت / ديمقراطية','"In a democracy, every adult can vote."','#534AB7'],
+  ['🏘️ Local government','Government of a city, town or district — handles local issues.','مقامی حکومت / حكومة محلية','"The local council fixed the roads near our school."','#534AB7'],
+  ['🌍 National government','Government of the whole country — handles national laws and decisions.','قومی حکومت / حكومة وطنية','"The national government makes laws for everyone."','#534AB7'],
+  ['💰 Tax','Money people and businesses pay to the government to fund public services.','ٹیکس / ضريبة','"Taxes pay for schools, hospitals and roads."','#534AB7'],
+  ['🗳️ Election','A process where citizens vote to choose their leaders.','انتخاب / انتخابات','"In an election, the candidate with the most votes wins."','#534AB7'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>LOCAL vs NATIONAL GOVERNMENT</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Level</th><th>Area</th><th>What it does</th><th>Examples</th></tr></thead><tbody>
+<tr><td><strong>🏘️ Local</strong></td><td>Town / city / district</td><td>Local roads, parks, rubbish collection, local schools</td><td>City council, town council</td></tr>
+<tr><td><strong>🌍 National</strong></td><td>Whole country</td><td>National laws, healthcare, the army, national education</td><td>Parliament, Congress, President</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>WHAT DOES GOVERNMENT DO?</div>
+<div class="four">
+${[
+  ['💰','Collect taxes','Money from people pays for everyone\'s services.'],
+  ['⚖️','Make laws','Rules everyone must follow to keep order and safety.'],
+  ['🏗️','Build things','Roads, schools, hospitals and bridges.'],
+  ['🛡️','Protect citizens','Army, police and courts keep people safe.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:var(--purple-light);border-color:var(--purple)">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:var(--purple)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>HOW VOTING WORKS</div>
+${[
+  ['1','Citizens register (sign up) to vote.'],
+  ['2','An ELECTION is held — a special day for voting.'],
+  ['3','People choose from different candidates (people who want to lead).'],
+  ['4','Each person votes SECRETLY — a secret ballot. No one can see your choice.'],
+  ['5','All votes are counted.'],
+  ['6','The candidate with the MOST votes wins and forms the government.'],
+].map(([n,t])=>`<div class="step"><div class="step-n">${n}</div><div class="step-t">${t}</div></div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>QUICK QUIZ — WHO HANDLES IT?</div>
+<div class="q-box">
+  <div class="q-text" style="line-height:2.8;font-size:13px">
+    Fixing a pothole in your street: <input class="inline" style="width:130px" placeholder="local / national"/><br/>
+    Making a law for the whole country: <input class="inline" style="width:130px" placeholder="local / national"/><br/>
+    Building a new city park: <input class="inline" style="width:130px" placeholder="local / national"/><br/>
+    Deciding on the national army: <input class="inline" style="width:130px" placeholder="local / national"/>
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>MY OPINION — WHAT WOULD I DO?</div>
+<div class="q-box">
+  <div class="q-label">If I were local leader, the ONE thing I would spend money on first:</div>
+  <input class="dline" placeholder="I would spend money on ... because ..."/>
+  <div class="q-label" style="margin-top:8px">Why it matters to my community:</div>
+  <textarea class="tarea" style="min-height:40px" placeholder="It matters because..."></textarea>
+</div>
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: Government = makes laws &amp; decisions · Local = small area · National = whole country · Democracy = people vote · Taxes pay for services! 🏛️</div>`,
+
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#991B1B,#B71C1C)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 10</div>
+  <div class="banner-title">✝️ Bible — Gideon: Brave When You Feel Small</div>
+  <div class="banner-sub">Judges 6–7 · Memory Verse: Judges 6:12 · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Gideon = <strong>جدعون</strong> — Arabic &amp; Urdu<br/>
+Brave = <strong>بہادر (bahadur)</strong> — Urdu · <strong>شجاع</strong> — Arabic<br/>
+"I am with you" = <strong>میں تمہارے ساتھ ہوں</strong> — Urdu · <strong>أنا معك</strong> — Arabic</div>
+
+<div class="verse-box">
+  <div style="font-size:11px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">⭐ MEMORY VERSE — Judges 6:12</div>
+  <div class="verse-text">"The Lord is with you, mighty warrior."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Judges 6:12</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🦁 Brave','Having courage to do the right thing, even when afraid.','بہادر / شجاع','"Gideon was afraid but chose to be brave."','#B71C1C'],
+  ['😟 Fearful','Feeling scared or worried about something.','خوفزدہ / خائف','"Gideon felt fearful when facing the enemy."','#B71C1C'],
+  ['😔 Feeling small','Feeling like you are not good enough or capable.','چھوٹا محسوس کرنا / الشعور بالصغر','"Gideon said \'I am the least in my family\'."','#B71C1C'],
+  ['💪 Mighty warrior','A strong and capable fighter — what GOD called Gideon.','طاقتور جنگجو / محارب قوي','"God called Gideon mighty warrior even when he doubted himself."','#B71C1C'],
+  ['✋ God\'s presence','God being with us, helping even when we feel alone.','خدا کی موجودگی / حضور الله','"God promised Gideon: I will be with you."','#B71C1C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY OF GIDEON — JUDGES 6–7</div>
+<div class="story" style="background:var(--red-light);border-color:#E57373;font-size:13px;line-height:1.9">
+<strong style="font-family:Nunito,sans-serif;font-size:15px;color:var(--red)">🦁 Gideon — Judges 6–7</strong><br/><br/>
+<strong>Background:</strong> The Midianites attacked Israel every year, destroying their crops and stealing their animals. Israel became poor and afraid.<br/><br/>
+<strong>God calls Gideon:</strong> An angel appeared to Gideon while he was hiding wheat from the enemy. The angel said: <em>"The Lord is with you, mighty warrior!"</em><br/><br/>
+Gideon replied: <em>"Me? My clan is the weakest, and I am the least in my family!"</em><br/><br/>
+<strong>God's plan:</strong> God reduced Gideon's army from 32,000 soldiers to just <strong>300</strong> — so everyone would know it was God who won, not human power.<br/><br/>
+<strong>The victory:</strong> Gideon's 300 men used trumpets, torches and clay jars to confuse the enemy at night. The Midianites panicked and fled. <strong>Israel was saved!</strong>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>STORY IN ORDER</div>
+${[
+  ['1','The Midianites attack Israel and destroy their crops every year.'],
+  ['2','An angel appears to Gideon and calls him "mighty warrior."'],
+  ['3','Gideon says he is the weakest and cannot save Israel.'],
+  ['4','God says "I will be with you" and chooses Gideon on purpose.'],
+  ['5','God reduces the army to just 300 men.'],
+  ['6','300 men defeat the Midianites with trumpets, torches and clay jars.'],
+].map(([n,t])=>`
+<div style="display:flex;gap:10px;align-items:center;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <div style="background:var(--red);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:14px;flex-shrink:0">${n}</div>
+  <span style="font-size:13px">${t}</span>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>GOD'S "I AM WITH YOU" PROMISES</div>
+${[
+  ['💛','When you feel weak…','God says: "My power is made perfect in weakness." (2 Corinthians 12:9)'],
+  ['💙','When you feel scared…','God says: "Do not fear, for I am with you." (Isaiah 41:10)'],
+  ['💜','When you feel too small…','God says: "I know the plans I have for you — plans to give you hope." (Jeremiah 29:11)'],
+  ['❤️','When you feel alone…','God says: "I will never leave you nor forsake you." (Hebrews 13:5)'],
+].map(([col,feeling,verse])=>`
+<div style="display:flex;gap:10px;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px;align-items:flex-start">
+  <span style="font-size:20px">${col}</span>
+  <div><div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:var(--red)">${feeling}</div>
+  <div style="font-size:12px;font-style:italic;color:var(--gray);margin-top:2px">${verse}</div></div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>COMPREHENSION QUESTIONS</div>
+${[
+  ['Why was Gideon threshing wheat in a winepress?','Gideon was hiding because...'],
+  ['What did God call Gideon even though he felt weak?','God called him...'],
+  ['Why did God reduce the army to 300?','God reduced the army so that...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:12px;color:var(--red);font-style:italic;margin:3px 0">Frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:40px"></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>MEMORY VERSE — LEARN IT!</div>
+<div class="verse-box">
+  <div class="verse-text">"The Lord is with you, mighty warrior."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Judges 6:12</div>
+</div>
+<div class="tip"><strong>How to learn:</strong> Read it 3 times → cover 1 word → say it → cover more → say it again until you can say the whole verse without looking!</div>
+<div class="q-box">
+  <div class="q-label">Write the verse from memory — no peeking! 😊</div>
+  <textarea class="tarea" style="min-height:50px" placeholder="The Lord is with you..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>MY LIFE APPLICATION</div>
+${[
+  ['❤️','A time I felt "too small" to do something:'],
+  ['🧡','One brave step I can take this week:'],
+  ['💛','What "God is with you" means to ME:'],
+].map(([col,label])=>`
+<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+  <div style="width:5px;height:30px;background:${col};border-radius:4px;margin-top:2px"></div>
+  <div style="flex:1"><div style="font-size:12px;font-weight:700;font-family:Nunito,sans-serif;color:${col}">${label}</div>
+  <input class="dline" style="border-bottom-color:${col}"/></div>
+</div>`).join('')}
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: God chose Gideon because of God's strength, not Gideon's. "The Lord is with you, mighty warrior." — Judges 6:12. God uses unlikely people! 🦁</div>`,
+
+};
+
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML='';pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur)el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render();};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week10_Notes');</script>
+</body>
+</html>
