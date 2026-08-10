@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 9 · Day 4 Revision · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;--radius-lg:24px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(245,158,11,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCD34D;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="overview"].active{background:rgba(245,158,11,0.2);color:#FCD34D;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-deco{position:absolute;right:-20px;top:-20px;width:220px;height:220px;border-radius:50%;opacity:0.07;filter:blur(1px);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;line-height:1;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;font-weight:500;opacity:0.72;max-width:520px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);flex-shrink:0;margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:180px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;transition:border-color 0.2s;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color 0.2s;cursor:pointer;}
+.ov-card:hover{border-color:var(--ov-color,#555);}
+.ov-icon{font-size:2rem;margin-bottom:10px;}
+.ov-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--bright);margin-bottom:6px;}
+.ov-topic{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+.ov-keys{display:flex;flex-direction:column;gap:4px;}
+.ov-key{font-size:0.78rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start;}
+.ov-key::before{content:'✓';color:var(--ov-color,#6EE7B7);flex-shrink:0;font-weight:700;}
+.tracker{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.tracker-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--bright);margin-bottom:16px;}
+.tracker-row{display:grid;grid-template-columns:180px 1fr 100px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.tracker-row:last-child{border-bottom:none;}
+.tracker-subject{font-size:0.88rem;font-weight:600;color:var(--text);}
+.tracker-bar-wrap{background:var(--surface2);border-radius:99px;height:8px;overflow:hidden;}
+.tracker-bar{height:8px;border-radius:99px;width:0%;transition:width 1s ease;}
+.tracker-score{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:center;width:100%;}
+.tracker-score:focus{outline:none;border-color:#F59E0B;}
+.mc-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.mc-opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.mc-opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.mc-opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.mc-opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.mc-fb{margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:0.87rem;font-weight:600;display:none;}
+.mc-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.mc-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.mc-nav{margin-top:14px;display:flex;align-items:center;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--muted);font-weight:700;}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}.tracker-row{grid-template-columns:1fr 1fr;}.tracker-bar-wrap{display:none;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 9</div>
+  <div class="day-badge">⭐ Day 4 · Revision</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="overview" onclick="show('overview')">📋 Overview</button>
+    <button class="tab" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ OVERVIEW PAGE ═══ -->
+<div id="pg-overview" class="page active">
+<div class="hero" style="background:linear-gradient(135deg,#1A1200,#3D2800);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#F59E0B,transparent);"></div>
+  <div class="hero-icon">⭐</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">Day 4 · Week 9 · Full Revision</div>
+  <div class="hero-title">Week 9 Revision —<br>All Subjects</div>
+  <div class="hero-subtitle">Mixed quiz · Topic summaries · Final score tracker · Cross-subject connections. Use this page to check what you know before moving on to Week 10.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">📖 Bible: Joshua</span>
+    <span class="hero-tag">✏️ English: Presentations</span>
+    <span class="hero-tag">🧮 Maths: Equations</span>
+    <span class="hero-tag">🔬 Science: Elements</span>
+    <span class="hero-tag">🏛️ Geography: Feudal System</span>
+  </div>
+</div>
+
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Week 9 Total</label><input type="text" placeholder="   / 200+"></div>
+</div>
+
+<div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--bright);margin-bottom:16px;">Week 9 at a Glance</div>
+<div class="overview-grid">
+  <div class="ov-card" style="--ov-color:#C4B5FD;border-color:rgba(109,40,217,0.3);" onclick="show('bible')">
+    <div class="ov-icon">📖</div>
+    <div class="ov-title" style="color:#C4B5FD;">Bible</div>
+    <div class="ov-topic">Joshua — Courage & Promise (Joshua 1, 3-6 · Joshua 1:9)</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#C4B5FD;">"Be strong and courageous" repeated 4 times</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Jordan crossing echoes the Red Sea (Moses)</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Jericho falls through obedience, not weapons</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Fulfils the promise first made to Abraham</div>
+      <div class="ov-key" style="--ov-color:#C4B5FD;">Twelve stones — a memorial for future generations</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCA5A5;border-color:rgba(190,18,60,0.3);" onclick="show('english')">
+    <div class="ov-icon">✏️</div>
+    <div class="ov-title" style="color:#FCA5A5;">English</div>
+    <div class="ov-topic">Speaking & Listening — Presentations</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Opening → main points → closing structure</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Signposting matters more in speech than writing</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Delivery skills: volume, pace, eye contact, body language</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Active listening is a skill, not passive hearing</div>
+      <div class="ov-key" style="--ov-color:#FCA5A5;">Open questions require explanation; closed need one fact</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#FCD34D;border-color:rgba(180,83,9,0.3);" onclick="show('maths')">
+    <div class="ov-icon">🧮</div>
+    <div class="ov-title" style="color:#FCD34D;">Maths</div>
+    <div class="ov-topic">Solving One-Step Equations</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#FCD34D;">Balancing method: same operation on both sides</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Inverse of + is −; inverse of × is ÷</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Always check by substituting back in</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Identify the operation before choosing the inverse</div>
+      <div class="ov-key" style="--ov-color:#FCD34D;">Used in geometry, word problems, real life</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#6EE7B7;border-color:rgba(6,95,70,0.3);" onclick="show('science')">
+    <div class="ov-icon">🔬</div>
+    <div class="ov-title" style="color:#6EE7B7;">Science</div>
+    <div class="ov-topic">Elements, Compounds & the Periodic Table</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Element = one type of atom; compound = elements joined</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Symbols: first letter capital, second lowercase</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Groups = columns (similar properties); periods = rows</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Metals: shiny, conduct, malleable. Non-metals: opposite</div>
+      <div class="ov-key" style="--ov-color:#6EE7B7;">Compounds have entirely new properties (NaCl example)</div>
+    </div>
+  </div>
+  <div class="ov-card" style="--ov-color:#93C5FD;border-color:rgba(30,58,138,0.3);" onclick="show('history')">
+    <div class="ov-icon">🏛️</div>
+    <div class="ov-title" style="color:#93C5FD;">History / Geography</div>
+    <div class="ov-topic">Medieval Europe & the Feudal System</div>
+    <div class="ov-keys">
+      <div class="ov-key" style="--ov-color:#93C5FD;">Feudal pyramid: monarch → lords → knights → serfs</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Land exchanged for loyalty and service</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Serfs bound to the land, could not leave</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">The Church held huge religious AND political power</div>
+      <div class="ov-key" style="--ov-color:#93C5FD;">Castles used geography (hills, rivers) for defence</div>
+    </div>
+  </div>
+</div>
+
+<div class="tracker">
+  <div class="tracker-title">📊 My Week 9 Score Tracker</div>
+  <div class="tracker-row">
+    <div class="tracker-subject">📖 Bible — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#7C3AED;" id="bar-bible"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('bible',this.value,99)" id="sc-bible">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">✏️ English — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#E11D48;" id="bar-english"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 99" oninput="updateBar('english',this.value,99)" id="sc-english">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🧮 Maths — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#D97706;" id="bar-maths"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('maths',this.value,100)" id="sc-maths">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🔬 Science — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#059669;" id="bar-science"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('science',this.value,100)" id="sc-science">
+  </div>
+  <div class="tracker-row">
+    <div class="tracker-subject">🏛️ History — Days 1–3</div>
+    <div class="tracker-bar-wrap"><div class="tracker-bar" style="background:#2563EB;" id="bar-history"></div></div>
+    <input class="tracker-score" type="text" placeholder="/ 100" oninput="updateBar('history',this.value,100)" id="sc-history">
+  </div>
+</div>
+
+<div class="card" style="--accent:#F59E0B;">
+  <div class="slabel" style="background:rgba(245,158,11,0.2);color:#FCD34D;">🌐 Big Ideas That Connect Everything This Week</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:4px;">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Structure enables action under pressure</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Joshua followed exact, structured instructions to face Jericho. The feudal system gave medieval society structure amid instability. The balancing method gives a reliable structure for solving unknowns. Clear structure turns uncertainty into manageable steps.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Combining parts creates new properties</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Sodium and chlorine combine into safe table salt. Castle walls, moats, and keeps combine into an unbreakable defensive system. Individual points combine into a persuasive presentation. The whole becomes more than the sum of its parts.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 What came before shapes what comes next</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Joshua fulfils a promise made generations earlier to Abraham. Feudalism arose from the fall of Rome. An equation's solution depends on correctly identifying the operation first. Understanding the past or the setup determines success in the present.</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+      <div style="font-weight:700;color:var(--bright);margin-bottom:8px;font-size:0.92rem;">🔗 Balance and reciprocity</div>
+      <div style="font-size:0.83rem;color:var(--muted);line-height:1.6;">Maths: an equation must stay balanced on both sides. Feudalism: land was exchanged for loyalty — a two-way obligation. Speaking and listening: communication requires both a speaker AND an active listener to actually work.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ BIBLE REVISION ═══ -->
+<div id="pg-bible" class="page">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#7C3AED,transparent);"></div>
+  <div class="hero-icon">🛡️</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 9 · Day 4 Revision</div>
+  <div class="hero-title">Joshua —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Multiple choice · Short recall · Extended question · Self-mark</div>
+  <div class="hero-tags"><span class="hero-tag">Memory verse</span><span class="hero-tag">Key events</span><span class="hero-tag">Promise & Courage</span></div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse Check</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse for Week 9 Bible from memory. Then write it in your own words. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Exact verse (Joshua 1:9):&#10;&#10;In my own words:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go." (Joshua 1:9, NIV). Own words: God tells Joshua to be brave and confident, not letting fear control his choices, because God's presence will be with him in every situation he faces, wherever he goes.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🎯 Multiple Choice Quiz</div>
+  <div id="bible-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextMC('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">✍️ Short Recall</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★</div>
+    <div class="q-text">Without notes — write down as much as you can remember about Joshua's story in 5 minutes. Include: key events in order, why the story matters theologically (promise, presence, obedience), and ONE connection to an earlier Bible week. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Write everything you remember — events, themes, vocabulary, connections:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Key events in order: Moses dies, Joshua commissioned (repeated "be strong and courageous") → spies sent, Rahab hides them → Jordan crossing (water stops, twelve stones set up) → encounter with commander of the LORD's army → march around Jericho for 7 days → walls collapse → Achan's disobedience causes defeat at Ai. Theological themes: <strong>promise</strong> (fulfilling what was given to Abraham), <strong>presence</strong> (God with Joshua "wherever you go"), <strong>obedience</strong> (unusual instructions followed exactly). Connection: to Abraham (Week 5 — same promised land), Moses (Week 7 — Red Sea echoed at Jordan), or Joseph (Week 6 — faith through different challenges). Give credit for vocabulary: covenant, consecrate, inheritance, successor.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Final Extended Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">★★</div>
+    <div class="q-text">Choose ONE of these essay questions and write a full response (minimum 8 sentences): <span class="marks">15 marks</span><br><br><strong>Option A:</strong> "Courage in Joshua's story is always paired with obedience — never separate from it." Discuss using at least three specific examples.<br><strong>Option B:</strong> "The story of Rahab shows that God's mercy was never meant to be limited to Israel alone." Do you agree?<br><strong>Option C:</strong> "God's promises may take generations to fulfil, but they are never abandoned." Evaluate this claim using the connection between Abraham and Joshua.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A — Courage and obedience:</strong> Award marks for: the Jordan crossing (priests obey by stepping in before the water stops), Jericho (obedience to marching/trumpet instructions, not independent military strategy), the encounter with the commander of the LORD's army (Joshua submits/removes sandals rather than asserting his own authority). In each case courage is expressed THROUGH precise obedience, not through independent bold action. <strong>Option B — Rahab and mercy beyond Israel:</strong> Award marks for: Rahab was a Canaanite (outsider) who helped the spies and was spared with her family; her later inclusion in the genealogy leading to Jesus (Matthew 1:5) reinforces this theme; connects to the promise to Abraham that "all peoples on earth" would be blessed (Genesis 12:3). <strong>Option C — Promises across generations:</strong> Award marks for: the specific timespan between Abraham's promise (Genesis 12) and Joshua's fulfilment (centuries later); the fact that Abraham himself died without seeing the fulfilment; the twelve stones as a memorial connecting past promise to present fulfilment for future generations to remember.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Bible Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 28+" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH REVISION ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#E11D48,transparent);"></div>
+  <div class="hero-icon">🎤</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 9 · Day 4 Revision</div>
+  <div class="hero-title">Presentations —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Structure test · Delivery skills drill · Question crafting · Extended writing</div>
+  <div class="hero-tags"><span class="hero-tag">Structure</span><span class="hero-tag">Delivery</span><span class="hero-tag">Active listening</span></div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🎯 Multiple Choice Quiz</div>
+  <div id="english-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextMC('english')">Next →</button>
+    <span class="score-badge" id="english-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📝 Vocabulary & Structure Test</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Define each of these 10 terms precisely AND use each correctly in one sentence of your own. <span class="marks">15 marks</span><br><br>1. presentation &nbsp; 2. audience &nbsp; 3. active listening &nbsp; 4. articulation &nbsp; 5. pace &nbsp; 6. eye contact &nbsp; 7. visual aid &nbsp; 8. filler words &nbsp; 9. signposting &nbsp; 10. hook</div>
+    <textarea class="q-input xwide" placeholder="1. Definition: ___ Sentence:&#10;2. Definition: ___ Sentence:&#10;3. etc..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>presentation</strong> — a talk given to an audience to inform, explain, or persuade. 2. <strong>audience</strong> — the people listening to a presentation. 3. <strong>active listening</strong> — fully concentrating on and engaging with a speaker. 4. <strong>articulation</strong> — speaking clearly so each word can be understood. 5. <strong>pace</strong> — the speed at which someone speaks. 6. <strong>eye contact</strong> — looking at the audience while speaking. 7. <strong>visual aid</strong> — an image or object used to support a spoken presentation. 8. <strong>filler words</strong> — unnecessary sounds like "um" used when thinking. 9. <strong>signposting</strong> — language like "first," "next," "finally" that shows listeners the structure. 10. <strong>hook</strong> — an engaging opening line that draws the audience in.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🌳 Full Presentation From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">★</div>
+    <div class="q-text">Without notes, write a complete 3-part presentation opening + one main point + closing on: <em>"Why courage and obedience go together in Joshua's story."</em> Use at least 3 signposting phrases. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Opening:&#10;&#10;Main point:&#10;&#10;Closing:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Opening with hook + purpose (3). Main point with clear signpost + specific detail from Joshua's story (4). Closing with summary + final thought (3). <strong>Strong evidence to use:</strong> the Jordan crossing requiring the priests to step in before the water stopped; the Jericho march requiring precise, sustained obedience with no visible progress for 6 days.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">English Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 25+" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS REVISION ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#D97706,transparent);"></div>
+  <div class="hero-icon">⚖️</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 9 · Day 4 Revision</div>
+  <div class="hero-title">Equations —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Timed drill · Mixed problem set · Common errors · Final exam challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Balancing method</span><span class="hero-tag">Word problems</span><span class="hero-tag">Multi-step</span></div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🎯 Multiple Choice Quiz</div>
+  <div id="maths-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextMC('maths')">Next →</button>
+    <span class="score-badge" id="maths-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">⚡ Timed Drill — 12 Questions (Target: under 10 minutes)</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★</div>
+    <div class="q-text">Work through as quickly and accurately as you can. Show brief working. <span class="marks">12 marks</span><br><br>1. x+16=25 &nbsp; 2. y−7=13 &nbsp; 3. 8x=72 &nbsp; 4. n÷5=12 &nbsp; 5. x+11=6 &nbsp; 6. 6y=−36 &nbsp; 7. "A number plus 14 equals 30. Find the number." &nbsp; 8. "A number divided by 7 equals 9. Find the number." &nbsp; 9. m−20=−5 &nbsp; 10. p÷8=−3 &nbsp; 11. 45=9x &nbsp; 12. y+18=18</div>
+    <textarea class="q-input xwide" placeholder="1. ___ 2. ___ 3. ___ 4. ___ 5. ___ 6. ___&#10;7. ___ 8. ___ 9. ___ 10. ___ 11. ___ 12. ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body">1. x=25−16=<strong>9</strong> &nbsp; 2. y=13+7=<strong>20</strong> &nbsp; 3. x=72÷8=<strong>9</strong> &nbsp; 4. n=12×5=<strong>60</strong> &nbsp; 5. x=6−11=<strong>−5</strong> &nbsp; 6. y=−36÷6=<strong>−6</strong> &nbsp; 7. n+14=30, n=<strong>16</strong> &nbsp; 8. n÷7=9, n=<strong>63</strong> &nbsp; 9. m=−5+20=<strong>15</strong> &nbsp; 10. p=−3×8=<strong>−24</strong> &nbsp; 11. x=45÷9=<strong>5</strong> &nbsp; 12. y=18−18=<strong>0</strong></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Final Challenge Problem</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">★★</div>
+    <div class="q-text">A medieval lord distributes land among three knights. The first knight receives x hectares. The second receives 3 times as much as the first. The third receives 15 hectares more than the first. Combined, the three knights receive 95 hectares. (a) Write expressions for the second and third knights in terms of x. (b) Write and simplify an equation for the total. (c) Solve for x. (d) Find how much land each knight receives. (e) Check your answer. <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) First = x. Second = ___. Third = ___.&#10;(b) Equation: &#10;(c) x = ___&#10;(d) First = ___ Second = ___ Third = ___&#10;(e) Check:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) First = x. Second = <strong>3x</strong>. Third = <strong>x+15</strong>. (b) x+3x+(x+15)=95, simplifies to 5x+15=95. (c) 5x=80. x=80÷5=<strong>16</strong>. (d) First = <strong>16 hectares</strong>. Second = 3(16)=<strong>48 hectares</strong>. Third = 16+15=<strong>31 hectares</strong>. (e) Check: 16+48+31=<strong>95 ✓</strong>.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Maths Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE REVISION ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#059669,transparent);"></div>
+  <div class="hero-icon">⚛️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 9 · Day 4 Revision</div>
+  <div class="hero-title">Elements & Periodic Table —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Quiz · Symbol matching · Real-world uses · Final challenge</div>
+  <div class="hero-tags"><span class="hero-tag">Symbols</span><span class="hero-tag">Groups & periods</span><span class="hero-tag">Metals vs non-metals</span></div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🎯 Multiple Choice Quiz</div>
+  <div id="science-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextMC('science')">Next →</button>
+    <span class="score-badge" id="science-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🧪 Symbol & Property Matching Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">From memory — write the chemical symbol for each element and state whether it is a metal or non-metal: <span class="marks">10 marks</span><br><br>hydrogen · oxygen · carbon · sodium · iron · gold · potassium · chlorine · sulfur · silver</div>
+    <textarea class="q-input wide" placeholder="hydrogen = ___ (metal/non-metal)&#10;oxygen = ___&#10;carbon = ___&#10;sodium = ___&#10;iron = ___&#10;gold = ___&#10;potassium = ___&#10;chlorine = ___&#10;sulfur = ___&#10;silver = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">hydrogen = H (non-metal) &nbsp; oxygen = O (non-metal) &nbsp; carbon = C (non-metal) &nbsp; sodium = Na (metal) &nbsp; iron = Fe (metal) &nbsp; gold = Au (metal) &nbsp; potassium = K (metal) &nbsp; chlorine = Cl (non-metal) &nbsp; sulfur = S (non-metal) &nbsp; silver = Ag (metal).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🌍 Cross-Subject Final Challenge</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">★</div>
+    <div class="q-text">Connect this week's science to this week's history: castle walls were often built from stone containing many different mineral compounds. Using the idea that "compounds have entirely new properties different from their component elements," explain in a short paragraph (5-6 sentences) why building materials made of compounds (like stone) might be more useful for construction than pure elements alone. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your connected paragraph here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body">Most pure elements are unsuitable for building construction on their own: many metals are too soft, too expensive, or too reactive (like sodium, which cannot even touch water safely), while many non-metals are gases at room temperature or too brittle to bear structural weight. Compounds, formed when elements chemically combine, often possess entirely new properties better suited to construction — for example, the calcium compounds found in limestone (used in medieval castle walls) are hard, durable, weather-resistant, and can be shaped into large blocks, none of which describes calcium metal alone (which is actually a soft, reactive metal in its pure form). This mirrors the sodium chloride example from this week's lesson: just as combining two dangerous elements creates a safe, useful compound (table salt), combining elements within rock-forming minerals creates compounds with the hardness, weather-resistance, and structural strength needed for castle construction — properties that emerge specifically from the chemical bonding, not from any single element used alone. This is why medieval builders instinctively used naturally occurring compounds (stone, mortar) rather than attempting to construct with pure elemental metals, even where available.</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Science Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 20+" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY REVISION ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-deco" style="background:radial-gradient(circle,#2563EB,transparent);"></div>
+  <div class="hero-icon">🏰</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 9 · Day 4 Revision</div>
+  <div class="hero-title">Medieval Europe —<br>Full Week Revision</div>
+  <div class="hero-subtitle">Memory maps · Feudal pyramid recall · Record-breakers · Final essay</div>
+  <div class="hero-tags"><span class="hero-tag">Feudal pyramid</span><span class="hero-tag">Knights & castles</span><span class="hero-tag">The Church</span></div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🎯 Multiple Choice Quiz</div>
+  <div id="history-mc"></div>
+  <div class="mc-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextMC('history')">Next →</button>
+    <span class="score-badge" id="history-mc-score"></span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🗺️ Memory Recall — From Memory</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★</div>
+    <div class="q-text">Without notes — fill in every answer from memory: <span class="marks">12 marks</span><br><br><strong>Feudal Pyramid (4 levels, top to bottom):</strong> 1.___ 2.___ 3.___ 4.___<br><br><strong>3 castle defensive features:</strong> 1.___ 2.___ 3.___<br><br><strong>Knight training stages:</strong> 1.___ (age ~7) 2.___ (age ~14) 3.___ (age ~21)<br><br><strong>Two types of power held by the Church:</strong> 1.___ 2.___</div>
+    <textarea class="q-input wide" placeholder="Write your answers here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Answers <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Feudal Pyramid:</strong> 1. Monarch 2. Lords/Nobles 3. Knights 4. Serfs/Peasants. <strong>Castle features (any 3):</strong> thick stone walls, moat, drawbridge, keep, battlements. <strong>Knight training:</strong> 1. Page (~age 7) 2. Squire (~age 14) 3. Knight (~age 21). <strong>Church power:</strong> 1. Religious power (baptisms, salvation teaching, monasteries) 2. Political/economic power (land ownership, tithes, crowning/excommunicating kings).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Final Extended History Question</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">★★</div>
+    <div class="q-text">Choose ONE question and write a full response (minimum 8 sentences): <span class="marks">12 marks</span><br><br><strong>Option A:</strong> "Feudalism was fundamentally about exchange — nobody at any level of the pyramid gave without receiving something in return." Evaluate this claim, considering whether the exchange was ever truly equal.<br><br><strong>Option B:</strong> "The medieval Church's power came from combining two different SOURCES of authority that most institutions only have one of." Explain and evaluate this claim.<br><br><strong>Option C:</strong> Using the six settlement factors from Week 8, explain why castles were built in specific locations and what this reveals about the connection between geography and defence.</div>
+    <textarea class="q-input xwide" placeholder="Which option? ___&#10;&#10;Write your full response:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Option A:</strong> Award for: identifying the exchange at each level (land for loyalty, protection for labour); recognising that the exchange was NOT equal in power — serfs had almost no rights or ability to negotiate their terms, unlike knights or lords, who had more genuine choice and leverage; nuanced conclusion that "exchange" existed formally at every level but the terms of that exchange were dictated overwhelmingly by those with more power. <strong>Option B:</strong> Award for: identifying the Church's dual source of authority — spiritual/religious (control over salvation, sacraments) AND material/political (land, tithes, ability to crown or excommunicate); explaining why this combination gave it power that rivalled kings, who typically only had military/political power without independent spiritual authority. <strong>Option C:</strong> Award for: applying settlement factors (natural defence being most relevant, but also water supply, transport routes) to explain castle placement on hills, river bends, coastlines; connecting to the idea that geography mattered even MORE without strong central government protection (as discussed in Day 1).</div>
+  </div>
+</div>
+
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">History/Geography Day 4 Revision Score</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 24+" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+function updateBar(subject, val, max){
+  const num = parseFloat(val);
+  if(!isNaN(num) && num >= 0){
+    const pct = Math.min((num / max) * 100, 100);
+    document.getElementById('bar-'+subject).style.width = pct + '%';
+  }
+}
+
+const mcData = {
+  bible:[
+    {q:"How many times does God (or the people) repeat 'be strong and courageous' to Joshua in chapter 1?",opts:["Once","Twice","Four times","Ten times"],ans:2,exp:'The command is repeated four times across Joshua chapter 1 (verses 6, 7, 9, and 18) — showing how much encouragement Joshua needed for the responsibility ahead.'},
+    {q:"What happened when the priests carrying the ark stepped into the Jordan River?",opts:["They were swept away","The water stopped flowing, allowing Israel to cross on dry ground","Nothing unusual happened","The ark floated away"],ans:1,exp:'Joshua 3:13-16 describes the river stopping — echoing the earlier Red Sea crossing under Moses, showing the same God acting through the new leader, Joshua.'},
+    {q:"What was unusual about how Israel captured Jericho?",opts:["They used advanced siege engines","They bribed the guards","They marched around the city, blew trumpets, and shouted — no weapons brought down the walls","They tunnelled underneath the walls"],ans:2,exp:'God\'s instructions were to march around Jericho for seven days (seven times on the final day), blow trumpets, and shout — the walls collapsed through obedience, not military strength.'},
+    {q:"Why were twelve stones set up after Israel crossed the Jordan?",opts:["To mark the border of Egypt","As a memorial so future generations would ask about and remember what God had done","To build a wall around Jericho","As a gift for the king of Jericho"],ans:1,exp:'Joshua 4:1-7 explains the stones were a permanent memorial, designed so children in later generations would ask what they meant and be told the story of God\'s faithfulness.'},
+    {q:"How does Joshua's story connect to the promise made to Abraham many generations earlier?",opts:["It has no connection","Joshua's conquest of Canaan is the fulfilment of the land God promised to Abraham's descendants","Abraham and Joshua were brothers","Abraham conquered Canaan before Joshua was born"],ans:1,exp:'God promised Abraham that his descendants would receive the land of Canaan (Genesis 12). Joshua\'s story, centuries later, is the actual fulfilment of that promise.'}
+  ],
+  english:[
+    {q:"What are the three main parts of a well-structured oral presentation?",opts:["Body, Introduction, Conclusion","Opening, main points, closing","Hook, evidence, quotes","Introduction only"],ans:1,exp:'Every strong presentation follows: Opening (hook + purpose) → Main points (2-4, clearly signposted) → Closing (summary + strong final thought).'},
+    {q:"Why is 'signposting' language (like 'first,' 'next,' 'finally') especially important in SPOKEN presentations?",opts:["It makes the speech sound more formal for no real reason","Listeners cannot re-read a missed sentence like readers can, so clear structure markers help them follow along in real time","It fills time when the speaker has nothing else to say","It is not actually important"],ans:1,exp:'Unlike readers, listeners only get one chance to hear each sentence — they cannot scroll back. Signposting makes the structure clear in the moment, helping the audience follow without confusion.'},
+    {q:"What is 'active listening'?",opts:['Listening with your eyes closed','Hearing words without processing their meaning','Fully concentrating on, understanding, and engaging with what a speaker is saying','Speaking loudly while someone else talks'],ans:2,exp:'Active listening means genuinely engaging with a speaker — through eye contact, body language, and meaningful questions — rather than simply hearing sounds without processing them.'},
+    {q:"What is the difference between an OPEN and a CLOSED question?",opts:['There is no real difference','An open question requires explanation; a closed question can be answered with one word or fact','Open questions are always longer to write','Closed questions are always rude'],ans:1,exp:'A closed question has a short, factual answer (yes/no, or a single fact). An open question requires the person to explain or elaborate, showing deeper engagement with the content.'},
+    {q:"Why should speakers try to reduce filler words like 'um' and 'like'?",opts:['They make a speech more interesting','They can make a speaker sound less prepared and confident; pausing silently is more effective','They are required by law to avoid','They have no real effect on a presentation'],ans:1,exp:'Filler words are used when thinking, but overusing them can make a speaker sound unprepared. A brief silent pause is more effective and sounds more confident than filling the gap with unnecessary sounds.'}
+  ],
+  maths:[
+    {q:"What is the inverse operation of multiplication?",opts:["Addition","Subtraction","Division","Multiplication"],ans:2,exp:'Division "undoes" multiplication. If an equation has "×," you use "÷" on both sides to isolate the variable.'},
+    {q:"Solve: x + 9 = 20",opts:["x = 29","x = 11","x = 180","x = 9"],ans:1,exp:'Subtract 9 from both sides: x = 20 − 9 = 11. Check: 11 + 9 = 20 ✓.'},
+    {q:"Solve: 6x = 48",opts:["x = 8","x = 42","x = 288","x = 54"],ans:0,exp:'Divide both sides by 6: x = 48 ÷ 6 = 8. Check: 6(8) = 48 ✓.'},
+    {q:"Solve: y − 7 = −3",opts:["y = 4","y = −10","y = 10","y = −4"],ans:0,exp:'Add 7 to both sides: y = −3 + 7 = 4. Check: 4 − 7 = −3 ✓.'},
+    {q:"A number divided by 6 equals 9. Which equation and solution are correct?",opts:["n×6=9, n=1.5","n÷6=9, n=54","n−6=9, n=15","n+6=9, n=3"],ans:1,exp:'"A number divided by 6 equals 9" translates to n÷6=9. Multiplying both sides by 6: n=9×6=54. Check: 54÷6=9 ✓.'}
+  ],
+  science:[
+    {q:"What is an element?",opts:["A mixture of two or more substances","A pure substance made of only one type of atom","Any substance that dissolves in water","A liquid that conducts electricity"],ans:1,exp:'An element is a pure substance containing only one type of atom — it cannot be broken down into anything simpler by chemical means.'},
+    {q:"What is the key difference between a compound and a mixture?",opts:["A compound is always a liquid","In a compound, elements are chemically joined with new properties; in a mixture, substances combine without a reaction and keep original properties","A compound can never be separated","There is no real difference"],ans:1,exp:'A compound forms through a chemical reaction, creating a substance with entirely new properties in a fixed ratio. A mixture simply combines substances physically, and each keeps its own original properties.'},
+    {q:"What does the chemical symbol 'Fe' represent, and where does it come from?",opts:["Fluorine, from English","Iron, from the Latin word 'ferrum'","Francium, from French","Fermium, from a scientist's name"],ans:1,exp:'"Fe" represents iron, from the Latin name "ferrum." Several common element symbols derive from Latin names rather than English (e.g. Na for sodium, Au for gold).'},
+    {q:"In the periodic table, what determines which GROUP (column) an element belongs to?",opts:["Its colour","The number of electrons in its outermost shell","When it was discovered","Its price"],ans:1,exp:'Elements in the same group have the same number of electrons in their outer shell, which is why they share similar chemical properties and reactivity patterns.'},
+    {q:"Which property is typical of METALS rather than non-metals?",opts:["Dull appearance, poor conductor","Brittle when solid","Shiny, good conductor of electricity and heat, malleable","Usually a gas at room temperature"],ans:2,exp:'Metals are typically shiny (lustrous), good conductors of heat and electricity, and malleable (can be bent or hammered into shape) — unlike non-metals, which are often dull, poor conductors, and brittle.'}
+  ],
+  history:[
+    {q:"What is the feudal system?",opts:["A democratic voting system in medieval villages","A system exchanging land for loyalty and military service, organising society into a hierarchy","A trade agreement between kings","A type of medieval currency"],ans:1,exp:'Feudalism organised medieval European society into a hierarchy: the king granted land to lords for loyalty; lords granted land to knights for military service; serfs worked the land at the bottom.'},
+    {q:"What was a 'serf'?",opts:["A type of medieval weapon","A squire who had not yet become a knight","A peasant legally bound to work a lord's land, unable to leave without permission","A title for the eldest son of a king"],ans:2,exp:'A serf was a peasant at the bottom of the feudal hierarchy, legally tied to the lord\'s land, unable to leave the manor or marry without the lord\'s permission.'},
+    {q:"What did a knight typically receive from his lord in exchange for military service?",opts:["A salary in gold coins", "Land to support himself, in exchange for a pledge of loyalty and military service","A permanent position in the Church","Permission to leave the kingdom"],ans:1,exp:'In the feudal exchange, knights received land from their lord in return for loyalty and a set number of days of military service each year — the foundation of the whole feudal relationship.'},
+    {q:"Why was the medieval Church so powerful beyond its religious role?",opts:["It had no power beyond religious matters","It owned vast land, collected tithes, and could crown or reject kings","It controlled all European trade routes","It had a larger army than any king"],ans:1,exp:'The medieval Church combined religious authority with significant political and economic power — owning enormous land, collecting tithes (a tenth of income), and holding influence over kings through coronation or excommunication.'},
+    {q:"Which castle feature specifically prevented attackers from reaching or tunnelling under the walls?",opts:["The keep","The battlements","The moat (water-filled ditch)","The great hall"],ans:2,exp:'The moat — a deep, water-filled ditch surrounding the castle — made it extremely difficult for attackers to reach the walls directly or dig tunnels underneath to undermine them.'}
+  ]
+};
+
+const mcState = {};
+['bible','english','maths','science','history'].forEach(s=>{
+  mcState[s]={idx:0,score:0};
+  renderMC(s);
+});
+
+function renderMC(s){
+  const st=mcState[s];
+  const qs=mcData[s];
+  const el=document.getElementById(s+'-mc');
+  const sc=document.getElementById(s+'-mc-score');
+  if(st.idx>=qs.length){
+    el.innerHTML=`<div style="padding:18px;background:rgba(6,95,70,0.12);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:1.8rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;">Quiz complete!</div><div style="color:var(--muted);margin-top:6px;">${st.score} / ${qs.length} correct</div></div>`;
+    return;
+  }
+  const q=qs[st.idx];
+  sc.textContent=`${st.score} / ${st.idx} correct`;
+  el.innerHTML=`<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question ${st.idx+1} of ${qs.length}</div>
+  <div style="font-size:0.96rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:14px;">${q.q}</div>
+  <div class="mc-opts">${q.opts.map((o,i)=>`<button class="mc-opt" onclick="answerMC('${s}',${i})">${o}</button>`).join('')}</div>
+  <div id="${s}-mc-fb" class="mc-fb"></div>`;
+}
+
+function answerMC(s,i){
+  const q=mcData[s][mcState[s].idx];
+  const opts=document.querySelectorAll(`#${s}-mc .mc-opt`);
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-mc-fb');
+  if(i===q.ans){
+    mcState[s].score++;
+    opts[i].classList.add('correct');
+    fb.className='mc-fb ok';fb.style.display='block';
+    fb.textContent='✅ Correct! '+q.exp;
+  }else{
+    opts[i].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.className='mc-fb bad';fb.style.display='block';
+    fb.textContent='❌ '+q.exp;
+  }
+  document.getElementById(s+'-mc-score').textContent=`${mcState[s].score} / ${mcState[s].idx+1} correct`;
+}
+
+function nextMC(s){
+  mcState[s].idx++;
+  renderMC(s);
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week9_Day4');</script>
+</body>
+</html>

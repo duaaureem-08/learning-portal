@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 9 · Day 1 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(109,40,217,0.2);border:1px solid rgba(109,40,217,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#C4B5FD;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 9</div>
+  <div class="day-badge">📅 Day 1</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 1 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">🛡️</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 9 · Day 1</div>
+  <div class="hero-title">Joshua —<br>Foundation Questions</div>
+  <div class="hero-subtitle">Vocabulary · Recall · Understanding courage and promise</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and basic recall. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Vocabulary & Memory Verse</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The phrase "be strong and courageous" appears FOUR times in Joshua chapter 1 — once from God, and the rest from the people and from God again. Repetition in the Bible is a signal: when something is said again and again, it means it matters deeply. Joshua needed real encouragement for a real responsibility.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">Write the memory verse from Joshua 1:9 in full. Then explain in your own words what it means to be "strong and courageous" even when you still feel afraid. <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Memory verse:&#10;&#10;What being strong and courageous despite fear means:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go." (Joshua 1:9, NIV). <strong>Being strong and courageous despite fear</strong> does not mean you feel no fear at all — it means fear does not get to make your decisions for you. Courage is not the absence of fear; it is acting rightly even while feeling afraid, because you trust something (or someone) bigger than the fear itself. For Joshua, that "something bigger" was the promise of God's presence — "wherever you go."</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Match each vocabulary word to its correct definition: <em>successor · covenant · ark of the covenant · siege · consecrate</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="successor = &#10;covenant = &#10;ark of the covenant = &#10;siege = &#10;consecrate = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>successor</strong> = the person who takes over a role or position after someone else — Joshua was Moses' successor. <strong>covenant</strong> = a serious, binding agreement between God and his people — the Promised Land was part of God's covenant with Abraham. <strong>ark of the covenant</strong> = a sacred wooden chest representing God's presence with Israel, carried by priests. <strong>siege</strong> = a military operation surrounding a city to force its surrender — Jericho's "siege" was won unusually, through marching and trumpets, not weapons. <strong>consecrate</strong> = to set apart as holy or dedicated to God — Israel consecrated themselves before crossing the Jordan.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">List the four main events/stages of this week's story in order: Joshua becomes leader, crossing the Jordan, the fall of Jericho, the twelve stones memorial. For each, write one sentence describing what happened. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="1. &#10;2. &#10;3. &#10;4. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Joshua becomes leader:</strong> After Moses dies, God commissions Joshua, repeatedly commanding him to be strong and courageous because God's presence will go with him. 2. <strong>Crossing the Jordan:</strong> The priests carry the ark into the flooded river; the water stops flowing, and all of Israel crosses on dry ground. 3. <strong>The twelve stones memorial:</strong> One stone is taken from the riverbed for each tribe, set up so future generations would ask about and remember what God had done. 4. <strong>The fall of Jericho:</strong> Israel marches around the walled city for seven days, blows trumpets, and shouts — and the walls collapse without any weapon being used.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Understanding and explanation. Think carefully before writing.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Understanding & Explanation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">The crossing of the Jordan River (Joshua 3) closely echoes the crossing of the Red Sea under Moses (Exodus 14). Compare the two events: what is similar, and why might God have chosen to repeat a similar miracle for the new leader Joshua? <span class="marks">5 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 7 Bible — Moses and the Exodus, the parting of the Red Sea.</div>
+    <textarea class="q-input wide" placeholder="What is similar between the two events:&#10;&#10;Why God might have repeated a similar miracle for Joshua:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Similarities:</strong> In both events, a body of water that should have blocked Israel's path stops flowing/parts, allowing the entire nation to cross on dry ground. In both cases, the miracle happens at a moment of transition — leaving Egypt (Red Sea) and entering Canaan (Jordan). Both miracles are connected to a leader carrying out God's instructions exactly. <strong>Why God repeated it:</strong> The repetition powerfully confirms that the SAME God who worked through Moses is now working through Joshua — Israel (and Joshua himself) needed reassurance that God's power had not left with Moses' death. It also publicly established Joshua's authority: Joshua 3:7 says God did this "so that they may know that I am with you as I was with Moses." The miracle was as much about confirming Joshua's leadership as it was about the practical crossing.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">God's instructions for capturing Jericho were unusual: marching, trumpets, and shouting — no weapons or siege engines. Explain what this method teaches about the SOURCE of Israel's victory. Why might God have chosen such an unusual method instead of a normal military attack? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What the method teaches about the source of victory:&#10;&#10;Why God might have chosen this unusual method:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The unusual method makes it impossible for Israel to credit the victory to their own military skill or strength. If Jericho had fallen through a clever siege strategy or superior weapons, Israel could later claim some of the glory for themselves. Instead, the walls collapsed through an act that had no natural military explanation — marching in a circle and shouting cannot break stone walls. This teaches that the land was a GIFT from God, not Israel's achievement, which is a central theme of the whole book of Joshua. By requiring strange obedience rather than military cleverness, God ensured that everyone — Israelites and Canaanites alike — would recognise the victory as coming from God himself, building Israel's trust in God's power and Joshua's authority as God's chosen leader.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">The lesson compares Abraham, Joseph, Moses, and Joshua as four examples of faith. What is the KEY DIFFERENCE between what faith required of Joshua compared to what it required of Abraham? <span class="marks">3 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 5 Bible — Abraham called to leave his homeland for an unknown destination.</div>
+    <textarea class="q-input" placeholder="What faith required of Abraham:&#10;&#10;What faith required of Joshua, and how it differs:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Abraham's faith required leaving everything familiar and travelling toward a destination he did not yet know — trusting a promise about a FUTURE he could not picture. Joshua's faith was different: the promise had ALREADY been clearly defined (the specific land of Canaan) and Israel was already standing at its border. Joshua's faith was about actively taking hold of a promise that had been spoken centuries earlier and was now within reach — requiring courage to act and obey rather than the uncertainty of an unknown destination. Abraham's faith was about trusting an unclear future; Joshua's faith was about courageously stepping into a promise that was clear but required action to receive.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking. Write in full sentences.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Analysis & Application</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">The twelve stones (Joshua 4) were set up specifically so that future generations would ASK about them and be told the story. Why might God have cared so much about future generations remembering this event, rather than just the people who experienced it directly? Write at least 5 sentences. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Faith is rarely sustained by a single generation's direct experience alone — it must be passed down, retold, and re-anchored in physical reminders, or it fades. By instructing Israel to build a memorial specifically designed to provoke a question ("what do these stones mean?"), God ensured that the story of his faithfulness would not simply be forgotten once those who witnessed it had died. Children growing up generations later, who never personally saw the Jordan stop flowing, would still encounter the same truth through their parents' retelling — making the original event present and real for them too. This reflects a recurring biblical pattern: festivals, memorials, and rituals (Passover, the Sabbath, this stone monument) are designed to keep faith communal and intergenerational rather than purely individual and momentary. The stones did not just commemorate a past event; they functioned as an ongoing invitation for every future generation to ask, remember, and trust the same God who acted at the Jordan.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">8</div>
+    <div class="q-text">Evaluate: "Joshua's story shows that courage and obedience are not separate things — they are the same response in two different situations." Do you agree? Use specific evidence from the lesson (the Jordan crossing AND Jericho) to support your view. Write at least 6 sentences. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Do you agree? ___&#10;&#10;Your argument with evidence:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This statement is well supported by the evidence in Joshua's story. At the Jordan, courage was needed to step into a flooded river BEFORE it stopped flowing — the priests had to walk forward in faith, trusting the water would part as they obeyed God's instruction to carry the ark in. This is courage expressed as obedience: doing what God said even before seeing the result. At Jericho, the same pattern repeats — there was no logical reason to believe that marching silently around a city for six days, then shouting on the seventh, would bring down stone walls. Yet Israel obeyed precisely, without modification or improvisation. In both cases, the "courage" required was not a feeling of bravery in the face of danger in the usual sense (like charging into battle) — it was the willingness to follow an unusual, even illogical-seeming instruction without alternative justification. This supports the claim: in Joshua's story, courage is not a separate quality from obedience but is revealed precisely THROUGH acts of obedience that required trusting God more than visible evidence. The two cannot really be separated — courage was the inner posture that made the outward obedience possible, and the obedience was the only way the courage became visible and tested.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 1 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">🎤</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 9 · Day 1</div>
+  <div class="hero-title">Presentations —<br>Structure & Delivery</div>
+  <div class="hero-subtitle">Opening, body, closing · Delivery skills · Vocabulary foundations</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 35"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and structure identification. Use your lesson notes.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Vocabulary & Structure</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> When you give a presentation, your audience can only hear each sentence ONCE. They cannot scroll back like with a written text. This is why clear "signposting" language ("first," "next," "finally") is even more important when speaking than when writing.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Define each term in your own words: <em>audience · active listening · pace · filler words · eye contact</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="audience: &#10;active listening: &#10;pace: &#10;filler words: &#10;eye contact: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>audience:</strong> the people listening to a presentation or speech. <strong>active listening:</strong> fully concentrating on and engaging with a speaker, not just passively hearing sounds. <strong>pace:</strong> the speed at which someone speaks — too fast is hard to follow, too slow loses interest. <strong>filler words:</strong> unnecessary sounds used when thinking, such as "um" or "like," which can make a speaker sound unprepared if overused. <strong>eye contact:</strong> looking at members of the audience while speaking, rather than only at notes — builds connection and confidence.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">List the THREE parts of a well-structured oral presentation and describe what goes in each. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Part 1: ___&#10;What goes in it: &#10;&#10;Part 2: ___&#10;What goes in it: &#10;&#10;Part 3: ___&#10;What goes in it: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Opening:</strong> A hook (question, fact, or short story) to grab attention, followed by a clear statement of purpose telling the audience what the presentation will cover. <strong>Main points:</strong> Usually 2-4 clear points, each signposted with phrases like "my first point is..." or "next..." so the audience can follow the structure without seeing it written down. <strong>Closing:</strong> A brief summary of the main points, followed by a strong final sentence — a call to action, memorable statement, or invitation for questions.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">For each delivery skill, identify ONE common mistake speakers make and explain how to fix it: <em>volume · pace · eye contact · body language · filler words</em> <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="volume: mistake = ___ fix = ___&#10;pace: mistake = ___ fix = ___&#10;eye contact: mistake = ___ fix = ___&#10;body language: mistake = ___ fix = ___&#10;filler words: mistake = ___ fix = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>volume:</strong> mistake = speaking too quietly from nerves; fix = practise projecting your voice so the back of the room can hear comfortably. <strong>pace:</strong> mistake = rushing through the whole presentation; fix = practise pausing briefly between points and slowing down for important information. <strong>eye contact:</strong> mistake = reading word-for-word from notes without looking up; fix = use brief notes/keywords only and practise looking at different parts of the audience. <strong>body language:</strong> mistake = crossing arms or fidgeting; fix = stand with open posture and use natural hand gestures to support points. <strong>filler words:</strong> mistake = overusing "um" or "like"; fix = pause silently instead of filling the gap with sound while thinking.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Applying presentation structure and active listening skills.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Application & Practice</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Write a complete opening (hook + purpose + signpost of 3 points) for a 2-minute presentation on ONE of these topics: "Why courage matters," "How medieval castles were designed for defence," or "Why elements and compounds are different." <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Topic chosen: ___&#10;&#10;Hook:&#10;&#10;Purpose statement:&#10;&#10;Signpost of three points (e.g. 'I'll cover three things: first... second... third...'):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example (castles topic):</strong> Hook — "Imagine an enemy army arrives at your home, and instead of running, you simply close a giant wooden door and wait safely behind stone walls ten feet thick." Purpose — "Today I'm going to explain how medieval castles were specifically designed for defence." Signpost — "I'll cover three things: first, the role of the moat; second, why castle walls were built so thick; and third, how the keep worked as a last line of defence." <strong>Award marks for:</strong> engaging hook (2), clear purpose statement (2), signpost naming 3 specific points (2).</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Imagine you are listening to a classmate's presentation about Joshua and Jericho. Write down THREE active listening behaviours you would show, and write ONE thoughtful follow-up question you might ask at the end. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="Active listening behaviour 1: &#10;Active listening behaviour 2: &#10;Active listening behaviour 3: &#10;&#10;Follow-up question:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Active listening behaviours:</strong> Maintaining eye contact with the speaker throughout. Nodding or showing facial reactions to interesting points. Waiting until the speaker pauses or finishes before asking a question, rather than interrupting. <strong>Example follow-up question:</strong> "You mentioned the walls of Jericho fell after the trumpets and the shout — do historians or archaeologists have any evidence about how this could have happened physically, or is it understood as a miracle beyond natural explanation?" (Any thoughtful, relevant question that shows genuine engagement with the content is acceptable.)</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">6</div>
+    <div class="q-text">Read this weak presentation excerpt and rewrite it to be stronger, fixing the issues with structure, signposting, and clarity: <span class="marks">5 marks</span><br><br><em>"So um, today I'm gonna talk about castles I guess. They had walls and stuff and also a moat. And there's also this tower thing. Yeah that's basically it."</em></td></tr></table></div>
+    <textarea class="q-input wide" placeholder="Rewritten, stronger version:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example improved version:</strong> "Today, I'm going to explain how medieval castles were built for defence. I'll cover three key features: the moat, the walls, and the keep. First, the moat — a deep, water-filled ditch — made it very difficult for attackers to reach the castle walls directly. Second, the walls themselves were often several metres thick, built to withstand even powerful siege weapons. Finally, the keep — the strongest central tower — served as the defenders' last refuge if the outer walls were ever breached. Together, these three features made castles some of the most effective defensive structures of the medieval period." <strong>Award marks for:</strong> removing filler words/informal language, adding a clear purpose statement, using signposting (first/second/finally), adding specific detail instead of vague phrases like "and stuff."</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended writing. Plan and write a full presentation script.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Full Presentation Script</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">7</div>
+    <div class="q-text">Write a complete script for a 3-minute oral presentation on this title: <span class="marks">12 marks</span><br><br><strong>"What the Battle of Jericho teaches us about courage and obedience"</strong><br><br>Your script must include: a strong opening (hook + purpose + signpost), THREE clearly signposted main points with supporting detail, and a strong closing (summary + final thought). Write it exactly as you would SAY it — natural spoken English, not formal written essay style.</div>
+    <textarea class="q-input xwide" style="min-height:300px;" placeholder="OPENING:&#10;&#10;MAIN POINT 1:&#10;&#10;MAIN POINT 2:&#10;&#10;MAIN POINT 3:&#10;&#10;CLOSING:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Opening (3): engaging hook + clear purpose + signpost of 3 points. Main point 1 (2): clear signpost + supporting detail (e.g. the strange marching instructions). Main point 2 (2): clear signpost + supporting detail (e.g. the obedience required without explanation). Main point 3 (2): clear signpost + supporting detail (e.g. what the victory teaches about the source of the win). Closing (2): brief summary + strong final thought (not new information). Spoken style (1): natural spoken language rather than overly formal written register — appropriate for being read aloud.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 35" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 1 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">⚖️</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 9 · Day 1</div>
+  <div class="hero-title">One-Step Equations —<br>Foundations</div>
+  <div class="hero-subtitle">Balancing method · Inverse operations · Checking answers</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and basic equation solving. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Vocabulary & Identifying Operations</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Every equation has ONE main operation connecting the variable to a number. Identify the operation FIRST (is it +, −, ×, or ÷?), then use the OPPOSITE (inverse) operation on both sides to isolate the variable.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">For each equation, identify the operation being used AND the inverse operation needed to solve it. Do not solve yet — just identify. <span class="marks">6 marks</span><br><br>a) x+6=14 &nbsp;&nbsp; b) y−9=3 &nbsp;&nbsp; c) 5x=40 &nbsp;&nbsp; d) n÷6=7 &nbsp;&nbsp; e) x+15=20 &nbsp;&nbsp; f) 8y=56</div>
+    <textarea class="q-input wide" placeholder="a) Operation: ___ Inverse needed: ___&#10;b) Operation: ___ Inverse needed: ___&#10;c) Operation: ___ Inverse needed: ___&#10;d) Operation: ___ Inverse needed: ___&#10;e) Operation: ___ Inverse needed: ___&#10;f) Operation: ___ Inverse needed: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) Operation: <strong>addition</strong>. Inverse: <strong>subtract 6</strong>. b) Operation: <strong>subtraction</strong>. Inverse: <strong>add 9</strong>. c) Operation: <strong>multiplication</strong>. Inverse: <strong>divide by 5</strong>. d) Operation: <strong>division</strong>. Inverse: <strong>multiply by 6</strong>. e) Operation: <strong>addition</strong>. Inverse: <strong>subtract 15</strong>. f) Operation: <strong>multiplication</strong>. Inverse: <strong>divide by 8</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">Now solve each equation from question 1, showing your working clearly. Check each answer by substituting back in. <span class="marks">12 marks — 2 per question</span></div>
+    <textarea class="q-input wide" placeholder="a) x = ___ Check: &#10;b) y = ___ Check: &#10;c) x = ___ Check: &#10;d) n = ___ Check: &#10;e) x = ___ Check: &#10;f) y = ___ Check: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) x=14−6=<strong>8</strong>. Check: 8+6=14 ✓. b) y=3+9=<strong>12</strong>. Check: 12−9=3 ✓. c) x=40÷5=<strong>8</strong>. Check: 5(8)=40 ✓. d) n=7×6=<strong>42</strong>. Check: 42÷6=7 ✓. e) x=20−15=<strong>5</strong>. Check: 5+15=20 ✓. f) y=56÷8=<strong>7</strong>. Check: 8(7)=56 ✓.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Word problems and writing equations.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Word Problems</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">Write an equation for each word problem, then solve it. Show your working. <span class="marks">10 marks</span><br><br>a) A number plus 12 equals 29. Find the number.<br>b) A number minus 8 equals 15. Find the number.<br>c) Seven times a number equals 63. Find the number.<br>d) A number divided by 9 equals 4. Find the number.<br>e) Forty-five increased by a number gives 100. Find the number.</div>
+    <textarea class="q-input wide" placeholder="a) Equation: ___ Solution: ___&#10;b) Equation: ___ Solution: ___&#10;c) Equation: ___ Solution: ___&#10;d) Equation: ___ Solution: ___&#10;e) Equation: ___ Solution: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) n+12=29 → n=<strong>17</strong>. b) n−8=15 → n=<strong>23</strong>. c) 7n=63 → n=<strong>9</strong>. d) n÷9=4 → n=<strong>36</strong>. e) 45+n=100 → n=<strong>55</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Joshua's army marched around Jericho. Each lap took the same amount of time. If the total time for 7 laps was 84 minutes, write and solve an equation to find the time for ONE lap. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Let one lap = t minutes.&#10;Equation: &#10;Solution: &#10;Check:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Let t = time for one lap (minutes). Equation: 7t = 84. Solve: t = 84 ÷ 7 = <strong>12 minutes</strong>. Check: 7 × 12 = 84 ✓.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Error correction and multi-step reasoning.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Error Correction & Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">A student solved these equations incorrectly. For each one, identify the error and give the correct solution: <span class="marks">8 marks</span><br><br>a) "x+7=15, so x=15+7=22"<br>b) "6x=48, so x=48+6=54"<br>c) "y−5=20, so y=20−5=15"<br>d) "n÷4=9, so n=9÷4=2.25"</div>
+    <textarea class="q-input wide" placeholder="a) Error: ___ Correct solution: ___&#10;b) Error: ___ Correct solution: ___&#10;c) Error: ___ Correct solution: ___&#10;d) Error: ___ Correct solution: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) <strong>Error:</strong> added instead of subtracting — the inverse of + is −, not +. <strong>Correct:</strong> x=15−7=<strong>8</strong>. b) <strong>Error:</strong> added instead of dividing — the inverse of × is ÷. <strong>Correct:</strong> x=48÷6=<strong>8</strong>. c) <strong>Error:</strong> subtracted again instead of adding — the inverse of − is +. <strong>Correct:</strong> y=20+5=<strong>25</strong>. d) <strong>Error:</strong> divided instead of multiplying — the inverse of ÷ is ×. <strong>Correct:</strong> n=9×4=<strong>36</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">A rope is cut into 9 equal pieces. Each piece is 12 cm long. (a) Write an equation to find the original length of the rope, using L for the unknown total length. (b) Solve it. (c) If instead the rope were cut into 15 equal pieces from the same original length, how long would each piece be? Show your full working. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Equation: &#10;(b) Solution: L = ___&#10;(c) New equation and working for 15 pieces:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) L ÷ 9 = 12. (b) L = 12 × 9 = <strong>108 cm</strong>. (c) Using the same total length (108 cm) cut into 15 pieces: 108 ÷ 15 = <strong>7.2 cm per piece</strong>.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 1 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">⚛️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 9 · Day 1</div>
+  <div class="hero-title">Elements & Compounds —<br>Foundations</div>
+  <div class="hero-subtitle">Pure substances · Chemical symbols · Metals vs non-metals</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and identification. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Vocabulary & Identification</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Remember from Week 8: a MIXTURE keeps the original properties of its parts. This week's key idea is different: a COMPOUND has completely NEW properties — different from the elements that made it. Sodium + chlorine (both dangerous alone) = table salt (safe to eat)!</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Define each term and give one example: <em>element · atom · compound · chemical symbol</em> <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="element: definition + example&#10;atom: definition + example&#10;compound: definition + example&#10;chemical symbol: definition + example"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>element:</strong> a pure substance made of only one type of atom. Example: oxygen, iron, gold. <strong>atom:</strong> the smallest particle of an element that still has that element's properties. Example: a single carbon atom. <strong>compound:</strong> two or more elements chemically joined together in a fixed ratio. Example: water (H₂O), carbon dioxide (CO₂). <strong>chemical symbol:</strong> a one- or two-letter code representing an element, with the first letter always capital. Example: O for oxygen, Fe for iron.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">Sort these into ELEMENT or COMPOUND: <em>oxygen (O) · water (H₂O) · gold (Au) · carbon dioxide (CO₂) · iron (Fe) · table salt (NaCl) · hydrogen (H) · sulfur (S)</em> <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="ELEMENTS: &#10;&#10;COMPOUNDS: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>ELEMENTS:</strong> oxygen (O), gold (Au), iron (Fe), hydrogen (H), sulfur (S) — each is one type of atom only. <strong>COMPOUNDS:</strong> water (H₂O — hydrogen + oxygen), carbon dioxide (CO₂ — carbon + oxygen), table salt (NaCl — sodium + chlorine) — each is two or more elements chemically joined.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Write the correct chemical symbol for each element, paying close attention to capital and lowercase letters: <em>hydrogen, oxygen, carbon, sodium, iron, gold, potassium, silver</em> <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="hydrogen = &#10;oxygen = &#10;carbon = &#10;sodium = &#10;iron = &#10;gold = &#10;potassium = &#10;silver = "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">hydrogen = <strong>H</strong>. oxygen = <strong>O</strong>. carbon = <strong>C</strong>. sodium = <strong>Na</strong>. iron = <strong>Fe</strong>. gold = <strong>Au</strong>. potassium = <strong>K</strong>. silver = <strong>Ag</strong>. (Remember: only the FIRST letter is capital; the second is always lowercase.)</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Properties and comparing metals and non-metals.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Properties & Comparison</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">Explain the difference between a compound and a mixture, using sodium chloride (table salt) as your example. Why does the lesson say a compound has "completely different" properties from the elements that formed it? <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Difference between compound and mixture:&#10;&#10;Sodium chloride example — properties of sodium alone, chlorine alone, and the compound NaCl:&#10;&#10;Why the properties are so different:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">A compound forms when two or more elements undergo a CHEMICAL REACTION and join together in a fixed ratio, creating a new substance with new properties. A mixture, by contrast, simply combines substances physically without a chemical reaction — each substance KEEPS its own original properties. <strong>Sodium chloride example:</strong> Sodium (Na) on its own is a soft, highly reactive metal that explodes violently in water. Chlorine (Cl) on its own is a toxic, poisonous green gas. Yet when they chemically combine (forming an ionic bond) to create sodium chloride (NaCl) — ordinary table salt — the result is a harmless white crystal that we eat every day. <strong>Why properties are so different:</strong> When atoms chemically bond, their electrons rearrange and interact in completely new ways, creating a substance with entirely different physical and chemical properties from its original elements. This is fundamentally different from a mixture, where no new bonds form and the original substances remain chemically unchanged and separable by physical means.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">5</div>
+    <div class="q-text">List FIVE properties of metals and FIVE properties of non-metals. For each metal property, name one specific metal that shows it well. <span class="marks">10 marks</span></div>
+    <textarea class="q-input wide" placeholder="METALS:&#10;1. Property + example metal: &#10;2. Property + example metal: &#10;3. Property + example metal: &#10;4. Property + example metal: &#10;5. Property + example metal: &#10;&#10;NON-METALS:&#10;1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>METALS:</strong> 1. Shiny/lustrous — gold maintains a bright shine when polished. 2. Good conductor of electricity — copper is used in electrical wiring. 3. Good conductor of heat — aluminium pans conduct heat efficiently for cooking. 4. Malleable (can be bent/hammered) — gold can be hammered into thin sheets. 5. Ductile (can be drawn into wire) — copper is drawn into electrical wire. <strong>NON-METALS:</strong> 1. Dull appearance — sulfur has a dull yellow appearance. 2. Poor conductor of electricity (insulator) — sulfur does not conduct electricity. 3. Brittle when solid — solid iodine crystals break/shatter rather than bend. 4. Often gases at room temperature — oxygen and nitrogen are gases. 5. Low density compared to most metals — many non-metal gases are very light.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific reasoning about the periodic table.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Periodic Table Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">6</div>
+    <div class="q-text">The periodic table organises elements into GROUPS (columns) and PERIODS (rows). <br><br>(a) Explain what determines which group an element belongs to.<br>(b) Explain what determines which period an element belongs to.<br>(c) Group 1 elements (lithium, sodium, potassium) are called "alkali metals" and are all highly reactive, especially with water. Group 0/8 elements (helium, neon, argon) are called "noble gases" and are almost completely unreactive. Using the idea that elements in the same group share similar properties, explain why scientists find it useful to organise elements this way — what can a scientist predict about an UNKNOWN element if they know its group? <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="(a) What determines group membership:&#10;&#10;(b) What determines period membership:&#10;&#10;(c) Why organising by group is useful for prediction:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) An element's <strong>group</strong> (vertical column) is determined by the number of electrons in its outermost shell (its "valence electrons"). Elements in the same group have the same number of outer electrons, which is the main reason they share similar chemical properties and tend to react in similar ways. (b) An element's <strong>period</strong> (horizontal row) is determined by the number of electron shells (energy levels) its atoms have. Moving across a period, elements have the same number of shells but an increasing number of electrons in the outer shell. (c) Organising elements by group is extremely useful for SCIENTIFIC PREDICTION. If a scientist discovers a new element and determines it belongs to Group 1 (the alkali metals), they can confidently predict — even before extensive testing — that it will be a soft, highly reactive metal that reacts violently with water, similar to lithium, sodium, and potassium. This predictive power was historically how the periodic table proved its scientific value: Dmitri Mendeleev, who first organised the modern periodic table, successfully predicted the existence and properties of several elements that had not yet been discovered, based purely on the gaps and patterns in his table. This shows that the periodic table is not just a storage system for facts — it reveals an underlying pattern in how atomic structure determines chemical behaviour.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 1 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">🏰</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 9 · Day 1</div>
+  <div class="hero-title">Medieval Europe —<br>Foundations</div>
+  <div class="hero-subtitle">The feudal pyramid · Key vocabulary · Roles and obligations</div>
+  <div class="hero-tags"><span class="hero-tag">Day 1</span><span class="hero-tag">3 Difficulty Levels</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 36"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Vocabulary and the feudal pyramid. Use your lesson notes if needed.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Vocabulary & Feudal Pyramid</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> A "vassal" is anyone who receives land in exchange for loyalty — but the SAME person can be both a vassal (to the person above them) AND a lord (to the people below them). A knight is a vassal to his lord, but the knight himself might be a "lord" over the serfs working his own small piece of land.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Define each term and give one example or detail: <em>feudalism · monarch · lord/noble · vassal · knight · serf · manor · clergy</em> <span class="marks">8 marks</span></div>
+    <textarea class="q-input xwide" placeholder="feudalism: &#10;monarch: &#10;lord/noble: &#10;vassal: &#10;knight: &#10;serf: &#10;manor: &#10;clergy: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>feudalism:</strong> a system of medieval Europe in which land was exchanged for loyalty and service, organising society into a hierarchy. <strong>monarch:</strong> a king or queen — the supreme ruler of a kingdom. <strong>lord/noble:</strong> a person of high rank who controlled land granted by the monarch, in exchange for military service and loyalty. <strong>vassal:</strong> a person who received land from a lord in exchange for a pledge of loyalty and service. <strong>knight:</strong> a warrior who served a lord on horseback in armour, following a code of honour called chivalry. <strong>serf:</strong> a peasant at the bottom of the feudal system, legally bound to a lord's land. <strong>manor:</strong> a large estate of land controlled by a lord, including the lord's house, farmland, and the village. <strong>clergy:</strong> officials of the Church — priests, bishops, monks — who held significant power in medieval society.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">Draw or describe the four levels of the feudal pyramid in order, from top to bottom. For each level, state what they received and what they gave in return. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="Level 1 (top): ___ Received: ___ Gave: ___&#10;Level 2: ___ Received: ___ Gave: ___&#10;Level 3: ___ Received: ___ Gave: ___&#10;Level 4 (bottom): ___ Received: ___ Gave: ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Level 1 — Monarch:</strong> Owned all land in theory. Received loyalty from lords. Gave land grants in exchange. <strong>Level 2 — Lords/Nobles:</strong> Received large estates of land from the monarch. Gave loyalty and military support to the king. <strong>Level 3 — Knights:</strong> Received land from lords in exchange for military service. Gave a set number of days of fighting service each year (often 40 days). <strong>Level 4 — Serfs/Peasants:</strong> Received protection and the right to farm a small plot for their own family. Gave labour — farming the lord's land for free several days a week and a portion of their own crops.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Life in medieval society and the role of the Church.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Daily Life & the Church</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">Describe a typical day in the life of a serf, including their work obligations, legal restrictions, and what they received in return for their labour. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Work obligations:&#10;&#10;Legal restrictions (what they could NOT do):&#10;&#10;What they received in return:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Work obligations:</strong> A serf farmed strips of land assigned to them by the lord, but had to give a portion of their own crops to the lord. They were also required to work several days each week on the lord's own fields completely without pay — this was called "labour service." <strong>Legal restrictions:</strong> Serfs could not leave the manor without the lord's permission, could not marry without permission, and were essentially legally tied to the land — passed down through generations along with the land itself, almost like property. <strong>What they received in return:</strong> Protection from raids, bandits, and invasions by the lord's knights and soldiers, plus the right to farm a small plot of land for their own family's food. This was the basic "exchange" at the heart of feudalism — labour and loyalty for protection and land use.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">The medieval Church held both religious AND political/economic power. Give TWO examples of each type of power, and explain why this combination made the Church one of the most influential institutions of the period. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Religious power — example 1:&#10;Religious power — example 2:&#10;&#10;Political/economic power — example 1:&#10;Political/economic power — example 2:&#10;&#10;Why this combination made the Church so influential:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Religious power examples:</strong> 1. The Church conducted baptisms, weddings, and funerals — central ceremonies at every stage of a person's life. 2. The Church taught that obedience to God and the Church secured salvation and avoided eternal punishment, giving it enormous spiritual authority over how people lived. <strong>Political/economic power examples:</strong> 1. The Church owned vast amounts of land across Europe — in many regions, more land than any single king. 2. The Church collected tithes (a tenth of people's income) from the entire population, making it extremely wealthy. <strong>Why this combination mattered:</strong> Because the Church combined spiritual authority (control over salvation and morality) with massive material wealth and land ownership, it could exert influence that rivalled or even exceeded that of kings. The Church could crown monarchs (giving their rule religious legitimacy) or excommunicate them (a powerful political weapon, since it could turn subjects against an excommunicated king). This unique combination of spiritual and material power made the medieval Church a genuinely independent political force, not merely a religious institution.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analytical thinking and cross-week connections.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Analysis & Extended History</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">The lesson notes that feudalism developed "in the absence of strong central government" after the fall of Rome. Connect this to Week 8's Geography lesson: explain why, without a strong central government providing protection, LOCAL physical geography (hills, rivers, castles) became even more important for safety and survival in medieval Europe than it might have been under a strong, unified empire like Rome. Write at least 6 sentences. <span class="marks">8 marks</span></div>
+    <div class="cross-week">🔗 <strong>Cross-week connection:</strong> Week 8 Geography — settlement factors, especially natural defence. Week 4 History — the Roman Empire and its fall.</div>
+    <textarea class="q-input xwide" placeholder="Write your connected response here..."></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">When the Roman Empire was strong and unified (Week 4), a single central authority maintained roads, legions, and law across vast distances — meaning individual towns did not need to defend themselves entirely on their own, since Roman military power and infrastructure provided broad protection. After Rome's collapse, this centralised protection disappeared, and local communities were left far more exposed to raids, invasions, and conflict between rival lords. In this environment, the physical geography of a location became dramatically more important for survival, exactly as the settlement factors studied in Week 8 (natural defence, water supply, fertile land) predict. A hilltop location, a river bend, or a defensible position became not just convenient but essential, because there was no longer a larger power providing security from a distance. This explains why medieval castles were deliberately built in highly defensible natural locations — on hills, surrounded by rivers, or along coastlines — investing enormous resources in fortification that simply was not necessary to the same degree under the unified protection of the Roman state. The shift from empire to feudalism therefore represents geography becoming more locally decisive: when political unity fragments, physical terrain reasserts itself as the primary determinant of safety, just as it had for the very earliest human settlements before large empires existed at all. In this sense, feudal Europe in some ways returned to settlement patterns more similar to ancient pre-imperial societies, where local defensible geography mattered enormously, rather than the geography-overriding infrastructure of a unified empire like Rome.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 1</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 36" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week9_Day1');</script>
+</body>
+</html>

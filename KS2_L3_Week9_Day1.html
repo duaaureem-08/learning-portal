@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 — Day 1 Test Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#FEF3C7;color:#92400E;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #D97706;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px 16px;font-weight:700;font-size:0.92rem;}
+.match-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.match-item select:focus{outline:none;border-color:var(--accent,#888);}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{width:160px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.order-item{background:white;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px 16px;font-weight:700;font-size:0.9rem;display:flex;align-items:center;gap:12px;}
+.order-num{width:32px;height:32px;border-radius:50%;background:var(--accent,#888);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.95rem;flex-shrink:0;}
+.order-select{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.88rem;}
+.open-box{width:100%;min-height:80px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.selected-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.selected-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-answer{background:#D1FAE5;border-color:#059669;color:#065F46;font-weight:900;}
+.tf-btn.wrong-answer{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.word-tag{padding:6px 14px;border-radius:99px;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);font-weight:800;font-size:0.85rem;border:2px solid var(--accent,#ccc);}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.match-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">📄 Day 1 — Test</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>💡</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>📋</span> Social Studies</button>
+</div>
+
+<!-- BIBLE -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">📖 Bible · Week 9</div>
+    <div class="hero-title">Rahab —<br>Courage to Do What is Right</div>
+    <div class="hero-sub">Joshua 2 · Rahab hides the spies · Doing right even when risky</div>
+    <div class="hero-emoji">🦁</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Match each word to its correct meaning.</p>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Being brave enough to do the right thing, even when it is scary.<br>
+        B — A person sent secretly to find out information about an enemy.<br>
+        C — To keep someone or something out of sight, away from danger.<br>
+        D — Something that could be dangerous or have a bad result.<br>
+        E — To keep someone safe from harm.
+      </div>
+    </div>
+    <div id="bible-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="checkVocab('bible')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Courage. Spy. Hide. Risky. Protect.')">🔊 Hear words</button>
+    </div>
+    <div id="bible-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — The Story of Rahab <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Put these events in the correct order (choose 1–6):</p>
+    <div id="bible-order"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--bible);" onclick="checkOrder('bible')">Check Order ✅</button></div>
+    <div id="bible-order-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:6px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+      <span class="word-tag">Jericho</span><span class="word-tag">spies</span><span class="word-tag">roof</span><span class="word-tag">rope</span><span class="word-tag">courage</span><span class="word-tag">family</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>Joshua sent two <em>_____</em> into the city of Jericho.</td><td><input class="fill-in" data-ans="spies" placeholder="type here"></td></tr>
+      <tr><td>The spies went to stay at the house of a woman in the city of <em>_____</em>.</td><td><input class="fill-in" data-ans="Jericho" placeholder="type here"></td></tr>
+      <tr><td>Rahab hid the spies under flax on her <em>_____</em>.</td><td><input class="fill-in" data-ans="roof" placeholder="type here"></td></tr>
+      <tr><td>Rahab helped the spies escape using a <em>_____</em> through her window.</td><td><input class="fill-in" data-ans="rope" placeholder="type here"></td></tr>
+      <tr><td>Rahab showed great <em>_____</em> by helping the spies, even though it was dangerous.</td><td><input class="fill-in" data-ans="courage" placeholder="type here"></td></tr>
+      <tr><td>The spies promised to protect Rahab and her <em>_____</em>.</td><td><input class="fill-in" data-ans="family" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkFill('bible-fill')">Check ✅</button>
+    </div>
+    <div id="bible-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="bible-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="bible-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTF('bible')">Check Answers ✅</button></div>
+    <div id="bible-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ENGLISH -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">✏️ English · Week 9</div>
+    <div class="hero-title">Descriptive Writing —<br>Settings</div>
+    <div class="hero-sub">Adjectives &amp; adverbs · The five senses · Word choice &amp; detail</div>
+    <div class="hero-emoji">🏞️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — The place and time where a story happens.<br>
+        B — A word that describes a noun. Example: dark, tall, ancient.<br>
+        C — A word that describes a verb — HOW something happens. Often ends in -ly.<br>
+        D — Sight, sound, smell, touch and taste — use them to bring writing to life.<br>
+        E — Choosing the best and most powerful word, not just any word.
+      </div>
+    </div>
+    <div id="eng-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="checkVocab('eng')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Setting. Adjective. Adverb. Senses. Word choice.')">🔊 Hear terms</button>
+    </div>
+    <div id="eng-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Sentence Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Adjective and adverb quiz — click the correct answer:</p>
+    <div id="eng-quiz"></div>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn" style="background:var(--english);" onclick="nextEngQ()">Next Question ➡️</button>
+      <span id="eng-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Add ONE powerful adjective or adverb to improve each sentence:</p>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Your word</th></tr>
+      <tr><td>The <em>_____</em> forest stretched for miles.</td><td><input class="fill-in" placeholder="adjective"></td></tr>
+      <tr><td>She walked <em>_____</em> through the empty house.</td><td><input class="fill-in" placeholder="adverb"></td></tr>
+      <tr><td>The <em>_____</em> waves crashed on the shore.</td><td><input class="fill-in" placeholder="adjective"></td></tr>
+      <tr><td>The wind blew <em>_____</em> across the field.</td><td><input class="fill-in" placeholder="adverb"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--english);" onclick="checkEngImprove()">Check ✅</button></div>
+    <div id="eng-improve-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="eng-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="eng-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTF('eng')">Check Answers ✅</button></div>
+    <div id="eng-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- MATHS -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">🔢 Maths · Week 9</div>
+    <div class="hero-title">Measurement —<br>Length &amp; Perimeter</div>
+    <div class="hero-sub">Centimetres &amp; metres · Measuring length · Perimeter of 2D shapes</div>
+    <div class="hero-emoji">📏</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — How long something is — measured in cm or m.<br>
+        B — The total distance all the way around a shape.<br>
+        C — How wide something is — side to side.<br>
+        D — A small unit of length. 100 of these = 1 metre.<br>
+        E — A bigger unit of length. Equal to 100 centimetres.
+      </div>
+    </div>
+    <div id="maths-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="checkVocab('maths')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Length. Perimeter. Width. Centimetre. Metre.')">🔊 Hear terms</button>
+    </div>
+    <div id="maths-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Convert between cm and m:</p>
+    <table class="fill-table">
+      <tr><th>Conversion</th><th>Your answer</th></tr>
+      <tr><td>3 m = ___ cm</td><td><input class="fill-in" data-ans="300" placeholder="?" style="width:90px;"></td></tr>
+      <tr><td>250 cm = ___ m</td><td><input class="fill-in" data-ans="2.5" placeholder="?" style="width:90px;"></td></tr>
+      <tr><td>5 m = ___ cm</td><td><input class="fill-in" data-ans="500" placeholder="?" style="width:90px;"></td></tr>
+      <tr><td>120 cm = ___ m</td><td><input class="fill-in" data-ans="1.2" placeholder="?" style="width:90px;"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkFill('maths-convert')">Check ✅</button></div>
+    <div id="maths-convert-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Find the perimeter of each shape:</p>
+    <table class="fill-table">
+      <tr><th>Shape</th><th>Perimeter</th></tr>
+      <tr><td>Square, side = 6 cm</td><td><input class="fill-in" data-ans="24" placeholder="? cm" style="width:90px;"></td></tr>
+      <tr><td>Rectangle, 10 cm × 4 cm</td><td><input class="fill-in" data-ans="28" placeholder="? cm" style="width:90px;"></td></tr>
+      <tr><td>Triangle: 3cm, 4cm, 5cm</td><td><input class="fill-in" data-ans="12" placeholder="? cm" style="width:90px;"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkFill('maths-perim')">Check ✅</button></div>
+    <div id="maths-perim-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="maths-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="maths-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTF('maths')">Check Answers ✅</button></div>
+    <div id="maths-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SCIENCE -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">💡 Science · Week 9</div>
+    <div class="hero-title">Light —<br>Sources &amp; Shadows</div>
+    <div class="hero-sub">Natural &amp; artificial light · How shadows form · Opaque, translucent, transparent</div>
+    <div class="hero-emoji">🌑</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Anything that MAKES its own light.<br>
+        B — Light that comes from nature, not made by people.<br>
+        C — Light made by people, using electricity or fire.<br>
+        D — A dark shape made when an object blocks light.<br>
+        E — A material that blocks ALL light — no light passes through.
+      </div>
+    </div>
+    <div id="sci-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="checkVocab('sci')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Light source. Natural light. Artificial light. Shadow. Opaque.')">🔊 Hear terms</button>
+    </div>
+    <div id="sci-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💡 Part B — Science Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Sort each item into NATURAL or ARTIFICIAL light source:</p>
+    <div id="sci-classify"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--science);" onclick="checkClassify()">Check ✅</button></div>
+    <div id="sci-classify-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Match each material to OPAQUE, TRANSLUCENT or TRANSPARENT:</p>
+    <div id="sci-habitat"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--science);" onclick="checkHabitat()">Check ✅</button></div>
+    <div id="sci-habitat-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="sci-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="sci-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTF('sci')">Check Answers ✅</button></div>
+    <div id="sci-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SOCIAL STUDIES -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">📄 Test Worksheet</div>
+    <div class="hero-week">📋 Social Studies · Week 9</div>
+    <div class="hero-title">Rules, Rights &amp;<br>Responsibilities</div>
+    <div class="hero-sub">Why we have rules · Class &amp; school rules · Rights of a child</div>
+    <div class="hero-emoji">📋</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Key Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — An instruction that tells people how to behave in a place.<br>
+        B — Something every person should have or be allowed to do.<br>
+        C — A duty or job that you are expected to do.<br>
+        D — Special protections every child deserves — like safety, education and play.<br>
+        E — Treating everyone equally and justly.
+      </div>
+    </div>
+    <div id="soc-vocab-area"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="checkVocab('soc')">Check Answers ✅</button>
+      <button class="audio-btn" onclick="speak('Rule. Right. Responsibility. Rights of a child. Fair.')">🔊 Hear terms</button>
+    </div>
+    <div id="soc-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📋 Part B — Civics Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Match each right to its matching responsibility:</p>
+    <div id="soc-habitat"></div>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--social);" onclick="checkHabitat()">Check ✅</button></div>
+    <div id="soc-habitat-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Fill in the missing words:</p>
+    <div class="word-bank" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+      <span class="word-tag">rules</span><span class="word-tag">rights</span><span class="word-tag">responsibilities</span><span class="word-tag">safe</span><span class="word-tag">fair</span>
+    </div>
+    <table class="fill-table">
+      <tr><th>Sentence</th><th>Missing Word</th></tr>
+      <tr><td>We follow <em>_____</em> to keep everyone safe and happy.</td><td><input class="fill-in" data-ans="rules" placeholder="type here"></td></tr>
+      <tr><td>Every child has special <em>_____</em>, like the right to education.</td><td><input class="fill-in" data-ans="rights" placeholder="type here"></td></tr>
+      <tr><td>Along with rights, we also have <em>_____</em> to others.</td><td><input class="fill-in" data-ans="responsibilities" placeholder="type here"></td></tr>
+      <tr><td>Rules like "walk, don't run" keep everyone <em>_____</em>.</td><td><input class="fill-in" data-ans="safe" placeholder="type here"></td></tr>
+      <tr><td>It is <em>_____</em> when everyone follows the same rules.</td><td><input class="fill-in" data-ans="fair" placeholder="type here"></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--social);" onclick="checkFill('soc-fill')">Check ✅</button></div>
+    <div id="soc-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div id="soc-crit"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="soc-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTF('soc')">Check Answers ✅</button></div>
+    <div id="soc-tf-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.rate=0.85;u.lang='en-GB';
+  window.speechSynthesis.speak(u);
+}
+
+// ── VOCAB DATA ────────────────────────────────────────────
+const vocabData={
+  bible:{terms:['Courage','Spy','Hide','Risky','Protect'],answers:['A','B','C','D','E']},
+  eng:{terms:['Setting','Adjective','Adverb','Senses','Word choice'],answers:['A','B','C','D','E']},
+  maths:{terms:['Length','Perimeter','Width','Centimetre (cm)','Metre (m)'],answers:['A','B','C','D','E']},
+  sci:{terms:['Light source','Natural light','Artificial light','Shadow','Opaque'],answers:['A','B','C','D','E']},
+  soc:{terms:['Rule','Right','Responsibility','Rights of a child','Fair'],answers:['A','B','C','D','E']},
+};
+function buildVocab(key){
+  const d=vocabData[key];const area=document.getElementById(key+'-vocab-area');if(!area)return;
+  let h='<div class="match-grid">';
+  d.terms.forEach((t,i)=>{h+=`<div class="match-item">${t} <button class="audio-btn" onclick="speak('${t}')">🔊</button><select id="vocab-${key}-${i}"><option value="">— select —</option>${['A','B','C','D','E'].map(l=>`<option value="${l}">${l}</option>`).join('')}</select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildVocab);
+function checkVocab(key){
+  const d=vocabData[key];let score=0;
+  d.terms.forEach((_,i)=>{const sel=document.getElementById('vocab-'+key+'-'+i);if(!sel)return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-vocab-result');res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${d.terms.length}!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct. Review and try again!`;}
+}
+
+// ── ORDER DATA (Bible only) ───────────────────────────────
+const orderData={
+  bible:{events:[
+    {text:'Rahab speaks to the spies about believing in their God.',correct:5},
+    {text:'Joshua sends two spies to explore the city of Jericho.',correct:1},
+    {text:'The King\'s soldiers come looking for the spies.',correct:3},
+    {text:'The spies promise to protect Rahab and her family.',correct:6},
+    {text:'The spies stay at the house of Rahab.',correct:2},
+    {text:'Rahab hides the spies and tells the soldiers they already left.',correct:4},
+  ]},
+};
+function buildOrder(key){
+  const d=orderData[key];if(!d)return;const area=document.getElementById(key+'-order');if(!area)return;
+  let h='<div class="order-list">';
+  d.events.forEach((ev,i)=>{h+=`<div class="order-item"><div class="order-num">${i+1}</div><div style="flex:1;font-size:0.9rem;">${ev.text}</div><select class="order-select" id="ord-${key}-${i}"><option value="">—</option>${d.events.map((_,n)=>`<option value="${n+1}">${n+1}</option>`).join('')}</select></div>`;});
+  h+='</div>';area.innerHTML=h;
+}
+['bible'].forEach(buildOrder);
+function checkOrder(key){
+  const d=orderData[key];let score=0;
+  d.events.forEach((ev,i)=>{const sel=document.getElementById('ord-'+key+'-'+i);if(!sel)return;
+    if(parseInt(sel.value)===ev.correct){score++;sel.style.borderColor='#059669';sel.style.background='#D1FAE5';}
+    else{sel.style.borderColor='#DC2626';sel.style.background='#FEE2E2';}});
+  const res=document.getElementById(key+'-order-result');if(res){res.style.display='block';
+    if(score===d.events.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect order! ${score}/${d.events.length}!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.events.length} in the right place.`;}}
+}
+
+// ── FILL IN THE BLANK ─────────────────────────────────────
+function checkFill(context){
+  let allInputs,resultId;
+  if(context==='bible-fill'){allInputs=document.querySelectorAll('#page-bible .fill-in[data-ans]');resultId='bible-fill-result';}
+  else if(context==='maths-convert'){allInputs=document.querySelectorAll('#page-maths .card:nth-child(3) table:first-of-type .fill-in');resultId='maths-convert-result';}
+  else if(context==='maths-perim'){allInputs=document.querySelectorAll('#page-maths .card:nth-child(3) table:last-of-type .fill-in');resultId='maths-perim-result';}
+  else if(context==='soc-fill'){allInputs=document.querySelectorAll('#page-social .fill-in[data-ans]');resultId='soc-fill-result';}
+  if(!allInputs)return;
+  let score=0,total=0;
+  allInputs.forEach(inp=>{if(!inp.dataset.ans)return;total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.ans.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById(resultId);if(res){res.style.display='block';
+    if(score===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All correct! ${score}/${total}`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${total} correct.`;}}
+}
+
+// ── TRUE / FALSE DATA ─────────────────────────────────────
+const tfData={
+  bible:[
+    {s:'Rahab refused to help the spies because it was too risky.',ans:false},
+    {s:'Rahab hid the spies under flax on her roof.',ans:true},
+    {s:'Rahab told the soldiers exactly where the spies were hiding.',ans:false},
+    {s:'The spies promised to protect Rahab and her family.',ans:true},
+    {s:'Rahab said she believed in the God of Israel.',ans:true},
+  ],
+  eng:[
+    {s:'A setting is the place and time where a story happens.',ans:true},
+    {s:'An adverb describes a noun.',ans:false},
+    {s:'An adjective describes a noun, like "the dark forest."',ans:true},
+    {s:'Using your five senses can make descriptive writing more powerful.',ans:true},
+    {s:'Word choice does not matter in descriptive writing.',ans:false},
+  ],
+  maths:[
+    {s:'100 centimetres = 1 metre.',ans:true},
+    {s:'Perimeter is the area inside a shape.',ans:false},
+    {s:'To find the perimeter of a shape, you add up all the sides.',ans:true},
+    {s:'A square with side 5cm has a perimeter of 25cm.',ans:false},
+    {s:'A rectangle 8cm by 3cm has a perimeter of 22cm.',ans:true},
+  ],
+  sci:[
+    {s:'The moon is a natural light source.',ans:false},
+    {s:'Shadows form when an opaque object blocks light.',ans:true},
+    {s:'Light passes through transparent materials easily.',ans:true},
+    {s:'A torch is a natural light source.',ans:false},
+    {s:'It is safe to look directly at the sun.',ans:false},
+  ],
+  soc:[
+    {s:'Rules help keep everyone safe and fair.',ans:true},
+    {s:'Children do not have any special rights.',ans:false},
+    {s:'Rights and responsibilities always go together.',ans:true},
+    {s:'Every child has the right to education.',ans:true},
+    {s:'It is fine to ignore school rules if you don\'t like them.',ans:false},
+  ],
+};
+function buildTF(key){
+  const data=tfData[key];const area=document.getElementById(key+'-tf');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td><button class="tf-btn" id="tf-${key}-${i}-T" onclick="selectTF('${key}',${i},'T')">✅ True</button><button class="tf-btn" id="tf-${key}-${i}-F" onclick="selectTF('${key}',${i},'F')">❌ False</button></td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTF);
+function selectTF(key,i,val){
+  document.getElementById('tf-'+key+'-'+i+'-T').classList.remove('selected-t');
+  document.getElementById('tf-'+key+'-'+i+'-F').classList.remove('selected-f');
+  document.getElementById('tf-'+key+'-'+i+'-'+val).classList.add(val==='T'?'selected-t':'selected-f');
+}
+function checkTF(key){
+  const data=tfData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tf-'+key+'-'+i+'-T');const fBtn=document.getElementById('tf-'+key+'-'+i+'-F');
+    const userT=tBtn.classList.contains('selected-t');const userF=fBtn.classList.contains('selected-f');
+    if((item.ans&&userT)||(!item.ans&&userF)){score++;(item.ans?tBtn:fBtn).classList.add('correct-answer');}
+    else{if(userT)tBtn.classList.add('wrong-answer');if(userF)fBtn.classList.add('wrong-answer');(item.ans?tBtn:fBtn).classList.add('correct-answer');}
+    tBtn.disabled=true;fBtn.disabled=true;});
+  const res=document.getElementById(key+'-tf-result');res.style.display='block';
+  if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct.`;}
+}
+
+// ── CRITICAL THINKING ─────────────────────────────────────
+const critData={
+  bible:[
+    {q:'3. Rahab\'s actions were RISKY — she could have been punished severely for hiding the spies. Why do you think she chose to take that risk anyway? What does this tell us about her character?'},
+    {q:'4. Real courage isn\'t about NOT feeling scared — it\'s about doing the right thing even when you ARE scared. Do you agree with this idea? Explain using Rahab\'s story.',hint:'Was Rahab probably scared? What did she do anyway?'},
+    {q:'5. Rahab said: "The Lord your God is God in heaven above and on the earth below." (Joshua 2:11). What do you think she meant? Why is it surprising that SHE said this, and not an Israelite?',hint:'Rahab was not from Israel — she lived in Jericho, a city that did not worship God.'},
+  ],
+  eng:[
+    {q:'3. Your classmate wrote: "The forest was dark." Rewrite this sentence TWO times using adjectives AND adverbs to make it more interesting and descriptive.'},
+    {q:'4. Explain the difference between an ADJECTIVE and an ADVERB. Give one example of each describing the same scene (e.g. a stormy beach).'},
+    {q:'5. Write 3–4 sentences describing a busy market using your FIVE SENSES. You MUST include at least THREE adjectives and TWO adverbs. Underline each one.'},
+  ],
+  maths:[
+    {q:'3. A rectangular field is 25 m long and 12 m wide. A farmer wants to put a fence all the way around it. How many metres of fence does he need? Show your working.',hint:'Perimeter = 2 × (length + width)'},
+    {q:'4. Explain in your own words what "perimeter" means. When would someone in real life need to calculate a perimeter?'},
+    {q:'5. A square garden has a perimeter of 32 m. What is the length of ONE side? Show your working and explain how you solved it.',hint:'If 4 × side = 32, work backwards using division!'},
+    {q:'6. REASONING: A rectangle has a perimeter of 20 cm. Give TWO different possible pairs of length and width that could make this true. Explain how you found them.'},
+  ],
+  sci:[
+    {q:'3. A torch is switched on in a completely dark room. Explain step by step what happens to the light, and why a shadow forms when you put your hand in front of it.'},
+    {q:'4. Explain why shadows are LONGER in the morning and evening, but SHORTER at midday. Use the words "sun" and "angle" in your answer.'},
+    {q:'5. DESIGN A FAIR TEST: You want to find out which material makes the DARKEST shadow. Fill in: My question / My prediction / What I change / What I measure / What I keep the same (2 things).'},
+  ],
+  soc:[
+    {q:'3. List TWO school rules AND explain why each one is important for keeping students safe or helping them learn.',hint:'Think: what would happen WITHOUT this rule?'},
+    {q:'4. Why do you think rights and responsibilities always go together? Give an example of a right you have AND the responsibility that comes with it.'},
+    {q:'5. EXTENDED: Imagine your class has NO rules at all for one whole day. Write a short story or description of what you think would happen. What problems might occur?'},
+    {q:'6. Every child has the right to education. What responsibilities come with this right? Think about what YOU need to do to make the most of your right to learn.'},
+  ],
+};
+function buildCrit(key){
+  const data=critData[key];const area=document.getElementById(key+'-crit');if(!area)return;
+  let h='';
+  data.forEach(item=>{
+    h+=`<div style="margin-bottom:18px;"><p style="font-weight:800;margin-bottom:6px;line-height:1.55;">${item.q}</p>`;
+    if(item.hint) h+=`<div class="callout" style="background:#FEF3C7;padding:10px 14px;"><div class="callout-icon">💡</div><div class="callout-text" style="font-size:0.85rem;">${item.hint}</div></div>`;
+    h+=`<textarea class="open-box" placeholder="Write your answer here…" style="margin-top:8px;"></textarea></div>`;});
+  area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(k=>buildCrit(k));
+
+// ── ENGLISH ADJECTIVE/ADVERB QUIZ ─────────────────────────
+const engQs=[
+  {q:'Which word is the adjective in: "The ancient castle stood alone."',opts:['ancient','castle','stood','alone'],ans:0},
+  {q:'Which word is the adverb in: "She walked quietly into the room."',opts:['walked','quietly','room','she'],ans:1},
+  {q:'Which sentence uses an adverb correctly?',opts:['The fast dog ran.','The dog ran quickly.','The dog quick ran.','The dog fastly ran.'],ans:1},
+  {q:'Adjectives describe...',opts:['Verbs','Nouns','Adverbs','Numbers'],ans:1},
+  {q:'Which word is NOT an adverb?',opts:['quietly','suddenly','beautiful','gently'],ans:2},
+];
+let engIdx=0,engScore=0;
+function renderEngQ(){
+  const q=engQs[engIdx];
+  if(!q){document.getElementById('eng-quiz').innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:12px;font-weight:800;">🎉 Done! Score: ${engScore}/${engQs.length}</div>`;if(engScore===engQs.length)celebrate();return;}
+  document.getElementById('eng-quiz').innerHTML=`<div class="quiz-box"><div class="quiz-q">Q${engIdx+1}: ${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerEngQ(${i})">${o}</button>`).join('')}</div><div id="eng-quiz-fb" class="quiz-feedback"></div></div>`;
+  document.getElementById('eng-score').textContent=`Score: ${engScore}/${engIdx}`;
+}
+function answerEngQ(i){
+  const q=engQs[engIdx];const opts=document.querySelectorAll('#eng-quiz .quiz-opt');opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');const fb=document.getElementById('eng-quiz-fb');fb.style.display='block';
+  if(i===q.ans){engScore++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.textContent='✅ Correct!';}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.textContent=`❌ The answer is: "${q.opts[q.ans]}"`;}
+  document.getElementById('eng-score').textContent=`Score: ${engScore}/${engIdx+1}`;
+}
+function nextEngQ(){engIdx++;renderEngQ();}
+renderEngQ();
+
+function checkEngImprove(){
+  let filled=0,total=0;
+  document.querySelectorAll('#page-english .card:nth-child(3) table:first-of-type .fill-in').forEach(inp=>{
+    total++;if(inp.value.trim().length>0)filled++;});
+  const res=document.getElementById('eng-improve-result');res.style.display='block';
+  if(filled===total){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent='✅ Great! You used your own adjectives and adverbs!';}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 Please fill in all ${total} sentences.`;}
+}
+
+// ── SCIENCE CLASSIFY (light sources) ──────────────────────
+const classifyData=[
+  {desc:'☀️ The Sun',ans:'Natural',opts:['Natural','Artificial']},
+  {desc:'🔦 A torch',ans:'Artificial',opts:['Natural','Artificial']},
+  {desc:'🔥 A campfire',ans:'Natural',opts:['Natural','Artificial']},
+  {desc:'💡 A lightbulb',ans:'Artificial',opts:['Natural','Artificial']},
+];
+function buildClassify(){
+  const area=document.getElementById('sci-classify');if(!area)return;
+  let h='';
+  classifyData.forEach((item,i)=>{
+    h+=`<div style="background:#F8FAFF;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;margin-bottom:8px;">${i+1}. ${item.desc}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${item.opts.map(opt=>`<button class="tf-btn" id="cls-${i}-${opt}" onclick="selectClassify(${i},'${opt}')">${opt}</button>`).join('')}
+      </div></div>`;
+  });
+  area.innerHTML=h;
+}
+buildClassify();
+function selectClassify(i,val){
+  classifyData[i].opts.forEach(opt=>{const btn=document.getElementById('cls-'+i+'-'+opt);if(btn){btn.classList.remove('selected-t','selected-f');btn.style.background='';}});
+  const btn=document.getElementById('cls-'+i+'-'+val);
+  if(btn){btn.classList.add('selected-t');btn.style.background='#D1FAE5';btn.style.borderColor='#059669';}
+}
+function checkClassify(){
+  let score=0;
+  classifyData.forEach((item,i)=>{
+    item.opts.forEach(opt=>{
+      const btn=document.getElementById('cls-'+i+'-'+opt);if(!btn)return;
+      if(btn.classList.contains('selected-t')){if(opt===item.ans){score++;btn.classList.add('correct-answer');}else btn.classList.add('wrong-answer');}
+      if(opt===item.ans)btn.classList.add('correct-answer');
+      btn.disabled=true;});
+  });
+  const res=document.getElementById('sci-classify-result');res.style.display='block';
+  if(score===classifyData.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${classifyData.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${classifyData.length} correct. Green = correct answer.`;}
+}
+
+// ── HABITAT-STYLE MATCHING (science materials AND social rights/responsibilities) ──
+const habitatData=[];
+function buildHabitat(){
+  const area=document.getElementById('sci-habitat');
+  if(area){
+    const sciMaterials=[
+      {item:'🪵 Wood',habitat:'Opaque',opts:['Opaque','Translucent','Transparent']},
+      {item:'🪟 Clear glass',habitat:'Transparent',opts:['Opaque','Translucent','Transparent']},
+      {item:'🧻 Tissue paper',habitat:'Translucent',opts:['Opaque','Translucent','Transparent']},
+      {item:'🧱 Brick',habitat:'Opaque',opts:['Opaque','Translucent','Transparent']},
+    ];
+    area.innerHTML=`<table class="fill-table"><tr><th>Material</th><th>Type</th></tr>
+    ${sciMaterials.map((item,i)=>`<tr><td><strong>${item.item}</strong></td>
+      <td><select class="order-select" id="hab-${i}" style="width:100%;">
+        <option value="">— choose —</option>
+        ${item.opts.map(o=>`<option value="${o}">${o}</option>`).join('')}
+      </select></td></tr>`).join('')}
+    </table>`;
+    area.dataset.kind='sci';
+    area.dataset.answers=JSON.stringify(sciMaterials.map(m=>m.habitat));
+  }
+  const socArea=document.getElementById('soc-habitat');
+  if(socArea){
+    const socPairs=[
+      {item:'🌟 Right: The right to learn',habitat:'Responsibility: Listen and try my best',opts:['Responsibility: Listen and try my best','Responsibility: Share my toys','Responsibility: Follow safety rules']},
+      {item:'🛡️ Right: The right to be safe',habitat:'Responsibility: Follow safety rules',opts:['Responsibility: Listen and try my best','Responsibility: Share my toys','Responsibility: Follow safety rules']},
+      {item:'🎉 Right: The right to play',habitat:'Responsibility: Share my toys',opts:['Responsibility: Listen and try my best','Responsibility: Share my toys','Responsibility: Follow safety rules']},
+    ];
+    socArea.innerHTML=`<table class="fill-table"><tr><th>Right</th><th>Matching Responsibility</th></tr>
+    ${socPairs.map((item,i)=>`<tr><td><strong>${item.item}</strong></td>
+      <td><select class="order-select" id="habsoc-${i}" style="width:100%;">
+        <option value="">— choose —</option>
+        ${item.opts.map(o=>`<option value="${o}">${o}</option>`).join('')}
+      </select></td></tr>`).join('')}
+    </table>`;
+    socArea.dataset.kind='soc';
+    socArea.dataset.answers=JSON.stringify(socPairs.map(m=>m.habitat));
+  }
+}
+buildHabitat();
+function checkHabitat(){
+  ['sci-habitat','soc-habitat'].forEach(id=>{
+    const area=document.getElementById(id);if(!area||!area.dataset.kind)return;
+    const answers=JSON.parse(area.dataset.answers);
+    const prefix=area.dataset.kind==='sci'?'hab-':'habsoc-';
+    let score=0;
+    answers.forEach((ans,i)=>{
+      const sel=document.getElementById(prefix+i);if(!sel)return;
+      if(sel.value===ans){score++;sel.style.borderColor='#059669';sel.style.background='#D1FAE5';}
+      else{sel.style.borderColor='#DC2626';sel.style.background='#FEE2E2';}
+    });
+    const res=document.getElementById((area.dataset.kind==='sci'?'sci':'soc')+'-habitat-result');
+    if(res){res.style.display='block';
+      if(score===answers.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${answers.length} correct!`;celebrate();}
+      else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${answers.length} correct.`;}}
+  });
+}
+
+// ── CONFETTI ──────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<50;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*30);}
+}
+const style=document.createElement('style');
+style.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(style);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week9_Day1');</script>
+</body>
+</html>

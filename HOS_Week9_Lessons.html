@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 9 Lessons · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#6D28D9; --bible-l:#EDE9FE; --bible-m:#8B5CF6; --bible-d:#4C1D95;
+  --english:#BE123C; --english-l:#FFF1F2; --english-m:#E11D48; --english-d:#881337;
+  --maths:#B45309; --maths-l:#FFFBEB; --maths-m:#D97706; --maths-d:#78350F;
+  --science:#065F46; --science-l:#ECFDF5; --science-m:#059669; --science-d:#022C22;
+  --history:#1E3A8A; --history-l:#EFF6FF; --history-m:#2563EB; --history-d:#0F1F5C;
+  --bg:#0F0F13; --surface:#18181F; --surface2:#22222E; --border:#2E2E3E;
+  --text:#F0EFF8; --muted:#9090A8; --bright:#FFFFFF;
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(30,58,138,0.08) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--bright);margin-right:24px;white-space:nowrap;letter-spacing:-0.02em;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{color:white;}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(0.98);}to{opacity:1;transform:none;}}
+.hero{border-radius:var(--radius-lg);padding:48px 40px;margin-bottom:32px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.65;margin-bottom:12px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;color:var(--bright);}
+.hero-subtitle{font-size:1rem;font-weight:500;opacity:0.75;max-width:500px;line-height:1.6;}
+.hero-icon{position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:5.5rem;opacity:0.18;line-height:1;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.hero-tag{padding:5px 14px;border-radius:99px;font-size:0.75rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--bright);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.esl-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;}
+.esl-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.esl-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.esl-word{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--accent-light,#C4B5FD);font-weight:700;min-width:140px;padding:3px 0;}
+.esl-def{font-size:0.87rem;color:var(--muted);line-height:1.5;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout .ci{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout .ct{font-size:0.92rem;line-height:1.6;}
+.callout .ct strong{color:var(--bright);font-weight:700;}
+.callout.tip{background:rgba(109,40,217,0.12);border:1px solid rgba(109,40,217,0.25);}
+.callout.info{background:rgba(30,58,138,0.15);border:1px solid rgba(30,58,138,0.3);}
+.callout.warn{background:rgba(180,83,9,0.15);border:1px solid rgba(180,83,9,0.3);}
+.callout.good{background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);}
+.callout.key{background:rgba(190,18,60,0.1);border:1px solid rgba(190,18,60,0.25);}
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-top:12px;}
+.data-table th{background:var(--surface2);color:var(--accent-light,#C4B5FD);font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#B0B0C8;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.data-table td strong{color:var(--bright);}
+.data-table td em{color:var(--accent-light,#C4B5FD);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;transition:border-color 0.2s;}
+.step:hover{border-color:var(--accent,#555);}
+.step-n{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;background:var(--accent,#555);}
+.step-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.step-desc{font-size:0.87rem;color:var(--muted);line-height:1.55;}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:1rem;color:var(--bright);margin:12px 0;overflow-x:auto;line-height:1.7;}
+.formula .hl{color:#FCD34D;}
+.formula .hl2{color:#6EE7B7;}
+.formula .hl3{color:#C4B5FD;}
+.formula .comment{color:var(--muted);font-size:0.82rem;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.vocab-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:transform 0.2s,border-color 0.2s;}
+.vocab-card:hover{transform:translateY(-3px);border-color:var(--accent,#555);}
+.vc-word{font-family:'JetBrains Mono',monospace;font-size:0.88rem;font-weight:700;color:var(--accent-light,#C4B5FD);margin-bottom:5px;}
+.vc-def{font-size:0.85rem;color:#B0B0C8;line-height:1.5;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.cmp-col{background:var(--surface2);border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);}
+.cmp-head{font-weight:700;color:var(--bright);margin-bottom:12px;font-size:0.95rem;}
+.cmp-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:0.87rem;color:var(--muted);line-height:1.45;}
+.cmp-row::before{content:'•';flex-shrink:0;}
+.verse-box{background:linear-gradient(135deg,rgba(109,40,217,0.15),rgba(76,29,149,0.2));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius);padding:24px 28px;text-align:center;margin:16px 0;}
+.verse-text{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--bright);line-height:1.5;margin-bottom:8px;}
+.verse-ref{font-size:0.82rem;color:#C4B5FD;font-weight:700;letter-spacing:0.05em;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent,#555);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--accent,#555);}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-weight:700;color:var(--bright);font-size:0.95rem;margin-bottom:4px;}
+.tl-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+.hier-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin:18px 0;}
+.hier-box{padding:10px 22px;border-radius:10px;font-size:0.85rem;font-weight:700;color:white;text-align:center;width:fit-content;}
+.hier-arrow{color:var(--muted);font-size:1.1rem;}
+.hier-sub{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.elem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin:14px 0;}
+.elem-tile{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;border:1px solid rgba(255,255,255,0.1);}
+.elem-sym{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:white;}
+.elem-name{font-size:0.62rem;color:rgba(255,255,255,0.75);margin-top:2px;text-align:center;}
+.elem-num{font-size:0.6rem;color:rgba(255,255,255,0.5);position:absolute;top:4px;left:6px;}
+.elem-tile{position:relative;}
+.quiz-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;}
+.quiz-q{font-size:1.02rem;font-weight:600;color:var(--bright);margin-bottom:16px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:all 0.18s;}
+.opt:hover:not(:disabled){border-color:var(--accent,#555);color:var(--bright);background:rgba(255,255,255,0.04);}
+.opt.correct{background:rgba(6,95,70,0.2);border-color:#059669;color:#6EE7B7;}
+.opt.wrong{background:rgba(190,18,60,0.15);border-color:#E11D48;color:#FCA5A5;}
+.quiz-fb{margin-top:12px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.9rem;font-weight:600;display:none;}
+.quiz-fb.ok{background:rgba(6,95,70,0.2);color:#6EE7B7;border:1px solid rgba(6,95,70,0.4);}
+.quiz-fb.bad{background:rgba(190,18,60,0.15);color:#FCA5A5;border:1px solid rgba(190,18,60,0.4);}
+.quiz-nav{display:flex;align-items:center;gap:12px;margin-top:16px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.score-badge{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:var(--muted);font-weight:700;}
+.confetti{position:fixed;top:-20px;width:9px;height:12px;border-radius:2px;z-index:9999;pointer-events:none;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+@media(max-width:600px){.hero{padding:30px 22px;}.hero-icon{display:none;}.card{padding:18px;}.compare{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 9</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;--accent-light:#C4B5FD;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">🛡️</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible Studies · Week 9</div>
+  <div class="hero-title">Joshua —<br>Courage & Promise</div>
+  <div class="hero-subtitle">Joshua 1, 3-6 · Entering the Promised Land · God Keeps His Promises · Be Strong and Courageous</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Joshua 1:9</span><span class="hero-tag">Joshua 3-6</span><span class="hero-tag">Courage</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">⭐ Memory Verse</div>
+  <div class="verse-box">
+    <div class="verse-text">"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."</div>
+    <div class="verse-ref">Joshua 1:9 — NIV</div>
+  </div>
+  <div class="callout tip">
+    <div class="ci">🧠</div>
+    <div class="ct"><strong>Word-by-word:</strong> "Be strong and courageous" is repeated FOUR times in Joshua 1 (verses 6, 7, 9, 18) — God knew Joshua needed to hear it again and again. "Do not be afraid" does not mean Joshua felt no fear — it means fear should not be what controls his decisions. "Wherever you go" — the promise of God's presence is not limited to easy places; it covers every step into the unknown.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before you continue</div>
+    <div class="esl-row"><div class="esl-word">successor</div><div class="esl-def">The person who takes over a role or position after someone else. Joshua became Moses' successor as leader of Israel.</div></div>
+    <div class="esl-row"><div class="esl-word">Promised Land</div><div class="esl-def">The land of Canaan, which God promised to give to Abraham's descendants (Genesis 12). Israel had waited generations to enter it.</div></div>
+    <div class="esl-row"><div class="esl-word">covenant</div><div class="esl-def">A serious, binding agreement between God and his people. The Promised Land was part of God's covenant with Abraham.</div></div>
+    <div class="esl-row"><div class="esl-word">ark of the covenant</div><div class="esl-def">A sacred wooden chest that represented God's presence with Israel. The priests carried it ahead of the people at the Jordan and at Jericho.</div></div>
+    <div class="esl-row"><div class="esl-word">spies / scouts</div><div class="esl-def">People sent secretly to gather information about an enemy or unfamiliar land before an army arrives.</div></div>
+    <div class="esl-row"><div class="esl-word">siege</div><div class="esl-def">A military operation in which an army surrounds a city to force it to surrender, often by cutting off supplies.</div></div>
+    <div class="esl-row"><div class="esl-word">consecrate</div><div class="esl-def">To set apart as holy or dedicated to God. Joshua told the people to consecrate themselves before crossing the Jordan.</div></div>
+    <div class="esl-row"><div class="esl-word">inheritance</div><div class="esl-def">Something passed down or given, often a possession that becomes permanently yours. The land of Canaan was Israel's inheritance.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🔄 From Moses to Joshua — A New Leader, the Same God</div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct">Moses had led Israel out of Egypt and through 40 years in the wilderness, but he died before entering Canaan (Deuteronomy 34). Joshua, who had been Moses' assistant and one of the twelve spies sent into Canaan 40 years earlier (Numbers 13-14), was chosen by God to lead the people into the Promised Land.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.4);">
+      <div class="cmp-head" style="color:#C4B5FD;">👤 What Stayed the Same</div>
+      <div class="cmp-row">God's promise to give Israel the land</div>
+      <div class="cmp-row">The need for courage and obedience</div>
+      <div class="cmp-row">God's presence going with the leader</div>
+      <div class="cmp-row">The Law given through Moses still applied</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(109,40,217,0.3);">
+      <div class="cmp-head" style="color:#C4B5FD;">🔄 What Changed</div>
+      <div class="cmp-row">A new human leader: Joshua, not Moses</div>
+      <div class="cmp-row">From wilderness wandering to active conquest</div>
+      <div class="cmp-row">From receiving the law to living it out in the land</div>
+      <div class="cmp-row">From promise spoken to promise being fulfilled</div>
+    </div>
+  </div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>KS3 thinking point:</strong> God's first words to Joshua are not a battle plan — they are a repeated command to be courageous (Joshua 1:6,7,9,18). Leadership transitions are tested moments; God meets Joshua's uncertainty with reassurance of his unchanging presence.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🌊 Crossing the Jordan — Joshua 3-4</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot" style="background:#6D28D9;"></div><div class="tl-date">Step 1</div><div class="tl-title">The people consecrate themselves</div><div class="tl-desc">Joshua tells Israel to prepare spiritually because "tomorrow the LORD will do amazing things among you" (3:5).</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#8B5CF6;"></div><div class="tl-date">Step 2</div><div class="tl-title">The priests step into the river first</div><div class="tl-desc">Carrying the ark of the covenant, the priests step into the flooded Jordan — and the water stops flowing, piling up upstream (3:13-16).</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#A78BFA;"></div><div class="tl-date">Step 3</div><div class="tl-title">All Israel crosses on dry ground</div><div class="tl-desc">The entire nation crosses the riverbed while the priests stand still in the middle holding the ark (3:17).</div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#C4B5FD;"></div><div class="tl-date">Step 4</div><div class="tl-title">Twelve stones set up as a memorial</div><div class="tl-desc">One stone is taken from the riverbed for each of Israel's twelve tribes, set up so future generations would ask "what do these stones mean?" and be told the story (4:1-7).</div></div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> This crossing deliberately echoes the Red Sea crossing under Moses (Exodus 14) — both times, water stops for Israel to cross on dry ground. The repetition shows the SAME God who acted through Moses is acting through Joshua.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🏰 The Battle of Jericho — Joshua 6</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">God's instructions for taking Jericho were strange by any normal military standard: march around the walled city once a day for six days, then seven times on the seventh day, blow trumpets, and shout. No weapons. No siege engines. Just obedience.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#6D28D9;">1</div><div><div class="step-title">Six days of marching</div><div class="step-desc">Armed men, seven priests with trumpets, and the ark circle the city once each day — in silence except for the trumpets.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">2</div><div><div class="step-title">The seventh day — seven times around</div><div class="step-desc">On the final day, Israel marches around Jericho seven times.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#6D28D9;">3</div><div><div class="step-title">The shout and the trumpets</div><div class="step-desc">On the seventh circuit, the priests blow the trumpets, and Joshua commands the people to shout — and the walls of Jericho collapse (6:20).</div></div></div>
+  </div>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct"><strong>KS3 key idea:</strong> The victory came through obedience to an unusual instruction, not through Israel's military strength. The story repeatedly emphasises that the LAND was God's gift, not Israel's achievement — a major theme of the whole book of Joshua.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">⚖️ Comparing Four Examples of Faith</div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>Abraham (Wk5)</th><th>Joseph (Wk6)</th><th>Moses (Wk7)</th><th>Joshua (Wk9)</th></tr></thead>
+    <tbody>
+      <tr><td>What faith required</td><td>Leaving home for an unknown destination</td><td>Integrity through suffering caused by others</td><td>Confronting Pharaoh and leading an exodus</td><td>Taking active possession of a promise already given</td></tr>
+      <tr><td>The promise involved</td><td>A future nation and land</td><td>God's purpose through hardship</td><td>Freedom from slavery</td><td>The SAME land first promised to Abraham</td></tr>
+      <tr><td>Key command from God</td><td>"Go" (Gen 12:1)</td><td>(no direct command — endurance)</td><td>"Let my people go" (Ex 5:1)</td><td>"Be strong and courageous" (Josh 1:9)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <div class="ci">🔗</div>
+    <div class="ct"><strong>The pattern completes:</strong> Joshua's story is the fulfilment of a promise made nearly 600 years earlier to Abraham. What began as a promise to one childless man in Genesis 12 becomes, in Joshua, an entire nation entering an actual physical land — showing that God's promises can take generations to fulfil but are never forgotten.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#6D28D9;">
+  <div class="card-title">🎯 Knowledge Check — Joshua</div>
+  <div id="bible-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#6D28D9;" onclick="nextQ('bible')">Next Question →</button>
+    <span class="score-badge" id="bible-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;--accent-light:#FCA5A5;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">🎤</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 9</div>
+  <div class="hero-title">Speaking & Listening —<br>Presentations</div>
+  <div class="hero-subtitle">Structuring an oral presentation · Active listening skills · Voice and body language</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Oral Presentation</span><span class="hero-tag">Active Listening</span><span class="hero-tag">Public Speaking</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Master these terms for speaking and listening</div>
+    <div class="esl-row"><div class="esl-word">presentation</div><div class="esl-def">A talk given to an audience to inform, explain, or persuade — usually with visual support like slides or notes.</div></div>
+    <div class="esl-row"><div class="esl-word">audience</div><div class="esl-def">The people who are listening to a presentation or speech. A good speaker thinks about what the audience already knows and needs.</div></div>
+    <div class="esl-row"><div class="esl-word">active listening</div><div class="esl-def">Fully concentrating on, understanding, and responding to a speaker — not just hearing words, but engaging with meaning. Shown through eye contact, nodding, and relevant questions.</div></div>
+    <div class="esl-row"><div class="esl-word">articulation</div><div class="esl-def">Speaking clearly so each word and sound can be understood. Good articulation means not mumbling or rushing words together.</div></div>
+    <div class="esl-row"><div class="esl-word">pace</div><div class="esl-def">The speed at which you speak. Too fast = audience cannot follow. Too slow = audience loses interest. Good pace varies for emphasis.</div></div>
+    <div class="esl-row"><div class="esl-word">eye contact</div><div class="esl-def">Looking at members of your audience while speaking, rather than only at notes or the floor. Builds connection and trust.</div></div>
+    <div class="esl-row"><div class="esl-word">visual aid</div><div class="esl-def">An image, slide, chart, or object used to support and clarify a spoken presentation.</div></div>
+    <div class="esl-row"><div class="esl-word">filler words</div><div class="esl-def">Unnecessary sounds or words used when thinking, such as "um," "like," or "you know." Reducing fillers makes a speaker sound more confident.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🏗️ Structuring a Short Oral Presentation</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">A spoken presentation needs the SAME logical structure as a written essay — but it must be even clearer, because listeners cannot re-read a sentence they missed. Tell them what you will say, say it, then tell them what you said.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#BE123C;">1</div><div><div class="step-title">Opening — grab attention and state your purpose</div><div class="step-desc">Start with a question, surprising fact, or short story. Then tell the audience clearly what your presentation is about: "Today I'm going to explain..."</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">2</div><div><div class="step-title">Main points — usually 2-4 clear points</div><div class="step-desc">Signpost each point clearly: "My first point is..." / "Next, I want to talk about..." / "Finally..." This helps listeners follow your structure without seeing it written down.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#BE123C;">3</div><div><div class="step-title">Closing — summarise and end strongly</div><div class="step-desc">Briefly restate your main points. End with a strong final sentence — a call to action, a memorable statement, or an invitation for questions.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🗣️ Delivery Skills — How You Say It Matters</div>
+  <table class="data-table">
+    <thead><tr><th>Skill</th><th>What To Do</th><th>Common Mistake to Avoid</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Volume</strong></td><td>Speak loud enough for everyone in the room to hear comfortably.</td><td>Speaking too quietly, especially when nervous.</td></tr>
+      <tr><td><strong>Pace</strong></td><td>Speak at a measured pace; pause briefly between points.</td><td>Rushing through the whole presentation from nerves.</td></tr>
+      <tr><td><strong>Eye contact</strong></td><td>Look at different parts of the audience, not just one person or your notes.</td><td>Reading word-for-word from a script without looking up.</td></tr>
+      <tr><td><strong>Body language</strong></td><td>Stand confidently; use natural hand gestures to support your points.</td><td>Crossing arms, fidgeting, or turning your back to the audience.</td></tr>
+      <tr><td><strong>Filler words</strong></td><td>Pause silently instead of saying "um" or "like" when thinking.</td><td>Overusing filler words, which makes the speaker sound unprepared.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">👂 Active Listening — The Other Half of Communication</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden idea:</strong> Communication is a two-way skill. A presentation only succeeds if the audience listens actively — and being a good audience member is a skill you can practise, just like speaking.</div>
+  </div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.4);">
+      <div class="cmp-head" style="color:#FCA5A5;">✅ Active Listening Looks Like</div>
+      <div class="cmp-row">Making eye contact with the speaker</div>
+      <div class="cmp-row">Nodding or showing facial reactions</div>
+      <div class="cmp-row">Asking relevant follow-up questions</div>
+      <div class="cmp-row">Waiting for pauses before speaking/asking</div>
+      <div class="cmp-row">Summarising what you heard to check understanding</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(190,18,60,0.3);">
+      <div class="cmp-head" style="color:#FCA5A5;">❌ Passive / Poor Listening Looks Like</div>
+      <div class="cmp-row">Looking at a phone or elsewhere</div>
+      <div class="cmp-row">Interrupting before the speaker finishes a point</div>
+      <div class="cmp-row">Thinking about your own response instead of listening</div>
+      <div class="cmp-row">Asking a question already answered (not listening)</div>
+      <div class="cmp-row">Showing visible boredom or distraction</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">📝 Worked Example — A Well-Structured Opening</div>
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;font-size:0.88rem;line-height:1.8;color:#B0B0C8;">
+    <span style="background:rgba(190,18,60,0.25);padding:2px 6px;border-radius:4px;color:#FCA5A5;font-size:0.75rem;font-weight:700;margin-right:6px;">[HOOK]</span><span style="color:var(--bright);">Imagine walking around a city wall seven times in one day, blowing trumpets, with no weapon in your hand — and watching the wall collapse.</span> <span style="background:rgba(30,58,138,0.25);padding:2px 6px;border-radius:4px;color:#93C5FD;font-size:0.75rem;font-weight:700;margin-right:6px;">[PURPOSE]</span>Today I'm going to explain the story of Joshua at Jericho, and what it teaches us about obedience and courage. <span style="background:rgba(6,95,70,0.25);padding:2px 6px;border-radius:4px;color:#6EE7B7;font-size:0.75rem;font-weight:700;margin-right:6px;">[SIGNPOST]</span><span style="color:#6EE7B7;">I'll cover three things:</span> first, who Joshua was; second, what happened at Jericho; and third, what this story means for us today.
+  </div>
+</div>
+
+<div class="card" style="--accent:#BE123C;">
+  <div class="card-title">🎯 Speaking & Listening Quiz</div>
+  <div id="english-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#BE123C;" onclick="nextQ('english')">Next →</button>
+    <span class="score-badge" id="english-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;--accent-light:#FCD34D;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D2200,#7A3D00);">
+  <div class="hero-icon">⚖️</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 9</div>
+  <div class="hero-title">Solving<br>One-Step Equations</div>
+  <div class="hero-subtitle">The balancing method · Equations with +, −, ×, ÷ · Checking your answer</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Equations</span><span class="hero-tag">Balancing Method</span><span class="hero-tag">Inverse Operations</span><span class="hero-tag">KS3 Level 6</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">📚 Key Vocabulary — ESL Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 8 — algebraic expressions</div>
+    <div class="esl-row"><div class="esl-word">equation</div><div class="esl-def">A mathematical statement that says two things are EQUAL, using an "=" sign. Example: x + 5 = 12.</div></div>
+    <div class="esl-row"><div class="esl-word">solve</div><div class="esl-def">To find the value of the unknown variable that makes the equation true.</div></div>
+    <div class="esl-row"><div class="esl-word">balance / balancing method</div><div class="esl-def">Doing the SAME operation to BOTH sides of an equation, so it stays equal — like keeping two sides of a scale level.</div></div>
+    <div class="esl-row"><div class="esl-word">inverse operation</div><div class="esl-def">The operation that "undoes" another. The inverse of + is −. The inverse of × is ÷.</div></div>
+    <div class="esl-row"><div class="esl-word">one-step equation</div><div class="esl-def">An equation that can be solved using just ONE inverse operation. Example: x + 3 = 10 (one step: subtract 3).</div></div>
+    <div class="esl-row"><div class="esl-word">check / verify</div><div class="esl-def">Substituting your answer back into the original equation to make sure both sides are equal.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">⚖️ The Balancing Method — The Big Idea</div>
+  <div class="callout key">
+    <div class="ci">🔑</div>
+    <div class="ct"><strong>Golden rule:</strong> An equation is like a balanced scale. Whatever you do to ONE side, you must do EXACTLY the same to the OTHER side — otherwise the scale (the equation) tips over and is no longer true.</div>
+  </div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">To solve an equation, you want to get the variable ALONE on one side. You do this by using the INVERSE operation to "undo" whatever is being done to the variable.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>If the equation has...</th><th>Use this inverse operation</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>x + 5 = 12 (addition)</td><td>Subtract 5 from both sides</td><td>x = 12 − 5 = 7</td></tr>
+      <tr><td>x − 4 = 9 (subtraction)</td><td>Add 4 to both sides</td><td>x = 9 + 4 = 13</td></tr>
+      <tr><td>3x = 21 (multiplication)</td><td>Divide both sides by 3</td><td>x = 21 ÷ 3 = 7</td></tr>
+      <tr><td>x ÷ 5 = 6 (division)</td><td>Multiply both sides by 5</td><td>x = 6 × 5 = 30</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">➕➖ Solving Addition & Subtraction Equations</div>
+  <div class="formula">
+    <span class="comment">Example 1: Solve x + 8 = 15</span><br>
+    x + 8 <span class="hl">− 8</span> = 15 <span class="hl">− 8</span> <span class="comment">← subtract 8 from BOTH sides</span><br>
+    x = <span class="hl2">7</span><br><br>
+    <span class="comment">Example 2: Solve y − 6 = 11</span><br>
+    y − 6 <span class="hl">+ 6</span> = 11 <span class="hl">+ 6</span> <span class="comment">← add 6 to BOTH sides</span><br>
+    y = <span class="hl2">17</span>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>Always check your answer:</strong> Substitute back in. For x + 8 = 15: 7 + 8 = 15 ✓. This confirms your answer is correct.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">✖️➗ Solving Multiplication & Division Equations</div>
+  <div class="formula">
+    <span class="comment">Example 3: Solve 4x = 28</span><br>
+    4x <span class="hl">÷ 4</span> = 28 <span class="hl">÷ 4</span> <span class="comment">← divide BOTH sides by 4</span><br>
+    x = <span class="hl2">7</span><br><br>
+    <span class="comment">Example 4: Solve n ÷ 3 = 9</span><br>
+    n ÷ 3 <span class="hl">× 3</span> = 9 <span class="hl">× 3</span> <span class="comment">← multiply BOTH sides by 3</span><br>
+    n = <span class="hl2">27</span>
+  </div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Common mistake:</strong> For "4x = 28," students sometimes try to subtract 4. But 4x means 4 MULTIPLIED by x — the inverse of multiplication is division, not subtraction. Always identify the operation correctly first.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🌍 Equations in Real Life — Word Problems</div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#B45309;">1</div><div><div class="step-title">Read the problem and identify the unknown</div><div class="step-desc">"A number plus 9 equals 23. What is the number?" → Let the number be n. Equation: n + 9 = 23.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">2</div><div><div class="step-title">Write the equation</div><div class="step-desc">n + 9 = 23</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">3</div><div><div class="step-title">Solve using the balancing method</div><div class="step-desc">n + 9 − 9 = 23 − 9 → n = 14</div></div></div>
+    <div class="step"><div class="step-n" style="background:#B45309;">4</div><div><div class="step-title">Check your answer makes sense</div><div class="step-desc">14 + 9 = 23 ✓. The answer fits the original word problem.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#B45309;">
+  <div class="card-title">🎯 Equations Quiz</div>
+  <div id="maths-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#B45309;" onclick="nextQ('maths')">Next →</button>
+    <span class="score-badge" id="maths-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;--accent-light:#6EE7B7;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">⚛️</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 9</div>
+  <div class="hero-title">Elements, Compounds &<br>the Periodic Table</div>
+  <div class="hero-subtitle">What is an element · Symbols · Metals vs non-metals · Groups and periods</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Elements</span><span class="hero-tag">Periodic Table</span><span class="hero-tag">Metals & Non-Metals</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">📚 Key Vocabulary — ESL Science Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Builds on Week 8 — mixtures and pure substances</div>
+    <div class="esl-row"><div class="esl-word">element</div><div class="esl-def">A pure substance made of only ONE type of atom. It cannot be broken down into anything simpler by chemical means. There are 118 known elements.</div></div>
+    <div class="esl-row"><div class="esl-word">atom</div><div class="esl-def">The smallest particle of an element that still has the properties of that element. Atoms are the building blocks of all matter.</div></div>
+    <div class="esl-row"><div class="esl-word">compound</div><div class="esl-def">A substance made of TWO OR MORE different elements chemically joined together. Example: water (H₂O) = hydrogen + oxygen.</div></div>
+    <div class="esl-row"><div class="esl-word">chemical symbol</div><div class="esl-def">A one- or two-letter code representing an element. The first letter is always capital. Example: O = oxygen, Na = sodium, Fe = iron.</div></div>
+    <div class="esl-row"><div class="esl-word">periodic table</div><div class="esl-def">A chart that organises all known elements by their properties — arranged in rows (periods) and columns (groups).</div></div>
+    <div class="esl-row"><div class="esl-word">group</div><div class="esl-def">A vertical COLUMN in the periodic table. Elements in the same group have similar chemical properties.</div></div>
+    <div class="esl-row"><div class="esl-word">period</div><div class="esl-def">A horizontal ROW in the periodic table. Elements in the same period have the same number of electron shells.</div></div>
+    <div class="esl-row"><div class="esl-word">metal / non-metal</div><div class="esl-def">Metals: shiny, conduct electricity/heat, malleable (bendable). Non-metals: dull, poor conductors, brittle. The periodic table is divided into both types.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🔍 Elements, Compounds, and Mixtures — The Hierarchy</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">Last week (Week 8) you learned about mixtures. This week we go one level deeper — into what the substances inside mixtures are actually made of.</div>
+  </div>
+  <div class="hier-wrap">
+    <div class="hier-box" style="background:#065F46;">ELEMENT — one type of atom (e.g. oxygen, O)</div>
+    <div class="hier-arrow">+</div>
+    <div class="hier-box" style="background:#059669;">ELEMENT — another type of atom (e.g. hydrogen, H)</div>
+    <div class="hier-arrow">↓ chemically joined</div>
+    <div class="hier-box" style="background:#10B981;">COMPOUND — water, H₂O (fixed ratio, new properties)</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Term</th><th>What It Is</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Element</strong></td><td>Pure substance, ONE type of atom</td><td>Oxygen (O), Iron (Fe), Gold (Au)</td></tr>
+      <tr><td><strong>Compound</strong></td><td>Two or more elements CHEMICALLY joined in a fixed ratio</td><td>Water (H₂O), Carbon dioxide (CO₂), Salt (NaCl)</td></tr>
+      <tr><td><strong>Mixture</strong></td><td>Two or more substances mixed but NOT chemically joined (Week 8)</td><td>Air, sea water, sand and salt</td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>Key difference:</strong> A compound's properties are completely DIFFERENT from the elements that made it. Sodium (Na) is a dangerous reactive metal; chlorine (Cl) is a toxic gas — but sodium chloride (NaCl) is harmless table salt! A mixture, by contrast, keeps the original properties of its parts.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🔤 Chemical Symbols — A Universal Language</div>
+  <div class="callout tip">
+    <div class="ci">🌐</div>
+    <div class="ct">Chemical symbols are understood by scientists in every country and language — they were standardised so scientists worldwide could communicate clearly, regardless of what their language calls the element.</div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Element</th><th>Symbol</th><th>Where the symbol comes from</th></tr></thead>
+    <tbody>
+      <tr><td>Hydrogen</td><td><em>H</em></td><td>First letter of the English name.</td></tr>
+      <tr><td>Oxygen</td><td><em>O</em></td><td>First letter of the English name.</td></tr>
+      <tr><td>Carbon</td><td><em>C</em></td><td>First letter of the English name.</td></tr>
+      <tr><td>Sodium</td><td><em>Na</em></td><td>From Latin "natrium."</td></tr>
+      <tr><td>Iron</td><td><em>Fe</em></td><td>From Latin "ferrum."</td></tr>
+      <tr><td>Gold</td><td><em>Au</em></td><td>From Latin "aurum."</td></tr>
+      <tr><td>Potassium</td><td><em>K</em></td><td>From Latin "kalium."</td></tr>
+      <tr><td>Silver</td><td><em>Ag</em></td><td>From Latin "argentum."</td></tr>
+    </tbody>
+  </table>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> The FIRST letter of a chemical symbol is ALWAYS capital. If there is a second letter, it is always lowercase. Co (cobalt) is completely different from CO (carbon monoxide — a compound)!</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🗂️ The Periodic Table — Groups and Periods</div>
+  <div class="elem-grid">
+    <div class="elem-tile" style="background:#1D4ED8;"><span class="elem-num">1</span><div class="elem-sym">H</div><div class="elem-name">Hydrogen</div></div>
+    <div class="elem-tile" style="background:#7C3AED;"><span class="elem-num">3</span><div class="elem-sym">Li</div><div class="elem-name">Lithium</div></div>
+    <div class="elem-tile" style="background:#7C3AED;"><span class="elem-num">11</span><div class="elem-sym">Na</div><div class="elem-name">Sodium</div></div>
+    <div class="elem-tile" style="background:#7C3AED;"><span class="elem-num">19</span><div class="elem-sym">K</div><div class="elem-name">Potassium</div></div>
+    <div class="elem-tile" style="background:#059669;"><span class="elem-num">6</span><div class="elem-sym">C</div><div class="elem-name">Carbon</div></div>
+    <div class="elem-tile" style="background:#059669;"><span class="elem-num">14</span><div class="elem-sym">Si</div><div class="elem-name">Silicon</div></div>
+    <div class="elem-tile" style="background:#DC2626;"><span class="elem-num">8</span><div class="elem-sym">O</div><div class="elem-name">Oxygen</div></div>
+    <div class="elem-tile" style="background:#DC2626;"><span class="elem-num">16</span><div class="elem-sym">S</div><div class="elem-name">Sulfur</div></div>
+    <div class="elem-tile" style="background:#D97706;"><span class="elem-num">17</span><div class="elem-sym">Cl</div><div class="elem-name">Chlorine</div></div>
+    <div class="elem-tile" style="background:#D97706;"><span class="elem-num">9</span><div class="elem-sym">F</div><div class="elem-name">Fluorine</div></div>
+    <div class="elem-tile" style="background:#475569;"><span class="elem-num">2</span><div class="elem-sym">He</div><div class="elem-name">Helium</div></div>
+    <div class="elem-tile" style="background:#475569;"><span class="elem-num">10</span><div class="elem-sym">Ne</div><div class="elem-name">Neon</div></div>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Feature</th><th>What It Means</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Group</strong> (vertical column)</td><td>Elements in the same group have similar chemical properties and the same number of electrons in their outer shell.</td></tr>
+      <tr><td><strong>Period</strong> (horizontal row)</td><td>Elements in the same period have the same number of electron shells (energy levels).</td></tr>
+      <tr><td><strong>Group 1 — Alkali Metals</strong></td><td>Very reactive metals (lithium, sodium, potassium) — react violently with water.</td></tr>
+      <tr><td><strong>Group 7 — Halogens</strong></td><td>Reactive non-metals (fluorine, chlorine) — often used in disinfectants.</td></tr>
+      <tr><td><strong>Group 0/8 — Noble Gases</strong></td><td>Very unreactive gases (helium, neon, argon) — used in balloons and lighting.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">⚙️ Metals vs Non-Metals</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.4);">
+      <div class="cmp-head" style="color:#6EE7B7;">⚙️ Metals (left & middle of table)</div>
+      <div class="cmp-row">Shiny (lustrous) when polished</div>
+      <div class="cmp-row">Good conductors of heat and electricity</div>
+      <div class="cmp-row">Malleable (can be bent/hammered into shape)</div>
+      <div class="cmp-row">Ductile (can be drawn into wires)</div>
+      <div class="cmp-row">Examples: iron, copper, gold, aluminium</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(6,95,70,0.3);">
+      <div class="cmp-head" style="color:#6EE7B7;">🧱 Non-Metals (right of table)</div>
+      <div class="cmp-row">Dull appearance (not shiny)</div>
+      <div class="cmp-row">Poor conductors (insulators) — except graphite</div>
+      <div class="cmp-row">Brittle when solid — break rather than bend</div>
+      <div class="cmp-row">Often gases at room temperature</div>
+      <div class="cmp-row">Examples: oxygen, carbon, sulfur, chlorine</div>
+    </div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> Most elements (about 80%) are metals. The "staircase" line dividing metals and non-metals on the periodic table contains elements called metalloids, which have properties of BOTH (e.g. silicon).</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#065F46;">
+  <div class="card-title">🎯 Elements & Periodic Table Quiz</div>
+  <div id="science-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#065F46;" onclick="nextQ('science')">Next →</button>
+    <span class="score-badge" id="science-score"></span>
+  </div>
+</div>
+</div></div>
+
+<!-- ═══════════════ HISTORY ═══════════════ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;--accent-light:#93C5FD;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#060C28,#0F2060);">
+  <div class="hero-icon">🏰</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History & Geography · Week 9</div>
+  <div class="hero-title">Medieval Europe &<br>the Feudal System</div>
+  <div class="hero-subtitle">Lords, serfs, knights · The role of the Church · Castles · Life in the Middle Ages</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Feudalism</span><span class="hero-tag">Knights</span><span class="hero-tag">Castles</span><span class="hero-tag">Medieval Church</span>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">📚 Key Vocabulary — ESL History Guide</div>
+  <div class="esl-box">
+    <div class="esl-title">Learn these words before exploring medieval Europe</div>
+    <div class="esl-row"><div class="esl-word">feudalism / feudal system</div><div class="esl-def">A system of medieval Europe in which land was exchanged for loyalty and service. Kings gave land to nobles, who gave protection and land to knights, who were served by peasants/serfs.</div></div>
+    <div class="esl-row"><div class="esl-word">monarch</div><div class="esl-def">A king or queen — the supreme ruler of a kingdom, believed in medieval times to rule with authority from God.</div></div>
+    <div class="esl-row"><div class="esl-word">lord / noble</div><div class="esl-def">A person of high social rank who owned and controlled land granted by the monarch, in exchange for military service and loyalty.</div></div>
+    <div class="esl-row"><div class="esl-word">vassal</div><div class="esl-def">A person who received land from a lord in exchange for a pledge of loyalty and military service. A vassal could also be a lord to others below them.</div></div>
+    <div class="esl-row"><div class="esl-word">knight</div><div class="esl-def">A warrior who served a lord, fighting on horseback in armour, in exchange for land. Knights followed a code of honour called chivalry.</div></div>
+    <div class="esl-row"><div class="esl-word">serf / peasant</div><div class="esl-def">A person at the bottom of the feudal system who worked the land. Serfs were legally bound to the lord's land and could not leave without permission.</div></div>
+    <div class="esl-row"><div class="esl-word">manor</div><div class="esl-def">A large estate of land controlled by a lord, including the lord's house, farmland, and the village where serfs lived and worked.</div></div>
+    <div class="esl-row"><div class="esl-word">clergy</div><div class="esl-def">Officials of the Church — priests, bishops, monks. The medieval Church was extremely powerful and wealthy, often rivalling kings in influence.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🏛️ The Feudal Pyramid — How Medieval Society Was Organised</div>
+  <div class="callout info">
+    <div class="ci">💡</div>
+    <div class="ct">After the fall of Rome (Week 4) and during centuries of instability, feudalism developed as a system to organise land, loyalty, and protection in the absence of strong central government.</div>
+  </div>
+  <div class="hier-wrap">
+    <div class="hier-box" style="background:#1E3A8A;">MONARCH (King/Queen) — owns all land</div>
+    <div class="hier-arrow">↓ grants land for loyalty</div>
+    <div class="hier-box" style="background:#2563EB;">LORDS / NOBLES — control large estates</div>
+    <div class="hier-arrow">↓ grants land for military service</div>
+    <div class="hier-box" style="background:#3B82F6;">KNIGHTS — fight for their lord</div>
+    <div class="hier-arrow">↓ protects and rules over</div>
+    <div class="hier-box" style="background:#60A5FA;color:#1E3A8A;">SERFS / PEASANTS — farm the land</div>
+  </div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct"><strong>KS3 key idea:</strong> This was NOT a system of equal exchange. The king technically owned all land; everyone below received the RIGHT to use land in exchange for service — but serfs at the bottom had almost no rights or freedom, and could not leave the lord's land.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">⚔️ Knights and Chivalry</div>
+  <table class="data-table">
+    <thead><tr><th>Aspect of Knighthood</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Training</td><td>Boys often began training as a "page" around age 7, became a "squire" around 14, and could be knighted around 21 after years of training in combat and horsemanship.</td></tr>
+      <tr><td>Equipment</td><td>A knight needed armour, a warhorse, and weapons — extremely expensive, which is why knighthood was usually limited to noble families.</td></tr>
+      <tr><td>Obligation to lord</td><td>In exchange for land, a knight owed his lord a set number of days of military service each year (often 40 days).</td></tr>
+      <tr><td>Code of chivalry</td><td>An ideal code of conduct: bravery in battle, loyalty to one's lord, courtesy, and protection of the weak — though in reality, behaviour varied widely.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip">
+    <div class="ci">💡</div>
+    <div class="ct"><strong>ESL tip:</strong> "Chivalry" comes from the French word "cheval" (horse) — a knight (chevalier) was originally simply "a horseman." The idea of chivalry as a moral code of honour developed alongside the practical role of mounted warrior.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🌾 Life as a Serf</div>
+  <div class="callout warn">
+    <div class="ci">⚠️</div>
+    <div class="ct">The majority of medieval Europeans — perhaps 90% — were peasants, and most of those were serfs. Their daily life was extremely hard, structured entirely around farming and obligation to their lord.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">1</div><div><div class="step-title">Working the land</div><div class="step-desc">Serfs farmed strips of land assigned to them, but had to give a portion of their crops to the lord and also work several days a week on the lord's own fields for free.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">2</div><div><div class="step-title">Legal bondage to the land</div><div class="step-desc">Unlike free peasants, serfs could not leave the manor or marry without the lord's permission — they were tied to the land they worked.</div></div></div>
+    <div class="step"><div class="step-n" style="background:#1E3A8A;">3</div><div><div class="step-title">Protection in exchange</div><div class="step-desc">In return for their labour, serfs received protection from the lord (defence against raids and bandits) and the right to farm a small plot for their own family's food.</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">⛪ The Power of the Medieval Church</div>
+  <div class="compare">
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.4);">
+      <div class="cmp-head" style="color:#93C5FD;">⛪ Religious Role</div>
+      <div class="cmp-row">Conducted baptisms, weddings, funerals — central to every life stage</div>
+      <div class="cmp-row">Ran monasteries — centres of prayer, learning, and copying books</div>
+      <div class="cmp-row">Taught that obedience to God and the Church secured salvation</div>
+    </div>
+    <div class="cmp-col" style="border-color:rgba(30,58,138,0.3);">
+      <div class="cmp-head" style="color:#93C5FD;">🏛️ Political & Economic Role</div>
+      <div class="cmp-row">Owned vast amounts of land — often more than any single king</div>
+      <div class="cmp-row">Collected "tithes" (a tenth of income) from the population</div>
+      <div class="cmp-row">Could crown or excommunicate (reject) kings, giving it huge power</div>
+    </div>
+  </div>
+  <div class="callout good">
+    <div class="ci">✅</div>
+    <div class="ct"><strong>KS3 key idea:</strong> In medieval Europe, religious and political power were deeply intertwined. The Church was not simply a place of worship — it was one of the most powerful landowning institutions in Europe, sometimes in direct competition with kings for authority.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🏰 Castles — Homes and Fortresses</div>
+  <table class="data-table">
+    <thead><tr><th>Castle Feature</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>Thick stone walls</td><td>Resisted attack from siege weapons and provided protection for everyone inside.</td></tr>
+      <tr><td>Moat (water-filled ditch)</td><td>Made it difficult for attackers to reach the walls or dig underneath them.</td></tr>
+      <tr><td>Drawbridge</td><td>Could be raised to cut off access to the castle entirely during an attack.</td></tr>
+      <tr><td>Keep (central tower)</td><td>The strongest, most defensible part of the castle — a last refuge during a siege.</td></tr>
+      <tr><td>Battlements</td><td>Notched walls on the roof allowing defenders to shoot arrows while staying protected.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <div class="ci">📍</div>
+    <div class="ct"><strong>Geography link:</strong> Castles were strategically built on hills, river bends, or coastlines — using natural geography for defence, exactly like the settlement factors studied in Week 8.</div>
+  </div>
+</div>
+
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="card-title">🎯 Medieval Europe Quiz</div>
+  <div id="history-quiz"></div>
+  <div class="quiz-nav">
+    <button class="btn" style="background:#1E3A8A;" onclick="nextQ('history')">Next →</button>
+    <span class="score-badge" id="history-score"></span>
+  </div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const quizData={
+  bible:[
+    {q:'What does the memory verse (Joshua 1:9) tell Joshua about WHY he can be courageous?',opts:['Because his army was very large','Because the LORD his God would be with him wherever he went','Because Jericho had weak walls','Because Moses had already conquered Canaan'],ans:1,exp:'The basis for courage is God\'s presence: "the LORD your God will be with you wherever you go." The command to be courageous is grounded in a promise, not in Joshua\'s own strength or resources.'},
+    {q:'How many times is the phrase "be strong and courageous" (or similar) repeated to Joshua in Joshua chapter 1?',opts:['Once','Twice','Four times','Ten times'],ans:2,exp:'The command is repeated four times (verses 6, 7, 9, 18) — showing how much encouragement Joshua needed as he took on the responsibility of leading Israel after Moses.'},
+    {q:'What happened when the priests carrying the ark of the covenant stepped into the Jordan River?',opts:['The ark floated away downstream','The water stopped flowing and piled up upstream, allowing Israel to cross on dry ground','The priests were swept away by the current','Nothing unusual happened'],ans:1,exp:'Joshua 3:13-16 describes the river stopping, just as the Red Sea had parted under Moses — showing the same God acting through the new leader, Joshua.'},
+    {q:'What was unusual about how Israel captured the city of Jericho?',opts:['They used siege engines to break down the walls','They bribed the guards to open the gates','They marched around the city, blew trumpets, and shouted — with no weapons used to bring down the walls','They tunnelled underneath the city walls'],ans:2,exp:'God\'s instructions were to march around Jericho for six days, then seven times on the seventh day, blow trumpets, and shout — and the walls collapsed. The victory came through obedience, not military strength.'},
+    {q:'What is the significance of the twelve stones set up after crossing the Jordan (Joshua 4)?',opts:['They marked the border of Egypt','They were used to build the city of Jericho','They served as a memorial so future generations would remember and ask about what God had done','They were a gift for the king of Jericho'],ans:2,exp:'Joshua 4:1-7 explains that the twelve stones (one per tribe) were a permanent memorial, designed so children in later generations would ask "what do these stones mean?" and be told the story of God\'s faithfulness.'},
+    {q:'How does Joshua\'s story connect to the promise originally given to Abraham (Week 5)?',opts:['It has no connection at all','Joshua\'s conquest of Canaan is the fulfilment of the land God promised to Abraham\'s descendants generations earlier','Joshua and Abraham were brothers','Abraham conquered Canaan himself before Joshua was born'],ans:1,exp:'God promised Abraham that his descendants would receive the land of Canaan (Genesis 12). Joshua\'s story, centuries later, is the actual fulfilment of that promise — showing that God\'s promises may take generations but are never forgotten.'},
+  ],
+  english:[
+    {q:'What should the OPENING of an oral presentation do?',opts:['List every source used','Grab attention and clearly state the purpose of the talk','Apologise for being nervous','Read the entire script word for word'],ans:1,exp:'A strong opening uses a hook (question, fact, story) to grab attention, then clearly tells the audience what the presentation will be about — just like a thesis statement in writing.'},
+    {q:'What is "active listening"?',opts:['Listening with your eyes closed','Hearing words without paying attention to meaning','Fully concentrating on, understanding, and engaging with what a speaker is saying','Speaking loudly while someone else is talking'],ans:2,exp:'Active listening means truly engaging with the speaker — through eye contact, body language, and meaningful questions — rather than simply hearing sounds without processing meaning.'},
+    {q:'What are "filler words" and why should speakers try to reduce them?',opts:['Words that make a speech longer and more impressive','Unnecessary sounds like "um" or "like" that make a speaker sound less confident and prepared','Words used only in written essays','Technical vocabulary specific to a topic'],ans:1,exp:'Filler words ("um," "like," "you know") are used when thinking, but overusing them makes a speaker sound unprepared or nervous. Pausing silently is more effective than filling silence with these words.'},
+    {q:'Why is eye contact important during a presentation?',opts:['It has no real importance','It builds connection and trust with the audience, showing confidence','It is required by law in formal speeches','It helps the speaker remember their notes better'],ans:1,exp:'Eye contact connects the speaker with the audience and signals confidence and sincerity. Reading only from notes without looking up can make a presentation feel disconnected and less engaging.'},
+    {q:'What is the purpose of "signposting" in a presentation (e.g. saying "my first point is...")?',opts:['To make the speech sound more formal for no reason','To help listeners follow the structure, since they cannot re-read a missed sentence like in writing','To fill time when a speaker has nothing else to say','To confuse the audience intentionally'],ans:1,exp:'Unlike readers, listeners cannot go back and re-read something they missed. Signposting phrases ("first," "next," "finally") make the structure of a spoken presentation clear in real time.'},
+  ],
+  maths:[
+    {q:'What is the inverse operation of addition?',opts:['Addition','Subtraction','Multiplication','Division'],ans:1,exp:'Subtraction "undoes" addition. If an equation has "+," you use "−" on both sides to isolate the variable.'},
+    {q:'Solve: x + 7 = 15',opts:['x = 22','x = 8','x = 7','x = 105'],ans:1,exp:'Subtract 7 from both sides: x + 7 − 7 = 15 − 7, so x = 8. Check: 8 + 7 = 15 ✓.'},
+    {q:'Solve: 5x = 35',opts:['x = 7','x = 30','x = 175','x = 40'],ans:0,exp:'Divide both sides by 5: 5x ÷ 5 = 35 ÷ 5, so x = 7. Check: 5(7) = 35 ✓.'},
+    {q:'Solve: y ÷ 4 = 9',opts:['y = 2.25','y = 13','y = 36','y = 5'],ans:2,exp:'Multiply both sides by 4: (y ÷ 4) × 4 = 9 × 4, so y = 36. Check: 36 ÷ 4 = 9 ✓.'},
+    {q:'In the equation 3x = 21, why would subtracting 3 from both sides be the WRONG approach?',opts:['Because subtraction is never allowed in equations','Because 3x means 3 multiplied by x, so the inverse operation needed is division, not subtraction','Because 21 is too large a number','Because x must always be isolated by adding, never subtracting'],ans:1,exp:'3x represents 3 MULTIPLIED by x. The correct inverse operation to isolate x is division (dividing both sides by 3), not subtraction. Identifying the correct operation is the most important first step.'},
+    {q:'A number minus 9 equals 14. What is the number, and which equation represents this problem?',opts:['n + 9 = 14, n = 5','n − 9 = 14, n = 23','n × 9 = 14, n = 1.56','n ÷ 9 = 14, n = 126'],ans:1,exp:'"A number minus 9 equals 14" translates to n − 9 = 14. Adding 9 to both sides: n = 14 + 9 = 23. Check: 23 − 9 = 14 ✓.'},
+  ],
+  science:[
+    {q:'What is an element?',opts:['A mixture of two or more substances','A pure substance made of only one type of atom','Any substance that can dissolve in water','A liquid that conducts electricity'],ans:1,exp:'An element is a pure substance containing only one type of atom — it cannot be broken down into anything simpler by chemical means. There are 118 known elements.'},
+    {q:'What is the key difference between a compound and a mixture?',opts:['A compound is always a liquid; a mixture is always a solid','In a compound, elements are chemically joined in a fixed ratio with new properties; in a mixture, substances are combined without a chemical reaction and keep their own properties','A compound can be separated by filtration; a mixture cannot','There is no real difference'],ans:1,exp:'A compound (like water, H₂O) forms through a chemical reaction, creating a substance with entirely new properties, in a fixed ratio. A mixture (like salt water) simply combines substances physically — each substance keeps its original properties.'},
+    {q:'What does the chemical symbol "Na" represent, and where does it come from?',opts:['Nitrogen, from the English name','Sodium, from the Latin word "natrium"','Neon, from the Greek word for "new"','Nickel, from German'],ans:1,exp:'"Na" represents sodium, and the symbol comes from the Latin name "natrium." Several common elements have symbols derived from Latin rather than their English names (e.g. Fe for iron, from "ferrum").'},
+    {q:'In the periodic table, what do elements in the SAME GROUP (column) have in common?',opts:['They are always the same colour','They have similar chemical properties and the same number of electrons in their outer shell','They were all discovered in the same year','They are all metals'],ans:1,exp:'Elements in the same vertical group share similar chemical properties because they have the same number of electrons in their outermost shell — this is the organising principle behind the periodic table\'s structure.'},
+    {q:'Which property is typical of METALS rather than non-metals?',opts:['Dull appearance and poor conductivity','Brittle and breaks easily when solid','Shiny appearance, good conductor of electricity and heat, and malleable (can be bent into shape)','Usually a gas at room temperature'],ans:2,exp:'Metals are typically shiny (lustrous), good conductors of heat and electricity, and malleable (can be hammered or bent into new shapes) and ductile (can be drawn into wires) — unlike non-metals, which are often dull, poor conductors, and brittle.'},
+  ],
+  history:[
+    {q:'What is the feudal system?',opts:['A system of democratic voting in medieval villages','A system in which land was exchanged for loyalty and military service, organising medieval society into a hierarchy','A trade agreement between European kings','A type of medieval currency'],ans:1,exp:'Feudalism organised medieval European society into a hierarchy: the king granted land to lords in exchange for loyalty and military support; lords granted land to knights for service; serfs worked the land at the bottom of the system.'},
+    {q:'What was a "serf"?',opts:['A type of medieval weapon','A knight who had not yet been formally knighted','A peasant legally bound to work on a lord\'s land, unable to leave without permission','A title given only to the eldest son of a king'],ans:2,exp:'A serf was a peasant at the bottom of the feudal hierarchy, legally tied to the lord\'s land. Serfs farmed the land, gave a portion of their crops to the lord, and could not leave the manor or marry without the lord\'s permission.'},
+    {q:'What did a knight typically receive from his lord in exchange for military service?',opts:['A salary paid in gold coins','Land (and the people living on it) to support himself','A position in the Church','Permission to leave the kingdom'],ans:1,exp:'In the feudal exchange, knights received land from their lord in return for a pledge of loyalty and a set number of days of military service each year — the foundation of the whole feudal system.'},
+    {q:'Why was the medieval Church so powerful, beyond its religious role?',opts:['It had no power beyond religious matters','It owned vast amounts of land, collected tithes from the population, and could even crown or reject kings','It controlled all trade routes across Europe','It had its own independent army larger than any king\'s'],ans:1,exp:'The medieval Church combined religious authority with significant political and economic power — owning enormous amounts of land, collecting a tenth of people\'s income (tithes), and holding influence over kings through ceremonies like coronation, sometimes rivalling royal power.'},
+    {q:'Which feature of a medieval castle was specifically designed to prevent attackers from reaching or undermining the walls?',opts:['The keep (central tower)','The battlements','The moat (water-filled ditch)','The great hall'],ans:2,exp:'The moat — a deep, water-filled ditch surrounding the castle — made it extremely difficult for attackers to reach the walls directly or dig tunnels underneath them, providing a key layer of defence.'},
+  ]
+};
+
+const quizState={};
+['bible','english','maths','science','history'].forEach(s=>{quizState[s]={idx:0,score:0};renderQuiz(s);});
+
+function renderQuiz(s){
+  const st=quizState[s];const qs=quizData[s];
+  const container=document.getElementById(s+'-quiz');
+  const scoreEl=document.getElementById(s+'-score');
+  if(!container)return;
+  if(st.idx>=qs.length){container.innerHTML='<div style="padding:24px;background:rgba(6,95,70,0.15);border:1px solid rgba(6,95,70,0.3);border-radius:12px;text-align:center;"><div style="font-size:2.5rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#6EE7B7;font-size:1.1rem;">Section Complete!</div><div style="color:var(--muted);margin-top:6px;">Final score: '+st.score+' / '+qs.length+'</div></div>';celebrate();return;}
+  const q=qs[st.idx];
+  if(scoreEl)scoreEl.textContent=st.score+' / '+st.idx+' correct';
+  container.innerHTML='<div class="quiz-wrap"><div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;">Question '+(st.idx+1)+' of '+qs.length+'</div><div class="quiz-q">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" onclick="answer(\''+s+'\','+i+')">'+o+'</button>').join('')+'</div><div id="'+s+'-fb" class="quiz-fb"></div></div>';
+}
+
+function answer(s,i){
+  const q=quizData[s][quizState[s].idx];
+  const opts=document.querySelectorAll('#'+s+'-quiz .opt');
+  opts.forEach(o=>o.disabled=true);
+  const fb=document.getElementById(s+'-fb');
+  if(i===q.ans){quizState[s].score++;opts[i].classList.add('correct');fb.className='quiz-fb ok';fb.style.display='block';fb.innerHTML='✅ Correct! '+q.exp;}
+  else{opts[i].classList.add('wrong');opts[q.ans].classList.add('correct');fb.className='quiz-fb bad';fb.style.display='block';fb.innerHTML='❌ Not quite. '+q.exp;}
+  const scoreEl=document.getElementById(s+'-score');
+  if(scoreEl)scoreEl.textContent=quizState[s].score+' / '+(quizState[s].idx+1)+' correct';
+}
+function nextQ(s){quizState[s].idx++;renderQuiz(s);}
+function celebrate(){const cols=['#7C3AED','#E11D48','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C','#60A5FA','#C4B5FD'];for(let i=0;i<70;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti';el.style.left=Math.random()*100+'vw';el.style.background=cols[Math.floor(Math.random()*cols.length)];el.style.animationDuration=(1.8+Math.random()*2.2)+'s';el.style.animationDelay=(Math.random()*0.3)+'s';el.style.width=(7+Math.random()*7)+'px';el.style.height=(9+Math.random()*9)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),5000);},i*25);}}
+</script>
+</body>
+</html>

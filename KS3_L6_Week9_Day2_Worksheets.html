@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS3 Level 6 · Week 9 · Day 2 Worksheets · HOS International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F13;--surface:#18181F;--surface2:#22222E;--border:#2E2E3E;--text:#F0EFF8;--muted:#9090A8;--bright:#FFFFFF;--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(109,40,217,0.07) 0%,transparent 60%);pointer-events:none;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(15,15,19,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:60px;}
+.brand{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:var(--bright);margin-right:16px;white-space:nowrap;}
+.brand sup{font-size:0.55rem;color:var(--muted);vertical-align:super;}
+.week-badge{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:600;color:var(--muted);margin-right:16px;white-space:nowrap;}
+.day-badge{background:rgba(190,18,60,0.2);border:1px solid rgba(190,18,60,0.4);border-radius:99px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#FCA5A5;margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab{padding:8px 16px;border-radius:var(--radius-sm);border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab[data-s="bible"].active{background:rgba(109,40,217,0.25);color:#C4B5FD;}
+.tab[data-s="english"].active{background:rgba(190,18,60,0.25);color:#FCA5A5;}
+.tab[data-s="maths"].active{background:rgba(180,83,9,0.25);color:#FCD34D;}
+.tab[data-s="science"].active{background:rgba(6,95,70,0.25);color:#6EE7B7;}
+.tab[data-s="history"].active{background:rgba(30,58,138,0.25);color:#93C5FD;}
+.page{display:none;max-width:980px;margin:0 auto;padding:36px 24px 80px;}
+.page.active{display:block;animation:fadeUp 0.4s cubic-bezier(0.22,0.68,0,1.2) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero{border-radius:24px;padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
+.hero-icon{position:absolute;right:36px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:10px;color:var(--bright);}
+.hero-subtitle{font-size:0.95rem;opacity:0.72;max-width:480px;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.hero-tag{padding:4px 12px;border-radius:99px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.diff-banner{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:var(--radius-sm);margin-bottom:20px;border:1px solid;}
+.diff-banner.easy{background:rgba(6,95,70,0.12);border-color:rgba(6,95,70,0.3);}
+.diff-banner.medium{background:rgba(180,83,9,0.12);border-color:rgba(180,83,9,0.3);}
+.diff-banner.hard{background:rgba(190,18,60,0.12);border-color:rgba(190,18,60,0.3);}
+.diff-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.diff-banner.easy .diff-label{background:rgba(6,95,70,0.3);color:#6EE7B7;}
+.diff-banner.medium .diff-label{background:rgba(180,83,9,0.3);color:#FCD34D;}
+.diff-banner.hard .diff-label{background:rgba(190,18,60,0.3);color:#FCA5A5;}
+.diff-desc{font-size:0.85rem;color:var(--muted);}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#444);border-radius:3px 0 0 3px;}
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:14px;}
+.esl-tip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:0.84rem;color:var(--muted);line-height:1.6;}
+.esl-tip strong{color:var(--bright);}
+.q-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin-bottom:14px;transition:border-color 0.2s;}
+.q-block:hover{border-color:var(--accent,#555);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:0.78rem;font-weight:700;color:white;background:var(--accent,#555);margin-bottom:10px;}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--bright);line-height:1.5;margin-bottom:10px;}
+.q-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;min-height:80px;transition:border-color 0.2s;line-height:1.6;}
+.q-input:focus{outline:none;border-color:var(--accent,#555);}
+.q-input.wide{min-height:130px;}.q-input.xwide{min-height:170px;}.q-input.narrow{min-height:54px;}
+.q-input::placeholder{color:var(--muted);font-size:0.85rem;}
+.marks{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 10px;font-size:0.72rem;font-weight:700;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.ma-toggle{margin-top:10px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--muted);transition:all 0.2s;user-select:none;}
+.ma-toggle:hover{border-color:var(--accent,#555);color:var(--text);}
+.ma-toggle .arrow{transition:transform 0.25s;font-size:0.7rem;}
+.ma-toggle.open .arrow{transform:rotate(180deg);}
+.ma-body{display:none;margin-top:8px;padding:12px 16px;background:rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.2);border-radius:8px;font-size:0.86rem;color:#A7E3C9;line-height:1.65;}
+.ma-body.visible{display:block;}
+.ma-body strong{color:#6EE7B7;}
+.score-area{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.score-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.score-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.95rem;width:110px;text-align:center;}
+.score-input:focus{outline:none;border-color:var(--accent,#555);}
+.name-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;}
+.name-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.name-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
+.name-field input:focus{outline:none;border-color:var(--accent,#555);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:28px 0;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-divider-label{font-size:0.7rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.cross-week{background:linear-gradient(135deg,rgba(30,58,138,0.12),rgba(109,40,217,0.1));border:1px solid rgba(93,63,211,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:12px;font-size:0.83rem;color:#C4B5FD;line-height:1.55;}
+.cross-week strong{color:var(--bright);}
+@media(max-width:600px){.hero{padding:26px 18px;}.hero-icon{display:none;}.card{padding:16px;}.name-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">HOS<sup>KS3·L6</sup></div>
+  <div class="week-badge">Week 9</div>
+  <div class="day-badge">📅 Day 2</div>
+  <div class="nav-tabs">
+    <button class="tab active" data-s="bible" onclick="show('bible')">📖 Bible</button>
+    <button class="tab" data-s="english" onclick="show('english')">✏️ English</button>
+    <button class="tab" data-s="maths" onclick="show('maths')">🧮 Maths</button>
+    <button class="tab" data-s="science" onclick="show('science')">🔬 Science</button>
+    <button class="tab" data-s="history" onclick="show('history')">🏛️ History</button>
+  </div>
+</nav>
+
+<!-- ═══ BIBLE DAY 2 ═══ -->
+<div id="pg-bible" class="page active">
+<style>.pg-bible-a{--accent:#6D28D9;}</style>
+<div class="pg-bible-a">
+<div class="hero" style="background:linear-gradient(135deg,#1A0A3D,#2D1266);">
+  <div class="hero-icon">🌊</div>
+  <div class="hero-eyebrow" style="color:#A78BFA;">📖 Bible · Week 9 · Day 2</div>
+  <div class="hero-title">Joshua —<br>Deeper Analysis</div>
+  <div class="hero-subtitle">Promise, presence, and obedience explored in depth</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Recall and comprehension. What happened and why?</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">📚 Recall: Promise and Presence</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The word "presence" in this lesson means God being WITH someone, not just nearby in space but actively involved in their life and decisions. "The LORD your God will be with you wherever you go" is a promise of ongoing PRESENCE, not just a one-time blessing.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">1</div>
+    <div class="q-text">In Joshua 1, God repeats "be strong and courageous" four times across the chapter — sometimes from God himself, and sometimes from the people speaking to Joshua. Identify WHO says it each time (God or the people) and explain what each instance reveals about the importance of encouragement in leadership. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Identify the speakers across the four instances:&#10;&#10;What this reveals about encouragement in leadership:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">God speaks the command directly to Joshua in verses 6, 7, and 9 — each time connecting the courage to a specific reason (verse 6: because Joshua will lead Israel to inherit the land; verse 7: connected to obedience to the Law; verse 9: connected to God's presence "wherever you go"). In verse 18, the people themselves repeat a similar charge back to Joshua, pledging their obedience and adding "only be strong and courageous." This reveals that encouragement in leadership is not a one-directional thing flowing only from a higher authority downward — it also comes FROM the community a leader serves. Joshua needed reassurance both from God's direct word and from the people's collective support. This models healthy leadership dynamics: even a leader appointed by God still benefits from, and perhaps needs, encouragement from those they lead, not just from above.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">2</div>
+    <div class="q-text">Joshua 1:8 commands Joshua to keep the "Book of the Law" always on his lips, to meditate on it day and night, and to be careful to obey everything in it — and THEN promises that he will be "prosperous and successful." Explain the relationship this verse describes between knowing/obeying God's word and experiencing success. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="What Joshua 1:8 commands regarding the Law:&#10;&#10;The relationship between knowing/obeying the word and prosperity/success:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Joshua 1:8 commands continuous engagement with God's word — not occasional reading, but constant meditation ("day and night") and careful, active obedience to "everything written in it." The promise of prosperity and success is directly connected to this practice — not as a magic formula, but because consistent attention to God's instruction shapes wise decision-making in every situation Joshua would face leading Israel. The verse suggests that success in Joshua's mission was never separate from his relationship with God's word; the two were bound together. This is not a promise that simply reading scripture guarantees worldly wealth — rather, it teaches that ongoing obedience and engagement with God's revealed guidance is the actual PATH to the kind of success God defines, which for Joshua meant faithfully leading Israel into and through the conquest of Canaan according to God's purposes.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">3</div>
+    <div class="q-text">Before the conquest of Jericho, Joshua encounters a mysterious figure described as "commander of the army of the LORD" (Joshua 5:13-15), and Joshua is told to remove his sandals because the ground is holy. What does this encounter suggest about whose army is REALLY leading the conquest of Canaan? <span class="marks">3 marks</span></div>
+    <textarea class="q-input" placeholder="Description of the encounter:&#10;&#10;What it suggests about who is really leading:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">When Joshua asks the figure "are you for us or for our enemies?", the answer is neither — the commander says simply "neither... but as commander of the army of the LORD I have now come." This pointedly refuses to frame the situation as God taking Israel's "side" in a human conflict; instead, it reframes the entire conquest as belonging to GOD'S purpose and command, with Israel as participants rather than independent agents pursuing their own military campaign. Joshua removing his sandals (echoing Moses at the burning bush, Exodus 3) signals that this is holy ground and a holy encounter — reinforcing that the true commander of this campaign is God himself, not Joshua. This sets the tone for everything that follows at Jericho: Israel's role is to obey precise instructions, not to strategise independently, because ultimate command belongs to God.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Deeper thinking about themes and theological meaning.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🔍 Themes Examined</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">4</div>
+    <div class="q-text">Rahab, a woman living in Jericho, hid the Israelite spies and helped them escape before the city's destruction (Joshua 2), and she and her family were spared when Jericho fell (Joshua 6:22-25). Explain why her inclusion in the story is theologically significant, given that she was a Canaanite — someone OUTSIDE Israel. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Summary of Rahab's role in the story:&#10;&#10;Why her inclusion is theologically significant (consider that she was an outsider to Israel):"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Rahab hid the two Israelite spies sent to scout Jericho, helping them escape capture, in exchange for a promise that she and her family would be spared when Israel attacked. When Jericho's walls fell and the city was destroyed, Rahab and her family were the only people from the city spared (Joshua 6:22-25). <strong>Theological significance:</strong> Rahab was not an Israelite — she was a Canaanite, technically one of the very people Israel was conquering, and by the Bible's own account, she worked in a morally questionable profession. Her inclusion and rescue demonstrate that God's mercy was never limited strictly to ethnic Israel; faith and right action could bring someone from OUTSIDE the covenant community into protection and even, according to later genealogies (Matthew 1:5), into the lineage that eventually leads to Jesus himself. This anticipates a recurring biblical theme: God's purposes, while worked out through Israel specifically, were never intended to exclude those outside Israel who responded with faith — Rahab's story is an early sign that the blessing promised to Abraham was ultimately meant to extend to "all peoples on earth" (Genesis 12:3), not Israel alone.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">5</div>
+    <div class="q-text">During the conquest, one Israelite named Achan disobeys God's instructions by secretly keeping plunder from Jericho that was meant to be devoted to God, and this disobedience causes Israel to suffer defeat in their next battle, at Ai (Joshua 7). What does this episode teach about the relationship between individual obedience and the wellbeing of the whole community? <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Summary of what happened with Achan:&#10;&#10;What this teaches about individual obedience and community wellbeing:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Achan secretly took forbidden plunder from Jericho — items that were supposed to be devoted entirely to God, not kept for personal gain. This single act of disobedience, hidden from everyone else, resulted in Israel's defeat at the next battle (Ai), with soldiers killed and the nation's confidence shaken — until Achan's sin was uncovered and dealt with. <strong>What this teaches:</strong> The story presents a striking and uncomfortable idea — that one person's hidden disobedience could affect the whole community's outcomes, not just the individual who sinned. This reflects an ancient understanding of corporate identity: Israel was bound together as a single covenant community, and Achan's secret sin was treated as a breach of the whole community's faithfulness to God, not merely a private matter. While modern readers may find this idea of "corporate responsibility" challenging compared to more individualistic modern thinking, the episode underscores a serious biblical principle: actions are rarely purely private in their consequences, particularly within a covenant community bound together by shared obedience and shared identity. It reinforces a theme already present in Jericho's victory — that obedience to God's specific instructions, even in matters that might seem small or easily concealed, mattered enormously to the outcome of the whole community's mission.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">6</div>
+    <div class="q-text">Compare the way faith is tested for Joshua (entering a land already promised) with the way it was tested for Abraham (Week 5, leaving for an unknown land). Which do you think requires MORE courage, and why? There is no single correct answer — argue your position with evidence. <span class="marks">4 marks</span></div>
+    <textarea class="q-input wide" placeholder="Your position: ___&#10;&#10;Your argument with evidence from both stories:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Either position can be well-argued. Example argument for Abraham requiring more courage:</strong> Abraham's faith involved stepping into total uncertainty — leaving his home, family, and the only life he knew, for a destination he was not even told in advance ("the land I will show you," Genesis 12:1). There was no map, no specific promise of WHEN the land would be reached, and Abraham would die without ever owning more than a small burial plot in it (Genesis 23). This requires a particular kind of courage: trusting a promise that might not be fulfilled within his own lifetime, with no clear plan. <strong>Example argument for Joshua requiring more courage:</strong> While Joshua's promise was clearer — a specific land, already identified — he faced the practical terror of actually executing a military conquest: walled cities, armed enemies, real physical danger of death in battle for himself and the entire nation he was responsible for leading. Abraham's courage was the courage of uncertainty and waiting; Joshua's courage was the courage of action and execution under direct physical danger, with the lives of an entire nation depending on his leadership decisions. Both forms of courage are valid and different — the strength of an answer depends on clear reasoning and specific evidence from each story, not which conclusion is reached.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended essay. Write with theological precision and clear structure.</span></div>
+<div class="card" style="--accent:#6D28D9;">
+  <div class="slabel" style="background:rgba(109,40,217,0.2);color:#A78BFA;">🏆 Extended Essay</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#6D28D9;">7</div>
+    <div class="q-text">"Joshua's story shows that God's promises are received through ACTIVE obedience, not passive waiting." Write a full response (minimum 10 sentences) evaluating this claim, using at least FOUR specific events from Joshua 1-6 as evidence. Include a clear conclusion. <span class="marks">15 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:280px;" placeholder="Write your full response here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Clear position stated. At least 4 specific events used as evidence (the commissioning of Joshua, the Jordan crossing, the encounter with the commander of the LORD's army, the march around Jericho — and optionally Rahab or Achan). Theological precision regarding promise, presence, and obedience. Counter-perspective considered (e.g. that the promise itself was a gift, not earned by obedience — obedience was the response to grace, not its cause). Meaningful conclusion. <strong>What a strong response argues:</strong> Throughout Joshua 1-6, the promise of the land is consistently paired with required ACTION — the priests had to physically step into the flooded Jordan before it stopped; Israel had to actually cross before the stones could be set up as a memorial; the army had to march the full seven days around Jericho exactly as instructed for the walls to fall. In no case does the promise simply happen automatically while Israel waits passively — each fulfilment requires specific, often risky, obedience first. However, a nuanced response should note that this is not a transactional "earn your blessing through good behaviour" framework: the promise itself was already given by God (the land had already been promised to Abraham centuries earlier) — Israel's obedience was the means of RECEIVING what had already been freely promised, not the means of EARNING the promise in the first place. This distinguishes active obedience-as-reception from a more transactional reading where obedience causes or earns God's favour. The strongest essays will hold both ideas together: God's promise was prior and gracious, but its fulfilment in Joshua's generation required real, costly, active obedience rather than passive waiting.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(109,40,217,0.4);">
+  <div><div class="score-label">Total Score — Bible Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(109,40,217,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ ENGLISH DAY 2 ═══ -->
+<div id="pg-english" class="page">
+<style>.pg-english-a{--accent:#BE123C;}</style>
+<div class="pg-english-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D0012,#8B0026);">
+  <div class="hero-icon">🎧</div>
+  <div class="hero-eyebrow" style="color:#FCA5A5;">✏️ English · Week 9 · Day 2</div>
+  <div class="hero-title">Active Listening &<br>Question Crafting</div>
+  <div class="hero-subtitle">Evaluating presentations · Crafting good questions · Peer feedback skills</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Practice</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Identifying strong vs weak listening and questioning.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">📚 Identifying Good Listening & Questions</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> Not all questions are equally useful. A "closed" question can be answered with one word (yes/no, or a single fact). An "open" question requires the speaker to explain or elaborate. Open questions usually show deeper active listening because they require genuinely understanding what was said well enough to ask something meaningful.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">1</div>
+    <div class="q-text">Sort these questions into CLOSED (one-word/fact answer) or OPEN (requires explanation): <span class="marks">6 marks</span><br><br>a) "Did Joshua lead Israel into Canaan?"<br>b) "Why do you think God chose such an unusual method to capture Jericho instead of a normal battle?"<br>c) "How many times is 'be strong and courageous' repeated in Joshua 1?"<br>d) "What connections do you see between Joshua's story and what we learned about Moses?"<br>e) "Was Rahab an Israelite?"<br>f) "How might this story apply to a difficult situation in someone's life today?"</div>
+    <textarea class="q-input wide" placeholder="CLOSED questions: &#10;&#10;OPEN questions: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>CLOSED:</strong> a) "Did Joshua lead Israel into Canaan?" (yes/no). c) "How many times is 'be strong and courageous' repeated?" (a specific number — four). e) "Was Rahab an Israelite?" (yes/no — no, she was Canaanite). <strong>OPEN:</strong> b) "Why... unusual method..." requires reasoning and explanation. d) "What connections..." requires comparison and synthesis. f) "How might this apply today..." requires personal reflection and explanation. Open questions show deeper engagement because they cannot be answered by simply recalling a fact — they require understanding and connecting ideas.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">2</div>
+    <div class="q-text">Read this short presentation transcript and identify TWO moments where the speaker did something well, and TWO things that could be improved: <span class="marks">8 marks</span><br><br><em>"So, um, today I want to talk about, like, medieval castles I guess. So castles had walls, right, and also there was this thing called a moat which is basically just water around the castle. And um there's also a keep which is like the main tower bit. So yeah castles were pretty cool and had lots of defence stuff."</em></td></tr></table></div>
+    <textarea class="q-input wide" placeholder="What the speaker did WELL (2 things):&#10;1. &#10;2. &#10;&#10;What could be IMPROVED (2 things):&#10;1. &#10;2. "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>What the speaker did well:</strong> 1. They identified relevant, correct content — walls, moat, and keep are all genuine castle defensive features mentioned in the lesson. 2. They attempted to explain each term briefly rather than just listing words (e.g. explaining the moat is "water around the castle"). <strong>What could be improved:</strong> 1. Excessive filler words ("um," "like," "right," "I guess") make the speaker sound unprepared and undermine confidence — these should be reduced through practice and replaced with brief silent pauses. 2. The structure lacks clear signposting (no "first," "second," "finally") and the vocabulary is too informal/vague for a presentation ("pretty cool," "lots of defence stuff" instead of specific, precise descriptions of HOW each feature provided defence).</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Crafting and practising feedback and questions.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🔍 Crafting Feedback & Questions</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">3</div>
+    <div class="q-text">Imagine you have just listened to a classmate's 3-minute presentation on "Elements and Compounds." Write structured feedback using this format: ONE specific thing they did well (with a reason why it worked), ONE specific suggestion for improvement (with a reason why it would help), and TWO open questions you would ask. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="What they did well + why it worked:&#10;&#10;Suggestion for improvement + why it would help:&#10;&#10;Open question 1:&#10;Open question 2:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Specific (not vague) positive feedback with a clear reason (2). Specific, constructive improvement suggestion with a clear reason — not just "be better" but something actionable (2). Two genuinely open questions requiring explanation, not yes/no answers (4). <strong>Example strong feedback:</strong> "You explained the difference between sodium alone and sodium chloride really clearly — using a real-life example like table salt made an abstract chemistry idea easy to picture. One suggestion: try using more signposting language like 'my second point is...' because at one point I lost track of whether you'd moved from elements to compounds. Question 1: Why do you think scientists chose to organise the periodic table by electron structure rather than, say, alphabetically? Question 2: How does understanding compounds help us understand the safety (or danger) of substances we use in everyday life?"</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">4</div>
+    <div class="q-text">Write a short paragraph (4-5 sentences) explaining why giving SPECIFIC feedback ("your second point needed an example") is more useful than GENERAL feedback ("good job" or "needs work"). Use the idea of active listening in your explanation. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Write your paragraph here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Example paragraph:</strong> Specific feedback is far more useful than general feedback because it gives the speaker something concrete they can actually change next time. Saying "good job" tells a presenter nothing about WHAT was good or HOW to repeat that success, while saying "your example about sodium chloride was clear and memorable" identifies exactly what worked. Similarly, "needs work" provides no direction, but "your closing felt rushed — try slowing down and adding a final memorable sentence" gives an actionable next step. Giving specific feedback also demonstrates genuine active listening, because it requires the listener to have actually processed and remembered the content in detail rather than simply forming a vague overall impression. In this way, specific feedback benefits both the speaker (clear improvement direction) and proves that the listener was truly engaged, not just present.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Full presentation script and self-evaluation.</span></div>
+<div class="card" style="--accent:#BE123C;">
+  <div class="slabel" style="background:rgba(190,18,60,0.2);color:#FCA5A5;">🏆 Presentation Script & Self-Evaluation</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#BE123C;">5</div>
+    <div class="q-text">Write a complete 3-minute presentation script on this title: <span class="marks">15 marks</span><br><br><strong>"How the feudal system organised medieval society"</strong><br><br>Your script must include: a strong opening (hook + purpose + signpost of THREE points), three clearly developed main points with specific detail from this week's History lesson, and a strong closing. After writing your script, write a SELF-EVALUATION (5+ sentences): What did you do well in this script? What would you focus on improving if you delivered it aloud?</div>
+    <textarea class="q-input xwide" style="min-height:300px;" placeholder="OPENING:&#10;&#10;MAIN POINT 1:&#10;&#10;MAIN POINT 2:&#10;&#10;MAIN POINT 3:&#10;&#10;CLOSING:&#10;&#10;SELF-EVALUATION:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Marking Guidance <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Award marks for:</strong> Opening (3): hook + purpose + 3-point signpost. Main point 1 (2): clear signpost + accurate, specific detail (e.g. the four levels of the feudal pyramid). Main point 2 (2): clear signpost + accurate detail (e.g. knights and the obligation of military service). Main point 3 (2): clear signpost + accurate detail (e.g. the role of serfs, or the Church's power). Closing (2): summary + strong final thought. Self-evaluation (4): genuine, specific reflection identifying real strengths and real areas for improvement — not vague statements like "it was good." <strong>Strong self-evaluations</strong> identify specific things like: "I used good signposting in my second point but my closing repeated information almost word-for-word from my opening rather than summarising in new words" or "I included accurate historical detail but my hook could have been more engaging — I should have opened with a question rather than a statement."</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(190,18,60,0.4);">
+  <div><div class="score-label">Total Score — English Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(190,18,60,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ MATHS DAY 2 ═══ -->
+<div id="pg-maths" class="page">
+<style>.pg-maths-a{--accent:#B45309;}</style>
+<div class="pg-maths-a">
+<div class="hero" style="background:linear-gradient(135deg,#3D1A00,#7C3500);">
+  <div class="hero-icon">🔢</div>
+  <div class="hero-eyebrow" style="color:#FCD34D;">🧮 Maths · Week 9 · Day 2</div>
+  <div class="hero-title">Equations —<br>Harder Problems</div>
+  <div class="hero-subtitle">Equations with negative numbers · Word problems · Geometry connections</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Harder Problems</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Speed round. Solve one-step equations, including those with negative answers.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">📚 Speed Round — Including Negative Numbers</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">1</div>
+    <div class="q-text">Solve each equation. Some answers will be negative — take care with your signs. <span class="marks">8 marks</span><br>a) x+12=8 &nbsp; b) y−3=−9 &nbsp; c) 4x=−20 &nbsp; d) n÷5=−6 &nbsp; e) x+20=15 &nbsp; f) 7y=−42 &nbsp; g) m−10=−4 &nbsp; h) p÷3=−8</div>
+    <textarea class="q-input wide" placeholder="a) b) c) d) e) f) g) h) "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">a) x=8−12=<strong>−4</strong> &nbsp; b) y=−9+3=<strong>−6</strong> &nbsp; c) x=−20÷4=<strong>−5</strong> &nbsp; d) n=−6×5=<strong>−30</strong> &nbsp; e) x=15−20=<strong>−5</strong> &nbsp; f) y=−42÷7=<strong>−6</strong> &nbsp; g) m=−4+10=<strong>6</strong> &nbsp; h) p=−8×3=<strong>−24</strong></div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Equations connected to geometry and real-world contexts.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🔍 Equations in Geometry & Real Life</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">2</div>
+    <div class="q-text">A triangle has three angles that add up to 180°. Two angles are known: 65° and 72°. The third angle is unknown, x. (a) Write an equation. (b) Solve for x. (c) Check your answer by adding all three angles. <span class="marks">5 marks</span></div>
+    <textarea class="q-input" placeholder="(a) Equation: &#10;(b) x = ___&#10;(c) Check: ___ + ___ + ___ = 180"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) 65+72+x=180, or 137+x=180. (b) x=180−137=<strong>43°</strong>. (c) Check: 65+72+43=<strong>180 ✓</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">3</div>
+    <div class="q-text">A medieval knight's armour weighed 25 kg. His total equipment (armour plus weapons) weighed 38 kg. (a) Write an equation to find the weight of his weapons, w. (b) Solve it.<br><br>A castle's outer wall was 4 times taller than its inner wall. The outer wall was 24 metres tall. (c) Write an equation to find the height of the inner wall, h. (d) Solve it. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Equation: &#10;(b) w = ___&#10;&#10;(c) Equation: &#10;(d) h = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) 25+w=38. (b) w=38−25=<strong>13 kg</strong>. (c) 4h=24. (d) h=24÷4=<strong>6 metres</strong>.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">4</div>
+    <div class="q-text">Israel's twelve tribal stones (Joshua 4) were divided equally among the twelve tribes for the memorial, but in reality the lesson says ONE stone was taken per tribe. Imagine instead a different memorial where the TOTAL number of stones collected was 84, divided equally among the same number of groups. Write and solve an equation to find how many stones each group received, if there were 12 groups. <span class="marks">4 marks</span></div>
+    <textarea class="q-input" placeholder="Let s = stones per group.&#10;Equation: &#10;Solution:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Let s = stones per group. Equation: 12s = 84. Solution: s = 84 ÷ 12 = <strong>7 stones per group</strong>.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Multi-step problems and reasoning about equations.</span></div>
+<div class="card" style="--accent:#B45309;">
+  <div class="slabel" style="background:rgba(180,83,9,0.2);color:#FCD34D;">🏆 Multi-Step Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">5</div>
+    <div class="q-text">A student says: "x + 5 = 5 + x, so this proves that x must equal 0." Evaluate this claim. Is the student's reasoning correct? Explain clearly, using the idea of an equation versus an identity. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Is the student correct? ___&#10;&#10;Explanation:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The student's reasoning is <strong>incorrect</strong>. The statement "x+5=5+x" is NOT a normal equation that we solve for a specific unknown value — it is an IDENTITY, meaning it is true for EVERY value of x, not just one. This is because addition is commutative (the order of adding two numbers does not change the result): x+5 will always equal 5+x no matter what number x represents. If you tried to "solve" it the normal way (subtracting x from both sides), you would get 5=5 — which is always true but tells you nothing about the specific value of x. This is different from a true one-step equation like "x+5=12," which IS only true for one specific value of x (x=7). The key distinction: an equation that simplifies to a TRUE statement with no variable remaining (like 5=5) is an identity true for all values; an equation that gives you a specific numerical value for the variable is a genuine equation with one solution.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#B45309;">6</div>
+    <div class="q-text">Three friends are building model castles. Combined, their three castles use 156 toy bricks. The second castle uses exactly twice as many bricks as the first. The third castle uses 12 more bricks than the first. (a) Let the first castle's bricks = b. Write expressions for the second and third castles in terms of b. (b) Write an equation for the total. (c) Solve for b. (d) Find the number of bricks in each castle. <span class="marks">8 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) First castle = b. Second castle = ___. Third castle = ___.&#10;(b) Equation: &#10;(c) Solve for b: &#10;(d) First = ___ Second = ___ Third = ___"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) First castle = b. Second castle = <strong>2b</strong>. Third castle = <strong>b+12</strong>. (b) Equation: b + 2b + (b+12) = 156, which simplifies to 4b+12=156. (c) 4b=156−12=144. b=144÷4=<strong>36</strong>. (d) First castle = <strong>36 bricks</strong>. Second castle = 2(36) = <strong>72 bricks</strong>. Third castle = 36+12 = <strong>48 bricks</strong>. Check: 36+72+48=156 ✓.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(180,83,9,0.4);">
+  <div><div class="score-label">Total Score — Maths Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(180,83,9,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ SCIENCE DAY 2 ═══ -->
+<div id="pg-science" class="page">
+<style>.pg-science-a{--accent:#065F46;}</style>
+<div class="pg-science-a">
+<div class="hero" style="background:linear-gradient(135deg,#011F14,#054530);">
+  <div class="hero-icon">🧬</div>
+  <div class="hero-eyebrow" style="color:#6EE7B7;">🔬 Science · Week 9 · Day 2</div>
+  <div class="hero-title">The Periodic Table —<br>Patterns & Prediction</div>
+  <div class="hero-subtitle">Groups in depth · Reactivity patterns · Using the table to predict properties</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Groups, periods, and reactivity recall.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">📚 Groups, Periods & Reactivity</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> "Reactivity" means how easily and how strongly an element reacts (combines chemically) with other substances. Group 1 metals are HIGHLY reactive — they react violently even with water. Group 0 (noble gases) are almost UNREACTIVE — they barely react with anything at all. Reactivity changes in predictable patterns as you move through the periodic table.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">1</div>
+    <div class="q-text">Describe the key properties of THREE named groups: Group 1 (Alkali Metals), Group 7 (Halogens), and Group 0/8 (Noble Gases). For each: name two specific elements in the group and describe their reactivity. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Group 1 (Alkali Metals):&#10;Two elements: &#10;Reactivity description: &#10;&#10;Group 7 (Halogens):&#10;Two elements: &#10;Reactivity description: &#10;&#10;Group 0/8 (Noble Gases):&#10;Two elements: &#10;Reactivity description: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Group 1 (Alkali Metals):</strong> Elements include lithium (Li), sodium (Na), potassium (K). These are HIGHLY reactive soft metals — they react violently with water, sometimes catching fire, and must be stored in oil to prevent reaction with air or moisture. Reactivity INCREASES as you move down the group (potassium is more reactive than sodium, which is more reactive than lithium). <strong>Group 7 (Halogens):</strong> Elements include fluorine (F), chlorine (Cl). These are reactive non-metals, often used as disinfectants (chlorine in swimming pools and tap water) because their reactivity allows them to kill bacteria. Reactivity DECREASES as you move down this group (fluorine is more reactive than chlorine). <strong>Group 0/8 (Noble Gases):</strong> Elements include helium (He), neon (Ne), argon (Ar). These are almost completely UNREACTIVE — their outer electron shell is already full, so they have little tendency to react with other elements. This is why helium is safe to use in party balloons (it won't explode or react) and neon is used in lighting without reacting with its glass casing.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Prediction and application using periodic table patterns.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🔍 Prediction & Application</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">2</div>
+    <div class="q-text">A scientist discovers a new element. They determine it is in Group 1 and in the period directly below potassium. <br><br>(a) Predict THREE properties this new element is likely to have, based on its group.<br>(b) Predict whether it will be MORE or LESS reactive than potassium, and explain your reasoning using the pattern in Group 1.<br>(c) Would you expect this new element to be a metal or a non-metal? Explain how you know. <span class="marks">7 marks</span></div>
+    <textarea class="q-input wide" placeholder="(a) Three predicted properties:&#10;1. &#10;2. &#10;3. &#10;&#10;(b) More or less reactive than potassium? Reasoning:&#10;&#10;(c) Metal or non-metal? How you know:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">(a) <strong>Three predicted properties:</strong> 1. It will be a soft, shiny metal (like other Group 1 metals). 2. It will react violently with water, likely producing hydrogen gas and possibly catching fire (like sodium and potassium). 3. It will have low density compared to most metals — Group 1 metals are notably less dense than typical metals like iron. (b) The new element will be <strong>MORE reactive</strong> than potassium. This is because reactivity INCREASES as you move down Group 1 — each element further down has its outer electron held more loosely (further from the nucleus), making it easier to lose in a reaction. Since this element is directly below potassium, it should be even more reactive. (c) It would be expected to be a <strong>metal</strong>, because ALL elements in Group 1 are metals (the alkali metals) — knowing the group alone allows a confident prediction about this fundamental classification, even before any testing.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">3</div>
+    <div class="q-text">Explain why scientists find the periodic table so useful for PREDICTING the properties of elements they have not yet fully tested, using the historical example of Dmitri Mendeleev (who first organised the modern periodic table and successfully predicted undiscovered elements). <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="Why the periodic table is useful for prediction:&#10;&#10;Mendeleev example:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The periodic table organises elements by genuine, underlying patterns in atomic structure — specifically the number and arrangement of electrons. Because elements in the same group reliably share similar chemical behaviour, and because properties change in predictable trends across periods, scientists can make confident predictions about an element's properties based purely on its POSITION in the table, even without testing every property directly. <strong>Mendeleev's example:</strong> When Dmitri Mendeleev created his version of the periodic table in 1869, he deliberately left GAPS in places where no known element fit the expected pattern — rather than assuming his table was simply incomplete or wrong, he predicted that undiscovered elements would eventually be found to fill those gaps, and he even predicted their approximate properties (such as density, reactivity, and atomic mass) based on the pattern of the elements around the gap. Several of these predicted elements — including gallium and germanium — were later discovered, and their actual properties closely matched Mendeleev's predictions made years earlier. This was a powerful demonstration that the periodic table reflects a real, deep pattern in nature, not just a convenient way of sorting facts — which is why it remains one of the most important organising tools in all of science.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended scientific reasoning about compounds and reactivity.</span></div>
+<div class="card" style="--accent:#065F46;">
+  <div class="slabel" style="background:rgba(6,95,70,0.2);color:#6EE7B7;">🏆 Extended Scientific Reasoning</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#065F46;">4</div>
+    <div class="q-text">"Reactivity patterns in the periodic table show that elements 'want' to achieve a stable, full outer electron shell — and this single idea explains why some elements form compounds easily, while noble gases almost never do." Evaluate this statement. In your answer, explain what a "full outer shell" means, why Group 1 metals readily lose an electron to form compounds, why Group 7 elements readily gain an electron, and why noble gases rarely react. Write at least 8 sentences. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" style="min-height:220px;" placeholder="Write your evaluation here:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">This statement captures a genuinely powerful and accurate principle in chemistry, sometimes informally summarised as atoms seeking a stable "full outer shell" of electrons. A "full outer shell" refers to the maximum number of electrons an atom's outermost energy level can hold (often 8, following the "octet rule" for most common elements) — when this outer shell is full, the atom is in its most stable, lowest-energy, least-reactive state. Group 1 metals (lithium, sodium, potassium) have just ONE electron in their outer shell — far easier to lose entirely than to gain seven more electrons to fill the shell. This is why Group 1 metals react by readily LOSING their single outer electron, forming a positively charged ion with a now-full outer shell underneath — explaining their high reactivity, especially with water and oxygen, as they "seek" this more stable arrangement. Group 7 elements (the halogens, like chlorine and fluorine) have SEVEN electrons in their outer shell — just one electron short of being full. This makes it far easier for them to GAIN one electron than to lose seven, so halogens react by attracting and capturing an extra electron, forming a negatively charged ion with a complete outer shell. This explains why sodium (loses one electron) and chlorine (gains one electron) react so readily together — sodium's lost electron is exactly what chlorine needs, forming the stable compound sodium chloride. Noble gases (helium, neon, argon), by contrast, ALREADY have a full outer shell naturally — they have no "incentive" to lose, gain, or share electrons with other atoms, which is precisely why they are so unreactive and rarely form compounds at all. This single underlying principle — atoms moving toward the stability of a full outer electron shell — therefore elegantly explains the reactivity patterns across the entire periodic table, from the violent reactivity of Group 1 metals to the near-total inertness of the noble gases.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(6,95,70,0.4);">
+  <div><div class="score-label">Total Score — Science Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(6,95,70,0.4);"></div>
+</div>
+</div></div>
+
+<!-- ═══ HISTORY DAY 2 ═══ -->
+<div id="pg-history" class="page">
+<style>.pg-history-a{--accent:#1E3A8A;}</style>
+<div class="pg-history-a">
+<div class="hero" style="background:linear-gradient(135deg,#0F1F5C,#1E3A8A);">
+  <div class="hero-icon">⚔️</div>
+  <div class="hero-eyebrow" style="color:#93C5FD;">🏛️ History/Geography · Week 9 · Day 2</div>
+  <div class="hero-title">Knights, Castles &<br>Medieval Warfare</div>
+  <div class="hero-subtitle">Chivalry in depth · Castle design and siege warfare · The Church's wider influence</div>
+  <div class="hero-tags"><span class="hero-tag">Day 2</span><span class="hero-tag">Deeper Analysis</span><span class="hero-tag">KS3 Level 6</span></div>
+</div>
+<div class="name-row">
+  <div class="name-field"><label>Student Name</label><input type="text" placeholder="Write your name here"></div>
+  <div class="name-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  <div class="name-field"><label>Teacher Score</label><input type="text" placeholder="   / 34"></div>
+</div>
+
+<div class="diff-banner easy"><span class="diff-label">🟢 Easy</span><span class="diff-desc">Section A — Knight training and castle defence recall.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">📚 Knight Training & Castle Defence</div>
+  <div class="esl-tip">💡 <strong>ESL Tip:</strong> The path to becoming a knight had three stages: <strong>page</strong> (servant-in-training, around age 7), <strong>squire</strong> (assistant to a knight, around age 14), and <strong>knight</strong> (fully trained, around age 21). Each word marks a different stage of YEARS of preparation — knighthood was never instant.</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">1</div>
+    <div class="q-text">Describe the three stages of knight training (page, squire, knight), including the approximate age and what was learned at each stage. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Page (age ~7):&#10;What was learned/done:&#10;&#10;Squire (age ~14):&#10;What was learned/done:&#10;&#10;Knight (age ~21):&#10;What was achieved:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Page (around age 7):</strong> A boy of noble birth was sent to serve in another lord's household, learning basic manners, religious education, and beginning physical training. <strong>Squire (around age 14):</strong> The page became a squire, directly assisting a knight — caring for his horse and armour, learning to fight with weapons, and accompanying the knight into actual battle to gain experience. <strong>Knight (around age 21):</strong> After years of training and proven skill, the squire could be formally knighted — often in a ceremony involving a blessing and being struck on the shoulder with a sword (the "accolade") — becoming a full knight able to serve a lord independently.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">2</div>
+    <div class="q-text">List FIVE defensive features of a medieval castle and explain how EACH ONE specifically worked to protect the people inside. <span class="marks">10 marks</span></div>
+    <textarea class="q-input xwide" placeholder="1. Feature: ___ How it worked: &#10;2. Feature: ___ How it worked: &#10;3. Feature: ___ How it worked: &#10;4. Feature: ___ How it worked: &#10;5. Feature: ___ How it worked: "></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">1. <strong>Thick stone walls</strong> — resisted damage from catapults, battering rams, and other siege weapons, providing a strong physical barrier attackers had to break through. 2. <strong>Moat</strong> — a deep, water-filled ditch surrounding the castle that made it extremely difficult for attackers to reach the walls directly or dig tunnels underneath to undermine them. 3. <strong>Drawbridge</strong> — could be raised on chains to completely cut off the only land access route during an attack, isolating the castle. 4. <strong>Keep (central tower)</strong> — the strongest, most heavily fortified part of the castle, serving as a last refuge if the outer defences were breached, often with its own separate food and water supply. 5. <strong>Battlements (crenellations)</strong> — the notched pattern along castle rooftops, allowing defenders to shoot arrows or drop objects on attackers while ducking behind the raised sections for protection.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section B</span></div>
+<div class="diff-banner medium"><span class="diff-label">🟡 Medium</span><span class="diff-desc">Section B — Chivalry, siege warfare, and the Church's broader role.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🔍 Chivalry, Siege & the Church</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">3</div>
+    <div class="q-text">The "code of chivalry" described bravery, loyalty, courtesy, and protection of the weak as the ideals of knighthood. The lesson notes that "in reality, behaviour varied widely." Explain why there might be a gap between an IDEAL code of conduct and the ACTUAL behaviour of people who claim to follow it. <span class="marks">5 marks</span></div>
+    <textarea class="q-input wide" placeholder="What chivalry idealised:&#10;&#10;Why there might be a gap between the ideal and actual behaviour:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">Chivalry idealised bravery in battle, unwavering loyalty to one's lord, courteous behaviour, and the protection of those who could not protect themselves — particularly women, children, and the poor. However, knights were still human beings with the same capacity for greed, cruelty, fear, and self-interest as anyone else, and the violent, lawless conditions of medieval warfare often created enormous pressure and opportunity to abandon these ideals. There was also limited accountability — a knight far from his own lord's direct oversight, fighting in a chaotic battle or siege, might face little realistic consequence for breaking the code, especially against people from a different region or faith. This pattern — an inspiring ideal that real human behaviour frequently fails to live up to — is common across history and cultures, and it is an important critical thinking skill to distinguish between how a society DESCRIBED its own values and how people actually BEHAVED in practice. Historical sources praising chivalrous knights often came from poets and storytellers who had reasons (entertainment, propaganda, idealisation of a patron) to present an attractive picture rather than an accurate one.</div>
+  </div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">4</div>
+    <div class="q-text">A siege is a long, drawn-out military strategy of surrounding a castle or city to force surrender, rather than attacking directly. Explain TWO different tactics besiegers might use to try to force a castle to surrender WITHOUT directly attacking the walls, and explain why a long siege was often more effective than a direct assault. <span class="marks">6 marks</span></div>
+    <textarea class="q-input wide" placeholder="Tactic 1:&#10;Tactic 2:&#10;&#10;Why a long siege was often more effective than direct assault:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body"><strong>Tactic 1 — Cutting off supplies (blockade):</strong> Surrounding the castle to prevent food, water, or reinforcements from reaching the defenders. Over weeks or months, hunger and disease inside the castle could force surrender without a single direct attack, since the defenders had a strictly limited food supply that could not last indefinitely. <strong>Tactic 2 — Undermining (sapping):</strong> Digging tunnels beneath castle walls to weaken the foundations, sometimes setting fires inside the tunnel to collapse the wall above — this attacked the structural weakness of walls rather than trying to overcome their strength directly. <strong>Why long sieges were often more effective:</strong> Direct assaults on heavily fortified, well-defended walls were extremely costly in soldiers' lives — attackers were exposed to arrows, boiling liquids, and dropped objects while climbing or breaking through. A siege, by contrast, exploited the castle's main weakness: its limited internal resources. Time itself became the besieger's weapon — every additional day the siege continued, the defenders' food, water, and morale dwindled, often eventually forcing surrender with far fewer casualties for the attacking army than a direct assault would have cost.</div>
+  </div>
+</div>
+
+<div class="section-divider"><span class="section-divider-label">Section C</span></div>
+<div class="diff-banner hard"><span class="diff-label">🔴 Hard</span><span class="diff-desc">Section C — Extended analysis connecting Church power and feudal society.</span></div>
+<div class="card" style="--accent:#1E3A8A;">
+  <div class="slabel" style="background:rgba(30,58,138,0.2);color:#93C5FD;">🏆 Extended Analysis</div>
+  <div class="q-block">
+    <div class="q-num" style="background:#1E3A8A;">5</div>
+    <div class="q-text">Some historians describe the medieval Church as functioning almost like a "parallel feudal lord" — owning land, collecting payments (tithes), and demanding loyalty, similar to a king or noble. Using evidence from this week's lesson, evaluate the strength of this comparison: in what ways was the Church SIMILAR to a feudal lord, and in what ways was it DIFFERENT? Write at least 7 sentences and reach a clear conclusion. <span class="marks">9 marks</span></div>
+    <textarea class="q-input xwide" placeholder="Ways the Church was SIMILAR to a feudal lord:&#10;&#10;Ways the Church was DIFFERENT:&#10;&#10;Conclusion:"></textarea>
+    <div class="ma-toggle" onclick="toggleMA(this)">💡 Show Model Answer <span class="arrow">▼</span></div>
+    <div class="ma-body">The comparison between the medieval Church and a feudal lord has real strength. Like a lord, the Church owned vast tracts of land — in many regions, more than any single secular noble — and derived enormous wealth and power from this land ownership, exactly as a lord did from his manor. Like a lord collecting rent or labour from serfs, the Church collected tithes — a mandatory tenth of a person's income or produce — from the entire population, regardless of whether individuals could genuinely afford it, functioning as a parallel system of obligatory payment. The Church also demanded loyalty and obedience, much as a lord demanded loyalty from his vassals, framing disobedience to Church teaching as having serious (in this case, eternal spiritual) consequences. However, there are important differences. A feudal lord's power was primarily military and territorial — backed by knights, castles, and the direct threat of force. The Church's power, while it did own land and wealth, was primarily SPIRITUAL and IDEOLOGICAL — its ultimate sanction was not physical violence but excommunication (spiritual exclusion) or the withholding of salvation, a form of power that depended entirely on people genuinely believing in its religious authority. Additionally, the Church operated as a single, centralised, international institution spanning across many separate feudal kingdoms — unlike individual lords whose authority was strictly local and tied to specific territory under a specific king. In conclusion, the comparison to a "parallel feudal lord" captures real and important similarities — particularly in land ownership, taxation, and demanded loyalty — but understates the uniquely spiritual and cross-border nature of Church authority, which gave it a different KIND of power than any individual secular lord possessed, even when it operated similarly in practical economic terms.</div>
+  </div>
+</div>
+<div class="score-area" style="border-color:rgba(30,58,138,0.4);">
+  <div><div class="score-label">Total Score — History/Geography Day 2</div></div>
+  <div style="display:flex;align-items:center;gap:10px;"><span style="color:var(--muted);font-size:0.85rem;">Score:</span><input class="score-input" type="text" placeholder="  / 34" style="border-color:rgba(30,58,138,0.4);"></div>
+</div>
+</div></div>
+
+<script>
+function show(s){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+s).classList.add('active');
+  document.querySelector('[data-s="'+s+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMA(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS3_L6_Week9_Day2');</script>
+</body>
+</html>

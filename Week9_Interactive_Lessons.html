@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 9 · KS2 Level 3 · Interactive Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:12px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh;font-size:15px}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1;min-width:100px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;transition:.13s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab.active{color:var(--white)!important}
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.subject-tabs{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap}
+.stab{padding:9px 18px;border-radius:22px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:var(--white)}
+.page{display:none;padding:14px 18px 50px}
+.page.active{display:block}
+.ws-header{background:linear-gradient(130deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.4px;display:inline-block;margin-bottom:4px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--teal);margin:2px 0}
+.ws-sub{font-size:12px;color:var(--gray);font-weight:600}
+.name-line{border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none;width:130px}
+.section{margin-bottom:18px}
+.sec-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num{background:var(--teal);color:var(--white);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6}
+.l1-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.word-bank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:14px}
+.word-bank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.word-tag{display:inline-block;background:var(--purple);color:var(--white);border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+.circle-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.opt{border:2px solid var(--amber);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);transition:.12s;background:var(--white)}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+.tbl-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.highlight-box{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--rsm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+.remember-box{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--white);text-align:center;margin-top:12px}
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.6}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:10px 0}
+.info-card{border-radius:var(--rsm);padding:12px;text-align:center;border:2px solid}
+.card-icon{font-size:30px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px;line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:2px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.chk.done{background:var(--teal);color:var(--white)}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+@media(max-width:600px){.two-col,.three-col,.four-col{grid-template-columns:1fr}}
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">📚 HOS · KS2 Level 3 · Week 9</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const SUBJECTS=[
+  {id:'eng',  label:'📖 English',   col:'#185FA5',lt:'#E6F1FB'},
+  {id:'maths',label:'🔢 Maths',     col:'#0F6E56',lt:'#E1F5EE'},
+  {id:'sci',  label:'💡 Science',   col:'#C2410C',lt:'#FFF0E6'},
+  {id:'hum',  label:'🌍 Humanities',col:'#534AB7',lt:'#EEEDFE'},
+  {id:'bib',  label:'✝️ Bible',     col:'#B71C1C',lt:'#FFEBEE'},
+];
+
+const WS={
+eng:[
+  {num:1,badge:'Descriptive Writing — Settings',title:'What is Descriptive Writing?',
+   secs:[{t:'Learn the key words',c:'eng_dw_vocab'},{t:'Adjectives vs Adverbs',c:'eng_dw_adj_adv'},{t:'Using your five senses',c:'eng_dw_senses'}]},
+  {num:2,badge:'Descriptive Writing — Settings',title:'Building a Setting Description',
+   secs:[{t:'Weak vs powerful words',c:'eng_dw_words'},{t:'Sentence frames for settings',c:'eng_dw_frames'},{t:'Practise describing a setting',c:'eng_dw_practise'}]},
+  {num:3,badge:'Descriptive Writing — Settings',title:'Write Your Own Setting',
+   secs:[{t:'Plan using your senses',c:'eng_dw_plan'},{t:'Write your full description',c:'eng_dw_write'},{t:'Check and improve',c:'eng_dw_check'}]},
+],
+maths:[
+  {num:1,badge:'Measurement — Length & Perimeter',title:'Units of Length',
+   secs:[{t:'Centimetres and metres',c:'maths_lp_units'},{t:'Converting cm and m',c:'maths_lp_convert'},{t:'Measuring practice',c:'maths_lp_measure'}]},
+  {num:2,badge:'Measurement — Length & Perimeter',title:'What is Perimeter?',
+   secs:[{t:'Understanding perimeter',c:'maths_lp_intro'},{t:'Perimeter of squares and rectangles',c:'maths_lp_shapes'},{t:'Perimeter problems',c:'maths_lp_probs'}]},
+  {num:3,badge:'Measurement — Length & Perimeter',title:'Perimeter Challenges',
+   secs:[{t:'Missing side lengths',c:'maths_lp_missing'},{t:'Real-world word problems',c:'maths_lp_word'},{t:'Mixed challenge',c:'maths_lp_mixed'}]},
+],
+sci:[
+  {num:1,badge:'Light — Sources & Shadows',title:'Where Does Light Come From?',
+   secs:[{t:'Learn the key words',c:'sci_ls_vocab'},{t:'Natural vs artificial light',c:'sci_ls_types'},{t:'Is it a light source?',c:'sci_ls_identify'}]},
+  {num:2,badge:'Light — Sources & Shadows',title:'How Do Shadows Form?',
+   secs:[{t:'Light travels in straight lines',c:'sci_ls_straight'},{t:'Opaque, translucent, transparent',c:'sci_ls_materials'},{t:'True or False?',c:'sci_ls_tf'}]},
+  {num:3,badge:'Light — Sources & Shadows',title:'Shadows Through the Day',
+   secs:[{t:'Why shadows change length',c:'sci_ls_change'},{t:'Sun safety',c:'sci_ls_safety'},{t:'Light and shadows quiz',c:'sci_ls_quiz'}]},
+],
+hum:[
+  {num:1,badge:'Rules, Rights & Responsibilities',title:'Why Do We Have Rules?',
+   secs:[{t:'Learn the key words',c:'hum_rrr_vocab'},{t:'Types of rules',c:'hum_rrr_types'},{t:'True or False?',c:'hum_rrr_tf'}]},
+  {num:2,badge:'Rules, Rights & Responsibilities',title:'Rights & Responsibilities',
+   secs:[{t:'Rights of a child',c:'hum_rrr_rights'},{t:'Rights and responsibilities go together',c:'hum_rrr_together'},{t:'Comprehension questions',c:'hum_rrr_questions'}]},
+  {num:3,badge:'Rules, Rights & Responsibilities',title:'Rules in My Life',
+   secs:[{t:'School rules — why they matter',c:'hum_rrr_school'},{t:'My own rules and responsibilities',c:'hum_rrr_mine'},{t:'Draw and reflect',c:'hum_rrr_draw'}]},
+],
+bib:[
+  {num:1,badge:'Rahab — Courage to Do What is Right',title:'The Story of Rahab',
+   secs:[{t:'Learn the key words',c:'bib_rh_vocab'},{t:'Read the story',c:'bib_rh_story'},{t:'Put the story in order',c:'bib_rh_sequence'}]},
+  {num:2,badge:'Rahab — Courage to Do What is Right',title:'Understanding Rahab\'s Faith',
+   secs:[{t:'Comprehension questions',c:'bib_rh_questions'},{t:'The memory verse',c:'bib_rh_verse'},{t:'True or False?',c:'bib_rh_tf'}]},
+  {num:3,badge:'Rahab — Courage to Do What is Right',title:'Courage in My Life',
+   secs:[{t:'What is courage?',c:'bib_rh_courage'},{t:'Rahab\'s choices — right or wrong?',c:'bib_rh_choices'},{t:'My life application',c:'bib_rh_apply'}]},
+],
+};
+
+function vc(word,meaning,l1,eg,color){
+  color=color||'teal';
+  return `<div class="vocab-card" style="border-left-color:var(--${color})">
+  <div class="vocab-word" style="color:var(--${color})">${word}</div>
+  <div class="vocab-meaning">${meaning}</div>
+  <div class="vocab-l1">🌍 ${l1}</div>
+  <div class="vocab-eg">✏️ e.g. ${eg}</div>
+</div>`;
+}
+
+function C(key){switch(key){
+
+/* ─── ENGLISH ─────────────────────────────────────────── */
+case 'eng_dw_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Setting = منظر (manzar) · Adjective = صفت · Adverb = متعلق فعل. Descriptive writing helps the reader SEE and FEEL a place using words!</div>
+${vc('🏞️ Setting','The place and time where a story happens.','منظر / مشهد','"The ancient forest at midnight is the setting."','blue')}
+${vc('🎨 Adjective','A word that describes a noun.','صفت / صفة','"The dark, shadowy cave dripped with water."','blue')}
+${vc('⚡ Adverb','A word that describes HOW a verb happens. Often ends in -ly.','متعلق فعل / ظرف','"The rain fell softly on the empty street."','blue')}
+${vc('👃 Senses','Sight, sound, smell, touch and taste — use them all!','حواس / حواس','"I used all five senses to describe the market."','blue')}
+<div class="q-block"><div class="q-text">Complete: An adjective describes a <input class="inline-ans" style="width:80px" placeholder="?"/>, while an adverb describes a <input class="inline-ans" style="width:80px" placeholder="?"/>.</div></div>`;
+
+case 'eng_dw_adj_adv': return `
+<div class="tip-box"><strong>Adjectives describe NOUNS. Adverbs describe VERBS.</strong><br/>
+Adjective: The <em>dark</em> cave. &nbsp;|&nbsp; Adverb: She walked <em>quietly</em>.</div>
+${[
+  ['The ___ forest was full of shadows.','gloomy','adjective'],
+  ['The wind blew ___ through the trees.','eerily','adverb'],
+  ['A ___ river twisted through the valley.','silvery','adjective'],
+  ['The leaves rustled ___ in the breeze.','softly','adverb'],
+  ['The ___ market smelled of spices.','bustling','adjective'],
+  ['She tiptoed ___ across the old floorboards.','carefully','adverb'],
+].map(([q,ans,type],i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1} — Add an ${type}:</div>
+<div class="q-text">${q}</div>
+<div class="circle-opts">
+  <div class="opt" onclick="chk(this,'dw${i}','${ans}','${ans}')">${ans}</div>
+  <div class="opt" onclick="chk(this,'dw${i}','wrong','${ans}')">boring</div>
+  <div class="opt" onclick="chk(this,'dw${i}','wrong2','${ans}')">nothing</div>
+</div></div>`).join('')}`;
+
+case 'eng_dw_senses': return `
+<div class="tip-box"><strong>Use your 5 senses to make writing come alive!</strong> Don't just describe what you SEE — also what you hear, smell, feel and even taste.</div>
+<div class="card-grid">
+${[['👀','Sight','What can you see? Colours, shapes, light, movement.'],
+   ['👂','Sound','What can you hear? Loud, quiet, near, far.'],
+   ['👃','Smell','What does it smell like? Fresh, musty, sweet, sharp.'],
+   ['✋','Touch/Feel','Is it hot, cold, rough, smooth, wet, dry?'],
+   ['👅','Taste','Can you taste anything in the air? Sweet, salty, bitter?'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--blue-light);border-color:var(--blue)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--blue)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-num">Quick practice: Setting = a rainy beach</div>
+  <div style="line-height:2.8;font-size:14px;margin-top:6px">
+    👀 I can see: <input class="inline-ans" style="width:200px" placeholder="..."/><br/>
+    👂 I can hear: <input class="inline-ans" style="width:200px" placeholder="..."/><br/>
+    👃 I can smell: <input class="inline-ans" style="width:200px" placeholder="..."/>
+  </div>
+</div>`;
+
+case 'eng_dw_words': return `
+<div class="tip-box"><strong>Word choice matters!</strong> Choose powerful, specific words — not boring, vague ones.</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Boring word</th><th>Powerful words to try instead</th></tr></thead><tbody>
+<tr><td>big</td><td>enormous, vast, towering, immense, colossal</td></tr>
+<tr><td>dark</td><td>shadowy, gloomy, pitch-black, murky, dim</td></tr>
+<tr><td>nice</td><td>glittering, breathtaking, serene, vivid, magnificent</td></tr>
+<tr><td>walked</td><td>crept, stumbled, glided, trudged, tiptoeed</td></tr>
+<tr><td>said</td><td>whispered, bellowed, murmured, cried, exclaimed</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-num">Improve these weak sentences:</div>
+<div style="font-size:14px;margin-top:8px">
+  "The big house was dark." → <input class="ans-line" placeholder="Write a better version..."/>
+  "The trees were nice." → <input class="ans-line" placeholder="Write a better version..."/>
+  "She walked slowly." → <input class="ans-line" placeholder="Write a better version..."/>
+</div></div>`;
+
+case 'eng_dw_frames': return `
+<div class="word-bank"><strong>Powerful adjectives:</strong>
+${['ancient','glistening','crumbling','vast','misty','golden','shadowy','towering'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="word-bank"><strong>Powerful adverbs:</strong>
+${['quietly','suddenly','gently','eerily','brightly','softly','carefully','slowly'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="tip-box"><strong>Sentence frames to get you started:</strong></div>
+${[
+  ['#185FA5','#DBEAFE','The ___, ___ [place] stretched endlessly before me.'],
+  ['#0F6E56','#D1FAE5','I could hear the ___ sound of ___, as though ___.'],
+  ['#C2410C','#FFEDD5','The air smelled ___ of ___, and I felt ___.'],
+  ['#534AB7','#EEEDFE','___, the wind ___ through the ___ trees.'],
+].map(([col,bg,f])=>`<div style="background:${bg};border:2px solid ${col};border-radius:var(--rsm);padding:11px 14px;font-family:Nunito,sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;color:${col}">${f}</div>`).join('')}
+<div class="q-block" style="margin-top:8px"><div class="q-text">Choose ONE frame and complete it:</div>
+<input class="ans-line" placeholder="Write your sentence..."/></div>`;
+
+case 'eng_dw_practise': return `
+<div class="tip-box"><strong>Describe THIS setting:</strong> 🌙 A dark, misty forest at night</div>
+${[
+  ['Opening sentence','Start with an adjective and name the setting.','The ___, ___ forest...'],
+  ['What you can see','Use TWO adjectives.','Tall, ___ trees...'],
+  ['What you can hear','Use an adverb and a sound.','The wind howled ___ and...'],
+  ['What you can feel/smell','Engage more senses.','The cold air smelled ___ and...'],
+].map(([t,hint,frame],i)=>`
+<div class="q-block"><div class="q-num">${i+1}. ${t}</div>
+<div style="font-size:12px;color:var(--gray);font-style:italic;margin-bottom:4px">${hint} &nbsp;|&nbsp; Frame: <em>${frame}</em></div>
+<input class="ans-line" placeholder="Write your sentence..."/></div>`).join('')}`;
+
+case 'eng_dw_plan': return `
+<div class="tip-box"><strong>Choose your setting</strong> and plan using your five senses before you write.</div>
+<div class="q-block">
+<div class="q-num">My setting is:</div>
+<div class="circle-opts">
+${['🏖️ A busy beach','🌲 A dark forest','🕌 An ancient city','🛒 A noisy market','⛰️ A mountain top'].map(s=>`<div class="opt" onclick="selectSetting(this,'${s}')">${s}</div>`).join('')}
+</div></div>
+<div id="sensePlan">
+<div class="q-block" style="margin-top:10px">
+  <div class="q-num">👀 What I can SEE:</div><input class="ans-line" placeholder="..."/>
+  <div class="q-num" style="margin-top:10px">👂 What I can HEAR:</div><input class="ans-line" placeholder="..."/>
+  <div class="q-num" style="margin-top:10px">👃 What I can SMELL:</div><input class="ans-line" placeholder="..."/>
+  <div class="q-num" style="margin-top:10px">✋ What I can FEEL:</div><input class="ans-line" placeholder="..."/>
+  <div class="q-num" style="margin-top:10px">Three powerful adjectives I will use:</div><input class="ans-line" placeholder="..."/>
+  <div class="q-num" style="margin-top:10px">Two powerful adverbs I will use:</div><input class="ans-line" placeholder="..."/>
+</div></div>`;
+
+case 'eng_dw_write': return `
+<div class="tip-box"><strong>Now write your FULL setting description.</strong> Use your plan from the last section. Aim for 5–7 sentences.</div>
+${[
+  ['Opening','Introduce the setting with a strong adjective.'],
+  ['Sights','Describe what you can see. Use TWO adjectives.'],
+  ['Sounds &amp; smells','What can you hear? What can you smell?'],
+  ['Feelings &amp; atmosphere','How does this place make you feel? What is the mood?'],
+  ['Final sentence','End with something memorable.'],
+].map(([t,hint],i)=>`
+<div class="q-block">
+  <div class="q-num">Paragraph ${i+1}: ${t}</div>
+  <div style="font-size:12px;color:var(--gray);font-style:italic;margin-bottom:4px">${hint}</div>
+  <textarea class="ans-box" style="min-height:48px" placeholder="Write your sentences..."></textarea>
+</div>`).join('')}`;
+
+case 'eng_dw_check': return `
+<div class="tip-box"><strong>Read your writing and tick each checklist item.</strong></div>
+<div class="q-block">
+${[
+  'I used at least FOUR different adjectives.',
+  'I used at least TWO adverbs (words ending in -ly).',
+  'I described at least THREE of the five senses.',
+  'I chose powerful words, not boring ones.',
+  'My writing has a clear mood or atmosphere.',
+  'Every sentence has a capital letter and full stop.',
+  'I would enjoy reading this description!',
+].map(item=>`<div class="check-row"><div class="chk" onclick="toggleChk(this)"></div><span>${item}</span></div>`).join('')}
+</div>
+<div class="q-block" style="margin-top:8px">
+  <div class="q-num">My favourite sentence I wrote:</div>
+  <input class="ans-line" placeholder="Copy your best sentence here..."/>
+</div>
+<div class="remember-box" style="background:#185FA5">⭐ REMEMBER: 5 senses + powerful adjectives + adverbs = vivid, exciting descriptive writing! 🏞️</div>`;
+
+/* ─── MATHS ─────────────────────────────────────────────── */
+case 'maths_lp_units': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Length = لمبائی (Urdu) · طول (Arabic). Perimeter = محیط (Urdu &amp; Arabic). Remember: 100 centimetres = 1 metre!</div>
+${vc('📏 Centimetre (cm)','A small unit of length. 100 cm makes 1 metre.','سینٹی میٹر / سنتيمتر','"A pencil is about 15 cm long."','teal')}
+${vc('📈 Metre (m)','A bigger unit of length. 1 m = 100 cm.','میٹر / متر','"A door is about 2 metres tall."','teal')}
+<div class="tip-box"><strong>Which unit to use?</strong><br/>
+Ruler for small things (pencils, books) → use <strong>cm</strong>.<br/>
+Tape measure for bigger things (rooms, gardens) → use <strong>m</strong>.</div>
+<div class="q-block"><div class="q-num">Pick the best unit (cm or m):</div>
+<div style="line-height:2.8;font-size:14px;margin-top:6px">
+  The length of a classroom: <input class="inline-ans" style="width:60px" placeholder="?"/><br/>
+  The length of your thumb: <input class="inline-ans" style="width:60px" placeholder="?"/><br/>
+  The height of a building: <input class="inline-ans" style="width:60px" placeholder="?"/><br/>
+  The width of a textbook: <input class="inline-ans" style="width:60px" placeholder="?"/>
+</div></div>`;
+
+case 'maths_lp_convert': return `
+<div class="tip-box"><strong>Converting:</strong> m → cm: multiply by 100. &nbsp; cm → m: divide by 100.</div>
+<div style="text-align:center;background:#fff;border:2px solid var(--amber-mid);border-radius:var(--rsm);padding:14px;margin-bottom:12px">
+  <div style="font-family:'Courier New',monospace;font-size:16px;color:var(--teal)">2 m × 100 = <strong>200 cm</strong></div>
+  <div style="font-family:'Courier New',monospace;font-size:16px;color:var(--orange);margin-top:6px">350 cm ÷ 100 = <strong>3.5 m</strong></div>
+</div>
+<div class="three-col">
+${[
+  ['1 m = ___ cm','100'],['5 m = ___ cm','500'],['250 cm = ___ m','2.5'],
+  ['3 m = ___ cm','300'],['450 cm = ___ m','4.5'],['800 cm = ___ m','8'],
+].map(([q,ans],i)=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-family:'Courier New',monospace;font-size:15px;font-weight:700;color:var(--teal)">${q}</div>
+  <input type="text" style="width:70px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:var(--teal);margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>`;
+
+case 'maths_lp_measure': return `
+<div class="tip-box"><strong>Choose the BEST unit and estimate the measurement.</strong></div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Object</th><th>Unit (cm or m)</th><th>Your estimate</th></tr></thead><tbody>
+<tr><td>Your pencil</td><td><input type="text" placeholder="cm or m?" style="width:60px;border:1px solid #ccc;border-radius:4px;padding:3px;font-family:'Nunito Sans',sans-serif;font-size:13px;"/></td><td><input type="text" placeholder="About ___?" style="width:80px;border:1px solid #ccc;border-radius:4px;padding:3px;font-family:'Nunito Sans',sans-serif;font-size:13px;"/></td></tr>
+<tr><td>Your classroom door</td><td><input type="text" placeholder="cm or m?" style="width:60px;border:1px solid #ccc;border-radius:4px;padding:3px;font-family:'Nunito Sans',sans-serif;font-size:13px;"/></td><td><input type="text" placeholder="About ___?" style="width:80px;border:1px solid #ccc;border-radius:4px;padding:3px;font-family:'Nunito Sans',sans-serif;font-size:13px;"/></td></tr>
+<tr><td>Your hand span</td><td><input type="text" placeholder="cm or m?" style="width:60px;border:1px solid #ccc;border-radius:4px;padding:3px;font-family:'Nunito Sans',sans-serif;font-size:13px;"/></td><td><input type="text" placeholder="About ___?" style="width:80px;border:1px solid #ccc;border-radius:4px;padding:3px;font-family:'Nunito Sans',sans-serif;font-size:13px;"/></td></tr>
+</tbody></table></div>`;
+
+case 'maths_lp_intro': return `
+<div class="tip-box"><strong>Perimeter</strong> = the distance all the way AROUND the outside of a shape. Just add up ALL the sides!</div>
+${vc('🟦 Perimeter','The total distance around the outside of a 2D shape. Add ALL the sides.','محیط / محيط','"The perimeter of a square with sides 4cm is 4×4 = 16cm."','teal')}
+<div style="text-align:center;margin:14px 0">
+  <svg viewBox="0 0 240 140" width="100%" style="max-width:280px;display:block;margin:0 auto;">
+    <rect x="40" y="20" width="160" height="80" fill="#E1F5EE" stroke="#0F6E56" stroke-width="3" rx="4"/>
+    <text x="120" y="14" text-anchor="middle" font-size="14" font-weight="700" fill="#0F6E56">8 cm</text>
+    <text x="120" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#0F6E56">8 cm</text>
+    <text x="24" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#0F6E56">4 cm</text>
+    <text x="214" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#0F6E56">4 cm</text>
+  </svg>
+  <div style="font-size:14px;margin-top:8px;font-weight:700;color:var(--teal)">Perimeter = 8 + 4 + 8 + 4 = <strong>24 cm</strong></div>
+</div>
+<div class="q-block"><div class="q-text">What is the perimeter of a rectangle 10cm × 5cm? <input class="inline-ans" style="width:80px" placeholder="? cm"/></div></div>`;
+
+case 'maths_lp_shapes': return `
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Shape</th><th>Formula</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Square</strong></td><td>4 × side</td><td>Side = 6cm → P = 4×6 = <strong>24cm</strong></td></tr>
+<tr><td><strong>Rectangle</strong></td><td>2 × (length + width)</td><td>7cm × 3cm → 2×(7+3) = <strong>20cm</strong></td></tr>
+<tr><td><strong>Any shape</strong></td><td>Add ALL sides</td><td>3 + 5 + 4 = <strong>12cm</strong></td></tr>
+</tbody></table></div>
+<div class="three-col" style="margin-top:12px">
+${[
+  ['Square, side = 5 cm','20'],
+  ['Rectangle, 8cm × 3cm','22'],
+  ['Triangle: 4, 5, 6 cm','15'],
+  ['Square, side = 9 cm','36'],
+  ['Rectangle, 12cm × 4cm','32'],
+  ['Triangle: 3, 3, 3 cm','9'],
+].map(([q,ans],i)=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:4px">${q}</div>
+  <input type="text" style="width:70px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:var(--teal)" placeholder="?cm"/>
+</div>`).join('')}
+</div>`;
+
+case 'maths_lp_probs': return `
+${[
+  ['🏡','A square garden has sides of 8 m each. What is the perimeter?','4 × 8 = ___'],
+  ['🖼️','A rectangular picture frame is 15 cm long and 10 cm wide. What is its perimeter?','2 × (15 + 10) = ___'],
+  ['🔺','A triangular sign has sides of 30 cm, 40 cm and 50 cm. What is its perimeter?','30 + 40 + 50 = ___'],
+].map(([ico,q,hint],i)=>`
+<div class="q-block">
+  <div class="q-num">${ico} Problem ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--gray);font-style:italic;margin:3px 0">Hint: ${hint}</div>
+  <input class="ans-line" placeholder="My working and answer..."/>
+</div>`).join('')}`;
+
+case 'maths_lp_missing': return `
+<div class="tip-box"><strong>Finding a missing side:</strong> If you know the perimeter, work BACKWARDS using division!</div>
+<div style="background:#fff;border:2px solid var(--amber-mid);border-radius:var(--rsm);padding:12px;margin-bottom:12px;font-family:'Courier New',monospace;font-size:14px;color:var(--teal)">
+  Square perimeter = 28 cm<br/>
+  28 ÷ 4 = <strong>7 cm</strong> per side ✅
+</div>
+<div class="three-col">
+${[
+  ['Square: Perimeter = 20 cm\nSide = ?','5'],
+  ['Square: Perimeter = 32 cm\nSide = ?','8'],
+  ['Square: Perimeter = 44 m\nSide = ?','11'],
+  ['Rectangle: P = 24 cm, length = 8 cm\nWidth = ?','4'],
+  ['Rectangle: P = 30 cm, length = 9 cm\nWidth = ?','6'],
+  ['Rectangle: P = 40 m, length = 14 m\nWidth = ?','6'],
+].map(([q,ans],i)=>`
+<div class="q-block" style="text-align:center">
+  <div style="font-size:12px;font-weight:700;color:var(--teal);white-space:pre-line;margin-bottom:4px">${q}</div>
+  <input type="text" style="width:70px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:var(--teal)" placeholder="?"/>
+</div>`).join('')}
+</div>`;
+
+case 'maths_lp_word': return `
+${[
+  ['🏊','A rectangular swimming pool is 20 m long and 8 m wide. What is the perimeter? If a swimmer swims around the edge TWICE, how far do they swim?','P = 2×(20+8) = ? &nbsp;·&nbsp; ×2 = ?'],
+  ['🚧','A builder needs to put a fence around a square field with sides of 15 m. How many metres of fencing does she need?','P = 4×15 = ?'],
+  ['🎁','A gift tag is cut in the shape of a rectangle 6 cm by 3 cm. What is the perimeter of the gift tag?','P = 2×(6+3) = ?'],
+].map(([ico,q,hint],i)=>`
+<div class="q-block">
+  <div class="q-num">${ico} Problem ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--gray);font-style:italic;margin:3px 0">Hint: ${hint}</div>
+  <textarea class="ans-box" style="min-height:44px" placeholder="My working and answer..."></textarea>
+</div>`).join('')}`;
+
+case 'maths_lp_mixed': return `
+<div class="tip-box"><strong>Mixed challenge!</strong> Think carefully — what information do you have, and what do you need to find?</div>
+<div class="q-block"><div class="q-num">🌟 Challenge 1</div>
+<div class="q-text">A square has the SAME perimeter as a rectangle 10cm × 6cm. What is the side length of the square?</div>
+<textarea class="ans-box" placeholder="Step 1 — rectangle perimeter: &#10;Step 2 — square side: 36 ÷ 4 = ?"></textarea></div>
+<div class="q-block"><div class="q-num">🌟 Challenge 2</div>
+<div class="q-text">A running track is shaped like a rectangle, 50m × 30m. If a student runs around it 4 times, how far do they run? Give your answer in both metres AND kilometres.</div>
+<textarea class="ans-box" placeholder="Perimeter = ? &#10;×4 = ? metres &#10;÷1000 = ? km"></textarea></div>
+<div class="remember-box" style="background:#0F6E56">⭐ REMEMBER: 100 cm = 1 m. Perimeter = add all sides. Square: 4×s. Rectangle: 2×(l+w). Work backwards to find missing sides!</div>`;
+
+/* ─── SCIENCE ─────────────────────────────────────────── */
+case 'sci_ls_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Light = روشنی (roshni, Urdu) · ضوء (Arabic). Shadow = سایہ (Urdu) · ظل (Arabic). Opaque = غیر شفاف (Urdu) · معتم (Arabic).</div>
+${vc('💡 Light source','Anything that MAKES its own light.','روشنی کا ذریعہ / مصدر ضوء','"The sun and a lightbulb are both light sources."','orange')}
+${vc('🌑 Shadow','A dark shape that forms when an opaque object blocks light.','سایہ / ظل','"My shadow follows me on a sunny day."','orange')}
+${vc('⬛ Opaque','Blocks ALL light — no light passes through.','غیر شفاف / معتم','"Wood is opaque — light cannot pass through it."','orange')}
+${vc('🌫️ Translucent','Lets SOME light through — blurry shapes visible.','نیم شفاف / نصف شفاف','"Frosted glass is translucent."','orange')}
+${vc('🪟 Transparent','Lets light pass through completely — can see clearly.','شفاف / شفاف','"Clear glass is transparent."','orange')}`;
+
+case 'sci_ls_types': return `
+<div class="two-col" style="margin-bottom:12px">
+<div class="info-card" style="background:#FFEDD5;border-color:#C2410C;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#C2410C;margin-bottom:8px">☀️ Natural Light Sources</div>
+  <div style="font-size:13px;line-height:2">☀️ The Sun<br/>🔥 Fire / candle flames<br/>⚡ Lightning<br/>⭐ Stars<br/>🪲 Fireflies (bioluminescence)</div>
+</div>
+<div class="info-card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">🔦 Artificial Light Sources</div>
+  <div style="font-size:13px;line-height:2">💡 Lightbulbs<br/>🔦 Torches<br/>📱 Phone screens<br/>🚗 Car headlights<br/>🕯️ Man-made candles</div>
+</div>
+</div>
+<div class="tip-box"><strong>⚠️ The moon is NOT a light source!</strong> The moon reflects light from the sun — it makes no light of its own.</div>
+<div class="q-block"><div class="q-num">Classify: Natural (N) or Artificial (A)?</div>
+<div style="line-height:2.8;font-size:14px;margin-top:6px">
+  ⭐ A star: <input class="inline-ans" style="width:40px" placeholder="?"/>  &nbsp;
+  💡 A lamp: <input class="inline-ans" style="width:40px" placeholder="?"/><br/>
+  🌙 The moon: <input class="inline-ans" style="width:40px" placeholder="?"/>  &nbsp;
+  🔥 A fire: <input class="inline-ans" style="width:40px" placeholder="?"/>
+</div></div>`;
+
+case 'sci_ls_identify': return `
+<p style="font-size:14px;margin-bottom:10px">Is each item a LIGHT SOURCE? Click Yes or No.</p>
+${[
+  ['☀️ The Sun','Yes'],
+  ['🌙 The Moon','No'],
+  ['🔦 A torch','Yes'],
+  ['🪞 A mirror','No'],
+  ['⚡ Lightning','Yes'],
+  ['📚 A book','No'],
+].map(([item,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${item}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'ls${i}','Yes','${ans}')">✅ Yes</div>
+    <div class="opt" onclick="chk(this,'ls${i}','No','${ans}')">❌ No</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_ls_straight': return `
+<div class="tip-box"><strong>Light travels in STRAIGHT LINES</strong> — it cannot bend around objects. This is why shadows form!</div>
+${[
+  ['1','A LIGHT SOURCE sends light out in straight lines in all directions.'],
+  ['2','An OPAQUE object gets in the way of the light.'],
+  ['3','Light cannot pass through opaque objects, so it is BLOCKED.'],
+  ['4','Behind the object, where no light reaches, a DARK SHAPE forms.'],
+  ['5','This dark shape is the SHADOW.'],
+].map(([n,text])=>`
+<div class="step-box">
+  <div class="step-num">${n}</div>
+  <div class="step-text">${text}</div>
+</div>`).join('')}
+<div class="q-block"><div class="q-text">Complete: A shadow forms because light travels in <input class="inline-ans" style="width:100px" placeholder="?"/> lines and cannot <input class="inline-ans" style="width:100px" placeholder="?"/> through opaque objects.</div></div>`;
+
+case 'sci_ls_materials': return `
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>Type</th><th>Light through?</th><th>Shadow?</th><th>Examples</th></tr></thead><tbody>
+<tr><td><strong>⬛ Opaque</strong></td><td>❌ None at all</td><td>Dark &amp; clear shadow</td><td>Wood, metal, brick, cardboard</td></tr>
+<tr><td><strong>🌫️ Translucent</strong></td><td>〰️ Some light</td><td>Faint, blurry shadow</td><td>Frosted glass, tissue paper, thin curtains</td></tr>
+<tr><td><strong>🪟 Transparent</strong></td><td>✅ Light passes through</td><td>No shadow formed</td><td>Clear glass, clean water, clear plastic</td></tr>
+</tbody></table></div>
+<p style="font-size:14px;margin:10px 0 6px">Classify each material:</p>
+${[
+  ['🪵 Wood','Opaque'],
+  ['🧻 Tissue paper','Translucent'],
+  ['🪟 Clear glass','Transparent'],
+  ['🧱 Brick','Opaque'],
+].map(([item,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${item}</span>
+  <div class="circle-opts" style="margin:0">
+    ${['Opaque','Translucent','Transparent'].map(opt=>`<div class="opt" onclick="chk(this,'mat${i}','${opt}','${ans}')">${opt}</div>`).join('')}
+  </div>
+</div>`).join('')}`;
+
+case 'sci_ls_tf': return `
+<p style="font-size:14px;margin-bottom:10px">True or False?</p>
+${[
+  ['Opaque materials block all light and make dark shadows.','True'],
+  ['The moon is a natural light source.','False'],
+  ['Transparent materials let light pass through easily.','True'],
+  ['Shadows can only form in the dark.','False'],
+  ['Light travels in curved lines.','False'],
+  ['Translucent materials let SOME light through.','True'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'stf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'stf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'sci_ls_change': return `
+<div class="tip-box"><strong>Shadows change length through the day</strong> because the SUN moves across the sky!</div>
+<div class="four-col" style="margin-bottom:14px">
+${[
+  ['🌅','Morning','Sun is LOW in the sky → long shadows'],
+  ['☀️','Midday','Sun is HIGH overhead → short shadows'],
+  ['🌇','Afternoon','Sun moves lower → shadows grow longer again'],
+  ['🌙','Night','No sun → no sunlight shadows at all'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:#FFEDD5;border-color:#C2410C">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:#C2410C">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">When is a shadow the SHORTEST? <input class="inline-ans" style="width:120px" placeholder="?"/> Why? <input class="ans-line" placeholder="Because..."/></div></div>`;
+
+case 'sci_ls_safety': return `
+<div class="tip-box"><strong>☀️ IMPORTANT:</strong> Never look directly at the sun — even for one second. It can permanently damage your eyes!</div>
+<div class="card-grid">
+${[
+  ['🧴','Wear sunscreen','Protects your skin from UV rays.'],
+  ['🕶️','Wear sunglasses','Protects your eyes from bright sunlight.'],
+  ['🌳','Stay in shade','Especially 11am–3pm, the hottest part of the day.'],
+  ['🧢','Wear a hat','Keeps the sun off your face and neck.'],
+  ['💧','Stay hydrated','Drink plenty of water in hot sun.'],
+  ['🚫','Never look at the sun','Even through sunglasses — it can blind you.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:#FFEDD5;border-color:#C2410C">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:#C2410C">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>`;
+
+case 'sci_ls_quiz': return `
+<p style="font-size:14px;margin-bottom:10px">Click the correct answer for each question:</p>
+${[
+  ['What is a light source?','Anything that makes its own light','A shadow','A mirror','A window','Anything that makes its own light'],
+  ['Which material makes the darkest shadow?','Opaque','Translucent','Transparent','None of them','Opaque'],
+  ['Why do shadows form?','Light bends around objects','An opaque object blocks light','Shadows come from the moon','Cold air makes shadows','An opaque object blocks light'],
+  ['When are shadows SHORTEST?','Early morning','At midnight','At midday','In the evening','At midday'],
+  ['Is the moon a light source?','Yes, always','Yes, only at night','No — it reflects the sun\'s light','No — it has no light at all','No — it reflects the sun\'s light'],
+  ['Which of these is transparent?','Wood','Brick','Clear glass','Frosted glass','Clear glass'],
+].map(([q,o1,o2,o3,o4,ans],i)=>`
+<div class="q-block"><div class="q-num">Q${i+1}: ${q}</div>
+<div class="circle-opts">${[o1,o2,o3,o4].map(o=>`<div class="opt" onclick="chk(this,'lq${i}','${o}','${ans}')">${o}</div>`).join('')}</div></div>`).join('')}
+<div class="remember-box" style="background:#C2410C">⭐ REMEMBER: Light source makes light · Opaque blocks light · Shadows need light AND an opaque object · Never look at the sun! 💡</div>`;
+
+/* ─── HUMANITIES ─────────────────────────────────────────── */
+case 'hum_rrr_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Rule = قانون / اصول (Urdu) · قاعدة (Arabic). Right = حق (Urdu/Arabic). Responsibility = ذمہ داری (Urdu) · مسؤولية (Arabic).</div>
+${vc('📋 Rule','An instruction that tells people how to behave.','قانون / قاعدة','"No running in school is a rule."','purple')}
+${vc('🌟 Right','Something every person should have or be allowed to do.','حق / حق','"Every child has the right to go to school."','purple')}
+${vc('🤝 Responsibility','A duty or job you are expected to do.','ذمہ داری / مسؤولية','"It is my responsibility to do my homework."','purple')}
+${vc('⚖️ Fair','Treating everyone equally and justly.','منصفانہ / عادل','"It is fair when rules apply to everyone equally."','purple')}
+<div class="q-block"><div class="q-text">Fill in: A <input class="inline-ans" style="width:70px" placeholder="?"/> is something every person should have. A <input class="inline-ans" style="width:100px" placeholder="?"/> is a duty you must do.</div></div>`;
+
+case 'hum_rrr_types': return `
+<div class="tip-box"><strong>There are different types of rules</strong> — at home, at school, in a country.</div>
+<div class="card-grid">
+${[
+  ['🏠','Home rules','Tidy your room. Be home by 7pm. Be kind to your brothers and sisters.'],
+  ['🏫','School rules','Raise your hand. Walk, don\'t run. Listen when the teacher speaks.'],
+  ['🌍','National laws','Drive on the correct side. Do not steal. Pay for what you take.'],
+  ['⚽','Games rules','Take turns. Play fairly. Follow the referee\'s decision.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--purple-light);border-color:var(--purple)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--purple)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-num">Which type of rule is each? (Home / School / National)</div>
+<div style="line-height:2.8;font-size:14px;margin-top:6px">
+  "Always stop at a red traffic light." → <input class="inline-ans" style="width:100px" placeholder="?"/><br/>
+  "Raise your hand before speaking." → <input class="inline-ans" style="width:100px" placeholder="?"/><br/>
+  "Do not eat in the bedroom." → <input class="inline-ans" style="width:100px" placeholder="?"/>
+</div></div>`;
+
+case 'hum_rrr_tf': return `
+<p style="font-size:14px;margin-bottom:10px">True or False?</p>
+${[
+  ['Rules exist only to punish people.','False'],
+  ['Rights and responsibilities always go together.','True'],
+  ['Only adults need to follow rules.','False'],
+  ['Fair means treating everyone equally.','True'],
+  ['Every child has the right to education.','True'],
+  ['Responsibilities are things no one expects you to do.','False'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'htf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'htf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'hum_rrr_rights': return `
+<div class="tip-box"><strong>The United Nations says every child in the world has rights</strong> — things they deserve, just because they are human beings.</div>
+<div class="card-grid">
+${[
+  ['📚','Education','Every child has the right to go to school and learn.'],
+  ['🏠','A safe home','Every child deserves a safe place to live.'],
+  ['🍎','Food &amp; health','Every child deserves enough food and healthcare.'],
+  ['🎉','Play &amp; rest','Every child has the right to rest, play and have fun.'],
+  ['🛡️','Safety','Every child has the right to be protected from harm.'],
+  ['👪','Family','Every child has the right to know and be cared for by their family.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:#E0E7FF;border-color:#534AB7">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:#534AB7">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">Name THREE rights every child has:<br/>
+1. <input class="ans-line" placeholder="..."/><br/>
+2. <input class="ans-line" placeholder="..."/><br/>
+3. <input class="ans-line" placeholder="..."/>
+</div></div>`;
+
+case 'hum_rrr_together': return `
+<div class="tip-box"><strong>Every RIGHT comes with a RESPONSIBILITY.</strong> They always work together — like two sides of the same coin!</div>
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>My RIGHT</th><th>My matching RESPONSIBILITY</th></tr></thead><tbody>
+<tr><td>🌟 Right to learn</td><td>🤝 Listen carefully and try my best</td></tr>
+<tr><td>🌟 Right to be safe</td><td>🤝 Follow safety rules</td></tr>
+<tr><td>🌟 Right to be heard</td><td>🤝 Listen to others when THEY speak</td></tr>
+<tr><td>🌟 Right to play</td><td>🤝 Share and play fairly with others</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-num">Match the right to its responsibility:</div>
+<div style="line-height:2.8;font-size:14px;margin-top:6px">
+  Right to education → Responsibility to <input class="inline-ans" style="width:180px" placeholder="..."/><br/>
+  Right to play → Responsibility to <input class="inline-ans" style="width:180px" placeholder="..."/>
+</div></div>`;
+
+case 'hum_rrr_questions': return `
+${[
+  ['What is the difference between a right and a responsibility?','A right is... A responsibility is...'],
+  ['Why do we need rules? Give TWO reasons.','We need rules because...'],
+  ['Give an example of a school rule and explain why it is fair.','One school rule is... It is fair because...'],
+  ['What might happen if there were NO rules at school?','Without rules...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--purple);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'hum_rrr_school': return `
+<div class="tbl-wrap"><table class="ws-table"><thead><tr><th>School rule</th><th>Why it matters</th></tr></thead><tbody>
+<tr><td>🙋 Raise your hand before speaking</td><td>So everyone gets a turn and the class stays organised.</td></tr>
+<tr><td>🚶 Walk, don't run, inside</td><td>To keep everyone safe from bumps and falls.</td></tr>
+<tr><td>👂 Listen when others are talking</td><td>Shows respect and helps everyone understand.</td></tr>
+<tr><td>🧹 Tidy up after yourself</td><td>Keeps the classroom clean and ready for everyone.</td></tr>
+<tr><td>🤝 Be kind to classmates</td><td>Makes school a safe, happy place for everyone.</td></tr>
+</tbody></table></div>
+<div class="q-block"><div class="q-text">Choose ONE school rule. Why is it important?<br/>
+Rule: <input class="ans-line" placeholder="..."/><br/>
+Why it matters: <textarea class="ans-box" style="min-height:36px" placeholder="..."></textarea>
+</div></div>`;
+
+case 'hum_rrr_mine': return `
+<div class="q-block">
+  <div class="q-num">My own rules, rights and responsibilities:</div>
+  <div style="line-height:2.8;font-size:14px;margin-top:6px">
+    One rule I follow at HOME: <input class="ans-line" placeholder="..."/><br/>
+    One rule I follow at SCHOOL: <input class="ans-line" placeholder="..."/><br/>
+    One RIGHT I have: <input class="ans-line" placeholder="..."/><br/>
+    One RESPONSIBILITY I have: <input class="ans-line" placeholder="..."/><br/>
+    Why rules are important to me: <input class="ans-line" placeholder="..."/>
+  </div>
+</div>
+<div class="q-block"><div class="q-num">Create YOUR OWN school rule. What would it be and why?</div>
+<textarea class="ans-box" placeholder="My rule: ... &#10;Why: ..."></textarea></div>`;
+
+case 'hum_rrr_draw': return `
+<div class="q-block">
+  <div class="q-num">🎨 Draw yourself following ONE important rule at school or home.</div>
+  <div style="border:2px dashed var(--purple);border-radius:8px;height:160px;background:#E0E7FF;display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:13px;font-style:italic">📋 Draw here! Show the rule you are following.</div>
+</div>
+<div class="q-block"><div class="q-text">What is the rule in your drawing? Why is it important?</div>
+<input class="ans-line" placeholder="The rule is ... It is important because ..."/></div>
+<div class="remember-box" style="background:#534AB7">⭐ REMEMBER: Rules keep us SAFE and FAIR. Rights and responsibilities go TOGETHER. Every child has the right to education, safety and play! 🤝</div>`;
+
+/* ─── BIBLE ──────────────────────────────────────────────── */
+case 'bib_rh_vocab': return `
+<div class="l1-box"><strong>🌍 In your language:</strong> Courage = ہمت (himmat, Urdu) · شجاعة (Arabic). Rahab showed real courage — doing the right thing even when it was dangerous!</div>
+${vc('🦁 Courage','Being brave enough to do the right thing, even when it is scary.','ہمت / شجاعة','"Rahab showed great courage by hiding the spies."','red')}
+${vc('🕵️ Spy','A person sent secretly to find out information about an enemy.','جاسوس / جاسوس','"Joshua sent two spies into the city of Jericho."','red')}
+${vc('⚠️ Risky','Something that could be dangerous or have a bad result.','خطرناک / محفوف بالمخاطر','"Hiding the spies was a very risky decision."','red')}
+${vc('🤝 Protect','To keep someone safe from harm.','حفاظت / حماية','"The spies promised to protect Rahab\'s family."','red')}
+<div class="q-block"><div class="q-text">Courage means being brave enough to do the <input class="inline-ans" style="width:80px" placeholder="?"/> thing, even when it is <input class="inline-ans" style="width:80px" placeholder="?"/>.</div></div>`;
+
+case 'bib_rh_story': return `
+<div class="tip-box"><strong>Bible reference:</strong> Joshua 2 · <strong>Theme:</strong> Rahab takes a great risk to do what is right, showing faith in God.</div>
+<div class="story-box" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:16px;font-family:Nunito,sans-serif;color:var(--red)">🦁 Rahab Hides the Spies — Joshua 2</strong><br/><br/>
+<strong>Beginning —</strong> After Moses died, Joshua led God's people. He wanted to capture the city of Jericho. He sent two spies to look around the city secretly. The spies went to stay at the house of a woman named <strong>Rahab</strong>.<br/><br/>
+<strong>Middle —</strong> The King of Jericho heard that spies had entered his city. He sent soldiers to Rahab's house to find them. But Rahab had already hidden the two spies under stalks of flax on her roof.<br/><br/>
+She bravely told the soldiers that the men had already left. The soldiers went away to look for them.<br/><br/>
+Later, Rahab went up to the spies on the roof. She told them she BELIEVED in their God. She had heard about the amazing things God had done for Israel. She said: "The Lord your God is God in heaven above and on the earth below." (Joshua 2:11)<br/><br/>
+<strong>End —</strong> She asked the spies to promise to protect her family. The spies agreed! They told her to tie a <strong>red cord</strong> in her window as a sign. Rahab helped them escape through her window using a rope. Because of her courage and faith, Rahab and her whole family were saved.
+</div>
+<div class="q-block"><div class="q-text">Why was Rahab's action so brave?<br/><input class="ans-line" placeholder="Rahab was brave because ..."/></div></div>`;
+
+case 'bib_rh_sequence': return `
+<div class="tip-box"><strong>Put the story events in the correct order. Write 1–6.</strong></div>
+${[
+  ['Joshua sends two spies to explore Jericho.','1'],
+  ['The spies promise to protect Rahab\'s family and escape.','6'],
+  ['The King\'s soldiers come looking for the spies.','3'],
+  ['Rahab hides the spies under flax on her roof.','2'],
+  ['Rahab tells the soldiers the men already left.','4'],
+  ['Rahab tells the spies she believes in their God.','5'],
+].map(([ev,n],i)=>`
+<div style="display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <input type="text" placeholder="?" style="width:36px;height:36px;border:2px solid var(--red);border-radius:50%;text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;color:var(--red);background:var(--red-light);outline:none"/>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}`;
+
+case 'bib_rh_questions': return `
+${[
+  ['Why did Joshua send spies to Jericho?','Joshua sent spies to...'],
+  ['What risky thing did Rahab do?','Rahab risked her safety by...'],
+  ['What did Rahab say she believed about God (Joshua 2:11)?','Rahab believed that God is...'],
+  ['What sign did the spies give Rahab?','The spies told Rahab to...'],
+].map(([q,frame],i)=>`
+<div class="q-block"><div class="q-num">Question ${i+1}</div>
+<div class="q-text">${q}</div>
+<div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0">Frame: ${frame}</div>
+<textarea class="ans-box" style="min-height:44px"></textarea></div>`).join('')}`;
+
+case 'bib_rh_verse': return `
+<div class="verse-box">
+<div style="font-size:12px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">⭐ MEMORY VERSE — Joshua 2:11</div>
+<div class="verse-text">"...for the Lord your God is God<br/>in heaven above and on the earth below."</div>
+<div style="font-size:11px;color:var(--gray);margin-top:8px">— Joshua 2:11</div>
+</div>
+<div class="tip-box"><strong>Who said this?</strong> Rahab — a woman from Jericho who was NOT an Israelite. She had only HEARD about God, yet she believed deeply enough to risk her own life!</div>
+<div class="q-block"><div class="q-text">Fill in the missing words:</div>
+<div style="font-size:15px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+  "...for the Lord your <input class="inline-ans" style="width:60px" placeholder="?"/> is <input class="inline-ans" style="width:60px" placeholder="?"/><br/>
+  in <input class="inline-ans" style="width:80px" placeholder="?"/> above and on the <input class="inline-ans" style="width:80px" placeholder="?"/> below."<br/>
+  — <input class="inline-ans" style="width:120px" placeholder="book &amp; verse?"/>
+</div></div>
+<div class="q-block"><div class="q-text">Write the verse from memory — no peeking! 😊</div>
+<textarea class="ans-box" style="min-height:55px" placeholder="...for the Lord your God ..."></textarea></div>`;
+
+case 'bib_rh_tf': return `
+<p style="font-size:14px;margin-bottom:10px">True or False? Click your answer.</p>
+${[
+  ['Rahab was an Israelite who already believed in God.','False'],
+  ['Rahab hid the spies under flax on her roof.','True'],
+  ['Rahab told the soldiers exactly where the spies were.','False'],
+  ['The spies promised to protect Rahab and her family.','True'],
+  ['Rahab\'s faith and courage saved her and her family.','True'],
+  ['Joshua 2:11 says God is only God in heaven, not on earth.','False'],
+].map(([s,ans],i)=>`
+<div class="check-row">
+  <span style="flex:1">${s}</span>
+  <div class="circle-opts" style="margin:0">
+    <div class="opt" onclick="chk(this,'btf${i}','True','${ans}')">✅ True</div>
+    <div class="opt" onclick="chk(this,'btf${i}','False','${ans}')">❌ False</div>
+  </div>
+</div>`).join('')}`;
+
+case 'bib_rh_courage': return `
+<div class="tip-box"><strong>Real courage is NOT the absence of fear.</strong> Real courage is doing the right thing EVEN WHEN you are scared!</div>
+<div class="card-grid">
+${[
+  ['😨','You feel scared…','…but you do the right thing ANYWAY.'],
+  ['⚠️','The choice is risky…','…but you choose what is right over what is safe.'],
+  ['🤝','You think of others…','…not just yourself.'],
+  ['🙏','You trust in God…','…even when you cannot see the outcome.'],
+].map(([ico,t,d])=>`
+<div class="info-card" style="background:var(--red-light);border-color:var(--red)">
+  <div class="card-icon">${ico}</div>
+  <div class="card-title" style="color:var(--red)">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">In your own words, explain what REAL courage means:<br/>
+<textarea class="ans-box" style="min-height:44px" placeholder="Courage means..."></textarea></div></div>`;
+
+case 'bib_rh_choices': return `
+<div class="tip-box"><strong>Rahab had to make difficult choices.</strong> Think about each one.</div>
+${[
+  ['Rahab chose to HIDE the spies, even though she could have been punished by the king.','Brave choice ✅','Dangerous choice ⚠️','Brave choice ✅'],
+  ['Rahab chose to LIE to the soldiers about where the spies had gone.','Right choice ✅','Wrong choice ❌','Right choice ✅'],
+  ['Rahab chose to TRUST in God, even though she was not an Israelite.','Faith ✅','Fear ❌','Faith ✅'],
+].map(([desc,o1,o2,ans],i)=>`
+<div class="q-block"><div class="q-num">Choice ${i+1}:</div>
+<div class="q-text" style="margin-bottom:8px">${desc}</div>
+<div class="circle-opts">
+  <div class="opt" onclick="chk(this,'ch${i}','${o1}','${ans}')">${o1}</div>
+  <div class="opt" onclick="chk(this,'ch${i}','${o2}','${ans}')">${o2}</div>
+</div></div>`).join('')}`;
+
+case 'bib_rh_apply': return `
+<div class="tip-box"><strong>Rahab's story is still relevant today!</strong> We all face moments when we need courage to do what is right.</div>
+${[
+  ['❤️','A time I was brave and did the right thing:'],
+  ['🧡','One way I can show courage at school this week:'],
+  ['💛','Someone I know who shows courage like Rahab:'],
+  ['💚','How I can protect or help someone this week:'],
+  ['💙','What Rahab\'s story teaches me about faith:'],
+  ['💜','My prayer or thought after learning this story:'],
+].map(([col,label])=>`
+<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+  <div style="width:5px;height:30px;background:${col};border-radius:4px;margin-top:2px"></div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;font-family:Nunito,sans-serif;color:${col}">${label}</div>
+    <input class="ans-line" style="border-bottom-color:${col}"/>
+  </div>
+</div>`).join('')}
+<div class="remember-box" style="background:#B71C1C">⭐ REMEMBER: Rahab risked everything to do right — and God protected her. Courage means doing right even when it is scary! 🦁</div>`;
+
+default: return '<p style="padding:10px;color:var(--gray)">Content loading…</p>';
+}}
+
+let curSubj='eng';let curLesson=1;
+
+function chk(el,group,val,ans){
+  const opts=el.parentElement.querySelectorAll('.opt');opts.forEach(o=>o.classList.remove('correct','wrong'));
+  if(val===ans){el.classList.add('correct');}
+  else{el.classList.add('wrong');opts.forEach(o=>{if(o.textContent.trim()===ans)o.classList.add('correct');});}
+}
+function toggleChk(el){el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';}
+function selectSetting(el,s){document.querySelectorAll('#sensePlan').forEach(x=>x.style.display='block');el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct'));el.classList.add('correct');}
+
+function render(){
+  const subjectTabs=document.getElementById('subjectTabs');
+  const navTabs=document.getElementById('navTabs');
+  const pages=document.getElementById('pages');
+  subjectTabs.innerHTML='';SUBJECTS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===curSubj?' active':'');
+    el.textContent=s.label;el.style.borderColor=s.col;el.style.color=s.id===curSubj?'#fff':s.col;
+    if(s.id===curSubj)el.style.background=s.col;
+    el.onclick=()=>{curSubj=s.id;curLesson=1;render();};
+    subjectTabs.appendChild(el);
+  });
+  const subj=SUBJECTS.find(s=>s.id===curSubj);
+  const lessons=WS[curSubj];
+  navTabs.innerHTML='';lessons.forEach(l=>{
+    const el=document.createElement('div');
+    el.className='tab'+(l.num===curLesson?' active':'');
+    el.textContent='Lesson '+l.num;el.style.borderColor=subj.col;
+    el.style.color=l.num===curLesson?'#fff':subj.col;
+    if(l.num===curLesson)el.style.background=subj.col;
+    el.onclick=()=>{curLesson=l.num;render();};
+    navTabs.appendChild(el);
+  });
+  const lesson=lessons.find(l=>l.num===curLesson);
+  pages.innerHTML=`<div class="page active">
+    <div class="ws-header">
+      <div>
+        <div class="ws-badge">${lesson.badge}</div>
+        <div class="ws-title">${lesson.title}</div>
+        <div class="ws-sub">Lesson ${lesson.num} of ${lessons.length} · ${subj.label} · Week 9</div>
+      </div>
+      <div>Name: <input class="name-line" placeholder="________________"/></div>
+    </div>
+    ${lesson.secs.map((sec,i)=>`
+    <div class="section">
+      <div class="sec-title"><span class="sec-num">${i+1}</span>${sec.t}</div>
+      ${C(sec.c)}
+    </div>`).join('')}
+  </div>`;
+}
+render();
+</script>
+
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week9_Lessons');</script>
+</body>
+</html>

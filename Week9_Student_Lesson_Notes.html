@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 9 · Student Lesson Notes · KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--mgray:#CFD8DC;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.frame{border-radius:var(--rsm);padding:11px 14px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;border:2px solid}
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:12px}
+.wbank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+.step{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px;margin-bottom:8px}
+.step-n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-t{font-size:13px;line-height:1.6}
+.example-box{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--rsm);padding:12px 16px;margin-bottom:10px;font-size:14px;line-height:1.8}
+.highlight{background:#FEF3C7;border:2px solid var(--amber);border-radius:var(--rsm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 9 · Student Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover',  label:'🏠 Cover',     col:'#0F6E56'},
+  {id:'eng',    label:'📖 English',   col:'#185FA5'},
+  {id:'maths',  label:'🔢 Maths',     col:'#0F6E56'},
+  {id:'sci',    label:'💡 Science',   col:'#C2410C'},
+  {id:'hum',    label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',    label:'✝️ Bible',     col:'#B71C1C'},
+];
+
+const PAGES={
+
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#185FA5);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">MY LESSON NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:24px">Week 9 · All 5 Subjects</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Descriptive Writing — Settings','#1E40AF','#DBEAFE'],
+      ['🔢','Maths','Measurement — Length &amp; Perimeter','#065F46','#D1FAE5'],
+      ['💡','Science','Light — Sources &amp; Shadows','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','Rules, Rights &amp; Responsibilities','#3730A3','#E0E7FF'],
+      ['✝️','Bible','Rahab — Courage to Do What is Right','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Use this booklet to read, learn and practise. Every page has words in English, Arabic and Urdu! 🌍</div>
+</div>`,
+
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#185FA5,#1E40AF)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 9</div>
+  <div class="banner-title">📖 English — Descriptive Writing: Settings</div>
+  <div class="banner-sub">KS2 Level 3 · Elementary ESL</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Setting = <strong>منظر (manzar)</strong> — Urdu · <strong>مشهد</strong> — Arabic<br/>
+Adjective = <strong>صفت (sift)</strong> — Urdu · <strong>صفة</strong> — Arabic<br/>
+Adverb = <strong>متعلق فعل</strong> — Urdu · <strong>ظرف</strong> — Arabic<br/>
+Descriptive writing uses special words to help the reader SEE, HEAR and FEEL a place!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WHAT IS A SETTING?</div>
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">🏞️ Setting</div>
+  <div style="font-size:13px;line-height:1.8">The PLACE and TIME where a story happens. Example: a dark forest, a busy market, a quiet beach at sunset.</div>
+</div>
+<div class="card" style="background:#D1FAE5;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#0F6E56;margin-bottom:8px">✏️ Descriptive Writing</div>
+  <div style="font-size:13px;line-height:1.8">Writing that uses adjectives, adverbs and the five senses to paint a picture with words.</div>
+</div>
+</div>
+
+<div class="tip"><strong>Easy trick! 🧠</strong> Use your FIVE SENSES to describe a setting: What can you SEE? HEAR? SMELL? FEEL (touch)? TASTE?</div>
+
+<div class="sec-head"><span class="sec-num">2</span>WORD BANK</div>
+${[
+  ['🏞️ Setting','The place and time where a story happens.','منظر / مشهد','"The setting of the story is a dark, old castle."','#185FA5'],
+  ['🎨 Adjective','A word that describes a noun. Example: dark, tall, ancient.','صفت / صفة','"The dark forest was silent."','#185FA5'],
+  ['⚡ Adverb','A word that describes a verb — HOW something happens. Often ends in -ly.','متعلق فعل / ظرف','"The wind blew gently across the field."','#185FA5'],
+  ['👃 Senses','Sight, sound, smell, touch and taste. Use them to bring writing to life.','حواس / حواس','"I used my senses to describe the smell of fresh bread."','#185FA5'],
+  ['🔤 Word choice','Choosing the BEST and most powerful word, not just any word.','الفاظ کا انتخاب / اختيار الكلمات','"Instead of \\'big\\', I chose \\'enormous\\' for better word choice."','#185FA5'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ e.g. ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>ADJECTIVES vs ADVERBS — WHAT'S THE DIFFERENCE?</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Type</th><th>Describes</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Adjective</strong></td><td>A NOUN (person, place, thing)</td><td>The <strong>dark</strong> forest, the <strong>old</strong> house</td></tr>
+<tr><td><strong>Adverb</strong></td><td>A VERB (an action — HOW it happens)</td><td>She walked <strong>quietly</strong>. The rain fell <strong>heavily</strong>.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>EXAMPLE — DESCRIBING A SETTING</div>
+<div class="story">
+<strong>Weak sentence:</strong> The forest was dark. There were trees.<br/><br/>
+<strong>Improved with adjectives and adverbs:</strong> The <em>ancient</em>, <em>shadowy</em> forest stretched endlessly. Tall trees creaked <em>slowly</em> in the wind, and the air smelled of <em>damp</em> moss.
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>WORD BANK — POWERFUL ADJECTIVES &amp; ADVERBS</div>
+<div class="wbank"><strong>Powerful adjectives:</strong>
+${['ancient','shadowy','glistening','crumbling','vast','silent','golden','misty'].map(w=>`<span class="wtag">${w}</span>`).join('')}
+</div>
+<div class="wbank"><strong>Powerful adverbs:</strong>
+${['quietly','suddenly','gently','slowly','brightly','softly','carefully','eerily'].map(w=>`<span class="wtag">${w}</span>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>USE YOUR FIVE SENSES</div>
+<div class="q-box">
+  <div class="q-label">Plan a setting description using your senses (a beach, a forest, a market — your choice)</div>
+  <div style="line-height:2.8;font-size:14px;margin-top:6px">
+    My setting is: <input class="inline" style="width:180px" placeholder="..."/><br/>
+    👀 I can SEE: <input class="inline" style="width:200px" placeholder="..."/><br/>
+    👂 I can HEAR: <input class="inline" style="width:200px" placeholder="..."/><br/>
+    👃 I can SMELL: <input class="inline" style="width:200px" placeholder="..."/><br/>
+    ✋ I can FEEL: <input class="inline" style="width:200px" placeholder="..."/>
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>SENTENCE FRAMES — USE THESE!</div>
+${[
+  ['#185FA5','#DBEAFE','The ___, ___ [place] stretched before me.'],
+  ['#0F6E56','#D1FAE5','I could hear the ___ sound of ___.'],
+  ['#C2410C','#FFEDD5','The air smelled ___ and ___.'],
+].map(([col,bg,f])=>`<div class="frame" style="background:${bg};border-color:${col};color:${col}">${f}</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">8</span>WRITE YOUR SETTING DESCRIPTION</div>
+${[
+  ['Opening','What is the setting? Use ONE strong adjective to introduce it.'],
+  ['Sights &amp; sounds','What can you see and hear? Use adjectives and adverbs.'],
+  ['Feelings &amp; atmosphere','How does the setting make you feel? What is the mood?'],
+].map(([t,q],i)=>`
+<div class="q-box">
+  <div class="q-label">${i+1}. ${t}</div>
+  <div class="q-text" style="font-size:12px;color:var(--gray)">${q}</div>
+  <textarea class="tarea" placeholder="Write your sentences here..."></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">9</span>CHECKLIST — CHECK AND IMPROVE</div>
+<div class="q-box">
+${[
+  'I used at least 3 adjectives to describe the setting.',
+  'I used at least 2 adverbs to describe actions.',
+  'I described what I can see, hear, smell or feel.',
+  'I chose powerful words, not boring ones.',
+  'My setting description has a clear mood or atmosphere.',
+].map(item=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px"><span style="width:18px;height:18px;border:2px solid var(--blue);border-radius:4px;flex-shrink:0;display:inline-block"></span>${item}</div>`).join('')}
+</div>
+
+<div class="remember" style="background:#185FA5">⭐ REMEMBER: Use your 5 senses + powerful adjectives + adverbs to bring a setting to life!</div>`,
+
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#0F6E56,#065F46)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 9</div>
+  <div class="banner-title">🔢 Maths — Measurement: Length &amp; Perimeter</div>
+  <div class="banner-sub">Centimetres · Metres · Perimeter of 2D Shapes · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Length = <strong>لمبائی (lambai)</strong> — Urdu · <strong>طول</strong> — Arabic<br/>
+Perimeter = <strong>محیط (muheet)</strong> — Urdu &amp; Arabic<br/>
+Centimetre (cm) and metre (m) are units we use to measure length!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>UNITS OF LENGTH</div>
+<div class="tip"><strong>Important rule:</strong> 100 centimetres (cm) = 1 metre (m). A metre is a BIGGER unit than a centimetre!</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Unit</th><th>Used for</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>cm (centimetre)</strong></td><td>Small things</td><td>A pencil is about 15 cm long.</td></tr>
+<tr><td><strong>m (metre)</strong></td><td>Bigger things</td><td>A door is about 2 m tall.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">2</span>WORD BANK</div>
+${[
+  ['📏 Length','How long something is — measured in cm or m.','لمبائی / طول','"The length of the table is 120 cm."'],
+  ['🟦 Perimeter','The total distance all the way around a shape.','محیط / محيط','"The perimeter of the square is 20 cm."'],
+  ['📐 Width','How wide something is — side to side.','چوڑائی / عرض','"The width of the room is 4 metres."'],
+  ['📊 Centimetre (cm)','A small unit of length. 100 cm = 1 m.','سینٹی میٹر / سنتيمتر','"My pencil is 15 cm long."'],
+  ['📈 Metre (m)','A bigger unit of length. 1 m = 100 cm.','میٹر / متر','"The classroom is 8 metres long."'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card">
+  <div class="v-word" style="color:#0F6E56">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>CONVERTING CM AND M</div>
+<div class="tip"><strong>Trick:</strong> To turn m into cm — multiply by 100. To turn cm into m — divide by 100!</div>
+<div class="example-box">
+2 m = 2 × 100 = <strong>200 cm</strong><br/>
+350 cm = 350 ÷ 100 = <strong>3.5 m</strong>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>WHAT IS PERIMETER?</div>
+<div class="tip"><strong>Perimeter</strong> = the distance all the way AROUND the outside of a shape. Add up all the sides!</div>
+<div style="text-align:center;margin:14px 0">
+  <svg viewBox="0 0 220 140" width="100%" style="max-width:280px;display:block;margin:0 auto;">
+    <rect x="40" y="20" width="140" height="80" fill="#D1FAE5" stroke="#0F6E56" stroke-width="3"/>
+    <text x="110" y="14" text-anchor="middle" font-size="13" font-weight="700" fill="#0F6E56">6 cm</text>
+    <text x="110" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#0F6E56">6 cm</text>
+    <text x="28" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="#0F6E56">3 cm</text>
+    <text x="195" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="#0F6E56">3 cm</text>
+  </svg>
+  <div style="font-size:13px;margin-top:6px;color:var(--gray)">Perimeter = 6 + 3 + 6 + 3 = <strong>18 cm</strong></div>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>PERIMETER FORMULAS</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Shape</th><th>Formula</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Square</strong></td><td>4 × side length</td><td>Side = 5 cm → Perimeter = 4 × 5 = 20 cm</td></tr>
+<tr><td><strong>Rectangle</strong></td><td>2 × (length + width)</td><td>Length 8, Width 3 → 2 × (8+3) = 22 cm</td></tr>
+<tr><td><strong>Any shape</strong></td><td>Add up ALL the sides</td><td>Just add every side together!</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">6</span>PRACTICE — FIND THE PERIMETER</div>
+<div class="three">
+${[
+  ['Square, side = 7 cm','28 cm'],
+  ['Rectangle, 9 cm × 4 cm','26 cm'],
+  ['Triangle: 5cm, 6cm, 7cm','18 cm'],
+].map(([q])=>`
+<div class="q-box" style="text-align:center;padding:10px">
+  <div style="font-family:Nunito,sans-serif;font-weight:700;font-size:13px;color:#0F6E56">${q}</div>
+  <input style="width:80px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:#0F6E56;margin-top:6px" placeholder="?"/>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>WORD PROBLEM PRACTICE</div>
+${[
+  ['📏','A rectangular garden is 12 m long and 5 m wide. What is its perimeter?','2 × (12 + 5) = ____'],
+  ['🟦','A square picture frame has sides of 9 cm. What is its perimeter?','4 × 9 = ____'],
+  ['📐','A triangle has sides of 4 cm, 6 cm and 8 cm. What is its perimeter?','4 + 6 + 8 = ____'],
+].map(([ico,q,hint],i)=>`
+<div class="q-box">
+  <div class="q-label">${ico} Problem ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:11px;color:var(--gray);font-style:italic;margin:4px 0">Hint: ${hint}</div>
+  <input class="dline" placeholder="My working and answer: ____"/>
+</div>`).join('')}
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: 100 cm = 1 m. Perimeter = add up ALL the sides of a shape!</div>`,
+
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#C2410C,#9A3412)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 9</div>
+  <div class="banner-title">💡 Science — Light: Sources &amp; Shadows</div>
+  <div class="banner-sub">Natural &amp; artificial light · How shadows form · Opaque, translucent, transparent</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Light = <strong>روشنی (roshni)</strong> — Urdu · <strong>ضوء</strong> — Arabic<br/>
+Shadow = <strong>سایہ (saya)</strong> — Urdu · <strong>ظل</strong> — Arabic<br/>
+Opaque = <strong>غیر شفاف</strong> — Urdu · <strong>معتم</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['💡 Light source','Anything that MAKES its own light.','روشنی کا ذریعہ / مصدر ضوء','"The sun is a natural light source. A lamp is an artificial one."','#C2410C'],
+  ['☀️ Natural light','Light that comes from nature — not made by people.','قدرتی روشنی / ضوء طبيعي','"The sun and fire give natural light."','#C2410C'],
+  ['🔦 Artificial light','Light made by people, using electricity or fire.','مصنوعی روشنی / ضوء اصطناعي','"A torch and a lightbulb give artificial light."','#C2410C'],
+  ['🌑 Shadow','A dark shape made when an object blocks light.','سایہ / ظل','"My shadow follows me on a sunny day."','#C2410C'],
+  ['⬛ Opaque','A material that blocks ALL light — no light passes through.','غیر شفاف / معتم','"Wood is opaque — light cannot pass through it."','#C2410C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>WHERE DOES LIGHT COME FROM?</div>
+<div class="tip"><strong>A light SOURCE</strong> is something that MAKES its own light. The moon is NOT a light source — it just reflects light from the sun!</div>
+<div class="two" style="margin-bottom:14px">
+<div class="card" style="background:#FFEDD5;border-color:#C2410C;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#C2410C;margin-bottom:8px">☀️ Natural Light Sources</div>
+  <div style="font-size:13px;line-height:1.8">The sun, fire, lightning, stars, fireflies.</div>
+</div>
+<div class="card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">🔦 Artificial Light Sources</div>
+  <div style="font-size:13px;line-height:1.8">Lightbulbs, torches, candles, phone screens.</div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>HOW DO SHADOWS FORM?</div>
+<div class="tip"><strong>A shadow forms when an OPAQUE object blocks light.</strong> Light travels in straight lines and cannot bend around objects!</div>
+${[
+  ['1','A light source (like the sun or a lamp) sends out light in straight lines.'],
+  ['2','An opaque object (like a person or a tree) blocks the light.'],
+  ['3','Light cannot pass through the object, so a dark shape forms behind it.'],
+  ['4','This dark shape is the SHADOW.'],
+].map(([n,text])=>`
+<div class="step">
+  <div class="step-n">${n}</div>
+  <div class="step-t">${text}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">4</span>OPAQUE, TRANSLUCENT, TRANSPARENT</div>
+<div class="tip"><strong>Materials let DIFFERENT amounts of light through!</strong></div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Material type</th><th>What happens to light</th><th>Examples</th></tr></thead><tbody>
+<tr><td><strong>⬛ Opaque</strong></td><td>NO light passes through — makes a dark, sharp shadow</td><td>Wood, metal, brick, a person</td></tr>
+<tr><td><strong>🌫️ Translucent</strong></td><td>SOME light passes through — blurry shapes can be seen</td><td>Frosted glass, tissue paper, thin curtains</td></tr>
+<tr><td><strong>🪟 Transparent</strong></td><td>Light passes through easily — no shadow forms!</td><td>Clear glass, clean water, clear plastic</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>HOW SHADOWS CHANGE</div>
+<div class="four" style="margin-bottom:14px">
+${[
+  ['🌅','Morning','Sun is low — shadows are LONG.'],
+  ['☀️','Midday','Sun is high — shadows are SHORT.'],
+  ['🌇','Evening','Sun is low again — shadows are LONG.'],
+  ['🌙','Night','No sunlight — no shadows from the sun!'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:#FFEDD5;border-color:#C2410C">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:#C2410C">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>STAYING SAFE IN SUNLIGHT</div>
+${[
+  ['🧴','Wear sunscreen','Protects your skin from strong sunlight.'],
+  ['🕶️','Wear sunglasses','Protects your eyes from bright sunlight.'],
+  ['👀','Never look directly at the sun','It can damage your eyes — even for a second!'],
+  ['🌳','Stay in shade','Especially during the hottest part of the day.'],
+].map(([ico,t,d])=>`
+<div class="step">
+  <div style="font-size:22px;width:28px;text-align:center">${ico}</div>
+  <div class="step-t"><strong>${t}</strong> — ${d}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>QUICK QUESTIONS</div>
+${[
+  ['What is a light source?','A light source is ...'],
+  ['Why do shadows form?','Shadows form because ...'],
+  ['What is the difference between opaque and transparent?','Opaque means … but transparent means …'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}: ${q}</div>
+  <div style="font-size:12px;color:#C2410C;font-style:italic;margin-bottom:4px">Frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:42px"></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">8</span>DRAW AND LABEL</div>
+<div class="q-box">
+  <div class="q-label">Draw a person standing in sunlight with their shadow. Label the light source and the shadow.</div>
+  <div style="border:2px dashed #C2410C;border-radius:8px;height:150px;background:#FFEDD5;display:flex;align-items:center;justify-content:center;color:#C2410C;font-size:13px;font-style:italic;margin:10px 0">☀️ Draw the sun, a person, and their shadow here!</div>
+</div>
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Light travels in straight lines. Opaque objects block light and make shadows. Never look directly at the sun! 💡</div>`,
+
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#534AB7,#3730A3)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 9</div>
+  <div class="banner-title">🌍 Humanities — Rules, Rights &amp; Responsibilities</div>
+  <div class="banner-sub">Why we have rules · Class &amp; school rules · Rights of a child · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 In your language:</strong><br/>
+Rule = <strong>قانون / اصول (qanoon/usool)</strong> — Urdu · <strong>قاعدة</strong> — Arabic<br/>
+Right = <strong>حق (haq)</strong> — Urdu &amp; Arabic<br/>
+Responsibility = <strong>ذمہ داری (zimmedari)</strong> — Urdu · <strong>مسؤولية</strong> — Arabic</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['📋 Rule','An instruction that tells people how to behave in a place.','قانون / قاعدة','"No running in the classroom is a school rule."','#534AB7'],
+  ['🌟 Right','Something every person should have or be allowed to do.','حق / حق','"Every child has the right to go to school."','#534AB7'],
+  ['🤝 Responsibility','A duty or job that you are expected to do.','ذمہ داری / مسؤولية','"It is my responsibility to do my homework."','#534AB7'],
+  ['👶 Rights of a child','Special protections every child deserves — like safety, education and play.','بچوں کے حقوق / حقوق الطفل','"The right to education is a right of every child."','#534AB7'],
+  ['⚖️ Fair','Treating everyone equally and justly.','منصفانہ / عادل','"It is fair when everyone follows the same rules."','#534AB7'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>WHY DO WE HAVE RULES?</div>
+<div class="tip"><strong>Rules help everyone stay safe, fair and happy</strong> — at home, at school, and in society.</div>
+<div class="four" style="margin-bottom:14px">
+${[
+  ['🛡️','Safety','Rules like "no running" keep people from getting hurt.'],
+  ['⚖️','Fairness','Rules like "take turns" make sure everyone is treated equally.'],
+  ['🤝','Respect','Rules like "listen when others speak" show respect for each other.'],
+  ['📚','Learning','Rules like "raise your hand" help everyone learn without disruption.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:#E0E7FF;border-color:#534AB7">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:#534AB7">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>CLASS &amp; SCHOOL RULES</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Rule</th><th>Why it matters</th></tr></thead><tbody>
+<tr><td>🙋 Raise your hand before speaking</td><td>So everyone gets a turn and the class stays organised.</td></tr>
+<tr><td>🚶 Walk, don't run, indoors</td><td>To keep everyone safe from bumps and falls.</td></tr>
+<tr><td>👂 Listen when others are talking</td><td>Shows respect and helps everyone understand.</td></tr>
+<tr><td>🧹 Tidy up after yourself</td><td>Keeps the classroom clean and ready for everyone.</td></tr>
+<tr><td>🤝 Be kind to classmates</td><td>Makes school a safe, happy place for everyone.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">4</span>RIGHTS AND RESPONSIBILITIES GO TOGETHER</div>
+<div class="tip"><strong>Important idea:</strong> Every RIGHT comes with a RESPONSIBILITY. If you have the right to be heard, you have the responsibility to also listen to others!</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>My RIGHT</th><th>My RESPONSIBILITY</th></tr></thead><tbody>
+<tr><td>The right to learn</td><td>The responsibility to listen and try my best</td></tr>
+<tr><td>The right to be safe</td><td>The responsibility to follow safety rules</td></tr>
+<tr><td>The right to be heard</td><td>The responsibility to listen to others too</td></tr>
+<tr><td>The right to play</td><td>The responsibility to share and be kind</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">5</span>RIGHTS OF A CHILD</div>
+<div class="tip"><strong>The United Nations says every child in the world has special rights.</strong> These protect children everywhere.</div>
+<div class="two">
+${[
+  ['📚 Right to education','Every child has the right to go to school and learn.'],
+  ['🏠 Right to a safe home','Every child deserves a safe place to live.'],
+  ['🍎 Right to food &amp; health','Every child deserves enough food and healthcare.'],
+  ['🎉 Right to play','Every child has the right to rest, play and have fun.'],
+].map(([t,d])=>`
+<div style="background:#E0E7FF;border:2px solid #534AB7;border-radius:var(--rsm);padding:10px">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#534AB7">${t}</div>
+  <div style="font-size:12px;margin-top:4px">${d}</div>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>MY OWN RULES, RIGHTS &amp; RESPONSIBILITIES</div>
+<div class="q-box">
+  <div class="q-label">Complete the table about YOUR life</div>
+  <div style="line-height:2.8;font-size:14px;margin-top:6px">
+    One rule at my school is: <input class="inline" style="width:200px" placeholder="?"/><br/>
+    One right I have is: <input class="inline" style="width:200px" placeholder="?"/><br/>
+    One responsibility I have is: <input class="inline" style="width:200px" placeholder="?"/><br/>
+    Why rules are important: <input class="inline" style="width:200px" placeholder="?"/>
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">7</span>DRAW AND WRITE</div>
+<div class="q-box">
+  <div class="q-label">Draw a picture showing you following ONE important rule (at home or school).</div>
+  <div style="border:2px dashed #534AB7;border-radius:8px;height:150px;background:#E0E7FF;display:flex;align-items:center;justify-content:center;color:#534AB7;font-size:13px;font-style:italic">📋 Draw yourself following a rule here!</div>
+</div>
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: Rules keep us safe and fair. Rights and responsibilities always go together! 🤝</div>`,
+
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#B71C1C,#991B1B)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 9</div>
+  <div class="banner-title">✝️ Bible — Rahab: Courage to Do What is Right</div>
+  <div class="banner-sub">Joshua 2 · Memory Verse: Joshua 2:11</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="l1-bridge"><strong>🌍 Did you know?</strong><br/>
+Rahab's story is found in the book of Joshua, just after Moses. It teaches us about COURAGE — doing the right thing even when it is risky!<br/>
+Courage = <strong>ہمت (himmat)</strong> — Urdu · <strong>شجاعة</strong> — Arabic</div>
+
+<div class="verse-box">
+  <div style="font-size:11px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;letter-spacing:.5px;margin-bottom:6px">🌟 MEMORY VERSE — Joshua 2:11</div>
+  <div class="verse-text">"...for the Lord your God is God in heaven above and on the earth below."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:8px">— Joshua 2:11</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORD BANK</div>
+${[
+  ['🦁 Courage','Being brave enough to do the right thing, even when it is scary.','ہمت / شجاعة','"Rahab showed great courage by helping the spies."','#B71C1C'],
+  ['🕵️ Spy','A person sent secretly to find out information about an enemy.','جاسوس / جاسوس','"Joshua sent two spies into the city of Jericho."','#B71C1C'],
+  ['🏠 Hide','To keep someone or something out of sight, away from danger.','چھپانا / إخفاء','"Rahab decided to hide the spies on her roof."','#B71C1C'],
+  ['⚠️ Risky','Something that could be dangerous or have a bad result.','خطرناک / محفوف بالمخاطر','"Helping the spies was a risky decision for Rahab."','#B71C1C'],
+  ['🤝 Protect','To keep someone safe from harm.','حفاظت کرنا / حماية','"Rahab chose to protect the spies from the king\'s soldiers."','#B71C1C'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">2</span>THE STORY OF RAHAB</div>
+<div class="story" style="background:var(--red-light);border-color:#E57373">
+<strong style="font-size:15px;font-family:Nunito,sans-serif;color:var(--red)">📜 Rahab Hides the Spies — Joshua 2</strong><br/><br/>
+<strong>Beginning —</strong> Joshua, the leader of Israel, sent two men to secretly explore the city of Jericho before the Israelites attacked. The men went to stay at the house of a woman named Rahab.<br/><br/>
+<strong>Middle —</strong> The King of Jericho heard that spies had entered the city and sent soldiers to Rahab's house to find them. But Rahab had ALREADY hidden the two spies under stalks of flax on her roof! She bravely told the soldiers the men had already left the city — even though this was risky and dangerous for her.<br/><br/>
+After the soldiers left, Rahab spoke to the spies. She said she believed in their God, because she had heard about the amazing things He had done for Israel. She said: <em>"The Lord your God is God in heaven above and on the earth below."</em> She asked the spies to protect her family when Israel attacked the city.<br/><br/>
+<strong>End —</strong> The spies promised to protect Rahab and her family. She helped them escape safely from the city using a rope through her window. Because of her courage and faith, Rahab and her whole family were saved when Jericho was later defeated.
+</div>
+
+<div class="sec-head"><span class="sec-num">3</span>STORY IN ORDER</div>
+<div style="counter-reset:story-step">
+${[
+  ['Joshua sends two spies to explore the city of Jericho.','1'],
+  ['The spies stay at the house of Rahab.','2'],
+  ['The King\'s soldiers come looking for the spies.','3'],
+  ['Rahab hides the spies and tells the soldiers they already left.','4'],
+  ['Rahab tells the spies she believes in their God.','5'],
+  ['The spies promise to protect Rahab and her family.','6'],
+].map(([ev,n])=>`
+<div style="display:flex;gap:10px;align-items:center;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px 14px;margin-bottom:8px">
+  <div style="background:var(--red);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:800;font-size:14px;flex-shrink:0">${n}</div>
+  <span style="font-size:14px">${ev}</span>
+</div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>COMPREHENSION — ANSWER THESE</div>
+${[
+  ['Why did Joshua send spies into Jericho?','Joshua sent spies to ...'],
+  ['What risky thing did Rahab do for the spies?','Rahab risked her safety by ...'],
+  ['What did Rahab say she believed about God?','Rahab said that God is ...'],
+  ['What did the spies promise to do for Rahab?','The spies promised to ...'],
+].map(([q,frame],i)=>`
+<div class="q-box">
+  <div class="q-label">Question ${i+1}</div>
+  <div class="q-text">${q}</div>
+  <div style="font-size:12px;color:var(--red);font-style:italic;margin:4px 0 4px">Sentence frame: ${frame}</div>
+  <textarea class="tarea" style="min-height:42px"></textarea>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>THE MEMORY VERSE — LEARN IT!</div>
+<div class="verse-box">
+  <div class="verse-text">"...for the Lord your God is God in heaven above and on the earth below."</div>
+  <div style="font-size:11px;color:var(--gray);margin-top:6px">— Joshua 2:11</div>
+</div>
+<div class="tip"><strong>How to learn:</strong> Read it 3 times → cover 1 word → say it → cover 2 words → say it → keep going until you can say it all!</div>
+<div class="q-box">
+  <div class="q-label">Fill in the missing words:</div>
+  <div style="font-size:15px;line-height:3;font-family:Nunito,sans-serif;margin-top:8px">
+    "...for the Lord your <input class="inline" style="width:60px" placeholder="?"/> is God in <input class="inline" style="width:70px" placeholder="?"/> above<br/>
+    and on the <input class="inline" style="width:70px" placeholder="?"/> below."<br/>
+    — <input class="inline" style="width:120px" placeholder="book &amp; verse?"/>
+  </div>
+</div>
+<div class="q-box">
+  <div class="q-label">Write the verse from memory — no peeking! 😊</div>
+  <textarea class="tarea" style="min-height:55px" placeholder="...for the Lord your God ..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">6</span>LIFE APPLICATION — COURAGE TO DO WHAT IS RIGHT</div>
+<div class="tip"><strong>Rahab had courage</strong> even though she was scared and it was risky. Real courage isn't about NOT feeling scared — it's doing the right thing ANYWAY.</div>
+${[
+  ['#EF5350','❤️ A time I had to be brave to do the right thing:'],
+  ['#F97316','🧡 One way I can show courage at school this week:'],
+  ['#EAB308','💛 Someone I know who has shown great courage:'],
+  ['#22C55E','💚 How I can help or protect someone, like Rahab helped the spies:'],
+  ['#3B82F6','💙 A risky choice that could still be the RIGHT choice:'],
+  ['#A855F7','💜 My prayer or thought about courage this week:'],
+].map(([col,label])=>`
+<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+  <div style="width:5px;height:30px;background:${col};border-radius:4px;margin-top:2px"></div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;font-family:Nunito,sans-serif;color:${col}">${label}</div>
+    <input class="dline" style="border-bottom-color:${col}"/>
+  </div>
+</div>`).join('')}
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: Rahab risked her own safety to do the right thing — and God protected her and her family. Real courage means doing what is right, even when it's hard! 🦁</div>`,
+
+};
+
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML=''; pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur) el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render()};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week9_Notes');</script>
+</body>
+</html>

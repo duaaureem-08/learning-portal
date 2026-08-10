@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 — Day 2 Challenge Worksheets · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#FEE2E2;color:#7F1D1D;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #DC2626;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:480px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.challenge-banner{background:linear-gradient(135deg,#7F1D1D,#DC2626);color:white;border-radius:var(--radius-sm);padding:12px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.open-box{width:100%;min-height:90px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.analysis-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.analysis-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.analysis-table td{padding:10px 14px;border:1px solid #E5E7EB;font-size:0.88rem;vertical-align:top;}
+.analysis-table tr:nth-child(even) td{background:#F8FAFF;}
+.analysis-table textarea{width:100%;min-height:70px;padding:8px;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:0.88rem;resize:vertical;}
+.analysis-table textarea:focus{outline:2px solid var(--accent,#888);border-radius:6px;}
+.vocab-challenge-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;}
+.vcc{background:#F8FAFF;border:2px solid #E5E7EB;border-radius:var(--radius-sm);padding:12px;}
+.vcc label{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);display:block;margin-bottom:4px;}
+.vcc textarea{width:100%;min-height:70px;padding:6px;border-radius:6px;border:1.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.85rem;resize:none;}
+.vcc textarea:focus{outline:none;border-color:var(--accent,#888);}
+.passage-box{background:linear-gradient(135deg,#F8FAFF,#EFF6FF);border-radius:var(--radius-sm);padding:18px 22px;border-left:4px solid var(--accent,#888);margin:14px 0;font-style:italic;font-size:0.95rem;line-height:1.7;}
+.step-list{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+.step-item{display:flex;gap:12px;background:#F8FAFF;border-radius:var(--radius-sm);padding:12px 16px;border:2px solid #E5E7EB;}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--accent,#888);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9rem;flex-shrink:0;}
+.step-q{font-weight:800;font-size:0.92rem;margin-bottom:6px;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:6px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:top;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.correction-box{width:100%;margin-top:4px;padding:6px 8px;border-radius:6px;border:1.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.82rem;}
+.fill-in{padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;}
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.hero-emoji{display:none;}.card{padding:16px;}.vocab-challenge-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">⚠️ Day 2 — Challenge</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span>📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span>✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span>🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span>💡</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span>📋</span> Social Studies</button>
+</div>
+
+<!-- BIBLE CHALLENGE -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">📖 Bible · Week 9</div>
+    <div class="hero-title">Rahab —<br>Courage to Do What is Right</div>
+    <div class="hero-sub">Deep analysis · Moral courage · Faith in action · Joshua 2:11</div>
+    <div class="hero-emoji">🦁</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 9 topics, harder questions. Read carefully. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary: Use Each Word in a Sentence <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Do NOT just define the word. Write a sentence that <strong>shows</strong> you understand its meaning in context.</p>
+    <div class="vocab-challenge-grid">
+      <div class="vcc"><label>Courage</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Risky</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Protect</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Faith</label><textarea placeholder="Write a sentence…"></textarea></div>
+      <div class="vcc"><label>Loyalty</label><textarea placeholder="Write a sentence…"></textarea></div>
+    </div>
+    <div style="margin-top:12px;"><button class="audio-btn" onclick="speak('Courage means being brave enough to do the right thing even when it is scary. Risky means something could be dangerous. Protect means to keep someone safe. Faith means trusting in God. Loyalty means staying true to someone you care about.')">🔊 Hear definitions</button></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📖 Part B — Analysis &amp; Evidence <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Read this passage. Then answer ALL questions:</p>
+    <div class="passage-box">
+      "I know that the Lord has given you this land... for the Lord your God is God in heaven above and on the earth below. Now then, please swear to me by the Lord that you will show kindness to my family, because I have shown kindness to you." — Joshua 2:9–12
+    </div>
+    <table class="analysis-table">
+      <tr><th style="width:40%;">Question</th><th>Your answer — use evidence from the passage</th></tr>
+      <tr><td>a) Rahab says "I know that the Lord has given you this land." What does this tell us about what Rahab had heard about Israel's God, even though she was not Israelite?</td><td><textarea placeholder="Rahab knew this because …"></textarea></td></tr>
+      <tr><td>b) Rahab asks the spies to "swear" (make a serious promise) to protect her family. Why do you think this was so important to her?</td><td><textarea placeholder="It was important because …"></textarea></td></tr>
+      <tr><td>c) Rahab says "I have shown kindness to you." What kindness had she shown? Why does she remind the spies of this?</td><td><textarea placeholder="Rahab showed kindness by … She reminds them because …"></textarea></td></tr>
+      <tr><td>d) This conversation happens in SECRET, on Rahab's roof. Why is the setting important to the story? What would have happened if someone had overheard?</td><td><textarea placeholder="The secret setting matters because …"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Compare each character's choice and consequence:</p>
+    <table class="analysis-table">
+      <tr><th>Character</th><th>Choice they made</th><th>Consequence they received</th></tr>
+      <tr><td><strong>Rahab</strong></td><td><textarea style="min-height:50px;" placeholder="What did Rahab choose to do?"></textarea></td><td><textarea style="min-height:50px;" placeholder="What happened to Rahab?"></textarea></td></tr>
+      <tr><td><strong>The King of Jericho</strong></td><td><textarea style="min-height:50px;" placeholder="What did the king choose?"></textarea></td><td><textarea style="min-height:50px;" placeholder="What happened to the king's city?"></textarea></td></tr>
+      <tr><td><strong>The spies</strong></td><td><textarea style="min-height:50px;" placeholder="What did the spies choose to do?"></textarea></td><td><textarea style="min-height:50px;" placeholder="What happened to the spies?"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Rahab's faith led to brave ACTION — she did not just believe, she DID something risky to help the spies. Using TWO specific moments from the story, explain how Rahab's belief and her actions were connected.</div>
+          <textarea class="open-box" placeholder="Moment 1:&#10;&#10;Moment 2:&#10;&#10;Connection between belief and action:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A classmate says: "Rahab lied to the soldiers, so she could not have been doing the right thing." Write a careful argument either AGREEING or DISAGREEING with this view. Use at least THREE points to support your argument.</div>
+          <textarea class="open-box" placeholder="I agree/disagree because …&#10;&#10;Point 1:&#10;Point 2:&#10;Point 3:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED RESPONSE: Rahab was an outsider — not an Israelite — yet she became part of the story of God's people because of her courage and faith. What does her story teach us about who God can use to do important things? Write a paragraph giving at least THREE points.</div>
+          <textarea class="open-box" style="min-height:160px;" placeholder="Point 1:&#10;&#10;Point 2:&#10;&#10;Point 3:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;">If FALSE — write the correct information in the correction box.</p>
+    <div id="bible-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTFCh('bible')">Check Answers ✅</button></div>
+    <div id="bible-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ENGLISH CHALLENGE -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">✏️ English · Week 9</div>
+    <div class="hero-title">Descriptive Writing —<br>Settings</div>
+    <div class="hero-sub">Writer's effect · Building atmosphere · Word choice analysis</div>
+    <div class="hero-emoji">🏞️</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Same Week 9 topics, harder questions. Write in full sentences.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary: Use Each Term with Examples <span class="marks">5 marks</span></div>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Your example sentence</th><th>What effect does it create?</th></tr>
+      <tr><td><strong>Setting</strong></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Adjective</strong></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Adverb</strong></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Atmosphere</strong></td><td><textarea style="min-height:45px;" placeholder="Write a sentence that creates a SPOOKY atmosphere…"></textarea></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Word choice</strong></td><td><textarea style="min-height:45px;" placeholder="Write a boring sentence, then rewrite it with better word choice…"></textarea></td><td><textarea style="min-height:45px;" placeholder="…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✏️ Part B — Analyse &amp; Create <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Read this passage carefully. Then answer ALL questions:</p>
+    <div class="passage-box">
+      "The old market buzzed loudly with chattering voices. Bright, colourful stalls lined the narrow street, overflowing with ripe mangoes and fragrant spices. The hot sun beat down relentlessly, but nobody seemed to mind as they bargained cheerfully over the noisy crowd."
+    </div>
+    <table class="analysis-table">
+      <tr><th style="width:40%;">Question</th><th>Your answer — quote the text</th></tr>
+      <tr><td>a) Find THREE adjectives in the passage. Write them and explain what each one makes the reader imagine.</td><td><textarea placeholder="Adjective 1:&#10;Effect:&#10;&#10;Adjective 2:&#10;Effect:&#10;&#10;Adjective 3:&#10;Effect:"></textarea></td></tr>
+      <tr><td>b) Find TWO adverbs in the passage. What do they tell us about HOW the actions happen?</td><td><textarea placeholder="Adverb 1: … tells us …&#10;Adverb 2: … tells us …"></textarea></td></tr>
+      <tr><td>c) Which of the FIVE SENSES does this passage use? Give evidence for each sense you find.</td><td><textarea placeholder="Sight: …&#10;Sound: …&#10;Smell: …"></textarea></td></tr>
+      <tr><td>d) What overall ATMOSPHERE (mood) does the writer create in this passage? How do the word choices help create that atmosphere?</td><td><textarea placeholder="The atmosphere is … The writer creates this by …"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Improve each boring sentence using adjectives, adverbs and sensory detail:</p>
+    <table class="analysis-table">
+      <tr><th>Original (boring)</th><th>Your improved version</th><th>Which senses did you use?</th></tr>
+      <tr><td>The room was empty.</td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td>The beach was nice.</td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td>The forest was scary.</td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Write a descriptive paragraph of 6–7 sentences about a SPOOKY setting (a haunted house, a dark forest at night, an abandoned building). You MUST use at least FIVE adjectives, THREE adverbs, and describe at least THREE of the five senses. Underline your adjectives and circle your adverbs.</div>
+          <textarea class="open-box" placeholder="Write your spooky setting description here…"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A student writes: "The big, big, big house was big." What is WRONG with this sentence? Explain why repeating the same adjective is a weak choice, and rewrite the sentence using THREE different, more powerful adjectives.</div>
+          <textarea class="open-box" placeholder="What is wrong:&#10;&#10;Improved sentence:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED RESPONSE: Explain why descriptive writing is important. Use THREE of these points: (a) it helps the reader imagine the scene clearly, (b) it creates mood and atmosphere, (c) it makes writing more interesting to read. Give an example from your own writing for each point.</div>
+          <textarea class="open-box" style="min-height:160px;" placeholder="Point a:&#10;&#10;Point b:&#10;&#10;Point c:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="eng-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTFCh('eng')">Check Answers ✅</button></div>
+    <div id="eng-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- MATHS CHALLENGE -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">🔢 Maths · Week 9</div>
+    <div class="hero-title">Measurement —<br>Length &amp; Perimeter</div>
+    <div class="hero-sub">Multi-step problems · Missing sides · Reasoning · Real-world applications</div>
+    <div class="hero-emoji">📏</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Show ALL working. Write reasoning in full sentences where asked.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary: Explain with Examples <span class="marks">5 marks</span></div>
+    <table class="analysis-table">
+      <tr><th>Word</th><th>Definition in your own words</th><th>Example showing the meaning</th></tr>
+      <tr><td><strong>Length</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Perimeter</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Width</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Centimetre / Metre</strong></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td><td><textarea style="min-height:50px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>2D shape</strong></td><td><textarea style="min-height:50px;" placeholder="A 2D shape is one that has…"></textarea></td><td><textarea style="min-height:50px;" placeholder="Example:"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🔢 Part B — Number Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Find the MISSING side length. Show your working:</p>
+    <table class="analysis-table">
+      <tr><th>Problem</th><th>Missing side</th><th>How I worked it out</th></tr>
+      <tr><td>Square: Perimeter = 36 cm. Side = ?</td><td><input type="text" class="fill-in" data-ans="9" placeholder="?"></td><td><textarea style="min-height:40px;" placeholder="I divided …"></textarea></td></tr>
+      <tr><td>Rectangle: Perimeter = 30 cm, length = 9 cm. Width = ?</td><td><input type="text" class="fill-in" data-ans="6" placeholder="?"></td><td><textarea style="min-height:40px;" placeholder="…"></textarea></td></tr>
+      <tr><td>Square: Perimeter = 48 m. Side = ?</td><td><input type="text" class="fill-in" data-ans="12" placeholder="?"></td><td><textarea style="min-height:40px;" placeholder="…"></textarea></td></tr>
+    </table>
+    <div style="margin-top:10px;"><button class="btn" style="background:var(--maths);" onclick="checkMissing()">Check Answers ✅</button></div>
+    <div id="missing-result" class="quiz-feedback"></div>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Work out the perimeter of these IRREGULAR shapes. Show your working:</p>
+    <table class="analysis-table">
+      <tr><th>Shape description</th><th>Working &amp; Perimeter</th></tr>
+      <tr><td>An L-shape with sides: 5cm, 3cm, 2cm, 2cm, 3cm, 5cm</td><td><textarea style="min-height:60px;" placeholder="Add all sides:"></textarea></td></tr>
+      <tr><td>A pentagon (5 sides) all 6cm long</td><td><textarea style="min-height:60px;" placeholder="5 × 6 ="></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part C — Reasoning &amp; Problem Solving <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">A rectangular swimming pool is 15 m long and 8 m wide. A path goes all the way around the OUTSIDE edge of the pool. If the path adds 1 m to each side, what is the NEW perimeter of the pool plus path? Show all working.</div>
+          <textarea class="open-box" placeholder="New length:&#10;New width:&#10;New perimeter:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A farmer has 100 m of fencing. He wants to build a rectangular field using ALL the fencing. Find THREE different possible length/width combinations that would use exactly 100 m of fencing. Show your working for each.</div>
+          <textarea class="open-box" placeholder="Option 1: length = ___, width = ___ → perimeter check&#10;Option 2:&#10;Option 3:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">REASONING: A square and a rectangle both have a perimeter of 24 cm. Is it possible for them to have the SAME area? Explain your reasoning with examples and calculations.</div>
+          <textarea class="open-box" placeholder="Square: side = ___, area = ___&#10;Rectangle: length = ___, width = ___, area = ___&#10;&#10;Conclusion:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-q">EXTENSION: A classroom needs a skirting board around the bottom of all four walls, except for one doorway that is 1m wide. The room is 6m by 5m. How many metres of skirting board are needed? Show all working.</div>
+          <textarea class="open-box" placeholder="Total perimeter:&#10;Subtract doorway:&#10;Final answer:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="maths-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTFCh('maths')">Check Answers ✅</button></div>
+    <div id="maths-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SCIENCE CHALLENGE -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">💡 Science · Week 9</div>
+    <div class="hero-title">Light —<br>Sources &amp; Shadows</div>
+    <div class="hero-sub">Deep analysis · Fair tests · Reflection &amp; refraction concepts</div>
+    <div class="hero-emoji">🌑</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Use scientific vocabulary. Write in full sentences. Show all reasoning.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary: Explain with Analogies <span class="marks">5 marks</span></div>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Scientific meaning</th><th>Analogy — "It is like ___ because ___"</th></tr>
+      <tr><td><strong>Light source</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;" placeholder="A light source is like … because …"></textarea></td></tr>
+      <tr><td><strong>Shadow</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;" placeholder="A shadow is like … because …"></textarea></td></tr>
+      <tr><td><strong>Opaque</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Translucent</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;" placeholder="…"></textarea></td></tr>
+      <tr><td><strong>Transparent</strong></td><td><textarea style="min-height:55px;"></textarea></td><td><textarea style="min-height:55px;" placeholder="…"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🔬 Part B — Science Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. A student placed FOUR different objects between a torch and a wall. Study the results:</p>
+    <table class="analysis-table">
+      <tr><th>Object</th><th>What happened on the wall</th><th>Why? Use scientific vocabulary.</th></tr>
+      <tr><td><strong>A piece of wood</strong></td><td>A dark, sharp shadow appeared.</td><td><textarea style="min-height:50px;" placeholder="Wood is … because …"></textarea></td></tr>
+      <tr><td><strong>Frosted glass</strong></td><td>A faint, blurry shadow appeared.</td><td><textarea style="min-height:50px;" placeholder="Frosted glass is … because …"></textarea></td></tr>
+      <tr><td><strong>Clear plastic</strong></td><td>No shadow appeared at all.</td><td><textarea style="min-height:50px;" placeholder="Clear plastic is … because …"></textarea></td></tr>
+      <tr><td><strong>A mirror</strong></td><td>The light bounced back in a different direction.</td><td><textarea style="min-height:50px;" placeholder="This happens because …"></textarea></td></tr>
+    </table>
+
+    <hr style="margin:20px 0;border-color:#E5E7EB;">
+    <p style="font-weight:800;margin-bottom:10px;">2. Explain how shadow length changes through the day:</p>
+    <textarea class="open-box" placeholder="In the morning the shadow is … because the sun is …&#10;At midday the shadow is … because …&#10;In the evening the shadow is … because …"></textarea>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Explain why light travels in STRAIGHT lines and what this has to do with how shadows are formed. Use a diagram or description showing the light source, the object, and the shadow.</div>
+          <textarea class="open-box" placeholder="Light travels in straight lines, which means …&#10;&#10;This causes a shadow because …"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">A student says: "The moon makes its own light at night." Is this correct? Explain what the moon actually does, and why it is NOT a light source.</div>
+          <textarea class="open-box" placeholder="This is incorrect because …&#10;&#10;The moon actually …"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">DESIGN A FAIR TEST: You want to find out which material makes the BEST window covering to block out sunlight (for someone who works night shifts and sleeps during the day). Write a complete investigation plan:</div>
+          <table class="analysis-table" style="margin-top:10px;">
+            <tr><th>Section</th><th>Your answer</th></tr>
+            <tr><td>My question (Does ___ affect ___?)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>My prediction (I think ___ because ___)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will CHANGE (one thing only)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I will MEASURE (the outcome)</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I keep the SAME — variable 1</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>What I keep the SAME — variable 2</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+            <tr><td>My conclusion will say: "I found out that…"</td><td><textarea style="min-height:40px;"></textarea></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="sci-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTFCh('sci')">Check Answers ✅</button></div>
+    <div id="sci-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- SOCIAL STUDIES CHALLENGE -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">⚠️ Challenge Worksheet — HARD</div>
+    <div class="hero-week">📋 Social Studies · Week 9</div>
+    <div class="hero-title">Rules, Rights &amp;<br>Responsibilities</div>
+    <div class="hero-sub">Deep analysis · Civics reasoning · Decision making</div>
+    <div class="hero-emoji">📋</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="challenge-banner">⚠️ CHALLENGE LEVEL — Use full sentences. Give evidence for opinions.</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary: Use in Real Contexts <span class="marks">5 marks</span></div>
+    <table class="analysis-table">
+      <tr><th>Term</th><th>Your sentence using the term</th><th>What would happen WITHOUT this in a community?</th></tr>
+      <tr><td><strong>Rule</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Right</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Responsibility</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Fair</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Rights of a child</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📋 Part B — Civics Skills <span class="marks">10 marks</span></div>
+    <p style="font-weight:800;margin-bottom:10px;">1. Read this scenario. Then answer all questions:</p>
+    <div class="passage-box">
+      "At Riverside School, students complained that the playground was unfair — older students always got the best equipment first, leaving younger students with nothing. The school council met and created a new rule: each class gets 15 minutes of priority playground time, on a rotating schedule, so every class gets a turn."
+    </div>
+    <table class="analysis-table">
+      <tr><th style="width:40%;">Question</th><th>Your answer</th></tr>
+      <tr><td>a) What PROBLEM led to the school creating this new rule?</td><td><textarea placeholder="The problem was …"></textarea></td></tr>
+      <tr><td>b) How does the new rule make things more FAIR for all students?</td><td><textarea placeholder="The new rule is fair because …"></textarea></td></tr>
+      <tr><td>c) What RESPONSIBILITY do students now have to make this rule work well?</td><td><textarea placeholder="Students now have the responsibility to …"></textarea></td></tr>
+    </table>
+
+    <p style="font-weight:800;margin:16px 0 10px;">2. Compare RULES at school with LAWS in a country:</p>
+    <table class="analysis-table">
+      <tr><th>Feature</th><th>School rules</th><th>National laws</th></tr>
+      <tr><td><strong>Who makes them?</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>What happens if you break them?</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+      <tr><td><strong>Why do they exist?</strong></td><td><textarea style="min-height:50px;"></textarea></td><td><textarea style="min-height:50px;"></textarea></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part C — Critical Thinking <span class="marks">10 marks</span></div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-q">Imagine you are creating ONE new rule for your classroom. Explain: (a) what the rule is, (b) why it is needed, (c) how it would be fair to everyone, and (d) what responsibility students would need to take to follow it.</div>
+          <textarea class="open-box" placeholder="My new rule:&#10;&#10;Why it is needed:&#10;&#10;Why it is fair:&#10;&#10;Responsibility needed:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-q">Some people say "rules limit our freedom." Others say "rules protect our freedom." Write a balanced argument considering BOTH views, then give your own conclusion.</div>
+          <textarea class="open-box" placeholder="Argument that rules limit freedom: …&#10;&#10;Argument that rules protect freedom: …&#10;&#10;My conclusion:"></textarea>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-q">EXTENDED RESPONSE: Every child in the world has rights, like the right to education and the right to be safe. Choose ONE right of a child and explain: (a) why it matters, (b) what could go wrong if children DIDN'T have this right, and (c) what adults' responsibility is in protecting it. Write at least 5 sentences.</div>
+          <textarea class="open-box" style="min-height:160px;" placeholder="The right I chose:&#10;&#10;Why it matters:&#10;&#10;What could go wrong without it:&#10;&#10;Adults' responsibility:"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False + Correction <span class="marks">5 marks</span></div>
+    <div id="soc-tf-ch"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTFCh('soc')">Check Answers ✅</button></div>
+    <div id="soc-tf-ch-result" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.rate=0.85;u.lang='en-GB';
+  window.speechSynthesis.speak(u);
+}
+
+const tfChData={
+  bible:[
+    {s:'Rahab was an Israelite woman who already believed in God.',ans:false,correction:'Rahab was NOT an Israelite — she lived in Jericho and had only HEARD about God\'s power.'},
+    {s:'Rahab hid the spies under flax on her roof.',ans:true},
+    {s:'Rahab asked the spies to swear they would protect her family.',ans:true},
+    {s:'The King of Jericho found and captured the spies.',ans:false,correction:'The King\'s soldiers did NOT find the spies — Rahab successfully hid them.'},
+    {s:'Joshua 2:11 describes God as ruling in heaven AND on earth.',ans:true},
+  ],
+  eng:[
+    {s:'Adjectives describe HOW an action happens.',ans:false,correction:'ADJECTIVES describe nouns. ADVERBS describe how an action happens.'},
+    {s:'Using your five senses can make a setting description more vivid.',ans:true},
+    {s:'Repeating the same adjective multiple times makes writing stronger.',ans:false,correction:'Repeating the same adjective makes writing WEAKER and boring — use varied, powerful words.'},
+    {s:'Atmosphere means the mood or feeling created by a piece of writing.',ans:true},
+    {s:'Word choice does not affect how a reader feels about a setting.',ans:false,correction:'Word choice has a BIG effect on how a reader imagines and feels about a setting.'},
+  ],
+  maths:[
+    {s:'Perimeter is the distance all the way around the outside of a shape.',ans:true},
+    {s:'A square with perimeter 36 cm has sides of 12 cm each.',ans:false,correction:'36 ÷ 4 = 9 cm per side, not 12 cm.'},
+    {s:'1 metre is equal to 100 centimetres.',ans:true},
+    {s:'A rectangle with length 9cm and width 6cm has a perimeter of 15cm.',ans:false,correction:'Perimeter = 2 × (9+6) = 30cm, not 15cm.'},
+    {s:'You can find a missing side of a square if you know its perimeter.',ans:true},
+  ],
+  sci:[
+    {s:'The moon makes its own light.',ans:false,correction:'The moon does NOT make its own light — it reflects light from the sun.'},
+    {s:'Opaque materials block all light and create dark shadows.',ans:true},
+    {s:'Translucent materials let NO light through at all.',ans:false,correction:'Translucent materials let SOME light through — only opaque materials block all light.'},
+    {s:'Light travels in straight lines.',ans:true},
+    {s:'Shadows are always the same length throughout the day.',ans:false,correction:'Shadows change length depending on the position of the sun — longer in morning/evening, shorter at midday.'},
+  ],
+  soc:[
+    {s:'Rules only exist to make life harder for children.',ans:false,correction:'Rules exist to keep people SAFE and treat everyone FAIRLY — not to make life harder.'},
+    {s:'Rights and responsibilities are always connected to each other.',ans:true},
+    {s:'Every child in the world has the right to education.',ans:true},
+    {s:'School rules and national laws serve completely different purposes with nothing in common.',ans:false,correction:'Both school rules and national laws exist to keep people safe and treat them fairly — they share that purpose.'},
+    {s:'It is fair when rules apply equally to everyone.',ans:true},
+  ],
+};
+
+function buildTFCh(key){
+  const data=tfChData[key];const area=document.getElementById(key+'-tf-ch');if(!area)return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True/False + Correction if False</th></tr>';
+  data.forEach((item,i)=>{h+=`<tr><td>${item.s}</td><td>
+    <button class="tf-btn" id="tfc-${key}-${i}-T" onclick="selTFCh('${key}',${i},'T')">✅ True</button>
+    <button class="tf-btn" id="tfc-${key}-${i}-F" onclick="selTFCh('${key}',${i},'F')">❌ False</button>
+    <br><input class="correction-box" id="tfc-corr-${key}-${i}" placeholder="If FALSE — write the correct answer here…">
+  </td></tr>`;});
+  h+='</table>';area.innerHTML=h;
+}
+['bible','eng','maths','sci','soc'].forEach(buildTFCh);
+
+function selTFCh(key,i,val){
+  ['T','F'].forEach(v=>{const b=document.getElementById('tfc-'+key+'-'+i+'-'+v);if(b)b.classList.remove('sel-t','sel-f');});
+  const btn=document.getElementById('tfc-'+key+'-'+i+'-'+val);
+  if(btn)btn.classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkTFCh(key){
+  const data=tfChData[key];let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tfc-'+key+'-'+i+'-T');const fBtn=document.getElementById('tfc-'+key+'-'+i+'-F');
+    const userT=tBtn?.classList.contains('sel-t');const userF=fBtn?.classList.contains('sel-f');
+    if((item.ans&&userT)||(!item.ans&&userF))score++;
+    if(item.ans){if(tBtn)tBtn.classList.add('correct-ans');if(userF&&fBtn)fBtn.classList.add('wrong-ans');}
+    else{if(fBtn)fBtn.classList.add('correct-ans');if(userT&&tBtn)tBtn.classList.add('wrong-ans');}
+    if(tBtn)tBtn.disabled=true;if(fBtn)fBtn.disabled=true;});
+  const res=document.getElementById(key+'-tf-ch-result');if(res){res.style.display='block';
+    if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Check green buttons for correct answers.`;}}
+}
+
+function checkMissing(){
+  const inputs=document.querySelectorAll('#page-maths .fill-in[data-ans]');
+  let score=0;
+  inputs.forEach(inp=>{
+    if(inp.value.trim()===inp.dataset.ans){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}});
+  const res=document.getElementById('missing-result');if(res){res.style.display='block';
+    if(score===inputs.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${inputs.length} correct!`;celebrate();}
+    else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${inputs.length} correct.`;}}
+}
+
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B'];
+  for(let i=0;i<50;i++){setTimeout(()=>{const el=document.createElement('div');el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);},i*30);}
+}
+const s=document.createElement('style');s.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';document.head.appendChild(s);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week9_Day2');</script>
+</body>
+</html>
