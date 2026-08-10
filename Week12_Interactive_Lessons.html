@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 12 · KS2 Level 3 · Interactive Lessons — Term 1 Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --mgray:#CFD8DC;--text:#2C2C2A;--white:#FFFFFF;
+  --radius:12px;--radius-sm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh;font-size:15px}
+h1,h2,h3,h4{font-family:'Nunito',sans-serif}
+
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1;min-width:100px}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:20px;border:2px solid transparent;font-size:12px;font-weight:700;cursor:pointer;transition:.13s;font-family:'Nunito',sans-serif;white-space:nowrap}
+.tab:hover{opacity:.82}
+.tab.active{color:var(--white)!important}
+.print-btn{background:var(--teal);color:var(--white);border:none;border-radius:20px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+.print-btn:hover{opacity:.85}
+
+.subject-tabs{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap}
+.stab{padding:9px 18px;border-radius:22px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab:hover{opacity:.8}
+.stab.active{color:var(--white)}
+
+.page{display:none;padding:14px 18px 50px}
+.page.active{display:block}
+
+.ws-header{background:linear-gradient(130deg,var(--amber-light),var(--teal-light));border:2px solid var(--amber-mid);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ws-badge{background:var(--amber);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.4px;display:inline-block;margin-bottom:4px}
+.ws-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--teal);margin:2px 0}
+.ws-sub{font-size:12px;color:var(--gray);font-weight:600}
+.name-line{border:none;border-bottom:1.5px solid var(--amber);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;padding:2px 4px;outline:none;width:130px}
+
+.section{margin-bottom:18px}
+.sec-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num{background:var(--teal);color:var(--white);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+
+.q-block{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.q-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65;color:var(--text)}
+.ans-line{width:100%;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;color:var(--text);margin-top:6px;display:block}
+.ans-box{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--radius-sm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;color:var(--text);margin-top:6px;resize:none}
+.inline-ans{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;color:var(--text);padding:2px 4px}
+
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-box{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6}
+.l1-box strong{font-family:'Nunito',sans-serif;font-weight:800}
+.review-box{background:linear-gradient(120deg,#FFF3D6,#E1F5EE);border:2px solid var(--amber);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6;font-weight:700}
+
+.vocab-card{background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:8px;border-left:4px solid var(--teal)}
+.vocab-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--teal)}
+.vocab-meaning{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.vocab-l1{font-size:12px;color:var(--blue);font-style:italic}
+.vocab-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.vocab-wk{display:inline-block;background:var(--amber);color:#fff;font-size:9px;font-weight:900;padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
+
+.word-bank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--radius-sm);padding:10px 13px;margin-bottom:14px}
+.word-bank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.word-tag{display:inline-block;background:var(--purple);color:var(--white);border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+
+.circle-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.opt{border:2px solid var(--amber);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber);transition:.12s;background:var(--white)}
+.opt:hover{opacity:.8}
+.opt.correct{background:#3B6D11!important;color:var(--white)!important;border-color:#3B6D11!important}
+.opt.wrong{background:#B71C1C!important;color:var(--white)!important;border-color:#B71C1C!important}
+
+.tbl-wrap{overflow-x:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:13px}
+table.ws-table th{background:var(--teal);color:var(--white);padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.ws-table td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top}
+table.ws-table tr:nth-child(even) td{background:var(--amber-light)}
+table.ws-table input[type=text]{width:100%;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:13px;outline:none;border-bottom:1px dashed var(--teal-mid);padding:2px}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+
+.story-box{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+.example-box{background:#F0FFF4;border:2px solid var(--teal-mid);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:10px;font-family:'Courier New',monospace}
+.highlight-box{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;line-height:1.8;margin:8px 0}
+.remember-box{border-radius:var(--radius-sm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--white);text-align:center;margin-top:12px}
+.step-box{display:flex;gap:10px;align-items:flex-start;background:var(--white);border:1.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:11px;margin-bottom:8px}
+.step-num{background:var(--teal);color:var(--white);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.6}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:10px 0}
+.info-card{border-radius:var(--radius-sm);padding:12px;text-align:center;border:2px solid}
+.card-icon{font-size:30px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+
+.check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--amber-light);font-size:13px;line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.chk{width:18px;height:18px;border:2px solid var(--teal);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.chk.done{background:var(--teal);color:var(--white)}
+
+.times-table{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:10px 0}
+.tt-cell{background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:6px;padding:6px 4px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal)}
+.tt-cell.header{background:var(--teal);color:var(--white);font-size:12px}
+.tt-input{width:100%;border:none;background:transparent;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--teal);outline:none}
+
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+.verse-ref{font-size:12px;color:var(--gray);margin-top:6px}
+
+@media(max-width:600px){.two-col,.three-col,.four-col{grid-template-columns:1fr}.times-table{grid-template-columns:repeat(3,1fr)}}
+@media print{.nav,.subject-tabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">📚 HOS · KS2 Level 3 · Week 12 — Term 1 Review</div>
+  <div class="nav-tabs" id="navTabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="pages"></div>
+
+<script>
+const SUBJECTS = [
+  {id:'eng',   label:'📖 English',    col:'#185FA5', lt:'#E6F1FB'},
+  {id:'maths', label:'🔢 Maths',      col:'#0F6E56', lt:'#E1F5EE'},
+  {id:'sci',   label:'💪 Science',    col:'#C2410C', lt:'#FFF0E6'},
+  {id:'hum',   label:'🌍 Humanities', col:'#534AB7', lt:'#EEEDFE'},
+  {id:'bib',   label:'✝️ Bible',      col:'#B71C1C', lt:'#FFEBEE'},
+];
+
+const WS = {
+
+/* ══════════════════════════════════════════════════════════
+   ENGLISH — Term 1 Review (Weeks 1–11)
+══════════════════════════════════════════════════════════ */
+eng:[
+  { num:1, badge:'Term 1 Review — Weeks 1–11', title:'Grammar & Sentences Review',
+    secs:[
+      {t:'Sentence types & punctuation (Wk 2)', c:'eng_r1_sentences'},
+      {t:'Nouns, verbs & adjectives (Wk 4)',     c:'eng_r1_word_classes'},
+      {t:'Conjunctions & adverbs (Wks 8, 11)',   c:'eng_r1_conjunctions_adverbs'},
+    ]},
+  { num:2, badge:'Term 1 Review — Weeks 1–11', title:'Reading Skills Review',
+    secs:[
+      {t:'Fiction comprehension (Wk 3)',      c:'eng_r2_fiction'},
+      {t:'Non-fiction comprehension (Wk 7)',  c:'eng_r2_nonfiction'},
+      {t:'Poetry — rhyme & rhythm (Wk 10)',   c:'eng_r2_poetry'},
+    ]},
+  { num:3, badge:'Term 1 Review — Weeks 1–11', title:'Writing & Spelling Review',
+    secs:[
+      {t:'Personal narrative writing (Wk 5)',   c:'eng_r3_narrative'},
+      {t:'Descriptive writing — settings (Wk 9)', c:'eng_r3_descriptive'},
+      {t:'Spelling rules practice test (Wk 6)', c:'eng_r3_spelling'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   MATHS — Term 1 Review (Weeks 1–11)
+══════════════════════════════════════════════════════════ */
+maths:[
+  { num:1, badge:'Term 1 Review — Weeks 1–11', title:'Number Review',
+    secs:[
+      {t:'Place value to 1,000 (Wk 1)',        c:'maths_r1_placevalue'},
+      {t:'Addition — column method (Wk 2)',    c:'maths_r1_addition'},
+      {t:'Subtraction — column method (Wk 3)', c:'maths_r1_subtraction'},
+    ]},
+  { num:2, badge:'Term 1 Review — Weeks 1–11', title:'Multiplication & Division Review',
+    secs:[
+      {t:'2×, 5×, 10× tables (Wk 4)', c:'maths_r2_times1'},
+      {t:'3×, 4×, 8× tables (Wk 5)',  c:'maths_r2_times2'},
+      {t:'Division — sharing & grouping (Wk 6)', c:'maths_r2_division'},
+    ]},
+  { num:3, badge:'Term 1 Review — Weeks 1–11', title:'Fractions & Measurement Review',
+    secs:[
+      {t:'Fractions — equal parts & comparing (Wks 7–8)', c:'maths_r3_fractions'},
+      {t:'Length, perimeter, mass & volume (Wks 9–10)',    c:'maths_r3_measurement'},
+      {t:'Time — telling time & duration (Wk 11)',          c:'maths_r3_time'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   SCIENCE — Term 1 Review (Weeks 1–11)
+══════════════════════════════════════════════════════════ */
+sci:[
+  { num:1, badge:'Term 1 Review — Weeks 1–11', title:'Living Things Review',
+    secs:[
+      {t:'Plants — parts, functions & needs (Wks 2–3)', c:'sci_r1_plants'},
+      {t:'Skeletons — humans & animals (Wk 4)',          c:'sci_r1_skeletons'},
+      {t:'Muscles & nutrition (Wks 5–6)',                c:'sci_r1_muscles_nutrition'},
+    ]},
+  { num:2, badge:'Term 1 Review — Weeks 1–11', title:'Materials & Earth Review',
+    secs:[
+      {t:'Rocks — types & properties (Wk 7)', c:'sci_r2_rocks'},
+      {t:'Fossils & soil (Wk 8)',              c:'sci_r2_fossils_soil'},
+      {t:'Working scientifically (Wk 1)',      c:'sci_r2_working_sci'},
+    ]},
+  { num:3, badge:'Term 1 Review — Weeks 1–11', title:'Light & Forces Review',
+    secs:[
+      {t:'Light — sources & shadows (Wk 9)', c:'sci_r3_light_shadows'},
+      {t:'Light — reflection (Wk 10)',       c:'sci_r3_reflection'},
+      {t:'Forces — magnets (Wk 11)',         c:'sci_r3_magnets'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   HUMANITIES — Term 1 Review (Weeks 1–11)
+══════════════════════════════════════════════════════════ */
+hum:[
+  { num:1, badge:'Term 1 Review — Weeks 1–11', title:'Geography Review',
+    secs:[
+      {t:'Maps — our local area (Wk 2)',                c:'hum_r1_maps'},
+      {t:'Our country & its geography (Wk 3)',          c:'hum_r1_country'},
+      {t:'Continents, oceans & climate zones (Wks 4, 11)', c:'hum_r1_continents_climate'},
+    ]},
+  { num:2, badge:'Term 1 Review — Weeks 1–11', title:'Ancient History Review',
+    secs:[
+      {t:'Ancient Egypt (Wks 5–6)',            c:'hum_r2_egypt'},
+      {t:'Stone Age to Iron Age (Wk 7)',       c:'hum_r2_stoneage'},
+      {t:'The Romans in Britain (Wk 8)',       c:'hum_r2_romans'},
+    ]},
+  { num:3, badge:'Term 1 Review — Weeks 1–11', title:'Community & Civics Review',
+    secs:[
+      {t:'My community — who we are (Wk 1)',              c:'hum_r3_community'},
+      {t:'Rules, rights & responsibilities (Wk 9)',        c:'hum_r3_rules'},
+      {t:'Local and national government (Wk 10)',         c:'hum_r3_government'},
+    ]},
+],
+
+/* ══════════════════════════════════════════════════════════
+   BIBLE — Term 1 Review (Weeks 1–11)
+══════════════════════════════════════════════════════════ */
+bib:[
+  { num:1, badge:'Term 1 Review — Weeks 1–11', title:'Genesis Heroes Review',
+    secs:[
+      {t:'Creation & Adam and Eve (Wks 1–2)', c:'bib_r1_creation_adam'},
+      {t:'Noah — trusting God (Wk 3)',        c:'bib_r1_noah'},
+      {t:'Abraham, Isaac & Jacob (Wks 4–5)',  c:'bib_r1_abraham_isaac'},
+    ]},
+  { num:2, badge:'Term 1 Review — Weeks 1–11', title:"God's People Review",
+    secs:[
+      {t:'Joseph — forgiveness (Wk 6)',            c:'bib_r2_joseph'},
+      {t:'Moses — speaking up (Wk 7)',              c:'bib_r2_moses'},
+      {t:"The Ten Commandments (Wk 8)",             c:'bib_r2_commandments'},
+    ]},
+  { num:3, badge:'Term 1 Review — Weeks 1–11', title:'Courage & Kindness Review',
+    secs:[
+      {t:'Rahab & Gideon — courage (Wks 9–10)', c:'bib_r3_rahab_gideon'},
+      {t:'Ruth — loyalty & kindness (Wk 11)',   c:'bib_r3_ruth'},
+      {t:'All memory verses + draw your favourite story', c:'bib_r3_verses_draw'},
+    ]},
+],
+};
+
+/* ══════════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════════ */
+function vc(word,meaning,l1,eg,color,wk){
+  color = color || 'teal';
+  return `<div class="vocab-card" style="border-left-color:var(--${color})">
+  <div class="vocab-word" style="color:var(--${color})">${word}${wk?`<span class="vocab-wk">${wk}</span>`:''}</div>
+  <div class="vocab-meaning">${meaning}</div>
+  <div class="vocab-l1">🌍 ${l1}</div>
+  <div class="vocab-eg">✏️ e.g. ${eg}</div>
+</div>`;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTENT RENDERER
+══════════════════════════════════════════════════════════ */
+function C(key){switch(key){
+
+/* ══════════════════════════ ENGLISH ══════════════════════════ */
+
+case 'eng_r1_sentences': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 2: Sentence types &amp; punctuation.</div>
+<p style="font-size:14px;margin-bottom:10px">There are FOUR sentence types. Click the correct type for each sentence.</p>
+${[
+  ['The sun was shining brightly.','Statement'],
+  ['Where did you put my book?','Question'],
+  ['What a wonderful surprise!','Exclamation'],
+  ['Close the door quietly.','Command'],
+].map(([s,ans],i)=>`
+<div class="q-block"><div class="q-num">Sentence ${i+1}</div>
+<div class="q-text">${s}</div>
+<div class="circle-opts">${['Statement','Question','Exclamation','Command'].map(o=>`<div class="opt" onclick="chk(this,'s1_${i}','${o}','${ans}')">${o}</div>`).join('')}</div></div>`).join('')}
+<div class="tip-box"><strong>Remember:</strong> Statements and commands end with a full stop (.) — questions end with (?) — exclamations end with (!).</div>`;
+
+case 'eng_r1_word_classes': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 4: Nouns, verbs &amp; adjectives.</div>
+${vc('📦 Noun','A person, place, animal or thing.','اسم / اسم','"dog, London, teacher, happiness"','blue','W4')}
+${vc('🏃 Verb','An action or doing word.','فعل / فعل','"run, jump, think, shout"','blue','W4')}
+${vc('🎨 Adjective','A word that describes a noun.','صفت / صفة','"tall, red, happy, ancient"','blue','W4')}
+<p style="font-size:14px;margin:10px 0">Sort each word into the correct box: <em>river, jumped, enormous, teacher, whispered, colourful</em></p>
+<div class="three-col">
+${['Noun','Verb','Adjective'].map(cat=>`<div class="q-block"><div class="q-num">${cat}s</div><input class="ans-line" placeholder="Write the words here..."/></div>`).join('')}
+</div>`;
+
+case 'eng_r1_conjunctions_adverbs': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 8: Conjunctions · Week 11: Adverbs &amp; time connectives.</div>
+${vc('🔗 Conjunction','A joining word: and, but, so, because, when.','ربط کا لفظ / أداة ربط','"I was tired, so I went to bed."','teal','W8')}
+${vc('⏰ Time connective','A word showing order: first, next, then, finally.','ترتیب کے الفاظ / روابط زمنية','"First, we packed our bags."','teal','W11')}
+<div class="q-block"><div class="q-num">Complete with the BEST conjunction (and / but / so / because / when)</div>
+<div style="line-height:2.6;font-size:14px;margin-top:6px">
+I wanted to play outside, <input class="inline-ans" style="width:80px" placeholder="?"/> it started to rain.<br/>
+She studied hard <input class="inline-ans" style="width:80px" placeholder="?"/> she passed the test.<br/>
+We were happy <input class="inline-ans" style="width:80px" placeholder="?"/> excited on the last day of term.
+</div></div>
+<div class="q-block"><div class="q-num">Put these time connectives in the order you would use them: <em>Finally, First, Then, Next</em></div>
+<input class="ans-line" placeholder="1) ... 2) ... 3) ... 4) ..."/></div>`;
+
+case 'eng_r2_fiction': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 3: Reading comprehension (fiction).</div>
+<div class="story-box">
+Maya stepped off the boat, her heart pounding. The island was covered in tall green trees, and strange bird calls echoed from every direction. "Stay close," her uncle warned, gripping the old map tightly. Maya nodded, trying to hide how nervous she felt.
+</div>
+<div class="q-block"><div class="q-text">Who are the characters in this passage?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Where is the story set?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">How did Maya feel? Find a clue from the text that shows this.</div><textarea class="ans-box" placeholder="Maya felt ... because the text says ..."></textarea></div>`;
+
+case 'eng_r2_nonfiction': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 7: Reading comprehension (non-fiction).</div>
+<div class="story-box">
+<strong>All About Owls</strong><br/><br/>
+<strong>What owls eat:</strong> Owls are hunters. They eat mice, small birds and insects.<br/><br/>
+<strong>How owls hunt:</strong> Owls have excellent hearing and can fly almost silently, which helps them surprise their prey at night.<br/><br/>
+<strong>Where owls live:</strong> Owls live in forests, barns and even city parks all around the world.
+</div>
+<div class="q-block"><div class="q-text">What is the MAIN IDEA of this text?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name the THREE headings used in this text.</div><input class="ans-line" placeholder="1) ... 2) ... 3) ..."/></div>
+<div class="q-block"><div class="q-text">Why do headings and subheadings help a reader?</div><textarea class="ans-box" placeholder="Headings help because ..."></textarea></div>`;
+
+case 'eng_r2_poetry': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 10: Poetry — rhyme, rhythm &amp; pattern.</div>
+${vc('🎵 Rhyme','Words that end with the same sound.','ہم قافیہ / قافية','"cat and hat rhyme."','purple','W10')}
+${vc('🥁 Rhythm','The beat or pattern in a poem.','تال / إيقاع','"Clap the rhythm as you read the poem."','purple','W10')}
+<div class="story-box" style="font-style:italic">
+The rain falls down, drip, drip, drip,<br/>
+It makes the puddles jump and skip.<br/>
+The clouds are grey, the wind is cold,<br/>
+But spring flowers soon will unfold.
+</div>
+<div class="q-block"><div class="q-text">Find TWO pairs of rhyming words in the poem above.</div><input class="ans-line" placeholder="1) ... and ...   2) ... and ..."/></div>
+<div class="q-block"><div class="q-text">Write your OWN two-line rhyme about the weather.</div><textarea class="ans-box" placeholder="Line 1: ...&#10;Line 2: ..."></textarea></div>`;
+
+case 'eng_r3_narrative': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 5: Personal narrative writing.</div>
+<div class="tip-box"><strong>Remember:</strong> A personal narrative is a TRUE story about YOU, told in the correct sequence, with your real feelings.</div>
+<div class="word-bank"><strong>Time-order words:</strong>
+${['First','Next','Then','After that','Finally'].map(w=>`<span class="word-tag">${w}</span>`).join('')}
+</div>
+<div class="q-block"><div class="q-num">📝 Quick plan</div>
+<div style="line-height:2.6;font-size:14px;margin-top:6px">
+WHO was there? <input class="inline-ans" style="width:150px" placeholder="..."/><br/>
+WHAT happened? <input class="inline-ans" style="width:150px" placeholder="..."/><br/>
+HOW did you feel? <input class="inline-ans" style="width:150px" placeholder="..."/>
+</div></div>
+<div class="q-block"><div class="q-text">Write TWO sentences of your personal narrative using at least one time-order word.</div>
+<textarea class="ans-box" placeholder="First, ..."></textarea></div>`;
+
+case 'eng_r3_descriptive': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 9: Descriptive writing — settings.</div>
+<div class="tip-box"><strong>Remember:</strong> Adjectives and adverbs help the reader imagine a PLACE — use your senses: see, hear, smell, feel.</div>
+<div class="q-block"><div class="q-text">Improve this boring sentence using at least TWO adjectives and one adverb:</div>
+<div class="example-box">"The forest was dark."</div>
+<textarea class="ans-box" placeholder="My improved sentence: ..."></textarea></div>
+<div class="q-block"><div class="q-text">Describe a BEACH in 2–3 sentences. Use at least three adjectives.</div>
+<textarea class="ans-box" placeholder="The beach ..."></textarea></div>`;
+
+case 'eng_r3_spelling': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 6: Spelling rules (Year 3/4 word list, Part 1).</div>
+<div class="tip-box"><strong>Remember:</strong> Add -ing, -ed, -er, -est to root words. Watch for doubling letters and dropping the silent "e"!</div>
+<div class="q-block"><div class="q-num">Add the correct ending to each word</div>
+<div style="line-height:2.8;font-size:14px;margin-top:6px">
+run + ing = <input class="inline-ans" style="width:90px" placeholder="?"/> (double the letter!)<br/>
+hope + ing = <input class="inline-ans" style="width:90px" placeholder="?"/> (drop the silent e!)<br/>
+happy + er = <input class="inline-ans" style="width:90px" placeholder="?"/> (change y to i!)<br/>
+jump + ed = <input class="inline-ans" style="width:90px" placeholder="?"/><br/>
+big + est = <input class="inline-ans" style="width:90px" placeholder="?"/>
+</div></div>
+<div class="q-block"><div class="q-text">Practice spelling test — write each word after your teacher reads it aloud:</div>
+<div class="two-col">${Array(4).fill(0).map((_,i)=>`<input class="ans-line" placeholder="Word ${i+1}"/>`).join('')}</div></div>`;
+
+/* ══════════════════════════ MATHS ══════════════════════════ */
+
+case 'maths_r1_placevalue': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 1: Place value (3-digit numbers).</div>
+<div class="tip-box"><strong>Remember:</strong> Every digit's value depends on its POSITION — Hundreds, Tens, Ones.</div>
+<table class="ws-table"><tr><th>Number</th><th>H</th><th>T</th><th>O</th></tr>
+${['482','307','956'].map(n=>`<tr><td><strong>${n}</strong></td><td><input class="tt-input" placeholder="?"/></td><td><input class="tt-input" placeholder="?"/></td><td><input class="tt-input" placeholder="?"/></td></tr>`).join('')}
+</table>
+<div class="q-block" style="margin-top:10px"><div class="q-text">Order these numbers from SMALLEST to LARGEST: 452, 245, 524, 425</div>
+<input class="ans-line" placeholder="..."/></div>`;
+
+case 'maths_r1_addition': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 2: Addition — column method.</div>
+<div class="tip-box"><strong>Remember:</strong> Start from the ONES column. Carry when a column totals 10 or more.</div>
+<div class="two-col">
+${['247+135','364+278'].map(q=>`<div class="q-block" style="text-align:center"><div style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:var(--teal)">${q} = <input type="text" style="width:70px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal)"/></div></div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">A school has 356 pupils in one building and 289 in another. How many pupils altogether?</div><input class="ans-line" placeholder="Working + answer..."/></div>`;
+
+case 'maths_r1_subtraction': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 3: Subtraction — column method.</div>
+<div class="tip-box"><strong>Remember:</strong> Borrow from the next column when the top digit is too small.</div>
+<div class="two-col">
+${['573−241','742−368'].map(q=>`<div class="q-block" style="text-align:center"><div style="font-family:'Courier New',monospace;font-size:20px;font-weight:700;color:var(--teal)">${q} = <input type="text" style="width:70px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:18px;font-weight:800;outline:none;color:var(--teal)"/></div></div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">Check your answer to 742 − 368 using the inverse (addition). Show your check.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'maths_r2_times1': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 4: 2×, 5× and 10× tables.</div>
+<div class="times-table">
+${['2×6=','5×7=','10×8=','2×9=','5×4=','10×11='].map(f=>`<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">A shop sells eggs in boxes of 10. There are 6 boxes. How many eggs?</div><input class="ans-line" placeholder="Number sentence + answer..."/></div>`;
+
+case 'maths_r2_times2': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 5: 3×, 4× and 8× tables.</div>
+<div class="times-table">
+${['3×7=','4×6=','8×5=','3×11=','4×9=','8×7='].map(f=>`<div class="tt-cell">${f}<input class="tt-input" placeholder="?"/></div>`).join('')}
+</div>
+<div class="q-block"><div class="q-text">If 4 × 6 = 24, use doubling to work out 8 × 6 = <input class="inline-ans" style="width:50px" placeholder="?"/></div></div>`;
+
+case 'maths_r2_division': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 6: Division — sharing &amp; grouping.</div>
+${vc('➗ Divide','To share a number into equal groups.','تقسیم / قسمة','"12 ÷ 3 = 4"','teal')}
+<div class="q-block"><div class="q-num">Use the inverse of multiplication to solve:</div>
+<div style="line-height:2.6;font-size:14px;margin-top:6px">
+20 ÷ 5 = <input class="inline-ans" style="width:60px" placeholder="?"/> (because 5 × <input class="inline-ans" style="width:40px" placeholder="?"/> = 20)<br/>
+32 ÷ 4 = <input class="inline-ans" style="width:60px" placeholder="?"/><br/>
+27 ÷ 3 = <input class="inline-ans" style="width:60px" placeholder="?"/>
+</div></div>
+<div class="q-block"><div class="q-text">18 sweets are shared equally between 3 children. How many does each child get?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'maths_r3_fractions': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Weeks 7–8: Fractions — equal parts, comparing &amp; ordering.</div>
+${vc('🍕 Fraction','Part of a whole. Top number = parts you have; bottom number = total equal parts.','کسر / كسر','"1/2 means one out of two equal parts."','teal')}
+<div class="q-block"><div class="q-text">Shade 3/4 of this shape (describe how many of the 4 parts you would shade):</div><input class="ans-line" placeholder="I would shade ... out of 4 parts."/></div>
+<div class="q-block"><div class="q-text">Order these fractions from SMALLEST to LARGEST: 1/2, 1/4, 3/4, 1/3</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'maths_r3_measurement': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Weeks 9–10: Length &amp; perimeter · Mass &amp; volume.</div>
+<div class="q-block"><div class="q-text">A rectangle is 8cm long and 5cm wide. What is its PERIMETER?</div><input class="ans-line" placeholder="Working + answer..."/></div>
+<div class="q-block"><div class="q-num">Fill in the correct unit: g, kg, ml or l</div>
+<div style="line-height:2.6;font-size:14px;margin-top:6px">
+A bag of flour weighs 2 <input class="inline-ans" style="width:50px" placeholder="?"/><br/>
+A cup holds 250 <input class="inline-ans" style="width:50px" placeholder="?"/> of juice<br/>
+A pencil weighs about 5 <input class="inline-ans" style="width:50px" placeholder="?"/>
+</div></div>`;
+
+case 'maths_r3_time': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 11: Time — telling the time &amp; duration.</div>
+<div class="q-block"><div class="q-text">Write the time shown as HALF PAST 3 in digital form:</div><input class="inline-ans" style="width:80px" placeholder="?:??"/></div>
+<div class="q-block"><div class="q-text">A film starts at 4:15pm and lasts 1 hour 30 minutes. What time does it finish?</div><input class="ans-line" placeholder="..."/></div>`;
+
+/* ══════════════════════════ SCIENCE ══════════════════════════ */
+
+case 'sci_r1_plants': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Weeks 2–3: Plant parts &amp; what plants need.</div>
+${vc('🌱 Root','Absorbs water and nutrients; anchors the plant.','جڑ / جذر','"Roots grow down into the soil."','orange','W2')}
+${vc('☀️ Photosynthesis','How leaves make food using sunlight, water and CO₂.','ضیائی تالیف / التمثيل الضوئي','"Leaves need sunlight for photosynthesis."','orange','W3')}
+<div class="q-block"><div class="q-text">Name the FOUR things a plant needs to grow.</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">What is the job of the STEM?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r1_skeletons': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 4: Animals including humans — skeletons.</div>
+${vc('🦴 Skeleton','The framework of bones that supports and protects the body.','ڈھانچہ / هيكل عظمي','"Your skeleton protects your organs."','orange','W4')}
+<div class="q-block"><div class="q-text">Give TWO reasons why animals have skeletons.</div><textarea class="ans-box" placeholder="1) ...&#10;2) ..."></textarea></div>
+<div class="q-block"><div class="q-text">What is an EXOSKELETON, and which animals have one?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r1_muscles_nutrition': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 5: Muscles &amp; movement · Week 6: Nutrition.</div>
+${vc('💪 Muscle','Pulls on bones to make the body move.','پٹھا / عضلة','"Your leg muscles help you run."','orange','W5')}
+${vc('🍎 Balanced diet','Eating the right amounts from each food group.','متوازن غذا / نظام غذائي متوازن','"A balanced diet includes fruit, veg, protein and grains."','orange','W6')}
+<div class="q-block"><div class="q-text">Name a muscle pair and explain how they work together.</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name TWO food groups and give one example food from each.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r2_rocks': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 7: Rocks — types &amp; properties.</div>
+${vc('🌋 Igneous rock','Formed when hot melted rock cools and hardens.','آتش فشانی چٹان / صخر ناري','"Granite is an igneous rock."','gray','W7')}
+${vc('🏖️ Sedimentary rock','Formed from layers of sand, mud and tiny pieces pressed together.','تلچھٹی چٹان / صخر رسوبي','"Sandstone is a sedimentary rock."','gray','W7')}
+<div class="q-block"><div class="q-text">Name the THREE types of rock and give one example of each.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r2_fossils_soil': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 8: Fossils &amp; soil.</div>
+${vc('🦴 Fossil','The preserved remains or imprint of a living thing from long ago.','فوسل / أحفورة','"Scientists found a dinosaur fossil in the rock."','gray','W8')}
+<div class="q-block"><div class="q-text">Explain in your own words HOW a fossil forms.</div><textarea class="ans-box" placeholder="A fossil forms when ..."></textarea></div>
+<div class="q-block"><div class="q-text">What is soil made of, and why is it important?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r2_working_sci': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 1: Working scientifically.</div>
+${vc('🔬 Fair test','A test where only ONE thing is changed and everything else stays the same.','منصفانہ تجربہ / اختبار عادل','"To make it a fair test, I only changed the amount of water."','orange')}
+<div class="q-block"><div class="q-num">Complete the parts of a simple investigation:</div>
+<div style="line-height:2.6;font-size:14px;margin-top:6px">
+My question: <input class="inline-ans" style="width:200px" placeholder="Does ___ affect ___?"/><br/>
+What I will CHANGE: <input class="inline-ans" style="width:150px" placeholder="..."/><br/>
+What I will KEEP THE SAME: <input class="inline-ans" style="width:150px" placeholder="..."/>
+</div></div>`;
+
+case 'sci_r3_light_shadows': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 9: Light — sources &amp; shadows.</div>
+${vc('💡 Light source','Something that makes its OWN light.','روشنی کا ذریعہ / مصدر ضوء','"The sun and a torch are light sources."','orange','W9')}
+${vc('🌑 Opaque','Does not let any light through — makes a dark shadow.','غیر شفاف / معتم','"A wooden door is opaque."','orange','W9')}
+<div class="q-block"><div class="q-text">Why do shadows form? Use the word "opaque" in your answer.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r3_reflection': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 10: Light — reflection.</div>
+${vc('🪞 Reflection','When light bounces off a surface.','انعکاس / انعكاس','"Mirrors reflect light so we can see ourselves."','orange','W10')}
+<div class="q-block"><div class="q-text">Why can we see objects that do not make their own light?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Give ONE safety rule about looking at bright light or the sun.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'sci_r3_magnets': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 11: Forces — magnets.</div>
+${vc('🧲 Magnetic','A material that is attracted to a magnet (e.g. iron, steel).','مقناطیسی / مغناطيسي','"A paperclip is magnetic."','orange','W11')}
+<div class="q-block"><div class="q-text">What happens when you put two magnets together SAME poles first, then OPPOSITE poles?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name TWO everyday uses of magnets.</div><input class="ans-line" placeholder="..."/></div>`;
+
+/* ══════════════════════════ HUMANITIES ══════════════════════════ */
+
+case 'hum_r1_maps': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 2: Maps — our local area.</div>
+${vc('🧭 Compass','A tool that always points North to help find direction.','قطب نما / بوصلة','"Never Eat Slimy Worms helps us remember N, E, S, W."','purple','W2')}
+<div class="q-block"><div class="q-text">What does the KEY (legend) on a map tell you?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">If the school is NORTH of the park, where is the park relative to the school?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r1_country': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 3: Our country &amp; its geography.</div>
+<div class="q-block"><div class="q-text">Name THREE types of physical feature (e.g. rivers, mountains, coastlines).</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">What is the capital city of your country, and why are capital cities important?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r1_continents_climate': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 4: Continents &amp; oceans · Week 11: Climate zones.</div>
+${vc('🌍 Continent','One of the seven huge land areas of the world.','براعظم / قارة','"Africa and Asia are continents."','purple','W4')}
+${vc('🌡️ Climate zone','An area of the world with a similar pattern of weather.','آب و ہوا کا خطہ / منطقة مناخية','"The desert is a hot, dry climate zone."','purple','W11')}
+<div class="q-block"><div class="q-text">Name the seven continents.</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name the three main climate zones and give one feature of each.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r2_egypt': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Weeks 5–6: Ancient Egypt &amp; its achievements.</div>
+${vc('👑 Pharaoh','The king or queen who ruled Ancient Egypt.','فرعون / فرعون','"Tutankhamun was a young pharaoh."','purple','W5')}
+${vc('✍️ Hieroglyphics','A writing system using pictures instead of letters.','تصویری رسم الخط / الكتابة الهيروغليفية','"Ancient Egyptians wrote in hieroglyphics."','purple','W6')}
+<div class="q-block"><div class="q-text">Why was the River Nile so important to Ancient Egypt?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name ONE thing we still use today that Ancient Egypt gave us.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r2_stoneage': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 7: Stone Age to Iron Age — Britain.</div>
+${vc('🪓 Stone Age','The earliest period when humans used stone tools.','پتھر کا دور / العصر الحجري','"Stone Age people made tools from flint."','gray','W7')}
+<div class="q-block"><div class="q-text">Put these in order: Iron Age, Stone Age, Bronze Age</div><input class="ans-line" placeholder="1) ... 2) ... 3) ..."/></div>
+<div class="q-block"><div class="q-text">How did tools and technology change over time?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r2_romans': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 8: The Romans in Britain.</div>
+<div class="q-block"><div class="q-text">Why did the Romans invade Britain?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name TWO things the Romans built or brought to Britain.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r3_community': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 1: My community — who we are.</div>
+${vc('🤝 Community','A group of people who live, work and share things together.','برادری / مجتمع','"Our school is part of our community."','purple','W1')}
+<div class="q-block"><div class="q-text">Name TWO roles people have in a community (e.g. teacher, doctor).</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Give ONE similarity and ONE difference between your family and a classmate's family.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r3_rules': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 9: Rules, rights &amp; responsibilities.</div>
+${vc('⚖️ Right','Something every person should be able to have or do.','حق / حق','"Every child has a right to education."','purple','W9')}
+<div class="q-block"><div class="q-text">Why do we have rules at school? Give TWO reasons.</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name ONE right that all children have.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'hum_r3_government': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 10: Local and national government.</div>
+<div class="q-block"><div class="q-text">What do governments do for their communities?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">What is VOTING, explained simply?</div><input class="ans-line" placeholder="..."/></div>`;
+
+/* ══════════════════════════ BIBLE ══════════════════════════ */
+
+case 'bib_r1_creation_adam': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 1: Creation · Week 2: Adam &amp; Eve.</div>
+${vc('🌎 Creation','God making everything that exists, from nothing.','تخلیق / الخلق','"Genesis 1 tells us about Creation."','red','W1')}
+${vc('🍎 Disobey','To do something you were told NOT to do.','نافرمانی / عصيان','"Adam and Eve disobeyed God's one rule."','red','W2')}
+<div class="q-block"><div class="q-text">What memory verse goes with Creation? <span style="color:var(--gray);font-size:12px">(Gen 1:1)</span></div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Even after Adam and Eve disobeyed, how did God show He still cared?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r1_noah': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 3: Noah — trusting God even when it's hard.</div>
+${vc('🌈 Covenant','A special unbreakable promise God makes.','عہد / عهد','"The rainbow was a sign of God's covenant."','red','W3')}
+<div class="q-block"><div class="q-text">What sign did God give Noah as a promise? <span style="color:var(--gray);font-size:12px">(Gen 9:13)</span></div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Why was Noah chosen to build the ark?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r1_abraham_isaac': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 4: Abraham · Week 5: Isaac &amp; Jacob.</div>
+${vc('🙏 Faith','Trusting God even when you cannot see the outcome.','ایمان / إيمان','"Faith means trusting what you cannot see." (Heb 11:1)','red','W4')}
+<div class="q-block"><div class="q-text">What did God ask Abraham to do, and how did Abraham respond?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">What did Esau trade to Jacob for a bowl of stew?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r2_joseph': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 6: Joseph — forgiving those who hurt you.</div>
+${vc('❤️ Forgive','To stop being angry with someone and choose to let go of the hurt.','معافی / مغفرة','"Joseph forgave his brothers." (Gen 50:20)','red','W6')}
+<div class="q-block"><div class="q-text">What did Joseph's brothers do to him?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">How did God turn something bad into something good in Joseph's story?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r2_moses': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 7: Moses — speaking up for others.</div>
+<div class="q-block"><div class="q-text">What did Moses see that made God speak to him? <span style="color:var(--gray);font-size:12px">(Ex 3:14)</span></div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">What did God ask Moses to do?</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r2_commandments': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 8: The Ten Commandments — God's rules for life.</div>
+<div class="q-block"><div class="q-text">Why are rules a GIFT and not a punishment?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Name ONE of the Ten Commandments in your own words.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r3_rahab_gideon': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 9: Rahab · Week 10: Gideon.</div>
+${vc('💪 Courage','Doing what is right even when it is scary or risky.','ہمت / شجاعة','"Rahab showed courage by hiding the spies." (Josh 2:11)','red','W9')}
+<div class="q-block"><div class="q-text">What brave thing did Rahab do?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Why did God choose Gideon, even though Gideon felt small? <span style="color:var(--gray);font-size:12px">(Judg 6:12)</span></div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r3_ruth': return `
+<div class="review-box">🔁 TERM 1 REVIEW — Week 11: Ruth — loyalty &amp; kindness.</div>
+${vc('🤝 Loyalty','Staying faithful and committed to someone.','وفاداری / ولاء','"Ruth stayed loyal to Naomi." (Ruth 1:16)','red','W11')}
+<div class="q-block"><div class="q-text">What did Ruth choose to do instead of leaving Naomi?</div><input class="ans-line" placeholder="..."/></div>
+<div class="q-block"><div class="q-text">Give an example of kindness you could show to your family this week.</div><input class="ans-line" placeholder="..."/></div>`;
+
+case 'bib_r3_verses_draw': return `
+<div class="tip-box"><strong>Term 1 Review &amp; Reflection:</strong> We have learned 10 memory verses this term! Let's recall them all.</div>
+<div class="verse-box">
+<div style="font-size:12px;color:var(--gray);font-weight:700;font-family:Nunito,sans-serif;margin-bottom:6px">📜 TERM 1 MEMORY VERSES</div>
+<div class="verse-text" style="font-size:13px;text-align:left;line-height:2.2">
+Gen 1:1 (Wk 1) · Rom 5:8 (Wk 2) · Gen 9:13 (Wk 3) · Heb 11:1 (Wk 4) · Num 23:19 (Wk 5)<br/>
+Gen 50:20 (Wk 6) · Ex 3:14 (Wk 7) · Josh 2:11 (Wk 9) · Judg 6:12 (Wk 10) · Ruth 1:16 (Wk 11)
+</div>
+</div>
+<div class="q-block"><div class="q-num">Recite from memory — write down ONE verse you remember well:</div>
+<textarea class="ans-box" placeholder="I remember: ..."></textarea></div>
+<div class="q-block"><div class="q-text">Which Bible story from this term was YOUR favourite, and why?</div><input class="ans-line" placeholder="My favourite story was ... because ..."/></div>
+<div class="q-block"><div class="q-text">Draw your favourite Bible story from Term 1!</div>
+<div style="border:2px dashed var(--red);border-radius:8px;height:160px;background:var(--red-light);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:13px;font-style:italic">✏️ Draw your favourite Term 1 Bible story here!</div></div>
+<div class="remember-box" style="background:#B71C1C">⭐ REMEMBER: All term, God has been showing us that He keeps His promises, forgives us, and asks us to be brave, loyal and kind! 🌟</div>`;
+
+default: return '<p>Content coming soon!</p>';
+}}
+
+/* ══════════════════════════════════════════════════════════
+   RENDER ENGINE
+══════════════════════════════════════════════════════════ */
+let curSubj = 'eng';
+let curLesson = 1;
+
+function chk(el, group, val, ans){
+  const opts = el.parentElement.querySelectorAll('.opt');
+  opts.forEach(o=>o.classList.remove('correct','wrong'));
+  if(val === ans){
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    opts.forEach(o=>{ if(o.textContent.trim() === ans) o.classList.add('correct'); });
+  }
+}
+
+function toggleChk(el){
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+function render(){
+  const subjectTabs = document.getElementById('subjectTabs');
+  const navTabs = document.getElementById('navTabs');
+  const pages = document.getElementById('pages');
+
+  subjectTabs.innerHTML = '';
+  SUBJECTS.forEach(s=>{
+    const el = document.createElement('div');
+    el.className = 'stab' + (s.id === curSubj ? ' active' : '');
+    el.textContent = s.label;
+    el.style.borderColor = s.col;
+    el.style.color = s.id === curSubj ? '#fff' : s.col;
+    if(s.id === curSubj) el.style.background = s.col;
+    el.onclick = () => { curSubj = s.id; curLesson = 1; render(); };
+    subjectTabs.appendChild(el);
+  });
+
+  const subj = SUBJECTS.find(s=>s.id === curSubj);
+  const lessons = WS[curSubj];
+
+  navTabs.innerHTML = '';
+  lessons.forEach(l=>{
+    const el = document.createElement('div');
+    el.className = 'tab' + (l.num === curLesson ? ' active' : '');
+    el.textContent = 'Lesson ' + l.num;
+    el.style.borderColor = subj.col;
+    el.style.color = l.num === curLesson ? '#fff' : subj.col;
+    if(l.num === curLesson) el.style.background = subj.col;
+    el.onclick = () => { curLesson = l.num; render(); };
+    navTabs.appendChild(el);
+  });
+
+  const lesson = lessons.find(l=>l.num === curLesson);
+  pages.innerHTML = `
+  <div class="page active">
+    <div class="ws-header">
+      <div>
+        <div class="ws-badge">${lesson.badge}</div>
+        <div class="ws-title">${lesson.title}</div>
+        <div class="ws-sub">Lesson ${lesson.num} of ${lessons.length} · ${subj.label} · Week 12</div>
+      </div>
+      <div>Name: <input class="name-line"/></div>
+    </div>
+    ${lesson.secs.map((sec,i)=>`
+    <div class="section">
+      <div class="sec-title"><span class="sec-num">${i+1}</span>${sec.t}</div>
+      ${C(sec.c)}
+    </div>`).join('')}
+  </div>`;
+}
+
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week12_Lessons');</script>
+</body>
+</html>

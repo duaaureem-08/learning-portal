@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 12 — Practice Test 3 · HOS International KS2 Level 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bible:#7C3AED;--bible-l:#EDE9FE;--bible-d:#5B21B6;
+  --english:#DB2777;--english-l:#FCE7F3;--english-d:#9D174D;
+  --maths:#D97706;--maths-l:#FEF3C7;--maths-d:#92400E;
+  --science:#059669;--science-l:#D1FAE5;--science-d:#064E3B;
+  --social:#2563EB;--social-l:#DBEAFE;--social-d:#1E3A8A;
+  --bg:#FAFBFF;--card:#FFFFFF;--text:#1E1B4B;--muted:#6B7280;
+  --radius:20px;--radius-sm:12px;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.top-bar{background:white;border-bottom:3px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.logo{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-right:6px;}
+.logo span{color:var(--science);}
+.day-badge{background:#FEE2E2;color:#7F1D1D;font-weight:900;font-size:0.8rem;padding:4px 12px;border-radius:99px;border:2px solid #DC2626;margin-right:8px;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:2.5px solid transparent;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;white-space:nowrap;background:#F3F4F6;}
+.nav-btn .emoji{font-size:1.1rem;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.nav-btn[data-sub="bible"]{--c:var(--bible);}
+.nav-btn[data-sub="english"]{--c:var(--english);}
+.nav-btn[data-sub="maths"]{--c:var(--maths);}
+.nav-btn[data-sub="science"]{--c:var(--science);}
+.nav-btn[data-sub="social"]{--c:var(--social);}
+.nav-btn.active{background:var(--c);border-color:var(--c);color:white;}
+.page{display:none;padding:30px 20px 60px;max-width:960px;margin:0 auto;animation:fadeIn 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{border-radius:var(--radius);padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;color:white;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(255,255,255,0.1);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-30px;right:60px;width:120px;height:120px;background:rgba(255,255,255,0.07);border-radius:50%;}
+.hero-week{font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:6px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2rem;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:0.95rem;font-weight:600;opacity:0.9;max-width:520px;}
+.hero-emoji{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.25;}
+.hero-type{display:inline-block;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:99px;padding:4px 14px;font-size:0.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.card{background:var(--card);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);border-left:6px solid var(--accent,#ccc);}
+.part-header{background:var(--accent,#888);color:white;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.marks{font-size:0.78rem;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 10px;border-radius:99px;margin-left:auto;}
+.week-tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:0.68rem;font-weight:900;text-transform:uppercase;letter-spacing:0.5px;background:rgba(0,0,0,0.06);color:var(--accent-d,#333);margin-right:4px;}
+.callout{border-radius:var(--radius-sm);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+.callout-icon{font-size:1.4rem;flex-shrink:0;}
+.callout-text{font-size:0.9rem;font-weight:600;line-height:1.55;}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.match-item{background:#F8FAFF;border:2.5px solid #E5E7EB;border-radius:var(--radius-sm);padding:14px 16px;font-weight:700;font-size:0.92rem;}
+.match-item select{width:100%;margin-top:8px;padding:8px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;background:white;cursor:pointer;}
+.match-item select:focus{outline:none;border-color:var(--accent,#888);}
+.quiz-box{background:#F8FAFF;border-radius:var(--radius-sm);padding:20px;margin-top:10px;}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:white;border:2.5px solid #E5E7EB;border-radius:50px;padding:11px 20px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;font-size:0.92rem;text-align:left;}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent,#888);background:var(--accent-l,#f5f5f5);}
+.quiz-opt.correct{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.quiz-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.quiz-feedback{margin-top:12px;padding:12px 18px;border-radius:12px;font-weight:700;display:none;font-size:0.92rem;line-height:1.5;}
+.fill-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.fill-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.fill-table td{padding:10px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.fill-table tr:nth-child(even) td{background:#F8FAFF;}
+.fill-in{width:150px;padding:7px 10px;border-radius:8px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;}
+.fill-in:focus{outline:none;border-color:var(--accent,#888);}
+.fill-in.correct{border-color:#059669;background:#D1FAE5;}
+.fill-in.wrong{border-color:#DC2626;background:#FEE2E2;}
+.tf-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.tf-table th{background:var(--accent,#888);color:white;padding:10px 14px;text-align:left;font-size:0.85rem;font-weight:800;}
+.tf-table td{padding:12px 14px;border-bottom:1px solid #E5E7EB;font-size:0.9rem;vertical-align:middle;}
+.tf-table tr:nth-child(even) td{background:#F8FAFF;}
+.tf-btn{padding:6px 16px;border-radius:50px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;margin:2px;transition:all 0.2s;background:white;}
+.tf-btn.sel-t{background:#D1FAE5;border-color:#059669;color:#065F46;}
+.tf-btn.sel-f{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;}
+.tf-btn.correct-ans{background:#D1FAE5;border-color:#059669;font-weight:900;}
+.tf-btn.wrong-ans{background:#FEE2E2;border-color:#DC2626;}
+.open-box{width:100%;min-height:75px;padding:12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.92rem;resize:vertical;line-height:1.55;}
+.open-box:focus{outline:none;border-color:var(--accent,#888);}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;transition:all 0.2s;color:white;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+.audio-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;background:var(--accent-l,#f0f0f0);color:var(--accent-d,#333);transition:all 0.2s;margin-left:8px;}
+.audio-btn:hover{background:var(--accent,#888);color:white;}
+.info-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.info-field{flex:1;min-width:160px;}
+.info-field label{font-size:0.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.info-field input{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:2.5px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;}
+.info-field input:focus{outline:none;border-color:var(--accent,#888);}
+.progress-wrap{background:#E5E7EB;border-radius:99px;height:12px;margin:8px 0 4px;}
+.progress-bar{height:12px;border-radius:99px;background:var(--accent,#888);transition:width 0.8s ease;}
+.test-banner{border-radius:var(--radius-sm);padding:12px 20px;margin-bottom:20px;font-weight:800;display:flex;align-items:center;gap:10px;font-size:0.92rem;flex-wrap:wrap;}
+@media(max-width:600px){
+  .hero-title{font-size:1.5rem;}
+  .hero-emoji{display:none;}
+  .card{padding:16px;}
+  .match-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">HOS <span>Learn</span></div>
+  <span class="day-badge">📝 Practice Test 3 of 3</span>
+  <button class="nav-btn active" data-sub="bible"   onclick="showPage('bible')">  <span class="emoji">📖</span> Bible</button>
+  <button class="nav-btn"        data-sub="english" onclick="showPage('english')"><span class="emoji">✏️</span> English</button>
+  <button class="nav-btn"        data-sub="maths"   onclick="showPage('maths')">  <span class="emoji">🔢</span> Maths</button>
+  <button class="nav-btn"        data-sub="science" onclick="showPage('science')"><span class="emoji">🌱</span> Science</button>
+  <button class="nav-btn"        data-sub="social"  onclick="showPage('social')"> <span class="emoji">🏘️</span> Social Studies</button>
+</div>
+
+<!-- ═══════════════ BIBLE ═══════════════ -->
+<div id="page-bible" class="page active" style="--accent:var(--bible);--accent-l:var(--bible-l);--accent-d:var(--bible-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--bible-d),var(--bible));">
+    <div class="hero-type">📝 Practice Test 3 of 3</div>
+    <div class="hero-week">📖 Bible · Term 1 Review — Weeks 9–11 + Mixed</div>
+    <div class="hero-title">Rahab, Gideon, Ruth<br>&amp; Full Term Mix</div>
+    <div class="hero-sub">Courage · Loyalty · Kindness · Plus a mixed review of all 11 weeks</div>
+    <div class="hero-emoji">🌈</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="test-banner" style="background:var(--bible-l);color:var(--bible-d);border:2px solid var(--bible);">📝 PRACTICE TEST 3 of 3 — Covers Weeks 9–11 + a full mixed review. Take your time and try your best!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">📚 Part A — Vocabulary <span class="marks">5 marks</span></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Match each word to its correct meaning.</p>
+    <div class="callout" style="background:var(--bible-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Doing what is right even when it is scary or risky. <span class="week-tag">W9</span><br>
+        B — Being brave when you feel small, because God is with you. <span class="week-tag">W10</span><br>
+        C — Staying faithful and committed to someone. <span class="week-tag">W11</span><br>
+        D — A group of people who live, work and share things together. <span class="week-tag">Mix</span><br>
+        E — A special, unbreakable promise God makes. <span class="week-tag">Mix</span>
+      </div>
+    </div>
+    <div id="bible-vocab-area"></div>
+    <div style="margin-top:14px;">
+      <button class="btn" style="background:var(--bible);" onclick="checkVocab('bible')">Check Answers ✅</button>
+    </div>
+    <div id="bible-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">🎯 Part B — Quick Quiz <span class="marks">10 marks</span></div>
+    <div id="bible-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--bible);" onclick="nextQ('bible')">Next Question ➡️</button>
+      <span id="bible-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="bible-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="bible-prog-label">0 of 5 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✍️ Part C — Fill in the Blanks <span class="marks">5 marks</span></div>
+    <table class="fill-table" id="bible-fill-table"></table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--bible);" onclick="checkFill('bible')">Check ✅</button></div>
+    <div id="bible-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="bible-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--bible);" onclick="checkTF('bible')">Check Answers ✅</button></div>
+    <div id="bible-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--bible);">💭 Part E — Short Answer <span class="marks">5 marks</span></div>
+    <div class="q-block" style="margin-bottom:14px;"><p style="font-weight:800;margin-bottom:8px;">1. What did Ruth choose to do, and what does this teach us about loyalty?</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+    <div class="q-block"><p style="font-weight:800;margin-bottom:8px;">2. Which Bible story from this term was YOUR favourite, and why? Use details from the story.</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+  </div>
+</div><!-- /bible -->
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<div id="page-english" class="page" style="--accent:var(--english);--accent-l:var(--english-l);--accent-d:var(--english-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--english-d),var(--english));">
+    <div class="hero-type">📝 Practice Test 3 of 3</div>
+    <div class="hero-week">✏️ English · Term 1 Review — Weeks 9–11 + Mixed</div>
+    <div class="hero-title">Descriptive Writing,<br>Poetry &amp; Full Term Mix</div>
+    <div class="hero-sub">Settings · Rhyme &amp; rhythm · Adverbs &amp; time connectives · Plus a mixed review</div>
+    <div class="hero-emoji">🎨</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="test-banner" style="background:var(--english-l);color:var(--english-d);border:2px solid var(--english);">📝 PRACTICE TEST 3 of 3 — Covers Weeks 9–11 + a full mixed review. Take your time and try your best!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">📚 Part A — Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--english-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Using adjectives and adverbs to help the reader imagine a place. <span class="week-tag">W9</span><br>
+        B — Words that end with the same sound. <span class="week-tag">W10</span><br>
+        C — A word showing the order of events: first, next, then. <span class="week-tag">W11</span><br>
+        D — A word that describes a noun. <span class="week-tag">Mix</span><br>
+        E — A word that joins two ideas together. <span class="week-tag">Mix</span>
+      </div>
+    </div>
+    <div id="english-vocab-area"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkVocab('english')">Check Answers ✅</button></div>
+    <div id="english-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">🎯 Part B — Quick Quiz <span class="marks">10 marks</span></div>
+    <div id="english-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--english);" onclick="nextQ('english')">Next Question ➡️</button>
+      <span id="english-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="english-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="english-prog-label">0 of 5 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✍️ Part C — Fill in the Blanks <span class="marks">5 marks</span></div>
+    <table class="fill-table" id="english-fill-table"></table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--english);" onclick="checkFill('english')">Check ✅</button></div>
+    <div id="english-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="english-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--english);" onclick="checkTF('english')">Check Answers ✅</button></div>
+    <div id="english-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--english);">💭 Part E — Short Answer <span class="marks">5 marks</span></div>
+    <div class="q-block" style="margin-bottom:14px;"><p style="font-weight:800;margin-bottom:8px;">1. Describe a stormy sea in 2–3 sentences, using at least three adjectives.</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+    <div class="q-block"><p style="font-weight:800;margin-bottom:8px;">2. Write a two-line rhyme about the weather.</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+  </div>
+</div><!-- /english -->
+
+<!-- ═══════════════ MATHS ═══════════════ -->
+<div id="page-maths" class="page" style="--accent:var(--maths);--accent-l:var(--maths-l);--accent-d:var(--maths-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--maths-d),var(--maths));">
+    <div class="hero-type">📝 Practice Test 3 of 3</div>
+    <div class="hero-week">🔢 Maths · Term 1 Review — Weeks 9–11 + Mixed</div>
+    <div class="hero-title">Measurement, Time<br>&amp; Full Term Mix</div>
+    <div class="hero-sub">Length &amp; perimeter · Mass &amp; volume · Telling the time · Plus a mixed review</div>
+    <div class="hero-emoji">🔢</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="test-banner" style="background:var(--maths-l);color:var(--maths-d);border:2px solid var(--maths);">📝 PRACTICE TEST 3 of 3 — Covers Weeks 9–11 + a full mixed review. Take your time and try your best!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">📚 Part A — Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--maths-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Adding up ALL the sides of a shape. <span class="week-tag">W9</span><br>
+        B — How heavy something is, measured in g or kg. <span class="week-tag">W10</span><br>
+        C — How much liquid something holds, measured in ml or litres. <span class="week-tag">W10</span><br>
+        D — The length of time between a start and an end. <span class="week-tag">W11</span><br>
+        E — How much a digit is worth based on its position. <span class="week-tag">Mix</span>
+      </div>
+    </div>
+    <div id="maths-vocab-area"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkVocab('maths')">Check Answers ✅</button></div>
+    <div id="maths-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">🎯 Part B — Quick Quiz <span class="marks">10 marks</span></div>
+    <div id="maths-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--maths);" onclick="nextQ('maths')">Next Question ➡️</button>
+      <span id="maths-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="maths-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="maths-prog-label">0 of 5 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✍️ Part C — Calculation Practice <span class="marks">5 marks</span></div>
+    <table class="fill-table" id="maths-fill-table"></table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--maths);" onclick="checkFill('maths')">Check ✅</button></div>
+    <div id="maths-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="maths-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--maths);" onclick="checkTF('maths')">Check Answers ✅</button></div>
+    <div id="maths-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--maths);">💭 Part E — Word Problems <span class="marks">5 marks</span></div>
+    <div class="q-block" style="margin-bottom:14px;"><p style="font-weight:800;margin-bottom:8px;">1. A rectangle is 9cm long and 5cm wide. What is its perimeter? Show your working.</p><textarea class="open-box" placeholder="Working + answer…"></textarea></div>
+    <div class="q-block"><p style="font-weight:800;margin-bottom:8px;">2. A film starts at 2:40pm and lasts 45 minutes. What time does it finish? Show your working.</p><textarea class="open-box" placeholder="Working + answer…"></textarea></div>
+  </div>
+</div><!-- /maths -->
+
+<!-- ═══════════════ SCIENCE ═══════════════ -->
+<div id="page-science" class="page" style="--accent:var(--science);--accent-l:var(--science-l);--accent-d:var(--science-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--science-d),var(--science));">
+    <div class="hero-type">📝 Practice Test 3 of 3</div>
+    <div class="hero-week">🌱 Science · Term 1 Review — Weeks 9–11 + Mixed</div>
+    <div class="hero-title">Light, Magnets<br>&amp; Full Term Mix</div>
+    <div class="hero-sub">Light sources &amp; shadows · Reflection · Magnets · Plus a mixed review</div>
+    <div class="hero-emoji">🦋</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="test-banner" style="background:var(--science-l);color:var(--science-d);border:2px solid var(--science);">📝 PRACTICE TEST 3 of 3 — Covers Weeks 9–11 + a full mixed review. Take your time and try your best!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">📚 Part A — Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--science-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Something that makes its own light. <span class="week-tag">W9</span><br>
+        B — Blocks all light, making a dark shadow. <span class="week-tag">W9</span><br>
+        C — When light bounces off a surface. <span class="week-tag">W10</span><br>
+        D — A material that is attracted to a magnet. <span class="week-tag">W11</span><br>
+        E — A test where only ONE thing is changed. <span class="week-tag">Mix</span>
+      </div>
+    </div>
+    <div id="science-vocab-area"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkVocab('science')">Check Answers ✅</button></div>
+    <div id="science-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">🎯 Part B — Quick Quiz <span class="marks">10 marks</span></div>
+    <div id="science-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--science);" onclick="nextQ('science')">Next Question ➡️</button>
+      <span id="science-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="science-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="science-prog-label">0 of 5 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✍️ Part C — Fill in the Blanks <span class="marks">5 marks</span></div>
+    <table class="fill-table" id="science-fill-table"></table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--science);" onclick="checkFill('science')">Check ✅</button></div>
+    <div id="science-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="science-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--science);" onclick="checkTF('science')">Check Answers ✅</button></div>
+    <div id="science-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--science);">💭 Part E — Short Answer / Drawing <span class="marks">5 marks</span></div>
+    <div class="q-block" style="margin-bottom:14px;"><p style="font-weight:800;margin-bottom:8px;">1. Why do we see shadows? Use the word "opaque" in your answer.</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+    <div class="q-block"><p style="font-weight:800;margin-bottom:8px;">2. Draw two magnets: one with SAME poles facing each other, one with OPPOSITE poles facing each other. Label what happens in each.</p>
+      <div style="border:2px dashed var(--science);border-radius:12px;height:140px;background:var(--science-l);display:flex;align-items:center;justify-content:center;color:var(--science-d);font-size:0.85rem;font-style:italic;">🧲 Draw and label your magnets here!</div>
+    </div>
+  </div>
+</div><!-- /science -->
+
+<!-- ═══════════════ SOCIAL STUDIES ═══════════════ -->
+<div id="page-social" class="page" style="--accent:var(--social);--accent-l:var(--social-l);--accent-d:var(--social-d);">
+  <div class="hero" style="background:linear-gradient(135deg,var(--social-d),var(--social));">
+    <div class="hero-type">📝 Practice Test 3 of 3</div>
+    <div class="hero-week">🏘️ Social Studies · Term 1 Review — Weeks 9–11 + Mixed</div>
+    <div class="hero-title">Rules, Government<br>&amp; Full Term Mix</div>
+    <div class="hero-sub">Rights &amp; responsibilities · Local &amp; national government · Climate zones · Plus a mixed review</div>
+    <div class="hero-emoji">🌆</div>
+  </div>
+  <div class="info-bar">
+    <div class="info-field"><label>Name</label><input type="text" placeholder="Your name…"></div>
+    <div class="info-field"><label>Date</label><input type="date"></div>
+    <div class="info-field"><label>Score</label><input type="text" placeholder="— / 30"></div>
+  </div>
+  <div class="test-banner" style="background:var(--social-l);color:var(--social-d);border:2px solid var(--social);">📝 PRACTICE TEST 3 of 3 — Covers Weeks 9–11 + a full mixed review. Take your time and try your best!</div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">📚 Part A — Vocabulary <span class="marks">5 marks</span></div>
+    <div class="callout" style="background:var(--social-l);">
+      <div class="callout-icon">🔊</div>
+      <div class="callout-text"><strong>Definitions (A–E):</strong><br>
+        A — Something every person should be able to have or do. <span class="week-tag">W9</span><br>
+        B — A group that makes decisions and provides services for a place. <span class="week-tag">W10</span><br>
+        C — An area of the world with a similar pattern of weather. <span class="week-tag">W11</span><br>
+        D — A group of people who live, work and share things together. <span class="week-tag">Mix</span><br>
+        E — A tool that always points North. <span class="week-tag">Mix</span>
+      </div>
+    </div>
+    <div id="social-vocab-area"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkVocab('social')">Check Answers ✅</button></div>
+    <div id="social-vocab-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">🎯 Part B — Quick Quiz <span class="marks">10 marks</span></div>
+    <div id="social-quiz"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" style="background:var(--social);" onclick="nextQ('social')">Next Question ➡️</button>
+      <span id="social-score" style="line-height:2.5;font-weight:800;font-size:0.9rem;"></span>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="progress-wrap"><div class="progress-bar" id="social-prog" style="width:0%;"></div></div>
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:700;" id="social-prog-label">0 of 5 questions answered</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✍️ Part C — Fill in the Blanks <span class="marks">5 marks</span></div>
+    <table class="fill-table" id="social-fill-table"></table>
+    <div style="margin-top:12px;"><button class="btn" style="background:var(--social);" onclick="checkFill('social')">Check ✅</button></div>
+    <div id="social-fill-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">✔️ Part D — True or False <span class="marks">5 marks</span></div>
+    <div id="social-tf"></div>
+    <div style="margin-top:14px;"><button class="btn" style="background:var(--social);" onclick="checkTF('social')">Check Answers ✅</button></div>
+    <div id="social-tf-result" class="quiz-feedback"></div>
+  </div>
+
+  <div class="card">
+    <div class="part-header" style="background:var(--social);">💭 Part E — Short Answer <span class="marks">5 marks</span></div>
+    <div class="q-block" style="margin-bottom:14px;"><p style="font-weight:800;margin-bottom:8px;">1. Name ONE right every child has, and explain why it matters.</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+    <div class="q-block"><p style="font-weight:800;margin-bottom:8px;">2. Name the three main climate zones and give one feature of each.</p><textarea class="open-box" placeholder="Write your answer…"></textarea></div>
+  </div>
+</div><!-- /social -->
+
+<script>
+function showPage(sub){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+sub).classList.add('active');
+  document.querySelector('[data-sub="'+sub+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── VOCAB DATA ────────────────────────────────────────────────────────────
+const vocabData = {
+  bible:{terms:['Courage','Gideon\'s bravery','Loyalty','Community','Covenant'],answers:['A','B','C','D','E']},
+  english:{terms:['Descriptive writing','Rhyme','Time connective','Adjective','Conjunction'],answers:['A','B','C','D','E']},
+  maths:{terms:['Perimeter','Mass','Volume','Duration','Place value'],answers:['A','B','C','D','E']},
+  science:{terms:['Light source','Opaque','Reflection','Magnetic','Fair test'],answers:['A','B','C','D','E']},
+  social:{terms:['Right','Government','Climate zone','Community','Compass'],answers:['A','B','C','D','E']}
+};
+function buildVocab(key){
+  const d=vocabData[key];
+  const area=document.getElementById(key+'-vocab-area');
+  if(!area) return;
+  let h='<div class="match-grid">';
+  d.terms.forEach((t,i)=>{
+    h+=`<div class="match-item">${t}
+      <select id="vocab-${key}-${i}">
+        <option value="">— select —</option>
+        <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+      </select></div>`;
+  });
+  h+='</div>';
+  area.innerHTML=h;
+}
+['bible','english','maths','science','social'].forEach(buildVocab);
+function checkVocab(key){
+  const d=vocabData[key];
+  let score=0;
+  d.terms.forEach((t,i)=>{
+    const sel=document.getElementById('vocab-'+key+'-'+i);
+    if(!sel) return;
+    if(sel.value===d.answers[i]){score++;sel.style.border='2px solid #059669';sel.style.background='#D1FAE5';}
+    else{sel.style.border='2px solid #DC2626';sel.style.background='#FEE2E2';}
+  });
+  const res=document.getElementById(key+'-vocab-result');
+  res.style.display='block';
+  if(score===d.terms.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ Perfect! ${score}/${d.terms.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.terms.length} correct. Review and try again!`;}
+}
+
+// ── QUICK QUIZ DATA (5 MCQs per subject) ──────────────────────────────────
+const quizData = {
+  bible:[
+    {q:'W9: What brave thing did Rahab do? (Josh 2:11)',opts:['She hid the spies','She built a wall','She led an army','She wrote a letter'],ans:0,exp:'Rahab bravely hid the Israelite spies, showing great courage and faith.'},
+    {q:'W10: Why did God choose Gideon, even though Gideon felt small? (Judg 6:12)',opts:['Because Gideon was the strongest','Because God is with those who trust Him, not just the strongest','Because Gideon was rich','Because Gideon asked to be chosen'],ans:1,exp:'God chose Gideon to show that His power works through ordinary people who trust Him.'},
+    {q:'W11: What did Ruth choose to do instead of leaving Naomi? (Ruth 1:16)',opts:['She went home to her own family','She stayed loyal and went with Naomi','She stopped speaking to Naomi','She became angry with Naomi'],ans:1,exp:'Ruth said "Where you go I will go" — choosing loyalty and kindness.'},
+    {q:'MIXED: Which Bible story from Term 1 is about a huge flood and a covenant?',opts:['Noah','Joseph','Gideon','Ruth'],ans:0,exp:'Noah and the flood — God\'s covenant was sealed with a rainbow (Week 3).'},
+    {q:'MIXED: What is the common theme across Rahab, Gideon and Ruth\'s stories?',opts:['Wealth and power','Courage, bravery and loyalty even when it is hard','Building things','Winning battles alone'],ans:1,exp:'All three show courage, bravery or loyalty in difficult circumstances, trusting God.'},
+  ],
+  english:[
+    {q:'W9: Descriptive writing mainly uses which type of word to help the reader imagine a place?',opts:['Adjectives','Numbers','Punctuation only','Silent letters'],ans:0,exp:'Adjectives (and adverbs) help paint a picture with words.'},
+    {q:'W10: Which pair of words RHYMES?',opts:['cat and dog','hat and bat','tree and leaf','sun and moon'],ans:1,exp:'"Hat" and "bat" end with the same sound — they rhyme.'},
+    {q:'W11: Which is a TIME CONNECTIVE?',opts:['Purple','Finally','Jumping','Quietly'],ans:1,exp:'"Finally" shows the order of events — a time connective.'},
+    {q:'MIXED: Which word is the ADJECTIVE in "The ancient, crumbling tower stood alone"?',opts:['tower','stood','ancient','alone'],ans:2,exp:'"Ancient" describes the noun "tower" — it is an adjective.'},
+    {q:'MIXED: Which sentence uses a conjunction correctly?',opts:['I was tired so I went to bed.','I tired so was bed I went to.','So I tired was.','Tired I so went bed to.'],ans:0,exp:'"So" correctly joins the two ideas showing a result.'},
+  ],
+  maths:[
+    {q:'W9: A rectangle is 6cm long and 4cm wide. What is its PERIMETER?',opts:['10cm','20cm','24cm','12cm'],ans:1,exp:'Perimeter = add all sides: 6+4+6+4 = 20cm.'},
+    {q:'W10: Which unit would you use to measure how much a bag of flour weighs?',opts:['ml','kg','cm','minutes'],ans:1,exp:'Mass (weight) is measured in grams (g) or kilograms (kg).'},
+    {q:'W11: A film starts at 4:15pm and lasts 1 hour 30 minutes. What time does it finish?',opts:['5:15pm','5:45pm','6:15pm','5:30pm'],ans:1,exp:'4:15pm + 1hr30min = 5:45pm.'},
+    {q:'MIXED: In the number 936, what is the value of the digit 3?',opts:['3','30','300','3000'],ans:1,exp:'3 is in the tens column, so it is worth 30.'},
+    {q:'MIXED: What is 4 × 8?',opts:['24','32','36','40'],ans:1,exp:'4 × 8 = 32.'},
+  ],
+  science:[
+    {q:'W9: What is a LIGHT SOURCE?',opts:['Something that reflects light','Something that makes its own light','Something that blocks light','A type of shadow'],ans:1,exp:'A light source makes its own light, e.g. the sun or a torch.'},
+    {q:'W10: Why can we see objects that do not make their own light?',opts:['They absorb all light','Light reflects off them into our eyes','They are magnetic','They are transparent'],ans:1,exp:'Light bounces (reflects) off objects and into our eyes, letting us see them.'},
+    {q:'W11: Which of these materials is MAGNETIC?',opts:['Plastic ruler','Iron nail','Wooden block','Paper'],ans:1,exp:'Iron (and steel) are magnetic materials — attracted to magnets.'},
+    {q:'MIXED: What is a "fair test"?',opts:['A test with no rules','A test where only ONE thing is changed','A test with no results','A test that is always easy'],ans:1,exp:'A fair test changes only one thing and keeps everything else the same.'},
+    {q:'MIXED: Which plant part makes food using sunlight?',opts:['Root','Stem','Leaf','Flower'],ans:2,exp:'The leaf carries out photosynthesis, using sunlight to make food.'},
+  ],
+  social:[
+    {q:'W9: What is a "right"?',opts:['A rule that only adults follow','Something every person should be able to have or do','A type of map symbol','A punishment'],ans:1,exp:'A right is something every person should be able to have or do, like education.'},
+    {q:'W10: What do local and national governments do?',opts:['Nothing important','Make decisions and provide services for communities','Only build houses','Only teach in schools'],ans:1,exp:'Governments make decisions and provide services like schools, roads and healthcare.'},
+    {q:'W11: Which climate zone is hot and dry most of the year?',opts:['Polar','Desert','Temperate','Tundra'],ans:1,exp:'Desert climate zones are hot and dry with very little rainfall.'},
+    {q:'MIXED: What is a "community"?',opts:['A type of building','A group of people who live and work together','A country','A type of map'],ans:1,exp:'A community is a group of people sharing a place and working/living together.'},
+    {q:'MIXED: What does a compass always point to?',opts:['East','South','North','West'],ans:2,exp:'A compass needle always points North.'},
+  ]
+};
+const qIdx={bible:0,english:0,maths:0,science:0,social:0};
+const qScore={bible:0,english:0,maths:0,science:0,social:0};
+function renderQ(key){
+  const qs=quizData[key];
+  const idx=qIdx[key];
+  const total=qs.length;
+  if(idx>=total){
+    document.getElementById(key+'-quiz').innerHTML=`<div style="padding:16px;background:#D1FAE5;border-radius:12px;font-weight:800;font-size:1rem;">🎉 Quiz complete! Score: ${qScore[key]}/${total}</div>`;
+    document.getElementById(key+'-prog').style.width='100%';
+    document.getElementById(key+'-prog-label').textContent=`${total} of ${total} questions answered`;
+    if(qScore[key]===total)celebrate();
+    return;
+  }
+  const q=qs[idx];
+  document.getElementById(key+'-quiz').innerHTML=`<div class="quiz-box">
+    <div class="quiz-q">Q${idx+1} of ${total}: ${q.q}</div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ('${key}',${i})">${o}</button>`).join('')}</div>
+    <div id="${key}-fb" class="quiz-feedback"></div>
+  </div>`;
+  document.getElementById(key+'-score').textContent=`Score: ${qScore[key]}/${idx}`;
+  document.getElementById(key+'-prog').style.width=`${(idx/total)*100}%`;
+  document.getElementById(key+'-prog-label').textContent=`${idx} of ${total} questions answered`;
+}
+function answerQ(key,i){
+  const qs=quizData[key];
+  const idx=qIdx[key];
+  const q=qs[idx];
+  const opts=document.querySelectorAll(`#${key}-quiz .quiz-opt`);
+  opts.forEach(o=>o.disabled=true);
+  opts[q.ans].classList.add('correct');
+  const fb=document.getElementById(key+'-fb');
+  fb.style.display='block';
+  if(i===q.ans){qScore[key]++;fb.style.background='#D1FAE5';fb.style.color='#065F46';fb.innerHTML=`✅ Correct! ${q.exp}`;}
+  else{opts[i].classList.add('wrong');fb.style.background='#FEE2E2';fb.style.color='#7F1D1D';fb.innerHTML=`❌ The answer is: <strong>${q.opts[q.ans]}</strong>. ${q.exp}`;}
+  const total=qs.length;
+  document.getElementById(key+'-score').textContent=`Score: ${qScore[key]}/${idx+1}`;
+  document.getElementById(key+'-prog').style.width=`${((idx+1)/total)*100}%`;
+  document.getElementById(key+'-prog-label').textContent=`${idx+1} of ${total} questions answered`;
+}
+function nextQ(key){qIdx[key]++;renderQ(key);}
+['bible','english','maths','science','social'].forEach(k=>renderQ(k));
+
+// ── FILL IN THE BLANK DATA ────────────────────────────────────────────────
+const fillData = {
+  bible:[
+    {s:'Rahab showed <em>_____</em> by hiding the spies, even though it was risky.',a:'courage'},
+    {s:'God chose Gideon to show that His power works even through people who feel <em>_____</em>.',a:'small'},
+    {s:'Ruth showed <em>_____</em> by staying with Naomi instead of leaving.',a:'loyalty'},
+    {s:'God made a special promise called a <em>_____</em> with Noah.',a:'covenant'},
+    {s:'Joseph chose to <em>_____</em> his brothers even though they had hurt him.',a:'forgive'},
+  ],
+  english:[
+    {s:'Descriptive writing uses <em>_____</em> to help the reader imagine a place.',a:'adjectives'},
+    {s:'Words that end with the same sound are said to <em>_____</em>.',a:'rhyme'},
+    {s:'"First, Next, Then, Finally" are all examples of time <em>_____</em>.',a:'connectives'},
+    {s:'A word that joins two ideas together is called a <em>_____</em>.',a:'conjunction'},
+    {s:'A word that describes a noun is called an <em>_____</em>.',a:'adjective'},
+  ],
+  maths:[
+    {s:'A rectangle 5cm by 3cm has a perimeter of <em>_____</em> cm.',a:'16'},
+    {s:'Weight is measured in grams or <em>_____</em>.',a:'kilograms'},
+    {s:'Liquid amount is measured in ml or <em>_____</em>.',a:'litres'},
+    {s:'Half past 3 written in digital form is <em>_____</em>.',a:'3:30'},
+    {s:'936 − 241 = <em>_____</em>',a:'695'},
+  ],
+  science:[
+    {s:'Something that makes its own light is called a light <em>_____</em>.',a:'source'},
+    {s:'An object that blocks all light and makes a dark shadow is <em>_____</em>.',a:'opaque'},
+    {s:'When light bounces off a surface, this is called <em>_____</em>.',a:'reflection'},
+    {s:'Iron and steel are examples of <em>_____</em> materials.',a:'magnetic'},
+    {s:'A test where only one thing changes is called a <em>_____</em> test.',a:'fair'},
+  ],
+  social:[
+    {s:'Every child has the <em>_____</em> to an education.',a:'right'},
+    {s:'The <em>_____</em> makes decisions and provides services for a community.',a:'government'},
+    {s:'An area with a similar pattern of weather is called a climate <em>_____</em>.',a:'zone'},
+    {s:'A group of people who live and work together is called a <em>_____</em>.',a:'community'},
+    {s:'A compass always points <em>_____</em>.',a:'north'},
+  ]
+};
+function buildFillTable(key){
+  const d=fillData[key];
+  const tbl=document.getElementById(key+'-fill-table');
+  if(!tbl) return;
+  tbl.innerHTML=`<tr><th>Sentence</th><th>Your Answer</th></tr>
+  ${d.map((item,i)=>`<tr><td>${item.s}</td><td><input class="fill-in" id="fill-${key}-${i}" data-ans="${item.a}" placeholder="type here"></td></tr>`).join('')}`;
+}
+['bible','english','maths','science','social'].forEach(buildFillTable);
+function checkFill(key){
+  const d=fillData[key];
+  let score=0;
+  d.forEach((item,i)=>{
+    const inp=document.getElementById('fill-'+key+'-'+i);
+    if(!inp) return;
+    if(inp.value.trim().toLowerCase()===item.a.toLowerCase()){score++;inp.classList.add('correct');inp.classList.remove('wrong');}
+    else{inp.classList.add('wrong');inp.classList.remove('correct');}
+  });
+  const res=document.getElementById(key+'-fill-result');
+  res.style.display='block';
+  if(score===d.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${d.length} correct!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${d.length} correct. Check your spelling and try again!`;}
+}
+
+// ── TRUE / FALSE DATA ─────────────────────────────────────────────────────
+const tfData = {
+  bible:[
+    {s:'Rahab hid the spies even though it was risky.',ans:true},
+    {s:'Gideon was chosen because he felt strong and confident.',ans:false},
+    {s:'Ruth left Naomi and went back to her own family.',ans:false},
+    {s:'Ruth showed loyalty by staying with Naomi.',ans:true},
+    {s:'God kept His promises to Noah, Abraham and Jacob.',ans:true},
+  ],
+  english:[
+    {s:'Descriptive writing uses adjectives to help readers imagine a scene.',ans:true},
+    {s:'"Cat" and "hat" rhyme.',ans:true},
+    {s:'"Purple" is a time connective.',ans:false},
+    {s:'A conjunction joins two ideas together.',ans:true},
+    {s:'Adjectives describe verbs, not nouns.',ans:false},
+  ],
+  maths:[
+    {s:'The perimeter of a 6cm by 4cm rectangle is 20cm.',ans:true},
+    {s:'Mass is measured in millilitres.',ans:false},
+    {s:'4:15pm plus 1 hour 30 minutes is 5:45pm.',ans:true},
+    {s:'In 936, the digit 3 is worth 3.',ans:false},
+    {s:'4 × 8 = 32.',ans:true},
+  ],
+  science:[
+    {s:'The sun is a light source.',ans:true},
+    {s:'Opaque objects let all light pass through.',ans:false},
+    {s:'Reflection is when light bounces off a surface.',ans:true},
+    {s:'Iron is a magnetic material.',ans:true},
+    {s:'A fair test changes more than one thing at a time.',ans:false},
+  ],
+  social:[
+    {s:'Every child has a right to education.',ans:true},
+    {s:'Governments provide services like schools and roads.',ans:true},
+    {s:'A desert climate zone is cold and wet.',ans:false},
+    {s:'A community is a group of people who live and work together.',ans:true},
+    {s:'A compass points South.',ans:false},
+  ]
+};
+function buildTF(key){
+  const data=tfData[key];
+  const area=document.getElementById(key+'-tf');
+  if(!area) return;
+  let h='<table class="tf-table"><tr><th>Statement</th><th>True / False</th></tr>';
+  data.forEach((item,i)=>{
+    h+=`<tr><td>${item.s}</td><td>
+      <button class="tf-btn" id="tf-${key}-${i}-T" onclick="selectTF('${key}',${i},'T')">✅ True</button>
+      <button class="tf-btn" id="tf-${key}-${i}-F" onclick="selectTF('${key}',${i},'F')">❌ False</button>
+    </td></tr>`;
+  });
+  h+='</table>';
+  area.innerHTML=h;
+}
+['bible','english','maths','science','social'].forEach(buildTF);
+function selectTF(key,i,val){
+  document.getElementById('tf-'+key+'-'+i+'-T').classList.remove('sel-t');
+  document.getElementById('tf-'+key+'-'+i+'-F').classList.remove('sel-f');
+  document.getElementById('tf-'+key+'-'+i+'-'+val).classList.add(val==='T'?'sel-t':'sel-f');
+}
+function checkTF(key){
+  const data=tfData[key];
+  let score=0;
+  data.forEach((item,i)=>{
+    const tBtn=document.getElementById('tf-'+key+'-'+i+'-T');
+    const fBtn=document.getElementById('tf-'+key+'-'+i+'-F');
+    const userT=tBtn.classList.contains('sel-t');
+    const userF=fBtn.classList.contains('sel-f');
+    if((item.ans&&userT)||(!item.ans&&userF)){score++;(item.ans?tBtn:fBtn).classList.add('correct-ans');}
+    else{if(userT)tBtn.classList.add('wrong-ans');if(userF)fBtn.classList.add('wrong-ans');(item.ans?tBtn:fBtn).classList.add('correct-ans');}
+    tBtn.disabled=true;fBtn.disabled=true;
+  });
+  const res=document.getElementById(key+'-tf-result');
+  res.style.display='block';
+  if(score===data.length){res.style.background='#D1FAE5';res.style.color='#065F46';res.textContent=`✅ All ${score}/${data.length} correct! Excellent!`;celebrate();}
+  else{res.style.background='#FEF3C7';res.style.color='#92400E';res.textContent=`📝 ${score}/${data.length} correct. Green = correct answer.`;}
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function celebrate(){
+  const colors=['#7C3AED','#DB2777','#D97706','#059669','#2563EB','#F59E0B','#34D399','#FB923C'];
+  for(let i=0;i<50;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.style.cssText=`position:fixed;top:-10px;width:${8+Math.random()*8}px;height:${10+Math.random()*10}px;border-radius:2px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;transform:rotate(${Math.random()*360}deg);animation:fall ${1.5+Math.random()*2}s linear forwards;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),4000);
+    },i*30);
+  }
+}
+const style=document.createElement('style');
+style.textContent='@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(style);
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week12_PracticeTest3');</script>
+</body>
+</html>

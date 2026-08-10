@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Week 12 · Student Lesson Notes · KS2 Level 3 — Term 1 Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#F59E0B;--amber-light:#FEF3C7;--amber-mid:#FDE68A;
+  --teal:#0F6E56;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --orange:#C2410C;--orange-light:#FFF0E6;
+  --red:#B71C1C;--red-light:#FFEBEE;
+  --green:#3B6D11;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--mgray:#CFD8DC;
+  --text:#2C2C2A;--white:#FFFFFF;
+  --radius:14px;--rsm:8px;
+}
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF0;color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Nunito',sans-serif}
+
+.nav{background:var(--white);border-bottom:3px solid var(--amber-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--teal);flex:1}
+.stabs{display:flex;gap:7px;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:20px;border:2px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:.13s}
+.stab.active{color:#fff}
+.print-btn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer}
+
+.page{display:none;padding:16px 18px 50px}
+.page.active{display:block}
+
+.banner{border-radius:var(--radius);padding:16px 20px;margin-bottom:18px;color:#fff}
+.banner-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.85;margin-bottom:4px}
+.banner-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;line-height:1.2}
+.banner-sub{font-size:13px;opacity:.85;margin-top:4px}
+.name-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.name-input{border:none;border-bottom:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:160px;font-family:'Nunito Sans',sans-serif}
+
+.sec-head{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--teal);margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--amber-mid)}
+.sec-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+.vocab-card{border-left:4px solid var(--teal);background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:11px 13px;margin-bottom:8px}
+.v-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px}
+.v-mean{font-size:13px;color:var(--text);margin:3px 0;line-height:1.5}
+.v-l1{font-size:12px;color:var(--blue);font-style:italic}
+.v-eg{font-size:12px;color:var(--green);font-style:italic;margin-top:3px}
+.v-wk{display:inline-block;background:var(--amber);color:#fff;font-size:9px;font-weight:900;padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
+
+.tip{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:var(--blue);line-height:1.6}
+.tip strong{font-family:'Nunito',sans-serif;font-weight:800}
+.l1-bridge{background:#FFF8E1;border-left:4px solid var(--amber);border-radius:var(--rsm);padding:10px 13px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.7}
+.l1-bridge strong{font-family:'Nunito',sans-serif;font-weight:800}
+.review-tip{background:linear-gradient(120deg,#FFF3D6,#E1F5EE);border:2px solid var(--amber);border-radius:var(--rsm);padding:10px 14px;font-size:13px;margin-bottom:14px;color:#7B5B00;line-height:1.6;font-weight:700}
+.remember{border-radius:var(--rsm);padding:11px 15px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;text-align:center;margin:14px 0}
+
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--teal);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:700;text-align:left}
+table.t td{border-bottom:1px solid var(--amber-mid);padding:8px 10px;vertical-align:top;line-height:1.5}
+table.t tr:nth-child(even) td{background:var(--amber-light)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+
+.card{border-radius:var(--rsm);padding:12px;border:2px solid;text-align:center}
+.card-ico{font-size:28px;margin-bottom:5px}
+.card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px}
+.card-desc{font-size:12px;margin-top:4px;line-height:1.5}
+
+.write-label{font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px;font-family:'Nunito',sans-serif}
+.dline{border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;width:100%;font-family:'Nunito Sans',sans-serif;font-size:14px;padding:6px 2px;outline:none;display:block;margin-bottom:6px}
+.tarea{width:100%;min-height:50px;border:1.5px dashed var(--teal-mid);border-radius:var(--rsm);background:var(--teal-light);font-family:'Nunito Sans',sans-serif;font-size:14px;padding:8px;outline:none;resize:none;margin-top:6px}
+.inline{display:inline-block;min-width:70px;border:none;border-bottom:1.5px dashed var(--teal-mid);background:transparent;font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;padding:2px 4px}
+.q-box{background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px}
+.q-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:var(--amber);margin-bottom:5px}
+.q-text{font-size:14px;line-height:1.65}
+
+.tt{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:8px 0}
+.tt-cell{background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:6px;padding:6px 3px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--teal)}
+.tt-cell input{width:100%;border:none;background:transparent;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--teal);outline:none}
+
+.story{background:var(--teal-light);border:2px solid var(--teal-mid);border-radius:var(--radius);padding:15px 17px;font-size:14px;line-height:1.9;margin:8px 0}
+
+.verse-box{background:#FFF8E1;border:3px solid var(--amber);border-radius:var(--radius);padding:18px;text-align:center;margin-bottom:14px}
+.verse-text{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--teal);line-height:1.8}
+
+.frame{border-radius:var(--rsm);padding:11px 14px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;text-align:center;margin-bottom:8px;border:2px solid}
+
+.wbank{background:var(--purple-light);border:1.5px solid var(--purple);border-radius:var(--rsm);padding:10px 13px;margin-bottom:12px}
+.wbank strong{font-family:'Nunito',sans-serif;font-weight:800;color:var(--purple);display:block;margin-bottom:6px;font-size:13px}
+.wtag{display:inline-block;background:var(--purple);color:#fff;border-radius:20px;padding:2px 10px;margin:3px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif}
+
+.step{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--amber-mid);border-radius:var(--rsm);padding:10px;margin-bottom:8px}
+.step-n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0}
+.step-t{font-size:13px;line-height:1.6}
+
+.rbow-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rbow-bar{width:12px;height:30px;border-radius:4px;flex-shrink:0}
+
+@media(max-width:600px){.two,.three,.four{grid-template-columns:1fr}.tt{grid-template-columns:repeat(3,1fr)}}
+@media print{.nav,.stabs,.print-btn{display:none!important}.page{display:block!important}body{background:white}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">📒 HOS · KS2 Level 3 · Week 12 · Term 1 Review Notes</div>
+  <div class="stabs" id="stabs"></div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+</div>
+<div id="pages"></div>
+
+<script>
+const SUBJS=[
+  {id:'cover',  label:'🏠 Cover',     col:'#0F6E56'},
+  {id:'eng',    label:'📖 English',   col:'#185FA5'},
+  {id:'maths',  label:'🔢 Maths',     col:'#0F6E56'},
+  {id:'sci',    label:'💪 Science',   col:'#C2410C'},
+  {id:'hum',    label:'🌍 Humanities',col:'#534AB7'},
+  {id:'bib',    label:'✝️ Bible',     col:'#B71C1C'},
+];
+
+const PAGES={
+
+/* ── COVER ─────────────────────────────────────────────── */
+cover:`
+<div style="background:linear-gradient(150deg,#0F6E56,#185FA5);min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+  <div style="font-size:52px;margin-bottom:10px">📒</div>
+  <div style="font-family:Nunito,sans-serif;font-size:11px;font-weight:800;color:#FDE68A;letter-spacing:1.5px;margin-bottom:8px">HOS INTERNATIONAL · KS2 LEVEL 3</div>
+  <div style="font-family:Nunito,sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px">TERM 1 REVIEW NOTES</div>
+  <div style="font-family:Nunito,sans-serif;font-size:15px;color:#FDE68A;margin-bottom:6px">Week 12 · Covering Weeks 1–11</div>
+  <div style="font-size:12px;color:rgba(255,255,255,.85);margin-bottom:24px;max-width:340px">Spelling test · number skills test · science quiz · map skills quiz · memory verse recitation</div>
+  <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:18px 24px;margin-bottom:24px;width:100%;max-width:360px">
+    <div style="font-size:12px;color:#FDE68A;margin-bottom:10px;font-weight:700">📝 My Details</div>
+    <div style="text-align:left;font-size:13px;color:#fff;line-height:2.4">
+      Name: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/><br/>
+      Class: <input style="border:none;border-bottom:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:13px;padding:2px 6px;outline:none;width:170px;font-family:'Nunito Sans',sans-serif" placeholder="________________"/>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px">
+    ${[
+      ['📖','English','Grammar · Reading · Writing · Spelling — Wks 1–11','#1E40AF','#DBEAFE'],
+      ['🔢','Maths','Number · Tables · Fractions · Measurement — Wks 1–11','#065F46','#D1FAE5'],
+      ['💪','Science','Plants · Body · Rocks · Light · Magnets — Wks 1–11','#9A3412','#FFEDD5'],
+      ['🌍','Humanities','Maps · Geography · Ancient Egypt · Romans · Civics','#3730A3','#E0E7FF'],
+      ['✝️','Bible','10 Bible stories &amp; memory verses — Wks 1–11','#991B1B','#FEE2E2'],
+    ].map(([ico,sub,topic,col,bg])=>`
+    <div style="background:${bg};border:1.5px solid ${col};border-radius:10px;padding:10px;text-align:left">
+      <div style="font-size:18px">${ico}</div>
+      <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:${col}">${sub}</div>
+      <div style="font-size:11px;color:#5F5E5A;margin-top:2px">${topic}</div>
+    </div>`).join('')}
+  </div>
+  <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,.6)">Use this booklet to revise everything we've learned this term before the assessments! 🌍</div>
+</div>`,
+
+/* ── ENGLISH ────────────────────────────────────────────── */
+eng:`
+<div class="banner" style="background:linear-gradient(135deg,#185FA5,#1E40AF)">
+  <div class="banner-label">SUBJECT 1 OF 5 · WEEK 12 · TERM 1 REVIEW</div>
+  <div class="banner-title">📖 English — Term 1 Review (Weeks 1–11)</div>
+  <div class="banner-sub">Grammar · Reading · Writing · Spelling · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="review-tip">🔁 This week reviews EVERYTHING from Term 1 English before your spelling test, reading comprehension and writing sample review.</div>
+
+<div class="sec-head"><span class="sec-num">1</span>SENTENCE TYPES &amp; PUNCTUATION (WEEK 2)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Type</th><th>Ends with</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Statement</strong></td><td>. full stop</td><td>The sun was shining.</td></tr>
+<tr><td><strong>Question</strong></td><td>? question mark</td><td>Where is my book?</td></tr>
+<tr><td><strong>Exclamation</strong></td><td>! exclamation mark</td><td>What a surprise!</td></tr>
+<tr><td><strong>Command</strong></td><td>. or !</td><td>Close the door.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">2</span>NOUNS, VERBS &amp; ADJECTIVES (WEEK 4)</div>
+${[
+  ['📦 Noun','A person, place, animal or thing.','اسم / اسم','"dog, London, teacher, happiness"','#185FA5'],
+  ['🏃 Verb','An action or doing word.','فعل / فعل','"run, jump, think, shout"','#185FA5'],
+  ['🎨 Adjective','A word that describes a noun.','صفت / صفة','"tall, red, happy, ancient"','#185FA5'],
+].map(([w,m,l1,eg,col])=>`
+<div class="vocab-card" style="border-left-color:${col}">
+  <div class="v-word" style="color:${col}">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ e.g. ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">3</span>CONJUNCTIONS &amp; TIME CONNECTIVES (WEEKS 8 &amp; 11)</div>
+<div class="wbank"><strong>Conjunctions:</strong> ${['and','but','so','because','when'].map(w=>`<span class="wtag">${w}</span>`).join('')}</div>
+<div class="wbank"><strong>Time connectives:</strong> ${['First','Next','Then','After that','Finally'].map(w=>`<span class="wtag">${w}</span>`).join('')}</div>
+
+<div class="sec-head"><span class="sec-num">4</span>READING COMPREHENSION — FICTION &amp; NON-FICTION (WEEKS 3 &amp; 7)</div>
+<div class="two">
+<div class="card" style="background:#DBEAFE;border-color:#185FA5;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#185FA5;margin-bottom:8px">📖 Fiction</div>
+  <div style="font-size:13px;line-height:1.8">Look for: characters, setting, plot. Ask: who, where, what happened, how did they feel?</div>
+</div>
+<div class="card" style="background:#D1FAE5;border-color:#0F6E56;text-align:left">
+  <div style="font-family:Nunito,sans-serif;font-weight:800;font-size:14px;color:#0F6E56;margin-bottom:8px">📰 Non-fiction</div>
+  <div style="font-size:13px;line-height:1.8">Look for: the main idea, headings and subheadings, key facts.</div>
+</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>POETRY — RHYME &amp; RHYTHM (WEEK 10)</div>
+${[
+  ['🎵 Rhyme','Words that end with the same sound.','ہم قافیہ / قافية','"cat and hat rhyme."'],
+  ['🥁 Rhythm','The beat or pattern in a poem.','تال / إيقاع','"Clap the rhythm as you read."'],
+].map(([w,m,l1,eg])=>`
+<div class="vocab-card" style="border-left-color:#534AB7">
+  <div class="v-word" style="color:#534AB7">${w}</div>
+  <div class="v-mean">${m}</div>
+  <div class="v-l1">🌍 ${l1}</div>
+  <div class="v-eg">✏️ e.g. ${eg}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">6</span>PERSONAL NARRATIVE &amp; DESCRIPTIVE WRITING (WEEKS 5 &amp; 9)</div>
+<div class="tip"><strong>Personal narrative</strong> = a TRUE story about YOU, told in order, with your real feelings.<br/><strong>Descriptive writing</strong> = using adjectives and adverbs so the reader can imagine a place.</div>
+${[
+  ['#185FA5','#DBEAFE','One day, I will never forget _______.'],
+  ['#0F6E56','#D1FAE5','I remember the time when _______.'],
+].map(([col,bg,f])=>`<div class="frame" style="background:${bg};border-color:${col};color:${col}">${f}</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>SPELLING RULES — YEAR 3/4 WORD LIST PART 1 (WEEK 6)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Rule</th><th>Example</th></tr></thead><tbody>
+<tr><td>Double the last letter before -ing/-ed (short vowel)</td><td>run → running</td></tr>
+<tr><td>Drop the silent e before -ing</td><td>hope → hoping</td></tr>
+<tr><td>Change y to i before -er/-est (after a consonant)</td><td>happy → happier</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">8</span>SPELLING TEST PRACTICE</div>
+<div class="q-box">
+  <div class="q-label">Write each word as your teacher reads it aloud</div>
+  <div class="two" style="margin-top:8px">${Array(6).fill(0).map((_,i)=>`<input class="dline" placeholder="Word ${i+1}"/>`).join('')}</div>
+</div>
+
+<div class="remember" style="background:#185FA5">⭐ REMEMBER: Great writing uses correct sentence types, strong word choices, time-order words, and careful spelling!</div>`,
+
+/* ── MATHS ──────────────────────────────────────────────── */
+maths:`
+<div class="banner" style="background:linear-gradient(135deg,#0F6E56,#065F46)">
+  <div class="banner-label">SUBJECT 2 OF 5 · WEEK 12 · TERM 1 REVIEW</div>
+  <div class="banner-title">🔢 Maths — Term 1 Review (Weeks 1–11)</div>
+  <div class="banner-sub">Number · Tables · Fractions · Measurement · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="review-tip">🔁 This week reviews EVERYTHING from Term 1 Maths before your number and operations skills test and mental arithmetic check.</div>
+
+<div class="sec-head"><span class="sec-num">1</span>PLACE VALUE (WEEK 1)</div>
+<div class="tip"><strong>Remember:</strong> Every digit's value depends on its position — Hundreds, Tens, Ones.</div>
+<div class="tt">
+${['H','T','O'].map(h=>`<div class="tt-cell" style="background:var(--teal);color:#fff">${h}</div>`).join('')}
+${['4','8','2'].map(d=>`<div class="tt-cell"><input value="${d}" readonly/></div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">2</span>ADDITION &amp; SUBTRACTION — COLUMN METHOD (WEEKS 2–3)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Operation</th><th>Rule</th></tr></thead><tbody>
+<tr><td><strong>➕ Addition</strong></td><td>Start from ONES. CARRY when a column totals 10 or more.</td></tr>
+<tr><td><strong>➖ Subtraction</strong></td><td>Start from ONES. BORROW when the top digit is too small.</td></tr>
+<tr><td><strong>✅ Check</strong></td><td>Addition and subtraction are INVERSES — use one to check the other.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>MULTIPLICATION TABLES (WEEKS 4–5)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Table</th><th>Trick</th></tr></thead><tbody>
+<tr><td><strong>2×, 5×, 10×</strong></td><td>10× just adds a zero. 5× ends in 0 or 5. 2× is doubling.</td></tr>
+<tr><td><strong>3×</strong></td><td>Count in 3s: 3, 6, 9, 12, 15...</td></tr>
+<tr><td><strong>4×</strong></td><td>Double the 2× table.</td></tr>
+<tr><td><strong>8×</strong></td><td>Double the 4× table.</td></tr>
+</tbody></table></div>
+<div class="tt">
+${['2×6','5×7','10×8','3×9','4×6','8×5'].map(f=>`<div class="tt-cell">${f}=<input placeholder="?"/></div>`).join('')}
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>DIVISION — SHARING &amp; GROUPING (WEEK 6)</div>
+<div class="vocab-card">
+  <div class="v-word" style="color:#0F6E56">➗ Divide</div>
+  <div class="v-mean">To share a number into equal groups. Division is the INVERSE of multiplication.</div>
+  <div class="v-l1">🌍 تقسیم / قسمة</div>
+  <div class="v-eg">✏️ 20 ÷ 5 = 4, because 5 × 4 = 20</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">5</span>FRACTIONS (WEEKS 7–8)</div>
+<div class="tip"><strong>Fraction</strong> = part of a whole. Top number = parts you have, bottom number = total equal parts. To compare fractions with the same bottom number, the bigger top number is the bigger fraction.</div>
+
+<div class="sec-head"><span class="sec-num">6</span>MEASUREMENT — LENGTH, PERIMETER, MASS &amp; VOLUME (WEEKS 9–10)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Measure</th><th>Units</th></tr></thead><tbody>
+<tr><td>Length</td><td>cm, m</td></tr>
+<tr><td>Perimeter</td><td>Add up ALL the sides of a shape</td></tr>
+<tr><td>Mass (weight)</td><td>g, kg</td></tr>
+<tr><td>Volume (capacity)</td><td>ml, litres</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">7</span>TIME — TELLING THE TIME &amp; DURATION (WEEK 11)</div>
+<div class="tip"><strong>Remember:</strong> Digital time uses hours:minutes (4:15). To find duration, count on from the start time to the end time.</div>
+
+<div class="sec-head"><span class="sec-num">8</span>MIXED PRACTICE</div>
+<div class="three">
+${['247+135','573−241','4×8'].map(q=>`
+<div class="q-box" style="text-align:center;padding:10px">
+  <div style="font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:#0F6E56">${q} =</div>
+  <input style="width:60px;text-align:center;border:none;border-bottom:2px dashed var(--teal-mid);font-size:16px;font-weight:800;outline:none;color:#0F6E56;margin-top:4px" placeholder="?"/>
+</div>`).join('')}
+</div>
+
+<div class="remember" style="background:#0F6E56">⭐ REMEMBER: Always start from the ONES column. Use the inverse to check your answers!</div>`,
+
+/* ── SCIENCE ────────────────────────────────────────────── */
+sci:`
+<div class="banner" style="background:linear-gradient(135deg,#C2410C,#9A3412)">
+  <div class="banner-label">SUBJECT 3 OF 5 · WEEK 12 · TERM 1 REVIEW</div>
+  <div class="banner-title">💪 Science — Term 1 Review (Weeks 1–11)</div>
+  <div class="banner-sub">Plants · Body · Rocks · Light · Magnets · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="review-tip">🔁 This week reviews EVERYTHING from Term 1 Science before your science knowledge quiz and observation/drawing task.</div>
+
+<div class="sec-head"><span class="sec-num">1</span>WORKING SCIENTIFICALLY (WEEK 1)</div>
+<div class="vocab-card">
+  <div class="v-word" style="color:#C2410C">🔬 Fair test</div>
+  <div class="v-mean">A test where only ONE thing is changed and everything else stays the same.</div>
+  <div class="v-l1">🌍 منصفانہ تجربہ / اختبار عادل</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">2</span>PLANTS — PARTS &amp; NEEDS (WEEKS 2–3)</div>
+<div class="four">
+${[
+  ['🌱','ROOT','Absorbs water &amp; nutrients; anchors the plant.'],
+  ['🌿','STEM','Carries water and food up to leaves.'],
+  ['🍃','LEAF','Makes food using sunlight — photosynthesis.'],
+  ['🌸','FLOWER','Attracts insects for pollination.'],
+].map(([ico,t,d])=>`
+<div class="card" style="background:#FFEDD5;border-color:#C2410C">
+  <div class="card-ico">${ico}</div>
+  <div class="card-title" style="color:#C2410C">${t}</div>
+  <div class="card-desc">${d}</div>
+</div>`).join('')}
+</div>
+<div class="tip"><strong>Plants need:</strong> sunlight, water, air (CO₂) and nutrients from soil to grow.</div>
+
+<div class="sec-head"><span class="sec-num">3</span>SKELETONS (WEEK 4)</div>
+<div class="tip"><strong>Skeletons</strong> support the body, protect organs, and let us move. Some animals (like insects) have an EXOSKELETON on the outside of their body.</div>
+
+<div class="sec-head"><span class="sec-num">4</span>MUSCLES &amp; NUTRITION (WEEKS 5–6)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Muscle</th><th>Job</th></tr></thead><tbody>
+<tr><td><strong>💪 Biceps</strong></td><td>Contracts to BEND your arm.</td></tr>
+<tr><td><strong>💪 Triceps</strong></td><td>Contracts to STRAIGHTEN your arm.</td></tr>
+</tbody></table></div>
+<div class="tip"><strong>Balanced diet:</strong> fruit, vegetables, protein, carbohydrates and dairy in the right amounts.</div>
+
+<div class="sec-head"><span class="sec-num">5</span>ROCKS, FOSSILS &amp; SOIL (WEEKS 7–8)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Rock type</th><th>How it forms</th></tr></thead><tbody>
+<tr><td><strong>Igneous</strong></td><td>Hot melted rock cools and hardens.</td></tr>
+<tr><td><strong>Sedimentary</strong></td><td>Layers of sand/mud pressed together.</td></tr>
+<tr><td><strong>Metamorphic</strong></td><td>Existing rock changed by heat and pressure.</td></tr>
+</tbody></table></div>
+<div class="tip"><strong>Fossils</strong> are the preserved remains of living things from long ago, usually found in sedimentary rock.</div>
+
+<div class="sec-head"><span class="sec-num">6</span>LIGHT — SOURCES, SHADOWS &amp; REFLECTION (WEEKS 9–10)</div>
+${[
+  ['💡 Light source','Something that makes its OWN light (e.g. the sun, a torch).'],
+  ['🌑 Opaque','Blocks all light — makes a dark shadow.'],
+  ['🪞 Reflection','When light bounces off a surface, letting us see objects.'],
+].map(([w,m])=>`
+<div class="vocab-card" style="border-left-color:#C2410C">
+  <div class="v-word" style="color:#C2410C">${w}</div>
+  <div class="v-mean">${m}</div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">7</span>FORCES — MAGNETS (WEEK 11)</div>
+<div class="tip"><strong>Remember:</strong> Magnets attract magnetic materials (iron, steel). SAME poles repel (push apart); OPPOSITE poles attract (pull together).</div>
+
+<div class="sec-head"><span class="sec-num">8</span>QUICK QUIZ CHECK</div>
+<div class="q-box">
+${[
+  'Name the four things a plant needs to grow.',
+  'What is a fair test?',
+  'Name the three types of rock.',
+  'What happens when two magnets with the SAME pole meet?',
+].map((q,i)=>`<div style="padding:6px 0;font-size:13px;border-bottom:1px solid rgba(0,0,0,.06)"><strong>${i+1}.</strong> ${q}</div>`).join('')}
+</div>
+
+<div class="remember" style="background:#C2410C">⭐ REMEMBER: Science is about asking questions, testing fairly, and using evidence to explain the world! 🔬</div>`,
+
+/* ── HUMANITIES ─────────────────────────────────────────── */
+hum:`
+<div class="banner" style="background:linear-gradient(135deg,#534AB7,#3730A3)">
+  <div class="banner-label">SUBJECT 4 OF 5 · WEEK 12 · TERM 1 REVIEW</div>
+  <div class="banner-title">🌍 Humanities — Term 1 Review (Weeks 1–11)</div>
+  <div class="banner-sub">Community · Maps · Geography · History · KS2 Level 3</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="review-tip">🔁 This week reviews EVERYTHING from Term 1 Humanities before your map skills quiz and short written/oral history task.</div>
+
+<div class="sec-head"><span class="sec-num">1</span>MY COMMUNITY (WEEK 1)</div>
+<div class="vocab-card">
+  <div class="v-word" style="color:#534AB7">🤝 Community</div>
+  <div class="v-mean">A group of people who live, work and share things together.</div>
+  <div class="v-l1">🌍 برادری / مجتمع</div>
+</div>
+
+<div class="sec-head"><span class="sec-num">2</span>MAPS — OUR LOCAL AREA (WEEK 2)</div>
+<div class="tip"><strong>Remember:</strong> "Never Eat Slimy Worms" = North, East, South, West (clockwise). The KEY (legend) tells you what map symbols mean.</div>
+
+<div class="sec-head"><span class="sec-num">3</span>OUR COUNTRY &amp; ITS GEOGRAPHY (WEEK 3)</div>
+<div class="tip">Physical features include rivers, mountains and coastlines. Every country has a capital city where the government is based.</div>
+
+<div class="sec-head"><span class="sec-num">4</span>CONTINENTS, OCEANS &amp; CLIMATE ZONES (WEEKS 4 &amp; 11)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Continents</th><th>Oceans</th></tr></thead><tbody>
+<tr><td>Africa, Asia, Antarctica, Australia, Europe, North America, South America</td><td>Pacific, Atlantic, Indian, Southern, Arctic</td></tr>
+</tbody></table></div>
+<div class="tip"><strong>Climate zones:</strong> Hot (desert/tropical), Cold (polar), Temperate (mild, four seasons).</div>
+
+<div class="sec-head"><span class="sec-num">5</span>ANCIENT EGYPT (WEEKS 5–6)</div>
+${[
+  ['👑 Pharaoh','The king or queen who ruled Ancient Egypt.'],
+  ['✍️ Hieroglyphics','A writing system using pictures instead of letters.'],
+].map(([w,m])=>`
+<div class="vocab-card" style="border-left-color:#534AB7">
+  <div class="v-word" style="color:#534AB7">${w}</div>
+  <div class="v-mean">${m}</div>
+</div>`).join('')}
+<div class="tip">The River Nile gave Ancient Egyptians water, farmland, transport and food.</div>
+
+<div class="sec-head"><span class="sec-num">6</span>STONE AGE TO IRON AGE &amp; THE ROMANS (WEEKS 7–8)</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Period</th><th>Key idea</th></tr></thead><tbody>
+<tr><td><strong>Stone Age</strong></td><td>Earliest tools made from stone.</td></tr>
+<tr><td><strong>Bronze Age</strong></td><td>People learned to make bronze tools.</td></tr>
+<tr><td><strong>Iron Age</strong></td><td>Stronger iron tools and weapons.</td></tr>
+<tr><td><strong>Romans</strong></td><td>Invaded Britain; built roads, towns and brought new ways of life.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">7</span>RULES, RIGHTS &amp; GOVERNMENT (WEEKS 9–10)</div>
+<div class="tip">Rules keep us safe and fair. Every child has RIGHTS, like the right to education. Governments make decisions and provide services for communities — people can VOTE to choose their leaders.</div>
+
+<div class="sec-head"><span class="sec-num">8</span>MY TERM 1 HUMANITIES FACT FILE</div>
+<div class="q-box">
+  <div class="q-label">Complete the fact file</div>
+  <div style="line-height:2.8;font-size:14px;margin-top:6px">
+    My favourite topic this term was: <input class="inline" style="width:200px" placeholder="?"/><br/>
+    One fact I remember about Ancient Egypt: <input class="inline" style="width:200px" placeholder="?"/><br/>
+    One right every child has: <input class="inline" style="width:200px" placeholder="?"/>
+  </div>
+</div>
+
+<div class="remember" style="background:#534AB7">⭐ REMEMBER: Geography helps us understand the world; History helps us understand the past; Civics helps us live well together! 🌍</div>`,
+
+/* ── BIBLE ──────────────────────────────────────────────── */
+bib:`
+<div class="banner" style="background:linear-gradient(135deg,#B71C1C,#991B1B)">
+  <div class="banner-label">SUBJECT 5 OF 5 · WEEK 12 · TERM 1 REVIEW &amp; REFLECTION</div>
+  <div class="banner-title">✝️ Bible — Term 1 Review (Weeks 1–11)</div>
+  <div class="banner-sub">10 stories · 10 memory verses · God keeps His promises</div>
+  <div class="name-row">Name: <input class="name-input" placeholder="________________"/></div>
+</div>
+
+<div class="review-tip">🔁 This week reviews ALL of Term 1 before your memory verse recitation, and you'll draw your favourite Bible story!</div>
+
+<div class="sec-head"><span class="sec-num">1</span>ALL TERM 1 MEMORY VERSES</div>
+<div class="verse-box">
+  <div class="verse-text" style="font-size:13px;text-align:left;line-height:2.3">
+  <strong>Wk 1</strong> Creation — Gen 1:1<br/>
+  <strong>Wk 2</strong> Adam &amp; Eve — Rom 5:8<br/>
+  <strong>Wk 3</strong> Noah — Gen 9:13<br/>
+  <strong>Wk 4</strong> Abraham — Heb 11:1<br/>
+  <strong>Wk 5</strong> Isaac &amp; Jacob — Num 23:19<br/>
+  <strong>Wk 6</strong> Joseph — Gen 50:20<br/>
+  <strong>Wk 7</strong> Moses — Ex 3:14<br/>
+  <strong>Wk 8</strong> Ten Commandments<br/>
+  <strong>Wk 9</strong> Rahab — Josh 2:11<br/>
+  <strong>Wk 10</strong> Gideon — Judg 6:12<br/>
+  <strong>Wk 11</strong> Ruth — Ruth 1:16
+  </div>
+</div>
+
+<div class="sec-head"><span class="sec-num">2</span>TERM 1 STORY SUMMARY</div>
+<div class="tbl-wrap"><table class="t"><thead><tr><th>Story</th><th>Big idea</th></tr></thead><tbody>
+<tr><td><strong>Creation</strong></td><td>God made everything good; we can be thankful.</td></tr>
+<tr><td><strong>Adam &amp; Eve</strong></td><td>Disobedience has consequences, but God still cares.</td></tr>
+<tr><td><strong>Noah</strong></td><td>Trusting God even when it's hard; God keeps His promises.</td></tr>
+<tr><td><strong>Abraham</strong></td><td>Faith means trusting what you cannot see.</td></tr>
+<tr><td><strong>Isaac &amp; Jacob</strong></td><td>God's promises are passed on through generations.</td></tr>
+<tr><td><strong>Joseph</strong></td><td>Forgiving those who hurt you; God turns bad into good.</td></tr>
+<tr><td><strong>Moses</strong></td><td>Speaking up for others; God calls unlikely people.</td></tr>
+<tr><td><strong>Ten Commandments</strong></td><td>Rules are a gift, not a punishment.</td></tr>
+<tr><td><strong>Rahab</strong></td><td>Courage to do what is right, even when risky.</td></tr>
+<tr><td><strong>Gideon</strong></td><td>Being brave when you feel small — God is with you.</td></tr>
+<tr><td><strong>Ruth</strong></td><td>Loyalty and kindness to family and strangers.</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="sec-num">3</span>LEARN &amp; RECITE</div>
+<div class="tip"><strong>How to practise reciting:</strong> Read a verse 3 times → cover 1 word → say it → cover 2 words → say it → keep going until you can say the WHOLE verse alone!</div>
+<div class="q-box">
+  <div class="q-label">Write your favourite memory verse from memory:</div>
+  <textarea class="tarea" style="min-height:55px" placeholder="I remember..."></textarea>
+</div>
+
+<div class="sec-head"><span class="sec-num">4</span>MY TERM 1 REFLECTION</div>
+${[
+  ['#EF5350','❤️ My favourite Bible story this term was:'],
+  ['#F97316','🧡 One thing I learned about God\'s character:'],
+  ['#EAB308','💛 One way I can show courage like Rahab or Gideon:'],
+  ['#22C55E','💚 One way I can show kindness like Ruth:'],
+  ['#3B82F6','💙 One promise from God I want to remember:'],
+].map(([col,label])=>`
+<div class="rbow-row">
+  <div class="rbow-bar" style="background:${col}"></div>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:700;color:${col};font-family:Nunito,sans-serif">${label}</div>
+    <input class="dline" style="border-bottom-color:${col}"/>
+  </div>
+</div>`).join('')}
+
+<div class="sec-head"><span class="sec-num">5</span>DRAW YOUR FAVOURITE BIBLE STORY</div>
+<div class="q-box">
+  <div class="q-label">Draw a scene from your favourite story of Term 1</div>
+  <div style="border:2px dashed #B71C1C;border-radius:8px;height:170px;background:#FFEBEE;display:flex;align-items:center;justify-content:center;color:#B71C1C;font-size:13px;font-style:italic;margin:10px 0">✏️ Draw your favourite Term 1 Bible story here!</div>
+</div>
+
+<div class="remember" style="background:#B71C1C">⭐ REMEMBER: All through Term 1, God has shown us that He keeps His promises, forgives us, and calls us to be brave, loyal and kind! 🌟</div>`,
+
+};
+
+/* ── Render engine ──────────────────────────────────────── */
+let cur='cover';
+function render(){
+  const stabs=document.getElementById('stabs');
+  const pages=document.getElementById('pages');
+  stabs.innerHTML=''; pages.innerHTML='';
+  SUBJS.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='stab'+(s.id===cur?' active':'');
+    el.textContent=s.label;
+    el.style.borderColor=s.col;
+    el.style.color=s.id===cur?'#fff':s.col;
+    if(s.id===cur) el.style.background=s.col;
+    el.onclick=()=>{cur=s.id;render()};
+    stabs.appendChild(el);
+  });
+  const pg=document.createElement('div');
+  pg.className='page active';
+  pg.innerHTML=PAGES[cur]||'<p style="padding:30px;color:var(--gray)">Loading...</p>';
+  pages.appendChild(pg);
+}
+render();
+</script>
+<script src="worksheet-submit.js"></script>
+<script>WorksheetSubmit.init('KS2_L3_Week12_Notes');</script>
+</body>
+</html>
